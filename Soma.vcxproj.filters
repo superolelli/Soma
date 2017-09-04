@@ -13,108 +13,744 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Headerdateien\Framework">
+      <UniqueIdentifier>{7b860345-bf90-4ebe-9e1e-fe61df26314d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Game">
+      <UniqueIdentifier>{c7530081-e5f9-47fd-bcda-577ee956b319}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Framework\Animation">
+      <UniqueIdentifier>{41704409-7e54-42c5-8a79-a13a8e7e5bfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Framework\GUI">
+      <UniqueIdentifier>{112083e9-b1da-4c1f-a2ab-46310d99a197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Framework\Graphics">
+      <UniqueIdentifier>{9f0953b6-7d1c-40c5-9dda-16e5848dceb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Framework\Patterns">
+      <UniqueIdentifier>{d4d37f9f-de06-470c-8f1c-d54d9511da7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Game\Resources">
+      <UniqueIdentifier>{238a4f87-ca92-4be6-bc8f-a49dc0656580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Framework">
+      <UniqueIdentifier>{d4dc7102-27fd-4418-9f62-f6c975270dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game">
+      <UniqueIdentifier>{6386b13e-2c58-4533-afc0-1ce3898dfe9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Framework\Animations">
+      <UniqueIdentifier>{95dddcf6-950b-4221-812f-79b5f7907a12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Framework\GUI">
+      <UniqueIdentifier>{331771eb-3732-4691-8612-486ed734db6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Framework\Graphics">
+      <UniqueIdentifier>{8d644b54-8c02-483e-8411-f4a620d0a4fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\Resources">
+      <UniqueIdentifier>{14c87864-4e59-4b30-ab9d-b3870b1368ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\InitialState.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="src\Framework\Animations\objectinfo\angleinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\Resources\FontManager.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="src\Framework\Animations\animation\animation.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\Resources\ObjectPropertiesManager.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="src\Framework\Animations\animation\animationinstance.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\Resources\SoundManager.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Resources\StringManager.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Resources\TextureManager.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Framework\Gameengine.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Framework\Window.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Framework\Time.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="src\Framework\Animations\override\atlasfile.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
     </ClCompile>
     <ClCompile Include="src\Framework\Gui\Beam.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Framework\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeinfo\beziereasingcurve.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\boneinstanceinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\boneobjectinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectref\boneref.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectref\bonerefinstance.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\boxinstanceinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\boxobjectinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
     </ClCompile>
     <ClCompile Include="src\Framework\Gui\Button.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Framework\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="src\Framework\Gui\StringInput.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="src\Framework\Animations\charactermap\charactermap.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\charactermap\charactermapinstruction.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeinfo\cubiceasingcurve.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeinfo\easingcurveinterface.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\entity\entity.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\entity\entityinstance.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\entity\entityinstancedata.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\entityobjectinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectref\entityref.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectref\entityrefinstance.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\eventobjectinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\examplefilefactory.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\exampleobjectfactory.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\file\file.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\override\filefactory.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\file\filereference.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\override\imagefile.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeinfo\instanteasingcurve.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\intvariableinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\jsonspriterfileattributewrapper.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\jsonspriterfiledocumentwrapper.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\jsonspriterfileelementwrapper.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeinfo\lineareasingcurve.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\loading\loader.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\loading\loadinghelpers.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\animation\mainlinekey.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\animation\mainlinekeyinstance.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\entity\object.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\override\objectfactory.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectref\objectref.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectref\objectrefinstance.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\pointinstanceinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\pointobjectinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeline\proxytimelinekey.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\pugixml\pugixml.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\pugixmlspriterfileattributewrapper.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\pugixmlspriterfiledocumentwrapper.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\pugixmlspriterfileelementwrapper.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeinfo\quadraticeasingcurve.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeinfo\quarticeasingcurve.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeinfo\quinticeasingcurve.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\realvariableinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\global\settings.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\sfmlboneinstanceinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\sfmlboxinstanceinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\sfmlimagefile.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\sfmlpointinstanceinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\sfmlsoundfile.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\sfmlsoundobjectinforeference.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\override\soundfile.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\soundobjectinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\override\soundobjectinforeference.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeline\soundtimelineinstance.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\spriteobjectinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\loading\spriterdocumentloader.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectref\spriteref.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectref\spriterefinstance.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\override\spriterfileattributewrapper.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\override\spriterfiledocumentwrapper.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\override\spriterfileelementwrapper.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\model\spritermodel.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\stringvariableinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\stringvariableinforeference.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\taglist.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\tagobjectinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\tagobjectinforeference.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeline\tagtimelineinstance.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeinfo\timeinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeline\timeline.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeline\timelineinstance.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeline\timelinekey.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\tinyxml2\tinyxml2.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\tinyxmlspriterfileattributewrapper.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\tinyxmlspriterfiledocumentwrapper.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\sfml_implementation\tinyxmlspriterfileelementwrapper.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectref\transformprocessor.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\triggerobjectinfo.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeline\triggertimelineinstance.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\objectinfo\universalobjectinterface.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\variable\variable.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\variable\variablecontainer.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\variable\variableinstancenameandidmap.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Animations\timeline\variabletimelineinstance.cpp">
+      <Filter>Quelldateien\Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Resources\FontManager.cpp">
+      <Filter>Quelldateien\Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Resources\ObjectPropertiesManager.cpp">
+      <Filter>Quelldateien\Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Resources\SoundManager.cpp">
+      <Filter>Quelldateien\Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Resources\StringManager.cpp">
+      <Filter>Quelldateien\Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Resources\TextureManager.cpp">
+      <Filter>Quelldateien\Game\Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\Framework\Graphics\Sprite.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Framework\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\Framework\Graphics\SpriteWithText.cpp">
+      <Filter>Quelldateien\Framework\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Window.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Time.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Gameengine.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\InitialState.cpp">
+      <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Gui\StringInput.cpp">
+      <Filter>Quelldateien\Framework\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Game.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Level.cpp">
+      <Filter>Quelldateien\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Game\InitialState.hpp">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\Resources\FontManager.hpp">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="src\Framework\Animations\animation\animation.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\Resources\ObjectPropertiesManager.hpp">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="src\Framework\Animations\animation\animationinstance.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\Resources\Resources.hpp">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="src\Framework\Animations\global\atlas.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\Resources\SoundManager.hpp">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="src\Framework\Animations\override\atlasfile.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\Resources\StringManager.hpp">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="src\Framework\Animations\timeinfo\beziereasingcurve.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\Resources\TextureManager.hpp">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="src\Framework\Animations\objectinfo\boneinstanceinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="src\Framework\Gameengine.hpp">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="src\Framework\Animations\objectinfo\boneobjectinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="src\Framework\Gamestate.hpp">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="src\Framework\Animations\objectref\boneref.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="src\Framework\Makros.hpp">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="src\Framework\Animations\objectref\bonerefinstance.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="src\Framework\Window.hpp">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="src\Framework\Animations\objectinfo\boxinstanceinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="src\Framework\Time.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Framework\Patterns\Singleton.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Framework\Gui\Beam.hpp">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="src\Framework\Animations\objectinfo\boxobjectinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
     <ClInclude Include="src\Framework\Gui\Button.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Framework\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Gui\Beam.hpp">
+      <Filter>Headerdateien\Framework\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\charactermap\charactermap.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\charactermap\charactermapinstruction.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\charactermap\charactermapinterface.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeinfo\cubiceasingcurve.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeinfo\easingcurveinterface.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\entity\entity.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\entity\entityinstance.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\entity\entityinstancedata.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\entityobjectinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectref\entityref.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectref\entityrefinstance.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\eventobjectinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\examplefilefactory.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\exampleobjectfactory.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\file\file.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\override\filefactory.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\file\filereference.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Gameengine.hpp">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Gamestate.hpp">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\override\imagefile.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\global\global.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeinfo\instanteasingcurve.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\intvariableinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\nlohmann-json\json.hpp">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\jsonspriterfileattributewrapper.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\jsonspriterfiledocumentwrapper.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\jsonspriterfileelementwrapper.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeinfo\lineareasingcurve.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\loading\loader.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\loading\loadinghelpers.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\animation\mainlinekey.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\animation\mainlinekeyinstance.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\entity\object.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\override\objectfactory.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectref\objectref.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectref\objectrefinstance.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\pointinstanceinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\pointobjectinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeline\proxytimelinekey.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\pugixml\pugiconfig.hpp">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\pugixml\pugixml.hpp">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\pugixmlspriterfileattributewrapper.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\pugixmlspriterfiledocumentwrapper.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\pugixmlspriterfileelementwrapper.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeinfo\quadraticeasingcurve.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeinfo\quarticeasingcurve.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeinfo\quinticeasingcurve.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\realvariableinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\global\settings.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\sfmlboneinstanceinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\sfmlboxinstanceinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\sfmlimagefile.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\sfmlpointinstanceinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\sfmlsoundfile.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\sfmlsoundobjectinforeference.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\override\soundfile.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\soundobjectinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\override\soundobjectinforeference.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeline\soundtimelineinstance.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\spriteobjectinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\loading\spriterdocumentloader.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectref\spriteref.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectref\spriterefinstance.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\spriterengine.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\override\spriterfileattributewrapper.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\override\spriterfiledocumentwrapper.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\override\spriterfileelementwrapper.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\model\spritermodel.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\stringvariableinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\stringvariableinforeference.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\taglist.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\tagobjectinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\tagobjectinforeference.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeline\tagtimelineinstance.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeinfo\timeinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeline\timeline.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeline\timelineinstance.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeline\timelinekey.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\tinyxml2\tinyxml2.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\tinyxmlspriterfileattributewrapper.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\tinyxmlspriterfiledocumentwrapper.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\sfml_implementation\tinyxmlspriterfileelementwrapper.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectref\transformprocessor.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\triggerobjectinfo.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeline\triggertimelineinstance.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\objectinfo\universalobjectinterface.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\variable\variable.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\variable\variablecontainer.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\variable\variableinstancenameandidmap.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Animations\timeline\variabletimelineinstance.h">
+      <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
     <ClInclude Include="src\Framework\Gui\StringInput.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Framework\GUI</Filter>
     </ClInclude>
     <ClInclude Include="src\Framework\Graphics\Sprite.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Framework\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\Framework\Graphics\SpriteWithText.hpp">
+      <Filter>Headerdateien\Framework\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Patterns\Singleton.hpp">
+      <Filter>Headerdateien\Framework\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\InitialState.hpp">
+      <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Window.hpp">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Makros.hpp">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Time.hpp">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Resources\FontManager.hpp">
+      <Filter>Headerdateien\Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Resources\ObjectPropertiesManager.hpp">
+      <Filter>Headerdateien\Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Resources\Resources.hpp">
+      <Filter>Headerdateien\Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Resources\SoundManager.hpp">
+      <Filter>Headerdateien\Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Resources\StringManager.hpp">
+      <Filter>Headerdateien\Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Resources\TextureManager.hpp">
+      <Filter>Headerdateien\Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Game.hpp">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Level.hpp">
+      <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Resources\BackgroundIDs.hpp">
+      <Filter>Headerdateien\Game\Resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

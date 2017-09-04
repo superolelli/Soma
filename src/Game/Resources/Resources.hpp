@@ -4,3 +4,4 @@
 #include "FontManager.hpp"
 #include "SoundManager.hpp"
 #include "StringManager.hpp"
+#include "BackgroundIDs.hpp"

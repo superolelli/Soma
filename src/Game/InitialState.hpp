@@ -7,6 +7,7 @@
 
 #include "../Game/Resources/Resources.hpp"
 
+#include "Game.hpp"
 
 
 class CInitialState : public GameState

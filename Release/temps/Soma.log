@@ -1,21 +1,9 @@
-﻿  Gameengine.cpp
-  Sprite.cpp
-  SpriteWithText.cpp
-src\Framework\Graphics\SpriteWithText.cpp(53): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-  Beam.cpp
-  Button.cpp
-  StringInput.cpp
-  Time.cpp
-  Window.cpp
-  InitialState.cpp
-  FontManager.cpp
-  ObjectPropertiesManager.cpp
-  SoundManager.cpp
-  StringManager.cpp
-  TextureManager.cpp
-  main.cpp
+﻿  Game.cpp
+src\Game\Game.cpp(59): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
   Code wird generiert.
-  All 413 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 3199 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
   Soma.vcxproj -> F:\Soma\Release\Soma.exe
   Soma.vcxproj -> F:\Soma\Release\Soma.pdb (Full PDB)

@@ -4,6 +4,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include "../../Framework/Patterns/singleton.hpp"
+#include "BackgroundIDs.hpp"
 
 #define g_pTextures CTextureManager::Get()
 class CTextureManager : public TSingleton<CTextureManager>
@@ -12,5 +13,5 @@ public:
 	//Loads all textures
 	void LoadTextures();
 
-	
+	sf::Texture bangBackgrounds[5];
 };

@@ -45,7 +45,7 @@ void CInitialState::Update()
 	g_pStringContainer->LoadStrings();
 	//g_pObjectProperties->LoadObjectProperties();
 
-	//m_pGameEngine->ChangeStateImmediately(new Game);
+	m_pGameEngine->ChangeStateImmediately(new Game);
 }
 
 
