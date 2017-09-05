@@ -10,12 +10,13 @@ void Game::Init(CGameEngine * _engine)
 	m_pGameEngine->GetWindow().setView(view);
 
 	level.Init();
+	adventureGroup.Init();
 }
 
 
 void Game::Cleanup()
 {
-
+	adventureGroup.Quit();
 	m_pGameEngine = nullptr;
 }
 
@@ -57,6 +58,7 @@ void Game::Render(double _normalizedTimestep)
 	m_pGameEngine->GetWindow().setView(view);
 
 	level.Render(m_pGameEngine->GetWindow(), view.getCenter().x - view.getSize().x / 2);
+	adventureGroup.Render();
 
 	m_pGameEngine->FlipWindow();
 }

@@ -17,4 +17,6 @@ public:
 private:
 
 	std::vector<CSprite> backgrounds;
+
+	void RenderBackground(sf::RenderTarget &_target, int _viewX);
 };

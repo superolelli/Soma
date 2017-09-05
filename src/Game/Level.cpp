@@ -30,15 +30,20 @@ void Level::Update()
 
 void Level::Render(sf::RenderTarget &_target, int _viewX)
 {
+	RenderBackground(_target, _viewX);
+}
+
+
+
+void Level::RenderBackground(sf::RenderTarget &_target, int _viewX)
+{
 	int backgroundNr = _viewX / backgrounds[0].GetRect().width;
 
 	if (backgrounds.size() > backgroundNr)
 	{
 		backgrounds[backgroundNr].Render(_target);
 
-		if(backgrounds.size() > backgroundNr + 1)
+		if (backgrounds.size() > backgroundNr + 1)
 			backgrounds[backgroundNr + 1].Render(_target);
 	}
-
-
 }

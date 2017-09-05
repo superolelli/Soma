@@ -5,6 +5,7 @@
 
 #include "../Game/Resources/Resources.hpp"
 #include "Level.hpp"
+#include "AdventureGroup.hpp"
 
 
 class Game : public GameState
@@ -25,4 +26,5 @@ private:
 
 	sf::View view;
 	Level level;
+	AdventureGroup adventureGroup;
 };

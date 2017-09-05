@@ -6,6 +6,7 @@
 #include "../../Framework/Patterns/singleton.hpp"
 #include "BackgroundIDs.hpp"
 
+
 #define g_pTextures CTextureManager::Get()
 class CTextureManager : public TSingleton<CTextureManager>
 {

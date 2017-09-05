@@ -5,3 +5,4 @@
 #include "SoundManager.hpp"
 #include "StringManager.hpp"
 #include "BackgroundIDs.hpp"
+#include "ModelManager.hpp"
