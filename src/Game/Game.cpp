@@ -39,14 +39,19 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
+	int xMove = 0;
+
 	if(m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
 
 	if (m_pGameEngine->GetKeystates(KeyID::Left) == Keystates::Held)
-		view.move(-5, 0);
+		xMove = -2;
 
 	if (m_pGameEngine->GetKeystates(KeyID::Right) == Keystates::Held)
-		view.move(5, 0);
+		xMove = 2;
+
+	view.move(xMove, 0);
+	adventureGroup.Update(xMove);
 }
 
 

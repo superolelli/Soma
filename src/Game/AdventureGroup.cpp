@@ -22,10 +22,13 @@ void AdventureGroup::Quit()
 		a.Quit();
 }
 
-void AdventureGroup::Update()
+void AdventureGroup::Update(int xMove)
 {
 	for (auto &a : adventurer)
-		a.Update();
+	{
+		a.Update(xMove, xMove != 0);
+	}
+	
 }
 
 

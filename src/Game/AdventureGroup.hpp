@@ -10,7 +10,7 @@ public:
 
 	void Init();
 	void Quit();
-	void Update();
+	void Update(int xMove);
 	void Render();
 
 private:

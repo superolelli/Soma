@@ -10,8 +10,10 @@ void Player::Init()
 
 	playerObject->setCurrentAnimation("idle");
 
-	playerObject->setScale(SpriterEngine::point(-0.8, 0.8));
+	playerObject->setScale(SpriterEngine::point(0.6, 0.6));
 	playerObject->reprocessCurrentTime();
+
+	is_walking = false;
 }
 
 
@@ -24,15 +26,32 @@ void Player::Quit()
 
 
 
-void Player::Update()
+void Player::Update(int _xMove, bool _is_walking)
 {
+	playerObject->setPosition(SpriterEngine::point(playerObject->getPosition().x + _xMove, playerObject->getPosition().y));
+
+	if (is_walking == false && _is_walking == true)
+	{
+		is_walking = true;
+		playerObject->setCurrentAnimation("walk");
+	}
+	else if (is_walking == true && _is_walking == false)
+	{
+		is_walking = false;
+		playerObject->setCurrentAnimation("idle");
+	}
+
 }
 
 
 
 void Player::Render()
 {
-	playerObject->setTimeElapsed(10);
+	if(is_walking)
+		playerObject->setTimeElapsed(17);
+	else
+		playerObject->setTimeElapsed(10);
+
 	playerObject->render();
 }
 
@@ -41,3 +60,5 @@ void Player::SetPos(int _x, int _y)
 {
 	playerObject->setPosition(SpriterEngine::point(_x, _y));
 }
+
+

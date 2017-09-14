@@ -381,20 +381,20 @@
     <ClCompile Include="src\Framework\Gui\StringInput.cpp">
       <Filter>Quelldateien\Framework\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\Game.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\Level.cpp">
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\Player.cpp">
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\AdventureGroup.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\Resources\ModelManager.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Game.cpp">
+      <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\AdventureGroup.cpp">
+      <Filter>Quelldateien\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -752,9 +752,6 @@
     <ClInclude Include="src\Game\Resources\TextureManager.hpp">
       <Filter>Headerdateien\Game\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\Game.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\Level.hpp">
       <Filter>Headerdateien\Game</Filter>
     </ClInclude>
@@ -764,11 +761,14 @@
     <ClInclude Include="src\Game\Player.hpp">
       <Filter>Headerdateien\Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\AdventureGroup.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\Resources\ModelManager.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\AdventureGroup.hpp">
+      <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Game.hpp">
+      <Filter>Headerdateien\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

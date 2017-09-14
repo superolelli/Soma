@@ -17,7 +17,7 @@ public:
 
 	void Init();
 	void Quit();
-	void Update();
+	void Update(int _xMove, bool _is_walking);
 	void Render();
 
 	void SetPos(int _x, int _y);
@@ -25,4 +25,6 @@ public:
 private:
 
 	SpriterEngine::EntityInstance *playerObject;
+	bool is_walking;
+
 };
