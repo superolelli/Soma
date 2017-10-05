@@ -6,12 +6,14 @@
 void AdventureGroup::Init()
 {
 	int x = 100;
+	int id = 0;
 	for (auto &a : adventurer)
 	{
-		a.Init();
+		a.Init(id);
 		a.SetPos(x, 700);
 
 		x += 150;
+		id += 1;
 	}
 }
 

@@ -6,6 +6,7 @@
 #include "../Game/Resources/Resources.hpp"
 #include "Level.hpp"
 #include "AdventureGroup.hpp"
+#include "Battle.hpp"
 
 
 class Game : public GameState
@@ -27,4 +28,8 @@ private:
 	sf::View view;
 	Level level;
 	AdventureGroup adventureGroup;
+
+	Battle *currentBattle;
+
+	bool inBattle;
 };

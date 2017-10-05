@@ -1,3 +1,5 @@
-﻿  Player.cpp
+﻿  Level.cpp
+f:\soma\src\game\level.cpp(55): warning C4018: ">": Konflikt zwischen "signed" und "unsigned"
+f:\soma\src\game\level.cpp(59): warning C4018: ">": Konflikt zwischen "signed" und "unsigned"
   Soma.vcxproj -> F:\Soma\Debug\Soma.exe
   Soma.vcxproj -> F:\Soma\Debug\Soma.pdb (Partial PDB)

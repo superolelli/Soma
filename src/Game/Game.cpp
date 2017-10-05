@@ -11,12 +11,16 @@ void Game::Init(CGameEngine * _engine)
 
 	level.Init();
 	adventureGroup.Init();
+
+	currentBattle = nullptr;
+	inBattle = false;
 }
 
 
 void Game::Cleanup()
 {
 	adventureGroup.Quit();
+	g_pModels->Quit();  //Muss in letztem Gamestate passieren
 	m_pGameEngine = nullptr;
 }
 
@@ -44,14 +48,38 @@ void Game::Update()
 	if(m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
 
-	if (m_pGameEngine->GetKeystates(KeyID::Left) == Keystates::Held)
-		xMove = -2;
+	if (inBattle)
+	{
+		currentBattle->Update();
 
-	if (m_pGameEngine->GetKeystates(KeyID::Right) == Keystates::Held)
-		xMove = 2;
+		if (currentBattle->battleFinished())
+		{
+			inBattle = false;
+			currentBattle->Quit();
+			SAFE_DELETE(currentBattle);
+		}
+	}
+	else
+	{
+		if (m_pGameEngine->GetKeystates(KeyID::Left) == Keystates::Held)
+			xMove = -2;
 
-	view.move(xMove, 0);
+		if (m_pGameEngine->GetKeystates(KeyID::Right) == Keystates::Held)
+			xMove = 2;
+
+		view.move(xMove, 0);
+		level.Update(view.getCenter().x);
+
+		if (level.InBattle())
+		{
+			inBattle = true;
+			currentBattle = new Battle;
+			currentBattle->Init(view.getCenter().x);
+		}
+	}
+
 	adventureGroup.Update(xMove);
+
 }
 
 
@@ -64,6 +92,9 @@ void Game::Render(double _normalizedTimestep)
 
 	level.Render(m_pGameEngine->GetWindow(), view.getCenter().x - view.getSize().x / 2);
 	adventureGroup.Render();
+	
+	if (currentBattle != nullptr)
+		currentBattle->Render();
 
 	m_pGameEngine->FlipWindow();
 }

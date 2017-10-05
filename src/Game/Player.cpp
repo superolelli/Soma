@@ -4,9 +4,16 @@
 
 
 
-void Player::Init()
+void Player::Init(int _id)
 {
-	playerObject = g_pModels->modelOle->getNewEntityInstance("Ole");
+	if(_id == 0)
+		playerObject = g_pModels->modelOle->getNewEntityInstance("Ole");
+	else if(_id == 1)
+		playerObject = g_pModels->modelAnna->getNewEntityInstance("anna");
+	else if (_id == 2)
+		playerObject = g_pModels->modelSimon->getNewEntityInstance("Simon");
+	else 
+		playerObject = g_pModels->modelMarkus->getNewEntityInstance("Markus");
 
 	playerObject->setCurrentAnimation("idle");
 

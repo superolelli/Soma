@@ -18,6 +18,13 @@ class CModelManager : public TSingleton<CModelManager>
 public:
 	//Loads all textures
 	void LoadModels(CGameEngine &_engine);
+	void Quit();
 
 	SpriterEngine::SpriterModel *modelOle;
+	SpriterEngine::SpriterModel *modelAnna;
+	SpriterEngine::SpriterModel *modelSimon;
+	SpriterEngine::SpriterModel *modelMarkus;
+
+	SpriterEngine::SpriterModel *modelAbtruenniger;
+	SpriterEngine::SpriterModel *modelGesetzloser;
 };

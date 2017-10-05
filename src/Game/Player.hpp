@@ -15,7 +15,7 @@ class Player
 {
 public:
 
-	void Init();
+	void Init(int _id);
 	void Quit();
 	void Update(int _xMove, bool _is_walking);
 	void Render();
