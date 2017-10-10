@@ -12,6 +12,8 @@ void Game::Init(CGameEngine * _engine)
 	level.Init();
 	adventureGroup.Init();
 
+	currentGUI = new BattleGUI;
+
 	currentBattle = nullptr;
 	inBattle = false;
 }
@@ -22,6 +24,7 @@ void Game::Cleanup()
 	adventureGroup.Quit();
 	g_pModels->Quit();  //Muss in letztem Gamestate passieren
 	m_pGameEngine = nullptr;
+	SAFE_DELETE(currentGUI);
 }
 
 
@@ -74,7 +77,7 @@ void Game::Update()
 		{
 			inBattle = true;
 			currentBattle = new Battle;
-			currentBattle->Init(view.getCenter().x);
+			currentBattle->Init(view.getCenter().x, &adventureGroup);
 		}
 	}
 

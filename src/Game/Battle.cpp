@@ -2,15 +2,15 @@
 
 
 
-void Battle::Init(int _xView)
+void Battle::Init(int _xView, AdventureGroup *_adventureGroup)
 {
-	enemyObject[3] = g_pModels->modelGesetzloser->getNewEntityInstance("Gesetzloser");
-	enemyObject[2] = g_pModels->modelGesetzloser->getNewEntityInstance("Gesetzloser");
-	enemyObject[1] = g_pModels->modelAbtruenniger->getNewEntityInstance("Abtruenniger");
-	enemyObject[0] = g_pModels->modelAbtruenniger->getNewEntityInstance("Abtruenniger");
+	enemy[3] = g_pModels->modelGesetzloser->getNewEntityInstance("Gesetzloser");
+	enemy[2] = g_pModels->modelGesetzloser->getNewEntityInstance("Gesetzloser");
+	enemy[1] = g_pModels->modelAbtruenniger->getNewEntityInstance("Abtruenniger");
+	enemy[0] = g_pModels->modelAbtruenniger->getNewEntityInstance("Abtruenniger");
 	int pos = _xView + 50;
 
-	for (auto e : enemyObject)
+	for (auto e : enemy)
 	{
 		e->setCurrentAnimation("idle");
 		e->setScale(SpriterEngine::point(0.6, 0.6));
@@ -19,13 +19,16 @@ void Battle::Init(int _xView)
 		pos += 200;
 	}
 
+	players = _adventureGroup;
+	//gui = _gui;
+
 	isBattleFinished = false;
 }
 
 
 void Battle::Quit()
 {
-	for (auto e : enemyObject)
+	for (auto e : enemy)
 		SAFE_DELETE(e);
 }
 
@@ -37,7 +40,7 @@ void Battle::Update()
 
 void Battle::Render()
 {
-	for (auto e : enemyObject)
+	for (auto e : enemy)
 	{
 		e->setTimeElapsed(10);
 		e->render();

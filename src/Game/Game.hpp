@@ -7,6 +7,8 @@
 #include "Level.hpp"
 #include "AdventureGroup.hpp"
 #include "Battle.hpp"
+#include "GUI.hpp"
+#include "BattleGUI.hpp"
 
 
 class Game : public GameState
@@ -28,6 +30,7 @@ private:
 	sf::View view;
 	Level level;
 	AdventureGroup adventureGroup;
+	GUI *currentGUI;
 
 	Battle *currentBattle;
 

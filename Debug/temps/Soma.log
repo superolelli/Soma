@@ -1,5 +1,14 @@
-﻿  Level.cpp
-f:\soma\src\game\level.cpp(55): warning C4018: ">": Konflikt zwischen "signed" und "unsigned"
-f:\soma\src\game\level.cpp(59): warning C4018: ">": Konflikt zwischen "signed" und "unsigned"
-  Soma.vcxproj -> F:\Soma\Debug\Soma.exe
-  Soma.vcxproj -> F:\Soma\Debug\Soma.pdb (Partial PDB)
+﻿  Game.cpp
+f:\soma\src\game\game.cpp(73): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+f:\soma\src\game\game.cpp(74): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
+f:\soma\src\game\game.cpp(80): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
+f:\soma\src\game\game.cpp(96): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+  Battle.cpp
+  Code wird generiert...
+  Überspringen... (keine relevanten Änderungen gefunden)
+  main.cpp
+  InitialState.cpp
+Game.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual void __thiscall GUI::Init(void)" (?Init@GUI@@UAEXXZ)".
+Game.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual void __thiscall GUI::Update(void)" (?Update@GUI@@UAEXXZ)".
+Game.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual void __thiscall GUI::Render(void)" (?Render@GUI@@UAEXXZ)".
+F:\Soma\Debug\Soma.exe : fatal error LNK1120: 3 nicht aufgelöste Externe
