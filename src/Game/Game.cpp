@@ -12,7 +12,8 @@ void Game::Init(CGameEngine * _engine)
 	level.Init();
 	adventureGroup.Init();
 
-	currentGUI = new BattleGUI;
+	currentGUI = new LevelGUI;
+	currentGUI->Init(m_pGameEngine);
 
 	currentBattle = nullptr;
 	inBattle = false;
@@ -46,44 +47,67 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-	int xMove = 0;
-
 	if(m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
 
+
 	if (inBattle)
-	{
-		currentBattle->Update();
-
-		if (currentBattle->battleFinished())
-		{
-			inBattle = false;
-			currentBattle->Quit();
-			SAFE_DELETE(currentBattle);
-		}
-	}
+		UpdateBattle();
 	else
+		UpdateLevel();
+
+	currentGUI->Update();
+}
+
+
+void Game::UpdateLevel()
+{
+	int xMove = 0;
+
+	if (m_pGameEngine->GetKeystates(KeyID::Left) == Keystates::Held)
+		xMove = -2;
+
+	if (m_pGameEngine->GetKeystates(KeyID::Right) == Keystates::Held)
+		xMove = 2;
+
+	view.move(xMove, 0);
+	level.Update(view.getCenter().x);
+
+	if (level.InBattle())
 	{
-		if (m_pGameEngine->GetKeystates(KeyID::Left) == Keystates::Held)
-			xMove = -2;
-
-		if (m_pGameEngine->GetKeystates(KeyID::Right) == Keystates::Held)
-			xMove = 2;
-
-		view.move(xMove, 0);
-		level.Update(view.getCenter().x);
-
-		if (level.InBattle())
-		{
-			inBattle = true;
-			currentBattle = new Battle;
-			currentBattle->Init(view.getCenter().x, &adventureGroup);
-		}
+		inBattle = true;
+		InitNewBattle();
 	}
 
 	adventureGroup.Update(xMove);
-
 }
+
+
+void Game::UpdateBattle()
+{
+	currentBattle->Update();
+
+	if (currentBattle->battleFinished())
+	{
+		inBattle = false;
+		currentBattle->Quit();
+		SAFE_DELETE(currentBattle);
+	}
+
+	adventureGroup.Update(0);
+}
+
+
+void Game::InitNewBattle()
+{
+	SAFE_DELETE(currentGUI);
+	currentGUI = new BattleGUI;
+	currentGUI->Init(m_pGameEngine);
+
+	currentBattle = new Battle;
+	currentBattle->Init(view.getCenter().x, &adventureGroup);
+}
+
 
 
 
@@ -98,6 +122,10 @@ void Game::Render(double _normalizedTimestep)
 	
 	if (currentBattle != nullptr)
 		currentBattle->Render();
+
+	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
+
+	currentGUI->Render();
 
 	m_pGameEngine->FlipWindow();
 }

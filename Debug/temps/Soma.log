@@ -1,14 +1,13 @@
-﻿  Game.cpp
-f:\soma\src\game\game.cpp(73): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-f:\soma\src\game\game.cpp(74): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
-f:\soma\src\game\game.cpp(80): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
-f:\soma\src\game\game.cpp(96): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-  Battle.cpp
+﻿  LevelGUI.cpp
+  Game.cpp
+f:\soma\src\game\game.cpp(74): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+f:\soma\src\game\game.cpp(75): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
+f:\soma\src\game\game.cpp(86): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
+f:\soma\src\game\game.cpp(102): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
   Code wird generiert...
-  Überspringen... (keine relevanten Änderungen gefunden)
+  Kompilieren...
   main.cpp
   InitialState.cpp
-Game.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual void __thiscall GUI::Init(void)" (?Init@GUI@@UAEXXZ)".
-Game.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual void __thiscall GUI::Update(void)" (?Update@GUI@@UAEXXZ)".
-Game.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual void __thiscall GUI::Render(void)" (?Render@GUI@@UAEXXZ)".
-F:\Soma\Debug\Soma.exe : fatal error LNK1120: 3 nicht aufgelöste Externe
+  Code wird generiert...
+  Soma.vcxproj -> F:\Soma\Debug\Soma.exe
+  Soma.vcxproj -> F:\Soma\Debug\Soma.pdb (Partial PDB)

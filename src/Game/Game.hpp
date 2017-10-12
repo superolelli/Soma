@@ -9,6 +9,7 @@
 #include "Battle.hpp"
 #include "GUI.hpp"
 #include "BattleGUI.hpp"
+#include "LevelGUI.hpp"
 
 
 class Game : public GameState
@@ -35,4 +36,9 @@ private:
 	Battle *currentBattle;
 
 	bool inBattle;
+
+
+	void UpdateLevel();
+	void UpdateBattle();
+	void InitNewBattle();
 };

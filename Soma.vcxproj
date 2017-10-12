@@ -232,6 +232,7 @@
     <ClCompile Include="src\Game\GUI.cpp" />
     <ClCompile Include="src\Game\InitialState.cpp" />
     <ClCompile Include="src\Game\Level.cpp" />
+    <ClCompile Include="src\Game\LevelGUI.cpp" />
     <ClCompile Include="src\Game\Player.cpp" />
     <ClCompile Include="src\Game\Resources\FontManager.cpp" />
     <ClCompile Include="src\Game\Resources\ModelManager.cpp" />
@@ -360,6 +361,7 @@
     <ClInclude Include="src\Game\GUI.hpp" />
     <ClInclude Include="src\Game\InitialState.hpp" />
     <ClInclude Include="src\Game\Level.hpp" />
+    <ClInclude Include="src\Game\LevelGUI.hpp" />
     <ClInclude Include="src\Game\Player.hpp" />
     <ClInclude Include="src\Game\Resources\BackgroundIDs.hpp" />
     <ClInclude Include="src\Game\Resources\FontManager.hpp" />

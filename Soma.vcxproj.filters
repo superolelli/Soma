@@ -52,6 +52,12 @@
     <Filter Include="Quelldateien\Game\Resources">
       <UniqueIdentifier>{14c87864-4e59-4b30-ab9d-b3870b1368ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Game\GUI">
+      <UniqueIdentifier>{5de3d48e-1c75-495b-b91a-cf30371d65fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\GUI">
+      <UniqueIdentifier>{bbf8decc-88f3-40e0-b284-f5cdc55b1cc4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -400,10 +406,13 @@
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\GUI.cpp">
-      <Filter>Quelldateien\Game</Filter>
+      <Filter>Quelldateien\Game\GUI</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\BattleGUI.cpp">
-      <Filter>Quelldateien\Game</Filter>
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\LevelGUI.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -782,11 +791,14 @@
     <ClInclude Include="src\Game\Battle.hpp">
       <Filter>Headerdateien\Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\GUI.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\BattleGUI.hpp">
-      <Filter>Headerdateien\Game</Filter>
+      <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\GUI.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\LevelGUI.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
