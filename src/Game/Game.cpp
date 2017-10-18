@@ -105,7 +105,7 @@ void Game::InitNewBattle()
 	currentGUI->Init(m_pGameEngine);
 
 	currentBattle = new Battle;
-	currentBattle->Init(view.getCenter().x, &adventureGroup);
+	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI);
 }
 
 

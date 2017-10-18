@@ -3,6 +3,8 @@
 #include "GUI.hpp"
 #include "../Framework/Graphics/Sprite.hpp"
 #include "Resources\Resources.hpp"
+#include "PlayerEnum.hpp"
+
 
 class BattleGUI : public GUI
 {
@@ -13,11 +15,14 @@ public:
 	virtual void Render() override;
 
 	int GetCurrentAbility() { return currentAbility; }
+	void SetCurrentPlayer(PlayerID _player) { currentPlayer = _player; }
 
 private:
 
 	int currentAbility;
+	PlayerID currentPlayer;
 
-	CSprite abilities[4];
+	CSprite abilities[4][4];
+
 	CSprite currentAbilityFrame;
 };

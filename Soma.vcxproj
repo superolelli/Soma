@@ -363,6 +363,7 @@
     <ClInclude Include="src\Game\Level.hpp" />
     <ClInclude Include="src\Game\LevelGUI.hpp" />
     <ClInclude Include="src\Game\Player.hpp" />
+    <ClInclude Include="src\Game\PlayerEnum.hpp" />
     <ClInclude Include="src\Game\Resources\BackgroundIDs.hpp" />
     <ClInclude Include="src\Game\Resources\FontManager.hpp" />
     <ClInclude Include="src\Game\Resources\ModelManager.hpp" />

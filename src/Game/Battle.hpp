@@ -2,14 +2,15 @@
 #include "Resources\Resources.hpp"
 #include "AdventureGroup.hpp"
 #include "BattleGUI.hpp"
+#include "PlayerEnum.hpp"
 
-
+enum abilityPhase {ready, aimed, finished};
 
 class Battle
 {
 public:
 
-	void Init(int _xView, AdventureGroup *_adventureGroup);
+	void Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui);
 	void Update();
 	void Render();
 	void Quit();
@@ -23,4 +24,9 @@ private:
 	BattleGUI *gui;
 
 	bool isBattleFinished;
+
+	int currentPlayer;
+	abilityPhase abilityStatus;
+
+	
 };

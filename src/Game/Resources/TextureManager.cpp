@@ -11,10 +11,25 @@ void CTextureManager::LoadTextures()
 	bangBackgrounds[door_2].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_tür_2.png");
 	bangBackgrounds[end].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_ende.png");
 
-	abilities[0].loadFromFile("Data/Sprites/Abilities/marshmallow_flash.png");
-	abilities[1].loadFromFile("Data/Sprites/Abilities/alle_auf_einen.png");
-	abilities[2].loadFromFile("Data/Sprites/Abilities/reparieren.png");
-	abilities[3].loadFromFile("Data/Sprites/Abilities/verarschen.png");
+	abilities[0][0].loadFromFile("Data/Sprites/Abilities/marshmallow_flash.png");
+	abilities[0][1].loadFromFile("Data/Sprites/Abilities/alle_auf_einen.png");
+	abilities[0][2].loadFromFile("Data/Sprites/Abilities/reparieren.png");
+	abilities[0][3].loadFromFile("Data/Sprites/Abilities/verarschen.png");
+
+	abilities[1][0].loadFromFile("Data/Sprites/Abilities/gummi_arm.png");
+	abilities[1][1].loadFromFile("Data/Sprites/Abilities/whole_body_kick.png");
+	abilities[1][2].loadFromFile("Data/Sprites/Abilities/hack_into_the_system.png");
+	abilities[1][3].loadFromFile("Data/Sprites/Abilities/poetry_slam.png");
+
+	abilities[2][0].loadFromFile("Data/Sprites/Abilities/indomitable_happiness.png");
+	abilities[2][1].loadFromFile("Data/Sprites/Abilities/word_gush.png");
+	abilities[2][2].loadFromFile("Data/Sprites/Abilities/side_of_nose_blow.png");
+	abilities[2][3].loadFromFile("Data/Sprites/Abilities/deathhug.png");
+
+	abilities[3][0].loadFromFile("Data/Sprites/Abilities/fist_of_revenge.png");
+	abilities[3][1].loadFromFile("Data/Sprites/Abilities/nose_ram.png");
+	abilities[3][2].loadFromFile("Data/Sprites/Abilities/harte_zerstörung.png");
+	abilities[3][3].loadFromFile("Data/Sprites/Abilities/horrible_grin.png");
 
 	currentAbilityFrame.loadFromFile("Data/Sprites/Abilities/currentAbilityFrame.png");
 

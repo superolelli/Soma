@@ -2,7 +2,7 @@
 
 
 
-void Battle::Init(int _xView, AdventureGroup *_adventureGroup)
+void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui)
 {
 	enemy[3] = g_pModels->modelGesetzloser->getNewEntityInstance("Gesetzloser");
 	enemy[2] = g_pModels->modelGesetzloser->getNewEntityInstance("Gesetzloser");
@@ -20,9 +20,13 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup)
 	}
 
 	players = _adventureGroup;
-	//gui = _gui;
+	gui = _gui;
 
 	isBattleFinished = false;
+
+	currentPlayer = Simon;
+	gui->SetCurrentPlayer((PlayerID)currentPlayer);
+	abilityStatus = ready;
 }
 
 
@@ -32,10 +36,29 @@ void Battle::Quit()
 		SAFE_DELETE(e);
 }
 
+
+
 void Battle::Update()
 {
+	if (abilityStatus == finished)
+	{
+		currentPlayer++;
+		if (currentPlayer > 3)
+			currentPlayer = 0;
+		gui->SetCurrentPlayer((PlayerID)currentPlayer);
+
+		abilityStatus = ready;
+	}
+	else if (abilityStatus == aimed)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))    //do the ability
+			abilityStatus = finished;
+	}
+	else
+		abilityStatus = aimed; //check if an aim was chosen
 	
 }
+
 
 
 void Battle::Render()

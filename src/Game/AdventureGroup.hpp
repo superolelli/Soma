@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Player.hpp"
-
-enum player {anna, simon, markus, ole};
+#include "PlayerEnum.hpp"
 
 class AdventureGroup
 {

@@ -1,13 +1,3 @@
-﻿  LevelGUI.cpp
-  Game.cpp
-f:\soma\src\game\game.cpp(74): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-f:\soma\src\game\game.cpp(75): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
-f:\soma\src\game\game.cpp(86): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
-f:\soma\src\game\game.cpp(102): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-  Code wird generiert...
-  Kompilieren...
-  main.cpp
-  InitialState.cpp
-  Code wird generiert...
+﻿  Battle.cpp
   Soma.vcxproj -> F:\Soma\Debug\Soma.exe
   Soma.vcxproj -> F:\Soma\Debug\Soma.pdb (Partial PDB)
