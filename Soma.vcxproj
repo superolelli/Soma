@@ -225,6 +225,7 @@
     <ClCompile Include="src\Framework\Gui\StringInput.cpp" />
     <ClCompile Include="src\Framework\Time.cpp" />
     <ClCompile Include="src\Framework\Window.cpp" />
+    <ClCompile Include="src\Game\Abilities.cpp" />
     <ClCompile Include="src\Game\AdventureGroup.cpp" />
     <ClCompile Include="src\Game\Battle.cpp" />
     <ClCompile Include="src\Game\BattleGUI.cpp" />
@@ -354,6 +355,7 @@
     <ClInclude Include="src\Framework\Patterns\Singleton.hpp" />
     <ClInclude Include="src\Framework\Time.hpp" />
     <ClInclude Include="src\Framework\Window.hpp" />
+    <ClInclude Include="src\Game\Abilities.hpp" />
     <ClInclude Include="src\Game\AdventureGroup.hpp" />
     <ClInclude Include="src\Game\Battle.hpp" />
     <ClInclude Include="src\Game\BattleGUI.hpp" />

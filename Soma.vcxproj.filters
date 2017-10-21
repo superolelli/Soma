@@ -414,6 +414,9 @@
     <ClCompile Include="src\Game\LevelGUI.cpp">
       <Filter>Quelldateien\Game\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\Abilities.cpp">
+      <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -801,6 +804,9 @@
       <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\PlayerEnum.hpp">
+      <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Abilities.hpp">
       <Filter>Headerdateien\Game</Filter>
     </ClInclude>
   </ItemGroup>

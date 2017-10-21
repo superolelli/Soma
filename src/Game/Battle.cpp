@@ -2,7 +2,7 @@
 
 
 
-void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui)
+void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine)
 {
 	enemy[3] = g_pModels->modelGesetzloser->getNewEntityInstance("Gesetzloser");
 	enemy[2] = g_pModels->modelGesetzloser->getNewEntityInstance("Gesetzloser");
@@ -21,6 +21,7 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui)
 
 	players = _adventureGroup;
 	gui = _gui;
+	engine = _engine;
 
 	isBattleFinished = false;
 
@@ -51,12 +52,53 @@ void Battle::Update()
 	}
 	else if (abilityStatus == aimed)
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))    //do the ability
+		   //do the ability
 			abilityStatus = finished;
 	}
 	else
-		abilityStatus = aimed; //check if an aim was chosen
+	{
+		if(AimChosen())
+			abilityStatus = aimed; 
+	}
 	
+}
+
+
+
+bool Battle::AimChosen()
+{
+	if (engine->GetButtonstates(ButtonID::Left) == Keystates::Released)
+	{
+		for (int i = 0; i < 8; i++)
+		{
+			if (g_pAbilities->abilityAims[currentPlayer][gui->GetCurrentAbility()].position[i] == true)
+				if (CompetitantClicked(i))
+					return true;
+		}
+	}
+
+	return false;
+}
+
+
+
+bool Battle::CompetitantClicked(int _id)
+{
+	if (_id >= 0 && _id < 4)
+	{
+		sf::IntRect rect;
+		rect.left = enemy[_id]->getPosition().x;
+		rect.top = enemy[_id]->getPosition().y - 200;
+		rect.width = 150;
+		rect.height = 400;		
+
+		if (rect.contains(engine->GetWorldMousePos()))
+			return true;
+	}
+	else
+		return false;
+
+	return false;
 }
 
 

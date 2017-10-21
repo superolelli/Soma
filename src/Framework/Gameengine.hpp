@@ -57,6 +57,7 @@ public:
 	inline std::string &GetTextInput() { return m_Window.GetTextInput(); }
 	inline int const GetMouseWheelMovement() const { return m_Window.GetMouseWheelMovement(); }
 	inline sf::Vector2i const &GetMousePos() { return m_Window.GetMousePos(); }
+	inline sf::Vector2i const &GetWorldMousePos() { return m_Window.GetWorldMousePos(); }
 
 
 private:

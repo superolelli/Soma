@@ -50,6 +50,7 @@ void Game::Update()
 	if(m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
 
+	m_pGameEngine->GetWindow().setView(view);
 
 	if (inBattle)
 		UpdateBattle();
@@ -65,10 +66,10 @@ void Game::UpdateLevel()
 	int xMove = 0;
 
 	if (m_pGameEngine->GetKeystates(KeyID::Left) == Keystates::Held)
-		xMove = -2;
+		xMove = -3;
 
 	if (m_pGameEngine->GetKeystates(KeyID::Right) == Keystates::Held)
-		xMove = 2;
+		xMove = 3;
 
 	view.move(xMove, 0);
 	level.Update(view.getCenter().x);
@@ -105,7 +106,7 @@ void Game::InitNewBattle()
 	currentGUI->Init(m_pGameEngine);
 
 	currentBattle = new Battle;
-	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI);
+	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine);
 }
 
 

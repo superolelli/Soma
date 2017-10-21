@@ -39,6 +39,7 @@ public:
 	inline std::string &GetTextInput() { return m_textInput; }
 	inline int const GetMouseWheelMovement() const { return m_mouseWheelMovement; }
 	inline sf::Vector2i const &GetMousePos()  { return m_mousePosition; }
+	inline sf::Vector2i const &GetWorldMousePos() { return (sf::Vector2i)m_pWindow->mapPixelToCoords(m_mousePosition); }
 
 
 private:
