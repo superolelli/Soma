@@ -4,6 +4,7 @@
 #include "BattleGUI.hpp"
 #include "PlayerEnum.hpp"
 #include "Abilities.hpp"
+#include "Enemy.hpp"
 
 enum abilityPhase {ready, aimed, finished};
 
@@ -20,7 +21,7 @@ public:
 
 private:
 
-	SpriterEngine::EntityInstance *enemy[4];
+	Enemy enemy[4];
 	AdventureGroup *players;
 	BattleGUI *gui;
 	CGameEngine *engine;
@@ -31,5 +32,5 @@ private:
 	abilityPhase abilityStatus;
 
 	bool AimChosen();
-	bool CompetitantClicked(int _id);
+	bool CombatantClicked(int _id);
 };

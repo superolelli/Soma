@@ -7,18 +7,31 @@
 void Player::Init(int _id)
 {
 	if(_id == 0)
-		playerObject = g_pModels->modelOle->getNewEntityInstance("Ole");
+		combatantObject = g_pModels->modelOle->getNewEntityInstance("Ole");
 	else if(_id == 1)
-		playerObject = g_pModels->modelAnna->getNewEntityInstance("anna");
+		combatantObject = g_pModels->modelAnna->getNewEntityInstance("anna");
 	else if (_id == 2)
-		playerObject = g_pModels->modelSimon->getNewEntityInstance("Simon");
+		combatantObject = g_pModels->modelSimon->getNewEntityInstance("Simon");
 	else 
-		playerObject = g_pModels->modelMarkus->getNewEntityInstance("Markus");
+		combatantObject = g_pModels->modelMarkus->getNewEntityInstance("Markus");
 
-	playerObject->setCurrentAnimation("idle");
+	combatantObject->setCurrentAnimation("idle");
 
-	playerObject->setScale(SpriterEngine::point(0.6, 0.6));
-	playerObject->reprocessCurrentTime();
+	combatantObject->setScale(SpriterEngine::point(0.6, 0.6));
+	combatantObject->reprocessCurrentTime();
+
+	SpriterEngine::UniversalObjectInterface* hitboxObj = combatantObject->getObjectInstance("bounding_box");
+
+	hitbox.width = hitboxObj->getSize().x * combatantObject->getScale().x;
+	hitbox.height = hitboxObj->getSize().y * combatantObject->getScale().y;
+	hitbox.left = hitboxObj->getPosition().x;
+	hitbox.top = hitboxObj->getPosition().y;
+
+	attributes.armour = 1;
+	attributes.currentHealth = 20;
+	attributes.maxHealth = 20;
+	attributes.damage = 5;
+	attributes.initiative = 1;
 
 	is_walking = false;
 }
@@ -28,24 +41,23 @@ void Player::Init(int _id)
 
 void Player::Quit()
 {
-	SAFE_DELETE(playerObject);
 }
 
 
 
 void Player::Update(int _xMove, bool _is_walking)
 {
-	playerObject->setPosition(SpriterEngine::point(playerObject->getPosition().x + _xMove, playerObject->getPosition().y));
+	SetPos(combatantObject->getPosition().x + _xMove, combatantObject->getPosition().y);
 
 	if (is_walking == false && _is_walking == true)
 	{
 		is_walking = true;
-		playerObject->setCurrentAnimation("walk");
+		combatantObject->setCurrentAnimation("walk");
 	}
 	else if (is_walking == true && _is_walking == false)
 	{
 		is_walking = false;
-		playerObject->setCurrentAnimation("idle");
+		combatantObject->setCurrentAnimation("idle");
 	}
 
 }
@@ -55,17 +67,13 @@ void Player::Update(int _xMove, bool _is_walking)
 void Player::Render()
 {
 	if(is_walking)
-		playerObject->setTimeElapsed(17);
+		combatantObject->setTimeElapsed(17);
 	else
-		playerObject->setTimeElapsed(10);
+		combatantObject->setTimeElapsed(10);
 
-	playerObject->render();
+	combatantObject->render();
 }
 
 
-void Player::SetPos(int _x, int _y)
-{
-	playerObject->setPosition(SpriterEngine::point(_x, _y));
-}
 
 

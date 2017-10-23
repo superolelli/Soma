@@ -31,6 +31,7 @@
         <obj_info name="bone_009" type="bone" w="120.29" h="10"/>
         <obj_info name="bone_010" type="bone" w="129.018" h="10"/>
         <obj_info name="bone_011" type="bone" w="68.5463" h="10"/>
+        <obj_info name="bounding_box" type="box" w="397.183" h="690.141" pivot_x="0" pivot_y="0"/>
         <animation id="0" name="idle" length="1000" interval="100">
             <mainline>
                 <key id="0">
@@ -65,6 +66,7 @@
                     <object_ref id="16" parent="2" timeline="14" key="0" z_index="16"/>
                     <object_ref id="17" parent="3" timeline="18" key="0" z_index="17"/>
                     <object_ref id="18" parent="3" timeline="15" key="0" z_index="18"/>
+                    <object_ref id="19" timeline="31" key="0" z_index="19"/>
                 </key>
                 <key id="1" time="500">
                     <bone_ref id="0" timeline="19" key="0"/>
@@ -98,6 +100,7 @@
                     <object_ref id="16" parent="2" timeline="14" key="0" z_index="16"/>
                     <object_ref id="17" parent="3" timeline="18" key="0" z_index="17"/>
                     <object_ref id="18" parent="3" timeline="15" key="0" z_index="18"/>
+                    <object_ref id="19" timeline="31" key="0" z_index="19"/>
                 </key>
             </mainline>
             <timeline id="0" name="gesetzloser_koerper">
@@ -194,12 +197,12 @@
             </timeline>
             <timeline id="16" name="gesetzloser_oberarm2">
                 <key id="0" spin="0">
-                    <object folder="0" file="13" x="-3.892452" y="-36.674121" angle="99.323592" scale_x="1"/>
+                    <object folder="0" file="13" x="-3.892452" y="-36.674121" angle="99.323592"/>
                 </key>
             </timeline>
             <timeline id="17" name="gesetzloser_unterarm2">
                 <key id="0" spin="0">
-                    <object folder="0" file="14" x="280.455234" y="-44.980528" angle="216.656108" scale_x="1"/>
+                    <object folder="0" file="14" x="280.455234" y="-44.980528" angle="216.656108"/>
                 </key>
             </timeline>
             <timeline id="18" name="gesetzloser_gewehr">
@@ -235,15 +238,15 @@
             </timeline>
             <timeline id="23" obj="4" name="bone_004" object_type="bone">
                 <key id="0" spin="0">
-                    <bone x="148.146593" y="78.966713" angle="171.506724" scale_x="1"/>
+                    <bone x="148.146593" y="78.966713" angle="171.506724"/>
                 </key>
             </timeline>
             <timeline id="24" obj="5" name="bone_005" object_type="bone">
                 <key id="0">
-                    <bone x="110.589537" y="15.219135" angle="242.667483" scale_x="1"/>
+                    <bone x="110.589537" y="15.219135" angle="242.667483"/>
                 </key>
                 <key id="1" time="500" spin="-1">
-                    <bone x="110.589537" y="15.219135" angle="247.893439" scale_x="1"/>
+                    <bone x="110.589537" y="15.219135" angle="247.893439"/>
                 </key>
             </timeline>
             <timeline id="25" obj="6" name="bone_006" object_type="bone">
@@ -274,6 +277,11 @@
             <timeline id="30" obj="11" name="bone_011" object_type="bone">
                 <key id="0" spin="0">
                     <bone x="134.618351" y="8.823696" angle="284.735944"/>
+                </key>
+            </timeline>
+            <timeline id="31" obj="12" name="bounding_box" object_type="box">
+                <key id="0" spin="0">
+                    <object x="138.028169" y="666.197183" pivot_x="0" pivot_y="1" scale_x="0.842134" scale_y="0.964202"/>
                 </key>
             </timeline>
         </animation>

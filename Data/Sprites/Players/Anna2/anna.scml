@@ -30,6 +30,7 @@
         <obj_info name="bone_010" type="bone" w="68.4212" h="10"/>
         <obj_info name="bone_011" type="bone" w="227.136" h="10"/>
         <obj_info name="bone_012" type="bone" w="66.2229" h="10"/>
+        <obj_info name="bounding_box" type="box" w="196.386" h="503.614" pivot_x="0" pivot_y="0"/>
         <animation id="0" name="idle" length="1000" interval="100">
             <mainline>
                 <key id="0">
@@ -63,6 +64,7 @@
                     <object_ref id="14" parent="11" timeline="3" key="0" z_index="14"/>
                     <object_ref id="15" parent="11" timeline="4" key="0" z_index="15"/>
                     <object_ref id="16" parent="11" timeline="7" key="0" z_index="16"/>
+                    <object_ref id="17" timeline="30" key="0" z_index="17"/>
                 </key>
                 <key id="1" time="499">
                     <bone_ref id="0" timeline="17" key="0"/>
@@ -95,6 +97,7 @@
                     <object_ref id="14" parent="11" timeline="3" key="0" z_index="14"/>
                     <object_ref id="15" parent="11" timeline="4" key="0" z_index="15"/>
                     <object_ref id="16" parent="11" timeline="7" key="1" z_index="16"/>
+                    <object_ref id="17" timeline="30" key="0" z_index="17"/>
                 </key>
             </mainline>
             <timeline id="0" name="anna_koerper">
@@ -119,7 +122,7 @@
             </timeline>
             <timeline id="4" name="anna_auge">
                 <key id="0" spin="0">
-                    <object folder="0" file="4" x="112.39245" y="-47.12927" angle="267.286591"/>
+                    <object folder="0" file="4" x="112.660414" y="-41.475239" angle="267.286591"/>
                 </key>
             </timeline>
             <timeline id="5" name="anna_oberarm1">
@@ -134,10 +137,10 @@
             </timeline>
             <timeline id="7" name="anna_pupille">
                 <key id="0" spin="0">
-                    <object folder="0" file="7" x="94.437899" y="-62.021102" angle="267.286591"/>
+                    <object folder="0" file="7" x="94.705863" y="-56.367071" angle="267.286591"/>
                 </key>
                 <key id="1" time="499" spin="0">
-                    <object folder="0" file="7" x="94.285403" y="-64.166226" angle="267.286591"/>
+                    <object folder="0" file="7" x="94.001029" y="-56.702804" angle="267.286591"/>
                 </key>
             </timeline>
             <timeline id="8" name="anna_oberschenkel">
@@ -266,6 +269,11 @@
                 </key>
                 <key id="1" time="499">
                     <bone x="158.895187" y="59.210918" angle="42.446876"/>
+                </key>
+            </timeline>
+            <timeline id="30" obj="13" name="bounding_box" object_type="box">
+                <key id="0" spin="0">
+                    <object x="59.036145" y="503.614458" pivot_x="0" pivot_y="1" scale_x="1"/>
                 </key>
             </timeline>
         </animation>
@@ -588,7 +596,7 @@
                     <object folder="0" file="13" x="10.809101" y="-4.648672" angle="212.39984"/>
                 </key>
                 <key id="1" time="498">
-                    <object folder="0" file="13" x="10.809101" y="-4.648672" angle="208.07682" scale_x="1" scale_y="1.063491"/>
+                    <object folder="0" file="13" x="10.809101" y="-4.648672" angle="208.07682" scale_y="1.063491"/>
                 </key>
             </timeline>
             <timeline id="26" name="anna_kopf">
@@ -609,18 +617,18 @@
             </timeline>
             <timeline id="28" name="anna_auge">
                 <key id="0" spin="0">
-                    <object folder="0" file="4" x="112.39245" y="-47.12927" angle="267.286591"/>
+                    <object folder="0" file="4" x="113.560434" y="-39.799295" angle="267.286591"/>
                 </key>
                 <key id="1" time="498" spin="0">
-                    <object folder="0" file="4" x="112.39245" y="-47.12927" angle="267.286591"/>
+                    <object folder="0" file="4" x="113.560434" y="-39.799295" angle="267.286591"/>
                 </key>
             </timeline>
             <timeline id="29" name="anna_pupille">
                 <key id="0" spin="0">
-                    <object folder="0" file="7" x="94.437899" y="-62.021102" angle="267.286591"/>
+                    <object folder="0" file="7" x="95.605883" y="-54.691127" angle="267.286591"/>
                 </key>
                 <key id="1" time="498" spin="0">
-                    <object folder="0" file="7" x="94.437899" y="-62.021102" angle="267.286591"/>
+                    <object folder="0" file="7" x="97.349073" y="-53.162668" angle="267.286591"/>
                 </key>
             </timeline>
         </animation>

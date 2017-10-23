@@ -4,18 +4,15 @@
 
 void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine)
 {
-	enemy[3] = g_pModels->modelGesetzloser->getNewEntityInstance("Gesetzloser");
-	enemy[2] = g_pModels->modelGesetzloser->getNewEntityInstance("Gesetzloser");
-	enemy[1] = g_pModels->modelAbtruenniger->getNewEntityInstance("Abtruenniger");
-	enemy[0] = g_pModels->modelAbtruenniger->getNewEntityInstance("Abtruenniger");
-	int pos = _xView + 50;
+	enemy[3].Init(4);
+	enemy[2].Init(4);
+	enemy[1].Init(5);
+	enemy[0].Init(5);
 
-	for (auto e : enemy)
+	int pos = _xView + 50;
+	for (auto &e : enemy)
 	{
-		e->setCurrentAnimation("idle");
-		e->setScale(SpriterEngine::point(0.6, 0.6));
-		e->setPosition(SpriterEngine::point(pos, 700));
-		e->reprocessCurrentTime();
+		e.SetPos(pos, 700);
 		pos += 200;
 	}
 
@@ -33,8 +30,7 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 
 void Battle::Quit()
 {
-	for (auto e : enemy)
-		SAFE_DELETE(e);
+
 }
 
 
@@ -72,7 +68,7 @@ bool Battle::AimChosen()
 		for (int i = 0; i < 8; i++)
 		{
 			if (g_pAbilities->abilityAims[currentPlayer][gui->GetCurrentAbility()].position[i] == true)
-				if (CompetitantClicked(i))
+				if (CombatantClicked(i))
 					return true;
 		}
 	}
@@ -82,17 +78,11 @@ bool Battle::AimChosen()
 
 
 
-bool Battle::CompetitantClicked(int _id)
+bool Battle::CombatantClicked(int _id)
 {
 	if (_id >= 0 && _id < 4)
 	{
-		sf::IntRect rect;
-		rect.left = enemy[_id]->getPosition().x;
-		rect.top = enemy[_id]->getPosition().y - 200;
-		rect.width = 150;
-		rect.height = 400;		
-
-		if (rect.contains(engine->GetWorldMousePos()))
+		if (enemy[_id].GetRect().contains(engine->GetWorldMousePos()))
 			return true;
 	}
 	else
@@ -105,9 +95,6 @@ bool Battle::CompetitantClicked(int _id)
 
 void Battle::Render()
 {
-	for (auto e : enemy)
-	{
-		e->setTimeElapsed(10);
-		e->render();
-	}
+	for (auto &e : enemy)
+		e.Render();
 }

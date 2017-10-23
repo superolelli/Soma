@@ -28,6 +28,7 @@
         <obj_info name="bone_009" type="bone" w="88.1544" h="10"/>
         <obj_info name="bone_010" type="bone" w="168.815" h="10"/>
         <obj_info name="bone_011" type="bone" w="200.1" h="10"/>
+        <obj_info name="bounding_box" type="box" w="273.864" h="765.909" pivot_x="0" pivot_y="0"/>
         <animation id="0" name="idle" length="1000" interval="100">
             <mainline>
                 <key id="0">
@@ -59,6 +60,7 @@
                     <object_ref id="13" parent="11" timeline="5" key="0" z_index="13"/>
                     <object_ref id="14" parent="7" timeline="6" key="0" z_index="14"/>
                     <object_ref id="15" parent="8" timeline="8" key="0" z_index="15"/>
+                    <object_ref id="16" timeline="28" key="0" z_index="16"/>
                 </key>
                 <key id="1" time="501">
                     <bone_ref id="0" timeline="16" key="0"/>
@@ -89,6 +91,7 @@
                     <object_ref id="13" parent="11" timeline="5" key="0" z_index="13"/>
                     <object_ref id="14" parent="7" timeline="6" key="0" z_index="14"/>
                     <object_ref id="15" parent="8" timeline="8" key="0" z_index="15"/>
+                    <object_ref id="16" timeline="28" key="0" z_index="16"/>
                 </key>
                 <key id="2" time="600">
                     <bone_ref id="0" timeline="16" key="0"/>
@@ -119,6 +122,7 @@
                     <object_ref id="13" parent="11" timeline="5" key="0" z_index="13"/>
                     <object_ref id="14" parent="7" timeline="6" key="0" z_index="14"/>
                     <object_ref id="15" parent="8" timeline="8" key="0" z_index="15"/>
+                    <object_ref id="16" timeline="28" key="0" z_index="16"/>
                 </key>
             </mainline>
             <timeline id="0" name="ole_kopf">
@@ -280,6 +284,11 @@
                 </key>
                 <key id="1" time="501" spin="-1">
                     <bone x="242.282646" y="1.301817" angle="3.753996"/>
+                </key>
+            </timeline>
+            <timeline id="28" obj="12" name="bounding_box" object_type="box">
+                <key id="0" spin="0">
+                    <object x="11.363636" y="723.863636" pivot_x="0" pivot_y="1" scale_x="0.891176" scale_y="0.942367"/>
                 </key>
             </timeline>
         </animation>
