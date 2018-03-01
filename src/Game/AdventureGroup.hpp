@@ -1,7 +1,9 @@
 #pragma once
 
-#include "Player.hpp"
-#include "PlayerEnum.hpp"
+#include "Ole.hpp"
+#include "Anna.hpp"
+#include "Markus.hpp"
+#include "Simon.hpp"
 
 class AdventureGroup
 {
@@ -12,7 +14,9 @@ public:
 	void Update(int xMove);
 	void Render();
 
+	Player *GetPlayer(int _id) { return adventurer[_id]; }
+
 private:
 
-	Player adventurer[4];
+	Player *adventurer[4];
 };

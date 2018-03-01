@@ -2,8 +2,6 @@
 #include "Resources\Resources.hpp"
 #include "AdventureGroup.hpp"
 #include "BattleGUI.hpp"
-#include "PlayerEnum.hpp"
-#include "Abilities.hpp"
 #include "Enemy.hpp"
 
 enum abilityPhase {ready, aimed, finished};
@@ -26,11 +24,15 @@ private:
 	BattleGUI *gui;
 	CGameEngine *engine;
 
+	std::list<Combatant*> combatants;
+	std::list<Combatant*>::iterator currentCombatant;
+	Combatant* selectedTarget;
+
 	bool isBattleFinished;
 
-	int currentPlayer;
 	abilityPhase abilityStatus;
 
 	bool AimChosen();
 	bool CombatantClicked(int _id);
+	void CalculateTurnOrder();
 };

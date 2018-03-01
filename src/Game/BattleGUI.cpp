@@ -50,3 +50,11 @@ void BattleGUI::Render()
 
 	currentAbilityFrame.Render(engine->GetWindow());
 }
+
+
+
+void BattleGUI::SetCurrentPlayer(int _player)
+{
+	if (_player >= 0 && _player < 4)
+		currentPlayer = (PlayerID)_player;
+}

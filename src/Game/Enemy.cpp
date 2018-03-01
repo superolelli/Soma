@@ -31,9 +31,25 @@ void Enemy::Init(int _id)
 	attributes.maxHealth = 20;
 	attributes.damage = 5;
 	attributes.initiative = 1;
+
+	for (int j = 0; j < 4; j++)
+	{
+		for (int i = 0; i < 8; i++)
+			possibleAbilityAims[j].position[i] = true;
+
+		possibleAbilityAims[j].howMany = 1;
+	}
 }
 
 
+
+bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
+{
+	for (Combatant* t : _targets)
+		std::cout << "Der Gegner schießt!" << std::endl;
+
+	return true;
+}
 
 void Enemy::Render()
 {

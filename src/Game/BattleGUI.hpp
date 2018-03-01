@@ -15,7 +15,7 @@ public:
 	virtual void Render() override;
 
 	int GetCurrentAbility() { return currentAbility; }
-	void SetCurrentPlayer(PlayerID _player) { currentPlayer = _player; }
+	void SetCurrentPlayer(int _player);
 
 private:
 

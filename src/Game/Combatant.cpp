@@ -17,8 +17,8 @@ void Combatant::SetPos(int _x, int _y)
 
 
 
-
-Combatant::~Combatant()
+void Combatant::Quit()
 {
 	SAFE_DELETE(combatantObject);
 }
+

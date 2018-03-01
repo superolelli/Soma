@@ -4,6 +4,7 @@
 
 void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine)
 {
+	srand(time(0));
 	enemy[3].Init(4);
 	enemy[2].Init(4);
 	enemy[1].Init(5);
@@ -20,43 +21,85 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 	gui = _gui;
 	engine = _engine;
 
+	combatants.push_back(&enemy[0]);
+	combatants.push_back(&enemy[1]);
+	combatants.push_back(&enemy[2]);
+	combatants.push_back(&enemy[3]);
+	combatants.push_back(players->GetPlayer(0));
+	combatants.push_back(players->GetPlayer(1));
+	combatants.push_back(players->GetPlayer(2));
+	combatants.push_back(players->GetPlayer(3));
+
+	CalculateTurnOrder();
+
+	currentCombatant = combatants.begin();
+
 	isBattleFinished = false;
 
-	currentPlayer = Simon;
-	gui->SetCurrentPlayer((PlayerID)currentPlayer);
+	gui->SetCurrentPlayer((*currentCombatant)->GetID());
+
 	abilityStatus = ready;
+	selectedTarget = nullptr;
 }
 
 
 void Battle::Quit()
 {
-
+	for (Enemy &e : enemy)
+		e.Quit();
 }
 
 
 
 void Battle::Update()
 {
-	if (abilityStatus == finished)
+	if (abilityStatus == ready)
 	{
-		currentPlayer++;
-		if (currentPlayer > 3)
-			currentPlayer = 0;
-		gui->SetCurrentPlayer((PlayerID)currentPlayer);
-
-		abilityStatus = ready;
+		if ((*currentCombatant)->IsPlayer())
+		{
+			if (AimChosen())
+				abilityStatus = aimed;
+		}
+		else
+			abilityStatus = aimed;
 	}
 	else if (abilityStatus == aimed)
 	{
-		   //do the ability
-			abilityStatus = finished;
+		//do the ability
+		std::vector<Combatant*> targets;
+		if ((*currentCombatant)->IsPlayer())
+		{
+			targets.push_back(selectedTarget);
+		}
+		else
+		{
+			targets.push_back(*combatants.begin());
+		}		
+		
+		(*currentCombatant)->DoAbility(gui->GetCurrentAbility(), targets);
+
+		abilityStatus = finished;
 	}
-	else
+	else if (abilityStatus == finished)
 	{
-		if(AimChosen())
-			abilityStatus = aimed; 
+		currentCombatant++;
+
+		if (currentCombatant == combatants.end())
+		{
+			CalculateTurnOrder();
+			currentCombatant = combatants.begin();
+		}
+
+		gui->SetCurrentPlayer((*currentCombatant)->GetID());
+
+		abilityStatus = ready;
 	}
 	
+}
+
+void Battle::CalculateTurnOrder()
+{
+	combatants.sort([](Combatant *c1, Combatant *c2) {return c1->GetAttributes().initiative > c2->GetAttributes().initiative;});
 }
 
 
@@ -67,9 +110,13 @@ bool Battle::AimChosen()
 	{
 		for (int i = 0; i < 8; i++)
 		{
-			if (g_pAbilities->abilityAims[currentPlayer][gui->GetCurrentAbility()].position[i] == true)
+			if ((*currentCombatant)->possibleAbilityAims[gui->GetCurrentAbility()].position[i] == true)
 				if (CombatantClicked(i))
+				{
+					selectedTarget = &enemy[i];
 					return true;
+				}
+				
 		}
 	}
 
@@ -85,8 +132,6 @@ bool Battle::CombatantClicked(int _id)
 		if (enemy[_id].GetRect().contains(engine->GetWorldMousePos()))
 			return true;
 	}
-	else
-		return false;
 
 	return false;
 }

@@ -227,6 +227,7 @@
     <ClCompile Include="src\Framework\Window.cpp" />
     <ClCompile Include="src\Game\Abilities.cpp" />
     <ClCompile Include="src\Game\AdventureGroup.cpp" />
+    <ClCompile Include="src\Game\Anna.cpp" />
     <ClCompile Include="src\Game\Battle.cpp" />
     <ClCompile Include="src\Game\BattleGUI.cpp" />
     <ClCompile Include="src\Game\Combatant.cpp" />
@@ -236,6 +237,8 @@
     <ClCompile Include="src\Game\InitialState.cpp" />
     <ClCompile Include="src\Game\Level.cpp" />
     <ClCompile Include="src\Game\LevelGUI.cpp" />
+    <ClCompile Include="src\Game\Markus.cpp" />
+    <ClCompile Include="src\Game\Ole.cpp" />
     <ClCompile Include="src\Game\Player.cpp" />
     <ClCompile Include="src\Game\Resources\FontManager.cpp" />
     <ClCompile Include="src\Game\Resources\ModelManager.cpp" />
@@ -243,6 +246,7 @@
     <ClCompile Include="src\Game\Resources\SoundManager.cpp" />
     <ClCompile Include="src\Game\Resources\StringManager.cpp" />
     <ClCompile Include="src\Game\Resources\TextureManager.cpp" />
+    <ClCompile Include="src\Game\Simon.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -359,6 +363,7 @@
     <ClInclude Include="src\Framework\Window.hpp" />
     <ClInclude Include="src\Game\Abilities.hpp" />
     <ClInclude Include="src\Game\AdventureGroup.hpp" />
+    <ClInclude Include="src\Game\Anna.hpp" />
     <ClInclude Include="src\Game\Battle.hpp" />
     <ClInclude Include="src\Game\BattleGUI.hpp" />
     <ClInclude Include="src\Game\Combatant.hpp" />
@@ -368,6 +373,8 @@
     <ClInclude Include="src\Game\InitialState.hpp" />
     <ClInclude Include="src\Game\Level.hpp" />
     <ClInclude Include="src\Game\LevelGUI.hpp" />
+    <ClInclude Include="src\Game\Markus.hpp" />
+    <ClInclude Include="src\Game\Ole.hpp" />
     <ClInclude Include="src\Game\Player.hpp" />
     <ClInclude Include="src\Game\PlayerEnum.hpp" />
     <ClInclude Include="src\Game\Resources\BackgroundIDs.hpp" />
@@ -378,6 +385,7 @@
     <ClInclude Include="src\Game\Resources\SoundManager.hpp" />
     <ClInclude Include="src\Game\Resources\StringManager.hpp" />
     <ClInclude Include="src\Game\Resources\TextureManager.hpp" />
+    <ClInclude Include="src\Game\Simon.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,15 +6,6 @@
 
 void Player::Init(int _id)
 {
-	if(_id == 0)
-		combatantObject = g_pModels->modelOle->getNewEntityInstance("Ole");
-	else if(_id == 1)
-		combatantObject = g_pModels->modelAnna->getNewEntityInstance("anna");
-	else if (_id == 2)
-		combatantObject = g_pModels->modelSimon->getNewEntityInstance("Simon");
-	else 
-		combatantObject = g_pModels->modelMarkus->getNewEntityInstance("Markus");
-
 	combatantObject->setCurrentAnimation("idle");
 
 	combatantObject->setScale(SpriterEngine::point(0.6, 0.6));
@@ -27,21 +18,9 @@ void Player::Init(int _id)
 	hitbox.left = hitboxObj->getPosition().x;
 	hitbox.top = hitboxObj->getPosition().y;
 
-	attributes.armour = 1;
-	attributes.currentHealth = 20;
-	attributes.maxHealth = 20;
-	attributes.damage = 5;
-	attributes.initiative = 1;
-
 	is_walking = false;
 }
 
-
-
-
-void Player::Quit()
-{
-}
 
 
 
