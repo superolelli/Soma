@@ -1,27 +1,14 @@
-﻿  Simon.cpp
-  Ole.cpp
-  Markus.cpp
+﻿  Player.cpp
+f:\soma\src\game\player.cpp(14): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
+f:\soma\src\game\player.cpp(15): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
+f:\soma\src\game\player.cpp(16): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
+f:\soma\src\game\player.cpp(17): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
+f:\soma\src\game\player.cpp(30): warning C4244: "Argument": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
   Enemy.cpp
 f:\soma\src\game\enemy.cpp(24): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
 f:\soma\src\game\enemy.cpp(25): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
 f:\soma\src\game\enemy.cpp(26): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
 f:\soma\src\game\enemy.cpp(27): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
-  Battle.cpp
-f:\soma\src\game\battle.cpp(7): warning C4244: "Argument": Konvertierung von "time_t" in "unsigned int", möglicher Datenverlust
-  Anna.cpp
   Code wird generiert...
-  Kompilieren...
-  main.cpp
-  InitialState.cpp
-  Game.cpp
-f:\soma\src\game\game.cpp(74): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-f:\soma\src\game\game.cpp(75): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
-f:\soma\src\game\game.cpp(109): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
-f:\soma\src\game\game.cpp(121): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-  AdventureGroup.cpp
-  Code wird generiert...
-  Überspringen... (keine relevanten Änderungen gefunden)
-  Player.cpp
-  Combatant.cpp
   Soma.vcxproj -> F:\Soma\Debug\Soma.exe
   Soma.vcxproj -> F:\Soma\Debug\Soma.pdb (Partial PDB)

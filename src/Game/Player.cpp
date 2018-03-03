@@ -2,8 +2,6 @@
 
 
 
-
-
 void Player::Init(int _id)
 {
 	combatantObject->setCurrentAnimation("idle");
@@ -17,6 +15,9 @@ void Player::Init(int _id)
 	hitbox.height = hitboxObj->getSize().y * combatantObject->getScale().y;
 	hitbox.left = hitboxObj->getPosition().x;
 	hitbox.top = hitboxObj->getPosition().y;
+
+	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, &attributes.currentHealth, &attributes.maxHealth);
+	healthBar.SetPos(GetRect().left - healthBar.GetRect().width / 2, GetRect().top - 20);
 
 	is_walking = false;
 }

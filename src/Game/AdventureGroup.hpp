@@ -14,6 +14,8 @@ public:
 	void Update(int xMove);
 	void Render();
 
+	void RenderWithHealthBars(sf::RenderTarget &_target);
+
 	Player *GetPlayer(int _id) { return adventurer[_id]; }
 
 private:

@@ -32,6 +32,9 @@ void Enemy::Init(int _id)
 	attributes.damage = 5;
 	attributes.initiative = 1;
 
+	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, &attributes.currentHealth, &attributes.maxHealth);
+	healthBar.SetPos(GetRect().left - healthBar.GetRect().width / 2, GetRect().top - 20);
+
 	for (int j = 0; j < 4; j++)
 	{
 		for (int i = 0; i < 8; i++)

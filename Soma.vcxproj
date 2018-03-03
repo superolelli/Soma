@@ -220,7 +220,7 @@
     <ClCompile Include="src\Framework\Gameengine.cpp" />
     <ClCompile Include="src\Framework\Graphics\Sprite.cpp" />
     <ClCompile Include="src\Framework\Graphics\SpriteWithText.cpp" />
-    <ClCompile Include="src\Framework\Gui\Beam.cpp" />
+    <ClCompile Include="src\Framework\Gui\Bar.cpp" />
     <ClCompile Include="src\Framework\Gui\Button.cpp" />
     <ClCompile Include="src\Framework\Gui\StringInput.cpp" />
     <ClCompile Include="src\Framework\Time.cpp" />
@@ -354,7 +354,7 @@
     <ClInclude Include="src\Framework\Gamestate.hpp" />
     <ClInclude Include="src\Framework\Graphics\Sprite.hpp" />
     <ClInclude Include="src\Framework\Graphics\SpriteWithText.hpp" />
-    <ClInclude Include="src\Framework\Gui\Beam.hpp" />
+    <ClInclude Include="src\Framework\Gui\Bar.hpp" />
     <ClInclude Include="src\Framework\Gui\Button.hpp" />
     <ClInclude Include="src\Framework\Gui\StringInput.hpp" />
     <ClInclude Include="src\Framework\Makros.hpp" />

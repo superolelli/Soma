@@ -2,7 +2,7 @@
 
 #include "../Framework/Gamestate.hpp"
 
-#include "../Framework/Gui/Beam.hpp"
+#include "../Framework/Gui/Bar.hpp"
 #include "../Framework/Graphics/Sprite.hpp"
 
 #include "../Game/Resources/Resources.hpp"

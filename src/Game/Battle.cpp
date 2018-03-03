@@ -141,5 +141,8 @@ bool Battle::CombatantClicked(int _id)
 void Battle::Render()
 {
 	for (auto &e : enemy)
+	{
 		e.Render();
+		e.RenderHealthBar(engine->GetWindow());
+	}
 }

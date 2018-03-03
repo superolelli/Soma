@@ -33,6 +33,9 @@ void CTextureManager::LoadTextures()
 
 	currentAbilityFrame.loadFromFile("Data/Sprites/Abilities/currentAbilityFrame.png");
 
+	healthBarFrame.loadFromFile("Data/Sprites/Battle/health_bar_frame.png");
+	healthBar.loadFromFile("Data/Sprites/Battle/health_bar.png");
+
 }
 
 

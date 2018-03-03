@@ -13,6 +13,8 @@ void Combatant::SetPos(int _x, int _y)
 
 	hitbox.left = hitboxObj->getPosition().x;
 	hitbox.top = hitboxObj->getPosition().y;
+
+	healthBar.SetPos(GetRect().left - healthBar.GetRect().width / 2, GetRect().top - 10);
 }
 
 

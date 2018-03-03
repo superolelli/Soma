@@ -75,9 +75,6 @@
     <ClCompile Include="src\Framework\Animations\override\atlasfile.cpp">
       <Filter>Quelldateien\Framework\Animations</Filter>
     </ClCompile>
-    <ClCompile Include="src\Framework\Gui\Beam.cpp">
-      <Filter>Quelldateien\Framework\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="src\Framework\Animations\timeinfo\beziereasingcurve.cpp">
       <Filter>Quelldateien\Framework\Animations</Filter>
     </ClCompile>
@@ -435,6 +432,9 @@
     <ClCompile Include="src\Game\Simon.cpp">
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
+    <ClCompile Include="src\Framework\Gui\Bar.cpp">
+      <Filter>Quelldateien\Framework\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -474,9 +474,6 @@
       <Filter>Headerdateien\Framework\Animation</Filter>
     </ClInclude>
     <ClInclude Include="src\Framework\Gui\Button.hpp">
-      <Filter>Headerdateien\Framework\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Framework\Gui\Beam.hpp">
       <Filter>Headerdateien\Framework\GUI</Filter>
     </ClInclude>
     <ClInclude Include="src\Framework\Animations\charactermap\charactermap.h">
@@ -844,6 +841,9 @@
     </ClInclude>
     <ClInclude Include="src\Game\Ole.hpp">
       <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Gui\Bar.hpp">
+      <Filter>Headerdateien\Framework\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

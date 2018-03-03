@@ -52,3 +52,12 @@ void AdventureGroup::Render()
 		a->Render();
 }
 
+void AdventureGroup::RenderWithHealthBars(sf::RenderTarget &_target)
+{
+	for (auto a : adventurer)
+	{
+		a->Render();
+		a->RenderHealthBar(_target);
+	}
+}
+

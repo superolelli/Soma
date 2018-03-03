@@ -119,10 +119,16 @@ void Game::Render(double _normalizedTimestep)
 	m_pGameEngine->GetWindow().setView(view);
 
 	level.Render(m_pGameEngine->GetWindow(), view.getCenter().x - view.getSize().x / 2);
+
 	adventureGroup.Render();
 	
-	if (currentBattle != nullptr)
+	if (currentBattle == nullptr)
+		adventureGroup.Render();
+	else
+	{
+		adventureGroup.RenderWithHealthBars(m_pGameEngine->GetWindow());
 		currentBattle->Render();
+	}
 
 	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
 

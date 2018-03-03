@@ -10,6 +10,8 @@
 
 #include "../Framework/Makros.hpp"
 
+#include "../Framework/Gui/Bar.hpp"
+
 
 
 struct combatantAttributes
@@ -40,6 +42,8 @@ public:
 	virtual bool DoAbility(int _id, std::vector<Combatant*> &_targets) { return true; }
 	virtual int GetID() { return -2; }
 
+	virtual void RenderHealthBar(sf::RenderTarget &_target) { healthBar.Render(_target); };
+
 	virtual bool IsPlayer() { return false; }
 
 	PossibleAims possibleAbilityAims[4];
@@ -51,5 +55,5 @@ protected:
 
 	combatantAttributes attributes;
 
-
+	Bar healthBar;
 };

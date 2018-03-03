@@ -19,4 +19,7 @@ public:
 	sf::Texture abilities[4][4];
 
 	sf::Texture currentAbilityFrame;
+
+	sf::Texture healthBarFrame;
+	sf::Texture healthBar;
 };
