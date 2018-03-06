@@ -42,6 +42,9 @@ public:
 	virtual bool DoAbility(int _id, std::vector<Combatant*> &_targets) { return true; }
 	virtual int GetID() { return -2; }
 
+	void LooseHealth(int _damage);
+	void GainHealth(int _health);
+
 	virtual void RenderHealthBar(sf::RenderTarget &_target) { healthBar.Render(_target); };
 
 	virtual bool IsPlayer() { return false; }

@@ -18,11 +18,11 @@ void AdventureGroup::Init()
 	adventurer[PlayerID::Markus]->Init(PlayerID::Markus);
 
 
-	int x = 100;
+	int x = GROUP_OFFSET_LEFT;
 	for (auto a : adventurer)
 	{
-		a->SetPos(x, 700);
-		x += 150;
+		a->SetPos(x, GROUP_Y_POS);
+		x += PLAYER_SPACING;
 	}
 }
 

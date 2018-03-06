@@ -6,6 +6,11 @@
 
 enum abilityPhase {ready, aimed, finished};
 
+
+const int ENEMY_X_OFFSET = 50;
+const int ENEMY_Y_POS = 700;
+const int ENEMY_SPACING = 200;
+
 class Battle
 {
 public:
@@ -24,9 +29,9 @@ private:
 	BattleGUI *gui;
 	CGameEngine *engine;
 
-	std::list<Combatant*> combatants;
-	std::list<Combatant*>::iterator currentCombatant;
-	Combatant* selectedTarget;
+	std::vector<Combatant*> combatants;
+	int currentCombatant;
+	int selectedTarget;
 
 	bool isBattleFinished;
 

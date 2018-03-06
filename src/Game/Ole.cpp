@@ -15,10 +15,31 @@ void PlayerOle::Init(int _id)
 	for (int j = 0; j < 4; j++)
 	{
 		for (int i = 0; i < 8; i++)
-			possibleAbilityAims[j].position[i] = true;
+			possibleAbilityAims[j].position[i] = false;
 
 		possibleAbilityAims[j].howMany = 1;
 	}
+
+	possibleAbilityAims[0].howMany = 3;
+	possibleAbilityAims[0].position[4] = true;
+	possibleAbilityAims[0].position[5] = true;
+	possibleAbilityAims[0].position[6] = true;
+	possibleAbilityAims[0].position[7] = true;
+
+	possibleAbilityAims[1].position[4] = true;
+	possibleAbilityAims[1].position[5] = true;
+	possibleAbilityAims[1].position[6] = true;
+	possibleAbilityAims[1].position[7] = true;
+
+	possibleAbilityAims[2].position[4] = true;
+	possibleAbilityAims[2].position[5] = true;
+	possibleAbilityAims[2].position[6] = true;
+	possibleAbilityAims[2].position[7] = true;
+
+	possibleAbilityAims[3].position[4] = true;
+	possibleAbilityAims[3].position[5] = true;
+	possibleAbilityAims[3].position[6] = true;
+	possibleAbilityAims[3].position[7] = true;
 
 	this->Player::Init(_id);
 }
@@ -52,20 +73,24 @@ bool PlayerOle::DoAbility(int _id, std::vector<Combatant*> &_targets)
 void PlayerOle::gummiArm(Combatant* _target)
 {
 	std::cout << "Ole setzt seinen Gummiarm ein!" << std::endl;
+	_target->LooseHealth(attributes.damage * 0.3f);
 }
 
 void PlayerOle::wholeBodyKick(Combatant* _target)
 {
 	std::cout << "Ole setzt einen Ganzkörperkick ein!" << std::endl;
+	_target->LooseHealth(attributes.damage);
 }
 
 void PlayerOle::hackIntoTheSystem(Combatant* _target)
 {
 	std::cout << "Ole hackt das System!" << std::endl;
+	_target->LooseHealth(attributes.damage);
 }
 
 void PlayerOle::poetrySlam(Combatant* _target)
 {
 	std::cout << "Ole trägt einen Poetry Slam vor!" << std::endl;
+	_target->LooseHealth(attributes.damage);
 }
 

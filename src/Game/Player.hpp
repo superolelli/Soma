@@ -4,6 +4,11 @@
 #include "../Framework/Gameengine.hpp"
 #include "Resources\Resources.hpp"
 
+
+const float PLAYER_SCALE = 0.6;
+const int WALKING_ANIMATION_SPEED = 12;
+const int IDLE_ANIMATION_SPEED = 8;
+
 class Player : public Combatant
 {
 public:

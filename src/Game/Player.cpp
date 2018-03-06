@@ -6,7 +6,7 @@ void Player::Init(int _id)
 {
 	combatantObject->setCurrentAnimation("idle");
 
-	combatantObject->setScale(SpriterEngine::point(0.6, 0.6));
+	combatantObject->setScale(SpriterEngine::point(PLAYER_SCALE, PLAYER_SCALE));
 	combatantObject->reprocessCurrentTime();
 
 	SpriterEngine::UniversalObjectInterface* hitboxObj = combatantObject->getObjectInstance("bounding_box");
@@ -17,7 +17,7 @@ void Player::Init(int _id)
 	hitbox.top = hitboxObj->getPosition().y;
 
 	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, &attributes.currentHealth, &attributes.maxHealth);
-	healthBar.SetPos(GetRect().left - healthBar.GetRect().width / 2, GetRect().top - 20);
+	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
 
 	is_walking = false;
 }
@@ -47,9 +47,9 @@ void Player::Update(int _xMove, bool _is_walking)
 void Player::Render()
 {
 	if(is_walking)
-		combatantObject->setTimeElapsed(17);
+		combatantObject->setTimeElapsed(WALKING_ANIMATION_SPEED);
 	else
-		combatantObject->setTimeElapsed(10);
+		combatantObject->setTimeElapsed(IDLE_ANIMATION_SPEED);
 
 	combatantObject->render();
 }

@@ -3,6 +3,9 @@
 #include "Combatant.hpp"
 #include "Resources\Resources.hpp"
 
+const float ENEMY_SCALE = 0.6f;
+const int ENEMY_ANIMATION_SPEED = 10;
+
 class Enemy : public Combatant
 {
 public:

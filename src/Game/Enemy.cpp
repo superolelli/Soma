@@ -16,7 +16,7 @@ void Enemy::Init(int _id)
 	}
 
 	combatantObject->setCurrentAnimation("idle");
-	combatantObject->setScale(SpriterEngine::point(0.6, 0.6));
+	combatantObject->setScale(SpriterEngine::point(ENEMY_SCALE, ENEMY_SCALE));
 	combatantObject->reprocessCurrentTime();
 
 	SpriterEngine::UniversalObjectInterface* hitboxObj = combatantObject->getObjectInstance("bounding_box");
@@ -33,7 +33,7 @@ void Enemy::Init(int _id)
 	attributes.initiative = 1;
 
 	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, &attributes.currentHealth, &attributes.maxHealth);
-	healthBar.SetPos(GetRect().left - healthBar.GetRect().width / 2, GetRect().top - 20);
+	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
 
 	for (int j = 0; j < 4; j++)
 	{
@@ -48,14 +48,15 @@ void Enemy::Init(int _id)
 
 bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
-	for (Combatant* t : _targets)
-		std::cout << "Der Gegner schießt!" << std::endl;
+	std::cout << "Der Gegner schießt!" << std::endl;
+
+	_targets[rand() % 4]->LooseHealth(attributes.damage);
 
 	return true;
 }
 
 void Enemy::Render()
 {
-	combatantObject->setTimeElapsed(10);
+	combatantObject->setTimeElapsed(ENEMY_ANIMATION_SPEED);
 	combatantObject->render();
 }
