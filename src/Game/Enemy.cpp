@@ -50,9 +50,23 @@ bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
 	std::cout << "Der Gegner schießt!" << std::endl;
 
-	_targets[rand() % 4]->LooseHealth(attributes.damage);
+	int target = rand() % 4;
+	do {
+		for (int i = 0; i < 8; i++)
+		{
+			if (_targets[i] != nullptr && _targets[i]->IsPlayer())
+			{
+				if (target == 0)
+				{
+					_targets[i]->LooseHealth(attributes.damage);
+					return true;
+				}
+				target--;
+			}
+		}
+	} while (target >= 0);
 
-	return true;
+	return false;
 }
 
 void Enemy::Render()

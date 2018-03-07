@@ -20,7 +20,7 @@ public:
 	void Render();
 	void Quit();
 
-	bool battleFinished() { return isBattleFinished; }
+	bool isFinished() { return isBattleFinished; }
 
 private:
 
@@ -40,4 +40,8 @@ private:
 	bool AimChosen();
 	bool CombatantClicked(int _id);
 	void CalculateTurnOrder();
+	void HandleDeaths();
+	bool CheckIfOneGroupIsDead();
+	void ChooseNextCombatant();
+	void DoCurrentAbility();
 };

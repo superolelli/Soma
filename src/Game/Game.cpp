@@ -88,11 +88,15 @@ void Game::UpdateBattle()
 {
 	currentBattle->Update();
 
-	if (currentBattle->battleFinished())
+	if (currentBattle->isFinished())
 	{
 		inBattle = false;
 		currentBattle->Quit();
 		SAFE_DELETE(currentBattle);
+
+		SAFE_DELETE(currentGUI);
+		currentGUI = new LevelGUI;
+		currentGUI->Init(m_pGameEngine);
 	}
 
 	adventureGroup.Update(0);
@@ -119,16 +123,11 @@ void Game::Render(double _normalizedTimestep)
 	m_pGameEngine->GetWindow().setView(view);
 
 	level.Render(m_pGameEngine->GetWindow(), view.getCenter().x - view.getSize().x / 2);
-
-	adventureGroup.Render();
 	
 	if (currentBattle == nullptr)
 		adventureGroup.Render();
 	else
-	{
-		adventureGroup.RenderWithHealthBars(m_pGameEngine->GetWindow());
 		currentBattle->Render();
-	}
 
 	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
 

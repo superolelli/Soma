@@ -34,6 +34,7 @@ class Combatant
 public:
 	virtual void Init(int _id) = 0;
 	void Quit();
+	virtual void Render() = 0;
 
 	void SetPos(int _x, int _y);
 	sf::IntRect &GetRect() { return hitbox; }
@@ -44,6 +45,9 @@ public:
 
 	void LooseHealth(int _damage);
 	void GainHealth(int _health);
+
+	int GetBattlePos() { return battlePosition; }
+	void SetBattlePos(int _pos) { battlePosition = _pos; }
 
 	virtual void RenderHealthBar(sf::RenderTarget &_target) { healthBar.Render(_target); };
 
@@ -57,6 +61,8 @@ protected:
 	sf::IntRect hitbox;
 
 	combatantAttributes attributes;
+
+	int battlePosition;
 
 	Bar healthBar;
 };

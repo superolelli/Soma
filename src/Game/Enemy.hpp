@@ -16,7 +16,7 @@ public:
 
 	virtual bool DoAbility(int _id, std::vector<Combatant*> &_targets);
 
-	void Render();
+	virtual void Render() override;
 
 private:
 
