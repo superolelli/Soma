@@ -59,6 +59,15 @@ void Battle::Update()
 	switch (abilityStatus)
 	{
 	case ready:
+			if (combatants[currentCombatant]->Status().IsAsleep())
+			{
+				combatants[currentCombatant]->Status().HandleStatusChanges();
+				abilityStatus = finished;
+				break;
+			}
+
+			combatants[currentCombatant]->Status().HandleStatusChanges();
+
 			if (combatants[currentCombatant]->IsPlayer())
 			{
 				if (AimChosen())
@@ -113,7 +122,7 @@ void Battle::HandleDeaths()
 {
 	for (int i = 0; i < 8; i++)
 	{
-		if (combatants[i] != nullptr && combatants[i]->GetAttributes().currentHealth <= 0)
+		if (combatants[i] != nullptr && combatants[i]->Status().GetCurrentHealth() <= 0)
 			combatants[i] = nullptr;
 	}
 }
@@ -165,7 +174,7 @@ void Battle::CalculateTurnOrder()
 		else if (c2 == nullptr)
 			return true;
 		else
-			return c1->GetAttributes().initiative > c2->GetAttributes().initiative; 
+			return c1->Status().GetInitiative() > c2->Status().GetInitiative();
 	});
 }
 

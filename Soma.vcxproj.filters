@@ -432,6 +432,15 @@
     <ClCompile Include="src\Framework\Gui\Bar.cpp">
       <Filter>Quelldateien\Framework\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\CombatantStatus.cpp">
+      <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Buff.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\CombatantAttributes.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -838,6 +847,15 @@
     </ClInclude>
     <ClInclude Include="src\Framework\Gui\Bar.hpp">
       <Filter>Headerdateien\Framework\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\CombatantStatus.hpp">
+      <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Buff.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\CombatantAttributes.hpp">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

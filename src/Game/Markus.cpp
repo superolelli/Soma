@@ -48,6 +48,12 @@ void PlayerMarkus::Init(int _id)
 
 bool PlayerMarkus::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
+	if (status.confused > 0)
+	{
+		if (rand() % 4 == 0)
+			LooseHealth(1);
+	}
+
 	switch (_id) {
 	case 0:
 		for (Combatant* t : _targets)
@@ -90,5 +96,14 @@ void PlayerMarkus::hardDestruction(Combatant* _target)
 void PlayerMarkus::horribleGrin(Combatant* _target)
 {
 	std::cout << "Markus grinst fürchterlich!" << std::endl;
+	buff newBuff;
+	newBuff.length = 3;
+	newBuff.attributes.armour = 0;
+	newBuff.attributes.currentHealth = 0;
+	newBuff.attributes.maxHealth = 0;
+	newBuff.attributes.damage = -2;
+	newBuff.attributes.initiative = -2;
+
+	_target->Debuff(newBuff);
 	_target->LooseHealth(attributes.damage);
 }

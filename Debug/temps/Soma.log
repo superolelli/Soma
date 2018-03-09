@@ -1,7 +1,5 @@
-﻿  Enemy.cpp
-f:\soma\src\game\enemy.cpp(24): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
-f:\soma\src\game\enemy.cpp(25): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
-f:\soma\src\game\enemy.cpp(26): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
-f:\soma\src\game\enemy.cpp(27): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
+﻿  Simon.cpp
+f:\soma\src\game\player.hpp(8): warning C4305: "Initialisierung": Verkürzung von "double" in "float"
+f:\soma\src\game\simon.cpp(87): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
   Soma.vcxproj -> F:\Soma\Debug\Soma.exe
   Soma.vcxproj -> F:\Soma\Debug\Soma.pdb (Partial PDB)

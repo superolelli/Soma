@@ -19,6 +19,12 @@ void Player::Init(int _id)
 	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, &attributes.currentHealth, &attributes.maxHealth);
 	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
 
+	status.confused = 0;
+	status.sleeping = false;
+	status.marked = 0;
+	status.buffs.clear();
+	status.debuffs.clear();
+
 	is_walking = false;
 }
 

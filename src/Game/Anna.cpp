@@ -48,6 +48,12 @@ void PlayerAnna::Init(int _id)
 
 bool PlayerAnna::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
+	if (status.confused > 0)
+	{
+		if (rand() % 4 == 0)
+			LooseHealth(1);
+	}
+
 	switch (_id) {
 	case 0:
 		for (Combatant* t : _targets)
@@ -72,12 +78,18 @@ bool PlayerAnna::DoAbility(int _id, std::vector<Combatant*> &_targets)
 void PlayerAnna::indomitableHappiness(Combatant* _target)
 {
 	std::cout << "Anna strahlt unbezwingbare Fröhlichkeit aus!" << std::endl;
+	if(rand()%3 == 0)
+		_target->Confuse(3);
+
 	_target->GainHealth(3);
 }
 
 void PlayerAnna::wordGush(Combatant* _target)
 {
 	std::cout << "Anna setzt einen Wortschwall frei!" << std::endl;
+	if (rand() % 4 == 0)
+		_target->PutToSleep();
+
 	_target->LooseHealth(attributes.damage);
 }
 

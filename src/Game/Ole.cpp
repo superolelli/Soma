@@ -48,6 +48,12 @@ void PlayerOle::Init(int _id)
 
 bool PlayerOle::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
+	if (status.confused > 0)
+	{
+		if (rand() % 4 == 0)
+			LooseHealth(1);
+	}
+
 	switch (_id) {
 	case 0:
 		for(Combatant* t : _targets)
@@ -79,18 +85,40 @@ void PlayerOle::gummiArm(Combatant* _target)
 void PlayerOle::wholeBodyKick(Combatant* _target)
 {
 	std::cout << "Ole setzt einen Ganzkörperkick ein!" << std::endl;
+
+	buff newBuff;
+	newBuff.length = 3;
+	newBuff.attributes.armour = 0;
+	newBuff.attributes.currentHealth = 0;
+	newBuff.attributes.maxHealth = 0;
+	newBuff.attributes.damage = -1;
+	newBuff.attributes.initiative = -1;
+
+	_target->Debuff(newBuff);
 	_target->LooseHealth(attributes.damage);
 }
 
 void PlayerOle::hackIntoTheSystem(Combatant* _target)
 {
 	std::cout << "Ole hackt das System!" << std::endl;
+
+	buff newBuff;
+	newBuff.length = 3;
+	newBuff.attributes.armour = -10;
+	newBuff.attributes.currentHealth = 0;
+	newBuff.attributes.maxHealth = 0;
+	newBuff.attributes.damage = -3;
+	newBuff.attributes.initiative = 0;
+
+	_target->Debuff(newBuff);
 	_target->LooseHealth(attributes.damage);
 }
 
 void PlayerOle::poetrySlam(Combatant* _target)
 {
 	std::cout << "Ole trägt einen Poetry Slam vor!" << std::endl;
+
+	_target->PutToSleep();
 	_target->LooseHealth(attributes.damage);
 }
 

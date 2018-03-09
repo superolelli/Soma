@@ -12,9 +12,9 @@ void CTextureManager::LoadTextures()
 	bangBackgrounds[end].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_ende.png");
 
 	abilities[0][0].loadFromFile("Data/Sprites/Abilities/marshmallow_flash.png");
-	abilities[0][1].loadFromFile("Data/Sprites/Abilities/alle_auf_einen.png");
+	abilities[0][3].loadFromFile("Data/Sprites/Abilities/alle_auf_einen.png");
 	abilities[0][2].loadFromFile("Data/Sprites/Abilities/reparieren.png");
-	abilities[0][3].loadFromFile("Data/Sprites/Abilities/verarschen.png");
+	abilities[0][1].loadFromFile("Data/Sprites/Abilities/verarschen.png");
 
 	abilities[1][0].loadFromFile("Data/Sprites/Abilities/gummi_arm.png");
 	abilities[1][1].loadFromFile("Data/Sprites/Abilities/whole_body_kick.png");

@@ -11,17 +11,8 @@
 #include "../Framework/Makros.hpp"
 
 #include "../Framework/Gui/Bar.hpp"
+#include "CombatantStatus.hpp"
 
-
-
-struct combatantAttributes
-{
-	int maxHealth;
-	int currentHealth;
-	int damage;
-	int armour;
-	int initiative;
-};
 
 struct PossibleAims
 {
@@ -38,13 +29,11 @@ public:
 
 	void SetPos(int _x, int _y);
 	sf::IntRect &GetRect() { return hitbox; }
-	combatantAttributes &GetAttributes() { return attributes; }
 
 	virtual bool DoAbility(int _id, std::vector<Combatant*> &_targets) { return true; }
 	virtual int GetID() { return -2; }
 
-	void LooseHealth(int _damage);
-	void GainHealth(int _health);
+	CombatantStatus &Status() { return status; }
 
 	int GetBattlePos() { return battlePosition; }
 	void SetBattlePos(int _pos) { battlePosition = _pos; }
@@ -60,7 +49,7 @@ protected:
 	SpriterEngine::EntityInstance *combatantObject;
 	sf::IntRect hitbox;
 
-	combatantAttributes attributes;
+	CombatantStatus status;
 
 	int battlePosition;
 

@@ -229,7 +229,10 @@
     <ClCompile Include="src\Game\Anna.cpp" />
     <ClCompile Include="src\Game\Battle.cpp" />
     <ClCompile Include="src\Game\BattleGUI.cpp" />
+    <ClCompile Include="src\Game\Buff.cpp" />
     <ClCompile Include="src\Game\Combatant.cpp" />
+    <ClCompile Include="src\Game\CombatantAttributes.cpp" />
+    <ClCompile Include="src\Game\CombatantStatus.cpp" />
     <ClCompile Include="src\Game\Enemy.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Game\GUI.cpp" />
@@ -364,7 +367,10 @@
     <ClInclude Include="src\Game\Anna.hpp" />
     <ClInclude Include="src\Game\Battle.hpp" />
     <ClInclude Include="src\Game\BattleGUI.hpp" />
+    <ClInclude Include="src\Game\Buff.hpp" />
     <ClInclude Include="src\Game\Combatant.hpp" />
+    <ClInclude Include="src\Game\CombatantAttributes.hpp" />
+    <ClInclude Include="src\Game\CombatantStatus.hpp" />
     <ClInclude Include="src\Game\Enemy.hpp" />
     <ClInclude Include="src\Game\Game.hpp" />
     <ClInclude Include="src\Game\GUI.hpp" />

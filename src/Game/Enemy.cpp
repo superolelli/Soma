@@ -32,6 +32,12 @@ void Enemy::Init(int _id)
 	attributes.damage = 5;
 	attributes.initiative = 1;
 
+	status.confused = 0;
+	status.sleeping = false;
+	status.marked = 0;
+	status.buffs.clear();
+	status.debuffs.clear();
+
 	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, &attributes.currentHealth, &attributes.maxHealth);
 	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
 
@@ -50,6 +56,28 @@ bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
 	std::cout << "Der Gegner schießt!" << std::endl;
 
+	//check for confusion
+	if (status.confused > 0)
+	{
+		if (rand() % 4 == 0)
+			LooseHealth(1);
+	}
+
+	//check for marked players
+	for (int i = 0; i < 8; i++)
+	{
+		if (_targets[i] != nullptr && _targets[i]->IsPlayer())
+		{
+			if (_targets[i]->IsMarked())
+			{
+				_targets[i]->LooseHealth(attributes.damage);
+				return true;
+			}
+
+		}
+	}
+
+	//choose random player
 	int target = rand() % 4;
 	do {
 		for (int i = 0; i < 8; i++)
