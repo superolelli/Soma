@@ -26,19 +26,19 @@ void Enemy::Init(int _id)
 	hitbox.left = hitboxObj->getPosition().x;
 	hitbox.top = hitboxObj->getPosition().y;
 
+	status.Reset();
+
+	CombatantAttributes attributes;
 	attributes.armour = 1;
 	attributes.currentHealth = 20;
 	attributes.maxHealth = 20;
 	attributes.damage = 5;
 	attributes.initiative = 1;
 
-	status.confused = 0;
-	status.sleeping = false;
-	status.marked = 0;
-	status.buffs.clear();
-	status.debuffs.clear();
+	status.SetAttributes(attributes);
+	
 
-	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, &attributes.currentHealth, &attributes.maxHealth);
+	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, status.GetCurrentHealthPointer(), status.GetMaxHealthPointer());
 	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
 
 	for (int j = 0; j < 4; j++)
@@ -57,10 +57,10 @@ bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 	std::cout << "Der Gegner schießt!" << std::endl;
 
 	//check for confusion
-	if (status.confused > 0)
+	if (status.IsConfused())
 	{
 		if (rand() % 4 == 0)
-			LooseHealth(1);
+			status.LooseHealth(1);
 	}
 
 	//check for marked players
@@ -68,9 +68,9 @@ bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 	{
 		if (_targets[i] != nullptr && _targets[i]->IsPlayer())
 		{
-			if (_targets[i]->IsMarked())
+			if (_targets[i]->Status().IsMarked())
 			{
-				_targets[i]->LooseHealth(attributes.damage);
+				_targets[i]->Status().LooseHealth(status.GetDamage());
 				return true;
 			}
 
@@ -86,7 +86,7 @@ bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 			{
 				if (target == 0)
 				{
-					_targets[i]->LooseHealth(attributes.damage);
+					_targets[i]->Status().LooseHealth(status.GetDamage());
 					return true;
 				}
 				target--;

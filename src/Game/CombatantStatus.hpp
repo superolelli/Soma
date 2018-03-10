@@ -24,6 +24,7 @@ public:
 
 	bool IsAsleep() { return sleeping; }
 	bool IsMarked() { return marked > 0; }
+	bool IsConfused() { return confused > 0; }
 
 	int GetMaxHealth();
 	int GetCurrentHealth();
@@ -31,7 +32,11 @@ public:
 	int GetArmour();
 	int GetInitiative();
 
+	int *GetCurrentHealthPointer() { return &attributes.currentHealth; }
+	int *GetMaxHealthPointer() { return &attributes.maxHealth; }
+
 	void SetAttributes(CombatantAttributes _attributes) { attributes = _attributes; }
+	void Reset();
 
 private:
 

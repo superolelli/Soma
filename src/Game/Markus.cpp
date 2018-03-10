@@ -7,11 +7,14 @@ void PlayerMarkus::Init(int _id)
 {
 	combatantObject = g_pModels->modelMarkus->getNewEntityInstance("Markus");
 
+	CombatantAttributes attributes;
 	attributes.armour = 1;
 	attributes.currentHealth = 20;
 	attributes.maxHealth = 20;
 	attributes.damage = 5;
 	attributes.initiative = 2;
+
+	status.SetAttributes(attributes);
 
 	for (int j = 0; j < 4; j++)
 	{
@@ -48,10 +51,10 @@ void PlayerMarkus::Init(int _id)
 
 bool PlayerMarkus::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
-	if (status.confused > 0)
+	if (status.IsConfused())
 	{
 		if (rand() % 4 == 0)
-			LooseHealth(1);
+			status.LooseHealth(1);
 	}
 
 	switch (_id) {
@@ -78,32 +81,32 @@ bool PlayerMarkus::DoAbility(int _id, std::vector<Combatant*> &_targets)
 void PlayerMarkus::fistOfRevenge(Combatant* _target)
 {
 	std::cout << "FIST OF REVENGE!" << std::endl;
-	_target->LooseHealth(attributes.damage * 2);
+	_target->Status().LooseHealth(status.GetDamage() * 2);
 }
 
 void PlayerMarkus::noseRam(Combatant* _target)
 {
 	std::cout << "Markus setzt seine Nasenramme ein!" << std::endl;
-	_target->LooseHealth(attributes.damage * 0.3f);
+	_target->Status().LooseHealth(status.GetDamage() * 0.3f);
 }
 
 void PlayerMarkus::hardDestruction(Combatant* _target)
 {
 	std::cout << "Markus praktiziert harte Zerstörung!" << std::endl;
-	_target->LooseHealth(attributes.damage);
+	_target->Status().LooseHealth(status.GetDamage());
 }
 
 void PlayerMarkus::horribleGrin(Combatant* _target)
 {
 	std::cout << "Markus grinst fürchterlich!" << std::endl;
-	buff newBuff;
-	newBuff.length = 3;
+	Buff newBuff;
+	newBuff.duration = 3;
 	newBuff.attributes.armour = 0;
 	newBuff.attributes.currentHealth = 0;
 	newBuff.attributes.maxHealth = 0;
 	newBuff.attributes.damage = -2;
 	newBuff.attributes.initiative = -2;
 
-	_target->Debuff(newBuff);
-	_target->LooseHealth(attributes.damage);
+	_target->Status().AddDebuff(newBuff);
+	_target->Status().LooseHealth(status.GetDamage());
 }

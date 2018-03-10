@@ -6,11 +6,15 @@ void PlayerSimon::Init(int _id)
 {
 	combatantObject = g_pModels->modelSimon->getNewEntityInstance("Simon");
 
+	CombatantAttributes attributes;
 	attributes.armour = 1;
 	attributes.currentHealth = 20;
 	attributes.maxHealth = 20;
 	attributes.damage = 5;
 	attributes.initiative = 2;
+
+	status.SetAttributes(attributes);
+
 
 	for (int j = 0; j < 4; j++)
 	{
@@ -51,10 +55,10 @@ void PlayerSimon::Init(int _id)
 
 bool PlayerSimon::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
-	if (status.confused > 0)
+	if (status.IsConfused())
 	{
 		if (rand() % 4 == 0)
-			LooseHealth(1);
+			status.LooseHealth(1);
 	}
 
 	switch (_id) {
@@ -90,31 +94,31 @@ void PlayerSimon::messAround(Combatant* _target)
 void PlayerSimon::allOnOne(Combatant* _target)
 {
 	std::cout << "Simon hetzt alle auf einen!" << std::endl;
-	buff newBuff;
-	newBuff.length = 2;
+	Buff newBuff;
+	newBuff.duration = 2;
 	newBuff.attributes.armour = 30;
 	newBuff.attributes.currentHealth = 0;
 	newBuff.attributes.maxHealth = 0;
 	newBuff.attributes.damage = 0;
 	newBuff.attributes.initiative = 0;
 
-	_target->Mark(2);
-	_target->Buff(newBuff);
+	_target->Status().Mark(2);
+	_target->Status().AddBuff(newBuff);
 }
 
 void PlayerSimon::marshmallowFlash()
 {
 	std::cout << "Simon hat einen Marshmallow-Flash!" << std::endl;
-	buff newBuff;
-	newBuff.length = 3;
+	Buff newBuff;
+	newBuff.duration = 3;
 	newBuff.attributes.armour = 10;
 	newBuff.attributes.currentHealth = 0;
 	newBuff.attributes.maxHealth = 0;
 	newBuff.attributes.damage = 3;
 	newBuff.attributes.initiative = 1;
 
-	Buff(newBuff);
-	GainHealth(5);
+	status.AddBuff(newBuff);
+	status.GainHealth(5);
 }
 
 void PlayerSimon::repair(Combatant* _target)
@@ -123,12 +127,12 @@ void PlayerSimon::repair(Combatant* _target)
 
 	if (_target->IsPlayer())
 	{
-		_target->GainHealth(3);
-		_target->RemoveAllDebuffs();
+		_target->Status().GainHealth(3);
+		_target->Status().RemoveAllDebuffs();
 	}
 	else
 	{
-		_target->LooseHealth(attributes.damage);
-		_target->RemoveAllBuffs();
+		_target->Status().LooseHealth(status.GetDamage());
+		_target->Status().RemoveAllBuffs();
 	}
 }

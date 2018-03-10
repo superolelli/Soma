@@ -16,14 +16,10 @@ void Player::Init(int _id)
 	hitbox.left = hitboxObj->getPosition().x;
 	hitbox.top = hitboxObj->getPosition().y;
 
-	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, &attributes.currentHealth, &attributes.maxHealth);
+	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, status.GetCurrentHealthPointer(), status.GetMaxHealthPointer());
 	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
 
-	status.confused = 0;
-	status.sleeping = false;
-	status.marked = 0;
-	status.buffs.clear();
-	status.debuffs.clear();
+	status.Reset();
 
 	is_walking = false;
 }

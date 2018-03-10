@@ -436,10 +436,10 @@
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\Buff.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Game</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\CombatantAttributes.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -852,10 +852,10 @@
       <Filter>Headerdateien\Game</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\Buff.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Game</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\CombatantAttributes.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

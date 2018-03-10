@@ -118,4 +118,13 @@ int CombatantStatus::GetInitiative()
 	return attributes.initiative < 0 ? 0 : attributes.initiative;
 }
 
+void CombatantStatus::Reset()
+{
+	confused = 0;
+	sleeping = false;
+	marked = 0;
+	buffs.clear();
+	debuffs.clear();
+}
+
 
