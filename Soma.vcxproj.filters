@@ -441,6 +441,9 @@
     <ClCompile Include="src\Game\CombatantAttributes.cpp">
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\Resources\SpritePool.cpp">
+      <Filter>Quelldateien\Game\Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -856,6 +859,9 @@
     </ClInclude>
     <ClInclude Include="src\Game\CombatantAttributes.hpp">
       <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Resources\SpritePool.hpp">
+      <Filter>Headerdateien\Game\Resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

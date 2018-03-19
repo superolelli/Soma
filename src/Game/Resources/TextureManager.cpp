@@ -35,6 +35,12 @@ void CTextureManager::LoadTextures()
 
 	healthBarFrame.loadFromFile("Data/Sprites/Battle/health_bar_frame.png");
 	healthBar.loadFromFile("Data/Sprites/Battle/health_bar.png");
+	buff.loadFromFile("Data/Sprites/Battle/buff.png");
+	debuff.loadFromFile("Data/Sprites/Battle/debuff.png");
+	confused.loadFromFile("Data/Sprites/Battle/confused.png");
+	marked.loadFromFile("Data/Sprites/Battle/marked.png");
+	sleeping.loadFromFile("Data/Sprites/Battle/sleeping.png");
+
 
 }
 

@@ -246,6 +246,7 @@
     <ClCompile Include="src\Game\Resources\ModelManager.cpp" />
     <ClCompile Include="src\Game\Resources\ObjectPropertiesManager.cpp" />
     <ClCompile Include="src\Game\Resources\SoundManager.cpp" />
+    <ClCompile Include="src\Game\Resources\SpritePool.cpp" />
     <ClCompile Include="src\Game\Resources\StringManager.cpp" />
     <ClCompile Include="src\Game\Resources\TextureManager.cpp" />
     <ClCompile Include="src\Game\Simon.cpp" />
@@ -387,6 +388,7 @@
     <ClInclude Include="src\Game\Resources\ObjectPropertiesManager.hpp" />
     <ClInclude Include="src\Game\Resources\Resources.hpp" />
     <ClInclude Include="src\Game\Resources\SoundManager.hpp" />
+    <ClInclude Include="src\Game\Resources\SpritePool.hpp" />
     <ClInclude Include="src\Game\Resources\StringManager.hpp" />
     <ClInclude Include="src\Game\Resources\TextureManager.hpp" />
     <ClInclude Include="src\Game\Simon.hpp" />

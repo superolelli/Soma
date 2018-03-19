@@ -25,6 +25,8 @@ public:
 	bool IsAsleep() { return sleeping; }
 	bool IsMarked() { return marked > 0; }
 	bool IsConfused() { return confused > 0; }
+	bool IsBuffed() { return buffs.size() > 0; }
+	bool IsDebuffed() { return debuffs.size() > 0; }
 
 	int GetMaxHealth();
 	int GetCurrentHealth();

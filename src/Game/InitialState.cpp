@@ -40,6 +40,7 @@ void CInitialState::Update()
 {
 	//Load the resources
 	g_pTextures->LoadTextures();
+	g_pSpritePool->LoadSprites();
 	g_pModels->LoadModels(*m_pGameEngine);
 	g_pFonts->LoadFonts();
 	g_pSounds->LoadSounds();

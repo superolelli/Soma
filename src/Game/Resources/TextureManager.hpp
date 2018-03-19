@@ -22,4 +22,9 @@ public:
 
 	sf::Texture healthBarFrame;
 	sf::Texture healthBar;
+	sf::Texture buff;
+	sf::Texture debuff;
+	sf::Texture confused;
+	sf::Texture marked;
+	sf::Texture sleeping;
 };

@@ -11,6 +11,7 @@
 #include "../Framework/Makros.hpp"
 
 #include "../Framework/Gui/Bar.hpp"
+#include "Resources\SpritePool.hpp"
 #include "CombatantStatus.hpp"
 
 
@@ -38,7 +39,7 @@ public:
 	int GetBattlePos() { return battlePosition; }
 	void SetBattlePos(int _pos) { battlePosition = _pos; }
 
-	virtual void RenderHealthBar(sf::RenderTarget &_target) { healthBar.Render(_target); };
+	virtual void RenderHealthBar(sf::RenderTarget &_target);
 
 	virtual bool IsPlayer() { return false; }
 
@@ -54,4 +55,6 @@ protected:
 	int battlePosition;
 
 	Bar healthBar;
+
+	void RenderStatusSymbols(sf::RenderTarget &_target);
 };

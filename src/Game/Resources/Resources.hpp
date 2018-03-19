@@ -6,3 +6,4 @@
 #include "StringManager.hpp"
 #include "BackgroundIDs.hpp"
 #include "ModelManager.hpp"
+#include "SpritePool.hpp"
