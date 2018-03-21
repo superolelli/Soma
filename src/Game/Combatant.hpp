@@ -12,14 +12,8 @@
 
 #include "../Framework/Gui/Bar.hpp"
 #include "Resources\SpritePool.hpp"
+#include "Resources\ObjectPropertiesManager.hpp"
 #include "CombatantStatus.hpp"
-
-
-struct PossibleAims
-{
-	bool position[8];
-	int howMany;
-};
 
 class Combatant
 {

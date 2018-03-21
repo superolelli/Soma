@@ -45,7 +45,7 @@ void CInitialState::Update()
 	g_pFonts->LoadFonts();
 	g_pSounds->LoadSounds();
 	g_pStringContainer->LoadStrings();
-	//g_pObjectProperties->LoadObjectProperties();
+	g_pObjectProperties->LoadObjectProperties();
 
 	m_pGameEngine->ChangeStateImmediately(new Game);
 }

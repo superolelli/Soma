@@ -9,6 +9,11 @@ void Player::Init(int _id)
 	combatantObject->setScale(SpriterEngine::point(PLAYER_SCALE, PLAYER_SCALE));
 	combatantObject->reprocessCurrentTime();
 
+	possibleAbilityAims[0] = g_pObjectProperties->playerAbilities[_id][0];
+	possibleAbilityAims[1] = g_pObjectProperties->playerAbilities[_id][1];
+	possibleAbilityAims[2] = g_pObjectProperties->playerAbilities[_id][2];
+	possibleAbilityAims[3] = g_pObjectProperties->playerAbilities[_id][3];
+
 	SpriterEngine::UniversalObjectInterface* hitboxObj = combatantObject->getObjectInstance("bounding_box");
 
 	hitbox.width = hitboxObj->getSize().x * combatantObject->getScale().x;

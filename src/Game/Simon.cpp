@@ -15,39 +15,6 @@ void PlayerSimon::Init(int _id)
 
 	status.SetAttributes(attributes);
 
-
-	for (int j = 0; j < 4; j++)
-	{
-		for (int i = 0; i < 8; i++)
-			possibleAbilityAims[j].position[i] = false;
-
-		possibleAbilityAims[j].howMany = 1;
-	}
-
-	possibleAbilityAims[0].position[0] = true;
-	possibleAbilityAims[0].position[1] = true;
-	possibleAbilityAims[0].position[2] = true;
-	possibleAbilityAims[0].position[3] = true;
-
-	possibleAbilityAims[1].position[4] = true;
-	possibleAbilityAims[1].position[5] = true;
-	possibleAbilityAims[1].position[6] = true;
-	possibleAbilityAims[1].position[7] = true;
-
-	possibleAbilityAims[2].position[0] = true;
-	possibleAbilityAims[2].position[1] = true;
-	possibleAbilityAims[2].position[2] = true;
-	possibleAbilityAims[2].position[3] = true;
-	possibleAbilityAims[2].position[4] = true;
-	possibleAbilityAims[2].position[5] = true;
-	possibleAbilityAims[2].position[6] = true;
-	possibleAbilityAims[2].position[7] = true;
-
-	possibleAbilityAims[3].position[0] = true;
-	possibleAbilityAims[3].position[1] = true;
-	possibleAbilityAims[3].position[2] = true;
-	possibleAbilityAims[3].position[3] = true;
-
 	this->Player::Init(_id);
 }
 
