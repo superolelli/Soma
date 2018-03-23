@@ -10,6 +10,7 @@ struct CombatantAttributes
 	int damage;
 	int armour;
 	int initiative;
+	int dexterity;
 
 	void operator +=(const CombatantAttributes &_attributes);
 	void operator -=(const CombatantAttributes &_attributes);

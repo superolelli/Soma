@@ -14,6 +14,8 @@ void Player::Init(int _id)
 	possibleAbilityAims[2] = g_pObjectProperties->playerAbilities[_id][2];
 	possibleAbilityAims[3] = g_pObjectProperties->playerAbilities[_id][3];
 
+	status.SetAttributes(g_pObjectProperties->playerAttributes[_id]);
+
 	SpriterEngine::UniversalObjectInterface* hitboxObj = combatantObject->getObjectInstance("bounding_box");
 
 	hitbox.width = hitboxObj->getSize().x * combatantObject->getScale().x;

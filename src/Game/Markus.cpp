@@ -7,15 +7,6 @@ void PlayerMarkus::Init(int _id)
 {
 	combatantObject = g_pModels->modelMarkus->getNewEntityInstance("Markus");
 
-	CombatantAttributes attributes;
-	attributes.armour = 1;
-	attributes.currentHealth = 20;
-	attributes.maxHealth = 20;
-	attributes.damage = 5;
-	attributes.initiative = 2;
-
-	status.SetAttributes(attributes);
-
 	this->Player::Init(_id);
 }
 

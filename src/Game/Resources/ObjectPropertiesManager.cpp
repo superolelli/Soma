@@ -5,6 +5,14 @@
 
 void ObjectPropertiesManager::LoadObjectProperties()
 {
+	LoadPlayerAbilities();
+	LoadPlayerAttributes();
+}
+
+
+
+void ObjectPropertiesManager::LoadPlayerAbilities()
+{
 	using namespace pugi;
 
 	xml_document doc;
@@ -39,5 +47,29 @@ void ObjectPropertiesManager::LoadObjectProperties()
 			}
 		}
 	}
+}
 
+
+
+
+void ObjectPropertiesManager::LoadPlayerAttributes()
+{
+	using namespace pugi;
+
+	xml_document doc;
+	doc.load_file("Data/XML/PlayerAttributes.xml");
+
+	//load ability values
+	for (xml_node player : doc.child("PlayerAttributes").children())
+	{
+		int playerID = player.attribute("id").as_int();
+		
+		playerAttributes[playerID].armour = player.attribute("armour").as_int();
+		playerAttributes[playerID].maxHealth= player.attribute("health").as_int();
+		playerAttributes[playerID].damage = player.attribute("damage").as_int();
+		playerAttributes[playerID].initiative = player.attribute("initiative").as_int();
+		playerAttributes[playerID].dexterity = player.attribute("dexterity").as_int();
+
+		playerAttributes[playerID].currentHealth = playerAttributes[playerID].maxHealth;
+	}
 }

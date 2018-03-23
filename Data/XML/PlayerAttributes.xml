@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<PlayerAttributes>
+  <Simon id="0"
+    armour ="1"
+    health ="20"
+    damage ="5"
+    initiative ="2"
+    dexterity ="5"
+  ></Simon>
+
+  <Ole id="1"
+    armour ="1"
+    health ="20"
+    damage ="5"
+    initiative ="2"
+    dexterity ="5"
+  ></Ole>
+
+  <Anna id="2"
+    armour ="1"
+    health ="20"
+    damage ="5"
+    initiative ="2"
+    dexterity ="5"
+  ></Anna>
+
+  <Markus id="3"
+    armour ="1"
+    health ="20"
+    damage ="5"
+    initiative ="2"
+    dexterity ="5"
+  ></Markus>
+  
+</PlayerAttributes>

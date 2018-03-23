@@ -6,20 +6,6 @@ void PlayerAnna::Init(int _id)
 {
 	combatantObject = g_pModels->modelAnna->getNewEntityInstance("anna");
 
-	CombatantAttributes attributes;
-	attributes.armour = 1;
-	attributes.currentHealth = 20;
-	attributes.maxHealth = 20;
-	attributes.damage = 5;
-	attributes.initiative = 2;
-
-	status.SetAttributes(attributes);
-
-	possibleAbilityAims[0] = g_pObjectProperties->playerAbilities[Anna][0];
-	possibleAbilityAims[1] = g_pObjectProperties->playerAbilities[Anna][1];
-	possibleAbilityAims[2] = g_pObjectProperties->playerAbilities[Anna][2];
-	possibleAbilityAims[3] = g_pObjectProperties->playerAbilities[Anna][3];
-
 	this->Player::Init(_id);
 }
 
