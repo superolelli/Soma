@@ -13,6 +13,7 @@
 #include "../Framework/Gui/Bar.hpp"
 #include "Resources\SpritePool.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
+#include "../Framework/Time.hpp"
 #include "CombatantStatus.hpp"
 
 class Combatant
@@ -21,6 +22,7 @@ public:
 	virtual void Init(int _id) = 0;
 	void Quit();
 	virtual void Render() = 0;
+	void Update();
 
 	void SetPos(int _x, int _y);
 	sf::IntRect &GetRect() { return hitbox; }

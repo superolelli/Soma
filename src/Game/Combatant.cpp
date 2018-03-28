@@ -71,3 +71,8 @@ void Combatant::Quit()
 {
 	SAFE_DELETE(combatantObject);
 }
+
+void Combatant::Update()
+{
+	healthBar.Update(g_pTimer->GetElapsedTime().asSeconds());
+}

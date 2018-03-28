@@ -56,6 +56,12 @@ void Battle::Quit()
 
 void Battle::Update()
 {
+	for (Combatant *c : combatants)
+	{
+		if(c != nullptr)
+			c->Update();
+	}
+
 	switch (abilityStatus)
 	{
 	case ready:

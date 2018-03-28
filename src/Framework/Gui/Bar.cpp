@@ -27,6 +27,14 @@ void Bar::Load(sf::Texture const &_beamTexture, sf::Texture const &_frameTexture
 
 	m_text.setCharacterSize(12);
 	m_text.setFillColor(sf::Color::Black);
+
+	baseAnimationTime = 0.0f;
+	currentAnimationTime = 0.0f;
+
+	smoothAnimationBaseValue = 0;
+
+	lastValue = *_value;
+	valueToRender = (float)*_value;
 }
 
 
@@ -47,12 +55,47 @@ void Bar::SetPos(float _x, float _y)
 
 
 
+void Bar::Update(float _elapsedTime)
+{
+	if (baseAnimationTime > 0.0f)
+	{
+		if (lastValue != *m_pValue)
+			StartAnimation();
+
+		HandleAnimation(_elapsedTime);
+	}
+	else
+		valueToRender = (float)*m_pValue;
+}
+
+
+void Bar::StartAnimation()
+{
+	currentAnimationTime = 0.0f;
+	smoothAnimationBaseValue = lastValue;
+	lastValue = *m_pValue;
+}
+
+
+void Bar::HandleAnimation(float _elapsedTime)
+{
+	if (currentAnimationTime < baseAnimationTime)
+	{
+		currentAnimationTime += _elapsedTime;
+		valueToRender = (float)smoothAnimationBaseValue + (currentAnimationTime / baseAnimationTime) * (float)(*m_pValue - smoothAnimationBaseValue);
+	}
+	else
+		valueToRender = (float)*m_pValue;
+}
+
+
+
 void Bar::Render(sf::RenderTarget &_target, bool _withNumbers)
 {
 	if (m_pValue != nullptr && m_pMaxValue != nullptr)
 	{
 		//renders the beam
-		m_bar.Render(_target, (float)(*m_pValue) / (float)(*m_pMaxValue), false);
+		m_bar.Render(_target, valueToRender / (float)(*m_pMaxValue), false);
 		m_frame.Render(_target);
 
 		if (_withNumbers)
@@ -60,13 +103,15 @@ void Bar::Render(sf::RenderTarget &_target, bool _withNumbers)
 			std::stringstream stream("");
 			stream.str("");
 
-			stream << *m_pValue << "/" << *m_pMaxValue;
+			stream << valueToRender << "/" << *m_pMaxValue;
 			m_text.setString(stream.str());
 			m_text.setPosition(m_bar.GetRect().width / 2 + m_bar.GetRect().left - m_text.getGlobalBounds().width / 2, m_bar.GetRect().height / 2 + m_bar.GetRect().top - m_text.getGlobalBounds().height / 2 - 2);
 			_target.draw(m_text);
 		}
 	}
 }
+
+
 
 
 

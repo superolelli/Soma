@@ -21,11 +21,15 @@ public:
 
 	sf::IntRect const &GetRect() { return m_frame.GetRect(); }
 
+	void SetSmoothTransformationTime(float _time) { baseAnimationTime = _time; currentAnimationTime = _time; }
+
 	//sets the font
 	void SetText(sf::Font const &_font, sf::Color const &_color, int _size);
 
 	//sets the character size
 	void SetCharacterSize(int _size) { m_text.setCharacterSize(_size); }
+
+	void Update(float _elapsedTime);
 
 	//Renders the beam
 	void Render(sf::RenderTarget &_target, bool _withNumbers = false);
@@ -39,7 +43,17 @@ private:
 	int *m_pValue;                    //the current value
 	int *m_pMaxValue;                //the maximum of the value
 
+	float valueToRender;
+
+	int lastValue;
+
+	int smoothAnimationBaseValue;
+	float baseAnimationTime;
+	float currentAnimationTime;
+
 	sf::Text m_text;                    //the text
 
+	void StartAnimation();
+	void HandleAnimation(float _elapsedTime);
 
 };

@@ -25,6 +25,7 @@ void Player::Init(int _id)
 
 	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, status.GetCurrentHealthPointer(), status.GetMaxHealthPointer());
 	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
+	healthBar.SetSmoothTransformationTime(0.7f);
 
 	status.Reset();
 
@@ -48,7 +49,6 @@ void Player::Update(int _xMove, bool _is_walking)
 		is_walking = false;
 		combatantObject->setCurrentAnimation("idle");
 	}
-
 }
 
 

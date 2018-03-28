@@ -1,3 +1,32 @@
-﻿  ObjectPropertiesManager.cpp
+﻿  Bar.cpp
+  Generating Code...
+  Compiling...
+  AdventureGroup.cpp
+  Generating Code...
+  Compiling...
+  main.cpp
+  Simon.cpp
+c:\soma\src\game\simon.cpp(49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Player.cpp
+c:\soma\src\game\player.cpp(21): warning C4244: '=': conversion from 'SpriterEngine::real' to 'int', possible loss of data
+c:\soma\src\game\player.cpp(22): warning C4244: '=': conversion from 'SpriterEngine::real' to 'int', possible loss of data
+c:\soma\src\game\player.cpp(23): warning C4244: '=': conversion from 'SpriterEngine::real' to 'int', possible loss of data
+c:\soma\src\game\player.cpp(24): warning C4244: '=': conversion from 'SpriterEngine::real' to 'int', possible loss of data
+c:\soma\src\game\player.cpp(40): warning C4244: 'argument': conversion from 'SpriterEngine::real' to 'int', possible loss of data
+  Ole.cpp
+c:\soma\src\game\ole.cpp(47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Markus.cpp
+c:\soma\src\game\markus.cpp(52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  InitialState.cpp
+  Game.cpp
+c:\soma\src\game\game.cpp(74): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\soma\src\game\game.cpp(75): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\soma\src\game\game.cpp(113): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\soma\src\game\game.cpp(125): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Battle.cpp
+c:\soma\src\game\battle.cpp(7): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Anna.cpp
+c:\soma\src\game\anna.cpp(63): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
   Soma.vcxproj -> C:\Soma\Debug\Soma.exe
   Soma.vcxproj -> C:\Soma\Debug\Soma.pdb (Partial PDB)

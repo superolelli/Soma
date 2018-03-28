@@ -50,6 +50,5 @@ private:
 	std::vector<Buff> buffs;
 	std::vector<Buff> debuffs;
 
-
 	void HandleBuffDurations(std::vector<Buff> &_buffs);
 };
