@@ -41,6 +41,7 @@ void CTextureManager::LoadTextures()
 	marked.loadFromFile("Data/Sprites/Battle/marked.png");
 	sleeping.loadFromFile("Data/Sprites/Battle/sleeping.png");
 
+	abilityAnnouncementBanner.loadFromFile("Data/Sprites/Battle/ability_announcement.png");
 
 }
 

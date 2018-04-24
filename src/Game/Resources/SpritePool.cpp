@@ -10,4 +10,6 @@ void SpritePool::LoadSprites()
 	confused.Load(g_pTextures->confused);
 	marked.Load(g_pTextures->marked);
 	sleeping.Load(g_pTextures->sleeping);
+
+	abilityAnnouncementBanner.Load(g_pTextures->abilityAnnouncementBanner);
 }

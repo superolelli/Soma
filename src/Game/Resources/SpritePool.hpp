@@ -17,4 +17,6 @@ public:
 	CSprite confused;
 	CSprite marked;
 	CSprite sleeping;
+
+	CSprite abilityAnnouncementBanner;
 };

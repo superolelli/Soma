@@ -33,6 +33,8 @@ private:
 	int currentCombatant;
 	int selectedTarget;
 
+	float abilityAnnouncementTime;
+
 	bool isBattleFinished;
 
 	abilityPhase abilityStatus;

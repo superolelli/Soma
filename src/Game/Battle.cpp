@@ -43,6 +43,7 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 
 	abilityStatus = ready;
 	selectedTarget = 0;
+	abilityAnnouncementTime = 0.0f;
 }
 
 
@@ -80,13 +81,15 @@ void Battle::Update()
 				abilityStatus = aimed;
 			}
 			else
+			{
 				abilityStatus = aimed;
+				abilityAnnouncementTime = 3.0f;
+			}
 
 		break;
 		
 	case aimed:	
 			DoCurrentAbility();
-			abilityStatus = finished;
 			break;
 		
 	case finished:
@@ -118,9 +121,20 @@ void Battle::DoCurrentAbility()
 		}
 
 		combatants[currentCombatant]->DoAbility(gui->GetCurrentAbility(), targets);
+		abilityStatus = finished;
 	}
 	else
-		combatants[currentCombatant]->DoAbility(gui->GetCurrentAbility(), combatants);
+	{
+		if (abilityAnnouncementTime > 0.0f)
+		{
+			abilityAnnouncementTime -= g_pTimer->GetElapsedTime().asSeconds();
+		}
+		else
+		{
+			combatants[currentCombatant]->DoAbility(gui->GetCurrentAbility(), combatants);
+			abilityStatus = finished;
+		}
+	}
 }
 
 
@@ -226,4 +240,11 @@ void Battle::Render()
 			combatants[i]->RenderHealthBar(engine->GetWindow());
 		}
 	}
+
+	if (abilityAnnouncementTime > 0.0f)
+	{
+		g_pSpritePool->abilityAnnouncementBanner.SetPos(engine->GetWindow().getView().getCenter().x + 100, 150.0f);
+		g_pSpritePool->abilityAnnouncementBanner.Render(engine->GetWindow());
+	}
+
 }

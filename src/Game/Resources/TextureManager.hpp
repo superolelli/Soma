@@ -27,4 +27,6 @@ public:
 	sf::Texture confused;
 	sf::Texture marked;
 	sf::Texture sleeping;
+
+	sf::Texture abilityAnnouncementBanner;
 };
