@@ -39,11 +39,15 @@ private:
 
 	abilityPhase abilityStatus;
 
-	bool AimChosen();
-	bool CombatantClicked(int _id);
+
 	void CalculateTurnOrder();
 	void HandleDeaths();
-	bool CheckIfOneGroupIsDead();
 	void ChooseNextCombatant();
 	void DoCurrentAbility();
+	void RenderAbilityAnnouncement();
+
+	bool AimChosen();
+	bool CombatantClicked(int _id);
+	bool CurrentAbilityCanAimAtCombatant(int i);
+	bool CheckIfOneGroupIsDead();
 };

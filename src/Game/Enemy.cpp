@@ -53,6 +53,44 @@ void Enemy::Init(int _id)
 
 
 
+void Enemy::ChooseAbility(std::vector<Combatant*> &_targets)
+{
+	chosenAbility = enemyAbilities::bang;
+
+	//check for marked players
+	for (int i = 0; i < 8; i++)
+	{
+		if (_targets[i] != nullptr && _targets[i]->IsPlayer())
+		{
+			if (_targets[i]->Status().IsMarked())
+			{
+				chosenTarget = _targets[i];
+				return;
+			}
+		}
+	}
+
+
+	int target = rand() % 4;
+	do {
+		for (int i = 0; i < 8; i++)
+		{
+			if (_targets[i] != nullptr && _targets[i]->IsPlayer())
+			{
+				if (target == 0)
+				{
+					chosenTarget = _targets[i];
+					return;
+				}
+				target--;
+			}
+		}
+	} while (target >= 0);
+}
+
+
+
+
 bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
 	std::cout << "Der Gegner schießt!" << std::endl;
@@ -64,39 +102,12 @@ bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 			status.LooseHealth(1);
 	}
 
-	//check for marked players
-	for (int i = 0; i < 8; i++)
-	{
-		if (_targets[i] != nullptr && _targets[i]->IsPlayer())
-		{
-			if (_targets[i]->Status().IsMarked())
-			{
-				_targets[i]->Status().LooseHealth(status.GetDamage());
-				return true;
-			}
+	chosenTarget->Status().LooseHealth(status.GetDamage());
 
-		}
-	}
-
-	//choose random player
-	int target = rand() % 4;
-	do {
-		for (int i = 0; i < 8; i++)
-		{
-			if (_targets[i] != nullptr && _targets[i]->IsPlayer())
-			{
-				if (target == 0)
-				{
-					_targets[i]->Status().LooseHealth(status.GetDamage());
-					return true;
-				}
-				target--;
-			}
-		}
-	} while (target >= 0);
-
-	return false;
+	return true;
 }
+
+
 
 void Enemy::Render()
 {

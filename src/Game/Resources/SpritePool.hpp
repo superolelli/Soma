@@ -2,7 +2,9 @@
 
 
 #include "../../Framework/Graphics/Sprite.hpp"
+#include "../../Framework/Graphics/SpriteWithText.hpp"
 #include "TextureManager.hpp"
+#include "FontManager.hpp"
 
 
 #define g_pSpritePool SpritePool::Get()
@@ -18,5 +20,5 @@ public:
 	CSprite marked;
 	CSprite sleeping;
 
-	CSprite abilityAnnouncementBanner;
+	SpriteWithText abilityAnnouncementBanner;
 };

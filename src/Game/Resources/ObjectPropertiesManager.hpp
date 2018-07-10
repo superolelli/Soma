@@ -12,6 +12,12 @@ struct PossibleAims
 	int howMany;
 };
 
+struct Ability
+{
+	PossibleAims possibleAims;
+	std::string name;
+};
+
 #define g_pObjectProperties ObjectPropertiesManager::Get()
 class ObjectPropertiesManager : public TSingleton<ObjectPropertiesManager>
 {
@@ -21,8 +27,11 @@ public:
 	PossibleAims playerAbilities[4][4];
 	CombatantAttributes playerAttributes[4];
 
+	Ability enemyAbilities[2];
+
 private:
 	void LoadPlayerAbilities();
 	void LoadPlayerAttributes();
+	void LoadEnemyAbilities();
 };
 

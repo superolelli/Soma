@@ -7,6 +7,7 @@ void ObjectPropertiesManager::LoadObjectProperties()
 {
 	LoadPlayerAbilities();
 	LoadPlayerAttributes();
+	LoadEnemyAbilities();
 }
 
 
@@ -71,5 +72,46 @@ void ObjectPropertiesManager::LoadPlayerAttributes()
 		playerAttributes[playerID].dexterity = player.attribute("dexterity").as_int();
 
 		playerAttributes[playerID].currentHealth = playerAttributes[playerID].maxHealth;
+	}
+}
+
+
+
+
+void ObjectPropertiesManager::LoadEnemyAbilities()
+{
+	using namespace pugi;
+
+	xml_document doc;
+	doc.load_file("Data/XML/EnemyAbilities.xml");
+
+	//get default values
+	Ability default;
+	default.possibleAims.howMany = doc.child("EnemyAbilities").child("default").attribute("how_many").as_int();
+	default.name = doc.child("EnemyAbilities").child("default").attribute("name").as_string();
+	for (xml_node pos : doc.child("EnemyAbilities").child("default").child("positions").children())
+	{
+		default.possibleAims.position[pos.attribute("id").as_int()] = pos.text().as_bool();
+	}
+
+	//load ability values
+	for (xml_node ability : doc.child("EnemyAbilities").children())
+	{
+		int abilityID = ability.attribute("id").as_int();
+
+		if (abilityID >= 0)
+		{
+			enemyAbilities[abilityID] = default;
+
+			if (ability.attribute("how_many"))
+				enemyAbilities[abilityID].possibleAims.howMany = ability.attribute("how_many").as_int();
+
+			enemyAbilities[abilityID].name = ability.attribute("name").as_string();
+
+			for (xml_node pos : ability.child("positions").children())
+			{
+				enemyAbilities[abilityID].possibleAims.position[pos.attribute("id").as_int()] = pos.text().as_bool();
+			}
+		}
 	}
 }

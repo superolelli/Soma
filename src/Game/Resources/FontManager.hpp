@@ -11,6 +11,6 @@ public:
 	void LoadFonts();
 
 	//returns a font
-	sf::Font f_plantc;
+	sf::Font f_kingArthur;
 
 };

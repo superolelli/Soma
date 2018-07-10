@@ -7,3 +7,4 @@
 #include "BackgroundIDs.hpp"
 #include "ModelManager.hpp"
 #include "SpritePool.hpp"
+#include "EnemyAbilities.hpp"

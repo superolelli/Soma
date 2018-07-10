@@ -4,6 +4,6 @@
 
 void CFontManager::LoadFonts()
 {
-	f_plantc.loadFromFile("Data/Fonts/plantc.ttf");
+	f_kingArthur.loadFromFile("Data/Fonts/kingArthur.ttf");
 }
 

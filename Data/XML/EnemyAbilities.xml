@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<EnemyAbilities>
+
+  <default id ="-1" how_many = "1" name="Default">
+    <positions>
+      <value id="0">false</value>
+      <value id="1">false</value>
+      <value id="2">false</value>
+      <value id="3">false</value>
+      <value id="4">false</value>
+      <value id="5">false</value>
+      <value id="6">false</value>
+      <value id="7">false</value>
+    </positions>
+  </default>
+
+  <bang id="0" name="Bang!">
+    <positions>
+      <value id="0">true</value>
+      <value id="1">true</value>
+      <value id="2">true</value>
+      <value id="3">true</value>
+    </positions>
+  </bang>
+
+  <gatling id="1" how_many ="4" name="Gatling Gun">
+    <positions>
+      <value id="0">true</value>
+      <value id="1">true</value>
+      <value id="2">true</value>
+      <value id="3">true</value>
+    </positions>
+  </gatling>
+
+</EnemyAbilities>

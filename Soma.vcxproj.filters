@@ -863,5 +863,8 @@
     <ClInclude Include="src\Game\Resources\SpritePool.hpp">
       <Filter>Headerdateien\Game\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="src\Game\Resources\EnemyAbilities.hpp">
+      <Filter>Headerdateien\Game\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

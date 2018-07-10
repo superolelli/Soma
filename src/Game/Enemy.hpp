@@ -18,7 +18,13 @@ public:
 
 	virtual void Render() override;
 
+
+	void ChooseAbility(std::vector<Combatant*> &_targets);
+
+	std::string GetChosenAbilityName() { return g_pObjectProperties->enemyAbilities[chosenAbility].name; }
+
 private:
 
-
+	Combatant* chosenTarget;
+	enemyAbilities chosenAbility;
 };

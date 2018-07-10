@@ -18,7 +18,7 @@ namespace SpriterEngine
 	{
 		if (texture.loadFromFile(path()))
 		{
-			// texture.setSmooth(true);
+			texture.setSmooth(true);
 			sprite.setTexture(texture);
 		}
 		else

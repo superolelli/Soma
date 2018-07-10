@@ -78,12 +78,13 @@ void Battle::Update()
 			if (combatants[currentCombatant]->IsPlayer())
 			{
 				if (AimChosen())
-				abilityStatus = aimed;
+					abilityStatus = aimed;
 			}
 			else
 			{
 				abilityStatus = aimed;
 				abilityAnnouncementTime = 3.0f;
+				((Enemy*)combatants[currentCombatant])->ChooseAbility(combatants);
 			}
 
 		break;
@@ -176,7 +177,7 @@ void Battle::ChooseNextCombatant()
 	do {
 		currentCombatant++;
 
-		if (currentCombatant == 7)
+		if (currentCombatant == 8)
 		{
 			CalculateTurnOrder();
 			currentCombatant = 0;
@@ -208,12 +209,11 @@ bool Battle::AimChosen()
 		{
 			if (combatants[i] != nullptr)
 			{
-				if (combatants[currentCombatant]->possibleAbilityAims[gui->GetCurrentAbility()].position[combatants[i]->GetBattlePos()] == true)
-					if (CombatantClicked(i))
-					{
-						selectedTarget = i;
-						return true;
-					}
+				if (CurrentAbilityCanAimAtCombatant(i) && CombatantClicked(i))
+				{
+					selectedTarget = i;
+					return true;
+				}
 			}
 		}
 	}
@@ -221,6 +221,12 @@ bool Battle::AimChosen()
 	return false;
 }
 
+
+
+bool Battle::CurrentAbilityCanAimAtCombatant(int i)
+{
+	return combatants[currentCombatant]->possibleAbilityAims[gui->GetCurrentAbility()].position[combatants[i]->GetBattlePos()];
+}
 
 
 bool Battle::CombatantClicked(int _id)
@@ -241,10 +247,18 @@ void Battle::Render()
 		}
 	}
 
+	RenderAbilityAnnouncement();
+}
+
+
+
+void Battle::RenderAbilityAnnouncement()
+{
 	if (abilityAnnouncementTime > 0.0f)
 	{
-		g_pSpritePool->abilityAnnouncementBanner.SetPos(engine->GetWindow().getView().getCenter().x + 100, 150.0f);
+		g_pSpritePool->abilityAnnouncementBanner.SetPos(engine->GetWindow().getView().getCenter().x + 100.0f, 150.0f);
+		g_pSpritePool->abilityAnnouncementBanner.ChangeString(0, ((Enemy*)combatants[currentCombatant])->GetChosenAbilityName());
+		g_pSpritePool->abilityAnnouncementBanner.SetTextPosCentered(0);
 		g_pSpritePool->abilityAnnouncementBanner.Render(engine->GetWindow());
 	}
-
 }

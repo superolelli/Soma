@@ -1,4 +1,14 @@
-﻿  Battle.cpp
+﻿  main.cpp
+  SpritePool.cpp
+  InitialState.cpp
+  Game.cpp
+f:\soma\src\game\game.cpp(74): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+f:\soma\src\game\game.cpp(75): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
+f:\soma\src\game\game.cpp(113): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
+f:\soma\src\game\game.cpp(125): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+  Battle.cpp
 f:\soma\src\game\battle.cpp(7): warning C4244: "Argument": Konvertierung von "time_t" in "unsigned int", möglicher Datenverlust
+f:\soma\src\game\battle.cpp(259): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+  Code wird generiert...
   Soma.vcxproj -> F:\Soma\Debug\Soma.exe
   Soma.vcxproj -> F:\Soma\Debug\Soma.pdb (Partial PDB)
