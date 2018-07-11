@@ -67,6 +67,24 @@ void Combatant::RenderStatusSymbols(sf::RenderTarget & _target)
 }
 
 
+void Combatant::GiveTurnTo(std::vector<Combatant*>* _targets, BattleGUI *_gui)
+{
+	allCombatants = _targets;
+	gui = _gui;
+
+	abilityStatus = ready;
+
+	if (status.IsAsleep())
+	{
+		status.HandleStatusChanges();
+		abilityStatus = finished;
+		return;
+	}
+
+	status.HandleStatusChanges();
+}
+
+
 void Combatant::Quit()
 {
 	SAFE_DELETE(combatantObject);

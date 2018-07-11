@@ -2,8 +2,11 @@
 
 
 
-void Player::Init(int _id)
+void Player::Init(int _id, CGameEngine *_engine)
 {
+
+	engine = _engine;
+
 	combatantObject->setCurrentAnimation("idle");
 
 	combatantObject->setScale(SpriterEngine::point(PLAYER_SCALE, PLAYER_SCALE));
@@ -30,6 +33,8 @@ void Player::Init(int _id)
 	status.Reset();
 
 	is_walking = false;
+
+	abilityStatus = finished;
 }
 
 
@@ -49,6 +54,13 @@ void Player::Update(int _xMove, bool _is_walking)
 		is_walking = false;
 		combatantObject->setCurrentAnimation("idle");
 	}
+
+
+	if (abilityStatus == ready && AimChosen())
+		abilityStatus = executing;
+
+	if (abilityStatus == executing)
+		DoCurrentAbility();
 }
 
 
@@ -64,5 +76,52 @@ void Player::Render()
 }
 
 
+
+bool Player::AimChosen()
+{
+	if (engine->GetButtonstates(ButtonID::Left) == Keystates::Released)
+	{
+		for (int i = 0; i < 8; i++)
+		{
+			if ((*allCombatants)[i] != nullptr)
+			{
+				if (CurrentAbilityCanAimAtCombatant(i) && CombatantClicked(i))
+				{
+					selectedTarget = i;
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
+
+bool Player::CurrentAbilityCanAimAtCombatant(int i)
+{
+	return possibleAbilityAims[gui->GetCurrentAbility()].position[(*allCombatants)[i]->GetBattlePos()];
+}
+
+
+bool Player::CombatantClicked(int _id)
+{
+	return (*allCombatants)[_id]->GetRect().contains(engine->GetWorldMousePos());
+}
+
+
+
+void Player::DoCurrentAbility()
+{
+	std::vector<Combatant*> targets;
+	for (int i = selectedTarget; i < possibleAbilityAims[gui->GetCurrentAbility()].howMany + selectedTarget && i < 8; i++)
+	{
+		if ((*allCombatants)[i] != nullptr)
+			targets.push_back((*allCombatants)[i]);
+	}
+
+	DoAbility(gui->GetCurrentAbility(), targets);
+	abilityStatus = finished;
+}
 
 

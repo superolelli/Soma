@@ -5,10 +5,10 @@
 void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine)
 {
 	srand(time(0));
-	enemy[3].Init(4);
-	enemy[2].Init(4);
-	enemy[1].Init(5);
-	enemy[0].Init(5);
+	enemy[3].Init(4, _engine);
+	enemy[2].Init(4, _engine);
+	enemy[1].Init(5, _engine);
+	enemy[0].Init(5, _engine);
 
 	int pos = _xView + ENEMY_X_OFFSET;
 	for (auto &e : enemy)
@@ -41,9 +41,7 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 
 	gui->SetCurrentPlayer(combatants[currentCombatant]->GetID());
 
-	abilityStatus = ready;
-	selectedTarget = 0;
-	abilityAnnouncementTime = 0.0f;
+	combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
 }
 
 
@@ -59,84 +57,25 @@ void Battle::Update()
 {
 	for (Combatant *c : combatants)
 	{
-		if(c != nullptr)
+		if (c != nullptr)
 			c->Update();
 	}
 
-	switch (abilityStatus)
+	if (combatants[currentCombatant]->FinishedTurn())
 	{
-	case ready:
-			if (combatants[currentCombatant]->Status().IsAsleep())
-			{
-				combatants[currentCombatant]->Status().HandleStatusChanges();
-				abilityStatus = finished;
-				break;
-			}
+		HandleDeaths();
 
-			combatants[currentCombatant]->Status().HandleStatusChanges();
+		if (IsOneGroupDead() == true)
+			isBattleFinished = true;
 
-			if (combatants[currentCombatant]->IsPlayer())
-			{
-				if (AimChosen())
-					abilityStatus = aimed;
-			}
-			else
-			{
-				abilityStatus = aimed;
-				abilityAnnouncementTime = 3.0f;
-				((Enemy*)combatants[currentCombatant])->ChooseAbility(combatants);
-			}
+		ChooseNextCombatant();
 
-		break;
-		
-	case aimed:	
-			DoCurrentAbility();
-			break;
-		
-	case finished:
-			HandleDeaths();
+		gui->SetCurrentPlayer(combatants[currentCombatant]->GetID());
 
-			if (CheckIfOneGroupIsDead() == true)
-				isBattleFinished = true;
-
-			ChooseNextCombatant();
-
-			gui->SetCurrentPlayer(combatants[currentCombatant]->GetID());
-
-			abilityStatus = ready;
-			break;
+		combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
 	}
 }
 
-
-
-void Battle::DoCurrentAbility()
-{
-	if (combatants[currentCombatant]->IsPlayer())
-	{
-		std::vector<Combatant*> targets;
-		for (int i = selectedTarget; i < combatants[currentCombatant]->possibleAbilityAims[gui->GetCurrentAbility()].howMany + selectedTarget && i < 8; i++)
-		{
-			if (combatants[i] != nullptr)
-				targets.push_back(combatants[i]);
-		}
-
-		combatants[currentCombatant]->DoAbility(gui->GetCurrentAbility(), targets);
-		abilityStatus = finished;
-	}
-	else
-	{
-		if (abilityAnnouncementTime > 0.0f)
-		{
-			abilityAnnouncementTime -= g_pTimer->GetElapsedTime().asSeconds();
-		}
-		else
-		{
-			combatants[currentCombatant]->DoAbility(gui->GetCurrentAbility(), combatants);
-			abilityStatus = finished;
-		}
-	}
-}
 
 
 void Battle::HandleDeaths()
@@ -149,7 +88,7 @@ void Battle::HandleDeaths()
 }
 
 
-bool Battle::CheckIfOneGroupIsDead()
+bool Battle::IsOneGroupDead()
 {
 	int PlayersAlive = 0;
 	int EnemiesAlive = 0;
@@ -201,41 +140,6 @@ void Battle::CalculateTurnOrder()
 
 
 
-bool Battle::AimChosen()
-{
-	if (engine->GetButtonstates(ButtonID::Left) == Keystates::Released)
-	{
-		for (int i = 0; i < 8; i++)
-		{
-			if (combatants[i] != nullptr)
-			{
-				if (CurrentAbilityCanAimAtCombatant(i) && CombatantClicked(i))
-				{
-					selectedTarget = i;
-					return true;
-				}
-			}
-		}
-	}
-
-	return false;
-}
-
-
-
-bool Battle::CurrentAbilityCanAimAtCombatant(int i)
-{
-	return combatants[currentCombatant]->possibleAbilityAims[gui->GetCurrentAbility()].position[combatants[i]->GetBattlePos()];
-}
-
-
-bool Battle::CombatantClicked(int _id)
-{
-	return combatants[_id]->GetRect().contains(engine->GetWorldMousePos());
-}
-
-
-
 void Battle::Render()
 {
 	for (int i = 0; i < 8; i++)
@@ -246,19 +150,5 @@ void Battle::Render()
 			combatants[i]->RenderHealthBar(engine->GetWindow());
 		}
 	}
-
-	RenderAbilityAnnouncement();
 }
 
-
-
-void Battle::RenderAbilityAnnouncement()
-{
-	if (abilityAnnouncementTime > 0.0f)
-	{
-		g_pSpritePool->abilityAnnouncementBanner.SetPos(engine->GetWindow().getView().getCenter().x + 100.0f, 150.0f);
-		g_pSpritePool->abilityAnnouncementBanner.ChangeString(0, ((Enemy*)combatants[currentCombatant])->GetChosenAbilityName());
-		g_pSpritePool->abilityAnnouncementBanner.SetTextPosCentered(0);
-		g_pSpritePool->abilityAnnouncementBanner.Render(engine->GetWindow());
-	}
-}

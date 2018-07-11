@@ -3,8 +3,10 @@
 
 
 
-void Enemy::Init(int _id)
+void Enemy::Init(int _id, CGameEngine * _engine)
 {
+	engine = _engine;
+
 	switch (_id)
 	{
 	case 4:
@@ -49,22 +51,26 @@ void Enemy::Init(int _id)
 
 		possibleAbilityAims[j].howMany = 1;
 	}
+
+
+	abilityAnnouncementTime = 0.0f;
+	abilityStatus = finished;
 }
 
 
 
-void Enemy::ChooseAbility(std::vector<Combatant*> &_targets)
+void Enemy::ChooseAbility()
 {
 	chosenAbility = enemyAbilities::bang;
 
 	//check for marked players
 	for (int i = 0; i < 8; i++)
 	{
-		if (_targets[i] != nullptr && _targets[i]->IsPlayer())
+		if ((*allCombatants)[i] != nullptr && (*allCombatants)[i]->IsPlayer())
 		{
-			if (_targets[i]->Status().IsMarked())
+			if ((*allCombatants)[i]->Status().IsMarked())
 			{
-				chosenTarget = _targets[i];
+				chosenTarget = (*allCombatants)[i];
 				return;
 			}
 		}
@@ -75,11 +81,11 @@ void Enemy::ChooseAbility(std::vector<Combatant*> &_targets)
 	do {
 		for (int i = 0; i < 8; i++)
 		{
-			if (_targets[i] != nullptr && _targets[i]->IsPlayer())
+			if ((*allCombatants)[i] != nullptr && (*allCombatants)[i]->IsPlayer())
 			{
 				if (target == 0)
 				{
-					chosenTarget = _targets[i];
+					chosenTarget = (*allCombatants)[i];
 					return;
 				}
 				target--;
@@ -109,8 +115,43 @@ bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 
 
 
+void Enemy::Update()
+{
+	Combatant::Update();
+
+	if (abilityStatus == ready)
+	{
+		ChooseAbility();
+		abilityStatus = executing;
+		abilityAnnouncementTime = 3.0f;
+	}
+
+	if (abilityStatus == executing)
+	{
+		if (abilityAnnouncementTime > 0.0f)
+		{
+			abilityAnnouncementTime -= g_pTimer->GetElapsedTime().asSeconds();
+		}
+		else
+		{
+			DoAbility(gui->GetCurrentAbility(), *allCombatants);
+			abilityStatus = finished;
+		}
+	}
+}
+
 void Enemy::Render()
 {
 	combatantObject->setTimeElapsed(ENEMY_ANIMATION_SPEED);
 	combatantObject->render();
+
+	if (abilityAnnouncementTime > 0.0f)
+	{
+		g_pSpritePool->abilityAnnouncementBanner.SetPos(engine->GetWindow().getView().getCenter().x + 100.0f, 150.0f);
+		g_pSpritePool->abilityAnnouncementBanner.ChangeString(0, GetChosenAbilityName());
+		g_pSpritePool->abilityAnnouncementBanner.SetTextPosCentered(0);
+		g_pSpritePool->abilityAnnouncementBanner.Render(engine->GetWindow());
+	}
 }
+
+

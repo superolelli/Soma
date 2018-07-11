@@ -3,19 +3,19 @@
 
 
 
-void AdventureGroup::Init()
+void AdventureGroup::Init(CGameEngine *_engine)
 {
 	adventurer[PlayerID::Ole] = new PlayerOle;
-	adventurer[PlayerID::Ole]->Init(PlayerID::Ole);
+	adventurer[PlayerID::Ole]->Init(PlayerID::Ole, _engine);
 
 	adventurer[PlayerID::Anna] = new PlayerAnna;
-	adventurer[PlayerID::Anna]->Init(PlayerID::Anna);
+	adventurer[PlayerID::Anna]->Init(PlayerID::Anna, _engine);
 
 	adventurer[PlayerID::Simon] = new PlayerSimon;
-	adventurer[PlayerID::Simon]->Init(PlayerID::Simon);
+	adventurer[PlayerID::Simon]->Init(PlayerID::Simon, _engine);
 
 	adventurer[PlayerID::Markus] = new PlayerMarkus;
-	adventurer[PlayerID::Markus]->Init(PlayerID::Markus);
+	adventurer[PlayerID::Markus]->Init(PlayerID::Markus, _engine);
 
 
 	int x = GROUP_OFFSET_LEFT;

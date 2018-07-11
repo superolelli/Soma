@@ -4,8 +4,6 @@
 #include "BattleGUI.hpp"
 #include "Enemy.hpp"
 
-enum abilityPhase {ready, aimed, finished};
-
 
 const int ENEMY_X_OFFSET = 50;
 const int ENEMY_Y_POS = 700;
@@ -31,23 +29,12 @@ private:
 
 	std::vector<Combatant*> combatants;
 	int currentCombatant;
-	int selectedTarget;
-
-	float abilityAnnouncementTime;
 
 	bool isBattleFinished;
-
-	abilityPhase abilityStatus;
-
 
 	void CalculateTurnOrder();
 	void HandleDeaths();
 	void ChooseNextCombatant();
-	void DoCurrentAbility();
-	void RenderAbilityAnnouncement();
 
-	bool AimChosen();
-	bool CombatantClicked(int _id);
-	bool CurrentAbilityCanAimAtCombatant(int i);
-	bool CheckIfOneGroupIsDead();
+	bool IsOneGroupDead();
 };

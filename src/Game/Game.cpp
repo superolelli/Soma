@@ -10,7 +10,7 @@ void Game::Init(CGameEngine * _engine)
 	m_pGameEngine->GetWindow().setView(view);
 
 	level.Init();
-	adventureGroup.Init();
+	adventureGroup.Init(_engine);
 
 	currentGUI = new LevelGUI;
 	currentGUI->Init(m_pGameEngine);

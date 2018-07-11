@@ -16,19 +16,28 @@
 #include "../Framework/Time.hpp"
 #include "CombatantStatus.hpp"
 
+
+#include "BattleGUI.hpp"
+
+
+enum abilityPhase { ready, executing, finished };
+
 class Combatant
 {
 public:
-	virtual void Init(int _id) = 0;
+	virtual void Init(int _id, CGameEngine *_engine) = 0;
 	void Quit();
 	virtual void Render() = 0;
-	void Update();
+	virtual void Update();
 
 	void SetPos(int _x, int _y);
 	sf::IntRect &GetRect() { return hitbox; }
 
 	virtual bool DoAbility(int _id, std::vector<Combatant*> &_targets) { return true; }
 	virtual int GetID() { return -2; }
+
+	void GiveTurnTo(std::vector<Combatant*> *_targets, BattleGUI *_gui);
+	bool FinishedTurn() { return abilityStatus == finished; }
 
 	CombatantStatus &Status() { return status; }
 
@@ -51,6 +60,14 @@ protected:
 	int battlePosition;
 
 	Bar healthBar;
+
+	CGameEngine *engine;
+	BattleGUI *gui;
+
+	abilityPhase abilityStatus;
+
+
+	std::vector<Combatant*> *allCombatants;
 
 	void RenderStatusSymbols(sf::RenderTarget &_target);
 };
