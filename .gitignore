@@ -21,8 +21,8 @@ $RECYCLE.BIN/
 Dependencies/
 
 #Builds
-Debug/
-Release/
+Debug/**
+Release/**
 
 # =========================
 # Operating System Files

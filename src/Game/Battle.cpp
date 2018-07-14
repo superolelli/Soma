@@ -21,19 +21,20 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 	gui = _gui;
 	engine = _engine;
 
-	combatants.push_back(&enemy[0]);
-	combatants.push_back(&enemy[1]);
-	combatants.push_back(&enemy[2]);
-	combatants.push_back(&enemy[3]);
 	combatants.push_back(players->GetPlayer(0));
 	combatants.push_back(players->GetPlayer(1));
 	combatants.push_back(players->GetPlayer(2));
 	combatants.push_back(players->GetPlayer(3));
+	combatants.push_back(&enemy[0]);
+	combatants.push_back(&enemy[1]);
+	combatants.push_back(&enemy[2]);
+	combatants.push_back(&enemy[3]);
 
-	CalculateTurnOrder();
 
 	for (int i = 0; i < 8; i++)
 		combatants[i]->SetBattlePos(i);
+
+	CalculateTurnOrder();
 
 	currentCombatant = 0;
 
@@ -56,10 +57,7 @@ void Battle::Quit()
 void Battle::Update()
 {
 	for (Combatant *c : combatants)
-	{
-		if (c != nullptr)
-			c->Update();
-	}
+		c->Update();
 
 	if (combatants[currentCombatant]->FinishedTurn())
 	{
@@ -80,10 +78,16 @@ void Battle::Update()
 
 void Battle::HandleDeaths()
 {
-	for (int i = 0; i < 8; i++)
+	std::vector<Combatant*>::iterator i;
+	for (i = combatants.begin(); i != combatants.end();)
 	{
-		if (combatants[i] != nullptr && combatants[i]->Status().GetCurrentHealth() <= 0)
-			combatants[i] = nullptr;
+		if ((*i)->Status().GetCurrentHealth() <= 0)
+		{
+			i = combatants.erase(i);
+			continue;
+		}
+
+		i++;
 	}
 }
 
@@ -92,36 +96,29 @@ bool Battle::IsOneGroupDead()
 {
 	int PlayersAlive = 0;
 	int EnemiesAlive = 0;
-	for (int i = 0; i < 8; i++)
+
+	for (Combatant* c : combatants)
 	{
-		if (combatants[i] != nullptr)
-		{
-			if (combatants[i]->IsPlayer())
-				PlayersAlive++;
-			else
-				EnemiesAlive++;
-		}
+		if (c->IsPlayer())
+			PlayersAlive++;
+		else
+			EnemiesAlive++;
 	}
 
-	if (PlayersAlive == 0 || EnemiesAlive == 0)
-		return true;	
-
-	return false;
+	return PlayersAlive == 0 || EnemiesAlive == 0;
 }
 
 
 
 void Battle::ChooseNextCombatant()
 {
-	do {
-		currentCombatant++;
+	currentCombatant++;
 
-		if (currentCombatant == 8)
-		{
-			CalculateTurnOrder();
-			currentCombatant = 0;
-		}
-	} while (combatants[currentCombatant] == nullptr);
+	if (currentCombatant >= combatants.size())
+	{
+		CalculateTurnOrder();
+		currentCombatant = 0;
+	}
 }
 
 
@@ -129,11 +126,6 @@ void Battle::ChooseNextCombatant()
 void Battle::CalculateTurnOrder()
 {
 	std::sort(combatants.begin(), combatants.end(), [](Combatant *c1, Combatant *c2) {
-		if (c1 == nullptr)
-			return false;
-		else if (c2 == nullptr)
-			return true;
-		else
 			return c1->Status().GetInitiative() > c2->Status().GetInitiative();
 	});
 }
@@ -142,13 +134,11 @@ void Battle::CalculateTurnOrder()
 
 void Battle::Render()
 {
-	for (int i = 0; i < 8; i++)
+	for (Combatant* c : combatants)
 	{
-		if (combatants[i] != nullptr)
-		{
-			combatants[i]->Render();
-			combatants[i]->RenderHealthBar(engine->GetWindow());
-		}
+		c->Render();
+		c->RenderHealthBar(engine->GetWindow());
 	}
+	
 }
 

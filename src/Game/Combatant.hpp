@@ -66,8 +66,9 @@ protected:
 
 	abilityPhase abilityStatus;
 
-
 	std::vector<Combatant*> *allCombatants;
+
+	Combatant *selectedTarget;
 
 	void RenderStatusSymbols(sf::RenderTarget &_target);
 };

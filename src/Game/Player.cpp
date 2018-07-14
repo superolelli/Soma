@@ -81,15 +81,12 @@ bool Player::AimChosen()
 {
 	if (engine->GetButtonstates(ButtonID::Left) == Keystates::Released)
 	{
-		for (int i = 0; i < 8; i++)
+		for (Combatant* c : (*allCombatants))
 		{
-			if ((*allCombatants)[i] != nullptr)
+			if (CurrentAbilityCanAimAtCombatant(c) && CombatantClicked(c))
 			{
-				if (CurrentAbilityCanAimAtCombatant(i) && CombatantClicked(i))
-				{
-					selectedTarget = i;
-					return true;
-				}
+				selectedTarget = c;
+				return true;
 			}
 		}
 	}
@@ -98,26 +95,28 @@ bool Player::AimChosen()
 }
 
 
-bool Player::CurrentAbilityCanAimAtCombatant(int i)
+bool Player::CurrentAbilityCanAimAtCombatant(Combatant* _combatant)
 {
-	return possibleAbilityAims[gui->GetCurrentAbility()].position[(*allCombatants)[i]->GetBattlePos()];
+	return possibleAbilityAims[gui->GetCurrentAbility()].position[_combatant->GetBattlePos()];
 }
 
 
-bool Player::CombatantClicked(int _id)
+bool Player::CombatantClicked(Combatant* _combatant)
 {
-	return (*allCombatants)[_id]->GetRect().contains(engine->GetWorldMousePos());
+	return _combatant->GetRect().contains(engine->GetWorldMousePos());
 }
 
 
 
 void Player::DoCurrentAbility()
 {
+	int targetPosition = selectedTarget->GetBattlePos();
+
 	std::vector<Combatant*> targets;
-	for (int i = selectedTarget; i < possibleAbilityAims[gui->GetCurrentAbility()].howMany + selectedTarget && i < 8; i++)
+	for (Combatant* c : (*allCombatants))
 	{
-		if ((*allCombatants)[i] != nullptr)
-			targets.push_back((*allCombatants)[i]);
+		if (c->GetBattlePos() >= targetPosition && c->GetBattlePos() < targetPosition + possibleAbilityAims[gui->GetCurrentAbility()].howMany)
+			targets.push_back(c);
 	}
 
 	DoAbility(gui->GetCurrentAbility(), targets);

@@ -62,39 +62,57 @@ void Enemy::Init(int _id, CGameEngine * _engine)
 void Enemy::ChooseAbility()
 {
 	chosenAbility = enemyAbilities::bang;
-
-	//check for marked players
-	for (int i = 0; i < 8; i++)
-	{
-		if ((*allCombatants)[i] != nullptr && (*allCombatants)[i]->IsPlayer())
-		{
-			if ((*allCombatants)[i]->Status().IsMarked())
-			{
-				chosenTarget = (*allCombatants)[i];
-				return;
-			}
-		}
-	}
-
-
-	int target = rand() % 4;
-	do {
-		for (int i = 0; i < 8; i++)
-		{
-			if ((*allCombatants)[i] != nullptr && (*allCombatants)[i]->IsPlayer())
-			{
-				if (target == 0)
-				{
-					chosenTarget = (*allCombatants)[i];
-					return;
-				}
-				target--;
-			}
-		}
-	} while (target >= 0);
 }
 
 
+
+void Enemy::ChooseTarget()
+{
+	selectedTarget = nullptr;
+
+	CheckForMarkedPlayers();
+
+	if (selectedTarget == nullptr)
+	{
+		ChooseRandomPlayer();
+	}
+}
+
+
+
+
+void Enemy::CheckForMarkedPlayers()
+{
+	for (Combatant* c : (*allCombatants))
+	{
+		if (c->IsPlayer() && c->Status().IsMarked())
+		{
+			selectedTarget = c;
+			return;
+		}
+	}
+}
+
+
+
+void Enemy::ChooseRandomPlayer()
+{
+	int numberOfPlayers = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), 0, [](int sum, Combatant* c) {if (c->IsPlayer()) return sum + 1; else return sum; });
+
+	int target = rand() % numberOfPlayers;
+	for (Combatant* c : (*allCombatants))
+	{
+		if (c->IsPlayer())
+		{
+			if (target == 0)
+			{
+				selectedTarget = c;
+				return;
+			}
+			target--;
+		}
+	}
+}
 
 
 bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
@@ -108,7 +126,7 @@ bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 			status.LooseHealth(1);
 	}
 
-	chosenTarget->Status().LooseHealth(status.GetDamage());
+	selectedTarget->Status().LooseHealth(status.GetDamage());
 
 	return true;
 }
@@ -122,6 +140,7 @@ void Enemy::Update()
 	if (abilityStatus == ready)
 	{
 		ChooseAbility();
+		ChooseTarget();
 		abilityStatus = executing;
 		abilityAnnouncementTime = 3.0f;
 	}

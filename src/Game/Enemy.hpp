@@ -3,6 +3,8 @@
 #include "Combatant.hpp"
 #include "Resources\Resources.hpp"
 
+#include <numeric>
+
 const float ENEMY_SCALE = 0.6f;
 const int ENEMY_ANIMATION_SPEED = 10;
 
@@ -24,10 +26,14 @@ public:
 
 private:
 
-	Combatant* chosenTarget;
 	enemyAbilities chosenAbility;
 
 	float abilityAnnouncementTime;
 
 	void ChooseAbility();
+
+
+	void ChooseTarget();
+	void CheckForMarkedPlayers();
+	void ChooseRandomPlayer();
 };

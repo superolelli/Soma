@@ -28,6 +28,7 @@ private:
 	CGameEngine *engine;
 
 	std::vector<Combatant*> combatants;
+
 	int currentCombatant;
 
 	bool isBattleFinished;

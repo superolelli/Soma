@@ -25,10 +25,8 @@ protected:
 	bool AimChosen();
 
 	void DoCurrentAbility();
-	bool CombatantClicked(int _id);
-	bool CurrentAbilityCanAimAtCombatant(int i);
-
-	int selectedTarget;
+	bool CombatantClicked(Combatant* _combatant);
+	bool CurrentAbilityCanAimAtCombatant(Combatant* _combatant);
 
 	bool is_walking;
 };
