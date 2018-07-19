@@ -94,3 +94,9 @@ void PlayerSimon::repair(Combatant* _target)
 		_target->Status().RemoveAllBuffs();
 	}
 }
+
+void PlayerSimon::StartAbilityAnimation(int _ability)
+{
+	combatantObject->setCurrentAnimation("marshmallow_flash");
+	combatantObject->setCurrentTime(0);
+}

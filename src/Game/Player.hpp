@@ -8,6 +8,7 @@
 const float PLAYER_SCALE = 0.6f;
 const int WALKING_ANIMATION_SPEED = 18;
 const int IDLE_ANIMATION_SPEED = 7;
+const int ABILITY_ANIMATION_SPEED = 15;
 
 class Player : public Combatant
 {
@@ -27,6 +28,8 @@ protected:
 	void DoCurrentAbility();
 	bool CombatantClicked(Combatant* _combatant);
 	bool CurrentAbilityCanAimAtCombatant(Combatant* _combatant);
+
+	virtual void StartAbilityAnimation(int _ability) {};
 
 	bool is_walking;
 };

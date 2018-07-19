@@ -20,5 +20,5 @@ private:
 	void marshmallowFlash();
 	void repair(Combatant* _target);
 
-
+	void StartAbilityAnimation(int _ability) override;
 };

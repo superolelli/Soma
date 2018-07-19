@@ -44,20 +44,26 @@ void Player::Update(int _xMove, bool _is_walking)
 {
 	SetPos(combatantObject->getPosition().x + _xMove, combatantObject->getPosition().y);
 
-	if (is_walking == false && _is_walking == true)
+	if (abilityStatus != executing)
 	{
-		is_walking = true;
-		combatantObject->setCurrentAnimation("walk");
-	}
-	else if (is_walking == true && _is_walking == false)
-	{
-		is_walking = false;
-		combatantObject->setCurrentAnimation("idle");
+		if (is_walking == false && _is_walking == true)
+		{
+			is_walking = true;
+			combatantObject->setCurrentAnimation("walk");
+		}
+		else if (is_walking == true && _is_walking == false)
+		{
+			is_walking = false;
+			combatantObject->setCurrentAnimation("idle");
+		}
 	}
 
 
 	if (abilityStatus == ready && AimChosen())
+	{
 		abilityStatus = executing;
+		StartAbilityAnimation(gui->GetCurrentAbility());
+	}
 
 	if (abilityStatus == executing)
 		DoCurrentAbility();
@@ -67,7 +73,9 @@ void Player::Update(int _xMove, bool _is_walking)
 
 void Player::Render()
 {
-	if(is_walking)
+	if (abilityStatus == executing)
+		combatantObject->setTimeElapsed(ABILITY_ANIMATION_SPEED);
+	else if(is_walking)
 		combatantObject->setTimeElapsed(WALKING_ANIMATION_SPEED);
 	else
 		combatantObject->setTimeElapsed(IDLE_ANIMATION_SPEED);
@@ -110,17 +118,22 @@ bool Player::CombatantClicked(Combatant* _combatant)
 
 void Player::DoCurrentAbility()
 {
-	int targetPosition = selectedTarget->GetBattlePos();
-
-	std::vector<Combatant*> targets;
-	for (Combatant* c : (*allCombatants))
+	if (combatantObject->animationJustFinished())
 	{
-		if (c->GetBattlePos() >= targetPosition && c->GetBattlePos() < targetPosition + possibleAbilityAims[gui->GetCurrentAbility()].howMany)
-			targets.push_back(c);
-	}
+		int targetPosition = selectedTarget->GetBattlePos();
 
-	DoAbility(gui->GetCurrentAbility(), targets);
-	abilityStatus = finished;
+		std::vector<Combatant*> targets;
+		for (Combatant* c : (*allCombatants))
+		{
+			if (c->GetBattlePos() >= targetPosition && c->GetBattlePos() < targetPosition + possibleAbilityAims[gui->GetCurrentAbility()].howMany)
+				targets.push_back(c);
+		}
+
+		combatantObject->setCurrentAnimation("idle");
+
+		DoAbility(gui->GetCurrentAbility(), targets);
+		abilityStatus = finished;
+	}
 }
 
 
