@@ -70,3 +70,9 @@ void PlayerAnna::deathHug(Combatant* _target)
 
 	status.GainHealth(1);
 }
+
+void PlayerAnna::StartAbilityAnimation(int _ability)
+{
+	combatantObject->setCurrentAnimation("word_gush");
+	combatantObject->setCurrentTime(0);
+}

@@ -72,3 +72,9 @@ void PlayerMarkus::horribleGrin(Combatant* _target)
 	_target->Status().AddDebuff(newBuff);
 	_target->Status().LooseHealth(status.GetDamage());
 }
+
+void PlayerMarkus::StartAbilityAnimation(int _ability)
+{
+	combatantObject->setCurrentAnimation("fist_of_revenge");
+	combatantObject->setCurrentTime(0);
+}

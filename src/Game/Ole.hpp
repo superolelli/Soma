@@ -21,6 +21,7 @@ private:
 	void hackIntoTheSystem(Combatant* _target);
 	void poetrySlam(Combatant* _target);
 
+	void StartAbilityAnimation(int _ability) override;
 
 };
 

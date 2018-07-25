@@ -21,4 +21,6 @@ private:
 	void hardDestruction(Combatant* _target);
 	void horribleGrin(Combatant* _target);
 
+	void StartAbilityAnimation(int _ability) override;
+
 };

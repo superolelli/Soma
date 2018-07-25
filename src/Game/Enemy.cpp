@@ -117,8 +117,6 @@ void Enemy::ChooseRandomPlayer()
 
 bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
-	std::cout << "Der Gegner schießt!" << std::endl;
-
 	//check for confusion
 	if (status.IsConfused())
 	{
@@ -150,9 +148,13 @@ void Enemy::Update()
 		if (abilityAnnouncementTime > 0.0f)
 		{
 			abilityAnnouncementTime -= g_pTimer->GetElapsedTime().asSeconds();
+
+			if (abilityAnnouncementTime <= 0.0f)
+				StartAbilityAnimation();
 		}
-		else
+		else if(combatantObject->animationJustFinished())
 		{
+			combatantObject->setCurrentAnimation("idle");
 			DoAbility(gui->GetCurrentAbility(), *allCombatants);
 			abilityStatus = finished;
 		}
@@ -161,7 +163,11 @@ void Enemy::Update()
 
 void Enemy::Render()
 {
-	combatantObject->setTimeElapsed(ENEMY_ANIMATION_SPEED);
+	if (abilityStatus == executing)
+		combatantObject->setTimeElapsed(ENEMY_ABILITY_ANIMATION_SPEED);
+	else
+		combatantObject->setTimeElapsed(ENEMY_IDLE_ANIMATION_SPEED);
+
 	combatantObject->render();
 
 	if (abilityAnnouncementTime > 0.0f)
@@ -173,4 +179,11 @@ void Enemy::Render()
 	}
 }
 
+
+
+void Enemy::StartAbilityAnimation()
+{
+	combatantObject->setCurrentAnimation("bang");
+	combatantObject->setCurrentTime(0);
+}
 

@@ -6,7 +6,8 @@
 #include <numeric>
 
 const float ENEMY_SCALE = 0.6f;
-const int ENEMY_ANIMATION_SPEED = 10;
+const int ENEMY_IDLE_ANIMATION_SPEED = 10;
+const int ENEMY_ABILITY_ANIMATION_SPEED = 15;
 
 class Enemy : public Combatant
 {
@@ -31,6 +32,8 @@ private:
 	float abilityAnnouncementTime;
 
 	void ChooseAbility();
+
+	void StartAbilityAnimation();
 
 
 	void ChooseTarget();

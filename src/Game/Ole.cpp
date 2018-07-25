@@ -87,3 +87,9 @@ void PlayerOle::poetrySlam(Combatant* _target)
 	_target->Status().LooseHealth(status.GetDamage());
 }
 
+void PlayerOle::StartAbilityAnimation(int _ability)
+{
+	combatantObject->setCurrentAnimation("hack_into_the_system");
+	combatantObject->setCurrentTime(0);
+}
+
