@@ -20,7 +20,7 @@
 #include "BattleGUI.hpp"
 
 
-enum abilityPhase { ready, executing, finished };
+enum abilityPhase { ready, executing, finished, attacked };
 
 class Combatant
 {
@@ -37,12 +37,18 @@ public:
 	virtual int GetID() { return -2; }
 
 	void GiveTurnTo(std::vector<Combatant*> *_targets, BattleGUI *_gui);
+
+	void StartAttackedAnimation();
+	void StopAttackedAnimation();
+
 	bool FinishedTurn() { return abilityStatus == finished; }
 
 	CombatantStatus &Status() { return status; }
 
 	int GetBattlePos() { return battlePosition; }
 	void SetBattlePos(int _pos) { battlePosition = _pos; }
+
+	abilityPhase GetAbilityStatus() { return abilityStatus; }
 
 	virtual void RenderHealthBar(sf::RenderTarget &_target);
 
@@ -68,7 +74,10 @@ protected:
 
 	std::vector<Combatant*> *allCombatants;
 
-	Combatant *selectedTarget;
+	std::vector<Combatant*> selectedTargets;
 
 	void RenderStatusSymbols(sf::RenderTarget &_target);
+
+	void StartTargetsAttackedAnimation();
+	void StopTargetsAttackedAnimation();
 };

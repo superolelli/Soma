@@ -16,6 +16,7 @@ public:
 	void Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine);
 	void Update();
 	void Render();
+	void RenderAbilityAnimations();
 	void Quit();
 
 	bool isFinished() { return isBattleFinished; }

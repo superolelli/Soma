@@ -43,14 +43,11 @@ bool PlayerOle::DoAbility(int _id, std::vector<Combatant*> &_targets)
 
 void PlayerOle::gummiArm(Combatant* _target)
 {
-	std::cout << "Ole setzt seinen Gummiarm ein!" << std::endl;
 	_target->Status().LooseHealth(status.GetDamage() * 0.3f);
 }
 
 void PlayerOle::wholeBodyKick(Combatant* _target)
 {
-	std::cout << "Ole setzt einen Ganzkörperkick ein!" << std::endl;
-
 	Buff newBuff;
 	newBuff.duration = 3;
 	newBuff.attributes.armour = 0;
@@ -65,8 +62,6 @@ void PlayerOle::wholeBodyKick(Combatant* _target)
 
 void PlayerOle::hackIntoTheSystem(Combatant* _target)
 {
-	std::cout << "Ole hackt das System!" << std::endl;
-
 	Buff newBuff;
 	newBuff.duration = 3;
 	newBuff.attributes.armour = -10;
@@ -81,8 +76,6 @@ void PlayerOle::hackIntoTheSystem(Combatant* _target)
 
 void PlayerOle::poetrySlam(Combatant* _target)
 {
-	std::cout << "Ole trägt einen Poetry Slam vor!" << std::endl;
-
 	_target->Status().PutToSleep();
 	_target->Status().LooseHealth(status.GetDamage());
 }

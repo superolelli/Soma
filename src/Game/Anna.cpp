@@ -41,7 +41,6 @@ bool PlayerAnna::DoAbility(int _id, std::vector<Combatant*> &_targets)
 
 void PlayerAnna::indomitableHappiness(Combatant* _target)
 {
-	std::cout << "Anna strahlt unbezwingbare Fröhlichkeit aus!" << std::endl;
 	if(rand()%3 == 0)
 		_target->Status().Confuse(3);
 
@@ -50,7 +49,6 @@ void PlayerAnna::indomitableHappiness(Combatant* _target)
 
 void PlayerAnna::wordGush(Combatant* _target)
 {
-	std::cout << "Anna setzt einen Wortschwall frei!" << std::endl;
 	if (rand() % 4 == 0)
 		_target->Status().PutToSleep();
 
@@ -59,13 +57,11 @@ void PlayerAnna::wordGush(Combatant* _target)
 
 void PlayerAnna::sideOfNoseBlow(Combatant* _target)
 {
-	std::cout << "Anna setzt einen Nasenflügelschlag!" << std::endl;
 	_target->Status().LooseHealth(status.GetDamage() * 0.4f);
 }
 
 void PlayerAnna::deathHug(Combatant* _target)
 {
-	std::cout << "Anna setzt eine TODESUMARMUNG ein!" << std::endl;
 	_target->Status().LooseHealth(status.GetDamage());
 
 	status.GainHealth(1);

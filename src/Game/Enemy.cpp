@@ -68,11 +68,11 @@ void Enemy::ChooseAbility()
 
 void Enemy::ChooseTarget()
 {
-	selectedTarget = nullptr;
+	selectedTargets.clear();
 
 	CheckForMarkedPlayers();
 
-	if (selectedTarget == nullptr)
+	if (selectedTargets.empty())
 	{
 		ChooseRandomPlayer();
 	}
@@ -87,7 +87,7 @@ void Enemy::CheckForMarkedPlayers()
 	{
 		if (c->IsPlayer() && c->Status().IsMarked())
 		{
-			selectedTarget = c;
+			selectedTargets.push_back(c);
 			return;
 		}
 	}
@@ -106,7 +106,7 @@ void Enemy::ChooseRandomPlayer()
 		{
 			if (target == 0)
 			{
-				selectedTarget = c;
+				selectedTargets.push_back(c);
 				return;
 			}
 			target--;
@@ -124,7 +124,7 @@ bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 			status.LooseHealth(1);
 	}
 
-	selectedTarget->Status().LooseHealth(status.GetDamage());
+	selectedTargets[0]->Status().LooseHealth(status.GetDamage());
 
 	return true;
 }
@@ -150,11 +150,16 @@ void Enemy::Update()
 			abilityAnnouncementTime -= g_pTimer->GetElapsedTime().asSeconds();
 
 			if (abilityAnnouncementTime <= 0.0f)
+			{
 				StartAbilityAnimation();
+				StartTargetsAttackedAnimation();
+			}
 		}
 		else if(combatantObject->animationJustFinished())
 		{
 			combatantObject->setCurrentAnimation("idle");
+			StopTargetsAttackedAnimation();
+
 			DoAbility(gui->GetCurrentAbility(), *allCombatants);
 			abilityStatus = finished;
 		}
@@ -163,7 +168,7 @@ void Enemy::Update()
 
 void Enemy::Render()
 {
-	if (abilityStatus == executing)
+	if (abilityStatus == executing || abilityStatus == attacked)
 		combatantObject->setTimeElapsed(ENEMY_ABILITY_ANIMATION_SPEED);
 	else
 		combatantObject->setTimeElapsed(ENEMY_IDLE_ANIMATION_SPEED);

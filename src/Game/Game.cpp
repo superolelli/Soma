@@ -131,6 +131,9 @@ void Game::Render(double _normalizedTimestep)
 
 	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
 
+	if (currentBattle != nullptr)
+		currentBattle->RenderAbilityAnimations();
+
 	currentGUI->Render();
 
 	m_pGameEngine->FlipWindow();

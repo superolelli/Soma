@@ -42,25 +42,21 @@ bool PlayerMarkus::DoAbility(int _id, std::vector<Combatant*> &_targets)
 
 void PlayerMarkus::fistOfRevenge(Combatant* _target)
 {
-	std::cout << "FIST OF REVENGE!" << std::endl;
 	_target->Status().LooseHealth(status.GetDamage() * 2);
 }
 
 void PlayerMarkus::noseRam(Combatant* _target)
 {
-	std::cout << "Markus setzt seine Nasenramme ein!" << std::endl;
 	_target->Status().LooseHealth(status.GetDamage() * 0.3f);
 }
 
 void PlayerMarkus::hardDestruction(Combatant* _target)
 {
-	std::cout << "Markus praktiziert harte Zerstörung!" << std::endl;
 	_target->Status().LooseHealth(status.GetDamage());
 }
 
 void PlayerMarkus::horribleGrin(Combatant* _target)
 {
-	std::cout << "Markus grinst fürchterlich!" << std::endl;
 	Buff newBuff;
 	newBuff.duration = 3;
 	newBuff.attributes.armour = 0;

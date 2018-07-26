@@ -43,15 +43,12 @@ bool PlayerSimon::DoAbility(int _id, std::vector<Combatant*> &_targets)
 
 void PlayerSimon::messAround(Combatant* _target)
 {
-	std::cout << "Simon verarscht den Gegner!" << std::endl;
-
 	_target->Status().Confuse(3);
 	_target->Status().LooseHealth(status.GetDamage() * 0.5f);
 }
 
 void PlayerSimon::allOnOne(Combatant* _target)
 {
-	std::cout << "Simon hetzt alle auf einen!" << std::endl;
 	Buff newBuff;
 	newBuff.duration = 2;
 	newBuff.attributes.armour = 30;
@@ -66,7 +63,6 @@ void PlayerSimon::allOnOne(Combatant* _target)
 
 void PlayerSimon::marshmallowFlash()
 {
-	std::cout << "Simon hat einen Marshmallow-Flash!" << std::endl;
 	Buff newBuff;
 	newBuff.duration = 3;
 	newBuff.attributes.armour = 10;
@@ -81,8 +77,6 @@ void PlayerSimon::marshmallowFlash()
 
 void PlayerSimon::repair(Combatant* _target)
 {
-	std::cout << "Simon repariert!" << std::endl;
-
 	if (_target->IsPlayer())
 	{
 		_target->Status().GainHealth(3);

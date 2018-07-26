@@ -66,6 +66,26 @@ void Combatant::RenderStatusSymbols(sf::RenderTarget & _target)
 
 }
 
+void Combatant::StartTargetsAttackedAnimation()
+{
+	for (Combatant *c : selectedTargets)
+	{
+		if (c != this)
+			c->StartAttackedAnimation();
+	}
+}
+
+
+
+void Combatant::StopTargetsAttackedAnimation()
+{
+	for (Combatant *c : selectedTargets)
+	{
+		if (c != this)
+			c->StopAttackedAnimation();
+	}
+}
+
 
 void Combatant::GiveTurnTo(std::vector<Combatant*>* _targets, BattleGUI *_gui)
 {
@@ -82,6 +102,25 @@ void Combatant::GiveTurnTo(std::vector<Combatant*>* _targets, BattleGUI *_gui)
 	}
 
 	status.HandleStatusChanges();
+}
+
+
+
+void Combatant::StartAttackedAnimation()
+{
+	combatantObject->setCurrentAnimation("attacked");
+	combatantObject->setCurrentTime(0);
+
+	abilityStatus = attacked;
+}
+
+
+
+void Combatant::StopAttackedAnimation()
+{
+	combatantObject->setCurrentAnimation("idle");
+
+	abilityStatus = finished;
 }
 
 

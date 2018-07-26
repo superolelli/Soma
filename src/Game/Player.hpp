@@ -29,6 +29,8 @@ protected:
 	bool CombatantClicked(Combatant* _combatant);
 	bool CurrentAbilityCanAimAtCombatant(Combatant* _combatant);
 
+	void SelectAdditionalTargets();
+
 	virtual void StartAbilityAnimation(int _ability) {};
 
 	bool is_walking;

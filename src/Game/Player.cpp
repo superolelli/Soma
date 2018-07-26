@@ -44,7 +44,7 @@ void Player::Update(int _xMove, bool _is_walking)
 {
 	SetPos(combatantObject->getPosition().x + _xMove, combatantObject->getPosition().y);
 
-	if (abilityStatus != executing)
+	if (abilityStatus != executing && abilityStatus != attacked)
 	{
 		if (is_walking == false && _is_walking == true)
 		{
@@ -63,6 +63,7 @@ void Player::Update(int _xMove, bool _is_walking)
 	{
 		abilityStatus = executing;
 		StartAbilityAnimation(gui->GetCurrentAbility());
+		StartTargetsAttackedAnimation();
 	}
 
 	if (abilityStatus == executing)
@@ -73,7 +74,7 @@ void Player::Update(int _xMove, bool _is_walking)
 
 void Player::Render()
 {
-	if (abilityStatus == executing)
+	if (abilityStatus == executing || abilityStatus == attacked)
 		combatantObject->setTimeElapsed(ABILITY_ANIMATION_SPEED);
 	else if(is_walking)
 		combatantObject->setTimeElapsed(WALKING_ANIMATION_SPEED);
@@ -93,7 +94,9 @@ bool Player::AimChosen()
 		{
 			if (CurrentAbilityCanAimAtCombatant(c) && CombatantClicked(c))
 			{
-				selectedTarget = c;
+				selectedTargets.push_back(c);
+				SelectAdditionalTargets();
+
 				return true;
 			}
 		}
@@ -103,10 +106,26 @@ bool Player::AimChosen()
 }
 
 
+
+void Player::SelectAdditionalTargets()
+{
+	int targetPosition = selectedTargets[0]->GetBattlePos();
+
+	for (Combatant* c : (*allCombatants))
+	{
+		if (c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + possibleAbilityAims[gui->GetCurrentAbility()].howMany)
+			selectedTargets.push_back(c);
+	}
+}
+
+
+
 bool Player::CurrentAbilityCanAimAtCombatant(Combatant* _combatant)
 {
 	return possibleAbilityAims[gui->GetCurrentAbility()].position[_combatant->GetBattlePos()];
 }
+
+
 
 
 bool Player::CombatantClicked(Combatant* _combatant)
@@ -120,18 +139,12 @@ void Player::DoCurrentAbility()
 {
 	if (combatantObject->animationJustFinished())
 	{
-		int targetPosition = selectedTarget->GetBattlePos();
-
-		std::vector<Combatant*> targets;
-		for (Combatant* c : (*allCombatants))
-		{
-			if (c->GetBattlePos() >= targetPosition && c->GetBattlePos() < targetPosition + possibleAbilityAims[gui->GetCurrentAbility()].howMany)
-				targets.push_back(c);
-		}
-
 		combatantObject->setCurrentAnimation("idle");
+		
+		StopTargetsAttackedAnimation();
 
-		DoAbility(gui->GetCurrentAbility(), targets);
+		DoAbility(gui->GetCurrentAbility(), selectedTargets);
+		selectedTargets.clear();
 		abilityStatus = finished;
 	}
 }

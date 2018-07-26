@@ -136,9 +136,22 @@ void Battle::Render()
 {
 	for (Combatant* c : combatants)
 	{
-		c->Render();
-		c->RenderHealthBar(engine->GetWindow());
+		//if (c->GetAbilityStatus() != executing)
+		//{
+			c->Render();
+			c->RenderHealthBar(engine->GetWindow());
+		//}
 	}
-	
+}
+
+
+
+void Battle::RenderAbilityAnimations()
+{
+	/*for (Combatant* c : combatants)
+	{
+		if(c->GetAbilityStatus() == executing)
+			c->Render();
+	}*/
 }
 
