@@ -93,4 +93,10 @@ void PlayerSimon::StartAbilityAnimation(int _ability)
 {
 	combatantObject->setCurrentAnimation("marshmallow_flash");
 	combatantObject->setCurrentTime(0);
+
+	lastPosition = combatantObject->getPosition();
+
+	combatantObject->setScale(SpriterEngine::point(0.8, 0.8));
+
+	combatantObject->setPosition(SpriterEngine::point(500, 800));
 }

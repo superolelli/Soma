@@ -64,6 +64,7 @@ protected:
 	CombatantStatus status;
 
 	int battlePosition;
+	SpriterEngine::point lastPosition;
 
 	Bar healthBar;
 

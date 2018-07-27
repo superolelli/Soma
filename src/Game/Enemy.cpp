@@ -137,15 +137,13 @@ void Enemy::Update()
 
 	if (abilityStatus == ready)
 	{
-		ChooseAbility();
-		ChooseTarget();
-		abilityStatus = executing;
-		abilityAnnouncementTime = 3.0f;
-	}
-
-	if (abilityStatus == executing)
-	{
-		if (abilityAnnouncementTime > 0.0f)
+		if (abilityAnnouncementTime <= 0.0f)
+		{
+			ChooseAbility();
+			ChooseTarget();
+			abilityAnnouncementTime = 3.0f;
+		}
+		else
 		{
 			abilityAnnouncementTime -= g_pTimer->GetElapsedTime().asSeconds();
 
@@ -153,11 +151,18 @@ void Enemy::Update()
 			{
 				StartAbilityAnimation();
 				StartTargetsAttackedAnimation();
+				abilityStatus = executing;
 			}
 		}
-		else if(combatantObject->animationJustFinished())
+	}
+
+	if (abilityStatus == executing)
+	{
+		if(combatantObject->animationJustFinished())
 		{
 			combatantObject->setCurrentAnimation("idle");
+			combatantObject->setScale(SpriterEngine::point(0.6, 0.6));
+			combatantObject->setPosition(lastPosition);
 			StopTargetsAttackedAnimation();
 
 			DoAbility(gui->GetCurrentAbility(), *allCombatants);
@@ -190,5 +195,11 @@ void Enemy::StartAbilityAnimation()
 {
 	combatantObject->setCurrentAnimation("bang");
 	combatantObject->setCurrentTime(0);
+
+	lastPosition = combatantObject->getPosition();
+
+	combatantObject->setScale(SpriterEngine::point(0.8, 0.8));
+	combatantObject->setPosition(SpriterEngine::point(900, 800));
+	//combatantObject->setPosition(SpriterEngine::point(int(lastPosition.x) % engine->GetWindowSize().x, 800));
 }
 

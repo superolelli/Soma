@@ -71,4 +71,10 @@ void PlayerAnna::StartAbilityAnimation(int _ability)
 {
 	combatantObject->setCurrentAnimation("word_gush");
 	combatantObject->setCurrentTime(0);
+
+	lastPosition = combatantObject->getPosition();
+
+	combatantObject->setScale(SpriterEngine::point(0.8, 0.8));
+
+	combatantObject->setPosition(SpriterEngine::point(500, 800));
 }

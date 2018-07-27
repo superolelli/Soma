@@ -1,38 +1,12 @@
-﻿  Game.cpp
-f:\soma\src\game\game.cpp(74): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-f:\soma\src\game\game.cpp(75): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
-f:\soma\src\game\game.cpp(113): warning C4244: "Argument": Konvertierung von "const float" in "int", möglicher Datenverlust
-f:\soma\src\game\game.cpp(125): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-  Battle.cpp
-f:\soma\src\game\battle.cpp(7): warning C4244: "Argument": Konvertierung von "time_t" in "unsigned int", möglicher Datenverlust
-f:\soma\src\game\battle.cpp(117): warning C4018: ">=": Konflikt zwischen "signed" und "unsigned"
-  Code wird generiert...
-  Kompilieren...
-  main.cpp
-  Simon.cpp
-f:\soma\src\game\simon.cpp(47): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-  Player.cpp
-f:\soma\src\game\player.cpp(24): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
-f:\soma\src\game\player.cpp(25): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
-f:\soma\src\game\player.cpp(26): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
-f:\soma\src\game\player.cpp(27): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
-f:\soma\src\game\player.cpp(45): warning C4244: "Argument": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
-  Ole.cpp
-f:\soma\src\game\ole.cpp(46): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-  Markus.cpp
-f:\soma\src\game\markus.cpp(50): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-  InitialState.cpp
-  Enemy.cpp
+﻿  Enemy.cpp
 f:\soma\src\game\enemy.cpp(26): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
 f:\soma\src\game\enemy.cpp(27): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
 f:\soma\src\game\enemy.cpp(28): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
 f:\soma\src\game\enemy.cpp(29): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
-f:\soma\src\game\enemy.cpp(180): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-  Anna.cpp
-f:\soma\src\game\anna.cpp(60): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-  AdventureGroup.cpp
-  Code wird generiert...
-  Überspringen... (keine relevanten Änderungen gefunden)
+f:\soma\src\game\enemy.cpp(185): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
   Combatant.cpp
+f:\soma\src\game\combatant.cpp(14): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
+f:\soma\src\game\combatant.cpp(15): warning C4244: "=": Konvertierung von "SpriterEngine::real" in "int", möglicher Datenverlust
+  Code wird generiert...
   Soma.vcxproj -> F:\Soma\Debug\Soma.exe
   Soma.vcxproj -> F:\Soma\Debug\Soma.pdb (Partial PDB)

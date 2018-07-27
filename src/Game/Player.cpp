@@ -140,6 +140,9 @@ void Player::DoCurrentAbility()
 	if (combatantObject->animationJustFinished())
 	{
 		combatantObject->setCurrentAnimation("idle");
+
+		combatantObject->setScale(SpriterEngine::point(0.6, 0.6));
+		combatantObject->setPosition(lastPosition);
 		
 		StopTargetsAttackedAnimation();
 

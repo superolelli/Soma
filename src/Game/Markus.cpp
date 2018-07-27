@@ -73,4 +73,10 @@ void PlayerMarkus::StartAbilityAnimation(int _ability)
 {
 	combatantObject->setCurrentAnimation("fist_of_revenge");
 	combatantObject->setCurrentTime(0);
+
+	lastPosition = combatantObject->getPosition();
+
+	combatantObject->setScale(SpriterEngine::point(0.8, 0.8));
+
+	combatantObject->setPosition(SpriterEngine::point(500, 800));
 }
