@@ -5,7 +5,7 @@
 #include "Enemy.hpp"
 
 
-const int ENEMY_X_OFFSET = 50;
+const int ENEMY_X_OFFSET = 20;
 const int ENEMY_Y_POS = 700;
 const int ENEMY_SPACING = 200;
 
