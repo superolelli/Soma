@@ -6,9 +6,7 @@
 
 
 const float PLAYER_SCALE = 0.6f;
-const int WALKING_ANIMATION_SPEED = 18;
-const int IDLE_ANIMATION_SPEED = 7;
-const int ABILITY_ANIMATION_SPEED = 15;
+const float WALKING_ANIMATION_SPEED = 0.85f;
 
 class Player : public Combatant
 {

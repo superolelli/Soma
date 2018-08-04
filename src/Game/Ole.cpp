@@ -82,13 +82,7 @@ void PlayerOle::poetrySlam(Combatant* _target)
 
 void PlayerOle::StartAbilityAnimation(int _ability)
 {
-	combatantObject->setCurrentAnimation("hack_into_the_system");
-	combatantObject->setCurrentTime(0);
-
-	lastPosition = combatantObject->getPosition();
-
-	combatantObject->setScale(SpriterEngine::point(0.8, 0.8));
-
-	combatantObject->setPosition(SpriterEngine::point(int(lastPosition.x) - (engine->GetWindow().getView().getCenter().x - engine->GetWindow().getView().getSize().x / 2), 800));
+	SetAnimation("hack_into_the_system", ABILITY_ANIMATION_SPEED);
+	ScaleForAbilityAnimation();
 }
 

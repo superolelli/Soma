@@ -7,7 +7,7 @@ void Player::Init(int _id, CGameEngine *_engine)
 
 	engine = _engine;
 
-	combatantObject->setCurrentAnimation("idle");
+	SetAnimation("idle", IDLE_ANIMATION_SPEED);
 
 	combatantObject->setScale(SpriterEngine::point(PLAYER_SCALE, PLAYER_SCALE));
 	combatantObject->reprocessCurrentTime();
@@ -49,12 +49,12 @@ void Player::Update(int _xMove, bool _is_walking)
 		if (is_walking == false && _is_walking == true)
 		{
 			is_walking = true;
-			combatantObject->setCurrentAnimation("walk");
+			SetAnimation("walk", WALKING_ANIMATION_SPEED);
 		}
 		else if (is_walking == true && _is_walking == false)
 		{
 			is_walking = false;
-			combatantObject->setCurrentAnimation("idle");
+			SetAnimation("idle", IDLE_ANIMATION_SPEED);
 		}
 	}
 
@@ -74,13 +74,7 @@ void Player::Update(int _xMove, bool _is_walking)
 
 void Player::Render()
 {
-	if (abilityStatus == executing || abilityStatus == attacked)
-		combatantObject->setTimeElapsed(ABILITY_ANIMATION_SPEED);
-	else if(is_walking)
-		combatantObject->setTimeElapsed(WALKING_ANIMATION_SPEED);
-	else
-		combatantObject->setTimeElapsed(IDLE_ANIMATION_SPEED);
-
+	combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
 	combatantObject->render();
 }
 
@@ -127,7 +121,6 @@ bool Player::CurrentAbilityCanAimAtCombatant(Combatant* _combatant)
 
 
 
-
 bool Player::CombatantClicked(Combatant* _combatant)
 {
 	return _combatant->GetRect().contains(engine->GetWorldMousePos());
@@ -139,11 +132,8 @@ void Player::DoCurrentAbility()
 {
 	if (combatantObject->animationJustFinished())
 	{
-		combatantObject->setCurrentAnimation("idle");
-
-		combatantObject->setScale(SpriterEngine::point(0.6, 0.6));
-		combatantObject->setPosition(lastPosition);
-		
+		SetAnimation("idle", IDLE_ANIMATION_SPEED);
+		ReverseScaleForAbilityAnimation();
 		StopTargetsAttackedAnimation();
 
 		DoAbility(gui->GetCurrentAbility(), selectedTargets);

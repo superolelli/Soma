@@ -6,8 +6,6 @@
 #include <numeric>
 
 const float ENEMY_SCALE = 0.6f;
-const int ENEMY_IDLE_ANIMATION_SPEED = 10;
-const int ENEMY_ABILITY_ANIMATION_SPEED = 15;
 
 class Enemy : public Combatant
 {

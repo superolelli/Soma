@@ -17,7 +17,7 @@ void Enemy::Init(int _id, CGameEngine * _engine)
 		break;
 	}
 
-	combatantObject->setCurrentAnimation("idle");
+	SetAnimation("idle", IDLE_ANIMATION_SPEED);
 	combatantObject->setScale(SpriterEngine::point(ENEMY_SCALE, ENEMY_SCALE));
 	combatantObject->reprocessCurrentTime();
 
@@ -160,9 +160,8 @@ void Enemy::Update()
 	{
 		if(combatantObject->animationJustFinished())
 		{
-			combatantObject->setCurrentAnimation("idle");
-			combatantObject->setScale(SpriterEngine::point(0.6, 0.6));
-			combatantObject->setPosition(lastPosition);
+			SetAnimation("idle", IDLE_ANIMATION_SPEED);
+			ReverseScaleForAbilityAnimation();
 			StopTargetsAttackedAnimation();
 
 			DoAbility(gui->GetCurrentAbility(), *allCombatants);
@@ -173,11 +172,7 @@ void Enemy::Update()
 
 void Enemy::Render()
 {
-	if (abilityStatus == executing || abilityStatus == attacked)
-		combatantObject->setTimeElapsed(ENEMY_ABILITY_ANIMATION_SPEED);
-	else
-		combatantObject->setTimeElapsed(ENEMY_IDLE_ANIMATION_SPEED);
-
+	combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
 	combatantObject->render();
 
 	if (abilityAnnouncementTime > 0.0f)
@@ -193,12 +188,7 @@ void Enemy::Render()
 
 void Enemy::StartAbilityAnimation()
 {
-	combatantObject->setCurrentAnimation("bang");
-	combatantObject->setCurrentTime(0);
-
-	lastPosition = combatantObject->getPosition();
-
-	combatantObject->setScale(SpriterEngine::point(0.8, 0.8));
-	combatantObject->setPosition(SpriterEngine::point(int(lastPosition.x) - (engine->GetWindow().getView().getCenter().x - engine->GetWindow().getView().getSize().x / 2), 800));
+	SetAnimation("bang", ABILITY_ANIMATION_SPEED);
+	ScaleForAbilityAnimation();
 }
 

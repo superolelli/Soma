@@ -86,6 +86,29 @@ void Combatant::StopTargetsAttackedAnimation()
 	}
 }
 
+void Combatant::ScaleForAbilityAnimation()
+{
+	lastPosition = combatantObject->getPosition();
+
+	combatantObject->setScale(SpriterEngine::point(0.8, 0.8));
+	combatantObject->setPosition(SpriterEngine::point(int(lastPosition.x) - (engine->GetWindow().getView().getCenter().x - engine->GetWindow().getView().getSize().x / 2), 800));
+
+}
+
+
+void Combatant::ReverseScaleForAbilityAnimation()
+{
+	combatantObject->setScale(SpriterEngine::point(0.6, 0.6));
+	combatantObject->setPosition(lastPosition);
+}
+
+void Combatant::SetAnimation(std::string _animation, float _speed)
+{
+	combatantObject->setCurrentAnimation(_animation);
+	combatantObject->setPlaybackSpeedRatio(_speed);
+	combatantObject->setCurrentTime(0);
+}
+
 
 void Combatant::GiveTurnTo(std::vector<Combatant*>* _targets, BattleGUI *_gui)
 {
@@ -108,20 +131,8 @@ void Combatant::GiveTurnTo(std::vector<Combatant*>* _targets, BattleGUI *_gui)
 
 void Combatant::StartAttackedAnimation()
 {
-	combatantObject->setCurrentAnimation("attacked");
-	combatantObject->setCurrentTime(0);
-	lastPosition = combatantObject->getPosition();
-
-	combatantObject->setScale(SpriterEngine::point(0.8, 0.8));
-
-	if (this->IsPlayer())
-		combatantObject->setPosition(SpriterEngine::point(500, 800));
-	else
-		combatantObject->setPosition(SpriterEngine::point(900, 800));
-		//combatantObject->setPosition(SpriterEngine::point(int(lastPosition.x) % engine->GetWindowSize().x, 800));
-
-	combatantObject->setPosition(SpriterEngine::point(int(lastPosition.x) - (engine->GetWindow().getView().getCenter().x - engine->GetWindow().getView().getSize().x / 2), 800));
-
+	SetAnimation("attacked", ABILITY_ANIMATION_SPEED);
+	ScaleForAbilityAnimation();
 	abilityStatus = attacked;
 }
 
@@ -129,11 +140,8 @@ void Combatant::StartAttackedAnimation()
 
 void Combatant::StopAttackedAnimation()
 {
-	combatantObject->setCurrentAnimation("idle");
-
-	combatantObject->setScale(SpriterEngine::point(0.6, 0.6));
-	combatantObject->setPosition(lastPosition);
-
+	SetAnimation("idle", IDLE_ANIMATION_SPEED);
+	ReverseScaleForAbilityAnimation();
 	abilityStatus = finished;
 }
 

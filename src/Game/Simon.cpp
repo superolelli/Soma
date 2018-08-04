@@ -91,12 +91,6 @@ void PlayerSimon::repair(Combatant* _target)
 
 void PlayerSimon::StartAbilityAnimation(int _ability)
 {
-	combatantObject->setCurrentAnimation("marshmallow_flash");
-	combatantObject->setCurrentTime(0);
-
-	lastPosition = combatantObject->getPosition();
-
-	combatantObject->setScale(SpriterEngine::point(0.8, 0.8));
-
-	combatantObject->setPosition(SpriterEngine::point(int(lastPosition.x) - (engine->GetWindow().getView().getCenter().x - engine->GetWindow().getView().getSize().x / 2), 800));
+	SetAnimation("marshmallow_flash", ABILITY_ANIMATION_SPEED);
+	ScaleForAbilityAnimation();
 }

@@ -22,6 +22,9 @@
 
 enum abilityPhase { ready, executing, finished, attacked };
 
+const float IDLE_ANIMATION_SPEED = 0.7f;
+const float ABILITY_ANIMATION_SPEED = 1.0f;
+
 class Combatant
 {
 public:
@@ -81,4 +84,9 @@ protected:
 
 	void StartTargetsAttackedAnimation();
 	void StopTargetsAttackedAnimation();
+
+	void ScaleForAbilityAnimation();
+	void ReverseScaleForAbilityAnimation();
+
+	void SetAnimation(std::string _animation, float _speed);
 };

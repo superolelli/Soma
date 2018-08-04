@@ -71,12 +71,6 @@ void PlayerMarkus::horribleGrin(Combatant* _target)
 
 void PlayerMarkus::StartAbilityAnimation(int _ability)
 {
-	combatantObject->setCurrentAnimation("fist_of_revenge");
-	combatantObject->setCurrentTime(0);
-
-	lastPosition = combatantObject->getPosition();
-
-	combatantObject->setScale(SpriterEngine::point(0.8, 0.8));
-
-	combatantObject->setPosition(SpriterEngine::point(int(lastPosition.x) - (engine->GetWindow().getView().getCenter().x - engine->GetWindow().getView().getSize().x / 2), 800));
+	SetAnimation("fist_of_revenge", ABILITY_ANIMATION_SPEED);
+	ScaleForAbilityAnimation();
 }
