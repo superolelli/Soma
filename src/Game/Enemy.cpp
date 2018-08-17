@@ -158,7 +158,7 @@ void Enemy::Update()
 
 	if (abilityStatus == executing)
 	{
-		if(combatantObject->animationJustFinished())
+		if(!combatantObject->animationIsPlaying())
 		{
 			SetAnimation("idle", IDLE_ANIMATION_SPEED);
 			ReverseScaleForAbilityAnimation();
@@ -188,7 +188,10 @@ void Enemy::Render()
 
 void Enemy::StartAbilityAnimation()
 {
+	ScaleForAbilityAnimation();                           //order is relevant because "bang" has no hitbox (needed for animation calculation)
 	SetAnimation("bang", ABILITY_ANIMATION_SPEED);
-	ScaleForAbilityAnimation();
+
+	g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("bang");
+	g_pSpritePool->abilityEffectsAnimation->setCurrentTime(0);
 }
 

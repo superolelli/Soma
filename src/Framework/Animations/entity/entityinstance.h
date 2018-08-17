@@ -63,6 +63,7 @@ namespace SpriterEngine
 
 		bool animationJustFinished(bool orLooped = false);
 		bool animationJustLooped();
+		bool animationIsPlaying() { return isPlaying; }
 
 		VariableInstanceNameAndIdMap *getVariables() override;
 		UniversalObjectInterface *getVariable(int variableId);

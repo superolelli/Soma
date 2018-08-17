@@ -69,6 +69,6 @@ void PlayerAnna::deathHug(Combatant* _target)
 
 void PlayerAnna::StartAbilityAnimation(int _ability)
 {
-	SetAnimation("word_gush", ABILITY_ANIMATION_SPEED);
 	ScaleForAbilityAnimation();
+	SetAnimation("word_gush", ABILITY_ANIMATION_SPEED);
 }

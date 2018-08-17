@@ -71,6 +71,6 @@ void PlayerMarkus::horribleGrin(Combatant* _target)
 
 void PlayerMarkus::StartAbilityAnimation(int _ability)
 {
-	SetAnimation("fist_of_revenge", ABILITY_ANIMATION_SPEED);
 	ScaleForAbilityAnimation();
+	SetAnimation("fist_of_revenge", ABILITY_ANIMATION_SPEED);
 }

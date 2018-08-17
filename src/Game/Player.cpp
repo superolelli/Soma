@@ -76,6 +76,13 @@ void Player::Render()
 {
 	combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
 	combatantObject->render();
+
+	if (abilityStatus == attacked)
+	{
+		g_pSpritePool->abilityEffectsAnimation->setPosition(SpriterEngine::point(GetRect().left + GetRect().width / 2, GetRect().top + GetRect().height/2));
+		g_pSpritePool->abilityEffectsAnimation->setTimeElapsed((float)g_pTimer->GetElapsedTime().asMilliseconds() * 0.9f);
+		g_pSpritePool->abilityEffectsAnimation->render();
+	}
 }
 
 
@@ -130,7 +137,7 @@ bool Player::CombatantClicked(Combatant* _combatant)
 
 void Player::DoCurrentAbility()
 {
-	if (combatantObject->animationJustFinished())
+	if (!combatantObject->animationIsPlaying())
 	{
 		SetAnimation("idle", IDLE_ANIMATION_SPEED);
 		ReverseScaleForAbilityAnimation();

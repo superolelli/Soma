@@ -34,6 +34,7 @@ public:
 	virtual void Update();
 
 	void SetPos(int _x, int _y);
+	void Scale(float _x, float _y);
 	sf::IntRect &GetRect() { return hitbox; }
 
 	virtual bool DoAbility(int _id, std::vector<Combatant*> &_targets) { return true; }
@@ -89,4 +90,6 @@ protected:
 	void ReverseScaleForAbilityAnimation();
 
 	void SetAnimation(std::string _animation, float _speed);
+
+	void ReloadHitbox();
 };

@@ -82,7 +82,7 @@ void PlayerOle::poetrySlam(Combatant* _target)
 
 void PlayerOle::StartAbilityAnimation(int _ability)
 {
-	SetAnimation("hack_into_the_system", ABILITY_ANIMATION_SPEED);
 	ScaleForAbilityAnimation();
+	SetAnimation("hack_into_the_system", ABILITY_ANIMATION_SPEED);
 }
 

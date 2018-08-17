@@ -7,15 +7,31 @@ void Combatant::SetPos(int _x, int _y)
 {
 	combatantObject->setPosition(SpriterEngine::point(_x, _y));
 
+	ReloadHitbox();
+
+	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
+}
+
+
+void Combatant::Scale(float _x, float _y)
+{
+	combatantObject->setScale(SpriterEngine::point(_x, _y));
+	ReloadHitbox();
+}
+
+
+void Combatant::ReloadHitbox()
+{
 	combatantObject->reprocessCurrentTime();
 
 	SpriterEngine::UniversalObjectInterface* hitboxObj = combatantObject->getObjectInstance("bounding_box");
 
 	hitbox.left = hitboxObj->getPosition().x;
 	hitbox.top = hitboxObj->getPosition().y;
-
-	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
+	hitbox.width = hitboxObj->getSize().x * combatantObject->getScale().x;
+	hitbox.height = hitboxObj->getSize().y * combatantObject->getScale().y;
 }
+
 
 void Combatant::RenderHealthBar(sf::RenderTarget & _target)
 {
@@ -90,16 +106,15 @@ void Combatant::ScaleForAbilityAnimation()
 {
 	lastPosition = combatantObject->getPosition();
 
-	combatantObject->setScale(SpriterEngine::point(0.8, 0.8));
-	combatantObject->setPosition(SpriterEngine::point(int(lastPosition.x) - (engine->GetWindow().getView().getCenter().x - engine->GetWindow().getView().getSize().x / 2), 800));
-
+	Scale(0.8, 0.8);
+	SetPos(lastPosition.x - engine->GetViewPosition().x, 800);
 }
 
 
 void Combatant::ReverseScaleForAbilityAnimation()
 {
-	combatantObject->setScale(SpriterEngine::point(0.6, 0.6));
-	combatantObject->setPosition(lastPosition);
+	Scale(0.6, 0.6);
+	SetPos(lastPosition.x, lastPosition.y);
 }
 
 void Combatant::SetAnimation(std::string _animation, float _speed)
@@ -131,8 +146,8 @@ void Combatant::GiveTurnTo(std::vector<Combatant*>* _targets, BattleGUI *_gui)
 
 void Combatant::StartAttackedAnimation()
 {
-	SetAnimation("attacked", ABILITY_ANIMATION_SPEED);
 	ScaleForAbilityAnimation();
+	SetAnimation("attacked", ABILITY_ANIMATION_SPEED);
 	abilityStatus = attacked;
 }
 

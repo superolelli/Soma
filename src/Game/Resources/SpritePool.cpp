@@ -16,4 +16,14 @@ void SpritePool::LoadSprites()
 	abilityAnnouncementBanner.SetTextFont(0, g_pFonts->f_kingArthur);
 	abilityAnnouncementBanner.SetTextCharacterSize(0, 28);
 	abilityAnnouncementBanner.SetTextColor(0, sf::Color(220, 220, 220));
+
+	abilityEffectsAnimation = g_pModels->modelAbilityEffects->getNewEntityInstance("ability_effects");
+}
+
+
+
+
+void SpritePool::FreeSprites()
+{
+	SAFE_DELETE(abilityEffectsAnimation);
 }

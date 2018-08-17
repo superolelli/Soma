@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0">
+        <file id="0" name="einschussloch.png" width="154" height="150" pivot_x="0.519481" pivot_y="0.473333"/>
+        <file id="1" name="blut_1.png" width="15" height="34" pivot_x="0.533333" pivot_y="0.264706"/>
+        <file id="2" name="blut_2.png" width="9" height="48" pivot_x="0.333333" pivot_y="0.541667"/>
+    </folder>
+    <entity id="0" name="ability_effects">
+        <animation id="0" name="bang" length="1000" interval="100" looping="false">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="404">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                    <object_ref id="1" timeline="1" key="0" z_index="1"/>
+                </key>
+                <key id="2" time="523">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                    <object_ref id="1" timeline="2" key="0" z_index="1"/>
+                    <object_ref id="2" timeline="1" key="1" z_index="2"/>
+                </key>
+                <key id="3" time="798">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                    <object_ref id="1" timeline="2" key="1" z_index="1"/>
+                    <object_ref id="2" timeline="1" key="2" z_index="2"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="einschussloch">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="19.66493" y="17.821596" angle="25.206876" scale_x="0.282622" scale_y="0.282622"/>
+                </key>
+                <key id="1" time="404" spin="0">
+                    <object folder="0" file="0" x="18.550281" y="15.751532" angle="25.206876" scale_x="0.161017" scale_y="0.161017"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="blut_1">
+                <key id="0" time="404" spin="0">
+                    <object folder="0" file="1" x="18.362972" y="11.03714" scale_x="0.024382" scale_y="0.013461"/>
+                </key>
+                <key id="1" time="523" spin="0">
+                    <object folder="0" file="1" x="16.552301" y="-9.598644" scale_x="0.887043" scale_y="0.887043"/>
+                </key>
+                <key id="2" time="798" spin="0">
+                    <object folder="0" file="1" x="16.825244" y="-28.061415" scale_x="0.887043" scale_y="0.887043"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="blut_2">
+                <key id="0" time="523">
+                    <object folder="0" file="2" x="18.143335" y="11.190824" angle="0" scale_x="0.42065" scale_y="-0.00002"/>
+                </key>
+                <key id="1" time="798">
+                    <object folder="0" file="2" x="17.228774" y="0.266139" scale_x="1.098934" scale_y="0.519499"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

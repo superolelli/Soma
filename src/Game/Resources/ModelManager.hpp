@@ -27,4 +27,6 @@ public:
 
 	SpriterEngine::SpriterModel *modelAbtruenniger;
 	SpriterEngine::SpriterModel *modelGesetzloser;
+
+	SpriterEngine::SpriterModel *modelAbilityEffects;
 };
