@@ -615,6 +615,7 @@
                     <object_ref id="12" parent="4" timeline="24" key="0" z_index="12"/>
                     <object_ref id="13" parent="5" timeline="25" key="0" z_index="13"/>
                     <object_ref id="14" parent="1" timeline="26" key="0" z_index="14"/>
+                    <object_ref id="15" timeline="27" key="0" z_index="15"/>
                 </key>
                 <key id="1" time="499">
                     <bone_ref id="0" timeline="0" key="1"/>
@@ -644,6 +645,7 @@
                     <object_ref id="12" parent="4" timeline="24" key="1" z_index="12"/>
                     <object_ref id="13" parent="5" timeline="25" key="1" z_index="13"/>
                     <object_ref id="14" parent="1" timeline="26" key="1" z_index="14"/>
+                    <object_ref id="15" timeline="27" key="1" z_index="15"/>
                 </key>
             </mainline>
             <timeline id="0" obj="0" name="bone_000" object_type="bone">
@@ -704,10 +706,10 @@
             </timeline>
             <timeline id="7" obj="7" name="bone_007" object_type="bone">
                 <key id="0" spin="0">
-                    <bone x="82.55814" y="-1.162791"/>
+                    <bone x="82.55814" y="-1.162791" angle="0"/>
                 </key>
                 <key id="1" time="499" spin="0">
-                    <bone x="82.55814" y="-1.162791"/>
+                    <bone x="82.55814" y="-1.162791" angle="0"/>
                 </key>
             </timeline>
             <timeline id="8" obj="8" name="bone_008" object_type="bone">
@@ -859,7 +861,15 @@
                     <object folder="0" file="21" x="27.878196" y="-47.348024" angle="271.169139"/>
                 </key>
                 <key id="1" time="499" spin="-1">
-                    <object folder="0" file="21" x="27.878196" y="-47.348024" angle="319.18138" scale_x="1"/>
+                    <object folder="0" file="21" x="27.878196" y="-47.348024" angle="319.18138"/>
+                </key>
+            </timeline>
+            <timeline id="27" name="ability_effect_point" object_type="point">
+                <key id="0" spin="0">
+                    <object x="215.60215" y="223.383856" angle="352.874984"/>
+                </key>
+                <key id="1" time="499" spin="0">
+                    <object x="215.60215" y="223.383856" angle="352.874984"/>
                 </key>
             </timeline>
         </animation>

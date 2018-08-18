@@ -9,7 +9,7 @@ void Player::Init(int _id, CGameEngine *_engine)
 
 	SetAnimation("idle", IDLE_ANIMATION_SPEED);
 
-	combatantObject->setScale(SpriterEngine::point(PLAYER_SCALE, PLAYER_SCALE));
+	Scale(PLAYER_SCALE, PLAYER_SCALE);
 	combatantObject->reprocessCurrentTime();
 
 	possibleAbilityAims[0] = g_pObjectProperties->playerAbilities[_id][0];
@@ -19,12 +19,7 @@ void Player::Init(int _id, CGameEngine *_engine)
 
 	status.SetAttributes(g_pObjectProperties->playerAttributes[_id]);
 
-	SpriterEngine::UniversalObjectInterface* hitboxObj = combatantObject->getObjectInstance("bounding_box");
-
-	hitbox.width = hitboxObj->getSize().x * combatantObject->getScale().x;
-	hitbox.height = hitboxObj->getSize().y * combatantObject->getScale().y;
-	hitbox.left = hitboxObj->getPosition().x;
-	hitbox.top = hitboxObj->getPosition().y;
+	ReloadHitbox();
 
 	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, status.GetCurrentHealthPointer(), status.GetMaxHealthPointer());
 	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
@@ -77,12 +72,10 @@ void Player::Render()
 	combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
 	combatantObject->render();
 
+	setElapsedTimeForAbilityEffect = false;
+
 	if (abilityStatus == attacked)
-	{
-		g_pSpritePool->abilityEffectsAnimation->setPosition(SpriterEngine::point(GetRect().left + GetRect().width / 2, GetRect().top + GetRect().height/2));
-		g_pSpritePool->abilityEffectsAnimation->setTimeElapsed((float)g_pTimer->GetElapsedTime().asMilliseconds() * 0.9f);
-		g_pSpritePool->abilityEffectsAnimation->render();
-	}
+		RenderAbilityEffects();
 }
 
 

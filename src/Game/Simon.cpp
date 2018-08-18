@@ -96,15 +96,22 @@ void PlayerSimon::StartAbilityAnimation(int _ability)
 	switch (_ability) {
 	case 0:
 		SetAnimation("marshmallow_flash", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("empty");
 		break;
 	case 1:
 		SetAnimation("marshmallow_flash", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("empty");
 		break;
 	case 2:
 		SetAnimation("marshmallow_flash", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("empty");
 		break;
 	case 3:
 		SetAnimation("all_on_one", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("all_on_one");
 		break;
 	}
+
+	
+	g_pSpritePool->abilityEffectsAnimation->setCurrentTime(0);
 }

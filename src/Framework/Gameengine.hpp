@@ -43,7 +43,7 @@ public:
 	sf::Vector2u &GetWindowSize() { return m_Window.GetRenderWindow()->getSize(); }
 
 	//Returns the position of the upper left corner of the view
-	sf::Vector2f &GetViewPosition() { return GetWindow().getView().getCenter() - GetWindow().getView().getSize() / 2.0f; }
+	sf::Vector2f GetViewPosition() { return GetWindow().getView().getCenter() - GetWindow().getView().getSize() / 2.0f; }
 
 	//clears the window
 	void ClearWindow(sf::Color const &_color) { m_Window.Clear(_color); }

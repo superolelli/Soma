@@ -24,10 +24,13 @@ enum abilityPhase { ready, executing, finished, attacked };
 
 const float IDLE_ANIMATION_SPEED = 0.7f;
 const float ABILITY_ANIMATION_SPEED = 1.0f;
+const float ABILITY_EFFECT_ANIMATION_SPEED = 0.9f;
 
 class Combatant
 {
 public:
+	static bool setElapsedTimeForAbilityEffect;
+
 	virtual void Init(int _id, CGameEngine *_engine) = 0;
 	void Quit();
 	virtual void Render() = 0;
@@ -64,6 +67,7 @@ protected:
 
 	SpriterEngine::EntityInstance *combatantObject;
 	sf::IntRect hitbox;
+	SpriterEngine::point abilityEffectPoint;
 
 	CombatantStatus status;
 
@@ -83,6 +87,8 @@ protected:
 
 	void RenderStatusSymbols(sf::RenderTarget &_target);
 
+	void RenderAbilityEffects();
+
 	void StartTargetsAttackedAnimation();
 	void StopTargetsAttackedAnimation();
 
@@ -92,4 +98,5 @@ protected:
 	void SetAnimation(std::string _animation, float _speed);
 
 	void ReloadHitbox();
+	void ReloadAbilityEffectPoint();
 };

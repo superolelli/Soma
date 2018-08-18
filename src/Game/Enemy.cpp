@@ -18,15 +18,10 @@ void Enemy::Init(int _id, CGameEngine * _engine)
 	}
 
 	SetAnimation("idle", IDLE_ANIMATION_SPEED);
-	combatantObject->setScale(SpriterEngine::point(ENEMY_SCALE, ENEMY_SCALE));
+	Scale(ENEMY_SCALE, ENEMY_SCALE);
 	combatantObject->reprocessCurrentTime();
 
-	SpriterEngine::UniversalObjectInterface* hitboxObj = combatantObject->getObjectInstance("bounding_box");
-
-	hitbox.width = hitboxObj->getSize().x * combatantObject->getScale().x;
-	hitbox.height = hitboxObj->getSize().y * combatantObject->getScale().y;
-	hitbox.left = hitboxObj->getPosition().x;
-	hitbox.top = hitboxObj->getPosition().y;
+	ReloadHitbox();
 
 	status.Reset();
 
@@ -138,37 +133,51 @@ void Enemy::Update()
 	if (abilityStatus == ready)
 	{
 		if (abilityAnnouncementTime <= 0.0f)
-		{
-			ChooseAbility();
-			ChooseTarget();
-			abilityAnnouncementTime = 3.0f;
-		}
+			PrepareAbility();
 		else
-		{
-			abilityAnnouncementTime -= g_pTimer->GetElapsedTime().asSeconds();
-
-			if (abilityAnnouncementTime <= 0.0f)
-			{
-				StartAbilityAnimation();
-				StartTargetsAttackedAnimation();
-				abilityStatus = executing;
-			}
-		}
+			AnnounceAndStartAbilityAnimation();
 	}
 
 	if (abilityStatus == executing)
 	{
 		if(!combatantObject->animationIsPlaying())
-		{
-			SetAnimation("idle", IDLE_ANIMATION_SPEED);
-			ReverseScaleForAbilityAnimation();
-			StopTargetsAttackedAnimation();
-
-			DoAbility(gui->GetCurrentAbility(), *allCombatants);
-			abilityStatus = finished;
-		}
+			ExecuteAbility();
 	}
 }
+
+
+
+void Enemy::PrepareAbility()
+{
+	ChooseAbility();
+	ChooseTarget();
+	abilityAnnouncementTime = 3.0f;
+}
+
+
+void Enemy::AnnounceAndStartAbilityAnimation()
+{
+	abilityAnnouncementTime -= g_pTimer->GetElapsedTime().asSeconds();
+
+	if (abilityAnnouncementTime <= 0.0f)
+	{
+		StartAbilityAnimation();
+		StartTargetsAttackedAnimation();
+		abilityStatus = executing;
+	}
+}
+
+
+void Enemy::ExecuteAbility()
+{
+	SetAnimation("idle", IDLE_ANIMATION_SPEED);
+	ReverseScaleForAbilityAnimation();
+	StopTargetsAttackedAnimation();
+
+	DoAbility(gui->GetCurrentAbility(), *allCombatants);
+	abilityStatus = finished;
+}
+
 
 void Enemy::Render()
 {
@@ -176,12 +185,20 @@ void Enemy::Render()
 	combatantObject->render();
 
 	if (abilityAnnouncementTime > 0.0f)
-	{
-		g_pSpritePool->abilityAnnouncementBanner.SetPos(engine->GetWindow().getView().getCenter().x + 100.0f, 150.0f);
-		g_pSpritePool->abilityAnnouncementBanner.ChangeString(0, GetChosenAbilityName());
-		g_pSpritePool->abilityAnnouncementBanner.SetTextPosCentered(0);
-		g_pSpritePool->abilityAnnouncementBanner.Render(engine->GetWindow());
-	}
+		RenderAbilityAnnouncement();
+
+	if (abilityStatus == attacked)
+		RenderAbilityEffects();
+}
+
+
+
+void Enemy::RenderAbilityAnnouncement()
+{
+	g_pSpritePool->abilityAnnouncementBanner.SetPos(engine->GetWindow().getView().getCenter().x + 100.0f, 150.0f);
+	g_pSpritePool->abilityAnnouncementBanner.ChangeString(0, GetChosenAbilityName());
+	g_pSpritePool->abilityAnnouncementBanner.SetTextPosCentered(0);
+	g_pSpritePool->abilityAnnouncementBanner.Render(engine->GetWindow());
 }
 
 

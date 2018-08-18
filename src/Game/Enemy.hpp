@@ -29,12 +29,17 @@ private:
 
 	float abilityAnnouncementTime;
 
+	void PrepareAbility();
 	void ChooseAbility();
-
-	void StartAbilityAnimation();
-
 
 	void ChooseTarget();
 	void CheckForMarkedPlayers();
 	void ChooseRandomPlayer();
+
+	void AnnounceAndStartAbilityAnimation();
+	void StartAbilityAnimation();
+
+	void ExecuteAbility();
+
+	void RenderAbilityAnnouncement();
 };
