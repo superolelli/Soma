@@ -72,6 +72,6 @@ void PlayerAnna::StartAbilityAnimation(int _ability)
 	ScaleForAbilityAnimation();
 	SetAnimation("word_gush", ABILITY_ANIMATION_SPEED);
 
-	g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("empty");
+	g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("word_gush");
 	g_pSpritePool->abilityEffectsAnimation->setCurrentTime(0);
 }

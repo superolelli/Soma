@@ -151,7 +151,7 @@ void Enemy::PrepareAbility()
 {
 	ChooseAbility();
 	ChooseTarget();
-	abilityAnnouncementTime = 3.0f;
+	abilityAnnouncementTime = 2.0f;
 }
 
 
@@ -184,7 +184,7 @@ void Enemy::Render()
 	combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
 	combatantObject->render();
 
-	if (abilityAnnouncementTime > 0.0f)
+	if (abilityAnnouncementTime > 0.0f && abilityAnnouncementTime < 1.0f)
 		RenderAbilityAnnouncement();
 
 	if (abilityStatus == attacked)
