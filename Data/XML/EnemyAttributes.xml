@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<EnemyAttributes>
+  <Gesetzloser id="4"
+    armour ="1"
+    health ="20"
+    damage ="8"
+    initiative ="2"
+    dexterity ="5"
+  ></Gesetzloser>
+
+  <Abtruenniger id="5"
+    armour ="1"
+    health ="20"
+    damage ="5"
+    initiative ="2"
+    dexterity ="5"
+  ></Abtruenniger>
+  
+</EnemyAttributes>

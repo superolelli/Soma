@@ -130,7 +130,7 @@ bool Player::CombatantClicked(Combatant* _combatant)
 
 void Player::DoCurrentAbility()
 {
-	if (!combatantObject->animationIsPlaying())
+	if (!combatantObject->animationIsPlaying() && !AbilityEffectIsPlaying())
 	{
 		SetAnimation("idle", IDLE_ANIMATION_SPEED);
 		ReverseScaleForAbilityAnimation();

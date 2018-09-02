@@ -61,8 +61,6 @@ public:
 
 	virtual bool IsPlayer() { return false; }
 
-	PossibleAims possibleAbilityAims[4];
-
 protected:
 
 	SpriterEngine::EntityInstance *combatantObject;
@@ -99,4 +97,6 @@ protected:
 
 	void ReloadHitbox();
 	void ReloadAbilityEffectPoint();
+
+	bool AbilityEffectIsPlaying();
 };

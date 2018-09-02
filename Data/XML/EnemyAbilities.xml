@@ -24,13 +24,13 @@
     </positions>
   </bang>
 
-  <gatling id="1" how_many ="4" name="Gatling Gun">
+  <springfield id="1" how_many ="1" name="Springfield">
     <positions>
       <value id="0">true</value>
       <value id="1">true</value>
       <value id="2">true</value>
       <value id="3">true</value>
     </positions>
-  </gatling>
+  </springfield>
 
 </EnemyAbilities>

@@ -6,6 +6,7 @@
 void Enemy::Init(int _id, CGameEngine * _engine)
 {
 	engine = _engine;
+	enemyID = _id;
 
 	switch (_id)
 	{
@@ -17,36 +18,18 @@ void Enemy::Init(int _id, CGameEngine * _engine)
 		break;
 	}
 
+	status.Reset();
+	status.SetAttributes(g_pObjectProperties->enemyAttributes[enemyID]);
+
 	SetAnimation("idle", IDLE_ANIMATION_SPEED);
 	Scale(ENEMY_SCALE, ENEMY_SCALE);
 	combatantObject->reprocessCurrentTime();
 
 	ReloadHitbox();
-
-	status.Reset();
-
-	CombatantAttributes attributes;
-	attributes.armour = 1;
-	attributes.currentHealth = 20;
-	attributes.maxHealth = 20;
-	attributes.damage = 5;
-	attributes.initiative = 1;
-	attributes.dexterity = 5;
-
-	status.SetAttributes(attributes);
 	
 	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, status.GetCurrentHealthPointer(), status.GetMaxHealthPointer());
 	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
 	healthBar.SetSmoothTransformationTime(0.7f);
-
-	for (int j = 0; j < 4; j++)
-	{
-		for (int i = 0; i < 8; i++)
-			possibleAbilityAims[j].position[i] = true;
-
-		possibleAbilityAims[j].howMany = 1;
-	}
-
 
 	abilityAnnouncementTime = 0.0f;
 	abilityStatus = finished;
@@ -56,7 +39,10 @@ void Enemy::Init(int _id, CGameEngine * _engine)
 
 void Enemy::ChooseAbility()
 {
-	chosenAbility = enemyAbilities::bang;
+	if (enemyID == 4)
+		chosenAbility = enemyAbilities::springfield;
+	else
+		chosenAbility = enemyAbilities::bang;
 }
 
 
@@ -80,7 +66,7 @@ void Enemy::CheckForMarkedPlayers()
 {
 	for (Combatant* c : (*allCombatants))
 	{
-		if (c->IsPlayer() && c->Status().IsMarked())
+		if (c->IsPlayer() && c->Status().IsMarked() && CanAimAtCombatant(c))
 		{
 			selectedTargets.push_back(c);
 			return;
@@ -89,23 +75,36 @@ void Enemy::CheckForMarkedPlayers()
 }
 
 
+bool Enemy::CanAimAtCombatant(Combatant *_combatant)
+{
+	return g_pObjectProperties->enemyAbilities[chosenAbility].possibleAims.position[_combatant->GetBattlePos()];
+}
+
+
 
 void Enemy::ChooseRandomPlayer()
 {
-	int numberOfPlayers = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), 0, [](int sum, Combatant* c) {if (c->IsPlayer()) return sum + 1; else return sum; });
+	int numberOfPlayers = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), 0, [&](int sum, Combatant* c) {if (c->IsPlayer() && CanAimAtCombatant(c)) return sum + 1; else return sum; });
 
-	int target = rand() % numberOfPlayers;
-	for (Combatant* c : (*allCombatants))
+	if (numberOfPlayers > 0)
 	{
-		if (c->IsPlayer())
+		int target = rand() % numberOfPlayers;
+		for (Combatant* c : (*allCombatants))
 		{
-			if (target == 0)
+			if (c->IsPlayer() && CanAimAtCombatant(c))
 			{
-				selectedTargets.push_back(c);
-				return;
+				if (target == 0)
+				{
+					selectedTargets.push_back(c);
+					return;
+				}
+				target--;
 			}
-			target--;
 		}
+	}
+	else
+	{
+		abilityStatus = finished;
 	}
 }
 
@@ -140,7 +139,7 @@ void Enemy::Update()
 
 	if (abilityStatus == executing)
 	{
-		if(!combatantObject->animationIsPlaying())
+		if(!combatantObject->animationIsPlaying() && !AbilityEffectIsPlaying())
 			ExecuteAbility();
 	}
 }
@@ -161,7 +160,7 @@ void Enemy::AnnounceAndStartAbilityAnimation()
 
 	if (abilityAnnouncementTime <= 0.0f)
 	{
-		StartAbilityAnimation();
+		StartAbilityAnimation(chosenAbility);
 		StartTargetsAttackedAnimation();
 		abilityStatus = executing;
 	}
@@ -203,12 +202,23 @@ void Enemy::RenderAbilityAnnouncement()
 
 
 
-void Enemy::StartAbilityAnimation()
+void Enemy::StartAbilityAnimation(int _ability)
 {
 	ScaleForAbilityAnimation();                           //order is relevant because "bang" has no hitbox (needed for animation calculation)
-	SetAnimation("bang", ABILITY_ANIMATION_SPEED);
 
-	g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("bang");
+	switch (_ability)
+	{
+	case 0:
+		SetAnimation("bang", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("bang");
+		break;
+
+	case 1:
+		SetAnimation("springfield", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("springfield");
+		break;
+	}
+
 	g_pSpritePool->abilityEffectsAnimation->setCurrentTime(0);
 }
 

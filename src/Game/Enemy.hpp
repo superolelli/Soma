@@ -13,7 +13,7 @@ public:
 
 	virtual void Init(int _id, CGameEngine *_engine) override;
 
-	virtual int GetID() override { return -1; }
+	virtual int GetID() override { return enemyID; }
 
 	virtual bool DoAbility(int _id, std::vector<Combatant*> &_targets);
 
@@ -24,6 +24,8 @@ public:
 	std::string GetChosenAbilityName() { return g_pObjectProperties->enemyAbilities[chosenAbility].name; }
 
 private:
+
+	int enemyID;
 
 	enemyAbilities chosenAbility;
 
@@ -36,8 +38,10 @@ private:
 	void CheckForMarkedPlayers();
 	void ChooseRandomPlayer();
 
+	bool CanAimAtCombatant(Combatant *_combatant);
+
 	void AnnounceAndStartAbilityAnimation();
-	void StartAbilityAnimation();
+	void StartAbilityAnimation(int _ability);
 
 	void ExecuteAbility();
 

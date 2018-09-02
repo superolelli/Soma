@@ -8,6 +8,7 @@ void ObjectPropertiesManager::LoadObjectProperties()
 	LoadPlayerAbilities();
 	LoadPlayerAttributes();
 	LoadEnemyAbilities();
+	LoadEnemyAttributes();
 }
 
 
@@ -113,5 +114,28 @@ void ObjectPropertiesManager::LoadEnemyAbilities()
 				enemyAbilities[abilityID].possibleAims.position[pos.attribute("id").as_int()] = pos.text().as_bool();
 			}
 		}
+	}
+}
+
+
+void ObjectPropertiesManager::LoadEnemyAttributes()
+{
+	using namespace pugi;
+
+	xml_document doc;
+	doc.load_file("Data/XML/EnemyAttributes.xml");
+
+	//load ability values
+	for (xml_node enemy : doc.child("EnemyAttributes").children())
+	{
+		int enemyID = enemy.attribute("id").as_int();
+
+		enemyAttributes[enemyID].armour = enemy.attribute("armour").as_int();
+		enemyAttributes[enemyID].maxHealth = enemy.attribute("health").as_int();
+		enemyAttributes[enemyID].damage = enemy.attribute("damage").as_int();
+		enemyAttributes[enemyID].initiative = enemy.attribute("initiative").as_int();
+		enemyAttributes[enemyID].dexterity = enemy.attribute("dexterity").as_int();
+
+		enemyAttributes[enemyID].currentHealth = enemyAttributes[enemyID].maxHealth;
 	}
 }

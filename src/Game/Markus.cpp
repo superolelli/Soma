@@ -74,6 +74,6 @@ void PlayerMarkus::StartAbilityAnimation(int _ability)
 	ScaleForAbilityAnimation();
 	SetAnimation("fist_of_revenge", ABILITY_ANIMATION_SPEED);
 
-	g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("empty");
+	g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("fist_of_revenge");
 	g_pSpritePool->abilityEffectsAnimation->setCurrentTime(0);
 }

@@ -204,3 +204,14 @@ void Combatant::Update()
 {
 	healthBar.Update(g_pTimer->GetElapsedTime().asSeconds());
 }
+
+
+
+
+bool Combatant::AbilityEffectIsPlaying()
+{
+	if (g_pSpritePool->abilityEffectsAnimation->currentAnimationName() == "empty")
+		return false;
+	else
+		return g_pSpritePool->abilityEffectsAnimation->animationIsPlaying();
+}

@@ -85,7 +85,7 @@ void PlayerOle::StartAbilityAnimation(int _ability)
 	ScaleForAbilityAnimation();
 	SetAnimation("hack_into_the_system", ABILITY_ANIMATION_SPEED);
 
-	g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("empty");
+	g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("hack_into_the_system");
 	g_pSpritePool->abilityEffectsAnimation->setCurrentTime(0);
 }
 

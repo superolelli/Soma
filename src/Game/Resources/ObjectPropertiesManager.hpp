@@ -5,6 +5,8 @@
 
 #include "../CombatantAttributes.hpp"
 
+#include <map>
+
 
 struct PossibleAims
 {
@@ -26,6 +28,7 @@ public:
 
 	PossibleAims playerAbilities[4][4];
 	CombatantAttributes playerAttributes[4];
+	std::map<int, CombatantAttributes> enemyAttributes;
 
 	Ability enemyAbilities[2];
 
@@ -33,5 +36,6 @@ private:
 	void LoadPlayerAbilities();
 	void LoadPlayerAttributes();
 	void LoadEnemyAbilities();
+	void LoadEnemyAttributes();
 };
 

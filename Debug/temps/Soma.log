@@ -1,4 +1,40 @@
-﻿  Enemy.cpp
-c:\soma\src\game\enemy.cpp(198): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+﻿  ObjectPropertiesManager.cpp
+  Enemy.cpp
+c:\soma\src\game\enemy.cpp(197): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Compiling...
+  main.cpp
+  Simon.cpp
+c:\soma\src\game\simon.cpp(47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Player.cpp
+c:\soma\src\game\player.cpp(40): warning C4244: 'argument': conversion from 'SpriterEngine::real' to 'int', possible loss of data
+  Ole.cpp
+c:\soma\src\game\ole.cpp(46): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Markus.cpp
+c:\soma\src\game\markus.cpp(50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  InitialState.cpp
+  Game.cpp
+c:\soma\src\game\game.cpp(75): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\soma\src\game\game.cpp(76): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\soma\src\game\game.cpp(114): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\soma\src\game\game.cpp(126): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Combatant.cpp
+c:\soma\src\game\combatant.cpp(29): warning C4244: '=': conversion from 'SpriterEngine::real' to 'int', possible loss of data
+c:\soma\src\game\combatant.cpp(30): warning C4244: '=': conversion from 'SpriterEngine::real' to 'int', possible loss of data
+c:\soma\src\game\combatant.cpp(31): warning C4244: '=': conversion from 'SpriterEngine::real' to 'int', possible loss of data
+c:\soma\src\game\combatant.cpp(32): warning C4244: '=': conversion from 'SpriterEngine::real' to 'int', possible loss of data
+c:\soma\src\game\combatant.cpp(143): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\soma\src\game\combatant.cpp(144): warning C4244: 'argument': conversion from 'SpriterEngine::real' to 'int', possible loss of data
+c:\soma\src\game\combatant.cpp(150): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\soma\src\game\combatant.cpp(151): warning C4244: 'argument': conversion from 'SpriterEngine::real' to 'int', possible loss of data
+  Battle.cpp
+c:\soma\src\game\battle.cpp(7): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\soma\src\game\battle.cpp(117): warning C4018: '>=': signed/unsigned mismatch
+  Anna.cpp
+c:\soma\src\game\anna.cpp(60): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  AdventureGroup.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  pugixml.cpp
   Soma.vcxproj -> C:\Soma\Debug\Soma.exe
   Soma.vcxproj -> C:\Soma\Debug\Soma.pdb (Partial PDB)
