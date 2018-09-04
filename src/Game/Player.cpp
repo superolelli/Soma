@@ -71,6 +71,7 @@ void Player::Render()
 {
 	combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
 	combatantObject->render();
+	combatantObject->playSoundTriggers();
 
 	setElapsedTimeForAbilityEffect = false;
 
@@ -132,11 +133,12 @@ void Player::DoCurrentAbility()
 {
 	if (!combatantObject->animationIsPlaying() && !AbilityEffectIsPlaying())
 	{
+		DoAbility(gui->GetCurrentAbility(), selectedTargets);
+
 		SetAnimation("idle", IDLE_ANIMATION_SPEED);
 		ReverseScaleForAbilityAnimation();
 		StopTargetsAttackedAnimation();
-
-		DoAbility(gui->GetCurrentAbility(), selectedTargets);
+		
 		selectedTargets.clear();
 		abilityStatus = finished;
 	}

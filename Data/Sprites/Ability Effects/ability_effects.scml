@@ -18,6 +18,7 @@
         <file id="14" name="blut_6.png" width="160" height="230" pivot_x="0.5" pivot_y="0.5"/>
         <file id="15" name="punch2.wav" type="sound"/>
         <file id="16" name="shot1.wav" type="sound"/>
+        <file id="17" name="beep.wav" type="sound"/>
     </folder>
     <folder id="1" name="Letters">
         <file id="0" name="Letters/a.png" width="35" height="36" pivot_x="0.514286" pivot_y="0.416667"/>
@@ -516,6 +517,11 @@
                     <object x="129" y="74" angle="0"/>
                 </key>
             </timeline>
+            <soundline id="-1" name="beep">
+                <key id="0" time="1394">
+                    <object folder="0" file="17" volume="0.154"/>
+                </key>
+            </soundline>
         </animation>
         <animation id="4" name="all_on_one" length="1000" interval="100" looping="false">
             <mainline>

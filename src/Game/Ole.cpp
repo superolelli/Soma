@@ -83,9 +83,28 @@ void PlayerOle::poetrySlam(Combatant* _target)
 void PlayerOle::StartAbilityAnimation(int _ability)
 {
 	ScaleForAbilityAnimation();
-	SetAnimation("hack_into_the_system", ABILITY_ANIMATION_SPEED);
 
-	g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("hack_into_the_system");
+	switch (_ability)
+	{
+	case 0:
+		SetAnimation("hack_into_the_system", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("hack_into_the_system");
+		break;
+	case 1:
+		SetAnimation("hack_into_the_system", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("hack_into_the_system");
+		break;
+	case 2:
+		SetAnimation("hack_into_the_system", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("hack_into_the_system");
+		break;
+	case 3:
+		SetAnimation("poetry_slam", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("empty");
+		break;
+	}
+
+
 	g_pSpritePool->abilityEffectsAnimation->setCurrentTime(0);
 }
 

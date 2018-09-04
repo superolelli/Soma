@@ -129,34 +129,34 @@
                 </key>
             </soundline>
         </animation>
-        <animation id="1" name="springfield" length="1000" interval="100" looping="false">
+        <animation id="1" name="springfield" length="1800" interval="100" looping="false">
             <mainline>
                 <key id="0">
                     <object_ref id="0" timeline="3" key="0" z_index="0"/>
                 </key>
-                <key id="1" time="276">
+                <key id="1" time="1001">
                     <object_ref id="0" timeline="0" key="0" z_index="0"/>
                     <object_ref id="1" timeline="1" key="0" z_index="1"/>
                     <object_ref id="2" timeline="3" key="0" z_index="2"/>
                 </key>
-                <key id="2" time="312">
+                <key id="2" time="1037">
                     <object_ref id="0" timeline="0" key="1" z_index="0"/>
                     <object_ref id="1" timeline="1" key="1" z_index="1"/>
                     <object_ref id="2" timeline="3" key="0" z_index="2"/>
                 </key>
-                <key id="3" time="639" curve_type="cubic" c1="0.4726" c2="0.9652">
+                <key id="3" time="1364" curve_type="cubic" c1="0.4726" c2="0.9652">
                     <object_ref id="0" timeline="0" key="1" z_index="0"/>
                     <object_ref id="1" timeline="2" key="0" z_index="1"/>
                     <object_ref id="2" timeline="1" key="2" z_index="2"/>
                     <object_ref id="3" timeline="3" key="0" z_index="3"/>
                 </key>
-                <key id="4" time="711" curve_type="cubic" c1="0.4726" c2="0.9652">
+                <key id="4" time="1436" curve_type="cubic" c1="0.4726" c2="0.9652">
                     <object_ref id="0" timeline="0" key="1" z_index="0"/>
                     <object_ref id="1" timeline="2" key="0" z_index="1"/>
                     <object_ref id="2" timeline="1" key="2" z_index="2"/>
                     <object_ref id="3" timeline="3" key="0" z_index="3"/>
                 </key>
-                <key id="5" time="1000">
+                <key id="5" time="1725">
                     <object_ref id="0" timeline="0" key="2" z_index="0"/>
                     <object_ref id="1" timeline="2" key="1" z_index="1"/>
                     <object_ref id="2" timeline="1" key="3" z_index="2"/>
@@ -164,35 +164,35 @@
                 </key>
             </mainline>
             <timeline id="0" name="einschussloch">
-                <key id="0" time="276" spin="0">
+                <key id="0" time="1001" spin="0">
                     <object folder="0" file="0" x="19.832332" y="19.597686" angle="25.206876" scale_x="0.320148" scale_y="0.320148"/>
                 </key>
-                <key id="1" time="312" spin="0">
+                <key id="1" time="1037" spin="0">
                     <object folder="0" file="0" x="19.832332" y="19.597686" angle="25.206876" scale_x="0.259913" scale_y="0.259913"/>
                 </key>
-                <key id="2" time="1000" spin="0">
+                <key id="2" time="1725" spin="0">
                     <object folder="0" file="0" x="19.832332" y="19.597686" angle="25.206876" scale_x="0.259913" scale_y="0.259913"/>
                 </key>
             </timeline>
             <timeline id="1" name="blut_1">
-                <key id="0" time="276" spin="0">
+                <key id="0" time="1001" spin="0">
                     <object folder="0" file="1" x="20.4284" y="15.03714" angle="0" scale_x="-0.04243" scale_y="0.01346"/>
                 </key>
-                <key id="1" time="312" spin="0">
+                <key id="1" time="1037" spin="0">
                     <object folder="0" file="1" x="20.4284" y="15.03714" angle="0" scale_x="-0.04243" scale_y="0.01346"/>
                 </key>
-                <key id="2" time="639" spin="0">
+                <key id="2" time="1364" spin="0">
                     <object folder="0" file="1" x="20.4284" y="-9.598644" angle="0" scale_x="-0.94243" scale_y="0.887043"/>
                 </key>
-                <key id="3" time="1000" spin="0">
+                <key id="3" time="1725" spin="0">
                     <object folder="0" file="1" x="20.4284" y="-23.91629" angle="0" scale_x="-0.94243" scale_y="0.887043"/>
                 </key>
             </timeline>
             <timeline id="2" name="blut_2">
-                <key id="0" time="639" spin="0">
+                <key id="0" time="1364" spin="0">
                     <object folder="0" file="2" x="19.81405" y="12.875343" angle="0" scale_x="-0.88899" scale_y="0.00068"/>
                 </key>
-                <key id="1" time="1000" spin="0">
+                <key id="1" time="1725" spin="0">
                     <object folder="0" file="2" x="19.81405" y="0.540111" angle="0" scale_x="-0.88899" scale_y="0.519499"/>
                 </key>
             </timeline>
@@ -200,17 +200,12 @@
                 <key id="0" spin="0">
                     <object x="19.059406" y="20.544554" angle="16.927513"/>
                 </key>
-                <key id="1" time="1000" spin="0">
+                <key id="1" time="1725" spin="0">
                     <object x="19.059406" y="20.544554" angle="16.927513"/>
                 </key>
             </timeline>
-            <soundline id="-1" name="shot3">
-                <key id="0" time="276">
-                    <object folder="0" file="3"/>
-                </key>
-            </soundline>
             <soundline id="-1" name="shot1">
-                <key id="0" time="276">
+                <key id="0" time="989">
                     <object folder="0" file="16"/>
                 </key>
             </soundline>

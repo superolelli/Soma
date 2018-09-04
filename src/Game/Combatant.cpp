@@ -169,6 +169,7 @@ void Combatant::GiveTurnTo(std::vector<Combatant*>* _targets, BattleGUI *_gui)
 	if (status.IsAsleep())
 	{
 		status.HandleStatusChanges();
+		SetAnimation("idle", IDLE_ANIMATION_SPEED);
 		abilityStatus = finished;
 		return;
 	}
@@ -189,7 +190,11 @@ void Combatant::StartAttackedAnimation()
 
 void Combatant::StopAttackedAnimation()
 {
-	SetAnimation("idle", IDLE_ANIMATION_SPEED);
+	if(status.IsAsleep())
+		SetAnimation("sleeping", IDLE_ANIMATION_SPEED);
+	else
+		SetAnimation("idle", IDLE_ANIMATION_SPEED);
+
 	ReverseScaleForAbilityAnimation();
 	abilityStatus = finished;
 }

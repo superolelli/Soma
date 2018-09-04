@@ -182,6 +182,7 @@ void Enemy::Render()
 {
 	combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
 	combatantObject->render();
+	combatantObject->playSoundTriggers();
 
 	if (abilityAnnouncementTime > 0.0f && abilityAnnouncementTime < 1.0f)
 		RenderAbilityAnnouncement();
