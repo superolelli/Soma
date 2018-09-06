@@ -72,8 +72,26 @@ void PlayerMarkus::horribleGrin(Combatant* _target)
 void PlayerMarkus::StartAbilityAnimation(int _ability)
 {
 	ScaleForAbilityAnimation();
-	SetAnimation("fist_of_revenge", ABILITY_ANIMATION_SPEED);
 
-	g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("fist_of_revenge");
+	switch (_ability)
+	{
+	case 0:
+		SetAnimation("fist_of_revenge", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("fist_of_revenge");
+		break;
+	case 1:
+		SetAnimation("fist_of_revenge", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("fist_of_revenge");
+		break;
+	case 2:
+		SetAnimation("fist_of_revenge", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("fist_of_revenge");
+		break;
+	case 3:
+		SetAnimation("horrible_grin", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("horrible_grin");
+		break;
+	}
+	
 	g_pSpritePool->abilityEffectsAnimation->setCurrentTime(0);
 }

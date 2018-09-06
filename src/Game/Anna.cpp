@@ -70,8 +70,26 @@ void PlayerAnna::deathHug(Combatant* _target)
 void PlayerAnna::StartAbilityAnimation(int _ability)
 {
 	ScaleForAbilityAnimation();
-	SetAnimation("word_gush", ABILITY_ANIMATION_SPEED);
 
-	g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("word_gush");
+	switch (_ability)
+	{
+	case 0:
+		SetAnimation("word_gush", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("word_gush");
+		break;
+	case 1:
+		SetAnimation("word_gush", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("word_gush");
+		break;
+	case 2:
+		SetAnimation("side_of_nose_blow", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("side_of_nose_blow");
+		break;
+	case 3:
+		SetAnimation("word_gush", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("word_gush");
+		break;
+	}
+
 	g_pSpritePool->abilityEffectsAnimation->setCurrentTime(0);
 }
