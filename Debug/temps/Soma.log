@@ -1,4 +1,4 @@
-﻿  Anna.cpp
-c:\soma\src\game\anna.cpp(60): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+﻿  Simon.cpp
+c:\soma\src\game\simon.cpp(47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Soma.vcxproj -> C:\Soma\Debug\Soma.exe
   Soma.vcxproj -> C:\Soma\Debug\Soma.pdb (Partial PDB)

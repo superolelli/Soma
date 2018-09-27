@@ -579,26 +579,26 @@
             </timeline>
             <timeline id="27" name="z">
                 <key id="0" time="299" spin="0">
-                    <object folder="0" file="22" x="241.129032" y="583.870968"/>
+                    <object folder="0" file="22" x="241.129032" y="583.870968" angle="0"/>
                 </key>
                 <key id="1" time="500" spin="0">
-                    <object folder="0" file="22" x="241.129032" y="583.870968"/>
+                    <object folder="0" file="22" x="241.129032" y="583.870968" angle="0"/>
                 </key>
                 <key id="2" time="697" spin="0">
-                    <object folder="0" file="22" x="241.129032" y="583.870968"/>
+                    <object folder="0" file="22" x="241.129032" y="583.870968" angle="0"/>
                 </key>
             </timeline>
             <timeline id="28" name="z2">
                 <key id="0" time="500" spin="0">
-                    <object folder="0" file="23" x="288.709677" y="605.645161"/>
+                    <object folder="0" file="23" x="288.709677" y="605.645161" angle="0"/>
                 </key>
                 <key id="1" time="697" spin="0">
-                    <object folder="0" file="23" x="288.709677" y="605.645161"/>
+                    <object folder="0" file="23" x="288.709677" y="605.645161" angle="0"/>
                 </key>
             </timeline>
             <timeline id="29" name="z3">
                 <key id="0" time="697" spin="0">
-                    <object folder="0" file="24" x="329.83871" y="633.870968"/>
+                    <object folder="0" file="24" x="329.83871" y="633.870968" angle="0"/>
                 </key>
             </timeline>
             <timeline id="30" obj="12" name="bounding_box" object_type="box">
@@ -1960,10 +1960,10 @@
             </timeline>
             <timeline id="28" name="ability_effect_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="139.230769" y="366.923077" angle="9.246113"/>
+                    <object x="175.23077" y="350.92308" angle="9.246113"/>
                 </key>
                 <key id="1" time="501" spin="0">
-                    <object x="139.230769" y="366.923077" angle="9.246113"/>
+                    <object x="175.23077" y="350.92308" angle="9.246113"/>
                 </key>
             </timeline>
         </animation>

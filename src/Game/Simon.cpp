@@ -103,8 +103,13 @@ void PlayerSimon::StartAbilityAnimation(int _ability)
 		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("empty");
 		break;
 	case 2:
-		SetAnimation("marshmallow_flash", ABILITY_ANIMATION_SPEED);
-		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("empty");
+		SetAnimation("repair", ABILITY_ANIMATION_SPEED);
+
+		if(selectedTargets[0]->IsPlayer())
+			g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("repair_friendly");
+		else
+			g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("repair_hostile");
+
 		break;
 	case 3:
 		SetAnimation("all_on_one", ABILITY_ANIMATION_SPEED);
