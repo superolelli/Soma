@@ -91,8 +91,8 @@ void PlayerOle::StartAbilityAnimation(int _ability)
 		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("hack_into_the_system");
 		break;
 	case 1:
-		SetAnimation("hack_into_the_system", ABILITY_ANIMATION_SPEED);
-		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("hack_into_the_system");
+		SetAnimation("whole_body_kick", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("whole_body_kick");
 		break;
 	case 2:
 		SetAnimation("hack_into_the_system", ABILITY_ANIMATION_SPEED);
