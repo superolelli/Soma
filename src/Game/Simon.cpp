@@ -99,8 +99,8 @@ void PlayerSimon::StartAbilityAnimation(int _ability)
 		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("empty");
 		break;
 	case 1:
-		SetAnimation("marshmallow_flash", ABILITY_ANIMATION_SPEED);
-		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("empty");
+		SetAnimation("mess_around", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("mess_around");
 		break;
 	case 2:
 		SetAnimation("repair", ABILITY_ANIMATION_SPEED);

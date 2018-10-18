@@ -6,7 +6,7 @@
 void Level::Init()
 {
 	int backgroundIDs[7] = {corridor_1, corridor_1, door_1, corridor_1, door_2, room_1, end };
-	int battlesTemp[14] = { 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0 };
+	int battlesTemp[14] = { 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0 };
 	int position = 0;
 	battle = false;
 
@@ -17,10 +17,9 @@ void Level::Init()
 		sprite.SetPos(position, 0);
 		backgrounds.push_back(sprite);
 
-		position += sprite.GetRect().width;
-	}
+		position += sprite.GetRect().width;	}
 
-	for (int i= 0; i < 10; i++)
+	for (int i= 0; i < 14; i++)
 	{
 		battles[i] = battlesTemp[i];
 	}

@@ -1,4 +1,4 @@
-﻿  Ole.cpp
-c:\soma\src\game\ole.cpp(46): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  Soma.vcxproj -> C:\Soma\Debug\Soma.exe
-  Soma.vcxproj -> C:\Soma\Debug\Soma.pdb (Partial PDB)
+﻿  Simon.cpp
+f:\soma\src\game\simon.cpp(47): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+  Soma.vcxproj -> F:\Soma\Debug\Soma.exe
+  Soma.vcxproj -> F:\Soma\Debug\Soma.pdb (Partial PDB)

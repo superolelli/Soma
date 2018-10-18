@@ -41,10 +41,24 @@ bool PlayerAnna::DoAbility(int _id, std::vector<Combatant*> &_targets)
 
 void PlayerAnna::indomitableHappiness(Combatant* _target)
 {
-	if(rand()%3 == 0)
-		_target->Status().Confuse(3);
+	if (_target->IsPlayer())
+	{
+		Buff newBuff;
+		newBuff.duration = 3;
+		newBuff.attributes.armour = 0;
+		newBuff.attributes.currentHealth = 0;
+		newBuff.attributes.maxHealth = 0;
+		newBuff.attributes.damage = 5;
+		newBuff.attributes.initiative = 2;
+		_target->Status().AddBuff(newBuff);
+	}
+	else
+	{
+		if (rand() % 3 == 0)
+			_target->Status().Confuse(3);
 
-	_target->Status().GainHealth(3);
+		Status().GainHealth(3);
+	}
 }
 
 void PlayerAnna::wordGush(Combatant* _target)
@@ -74,8 +88,12 @@ void PlayerAnna::StartAbilityAnimation(int _ability)
 	switch (_ability)
 	{
 	case 0:
-		SetAnimation("word_gush", ABILITY_ANIMATION_SPEED);
-		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("word_gush");
+		SetAnimation("indomitable_happiness", ABILITY_ANIMATION_SPEED);
+
+		if (selectedTargets[0]->IsPlayer())
+			g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("indomitable_happiness_friendly");
+		else
+			g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("indomitable_happiness_hostile");
 		break;
 	case 1:
 		SetAnimation("word_gush", ABILITY_ANIMATION_SPEED);
