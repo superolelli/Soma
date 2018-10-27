@@ -87,8 +87,8 @@ void PlayerOle::StartAbilityAnimation(int _ability)
 	switch (_ability)
 	{
 	case 0:
-		SetAnimation("hack_into_the_system", ABILITY_ANIMATION_SPEED);
-		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("hack_into_the_system");
+		SetAnimation("gummi_arm", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("gummi_arm");
 		break;
 	case 1:
 		SetAnimation("whole_body_kick", ABILITY_ANIMATION_SPEED);

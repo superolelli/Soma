@@ -104,8 +104,8 @@ void PlayerAnna::StartAbilityAnimation(int _ability)
 		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("side_of_nose_blow");
 		break;
 	case 3:
-		SetAnimation("word_gush", ABILITY_ANIMATION_SPEED);
-		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("word_gush");
+		SetAnimation("death_hug", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("death_hug");
 		break;
 	}
 

@@ -84,8 +84,8 @@ void PlayerMarkus::StartAbilityAnimation(int _ability)
 		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("nose_ram");
 		break;
 	case 2:
-		SetAnimation("fist_of_revenge", ABILITY_ANIMATION_SPEED);
-		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("fist_of_revenge");
+		SetAnimation("hard_destruction", ABILITY_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("hard_destruction");
 		break;
 	case 3:
 		SetAnimation("horrible_grin", ABILITY_ANIMATION_SPEED);
