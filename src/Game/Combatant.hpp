@@ -46,6 +46,7 @@ public:
 	void GiveTurnTo(std::vector<Combatant*> *_targets, BattleGUI *_gui);
 
 	void StartAttackedAnimation();
+	void StartFriendlyAttackedAnimation();
 	void StopAttackedAnimation();
 
 	bool FinishedTurn() { return abilityStatus == finished; }
@@ -58,6 +59,8 @@ public:
 	abilityPhase GetAbilityStatus() { return abilityStatus; }
 
 	virtual void RenderHealthBar(sf::RenderTarget &_target);
+	void RenderAbilityTargetMarker();
+	void RenderTurnMarker();
 
 	virtual bool IsPlayer() { return false; }
 

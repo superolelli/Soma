@@ -1,18 +1,12 @@
 #pragma once
 
 #include "../../Framework/Patterns/singleton.hpp"
-#include "../../Framework/Animations/pugixml/pugixml.hpp"
+#include "../Util/XMLUtilities.hpp"
 
-#include "../CombatantAttributes.hpp"
+#include "../Ability.hpp"
 
 #include <map>
 
-
-struct PossibleAims
-{
-	bool position[8];
-	int howMany;
-};
 
 struct Ability
 {
@@ -20,13 +14,14 @@ struct Ability
 	std::string name;
 };
 
+
 #define g_pObjectProperties ObjectPropertiesManager::Get()
 class ObjectPropertiesManager : public TSingleton<ObjectPropertiesManager>
 {
 public:
 	void LoadObjectProperties();
 
-	PossibleAims playerAbilities[4][4];
+	PlayerAbility playerAbilities[4][4];
 	CombatantAttributes playerAttributes[4];
 	std::map<int, CombatantAttributes> enemyAttributes;
 

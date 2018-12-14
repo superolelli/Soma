@@ -250,9 +250,11 @@
     <ClCompile Include="src\Game\Resources\StringManager.cpp" />
     <ClCompile Include="src\Game\Resources\TextureManager.cpp" />
     <ClCompile Include="src\Game\Simon.cpp" />
+    <ClCompile Include="src\Game\Util\XMLUtilities.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Game\Ability.hpp" />
     <ClInclude Include="src\Game\Resources\EnemyAbilities.hpp" />
     <ClInclude Include="src\Framework\Animations\animation\animation.h" />
     <ClInclude Include="src\Framework\Animations\animation\animationinstance.h" />
@@ -393,6 +395,7 @@
     <ClInclude Include="src\Game\Resources\StringManager.hpp" />
     <ClInclude Include="src\Game\Resources\TextureManager.hpp" />
     <ClInclude Include="src\Game\Simon.hpp" />
+    <ClInclude Include="src\Game\Util\XMLUtilities.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

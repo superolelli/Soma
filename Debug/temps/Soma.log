@@ -1,5 +1,3 @@
-﻿cl : Befehlszeile warning D9028: Fehler beim minimalen Neukompilieren, normale Erstellung wird durchgeführt.
-  Ole.cpp
-f:\soma\src\game\ole.cpp(46): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+﻿  ObjectPropertiesManager.cpp
   Soma.vcxproj -> F:\Soma\Debug\Soma.exe
   Soma.vcxproj -> F:\Soma\Debug\Soma.pdb (Partial PDB)

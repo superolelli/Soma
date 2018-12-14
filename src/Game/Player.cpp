@@ -12,11 +12,6 @@ void Player::Init(int _id, CGameEngine *_engine)
 	Scale(PLAYER_SCALE, PLAYER_SCALE);
 	combatantObject->reprocessCurrentTime();
 
-	possibleAbilityAims[0] = g_pObjectProperties->playerAbilities[_id][0];
-	possibleAbilityAims[1] = g_pObjectProperties->playerAbilities[_id][1];
-	possibleAbilityAims[2] = g_pObjectProperties->playerAbilities[_id][2];
-	possibleAbilityAims[3] = g_pObjectProperties->playerAbilities[_id][3];
-
 	status.SetAttributes(g_pObjectProperties->playerAttributes[_id]);
 
 	ReloadHitbox();
@@ -33,6 +28,10 @@ void Player::Init(int _id, CGameEngine *_engine)
 }
 
 
+int Player::NumberOfTargetsForCurrentAbility()
+{
+	return g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].possibleAims.howMany;
+}
 
 
 void Player::Update(int _xMove, bool _is_walking)
@@ -60,6 +59,7 @@ void Player::Update(int _xMove, bool _is_walking)
 		StartAbilityAnimation(gui->GetCurrentAbility());
 		StartTargetsAttackedAnimation();
 	}
+	
 
 	if (abilityStatus == executing)
 		DoCurrentAbility();
@@ -77,8 +77,33 @@ void Player::Render()
 
 	if (abilityStatus == attacked)
 		RenderAbilityEffects();
+
+	if (abilityStatus == ready)
+	{
+		RenderTurnMarker();
+		RenderAbilityTargetMarker();
+	}
 }
 
+
+void Player::RenderAbilityTargetMarker()
+{
+	for (Combatant *c : (*allCombatants))
+	{
+		if (c->GetRect().contains(engine->GetWorldMousePos()) && CurrentAbilityCanAimAtCombatant(c))
+		{
+			int targetPosition = c->GetBattlePos();
+
+			for (Combatant* c : (*allCombatants))
+			{
+				if (c->GetBattlePos() >= targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
+					c->RenderAbilityTargetMarker();				
+			}
+
+			return;
+		}
+	}
+}
 
 
 bool Player::AimChosen()
@@ -108,7 +133,7 @@ void Player::SelectAdditionalTargets()
 
 	for (Combatant* c : (*allCombatants))
 	{
-		if (c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + possibleAbilityAims[gui->GetCurrentAbility()].howMany)
+		if (c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
 			selectedTargets.push_back(c);
 	}
 }
@@ -117,7 +142,7 @@ void Player::SelectAdditionalTargets()
 
 bool Player::CurrentAbilityCanAimAtCombatant(Combatant* _combatant)
 {
-	return possibleAbilityAims[gui->GetCurrentAbility()].position[_combatant->GetBattlePos()];
+	return g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].possibleAims.position[_combatant->GetBattlePos()];
 }
 
 

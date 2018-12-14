@@ -58,6 +58,12 @@
     <Filter Include="Quelldateien\Game\GUI">
       <UniqueIdentifier>{bbf8decc-88f3-40e0-b284-f5cdc55b1cc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Game\Util">
+      <UniqueIdentifier>{6389deed-c44d-4db2-a100-e025a155c190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\Util">
+      <UniqueIdentifier>{6ba0a4fc-7d54-4741-9599-772653192a94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -443,6 +449,9 @@
     </ClCompile>
     <ClCompile Include="src\Game\Resources\SpritePool.cpp">
       <Filter>Quelldateien\Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Util\XMLUtilities.cpp">
+      <Filter>Quelldateien\Game\Util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -865,6 +874,12 @@
     </ClInclude>
     <ClInclude Include="src\Game\Resources\EnemyAbilities.hpp">
       <Filter>Headerdateien\Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Util\XMLUtilities.hpp">
+      <Filter>Headerdateien\Game\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Ability.hpp">
+      <Filter>Headerdateien\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -111,7 +111,6 @@ void Enemy::ChooseRandomPlayer()
 
 bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
-	//check for confusion
 	if (status.IsConfused())
 	{
 		if (rand() % 4 == 0)
@@ -187,6 +186,14 @@ void Enemy::Render()
 	if (abilityAnnouncementTime > 0.0f && abilityAnnouncementTime < 1.0f)
 		RenderAbilityAnnouncement();
 
+	if (abilityStatus == ready)
+	{
+		RenderTurnMarker();
+
+		if(abilityAnnouncementTime >= 0.0f)
+			RenderAbilityTargetMarker();
+	}
+
 	if (abilityStatus == attacked)
 		RenderAbilityEffects();
 }
@@ -201,6 +208,12 @@ void Enemy::RenderAbilityAnnouncement()
 	g_pSpritePool->abilityAnnouncementBanner.Render(engine->GetWindow());
 }
 
+
+void Enemy::RenderAbilityTargetMarker()
+{
+	for (Combatant *c : selectedTargets)
+		c->RenderAbilityTargetMarker();	
+}
 
 
 void Enemy::StartAbilityAnimation(int _ability)

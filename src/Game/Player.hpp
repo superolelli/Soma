@@ -19,8 +19,6 @@ public:
 	virtual bool IsPlayer() override { return true; }
 	virtual int GetID() override { return -3; }
 
-	PossibleAims possibleAbilityAims[4];
-
 protected:
 
 	bool AimChosen();
@@ -29,7 +27,11 @@ protected:
 	bool CombatantClicked(Combatant* _combatant);
 	bool CurrentAbilityCanAimAtCombatant(Combatant* _combatant);
 
+	void RenderAbilityTargetMarker();
+
 	void SelectAdditionalTargets();
+
+	int NumberOfTargetsForCurrentAbility();
 
 	virtual void StartAbilityAnimation(int _ability) {};
 

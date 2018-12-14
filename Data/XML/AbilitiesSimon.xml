@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Abilities>
+    <ability id="0" name="Marshmallow flash">
+        <animation>marshmallow_flash</animation>
+
+        <positions>
+            <value id="0">true</value>
+        </positions>
+
+        <effect>
+            <healSelf>5</healSelf>
+            <buff duration="3"> 
+                <armour>10</armour>
+                <damage>3</damage>
+                <initiative>1</initiative>
+            </buff>
+        </effect>
+    </ability>
+
+    <ability id="1" name="Mess around">
+        <animation>mess_around</animation>
+        <effectAnimation>mess_around</effectAnimation>
+
+        <positions>
+            <value id="4">true</value>
+            <value id="5">true</value>
+            <value id="6">true</value>
+            <value id="7">true</value>
+        </positions>
+
+        <effect>
+            <damageFactor>0.5</damageFactor>
+            <confusion>3</confusion>
+        </effect>
+    </ability>
+
+    <ability id="2" name="Repair">
+        <animation>repair</animation>
+        <effectAnimation target="friend">repair_friendly</effectAnimation>
+        <effectAnimation target="enemy">repair_hostile</effectAnimation>
+
+        <positions>
+            <value id="0">true</value>
+            <value id="1">true</value>
+            <value id="2">true</value>
+            <value id="3">true</value>
+            <value id="4">true</value>
+            <value id="5">true</value>
+            <value id="6">true</value>
+            <value id="7">true</value>
+        </positions>
+
+        <effect target="friend">
+            <heal>3</heal>
+            <removeDebuffs>true</removeDebuffs>
+        </effect>
+        <effect target="enemy">
+            <damageFactor>1</damageFactor>
+            <removeBuffs>true</removeBuffs>
+        </effect>
+    </ability>
+
+    <ability id="3" name="All on one">
+        <animation>all_on_one</animation>
+        <effectAnimation>all_on_one</effectAnimation>
+
+        <positions>
+            <value id="0">true</value>
+            <value id="1">true</value>
+            <value id="2">true</value>
+            <value id="3">true</value>
+        </positions>
+
+        <effect>
+            <mark>2</mark>
+            <buff duration="2">
+                <armour>30</armour>
+            </buff>
+        </effect>
+    </ability>   
+</Abilities>

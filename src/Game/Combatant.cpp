@@ -121,7 +121,12 @@ void Combatant::StartTargetsAttackedAnimation()
 	for (Combatant *c : selectedTargets)
 	{
 		if (c != this)
-			c->StartAttackedAnimation();
+		{
+			if (c->IsPlayer() ^ this->IsPlayer())  //^ = XOR
+				c->StartAttackedAnimation();
+			else
+				c->StartFriendlyAttackedAnimation();
+		}
 	}
 }
 
@@ -187,6 +192,13 @@ void Combatant::StartAttackedAnimation()
 }
 
 
+void Combatant::StartFriendlyAttackedAnimation()
+{
+	ScaleForAbilityAnimation();
+	SetAnimation("attacked_friendly", ABILITY_ANIMATION_SPEED);
+	abilityStatus = attacked;
+}
+
 
 void Combatant::StopAttackedAnimation()
 {
@@ -219,4 +231,21 @@ bool Combatant::AbilityEffectIsPlaying()
 		return false;
 	else
 		return g_pSpritePool->abilityEffectsAnimation->animationIsPlaying();
+}
+
+
+void Combatant::RenderAbilityTargetMarker()
+{
+	int xPos = GetRect().left + (GetRect().width - g_pSpritePool->abilityTargetMarker.GetRect().width) / 2;
+	int yPos = healthBar.GetRect().top + healthBar.GetRect().height + 20;
+	g_pSpritePool->abilityTargetMarker.SetPos(xPos, yPos);
+	g_pSpritePool->abilityTargetMarker.Render(engine->GetWindow());
+}
+
+void Combatant::RenderTurnMarker()
+{
+	int xPos = GetRect().left + (GetRect().width - g_pSpritePool->turnMarker.GetRect().width) / 2;
+	int yPos = healthBar.GetRect().top + healthBar.GetRect().height + 20;
+	g_pSpritePool->turnMarker.SetPos(xPos, yPos);
+	g_pSpritePool->turnMarker.Render(engine->GetWindow());
 }

@@ -26,4 +26,7 @@ public:
 	SpriteWithText abilityAnnouncementBanner;
 
 	SpriterEngine::EntityInstance *abilityEffectsAnimation;
+
+	CSprite abilityTargetMarker;
+	CSprite turnMarker;
 };

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ability id ="-1" name="default">
+    <animation>idle</animation>
+    <effectAnimation>empty</effectAnimation>
+
+    <howMany>1</howMany>
+    <positions>
+      <value id="0">false</value>
+      <value id="1">false</value>
+      <value id="2">false</value>
+      <value id="3">false</value>
+      <value id="4">false</value>
+      <value id="5">false</value>
+      <value id="6">false</value>
+      <value id="7">false</value>
+    </positions>
+
+    <effect>
+        <damageFactor>0</damageFactor>
+        <heal>0</heal>
+        <healSelf>0</healSelf>
+        <confusion>0</confusion>
+        <mark>0</mark>
+        <removeDebuffs>false</removeDebuffs>
+        <removeBuffs>false</removeBuffs>
+        <buff duration="0">
+            <armour>0</armour>
+            <damage>0</damage>
+            <initiative>0</initiative>
+            <maxHealth>0</maxHealth>
+            <currentHealth>0</currentHealth>
+            <dexterity>0</dexterity>
+        </buff>
+    </effect>
+</ability>
+

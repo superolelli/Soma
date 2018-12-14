@@ -18,6 +18,9 @@ void SpritePool::LoadSprites()
 	abilityAnnouncementBanner.SetTextColor(0, sf::Color(220, 220, 220));
 
 	abilityEffectsAnimation = g_pModels->modelAbilityEffects->getNewEntityInstance("ability_effects");
+
+	abilityTargetMarker.Load(g_pTextures->abilityTargetMarker);
+	turnMarker.Load(g_pTextures->turnMarker);
 }
 
 

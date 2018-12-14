@@ -29,4 +29,6 @@ public:
 	sf::Texture sleeping;
 
 	sf::Texture abilityAnnouncementBanner;
+	sf::Texture abilityTargetMarker;
+	sf::Texture turnMarker;
 };

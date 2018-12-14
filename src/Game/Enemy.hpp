@@ -46,4 +46,5 @@ private:
 	void ExecuteAbility();
 
 	void RenderAbilityAnnouncement();
+	void RenderAbilityTargetMarker();
 };

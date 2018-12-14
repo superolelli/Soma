@@ -3,7 +3,6 @@
 
 int main()
 {
-	//start the engine
 	CGameEngine engine;
 
 	engine.Init("Soma");

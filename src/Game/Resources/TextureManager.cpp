@@ -43,6 +43,9 @@ void CTextureManager::LoadTextures()
 
 	abilityAnnouncementBanner.loadFromFile("Data/Sprites/Battle/ability_announcement.png");
 
+	abilityTargetMarker.loadFromFile("Data/Sprites/Battle/battle_marker.png");
+	turnMarker.loadFromFile("Data/Sprites/Battle/turn_marker.png");
+
 }
 
 
