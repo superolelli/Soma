@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Abilities>
+    <ability id="0" name="Unbezwingbare Fröhlichkeit">
+        <animation>indomitable_happiness</animation>
+        <effectAnimation target="friend">indomitable_happiness_friendly</effectAnimation>
+        <effectAnimation target="enemy">indomitable_happiness_hostile</effectAnimation>
+
+        <positions>
+            <value id="0">true</value>
+            <value id="1">true</value>
+            <value id="3">true</value>
+            <value id="4">true</value>
+            <value id="5">true</value>
+            <value id="6">true</value>
+            <value id="7">true</value>
+        </positions>
+
+        <effect target="friend">
+            <buff duration="3">
+                <damage>5</damage>
+                <initiative>2</initiative>
+            </buff>
+        </effect>
+        <effect target="enemy">
+            <healSelf>3</healSelf>
+            <confusion probability="0.3">3</confusion>
+        </effect>
+    </ability>
+
+    <ability id="1" name="Wortschwall">
+        <animation>word_gush</animation>
+        <effectAnimation>word_gush</effectAnimation>
+
+        <positions>
+            <value id="4">true</value>
+            <value id="5">true</value>
+            <value id="6">true</value>
+            <value id="7">true</value>
+        </positions>
+
+        <effect>
+            <damageFactor>1</damageFactor>
+            <putToSleepProbability>0.25</putToSleepProbability>
+        </effect>
+    </ability>
+
+    <ability id="2" name="Nasenflügelschlag">
+        <animation>side_of_nose_blow</animation>
+        <effectAnimation>side_of_nose_blow</effectAnimation>
+
+        <howMany>2</howMany>
+        <positions>
+            <value id="4">true</value>
+            <value id="5">true</value>
+            <value id="6">true</value>
+            <value id="7">true</value>
+        </positions>
+
+        <effect target="enemy">
+            <damageFactor>0.4</damageFactor>
+        </effect>
+    </ability>
+
+    <ability id="3" name="Todesumarmung">
+        <animation>death_hug</animation>
+        <effectAnimation>death_hug</effectAnimation>
+
+        <positions>
+            <value id="4">true</value>
+            <value id="5">true</value>
+            <value id="6">true</value>
+            <value id="7">true</value>
+        </positions>
+
+        <effect>
+            <damageFactor>1</damageFactor>
+            <healSelf>1</healSelf>
+        </effect>
+    </ability>   
+</Abilities>

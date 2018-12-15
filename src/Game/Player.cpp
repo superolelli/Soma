@@ -158,7 +158,17 @@ void Player::DoCurrentAbility()
 {
 	if (!combatantObject->animationIsPlaying() && !AbilityEffectIsPlaying())
 	{
-		DoAbility(gui->GetCurrentAbility(), selectedTargets);
+		HandleConfusion();
+
+		auto &ability = g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()];
+
+		for (Combatant *t : selectedTargets)
+		{
+			if (t->IsPlayer())
+				ApplyAbilityEffectToTarget(t, ability.effectFriendly);
+			else
+				ApplyAbilityEffectToTarget(t, ability.effectHostile);
+		}
 
 		SetAnimation("idle", IDLE_ANIMATION_SPEED);
 		ReverseScaleForAbilityAnimation();
@@ -170,3 +180,70 @@ void Player::DoCurrentAbility()
 }
 
 
+void Player::ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & _effect)
+{
+	if (_effect.damageFactor != 0)
+		_target->Status().LooseHealth(status.GetDamage() * _effect.damageFactor);
+
+	if (_effect.heal != 0)
+		_target->Status().GainHealth(_effect.heal);
+
+	if (_effect.healSelf != 0)
+		status.GainHealth(_effect.healSelf);
+
+	if (_effect.confusion != 0)
+	{
+		if((rand() % 100) + 1 <= _effect.confusionProbability * 100.0f)
+			_target->Status().Confuse(_effect.confusion);
+	}
+
+	if (_effect.mark != 0)
+		_target->Status().Mark(_effect.mark);
+
+	if (_effect.putToSleepProbability != 0.0f)
+	{
+		if ((rand() % 100) + 1 <= _effect.putToSleepProbability * 100.0f)
+			_target->Status().PutToSleep();
+	}
+
+	if (_effect.removeBuffs)
+		_target->Status().RemoveAllBuffs();
+
+	if (_effect.removeDebuffs)
+		_target->Status().RemoveAllDebuffs();
+
+	if (_effect.buff.duration != 0)
+	{
+		if (_effect.buff.isPositive)
+			_target->Status().AddBuff(_effect.buff);
+		else
+			_target->Status().AddDebuff(_effect.buff);
+	}
+}
+
+
+
+void Player::HandleConfusion()
+{
+	if (status.IsConfused())
+	{
+		if (rand() % 4 == 0)
+			status.LooseHealth(1);
+	}
+}
+
+
+
+void Player::StartAbilityAnimation(int _ability)
+{
+	ScaleForAbilityAnimation();
+
+	SetAnimation(g_pObjectProperties->playerAbilities[GetID()][_ability].animation, ABILITY_ANIMATION_SPEED);
+
+	if (selectedTargets[0]->IsPlayer())
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation(g_pObjectProperties->playerAbilities[GetID()][_ability].effectAnimationFriendly);
+	else
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation(g_pObjectProperties->playerAbilities[GetID()][_ability].effectAnimationHostile);
+
+	g_pSpritePool->abilityEffectsAnimation->setCurrentTime(0);
+}

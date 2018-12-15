@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Abilities>
-    <ability id="0" name="Marshmallow flash">
+    <ability id="0" name="Marshmallowflash">
         <animation>marshmallow_flash</animation>
 
         <positions>
@@ -10,7 +10,7 @@
 
         <effect>
             <healSelf>5</healSelf>
-            <buff duration="3"> 
+            <buff duration="3" isPositive="true" onSelf="true"> 
                 <armour>10</armour>
                 <damage>3</damage>
                 <initiative>1</initiative>
@@ -18,7 +18,7 @@
         </effect>
     </ability>
 
-    <ability id="1" name="Mess around">
+    <ability id="1" name="Verarschen">
         <animation>mess_around</animation>
         <effectAnimation>mess_around</effectAnimation>
 
@@ -35,7 +35,7 @@
         </effect>
     </ability>
 
-    <ability id="2" name="Repair">
+    <ability id="2" name="Reparieren">
         <animation>repair</animation>
         <effectAnimation target="friend">repair_friendly</effectAnimation>
         <effectAnimation target="enemy">repair_hostile</effectAnimation>
@@ -61,7 +61,7 @@
         </effect>
     </ability>
 
-    <ability id="3" name="All on one">
+    <ability id="3" name="Alle auf einen">
         <animation>all_on_one</animation>
         <effectAnimation>all_on_one</effectAnimation>
 
@@ -74,7 +74,7 @@
 
         <effect>
             <mark>2</mark>
-            <buff duration="2">
+            <buff duration="2" isPositive="true" onSelf="false">
                 <armour>30</armour>
             </buff>
         </effect>

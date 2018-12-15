@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Abilities>
+    <ability id="0" name="Gummiarm">
+        <animation>gummi_arm</animation>
+        <effectAnimation>gummi_arm</effectAnimation>
+
+        <howMany>3</howMany>
+        <positions>
+            <value id="4">true</value>
+            <value id="5">true</value>
+            <value id="6">true</value>
+            <value id="7">true</value>
+        </positions>
+
+        <effect>
+            <damageFactor>0.3</damageFactor>
+        </effect>
+    </ability>
+
+    <ability id="1" name="Ganzkörpertritt">
+        <animation>whole_body_kick</animation>
+        <effectAnimation>whole_body_kick</effectAnimation>
+
+        <positions>
+            <value id="4">true</value>
+            <value id="5">true</value>
+            <value id="6">true</value>
+            <value id="7">true</value>
+        </positions>
+
+        <effect>
+            <damageFactor>1</damageFactor>
+            <buff duration="3" isPositive="false">
+                <initiative>-1</initiative>
+                <damage>-1</damage>
+            </buff>
+        </effect>
+    </ability>
+
+    <ability id="2" name="Ins System hacken">
+        <animation>hack_into_the_system</animation>
+        <effectAnimation>hack_into_the_system</effectAnimation>
+
+        <positions>
+            <value id="4">true</value>
+            <value id="5">true</value>
+            <value id="6">true</value>
+            <value id="7">true</value>
+        </positions>
+
+        <effect>
+            <damageFactor>1</damageFactor>
+            <buff duration="3" isPositive="false">
+                <armour>-10</armour>
+                <damage>-3</damage>
+            </buff>
+        </effect>
+    </ability>
+
+    <ability id="3" name="Poetry Slam">
+        <animation>poetry_slam</animation>
+
+        <positions>
+            <value id="4">true</value>
+            <value id="5">true</value>
+            <value id="6">true</value>
+            <value id="7">true</value>
+        </positions>
+
+        <effect>
+            <damageFactor>1</damageFactor>
+            <putToSleepProbability>1</putToSleepProbability>
+        </effect>
+    </ability>   
+</Abilities>

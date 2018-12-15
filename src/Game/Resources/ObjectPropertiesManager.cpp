@@ -1,4 +1,5 @@
 #include "ObjectPropertiesManager.hpp"
+#include "../PlayerEnum.hpp"
 
 
 
@@ -25,19 +26,27 @@ void ObjectPropertiesManager::LoadPlayerAbilities()
     PlayerAbility default;
 	loadAbilityFromXML(doc.child("ability"), default);
 
-	//load player specific values
-    doc.load_file("Data/XML/AbilitiesSimon.xml");
+	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesSimon.xml", PlayerID::Simon, default);
+	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesOle.xml", PlayerID::Ole, default);
+	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesAnna.xml", PlayerID::Anna, default);
+	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesMarkus.xml", PlayerID::Markus, default);
+}
 
-    for (auto &playerAbility : playerAbilities)
-    {
-        for (xml_node &ability : doc.child("Abilities").children())
-        {        
-            int abilityID = ability.attribute("id").as_int();
-            playerAbility[abilityID] = default;
 
-			loadAbilityFromXML(ability, playerAbility[abilityID]);
-        }
-    }
+void ObjectPropertiesManager::LoadAbilitiesOfSpecificPlayer(const char* _path, int _id, PlayerAbility &_default)
+{
+	using namespace pugi;
+
+	xml_document doc;
+	doc.load_file(_path);
+
+	for (xml_node &ability : doc.child("Abilities").children())
+	{
+		int abilityID = ability.attribute("id").as_int();
+		playerAbilities[_id][abilityID] = _default;
+
+		loadAbilityFromXML(ability, playerAbilities[_id][abilityID]);
+	}
 }
 
 

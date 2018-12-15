@@ -21,11 +21,12 @@
         <damageFactor>0</damageFactor>
         <heal>0</heal>
         <healSelf>0</healSelf>
-        <confusion>0</confusion>
+        <confusion probability="0">0</confusion>
         <mark>0</mark>
+        <putToSleepProbability>0</putToSleepProbability>
         <removeDebuffs>false</removeDebuffs>
         <removeBuffs>false</removeBuffs>
-        <buff duration="0">
+        <buff duration="0" isPositive="true" onSelf="false">
             <armour>0</armour>
             <damage>0</damage>
             <initiative>0</initiative>

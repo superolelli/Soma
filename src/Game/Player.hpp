@@ -26,14 +26,16 @@ protected:
 	void DoCurrentAbility();
 	bool CombatantClicked(Combatant* _combatant);
 	bool CurrentAbilityCanAimAtCombatant(Combatant* _combatant);
+	void ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & _effect);
+
+	void HandleConfusion();
 
 	void RenderAbilityTargetMarker();
+	void StartAbilityAnimation(int _ability);
 
 	void SelectAdditionalTargets();
 
 	int NumberOfTargetsForCurrentAbility();
-
-	virtual void StartAbilityAnimation(int _ability) {};
 
 	bool is_walking;
 };

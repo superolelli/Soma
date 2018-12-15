@@ -12,5 +12,7 @@ void Buff::SetStandardValues()
 	attributes.damage = 0;
 	attributes.initiative = 0;
 
+	isPositive = true;
+	onSelf = false;
 	duration = 0;
 }

@@ -8,6 +8,12 @@ namespace pugi {
     {
 		if(buffNode.attribute("duration"))
 			buff.duration = buffNode.attribute("duration").as_int();
+
+		if (buffNode.attribute("isPositive"))
+			buff.isPositive = buffNode.attribute("isPositive").as_bool();
+
+		if (buffNode.attribute("onSelf"))
+			buff.onSelf = buffNode.attribute("onSelf").as_bool();
         
         if (buffNode.child("armour"))
             buff.attributes.armour = buffNode.child("armour").text().as_int();
@@ -42,10 +48,17 @@ namespace pugi {
 			effect.healSelf = effectNode.child("healSelf").text().as_int();
 
 		if (effectNode.child("confusion"))
+		{
 			effect.confusion = effectNode.child("confusion").text().as_int();
+			if (effectNode.child("confusiont").attribute("probability"))
+				effect.confusionProbability = effectNode.child("confusion").attribute("probability").as_float();
+		}
 
 		if (effectNode.child("mark"))
 			effect.mark = effectNode.child("mark").text().as_int();
+
+		if (effectNode.child("putToSleep"))
+			effect.putToSleepProbability = effectNode.child("putToSleepProbability").text().as_float();
 
 		if (effectNode.child("removeBuffs"))
 			effect.removeBuffs = effectNode.child("removeBuffs").text().as_bool();
@@ -75,9 +88,8 @@ namespace pugi {
 				ability.effectAnimationFriendly = effectAnimation.text().as_string();
 				ability.effectAnimationHostile = effectAnimation.text().as_string();
 			}
-			else if (effectAnimation.attribute("target").as_string() == "friend")
+			else if (std::strcmp(effectAnimation.attribute("target").as_string(), "friend") == 0)
 				ability.effectAnimationFriendly = effectAnimation.text().as_string();
-
 			else
 				ability.effectAnimationHostile = effectAnimation.text().as_string();
 		}
@@ -97,14 +109,11 @@ namespace pugi {
 				loadAbilityEffectFromXML(effect, ability.effectFriendly);
 				ability.effectHostile = ability.effectFriendly;
 			}
-			else if (effect.attribute("target").as_string() == "friend")
-			{
+			else if (std::strcmp(effect.attribute("target").as_string(), "friend") == 0)
 				loadAbilityEffectFromXML(effect, ability.effectFriendly);
-			}
 			else
-			{
 				loadAbilityEffectFromXML(effect, ability.effectHostile);
-			}
+			
 		}
 	}
 

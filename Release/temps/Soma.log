@@ -1,9 +1,8 @@
-﻿  ObjectPropertiesManager.cpp
-  XMLUtilities.cpp
+﻿  XMLUtilities.cpp
   Code wird generiert.
-  10 of 8158 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    28 functions had inline decision re-evaluated but remain unchanged
+  1 of 8140 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
   Soma.vcxproj -> F:\Soma\Release\Soma.exe
   Soma.vcxproj -> F:\Soma\Release\Soma.pdb (Full PDB)

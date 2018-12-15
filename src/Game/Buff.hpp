@@ -11,4 +11,6 @@ public:
 
 	CombatantAttributes attributes;
 	int duration;
+	bool isPositive;
+	bool onSelf;
 };

@@ -29,6 +29,7 @@ public:
 
 private:
 	void LoadPlayerAbilities();
+	void LoadAbilitiesOfSpecificPlayer(const char* _path, int _id, PlayerAbility &_default);
 	void LoadPlayerAttributes();
 	void LoadEnemyAbilities();
 	void LoadEnemyAttributes();

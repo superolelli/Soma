@@ -12,16 +12,6 @@ public:
 
 	virtual int GetID() override { return PlayerID::Ole; }
 
-	virtual bool DoAbility(int _id, std::vector<Combatant*> &_targets);
-
 private:
-
-	void gummiArm(Combatant* _target);
-	void wholeBodyKick(Combatant* _target);
-	void hackIntoTheSystem(Combatant* _target);
-	void poetrySlam(Combatant* _target);
-
-	void StartAbilityAnimation(int _ability) override;
-
 };
 

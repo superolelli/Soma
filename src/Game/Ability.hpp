@@ -19,7 +19,9 @@ struct AbilityEffect
     int heal;
     int healSelf;
     int confusion;
+	float confusionProbability;
     int mark;
+	float putToSleepProbability;
     bool removeBuffs;
     bool removeDebuffs;
     Buff buff;
