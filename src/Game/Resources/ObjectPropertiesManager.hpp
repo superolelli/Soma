@@ -22,8 +22,8 @@ public:
 	void LoadObjectProperties();
 
 	PlayerAbility playerAbilities[4][4];
-	CombatantAttributes playerAttributes[4];
-	std::map<int, CombatantAttributes> enemyAttributes;
+	CombatantStats playerStats[4];
+	std::map<int, CombatantStats> enemyStats;
 
 	Ability enemyAbilities[2];
 

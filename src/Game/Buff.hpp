@@ -9,7 +9,7 @@ public:
 
 	void SetStandardValues();
 
-	CombatantAttributes attributes;
+	CombatantStats stats;
 	int duration;
 	bool isPositive;
 	bool onSelf;

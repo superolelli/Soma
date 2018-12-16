@@ -32,7 +32,13 @@
             <initiative>0</initiative>
             <maxHealth>0</maxHealth>
             <currentHealth>0</currentHealth>
+						<criticalHit>0</criticalHit>
+						<precision>0</precision>
+						<dodge>0</dodge>
             <dexterity>0</dexterity>
+						<strength>0</strength>
+						<speed>0</speed>
+						<constitution>0</constitution>
         </buff>
     </effect>
 </ability>

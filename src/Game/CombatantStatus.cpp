@@ -28,7 +28,7 @@ void CombatantStatus::HandleBuffDurations(std::vector<Buff> &_buffs)
 
 		if (i->duration <= 0)
 		{
-			attributes -= i->attributes;
+			currentStats -= i->stats;
 			i = _buffs.erase(i);
 		}
 		else
@@ -39,32 +39,32 @@ void CombatantStatus::HandleBuffDurations(std::vector<Buff> &_buffs)
 
 void CombatantStatus::LooseHealth(int _damage)
 {
-	attributes.currentHealth -= _damage - ((float)attributes.armour / 100.0f * _damage);
+	currentStats.currentHealth -= _damage - ((float)currentStats.armour / 100.0f * _damage);
 
-	if (attributes.currentHealth < 0)
-		attributes.currentHealth = 0;
+	if (currentStats.currentHealth < 0)
+		currentStats.currentHealth = 0;
 }
 
 
 void CombatantStatus::GainHealth(int _health)
 {
-	attributes.currentHealth += _health;
+	currentStats.currentHealth += _health;
 
-	if (attributes.currentHealth > attributes.maxHealth)
-		attributes.currentHealth = attributes.maxHealth;
+	if (currentStats.currentHealth > currentStats.maxHealth)
+		currentStats.currentHealth = currentStats.maxHealth;
 }
 
 
 void CombatantStatus::AddBuff(Buff _buff)
 {
-	attributes += _buff.attributes;
+	currentStats += _buff.stats;
 	buffs.push_back(_buff);
 }
 
 
 void CombatantStatus::AddDebuff(Buff _buff)
 {
-	attributes += _buff.attributes;
+	currentStats += _buff.stats;
 	debuffs.push_back(_buff);
 }
 
@@ -73,7 +73,7 @@ void CombatantStatus::RemoveAllBuffs()
 {
 	std::vector<Buff>::iterator i;
 	for (i = buffs.begin(); i != buffs.end();)
-		attributes -= i->attributes;
+		currentStats -= i->stats;
 
 	buffs.clear();
 }
@@ -83,7 +83,7 @@ void CombatantStatus::RemoveAllDebuffs()
 {
 	std::vector<Buff>::iterator i;
 	for (i = debuffs.begin(); i != debuffs.end();)
-		attributes -= i->attributes;
+		currentStats -= i->stats;
 
 	debuffs.clear();
 }
@@ -91,31 +91,46 @@ void CombatantStatus::RemoveAllDebuffs()
 
 int CombatantStatus::GetMaxHealth()
 {
-	return attributes.maxHealth < 0 ? 0 : attributes.maxHealth;
+	return currentStats.maxHealth < 0 ? 0 : currentStats.maxHealth;
 }
 
 
 int CombatantStatus::GetCurrentHealth()
 {
-	return attributes.currentHealth < 0 ? 0 : attributes.currentHealth;
+	return currentStats.currentHealth < 0 ? 0 : currentStats.currentHealth;
 }
 
 
 int CombatantStatus::GetDamage()
 {
-	return attributes.damage < 0 ? 0 : attributes.damage;
+	return currentStats.damage < 0 ? 0 : currentStats.damage;
 }
 
 
 int CombatantStatus::GetArmour()
 {
-	return attributes.armour < 0 ? 0 : attributes.armour;
+	return currentStats.armour < 0 ? 0 : currentStats.armour;
+}
+
+int CombatantStatus::GetCriticalHit()
+{
+	return currentStats.criticalHit < 0 ? 0 : currentStats.criticalHit;
+}
+
+int CombatantStatus::GetDodge()
+{
+	return currentStats.dodge < 0 ? 0 : currentStats.dodge;
+}
+
+int CombatantStatus::GetPrecision()
+{
+	return currentStats.precision < 0 ? 0 : currentStats.precision;
 }
 
 
 int CombatantStatus::GetInitiative()
 {
-	return attributes.initiative < 0 ? 0 : attributes.initiative;
+	return currentStats.initiative < 0 ? 0 : currentStats.initiative;
 }
 
 void CombatantStatus::Reset()

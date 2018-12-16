@@ -13,4 +13,6 @@ namespace pugi {
 
 	void loadAbilityFromXML(const xml_node& abilityNode, PlayerAbility &ability);
 
+	void loadAttributesFromXML(const xml_node& attributeNode, CombatantStats &stats);
+
 }

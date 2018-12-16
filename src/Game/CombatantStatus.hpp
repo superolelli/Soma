@@ -32,17 +32,20 @@ public:
 	int GetCurrentHealth();
 	int GetDamage();
 	int GetArmour();
+	int GetCriticalHit();
+	int GetDodge();
+	int GetPrecision();
 	int GetInitiative();
 
-	int *GetCurrentHealthPointer() { return &attributes.currentHealth; }
-	int *GetMaxHealthPointer() { return &attributes.maxHealth; }
+	int *GetCurrentHealthPointer() { return &currentStats.currentHealth; }
+	int *GetMaxHealthPointer() { return &currentStats.maxHealth; }
 
-	void SetAttributes(CombatantAttributes _attributes) { attributes = _attributes; }
+	void SetStats(CombatantStats _stats) { currentStats = _stats; }
 	void Reset();
 
 private:
 
-	CombatantAttributes attributes;
+	CombatantStats currentStats;
 
 	int confused;
 	bool sleeping;

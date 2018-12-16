@@ -19,7 +19,7 @@ void Enemy::Init(int _id, CGameEngine * _engine)
 	}
 
 	status.Reset();
-	status.SetAttributes(g_pObjectProperties->enemyAttributes[enemyID]);
+	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);
 
 	SetAnimation("idle", IDLE_ANIMATION_SPEED);
 	Scale(ENEMY_SCALE, ENEMY_SCALE);

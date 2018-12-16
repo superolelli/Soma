@@ -2,35 +2,63 @@
 
 <PlayerAttributes>
   <Simon id="0"
+		strength="5"
+		constitution="4"
+		dexterity="5"
+		speed="2"
+				 
     armour ="1"
     health ="20"
     damage ="5"
     initiative ="2"
-    dexterity ="5"
+		criticalHit="5"
+		dodge="2"
+		precision="5"
   ></Simon>
 
   <Ole id="1"
+    strength="5"
+		constitution="4"
+		dexterity="5"
+		speed="1"
+				 
     armour ="1"
     health ="20"
     damage ="5"
-    initiative ="2"
-    dexterity ="5"
+    initiative ="1"
+		criticalHit="5"
+		dodge="1"
+		precision="5"
   ></Ole>
 
   <Anna id="2"
+    strength="5"
+		constitution="4"
+		dexterity="5"
+		speed="1"
+				 
     armour ="1"
     health ="20"
     damage ="5"
-    initiative ="2"
-    dexterity ="5"
+    initiative ="1"
+		criticalHit="5"
+		dodge="1"
+		precision="5"
   ></Anna>
 
   <Markus id="3"
+    strength="5"
+		constitution="4"
+		dexterity="5"
+		speed="1"
+				 
     armour ="1"
     health ="20"
     damage ="5"
-    initiative ="2"
-    dexterity ="5"
+    initiative ="1"
+		criticalHit="5"
+		dodge="1"
+		precision="5"
   ></Markus>
   
 </PlayerAttributes>

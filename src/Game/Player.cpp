@@ -12,7 +12,7 @@ void Player::Init(int _id, CGameEngine *_engine)
 	Scale(PLAYER_SCALE, PLAYER_SCALE);
 	combatantObject->reprocessCurrentTime();
 
-	status.SetAttributes(g_pObjectProperties->playerAttributes[_id]);
+	status.SetStats(g_pObjectProperties->playerStats[_id]);
 
 	ReloadHitbox();
 
