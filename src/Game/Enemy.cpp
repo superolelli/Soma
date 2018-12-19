@@ -3,10 +3,11 @@
 
 
 
-void Enemy::Init(int _id, CGameEngine * _engine)
+void Enemy::Init(int _id, CGameEngine * _engine, NotificationRenderer *_notificationRenderer)
 {
 	engine = _engine;
 	enemyID = _id;
+	notificationRenderer = _notificationRenderer;
 
 	switch (_id)
 	{
@@ -117,7 +118,8 @@ bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 			status.LooseHealth(1);
 	}
 
-	selectedTargets[0]->Status().LooseHealth(status.GetDamage());
+	if(selectedTargets[0]->GetAbilityStatus() != dodging)
+		selectedTargets[0]->Status().LooseHealth(status.GetDamage());
 
 	return true;
 }
@@ -138,6 +140,7 @@ void Enemy::Update()
 
 	if (abilityStatus == executing)
 	{
+		std::cout << "Executing ability" << std::endl;
 		if(!combatantObject->animationIsPlaying() && !AbilityEffectIsPlaying())
 			ExecuteAbility();
 	}
@@ -194,7 +197,7 @@ void Enemy::Render()
 			RenderAbilityTargetMarker();
 	}
 
-	if (abilityStatus == attacked)
+	if (abilityStatus == attacked || abilityStatus == dodging)
 		RenderAbilityEffects();
 }
 

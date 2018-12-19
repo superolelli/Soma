@@ -2,13 +2,13 @@
 
 
 
-void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine)
+void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer)
 {
 	srand(time(0));
-	enemy[3].Init(4, _engine);
-	enemy[2].Init(4, _engine);
-	enemy[1].Init(5, _engine);
-	enemy[0].Init(5, _engine);
+	enemy[3].Init(4, _engine, _notificationRenderer);
+	enemy[2].Init(4, _engine, _notificationRenderer);
+	enemy[1].Init(5, _engine, _notificationRenderer);
+	enemy[0].Init(5, _engine, _notificationRenderer);
 
 	int pos = _xView + ENEMY_X_OFFSET;
 	for (auto &e : enemy)

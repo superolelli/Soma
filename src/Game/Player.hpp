@@ -12,7 +12,7 @@ class Player : public Combatant
 {
 public:
 
-	virtual void Init(int _id, CGameEngine *_engine) override;
+	virtual void Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer) override;
 	void Update(int _xMove, bool _is_walking);
 	virtual void Render() override;
 

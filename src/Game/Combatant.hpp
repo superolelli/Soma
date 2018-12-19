@@ -15,12 +15,13 @@
 #include "Resources\ObjectPropertiesManager.hpp"
 #include "../Framework/Time.hpp"
 #include "CombatantStatus.hpp"
+#include "../Framework/Graphics/NotificationRenderer.hpp"
 
 
 #include "BattleGUI.hpp"
 
 
-enum abilityPhase { ready, executing, finished, attacked };
+enum abilityPhase { ready, executing, finished, attacked, dodging };
 
 const float IDLE_ANIMATION_SPEED = 0.7f;
 const float ABILITY_ANIMATION_SPEED = 1.0f;
@@ -31,7 +32,7 @@ class Combatant
 public:
 	static bool setElapsedTimeForAbilityEffect;
 
-	virtual void Init(int _id, CGameEngine *_engine) = 0;
+	virtual void Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer) = 0;
 	void Quit();
 	virtual void Render() = 0;
 	virtual void Update();
@@ -46,6 +47,7 @@ public:
 	void GiveTurnTo(std::vector<Combatant*> *_targets, BattleGUI *_gui);
 
 	void StartAttackedAnimation();
+	void StartDodgingAnimation();
 	void StartFriendlyAttackedAnimation();
 	void StopAttackedAnimation();
 
@@ -79,6 +81,7 @@ protected:
 
 	CGameEngine *engine;
 	BattleGUI *gui;
+	NotificationRenderer *notificationRenderer;
 
 	abilityPhase abilityStatus;
 
@@ -102,4 +105,5 @@ protected:
 	void ReloadAbilityEffectPoint();
 
 	bool AbilityEffectIsPlaying();
+	bool CheckForDodging(Combatant *_attacker);
 };

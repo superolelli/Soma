@@ -2,9 +2,9 @@
 
 
 
-void PlayerAnna::Init(int _id, CGameEngine *_engine)
+void PlayerAnna::Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer)
 {
 	combatantObject = g_pModels->modelAnna->getNewEntityInstance("anna");
 
-	this->Player::Init(_id, _engine);
+	this->Player::Init(_id, _engine, _notificationRenderer);
 }

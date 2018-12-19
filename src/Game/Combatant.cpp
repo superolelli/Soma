@@ -110,8 +110,11 @@ void Combatant::RenderAbilityEffects()
 	else
 		g_pSpritePool->abilityEffectsAnimation->setTimeElapsed(0);
 
-	g_pSpritePool->abilityEffectsAnimation->render(); 
-	g_pSpritePool->abilityEffectsAnimation->playSoundTriggers();
+	if (GetAbilityStatus() != dodging)
+	{
+		g_pSpritePool->abilityEffectsAnimation->render();
+		g_pSpritePool->abilityEffectsAnimation->playSoundTriggers();
+	}
 }
 
 
@@ -122,8 +125,13 @@ void Combatant::StartTargetsAttackedAnimation()
 	{
 		if (c != this)
 		{
-			if (c->IsPlayer() ^ this->IsPlayer())  //^ = XOR
-				c->StartAttackedAnimation();
+			if (c->IsPlayer() ^ this->IsPlayer()) //^ = XOR
+			{
+				if (c->CheckForDodging(this))
+					c->StartDodgingAnimation();
+				else
+					c->StartAttackedAnimation();
+			}
 			else
 				c->StartFriendlyAttackedAnimation();
 		}
@@ -191,6 +199,16 @@ void Combatant::StartAttackedAnimation()
 	abilityStatus = attacked;
 }
 
+void Combatant::StartDodgingAnimation()
+{
+	std::cout << "Start dodging animation" << std::endl;
+	ScaleForAbilityAnimation();
+	SetAnimation("attacked", ABILITY_ANIMATION_SPEED);
+	notificationRenderer->AddNotification("Ausgewichen!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width/2.0f, GetRect().top), 2.0f);
+
+	abilityStatus = dodging;
+	std::cout <<"Started dodging animation" << std::endl;
+}
 
 void Combatant::StartFriendlyAttackedAnimation()
 {
@@ -231,6 +249,17 @@ bool Combatant::AbilityEffectIsPlaying()
 		return false;
 	else
 		return g_pSpritePool->abilityEffectsAnimation->animationIsPlaying();
+}
+
+
+bool Combatant::CheckForDodging(Combatant *_attacker)
+{
+	std::cout << "Check for dodging" << std::endl;
+	int difference = status.GetDodge() - _attacker->Status().GetPrecision();
+	if (rand()%100 < difference * 2)
+		return true;
+
+	return false;
 }
 
 

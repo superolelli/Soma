@@ -453,6 +453,9 @@
     <ClCompile Include="src\Game\Util\XMLUtilities.cpp">
       <Filter>Quelldateien\Game\Util</Filter>
     </ClCompile>
+    <ClCompile Include="src\Framework\Graphics\NotificationRenderer.cpp">
+      <Filter>Quelldateien\Framework\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -880,6 +883,9 @@
     </ClInclude>
     <ClInclude Include="src\Game\Ability.hpp">
       <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Graphics\NotificationRenderer.hpp">
+      <Filter>Headerdateien\Framework\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

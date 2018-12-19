@@ -3,6 +3,7 @@
 #include "AdventureGroup.hpp"
 #include "BattleGUI.hpp"
 #include "Enemy.hpp"
+#include "../Framework/Graphics/NotificationRenderer.hpp"
 
 
 const int ENEMY_X_OFFSET = 20;
@@ -13,7 +14,7 @@ class Battle
 {
 public:
 
-	void Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine);
+	void Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
 	void Update();
 	void Render();
 	void RenderAbilityAnimations();

@@ -57,7 +57,7 @@
     damage ="5"
     initiative ="1"
 		criticalHit="5"
-		dodge="1"
+		dodge="50"
 		precision="5"
   ></Markus>
   

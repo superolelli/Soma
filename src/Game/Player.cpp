@@ -2,10 +2,11 @@
 
 
 
-void Player::Init(int _id, CGameEngine *_engine)
+void Player::Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer)
 {
 
 	engine = _engine;
+	notificationRenderer = _notificationRenderer;
 
 	SetAnimation("idle", IDLE_ANIMATION_SPEED);
 
@@ -75,7 +76,7 @@ void Player::Render()
 
 	setElapsedTimeForAbilityEffect = false;
 
-	if (abilityStatus == attacked)
+	if (abilityStatus == attacked || abilityStatus == dodging)
 		RenderAbilityEffects();
 
 	if (abilityStatus == ready)
@@ -166,7 +167,7 @@ void Player::DoCurrentAbility()
 		{
 			if (t->IsPlayer())
 				ApplyAbilityEffectToTarget(t, ability.effectFriendly);
-			else
+			else if(t->GetAbilityStatus() != dodging)
 				ApplyAbilityEffectToTarget(t, ability.effectHostile);
 		}
 

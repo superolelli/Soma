@@ -10,7 +10,7 @@ void Game::Init(CGameEngine * _engine)
 	m_pGameEngine->GetWindow().setView(view);
 
 	level.Init();
-	adventureGroup.Init(_engine);
+	adventureGroup.Init(_engine, &notificationRenderer);
 
 	currentGUI = new LevelGUI;
 	currentGUI->Init(m_pGameEngine);
@@ -57,6 +57,8 @@ void Game::Update()
 		UpdateBattle();
 	else
 		UpdateLevel();
+
+	notificationRenderer.Update();
 
 	currentGUI->Update();
 }
@@ -111,7 +113,7 @@ void Game::InitNewBattle()
 	currentGUI->Init(m_pGameEngine);
 
 	currentBattle = new Battle;
-	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine);
+	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer);
 }
 
 
@@ -129,6 +131,8 @@ void Game::Render(double _normalizedTimestep)
 		adventureGroup.Render();
 	else
 		currentBattle->Render();
+
+	notificationRenderer.Render(m_pGameEngine->GetWindow());
 
 	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
 

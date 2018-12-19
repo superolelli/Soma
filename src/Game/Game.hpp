@@ -10,6 +10,7 @@
 #include "GUI.hpp"
 #include "BattleGUI.hpp"
 #include "LevelGUI.hpp"
+#include "../Framework/Graphics/NotificationRenderer.hpp"
 
 
 class Game : public GameState
@@ -34,6 +35,8 @@ private:
 	GUI *currentGUI;
 
 	Battle *currentBattle;
+
+	NotificationRenderer notificationRenderer;
 
 	bool inBattle;
 
