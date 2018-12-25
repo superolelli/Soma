@@ -18,11 +18,11 @@ $RECYCLE.BIN/
 *.lnk
 
 #Dependencies
-Dependencies/
+/Dependencies/
 
 #Builds
-Debug/**
-Release/**
+/Debug/*
+/Release/*
 
 # =========================
 # Operating System Files
@@ -52,3 +52,4 @@ Release/**
 Network Trash Folder
 Temporary Items
 .apdisk
+*.db

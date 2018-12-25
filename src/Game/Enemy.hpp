@@ -31,12 +31,15 @@ private:
 
 	float abilityAnnouncementTime;
 
+	bool confusionChecked;
+
 	void PrepareAbility();
 	void ChooseAbility();
 
 	void ChooseTarget();
 	void CheckForMarkedPlayers();
 	void ChooseRandomPlayer();
+    void ChooseRandomEnemy();
 
 	bool CanAimAtCombatant(Combatant *_combatant);
 

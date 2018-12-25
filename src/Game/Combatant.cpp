@@ -125,7 +125,7 @@ void Combatant::StartTargetsAttackedAnimation()
 	{
 		if (c != this)
 		{
-			if (c->IsPlayer() ^ this->IsPlayer()) //^ = XOR
+			if ((c->IsPlayer() ^ this->IsPlayer()) || actsInConfusion) //^ = XOR
 			{
 				if (c->CheckForDodging(this))
 					c->StartDodgingAnimation();
@@ -201,13 +201,11 @@ void Combatant::StartAttackedAnimation()
 
 void Combatant::StartDodgingAnimation()
 {
-	std::cout << "Start dodging animation" << std::endl;
 	ScaleForAbilityAnimation();
 	SetAnimation("attacked", ABILITY_ANIMATION_SPEED);
-	notificationRenderer->AddNotification("Ausgewichen!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width/2.0f, GetRect().top), 2.0f);
+	notificationRenderer->AddNotification("Ausgewichen!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width/2.0f, GetRect().top), 1.0f);
 
 	abilityStatus = dodging;
-	std::cout <<"Started dodging animation" << std::endl;
 }
 
 void Combatant::StartFriendlyAttackedAnimation()
@@ -254,7 +252,6 @@ bool Combatant::AbilityEffectIsPlaying()
 
 bool Combatant::CheckForDodging(Combatant *_attacker)
 {
-	std::cout << "Check for dodging" << std::endl;
 	int difference = status.GetDodge() - _attacker->Status().GetPrecision();
 	if (rand()%100 < difference * 2)
 		return true;
@@ -277,4 +274,47 @@ void Combatant::RenderTurnMarker()
 	int yPos = healthBar.GetRect().top + healthBar.GetRect().height + 20;
 	g_pSpritePool->turnMarker.SetPos(xPos, yPos);
 	g_pSpritePool->turnMarker.Render(engine->GetWindow());
+}
+
+
+
+void Combatant::ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & _effect)
+{
+	if (_effect.damageFactor != 0)
+		_target->Status().LooseHealth(status.GetDamage() * _effect.damageFactor);
+
+	if (_effect.heal != 0)
+		_target->Status().GainHealth(_effect.heal);
+
+	if (_effect.healSelf != 0)
+		status.GainHealth(_effect.healSelf);
+
+	if (_effect.confusion != 0)
+	{
+		if ((rand() % 100) + 1 <= _effect.confusionProbability * 100.0f)
+			_target->Status().Confuse(_effect.confusion);
+	}
+
+	if (_effect.mark != 0)
+		_target->Status().Mark(_effect.mark);
+
+	if (_effect.putToSleepProbability != 0.0f)
+	{
+		if ((rand() % 100) + 1 <= _effect.putToSleepProbability * 100.0f)
+			_target->Status().PutToSleep();
+	}
+
+	if (_effect.removeBuffs)
+		_target->Status().RemoveAllBuffs();
+
+	if (_effect.removeDebuffs)
+		_target->Status().RemoveAllDebuffs();
+
+	if (_effect.buff.duration != 0)
+	{
+		if (_effect.buff.isPositive)
+			_target->Status().AddBuff(_effect.buff);
+		else
+			_target->Status().AddDebuff(_effect.buff);
+	}
 }

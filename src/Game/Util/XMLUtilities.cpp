@@ -76,7 +76,7 @@ namespace pugi {
 		if (effectNode.child("mark"))
 			effect.mark = effectNode.child("mark").text().as_int();
 
-		if (effectNode.child("putToSleep"))
+		if (effectNode.child("putToSleepProbability"))
 			effect.putToSleepProbability = effectNode.child("putToSleepProbability").text().as_float();
 
 		if (effectNode.child("removeBuffs"))
@@ -92,7 +92,7 @@ namespace pugi {
 
 
 
-	void loadAbilityFromXML(const xml_node & abilityNode, PlayerAbility & ability)
+	void loadAbilityFromXML(const xml_node & abilityNode, Ability & ability)
 	{
 		if (abilityNode.attribute("name"))
 			ability.name = abilityNode.attribute("name").as_string();

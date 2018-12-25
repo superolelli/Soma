@@ -28,7 +28,7 @@ struct AbilityEffect
 };
 
 
-struct PlayerAbility
+struct Ability
 {
     std::string name;
     PossibleAims possibleAims;

@@ -77,6 +77,8 @@ protected:
 	int battlePosition;
 	SpriterEngine::point lastPosition;
 
+	bool actsInConfusion;
+
 	Bar healthBar;
 
 	CGameEngine *engine;
@@ -92,6 +94,8 @@ protected:
 	void RenderStatusSymbols(sf::RenderTarget &_target);
 
 	void RenderAbilityEffects();
+
+	void ApplyAbilityEffectToTarget(Combatant *_target, AbilityEffect &_effect);
 
 	void StartTargetsAttackedAnimation();
 	void StopTargetsAttackedAnimation();

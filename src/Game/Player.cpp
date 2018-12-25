@@ -24,6 +24,7 @@ void Player::Init(int _id, CGameEngine *_engine, NotificationRenderer *_notifica
 	status.Reset();
 
 	is_walking = false;
+	actsInConfusion = false;
 
 	abilityStatus = finished;
 }
@@ -165,7 +166,7 @@ void Player::DoCurrentAbility()
 
 		for (Combatant *t : selectedTargets)
 		{
-			if (t->IsPlayer())
+			if (t->IsPlayer() && !actsInConfusion)
 				ApplyAbilityEffectToTarget(t, ability.effectFriendly);
 			else if(t->GetAbilityStatus() != dodging)
 				ApplyAbilityEffectToTarget(t, ability.effectHostile);
@@ -177,48 +178,6 @@ void Player::DoCurrentAbility()
 		
 		selectedTargets.clear();
 		abilityStatus = finished;
-	}
-}
-
-
-void Player::ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & _effect)
-{
-	if (_effect.damageFactor != 0)
-		_target->Status().LooseHealth(status.GetDamage() * _effect.damageFactor);
-
-	if (_effect.heal != 0)
-		_target->Status().GainHealth(_effect.heal);
-
-	if (_effect.healSelf != 0)
-		status.GainHealth(_effect.healSelf);
-
-	if (_effect.confusion != 0)
-	{
-		if((rand() % 100) + 1 <= _effect.confusionProbability * 100.0f)
-			_target->Status().Confuse(_effect.confusion);
-	}
-
-	if (_effect.mark != 0)
-		_target->Status().Mark(_effect.mark);
-
-	if (_effect.putToSleepProbability != 0.0f)
-	{
-		if ((rand() % 100) + 1 <= _effect.putToSleepProbability * 100.0f)
-			_target->Status().PutToSleep();
-	}
-
-	if (_effect.removeBuffs)
-		_target->Status().RemoveAllBuffs();
-
-	if (_effect.removeDebuffs)
-		_target->Status().RemoveAllDebuffs();
-
-	if (_effect.buff.duration != 0)
-	{
-		if (_effect.buff.isPositive)
-			_target->Status().AddBuff(_effect.buff);
-		else
-			_target->Status().AddDebuff(_effect.buff);
 	}
 }
 

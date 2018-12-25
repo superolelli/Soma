@@ -23,7 +23,7 @@ void ObjectPropertiesManager::LoadPlayerAbilities()
     doc.load_file("Data/XML/AbilitiesDefault.xml");
 
     //get default values
-    PlayerAbility default;
+    Ability default;
 	loadAbilityFromXML(doc.child("ability"), default);
 
 	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesSimon.xml", PlayerID::Simon, default);
@@ -33,7 +33,7 @@ void ObjectPropertiesManager::LoadPlayerAbilities()
 }
 
 
-void ObjectPropertiesManager::LoadAbilitiesOfSpecificPlayer(const char* _path, int _id, PlayerAbility &_default)
+void ObjectPropertiesManager::LoadAbilitiesOfSpecificPlayer(const char* _path, int _id, Ability &_default)
 {
 	using namespace pugi;
 
@@ -69,42 +69,25 @@ void ObjectPropertiesManager::LoadPlayerAttributes()
 
 
 
-
 void ObjectPropertiesManager::LoadEnemyAbilities()
 {
 	using namespace pugi;
 
 	xml_document doc;
-	doc.load_file("Data/XML/EnemyAbilities.xml");
+	doc.load_file("Data/XML/AbilitiesDefault.xml");
 
 	//get default values
 	Ability default;
-	default.possibleAims.howMany = doc.child("EnemyAbilities").child("default").attribute("how_many").as_int();
-	default.name = doc.child("EnemyAbilities").child("default").attribute("name").as_string();
-	for (xml_node pos : doc.child("EnemyAbilities").child("default").child("positions").children())
-	{
-		default.possibleAims.position[pos.attribute("id").as_int()] = pos.text().as_bool();
-	}
+	loadAbilityFromXML(doc.child("ability"), default);
 
-	//load ability values
-	for (xml_node ability : doc.child("EnemyAbilities").children())
+	doc.load_file("Data/XML/EnemyAbilities.xml");
+
+	for (xml_node &ability : doc.child("Abilities").children())
 	{
 		int abilityID = ability.attribute("id").as_int();
+		enemyAbilities[abilityID] = default;
 
-		if (abilityID >= 0)
-		{
-			enemyAbilities[abilityID] = default;
-
-			if (ability.attribute("how_many"))
-				enemyAbilities[abilityID].possibleAims.howMany = ability.attribute("how_many").as_int();
-
-			enemyAbilities[abilityID].name = ability.attribute("name").as_string();
-
-			for (xml_node pos : ability.child("positions").children())
-			{
-				enemyAbilities[abilityID].possibleAims.position[pos.attribute("id").as_int()] = pos.text().as_bool();
-			}
-		}
+		loadAbilityFromXML(ability, enemyAbilities[abilityID]);
 	}
 }
 

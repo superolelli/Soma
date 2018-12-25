@@ -26,7 +26,6 @@ protected:
 	void DoCurrentAbility();
 	bool CombatantClicked(Combatant* _combatant);
 	bool CurrentAbilityCanAimAtCombatant(Combatant* _combatant);
-	void ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & _effect);
 
 	void HandleConfusion();
 

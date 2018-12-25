@@ -34,6 +34,8 @@ void Enemy::Init(int _id, CGameEngine * _engine, NotificationRenderer *_notifica
 
 	abilityAnnouncementTime = 0.0f;
 	abilityStatus = finished;
+	confusionChecked = false;
+	actsInConfusion = false;
 }
 
 
@@ -69,8 +71,11 @@ void Enemy::CheckForMarkedPlayers()
 	{
 		if (c->IsPlayer() && c->Status().IsMarked() && CanAimAtCombatant(c))
 		{
-			selectedTargets.push_back(c);
-			return;
+            if (rand() % 10 < 8)
+            {
+                selectedTargets.push_back(c);
+                return;
+            }
 		}
 	}
 }
@@ -110,19 +115,47 @@ void Enemy::ChooseRandomPlayer()
 }
 
 
+void Enemy::ChooseRandomEnemy()
+{
+	int numberOfEnemies = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), -1, [&](int sum, Combatant *c) {if (!c->IsPlayer())return sum + 1; else return sum; });
+
+    if (numberOfEnemies > 0)
+    {
+		int target = rand() % numberOfEnemies;
+		for (Combatant *c : (*allCombatants))
+		{
+			if (!c->IsPlayer())
+			{
+				if (target == 0)
+				{
+					selectedTargets.push_back(c);
+					return;
+				}
+				target--;
+			}
+		}
+    }
+	else
+	{
+		abilityStatus = finished;
+	}
+}
+
+
 bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
-	if (status.IsConfused())
+	for (Combatant *t : selectedTargets)
 	{
-		if (rand() % 4 == 0)
-			status.LooseHealth(1);
+		if (!t->IsPlayer() || actsInConfusion)
+			ApplyAbilityEffectToTarget(t, g_pObjectProperties->enemyAbilities[chosenAbility].effectFriendly);
+		else if(t->GetAbilityStatus() != dodging)
+			ApplyAbilityEffectToTarget(t, g_pObjectProperties->enemyAbilities[chosenAbility].effectHostile);
 	}
-
-	if(selectedTargets[0]->GetAbilityStatus() != dodging)
-		selectedTargets[0]->Status().LooseHealth(status.GetDamage());
 
 	return true;
 }
+
+
 
 
 
@@ -132,15 +165,31 @@ void Enemy::Update()
 
 	if (abilityStatus == ready)
 	{
-		if (abilityAnnouncementTime <= 0.0f)
-			PrepareAbility();
+		if (confusionChecked == false)
+		{
+			if (status.IsConfused() && rand() % 10 < 5)
+			{
+				selectedTargets.clear();
+				ChooseAbility();
+				ChooseRandomEnemy();
+				notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left - GetRect().width/2.0f, GetRect().top - 20.0f), 1.0f);
+				abilityAnnouncementTime = 2.0f;
+				actsInConfusion = true;
+			}
+
+			confusionChecked = true;
+		}
 		else
+		{
+			if (abilityAnnouncementTime <= 0.0f)
+				PrepareAbility();
+			
 			AnnounceAndStartAbilityAnimation();
+		}
 	}
 
 	if (abilityStatus == executing)
 	{
-		std::cout << "Executing ability" << std::endl;
 		if(!combatantObject->animationIsPlaying() && !AbilityEffectIsPlaying())
 			ExecuteAbility();
 	}
@@ -177,6 +226,8 @@ void Enemy::ExecuteAbility()
 
 	DoAbility(gui->GetCurrentAbility(), *allCombatants);
 	abilityStatus = finished;
+	confusionChecked = false;
+	actsInConfusion = false;
 }
 
 
@@ -186,7 +237,7 @@ void Enemy::Render()
 	combatantObject->render();
 	combatantObject->playSoundTriggers();
 
-	if (abilityAnnouncementTime > 0.0f && abilityAnnouncementTime < 1.0f)
+	if (abilityAnnouncementTime > 0.0f && abilityAnnouncementTime < 1.0f && !actsInConfusion)
 		RenderAbilityAnnouncement();
 
 	if (abilityStatus == ready)
@@ -223,18 +274,12 @@ void Enemy::StartAbilityAnimation(int _ability)
 {
 	ScaleForAbilityAnimation();                           //order is relevant because "bang" has no hitbox (needed for animation calculation)
 
-	switch (_ability)
-	{
-	case 0:
-		SetAnimation("bang", ABILITY_ANIMATION_SPEED);
-		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("bang");
-		break;
+	SetAnimation(g_pObjectProperties->enemyAbilities[_ability].animation, ABILITY_ANIMATION_SPEED);
 
-	case 1:
-		SetAnimation("springfield", ABILITY_ANIMATION_SPEED);
-		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation("springfield");
-		break;
-	}
+	if (!selectedTargets[0]->IsPlayer())
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation(g_pObjectProperties->enemyAbilities[_ability].effectAnimationFriendly);
+	else
+		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation(g_pObjectProperties->enemyAbilities[_ability].effectAnimationHostile);
 
 	g_pSpritePool->abilityEffectsAnimation->setCurrentTime(0);
 }

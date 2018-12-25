@@ -10,6 +10,7 @@
 
         <effect>
             <healSelf>5</healSelf>
+            <removeDebuffs>true</removeDebuffs>
             <buff duration="3" isPositive="true" onSelf="true"> 
                 <armour>10</armour>
                 <damage>3</damage>
@@ -31,7 +32,7 @@
 
         <effect>
             <damageFactor>0.5</damageFactor>
-            <confusion>3</confusion>
+            <confusion probability="1">3</confusion>
         </effect>
     </ability>
 
@@ -56,7 +57,7 @@
             <removeDebuffs>true</removeDebuffs>
         </effect>
         <effect target="enemy">
-            <damageFactor>1</damageFactor>
+            <damageFactor>0.8</damageFactor>
             <removeBuffs>true</removeBuffs>
         </effect>
     </ability>

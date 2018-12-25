@@ -11,7 +11,7 @@ namespace pugi {
 
     void loadAbilityEffectFromXML(const xml_node& effectNode, AbilityEffect &effect);
 
-	void loadAbilityFromXML(const xml_node& abilityNode, PlayerAbility &ability);
+	void loadAbilityFromXML(const xml_node& abilityNode, Ability &ability);
 
 	void loadAttributesFromXML(const xml_node& attributeNode, CombatantStats &stats);
 

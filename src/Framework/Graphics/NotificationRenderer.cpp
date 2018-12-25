@@ -1,4 +1,5 @@
 #include "NotificationRenderer.hpp"
+#include <iostream>
 
 
 void NotificationRenderer::Update()
@@ -6,7 +7,7 @@ void NotificationRenderer::Update()
 	for (auto it = notifications.begin(); it != notifications.end();)
 	{
 		it->duration -= (float)(MS_PER_UPDATE) / 1000.0f;
-		it->text.move(0.0f, -3.0f);
+		it->text.move(0.0f, -2.0f);
 
 		if (it->duration <= 0.0f)
 			it = notifications.erase(it);
