@@ -220,11 +220,11 @@ void Enemy::AnnounceAndStartAbilityAnimation()
 
 void Enemy::ExecuteAbility()
 {
+	DoAbility(gui->GetCurrentAbility(), *allCombatants);
+
 	SetAnimation("idle", IDLE_ANIMATION_SPEED);
 	ReverseScaleForAbilityAnimation();
 	StopTargetsAttackedAnimation();
-
-	DoAbility(gui->GetCurrentAbility(), *allCombatants);
 	abilityStatus = finished;
 	confusionChecked = false;
 	actsInConfusion = false;

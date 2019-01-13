@@ -69,7 +69,7 @@ namespace pugi {
 		if (effectNode.child("confusion"))
 		{
 			effect.confusion = effectNode.child("confusion").text().as_int();
-			if (effectNode.child("confusiont").attribute("probability"))
+			if (effectNode.child("confusion").attribute("probability"))
 				effect.confusionProbability = effectNode.child("confusion").attribute("probability").as_float();
 		}
 
