@@ -1,4 +1,5 @@
 #include "Combatant.hpp"
+#include "Markus.hpp"
 
 bool Combatant::setElapsedTimeForAbilityEffect;
 
@@ -100,7 +101,13 @@ void Combatant::RenderAbilityEffects()
 	g_pSpritePool->abilityEffectsAnimation->reprocessCurrentTime();
 	SpriterEngine::UniversalObjectInterface* pointObj = g_pSpritePool->abilityEffectsAnimation->getObjectInstance("attaching_point");
 
-	g_pSpritePool->abilityEffectsAnimation->setPosition(SpriterEngine::point(abilityEffectPoint.x - pointObj->getPosition().x, abilityEffectPoint.y - pointObj->getPosition().y));
+	auto pointObjPlayer = g_pSpritePool->abilityEffectsAnimation->objectIfExistsOnCurrentFrame("attaching_point_player");
+
+	if(pointObjPlayer != nullptr && this->IsPlayer())
+		g_pSpritePool->abilityEffectsAnimation->setPosition(SpriterEngine::point(abilityEffectPoint.x - pointObjPlayer->getPosition().x, abilityEffectPoint.y - pointObjPlayer->getPosition().y));
+	else
+		g_pSpritePool->abilityEffectsAnimation->setPosition(SpriterEngine::point(abilityEffectPoint.x - pointObj->getPosition().x, abilityEffectPoint.y - pointObj->getPosition().y));
+
 
 	if (Combatant::setElapsedTimeForAbilityEffect == false)
 	{
@@ -125,6 +132,9 @@ void Combatant::StartTargetsAttackedAnimation()
 	{
 		if (c != this)
 		{
+			if (dynamic_cast<PlayerMarkus*>(c) != nullptr)
+				dynamic_cast<PlayerMarkus*>(c)->AttackedBy(this->battlePosition);
+
 			if ((c->IsPlayer() ^ this->IsPlayer()) || actsInConfusion) //^ = XOR
 			{
 				if (c->CheckForDodging(this))

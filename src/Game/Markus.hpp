@@ -12,6 +12,12 @@ public:
 
 	virtual int GetID() override { return PlayerID::Markus; }
 
+	void AttackedBy(int _battlePos);
+	void ResetFistOfRevenge();
+	bool CanAimFistOfRevengeAt(int _battlePos);
+
 private:
+
+	bool wasAttackedLastRoundBy[4];
 
 };

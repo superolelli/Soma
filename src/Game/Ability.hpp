@@ -9,6 +9,7 @@
 struct PossibleAims
 {
     bool position[8];
+	bool attackAll;
     int howMany;
 };
 
@@ -25,6 +26,8 @@ struct AbilityEffect
     bool removeBuffs;
     bool removeDebuffs;
     Buff buff;
+
+	void clear();
 };
 
 
@@ -37,4 +40,7 @@ struct Ability
     std::string effectAnimationHostile;
     AbilityEffect effectFriendly;
     AbilityEffect effectHostile;
+
+	void clear();
 };
+

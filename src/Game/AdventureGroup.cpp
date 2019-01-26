@@ -29,7 +29,7 @@ void AdventureGroup::Init(CGameEngine *_engine, NotificationRenderer *_notificat
 
 void AdventureGroup::Quit()
 {
-	for (auto a : adventurer)
+	for (auto &a : adventurer)
 	{
 		a->Quit();
 		SAFE_DELETE(a);

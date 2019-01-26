@@ -1,5 +1,5 @@
 #include "Player.hpp"
-
+#include "Markus.hpp"
 
 
 void Player::Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer)
@@ -33,6 +33,11 @@ void Player::Init(int _id, CGameEngine *_engine, NotificationRenderer *_notifica
 int Player::NumberOfTargetsForCurrentAbility()
 {
 	return g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].possibleAims.howMany;
+}
+
+bool Player::CurrentAbilityAttacksAll()
+{
+	return g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].possibleAims.attackAll;
 }
 
 
@@ -75,8 +80,6 @@ void Player::Render()
 	combatantObject->render();
 	combatantObject->playSoundTriggers();
 
-	setElapsedTimeForAbilityEffect = false;
-
 	if (abilityStatus == attacked || abilityStatus == dodging)
 		RenderAbilityEffects();
 
@@ -98,7 +101,7 @@ void Player::RenderAbilityTargetMarker()
 
 			for (Combatant* c : (*allCombatants))
 			{
-				if (c->GetBattlePos() >= targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
+				if (CurrentAbilityAttacksAll() && this != c || c->GetBattlePos() >= targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
 					c->RenderAbilityTargetMarker();				
 			}
 
@@ -135,7 +138,7 @@ void Player::SelectAdditionalTargets()
 
 	for (Combatant* c : (*allCombatants))
 	{
-		if (c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
+		if (CurrentAbilityAttacksAll() && this != c  && selectedTargets[0] != c || c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
 			selectedTargets.push_back(c);
 	}
 }
@@ -144,7 +147,14 @@ void Player::SelectAdditionalTargets()
 
 bool Player::CurrentAbilityCanAimAtCombatant(Combatant* _combatant)
 {
-	return g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].possibleAims.position[_combatant->GetBattlePos()];
+	bool canAim = g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].possibleAims.position[_combatant->GetBattlePos()];
+
+	if (dynamic_cast<PlayerMarkus*>(this) != nullptr && gui->GetCurrentAbility() == 0) { 
+		auto *markus = dynamic_cast<PlayerMarkus*>(this);
+		return (canAim && markus->CanAimFistOfRevengeAt(_combatant->GetBattlePos()));
+	}
+
+	return canAim;
 }
 
 
@@ -178,6 +188,9 @@ void Player::DoCurrentAbility()
 		
 		selectedTargets.clear();
 		abilityStatus = finished;
+
+		if (dynamic_cast<PlayerMarkus*>(this))
+			dynamic_cast<PlayerMarkus*>(this)->ResetFistOfRevenge();
 	}
 }
 

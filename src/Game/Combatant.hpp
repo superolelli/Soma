@@ -64,6 +64,8 @@ public:
 	void RenderAbilityTargetMarker();
 	void RenderTurnMarker();
 
+	void ResetAbilityStatus() { abilityStatus = finished; }
+
 	virtual bool IsPlayer() { return false; }
 
 protected:

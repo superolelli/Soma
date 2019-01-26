@@ -48,6 +48,9 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 
 void Battle::Quit()
 {
+	for (Combatant *c : combatants)
+		c->ResetAbilityStatus();
+
 	for (Enemy &e : enemy)
 		e.Quit();
 }
@@ -134,6 +137,7 @@ void Battle::CalculateTurnOrder()
 
 void Battle::Render()
 {
+	Combatant::setElapsedTimeForAbilityEffect = false;
 	for (Combatant* c : combatants)
 	{
 		if (c->GetAbilityStatus() != executing && c->GetAbilityStatus() != attacked)

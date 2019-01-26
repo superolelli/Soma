@@ -35,6 +35,7 @@ protected:
 	void SelectAdditionalTargets();
 
 	int NumberOfTargetsForCurrentAbility();
+	bool CurrentAbilityAttacksAll();
 
 	bool is_walking;
 };

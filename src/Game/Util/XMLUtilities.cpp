@@ -98,7 +98,7 @@ namespace pugi {
 			ability.name = abilityNode.attribute("name").as_string();
 
 		if (abilityNode.child("animation"))
-			ability.animation = abilityNode.child_value("animation");
+			ability.animation = abilityNode.child("animation").text().as_string();
 
 		for (auto &effectAnimation : abilityNode.children("effectAnimation"))
 		{
@@ -115,6 +115,9 @@ namespace pugi {
 
 		if (abilityNode.child("howMany"))
 			ability.possibleAims.howMany = abilityNode.child("howMany").text().as_int();
+
+		if (abilityNode.child("attackAll"))
+			ability.possibleAims.attackAll = abilityNode.child("attackAll").text().as_bool();
 
 		for (xml_node &pos : abilityNode.child("positions").children())
 		{

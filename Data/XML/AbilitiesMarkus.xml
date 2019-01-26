@@ -38,16 +38,23 @@
         <animation>hard_destruction</animation>
         <effectAnimation>hard_destruction</effectAnimation>
 
+		<attackAll>true</attackAll>
         <positions>
+			<value id="0">true</value>
+			<value id="1">true</value>
+			<value id="2">true</value>
             <value id="4">true</value>
             <value id="5">true</value>
             <value id="6">true</value>
             <value id="7">true</value>
         </positions>
 
-        <effect>
-            <damageFactor>1</damageFactor>
+        <effect target="enemy">
+            <damageFactor>0.5</damageFactor>
         </effect>
+		<effect target="friend">
+			<damageFactor>0.2</damageFactor>
+		</effect>
     </ability>
 
     <ability id="3" name="Fürchterliches Grinsen">

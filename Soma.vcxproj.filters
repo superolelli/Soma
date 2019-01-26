@@ -456,6 +456,9 @@
     <ClCompile Include="src\Framework\Graphics\NotificationRenderer.cpp">
       <Filter>Quelldateien\Framework\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\Ability.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">

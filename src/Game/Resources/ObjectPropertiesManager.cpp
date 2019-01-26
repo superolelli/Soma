@@ -24,6 +24,8 @@ void ObjectPropertiesManager::LoadPlayerAbilities()
 
     //get default values
     Ability default;
+	default.clear();
+
 	loadAbilityFromXML(doc.child("ability"), default);
 
 	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesSimon.xml", PlayerID::Simon, default);
@@ -44,7 +46,6 @@ void ObjectPropertiesManager::LoadAbilitiesOfSpecificPlayer(const char* _path, i
 	{
 		int abilityID = ability.attribute("id").as_int();
 		playerAbilities[_id][abilityID] = _default;
-
 		loadAbilityFromXML(ability, playerAbilities[_id][abilityID]);
 	}
 }

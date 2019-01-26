@@ -6,6 +6,7 @@
     <effectAnimation>empty</effectAnimation>
 
     <howMany>1</howMany>
+	<attackAll>false</attackAll>
     <positions>
       <value id="0">false</value>
       <value id="1">false</value>
