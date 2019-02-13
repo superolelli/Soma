@@ -97,6 +97,9 @@ namespace pugi {
 		if (abilityNode.attribute("name"))
 			ability.name = abilityNode.attribute("name").as_string();
 
+		if (abilityNode.child("description"))
+			ability.description = abilityNode.child("description").text().as_string();
+
 		if (abilityNode.child("animation"))
 			ability.animation = abilityNode.child("animation").text().as_string();
 

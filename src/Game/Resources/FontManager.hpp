@@ -12,5 +12,9 @@ public:
 
 	//returns a font
 	sf::Font f_kingArthur;
+	sf::Font f_calibri;
+	sf::Font f_arial;
+	sf::Font f_plantc;
+	sf::Font f_openSans;
 
 };

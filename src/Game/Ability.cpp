@@ -19,6 +19,7 @@ void AbilityEffect::clear()
 void Ability::clear()
 {
 	name.clear();
+	description.clear();
 	animation.clear();
 	effectAnimationFriendly.clear();
 	effectAnimationHostile.clear();

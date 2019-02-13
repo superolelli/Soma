@@ -230,6 +230,7 @@
     <ClCompile Include="src\Framework\Animations\variable\variableinstancenameandidmap.cpp" />
     <ClCompile Include="src\Framework\Gameengine.cpp" />
     <ClCompile Include="src\Framework\Graphics\NotificationRenderer.cpp" />
+    <ClCompile Include="src\Framework\Graphics\RichText.cpp" />
     <ClCompile Include="src\Framework\Graphics\Sprite.cpp" />
     <ClCompile Include="src\Framework\Graphics\SpriteWithText.cpp" />
     <ClCompile Include="src\Framework\Gui\Bar.cpp" />
@@ -268,6 +269,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Graphics\NotificationRenderer.hpp" />
+    <ClInclude Include="src\Framework\Graphics\RichText.hpp" />
     <ClInclude Include="src\Game\Ability.hpp" />
     <ClInclude Include="src\Game\Resources\EnemyAbilities.hpp" />
     <ClInclude Include="src\Framework\Animations\animation\animation.h" />

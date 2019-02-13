@@ -457,7 +457,10 @@
       <Filter>Quelldateien\Framework\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\Ability.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Graphics\RichText.cpp">
+      <Filter>Quelldateien\Framework\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -888,6 +891,9 @@
       <Filter>Headerdateien\Game</Filter>
     </ClInclude>
     <ClInclude Include="src\Framework\Graphics\NotificationRenderer.hpp">
+      <Filter>Headerdateien\Framework\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Graphics\RichText.hpp">
       <Filter>Headerdateien\Framework\Graphics</Filter>
     </ClInclude>
   </ItemGroup>

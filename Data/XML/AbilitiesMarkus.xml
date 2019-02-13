@@ -15,6 +15,12 @@
         <effect>
             <damageFactor>2</damageFactor>
         </effect>
+
+        <description>*#ffa500 Fist of Revenge*
+#aa5000 Geht nur auf Gegner, die 
+Markus letze Runde angegriffen haben
+#white Schadensfaktor: 200%
+        </description>
     </ability>
 
     <ability id="1" name="Nasenrammbock">
@@ -32,6 +38,10 @@
         <effect>
             <damageFactor>0.3</damageFactor>
         </effect>
+
+        <description>*#ffa500 Nasenrammbock*
+#white Schadensfaktor: 30%
+        </description>
     </ability>
 
     <ability id="2" name="Harte Zerstörung">
@@ -55,6 +65,14 @@
 		<effect target="friend">
 			<damageFactor>0.2</damageFactor>
 		</effect>
+
+        <description>*#ffa500 Harte Zerstörung*
+#aa5000 Geht auf alle (Gegner und Freunde)
+#888888 Auf Freund
+    #white Schadensfaktor: 20%
+#888888 Auf Gegner
+    #white Schadensfaktor: 50%
+        </description>
     </ability>
 
     <ability id="3" name="Fürchterliches Grinsen">
@@ -69,12 +87,19 @@
         </positions>
 
         <effect>
-            <damageFactor>1</damageFactor>
+            <damageFactor>0.8</damageFactor>
             <buff duration="3" isPositive="false">
                 <damage>-2</damage>
                 <initiative>-2</initiative>
             </buff>
         </effect>
+
+        <description>*#ffa500 Fürchterliches Grinsen*    
+#white Schadensfaktor: 80%
+Für 3 Runden:
+    #aaaadd -2 Schaden
+    -2 Initiative
+        </description>
     </ability>   
     
 </Abilities>

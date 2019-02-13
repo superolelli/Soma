@@ -34,6 +34,7 @@ struct AbilityEffect
 struct Ability
 {
     std::string name;
+	std::string description;
     PossibleAims possibleAims;
     std::string animation;
     std::string effectAnimationFriendly;

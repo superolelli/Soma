@@ -8,3 +8,4 @@
 #include "ModelManager.hpp"
 #include "SpritePool.hpp"
 #include "EnemyAbilities.hpp"
+#include "ObjectPropertiesManager.hpp"

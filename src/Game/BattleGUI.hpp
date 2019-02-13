@@ -25,4 +25,6 @@ private:
 	CSprite abilities[4][4];
 
 	CSprite currentAbilityFrame;
+
+	void ShowTooltip(int _ability);
 };

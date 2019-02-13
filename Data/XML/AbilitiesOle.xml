@@ -16,6 +16,10 @@
         <effect>
             <damageFactor>0.3</damageFactor>
         </effect>
+
+        <description>*#ffa500 Gummiarm*
+#white Schadensfaktor: 30%
+        </description>
     </ability>
 
     <ability id="1" name="Ganzkörpertritt">
@@ -36,6 +40,13 @@
                 <damage>-1</damage>
             </buff>
         </effect>
+
+        <description>*#ffa500 Ganzkörpertritt*
+#white Schadensfaktor: 100%
+Für 3 Runden:
+    #aaaadd -1 Inititative
+    -1 Schaden
+        </description>
     </ability>
 
     <ability id="2" name="Ins System hacken">
@@ -50,12 +61,19 @@
         </positions>
 
         <effect>
-            <damageFactor>1</damageFactor>
+            <damageFactor>0.5</damageFactor>
             <buff duration="3" isPositive="false">
                 <armour>-10</armour>
                 <damage>-3</damage>
             </buff>
         </effect>
+
+        <description>*#ffa500 Ins System hacken*
+#white Schadensfaktor: 50%
+Für 3 Runden:
+    #aaaadd -10 Rüstung
+    -3 Schaden
+        </description>
     </ability>
 
     <ability id="3" name="Poetry Slam">
@@ -69,8 +87,13 @@
         </positions>
 
         <effect>
-            <damageFactor>1</damageFactor>
+            <damageFactor>0.5</damageFactor>
             <putToSleepProbability>1</putToSleepProbability>
         </effect>
+
+        <description>*#ffa500 Poetry Slam*
+#white Schadensfaktor: 50%
+Schlaf: 100%
+        </description>
     </ability>   
 </Abilities>

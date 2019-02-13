@@ -17,6 +17,14 @@
                 <initiative>1</initiative>
             </buff>
         </effect>
+
+        <description>*#ffa500 Marshmallowflash*     (nur selbst)
+#00aa00 Heilung: 5
+#white Entfernt Debuffs
+Für 3 Runden: 
+    #aaaadd +10 Rüstung
+    +3 Schaden
+    +1 Initiative</description>
     </ability>
 
     <ability id="1" name="Verarschen">
@@ -34,6 +42,10 @@
             <damageFactor>0.5</damageFactor>
             <confusion probability="1">3</confusion>
         </effect>
+        
+        <description>*#ffa500 Verarschen*
+#white Schadensfaktor: 50%
+#bb77bb Verwirrung (3 Runden): 100%</description>
     </ability>
 
     <ability id="2" name="Reparieren">
@@ -60,6 +72,14 @@
             <damageFactor>0.8</damageFactor>
             <removeBuffs>true</removeBuffs>
         </effect>
+
+        <description>*#ffa500 Reparieren*
+#888888 Auf Freund
+    #00aa00 Heilung: 3
+    #white Entfernt Debuffs
+#888888 Auf Gegner
+    #white Schadensfaktor: 80%
+    Entfernt Buffs</description>
     </ability>
 
     <ability id="3" name="Alle auf einen">
@@ -78,5 +98,10 @@
                 <armour>30</armour>
             </buff>
         </effect>
+
+        <description>*##ffa500 Alle auf einen*
+#white Markiert (2 Runden)
+Für 2 Runden:
+    #aaaadd +30 Rüstung</description>
     </ability>   
 </Abilities>

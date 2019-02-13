@@ -26,6 +26,16 @@
             <healSelf>3</healSelf>
             <confusion probability="0.3">3</confusion>
         </effect>
+
+        <description>*#ffa500 Unbezwingbare Fröhlichkeit*
+#888888 Auf Freund
+    #white Für 3 Runden:
+        #aaaadd +5 Schaden
+        +2 Initiative
+#888888 Auf Gegner
+    #00aa00 Heilung (selbst): 3
+    #bb77bb Verwirrung (3 Runden): 30%
+        </description>
     </ability>
 
     <ability id="1" name="Wortschwall">
@@ -43,6 +53,11 @@
             <damageFactor>1</damageFactor>
             <putToSleepProbability>0.25</putToSleepProbability>
         </effect>
+
+        <description>*#ffa500 Wortschwall*
+#white Schadensfaktor: 100%
+Schlaf: 25%
+        </description>
     </ability>
 
     <ability id="2" name="Nasenflügelschlag">
@@ -60,6 +75,10 @@
         <effect target="enemy">
             <damageFactor>0.4</damageFactor>
         </effect>
+
+        <description>*#ffa500 Nasenflügelschlag*
+#white Schadensfaktor: 40%
+        </description>
     </ability>
 
     <ability id="3" name="Todesumarmung">
@@ -77,5 +96,10 @@
             <damageFactor>1</damageFactor>
             <healSelf>1</healSelf>
         </effect>
+
+        <description>*#ffa500 Todesumarmung*
+#white Schadensfaktor: 100%
+#00aa00 Heilung (selbst): 1
+        </description>
     </ability>   
 </Abilities>
