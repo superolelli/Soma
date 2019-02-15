@@ -3,32 +3,32 @@
 <EnemyAttributes>
   <Gesetzloser id="4"
     strength="8"
-	constitution="4"
-	dexterity="5"
-	speed="1"
+	  constitution="4"
+	  dexterity="5"
+	  speed="1"
 				 
     armour ="1"
     health ="20"
     damage ="8"
     initiative ="1"
-	criticalHit="5"
-	dodge="1"
-	precision="5"
+	  criticalHit="5"
+	  dodge="1"
+	  precision="5"
   ></Gesetzloser>
 
   <Abtruenniger id="5"
     strength="5"
-	constitution="4"
-	dexterity="5"
-	speed="1"
+	  constitution="4"
+	  dexterity="5"
+	  speed="1"
 				 
     armour ="1"
     health ="20"
     damage ="5"
     initiative ="1"
-	criticalHit="5"
-	dodge="1"
-	precision="5"
+	  criticalHit="5"
+	  dodge="1"
+	  precision="5"
   ></Abtruenniger>
   
 </EnemyAttributes>

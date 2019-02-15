@@ -19,6 +19,7 @@ void Enemy::Init(int _id, CGameEngine * _engine, NotificationRenderer *_notifica
 		break;
 	}
 
+	status.Init(this, notificationRenderer);
 	status.Reset();
 	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);
 

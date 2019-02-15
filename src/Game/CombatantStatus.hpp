@@ -2,11 +2,15 @@
 
 #include "Buff.hpp"
 #include <vector>
+#include "../Framework/Graphics/NotificationRenderer.hpp"
 
+class Combatant;
 
 class CombatantStatus
 {
 public:
+
+	void Init(Combatant *_combatant, NotificationRenderer *_notificationRenderer);
 
 	void HandleStatusChanges();
 
@@ -46,6 +50,8 @@ public:
 private:
 
 	CombatantStats currentStats;
+	Combatant *combatant;
+	NotificationRenderer *notificationRenderer;
 
 	int confused;
 	bool sleeping;

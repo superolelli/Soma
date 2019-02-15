@@ -293,11 +293,14 @@ void Combatant::ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & 
 	if (_effect.damageFactor != 0)
 		_target->Status().LooseHealth(status.GetDamage() * _effect.damageFactor);
 
+
 	if (_effect.heal != 0)
 		_target->Status().GainHealth(_effect.heal);
 
+
 	if (_effect.healSelf != 0)
 		status.GainHealth(_effect.healSelf);
+
 
 	if (_effect.confusion != 0)
 	{

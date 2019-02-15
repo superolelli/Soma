@@ -1,5 +1,14 @@
 #include "CombatantStatus.hpp"
+#include "Resources\FontManager.hpp"
+#include "Combatant.hpp"
 
+
+
+void CombatantStatus::Init(Combatant *_combatant, NotificationRenderer *_notificationRenderer)
+{
+	combatant = _combatant;
+	notificationRenderer = _notificationRenderer;
+}
 
 
 void CombatantStatus::HandleStatusChanges()
@@ -39,10 +48,15 @@ void CombatantStatus::HandleBuffDurations(std::vector<Buff> &_buffs)
 
 void CombatantStatus::LooseHealth(int _damage)
 {
-	currentStats.currentHealth -= _damage - ((float)currentStats.armour / 100.0f * _damage);
+	int damage = _damage - std::round(((float)currentStats.armour / 100.0f * _damage));
+	currentStats.currentHealth -= damage;
 
 	if (currentStats.currentHealth < 0)
 		currentStats.currentHealth = 0;
+
+	auto notificationPos = sf::Vector2f(combatant->GetRect().left + combatant->GetRect().width / 2.0f, combatant->GetRect().top);
+	notificationRenderer->AddNotification(std::to_string(damage), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color::Red, sf::Color::Black);
+
 }
 
 
@@ -52,6 +66,9 @@ void CombatantStatus::GainHealth(int _health)
 
 	if (currentStats.currentHealth > currentStats.maxHealth)
 		currentStats.currentHealth = currentStats.maxHealth;
+
+	auto notificationPos = sf::Vector2f(combatant->GetRect().left + combatant->GetRect().width / 2.0f, combatant->GetRect().top);
+	notificationRenderer->AddNotification(std::to_string(_health), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color::Green, sf::Color::Black);
 }
 
 
