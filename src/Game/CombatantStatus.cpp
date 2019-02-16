@@ -46,7 +46,7 @@ void CombatantStatus::HandleBuffDurations(std::vector<Buff> &_buffs)
 }
 
 
-void CombatantStatus::LooseHealth(int _damage)
+void CombatantStatus::LooseHealth(int _damage, bool _critical)
 {
 	int damage = _damage - std::round(((float)currentStats.armour / 100.0f * _damage));
 	currentStats.currentHealth -= damage;
@@ -55,7 +55,12 @@ void CombatantStatus::LooseHealth(int _damage)
 		currentStats.currentHealth = 0;
 
 	auto notificationPos = sf::Vector2f(combatant->GetRect().left + combatant->GetRect().width / 2.0f, combatant->GetRect().top);
-	notificationRenderer->AddNotification(std::to_string(damage), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color::Red, sf::Color::Black);
+
+	if(_critical)
+		notificationRenderer->AddNotification(std::to_string(damage), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color(180, 0, 0), sf::Color::Black, 40);
+	else
+		notificationRenderer->AddNotification(std::to_string(damage), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color::Red, sf::Color::Black);
+	
 
 }
 
@@ -85,6 +90,33 @@ void CombatantStatus::AddDebuff(Buff _buff)
 	debuffs.push_back(_buff);
 }
 
+Buff & CombatantStatus::GetBuff()
+{
+	returnBuff.SetStandardValues();
+
+	for (auto &b : buffs)
+	{
+		returnBuff.stats += b.stats;
+		if(returnBuff.duration < b.duration)
+			returnBuff.duration = b.duration;
+	}
+
+	return returnBuff;
+}
+
+Buff & CombatantStatus::GetDebuff()
+{
+	returnBuff.SetStandardValues();
+
+	for (auto &b : debuffs)
+	{
+		returnBuff.stats += b.stats;
+		if (returnBuff.duration < b.duration)
+			returnBuff.duration = b.duration;
+	}
+
+	return returnBuff;
+}
 
 void CombatantStatus::RemoveAllBuffs()
 {
@@ -120,9 +152,18 @@ int CombatantStatus::GetCurrentHealth()
 
 int CombatantStatus::GetDamage()
 {
-	return currentStats.damage < 0 ? 0 : currentStats.damage;
+	return GetDamageMin() + rand() % (GetDamageMax() - GetDamageMin() + 1);
 }
 
+int CombatantStatus::GetDamageMin()
+{
+	return currentStats.damageMin < 0 ? 0 : currentStats.damageMin;
+}
+
+int CombatantStatus::GetDamageMax()
+{
+	return currentStats.damageMax < 0 ? 0 : currentStats.damageMax;
+}
 
 int CombatantStatus::GetArmour()
 {

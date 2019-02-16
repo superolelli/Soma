@@ -2,14 +2,15 @@
 
 <PlayerAttributes>
   <Simon id="0"
-		strength="5"
+		strength="4"
 		constitution="5"
 		dexterity="6"
 		speed="1"
 				 
     armour ="1"
     health ="25"
-    damage ="5"
+    damageMin ="5"
+    damageMax = "8"
     initiative ="1"
 		criticalHit="6"
 		dodge="1"
@@ -17,14 +18,15 @@
   ></Simon>
 
   <Ole id="1"
-    strength="5"
+    strength="4"
 		constitution="4"
 		dexterity="6"
 		speed="2"
 				 
     armour ="1"
     health ="20"
-    damage ="5"
+    damageMin ="5"
+    damageMax = "8"
     initiative ="2"
 		criticalHit="6"
 		dodge="2"
@@ -32,14 +34,15 @@
   ></Ole>
 
   <Anna id="2"
-    strength="5"
+    strength="4"
 		constitution="4"
 		dexterity="5"
 		speed="3"
 				 
     armour ="1"
     health ="20"
-    damage ="5"
+    damageMin ="5"
+    damageMax = "8"
     initiative ="3"
 		criticalHit="5"
 		dodge="3"
@@ -54,7 +57,8 @@
 				 
     armour ="1"
     health ="30"
-    damage ="6"
+    damageMin ="9"
+    damageMax = "12"
     initiative ="1"
 		criticalHit="4"
 		dodge="1"

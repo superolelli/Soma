@@ -1,5 +1,6 @@
 #include "Combatant.hpp"
 #include "Markus.hpp"
+#include "../Framework/Graphics/RichText.hpp"
 
 bool Combatant::setElapsedTimeForAbilityEffect;
 
@@ -90,8 +91,114 @@ void Combatant::RenderStatusSymbols(sf::RenderTarget & _target)
 		g_pSpritePool->marked.SetPos(x, y);
 		g_pSpritePool->marked.Render(_target);
 	}
+
+	RenderStatusSymbolsTooltips();
 }
 
+
+void Combatant::RenderStatusSymbolsTooltips()
+{
+	if (status.IsAsleep() && g_pSpritePool->sleeping.GetRect().contains(engine->GetWorldMousePos()))
+	{
+		RenderTooltip("Schläft");
+	}
+
+	if (status.IsConfused() && g_pSpritePool->confused.GetRect().contains(engine->GetWorldMousePos()))
+	{
+		RenderTooltip("#bb77bb Verwirrt (" + std::to_string(status.RoundsConfused()) + " Runden)");
+	}
+
+	if (status.IsMarked() && g_pSpritePool->marked.GetRect().contains(engine->GetWorldMousePos()))
+	{
+		RenderTooltip("Markiert");
+	}
+
+	if (status.IsBuffed() && g_pSpritePool->buff.GetRect().contains(engine->GetWorldMousePos()))
+	{
+		auto buff = status.GetBuff();
+
+		std::string tooltip("");
+		tooltip.append(std::to_string(buff.duration) + " Runden:\n#aaaadd ");
+
+		if (buff.stats.attributes.strength != 0)
+			tooltip.append(" +" + std::to_string(buff.stats.attributes.strength) + " Stärke\n");
+		if (buff.stats.attributes.constitution != 0)
+			tooltip.append(" +" + std::to_string(buff.stats.attributes.constitution) + " Konstitution\n");
+		if (buff.stats.attributes.dexterity != 0)
+			tooltip.append(" +" + std::to_string(buff.stats.attributes.dexterity) + " Geschicklichkeit\n");
+		if (buff.stats.attributes.speed != 0)
+			tooltip.append(" +" + std::to_string(buff.stats.attributes.speed) + " Geschwindigkeit\n");
+		if (buff.stats.armour != 0)
+			tooltip.append(" +" + std::to_string(buff.stats.armour) + " Rüstung\n");
+		if (buff.stats.maxHealth != 0)
+			tooltip.append(" +" + std::to_string(buff.stats.maxHealth) + " Maximales Leben\n");
+		if (buff.stats.damageMin != 0)
+			tooltip.append(" +" + std::to_string(buff.stats.damageMin) + " Schaden\n");
+		if (buff.stats.initiative != 0)
+			tooltip.append(" +" + std::to_string(buff.stats.initiative) + " Initiative\n");
+		if (buff.stats.criticalHit != 0)
+			tooltip.append(" +" + std::to_string(buff.stats.criticalHit) + " Kritische Trefferchance\n");
+		if (buff.stats.dodge != 0)
+			tooltip.append(" +" + std::to_string(buff.stats.dodge) + " Ausweichen\n");
+		if (buff.stats.precision != 0)
+			tooltip.append(" +" + std::to_string(buff.stats.precision) + " Präzision\n");
+
+		tooltip.pop_back();
+		RenderTooltip(tooltip);
+	}
+
+	if (status.IsDebuffed() && g_pSpritePool->debuff.GetRect().contains(engine->GetWorldMousePos()))
+	{
+		auto buff = status.GetDebuff();
+
+		std::string tooltip("");
+		tooltip.append(std::to_string(buff.duration) + " Runden:\n#aaaadd ");
+
+		if (buff.stats.attributes.strength != 0)
+			tooltip.append(std::to_string(buff.stats.attributes.strength) + " Stärke\n");
+		if (buff.stats.attributes.constitution != 0)
+			tooltip.append(std::to_string(buff.stats.attributes.constitution) + " Konstitution\n");
+		if (buff.stats.attributes.dexterity != 0)
+			tooltip.append(std::to_string(buff.stats.attributes.dexterity) + " Geschicklichkeit\n");
+		if (buff.stats.attributes.speed != 0)
+			tooltip.append(std::to_string(buff.stats.attributes.speed) + " Geschwindigkeit\n");
+		if (buff.stats.armour != 0)
+			tooltip.append(std::to_string(buff.stats.armour) + " Rüstung\n");
+		if (buff.stats.maxHealth != 0)
+			tooltip.append(std::to_string(buff.stats.maxHealth) + " Maximales Leben\n");
+		if (buff.stats.damageMin != 0)
+			tooltip.append(std::to_string(buff.stats.damageMin) + " Schaden\n");
+		if (buff.stats.initiative != 0)
+			tooltip.append(std::to_string(buff.stats.initiative) + " Initiative\n");
+		if (buff.stats.criticalHit != 0)
+			tooltip.append(std::to_string(buff.stats.criticalHit) + " Kritische Trefferchance\n");
+		if (buff.stats.dodge != 0)
+			tooltip.append(std::to_string(buff.stats.dodge) + " Ausweichen\n");
+		if (buff.stats.precision != 0)
+			tooltip.append(std::to_string(buff.stats.precision) + " Präzision\n");
+
+		tooltip.pop_back();
+		RenderTooltip(tooltip);
+	}
+}
+
+
+void Combatant::RenderTooltip(std::string _tooltip)
+{
+	sfe::RichText tooltip;
+	tooltip.setCharacterSize(18);
+	tooltip.setFont(g_pFonts->f_arial);
+	tooltip.setString(_tooltip);
+	tooltip.setPosition(engine->GetWorldMousePos().x, engine->GetWorldMousePos().y - tooltip.getLocalBounds().height - 5.0f);
+
+	sf::FloatRect backgroundRect = tooltip.getLocalBounds();
+	sf::RectangleShape background(sf::Vector2f(backgroundRect.width + 6.0f, backgroundRect.height + 9.0f));
+	background.setFillColor(sf::Color(0, 0, 0, 200));
+	background.setPosition(tooltip.getPosition() + sf::Vector2f(-3.0f, -1.0f));
+
+	engine->GetWindow().draw(background);
+	engine->GetWindow().draw(tooltip);
+}
 
 void Combatant::RenderAbilityEffects()
 {
@@ -290,8 +397,16 @@ void Combatant::RenderTurnMarker()
 
 void Combatant::ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & _effect)
 {
-	if (_effect.damageFactor != 0)
-		_target->Status().LooseHealth(status.GetDamage() * _effect.damageFactor);
+	if (_effect.damageFactor != 0) 
+	{
+		auto damage = status.GetDamage() * _effect.damageFactor;
+		if (rand() % 100 < status.GetCriticalHit())
+		{
+			_target->Status().LooseHealth(damage * 2, true);
+		}
+		else
+			_target->Status().LooseHealth(damage, false);
+	}
 
 
 	if (_effect.heal != 0)

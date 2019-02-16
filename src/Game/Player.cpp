@@ -202,7 +202,7 @@ void Player::HandleConfusion()
 	if (status.IsConfused())
 	{
 		if (rand() % 4 == 0)
-			status.LooseHealth(1);
+			status.LooseHealth(1, false);
 	}
 }
 

@@ -14,7 +14,7 @@ public:
 
 	void HandleStatusChanges();
 
-	void LooseHealth(int _damage);
+	void LooseHealth(int _damage, bool _critical);
 	void GainHealth(int _health);
 
 	void Mark(int _rounds) { marked += _rounds; }
@@ -32,9 +32,16 @@ public:
 	bool IsBuffed() { return buffs.size() > 0; }
 	bool IsDebuffed() { return debuffs.size() > 0; }
 
+	int RoundsConfused() { return confused; }
+
+	Buff &GetBuff();
+	Buff &GetDebuff();
+
 	int GetMaxHealth();
 	int GetCurrentHealth();
 	int GetDamage();
+	int GetDamageMin();
+	int GetDamageMax();
 	int GetArmour();
 	int GetCriticalHit();
 	int GetDodge();
@@ -58,6 +65,8 @@ private:
 	int marked;
 	std::vector<Buff> buffs;
 	std::vector<Buff> debuffs;
+
+	Buff returnBuff;
 
 	void HandleBuffDurations(std::vector<Buff> &_buffs);
 };

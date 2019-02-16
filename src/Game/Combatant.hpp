@@ -94,6 +94,7 @@ protected:
 	std::vector<Combatant*> selectedTargets;
 
 	void RenderStatusSymbols(sf::RenderTarget &_target);
+	void RenderStatusSymbolsTooltips();
 
 	void RenderAbilityEffects();
 
@@ -112,4 +113,6 @@ protected:
 
 	bool AbilityEffectIsPlaying();
 	bool CheckForDodging(Combatant *_attacker);
+
+	void RenderTooltip(std::string _tooltip);
 };

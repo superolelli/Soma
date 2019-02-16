@@ -9,7 +9,8 @@ void Buff::SetStandardValues()
 	stats.armour = 0;
 	stats.currentHealth = 0;
 	stats.maxHealth = 0;
-	stats.damage = 0;
+	stats.damageMin = 0;
+	stats.damageMax = 0;
 	stats.criticalHit = 0;
 	stats.precision = 0;
 	stats.dodge = 0;

@@ -19,7 +19,10 @@ namespace pugi {
             buff.stats.armour = buffNode.child("armour").text().as_int(); 
         
         if (buffNode.child("damage"))
-            buff.stats.damage = buffNode.child("damage").text().as_int();
+            buff.stats.damageMin = buffNode.child("damage").text().as_int();
+
+		if (buffNode.child("damage"))
+			buff.stats.damageMax = buffNode.child("damage").text().as_int();
         
         if (buffNode.child("initiative"))
             buff.stats.initiative = buffNode.child("initiative").text().as_int();
@@ -146,7 +149,8 @@ namespace pugi {
 	{
 		stats.armour = attributeNode.attribute("armour").as_int();
 		stats.maxHealth = attributeNode.attribute("health").as_int();
-		stats.damage = attributeNode.attribute("damage").as_int();
+		stats.damageMin = attributeNode.attribute("damageMin").as_int();
+		stats.damageMax = attributeNode.attribute("damageMax").as_int();
 		stats.initiative = attributeNode.attribute("initiative").as_int();
 		stats.criticalHit = attributeNode.attribute("criticalHit").as_int();
 		stats.dodge = attributeNode.attribute("dodge").as_int();

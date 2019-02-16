@@ -26,7 +26,8 @@ void CombatantStats::operator+=(const CombatantStats & _stats)
 {
 	maxHealth += _stats.maxHealth + _stats.attributes.constitution * CONSTITUTION_TO_HEALTH;
 	currentHealth += _stats.currentHealth + _stats.attributes.constitution * CONSTITUTION_TO_HEALTH;
-	damage += _stats.damage + _stats.attributes.strength * STRENGTH_TO_DAMAGE;
+	damageMin += _stats.damageMin + _stats.attributes.strength * STRENGTH_TO_DAMAGE;
+	damageMax += _stats.damageMax + _stats.attributes.strength * STRENGTH_TO_DAMAGE;
 	armour += _stats.armour;
 	criticalHit += _stats.criticalHit + _stats.attributes.dexterity * DEXTERITY_TO_CRITICAL;
 	dodge += _stats.dodge + _stats.attributes.speed * SPEED_TO_DODGE;
@@ -40,7 +41,8 @@ void CombatantStats::operator-=(const CombatantStats & _stats)
 {
 	maxHealth -= _stats.maxHealth + _stats.attributes.constitution * CONSTITUTION_TO_HEALTH;
 	currentHealth -= _stats.currentHealth + _stats.attributes.constitution * CONSTITUTION_TO_HEALTH;
-	damage -= _stats.damage + _stats.attributes.strength * STRENGTH_TO_DAMAGE;
+	damageMin -= _stats.damageMin + _stats.attributes.strength * STRENGTH_TO_DAMAGE;
+	damageMax -= _stats.damageMax + _stats.attributes.strength * STRENGTH_TO_DAMAGE;
 	armour -= _stats.armour;
 	criticalHit -= _stats.criticalHit + _stats.attributes.dexterity * DEXTERITY_TO_CRITICAL;
 	dodge -= _stats.dodge + _stats.attributes.speed * SPEED_TO_DODGE;

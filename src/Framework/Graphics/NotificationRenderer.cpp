@@ -23,10 +23,11 @@ void NotificationRenderer::Render(sf::RenderTarget & _target)
 		_target.draw(n.text);
 }
 
-void NotificationRenderer::AddNotification(std::string _notification, sf::Font &_font, sf::Vector2f _position, float _duration, sf::Color _fillColor, sf::Color _outlineColor)
+void NotificationRenderer::AddNotification(std::string _notification, sf::Font &_font, sf::Vector2f _position, float _duration, sf::Color _fillColor, sf::Color _outlineColor, int _characterSize)
 {
 	Notification newNotification;
 	newNotification.text.setFont(_font);
+	newNotification.text.setCharacterSize(_characterSize);
 	newNotification.text.setString(_notification);
 	newNotification.text.setPosition(_position);
 	newNotification.text.setFillColor(_fillColor);
