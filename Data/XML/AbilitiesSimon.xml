@@ -12,17 +12,17 @@
             <healSelf>5</healSelf>
             <removeDebuffs>true</removeDebuffs>
             <buff duration="3" isPositive="true" onSelf="true"> 
-                <armour>10</armour>
+                <armour>20</armour>
                 <damage>3</damage>
                 <initiative>1</initiative>
             </buff>
         </effect>
 
-        <description>*#ffa500 Marshmallowflash*     (nur selbst)
+        <description>*#ffa500 Marshmallowflash*     #ffa500(nur selbst)
 #00aa00 Heilung: 5
 #white Entfernt Debuffs
 Für 3 Runden: 
-    #aaaadd +10 Rüstung
+    #aaaadd +20 Rüstung
     +3 Schaden
     +1 Initiative</description>
     </ability>
@@ -40,12 +40,12 @@ Für 3 Runden:
 
         <effect>
             <damageFactor>0.5</damageFactor>
-            <confusion probability="1">3</confusion>
+            <confusion probability="0.9">3</confusion>
         </effect>
         
         <description>*#ffa500 Verarschen*
 #white Schadensfaktor: 50%
-#bb77bb Verwirrung (3 Runden): 100%</description>
+#bb77bb Verwirrung (3 Runden): 90%</description>
     </ability>
 
     <ability id="2" name="Reparieren">
@@ -69,7 +69,7 @@ Für 3 Runden:
             <removeDebuffs>true</removeDebuffs>
         </effect>
         <effect target="enemy">
-            <damageFactor>0.8</damageFactor>
+            <damageFactor>1</damageFactor>
             <removeBuffs>true</removeBuffs>
         </effect>
 
@@ -78,7 +78,7 @@ Für 3 Runden:
     #00aa00 Heilung: 3
     #white Entfernt Debuffs
 #888888 Auf Gegner
-    #white Schadensfaktor: 80%
+    #white Schadensfaktor: 100%
     Entfernt Buffs</description>
     </ability>
 
@@ -99,7 +99,7 @@ Für 3 Runden:
             </buff>
         </effect>
 
-        <description>*##ffa500 Alle auf einen*
+        <description>*#ffa500 Alle auf einen*
 #white Markiert (2 Runden)
 Für 2 Runden:
     #aaaadd +30 Rüstung</description>

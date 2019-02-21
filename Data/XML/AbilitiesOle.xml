@@ -7,7 +7,6 @@
 
         <howMany>3</howMany>
         <positions>
-            <value id="4">true</value>
             <value id="5">true</value>
             <value id="6">true</value>
             <value id="7">true</value>
@@ -18,8 +17,7 @@
         </effect>
 
         <description>*#ffa500 Gummiarm*
-#white Schadensfaktor: 30%
-        </description>
+#white Schadensfaktor: 30%</description>
     </ability>
 
     <ability id="1" name="Ganzkörpertritt">
@@ -29,8 +27,6 @@
         <positions>
             <value id="4">true</value>
             <value id="5">true</value>
-            <value id="6">true</value>
-            <value id="7">true</value>
         </positions>
 
         <effect>
@@ -45,8 +41,7 @@
 #white Schadensfaktor: 100%
 Für 3 Runden:
     #aaaadd -1 Inititative
-    -1 Schaden
-        </description>
+    -1 Schaden</description>
     </ability>
 
     <ability id="2" name="Ins System hacken">
@@ -61,19 +56,18 @@ Für 3 Runden:
         </positions>
 
         <effect>
-            <damageFactor>0.5</damageFactor>
+            <damageFactor>0.6</damageFactor>
             <buff duration="3" isPositive="false">
                 <armour>-10</armour>
-                <damage>-3</damage>
+                <dodge>-3</dodge>
             </buff>
         </effect>
 
         <description>*#ffa500 Ins System hacken*
-#white Schadensfaktor: 50%
+#white Schadensfaktor: 60%
 Für 3 Runden:
     #aaaadd -10 Rüstung
-    -3 Schaden
-        </description>
+    -3 Ausweichen</description>
     </ability>
 
     <ability id="3" name="Poetry Slam">
@@ -88,12 +82,11 @@ Für 3 Runden:
 
         <effect>
             <damageFactor>0.5</damageFactor>
-            <putToSleepProbability>1</putToSleepProbability>
+            <putToSleepProbability>0.9</putToSleepProbability>
         </effect>
 
         <description>*#ffa500 Poetry Slam*
 #white Schadensfaktor: 50%
-Schlaf: 100%
-        </description>
+Schlaf: 90%</description>
     </ability>   
 </Abilities>

@@ -109,8 +109,10 @@ void Game::UpdateBattle()
 void Game::InitNewBattle()
 {
 	SAFE_DELETE(currentGUI);
-	currentGUI = new BattleGUI;
-	currentGUI->Init(m_pGameEngine);
+	BattleGUI *newGui = new BattleGUI;
+	newGui->Init(m_pGameEngine);
+	newGui->SetAdventureGroup(&adventureGroup);
+	currentGUI = newGui;
 
 	currentBattle = new Battle;
 	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer);

@@ -118,14 +118,14 @@ void Enemy::ChooseRandomPlayer()
 
 void Enemy::ChooseRandomEnemy()
 {
-	int numberOfEnemies = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), -1, [&](int sum, Combatant *c) {if (!c->IsPlayer())return sum + 1; else return sum; });
+	int numberOfEnemies = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), 0, [&](int sum, Combatant *c) {if (!c->IsPlayer())return sum + 1; else return sum; });
 
     if (numberOfEnemies > 0)
     {
 		int target = rand() % numberOfEnemies;
 		for (Combatant *c : (*allCombatants))
 		{
-			if (!c->IsPlayer())
+			if (!c->IsPlayer() && c != this)
 			{
 				if (target == 0)
 				{

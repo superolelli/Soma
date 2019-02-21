@@ -62,12 +62,12 @@ namespace
 
 namespace sfe
 {
-	RichText::RichText() : characterSize(30), font(NULL)
+	RichText::RichText() : characterSize(30), font(NULL), centered(false)
 	{
 		initializeColors();
 	}
 
-	RichText::RichText(const sf::String& source, const sf::Font& font, unsigned int characterSize) : characterSize(characterSize), font(&font)
+	RichText::RichText(const sf::String& source, const sf::Font& font, unsigned int characterSize) : characterSize(characterSize), font(&font), centered(false)
 	{
 		initializeColors();
 		setString(source);
@@ -267,6 +267,10 @@ namespace sfe
 			cursor += chunks[i].text.getSize();
 			lastChunk = &chunks[i];
 		}
+
+
+		if (centered)
+			center();
 	}
 
 	void RichText::clear()
@@ -297,6 +301,12 @@ namespace sfe
 		this->font = &font;
 
 		setString(source);
+	}
+
+
+	void RichText::setCentered(bool _centered)
+	{
+		centered = _centered;
 	}
 
 	sf::FloatRect RichText::getLocalBounds() const
@@ -333,6 +343,56 @@ namespace sfe
 			target.draw(texts[i], states);
 		}
 	}
+
+
+	void RichText::center()
+	{
+		//get longest line length
+		int lastY = texts[0].getPosition().y;
+		int longestLength = 0;
+		int currentLength = 0;
+		int numOfTextInLine = 0;
+		std::vector<int> lineLengths;
+		std::vector<int> numOfTextsInLine;
+		for (int i = 0; i < texts.size(); i++)
+		{
+			if (texts[i].getPosition().y != lastY)
+			{
+				lastY = texts[i].getPosition().y;
+				if (currentLength > longestLength)
+					longestLength = currentLength;
+
+				lineLengths.push_back(currentLength);
+				numOfTextsInLine.push_back(numOfTextInLine);
+				currentLength = 0;
+				numOfTextInLine = 0;
+			}
+
+			currentLength += texts[i].getLocalBounds().width;
+			numOfTextInLine++;
+		}
+
+		if (currentLength > longestLength)
+			longestLength = currentLength;
+		lineLengths.push_back(currentLength);
+		numOfTextsInLine.push_back(numOfTextInLine);
+
+
+		float positionX = 0.0f;
+		int text = 0;
+		//set position of lines
+		for (int i = 0; i < lineLengths.size(); i++)
+		{
+			positionX = longestLength / 2.0f - lineLengths[i] / 2.0f;
+			for (int j = 0; j < numOfTextsInLine[i]; j++)
+			{
+				texts[text].setPosition(texts[text].getPosition().x + positionX, texts[text].getPosition().y);
+				text++;
+			}
+			
+		}
+	}
+
 
 	void
 	RichText::initializeColors()

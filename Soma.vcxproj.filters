@@ -462,6 +462,9 @@
     <ClCompile Include="src\Framework\Graphics\RichText.cpp">
       <Filter>Quelldateien\Framework\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="src\Framework\Graphics\RoundedRectangleShape.cpp">
+      <Filter>Quelldateien\Framework\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -894,6 +897,9 @@
       <Filter>Headerdateien\Framework\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\Framework\Graphics\RichText.hpp">
+      <Filter>Headerdateien\Framework\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Graphics\RoundedRectangleShape.hpp">
       <Filter>Headerdateien\Framework\Graphics</Filter>
     </ClInclude>
   </ItemGroup>

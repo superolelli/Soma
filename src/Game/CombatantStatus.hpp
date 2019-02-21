@@ -33,9 +33,15 @@ public:
 	bool IsDebuffed() { return debuffs.size() > 0; }
 
 	int RoundsConfused() { return confused; }
+	int RoundsMarked() { return marked; }
 
 	Buff &GetBuff();
 	Buff &GetDebuff();
+
+	int GetStrength();
+	int GetDexterity();
+	int GetConstitution();
+	int GetSpeed();
 
 	int GetMaxHealth();
 	int GetCurrentHealth();

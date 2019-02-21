@@ -5,6 +5,7 @@
 #include "Resources\Resources.hpp"
 #include "PlayerEnum.hpp"
 
+class AdventureGroup;
 
 class BattleGUI : public GUI
 {
@@ -16,15 +17,18 @@ public:
 
 	int GetCurrentAbility() { return currentAbility; }
 	void SetCurrentPlayer(int _player);
+	void SetAdventureGroup(AdventureGroup *_adventureGroup);
 
 private:
 
 	int currentAbility;
 	PlayerID currentPlayer;
+	AdventureGroup *players;
 
 	CSprite abilities[4][4];
 
 	CSprite currentAbilityFrame;
 
 	void ShowTooltip(int _ability);
+	void ShowPlayerAttributes();
 };

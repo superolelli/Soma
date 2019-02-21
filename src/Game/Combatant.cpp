@@ -1,6 +1,7 @@
 #include "Combatant.hpp"
 #include "Markus.hpp"
 #include "../Framework/Graphics/RichText.hpp"
+#include "../Framework/Graphics/RoundedRectangleShape.hpp"
 
 bool Combatant::setElapsedTimeForAbilityEffect;
 
@@ -100,17 +101,23 @@ void Combatant::RenderStatusSymbolsTooltips()
 {
 	if (status.IsAsleep() && g_pSpritePool->sleeping.GetRect().contains(engine->GetWorldMousePos()))
 	{
-		RenderTooltip("Schläft");
+		RenderTooltip("Schläft", g_pSpritePool->sleeping.GetRect().left, g_pSpritePool->sleeping.GetRect().top);
 	}
 
 	if (status.IsConfused() && g_pSpritePool->confused.GetRect().contains(engine->GetWorldMousePos()))
 	{
-		RenderTooltip("#bb77bb Verwirrt (" + std::to_string(status.RoundsConfused()) + " Runden)");
+		if(status.RoundsConfused() > 1)
+			RenderTooltip("#bb77bb Verwirrt (" + std::to_string(status.RoundsConfused()) + " Runden)", g_pSpritePool->confused.GetRect().left, g_pSpritePool->confused.GetRect().top);
+		else
+			RenderTooltip("#bb77bb Verwirrt (" + std::to_string(status.RoundsConfused()) + " Runde)", g_pSpritePool->confused.GetRect().left, g_pSpritePool->confused.GetRect().top);
 	}
 
 	if (status.IsMarked() && g_pSpritePool->marked.GetRect().contains(engine->GetWorldMousePos()))
 	{
-		RenderTooltip("Markiert");
+		if(status.RoundsMarked() > 1)
+			RenderTooltip("Markiert (" + std::to_string(status.RoundsMarked()) + " Runden)", g_pSpritePool->marked.GetRect().left, g_pSpritePool->marked.GetRect().top);
+		else
+			RenderTooltip("Markiert (" + std::to_string(status.RoundsMarked()) + " Runde)", g_pSpritePool->marked.GetRect().left, g_pSpritePool->marked.GetRect().top);
 	}
 
 	if (status.IsBuffed() && g_pSpritePool->buff.GetRect().contains(engine->GetWorldMousePos()))
@@ -118,7 +125,11 @@ void Combatant::RenderStatusSymbolsTooltips()
 		auto buff = status.GetBuff();
 
 		std::string tooltip("");
-		tooltip.append(std::to_string(buff.duration) + " Runden:\n#aaaadd ");
+
+		if(buff.duration > 1)
+			tooltip.append(std::to_string(buff.duration) + " Runden:\n#aaaadd ");
+		else 
+			tooltip.append(std::to_string(buff.duration) + " Runde:\n#aaaadd ");
 
 		if (buff.stats.attributes.strength != 0)
 			tooltip.append(" +" + std::to_string(buff.stats.attributes.strength) + " Stärke\n");
@@ -144,7 +155,7 @@ void Combatant::RenderStatusSymbolsTooltips()
 			tooltip.append(" +" + std::to_string(buff.stats.precision) + " Präzision\n");
 
 		tooltip.pop_back();
-		RenderTooltip(tooltip);
+		RenderTooltip(tooltip, g_pSpritePool->buff.GetRect().left, g_pSpritePool->buff.GetRect().top);
 	}
 
 	if (status.IsDebuffed() && g_pSpritePool->debuff.GetRect().contains(engine->GetWorldMousePos()))
@@ -152,7 +163,10 @@ void Combatant::RenderStatusSymbolsTooltips()
 		auto buff = status.GetDebuff();
 
 		std::string tooltip("");
-		tooltip.append(std::to_string(buff.duration) + " Runden:\n#aaaadd ");
+		if (buff.duration > 1)
+			tooltip.append(std::to_string(buff.duration) + " Runden:\n#aaaadd ");
+		else
+			tooltip.append(std::to_string(buff.duration) + " Runde:\n#aaaadd ");
 
 		if (buff.stats.attributes.strength != 0)
 			tooltip.append(std::to_string(buff.stats.attributes.strength) + " Stärke\n");
@@ -178,23 +192,25 @@ void Combatant::RenderStatusSymbolsTooltips()
 			tooltip.append(std::to_string(buff.stats.precision) + " Präzision\n");
 
 		tooltip.pop_back();
-		RenderTooltip(tooltip);
+		RenderTooltip(tooltip, g_pSpritePool->debuff.GetRect().left, g_pSpritePool->debuff.GetRect().top);
 	}
 }
 
 
-void Combatant::RenderTooltip(std::string _tooltip)
+void Combatant::RenderTooltip(std::string _tooltip, float _x, float _y)
 {
 	sfe::RichText tooltip;
 	tooltip.setCharacterSize(18);
 	tooltip.setFont(g_pFonts->f_arial);
 	tooltip.setString(_tooltip);
-	tooltip.setPosition(engine->GetWorldMousePos().x, engine->GetWorldMousePos().y - tooltip.getLocalBounds().height - 5.0f);
+	tooltip.setPosition(_x, _y - tooltip.getLocalBounds().height - 30.0f);
 
 	sf::FloatRect backgroundRect = tooltip.getLocalBounds();
-	sf::RectangleShape background(sf::Vector2f(backgroundRect.width + 6.0f, backgroundRect.height + 9.0f));
+	sf::RoundedRectangleShape background(sf::Vector2f(backgroundRect.width + 10.0f, backgroundRect.height + 16.0f), 8, 10);
 	background.setFillColor(sf::Color(0, 0, 0, 200));
-	background.setPosition(tooltip.getPosition() + sf::Vector2f(-3.0f, -1.0f));
+	background.setOutlineThickness(2.0f);
+	background.setOutlineColor(sf::Color(60, 60, 60));
+	background.setPosition(tooltip.getPosition() + sf::Vector2f(-5.0f, -4.0f));
 
 	engine->GetWindow().draw(background);
 	engine->GetWindow().draw(tooltip);

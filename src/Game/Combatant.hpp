@@ -114,5 +114,5 @@ protected:
 	bool AbilityEffectIsPlaying();
 	bool CheckForDodging(Combatant *_attacker);
 
-	void RenderTooltip(std::string _tooltip);
+	void RenderTooltip(std::string _tooltip, float _x, float _y);
 };

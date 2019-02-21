@@ -34,6 +34,8 @@ namespace sfe
 			const sf::Font* getFont() const;
 			void setFont(const sf::Font& font);
 
+			void setCentered(bool _centered);
+
 			sf::FloatRect getLocalBounds() const;
 			sf::FloatRect getGlobalBounds() const;
 
@@ -44,6 +46,8 @@ namespace sfe
 		private:
 			void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+			void center();
+
 			void initializeColors();
 			sf::Color getColor(const sf::String& source) const;
 			sf::Color getColor(unsigned int argbHex) const;
@@ -53,6 +57,8 @@ namespace sfe
 
 			unsigned int characterSize;
 			const sf::Font* font;
+
+			bool centered;
 
 			sf::String source;
 			sf::String string;

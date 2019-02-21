@@ -16,5 +16,6 @@ public:
 	sf::Font f_arial;
 	sf::Font f_plantc;
 	sf::Font f_openSans;
+	sf::Font f_trajan;
 
 };

@@ -5,7 +5,7 @@ const int CONSTITUTION_TO_HEALTH = 5;
 const int DEXTERITY_TO_PRECISION = 1;
 const int STRENGTH_TO_DAMAGE = 2;
 const int DEXTERITY_TO_CRITICAL = 1;
-const int SPEED_TO_DODGE = 1;
+const int SPEED_TO_DODGE = 3;
 const int SPEED_TO_INITIATIVE = 1;
 
 

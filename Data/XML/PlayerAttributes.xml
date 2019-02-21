@@ -13,7 +13,7 @@
     damageMax = "8"
     initiative ="1"
 		criticalHit="6"
-		dodge="1"
+		dodge="3"
 		precision="6"
   ></Simon>
 
@@ -29,7 +29,7 @@
     damageMax = "8"
     initiative ="2"
 		criticalHit="6"
-		dodge="2"
+		dodge="6"
 		precision="6"
   ></Ole>
 
@@ -45,7 +45,7 @@
     damageMax = "8"
     initiative ="3"
 		criticalHit="5"
-		dodge="3"
+		dodge="9"
 		precision="5"
   ></Anna>
 
@@ -61,7 +61,7 @@
     damageMax = "12"
     initiative ="1"
 		criticalHit="4"
-		dodge="1"
+		dodge="3"
 		precision="4"
   ></Markus>
   
