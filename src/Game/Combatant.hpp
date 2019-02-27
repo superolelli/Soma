@@ -50,8 +50,12 @@ public:
 	void StartDodgingAnimation();
 	void StartFriendlyAttackedAnimation();
 	void StopAttackedAnimation();
+	void StartDeathAnimation();
 
 	bool FinishedTurn() { return abilityStatus == finished; }
+	bool IsDying() { return dying; }
+
+	bool AnimationFinished() { return !combatantObject->animationIsPlaying(); }
 
 	CombatantStatus &Status() { return status; }
 
@@ -80,6 +84,7 @@ protected:
 	SpriterEngine::point lastPosition;
 
 	bool actsInConfusion;
+	bool dying;
 
 	Bar healthBar;
 

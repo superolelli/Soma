@@ -69,7 +69,9 @@ void Battle::Update()
 		if (IsOneGroupDead() == true)
 			isBattleFinished = true;
 
-		ChooseNextCombatant();
+		do {
+			ChooseNextCombatant();
+		} while (combatants[currentCombatant]->Status().GetCurrentHealth() <= 0);
 
 		gui->SetCurrentPlayer(combatants[currentCombatant]->GetID());
 
@@ -86,8 +88,13 @@ void Battle::HandleDeaths()
 	{
 		if ((*i)->Status().GetCurrentHealth() <= 0)
 		{
-			i = combatants.erase(i);
-			continue;
+			if(!(*i)->IsDying())
+				(*i)->StartDeathAnimation();
+			else if ((*i)->AnimationFinished())
+			{
+				i = combatants.erase(i);
+				continue;
+			}
 		}
 
 		i++;

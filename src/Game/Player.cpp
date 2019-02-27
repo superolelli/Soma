@@ -26,6 +26,7 @@ void Player::Init(int _id, CGameEngine *_engine, NotificationRenderer *_notifica
 
 	is_walking = false;
 	actsInConfusion = false;
+	dying = false;
 
 	abilityStatus = finished;
 }

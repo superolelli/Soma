@@ -361,6 +361,13 @@ void Combatant::StopAttackedAnimation()
 }
 
 
+void Combatant::StartDeathAnimation()
+{
+	SetAnimation("dying", IDLE_ANIMATION_SPEED);
+	dying = true;
+}
+
+
 void Combatant::Quit()
 {
 	SAFE_DELETE(combatantObject);

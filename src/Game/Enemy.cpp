@@ -37,6 +37,7 @@ void Enemy::Init(int _id, CGameEngine * _engine, NotificationRenderer *_notifica
 	abilityStatus = finished;
 	confusionChecked = false;
 	actsInConfusion = false;
+	dying = false;
 }
 
 
