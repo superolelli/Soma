@@ -6,13 +6,35 @@
 bool Combatant::setElapsedTimeForAbilityEffect;
 
 
+
+void Combatant::Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer)
+{
+	engine = _engine;
+	notificationRenderer = _notificationRenderer;
+
+	SetAnimation("idle", IDLE_ANIMATION_SPEED);
+	Scale(COMBATANT_NORMAL_SCALE, COMBATANT_NORMAL_SCALE);
+	combatantObject->reprocessCurrentTime();
+
+	ReloadHitbox();
+
+	status.Init(this, notificationRenderer);
+	status.Reset();
+
+	statusBar.Init(&status, engine);
+
+	actsInConfusion = false;
+	dying = false;
+
+	abilityStatus = finished;
+
+}
+
 void Combatant::SetPos(int _x, int _y)
 {
 	combatantObject->setPosition(SpriterEngine::point(_x, _y));
 
 	ReloadHitbox();
-
-	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
 }
 
 
@@ -36,7 +58,6 @@ void Combatant::ReloadHitbox()
 }
 
 
-
 void Combatant::ReloadAbilityEffectPoint()
 {
 	combatantObject->reprocessCurrentTime();
@@ -47,174 +68,6 @@ void Combatant::ReloadAbilityEffectPoint()
 }
 
 
-void Combatant::RenderHealthBar(sf::RenderTarget & _target)
-{
-	healthBar.Render(_target);
-	RenderStatusSymbols(_target);
-}
-
-
-void Combatant::RenderStatusSymbols(sf::RenderTarget & _target)
-{
-	int x = healthBar.GetRect().left;
-	int y = healthBar.GetRect().top + healthBar.GetRect().height;
-
-	if (status.IsAsleep())
-	{
-		g_pSpritePool->sleeping.SetPos(x, y);
-		g_pSpritePool->sleeping.Render(_target);
-		x += 20;
-	}
-
-	if (status.IsConfused())
-	{
-		g_pSpritePool->confused.SetPos(x, y);
-		g_pSpritePool->confused.Render(_target);
-		x += 20;
-	}
-
-	if (status.IsBuffed())
-	{
-		g_pSpritePool->buff.SetPos(x, y);
-		g_pSpritePool->buff.Render(_target);
-		x += 20;
-	}
-
-	if (status.IsDebuffed())
-	{
-		g_pSpritePool->debuff.SetPos(x, y);
-		g_pSpritePool->debuff.Render(_target);
-		x += 20;
-	}
-
-	if (status.IsMarked())
-	{
-		g_pSpritePool->marked.SetPos(x, y);
-		g_pSpritePool->marked.Render(_target);
-	}
-
-	RenderStatusSymbolsTooltips();
-}
-
-
-void Combatant::RenderStatusSymbolsTooltips()
-{
-	if (status.IsAsleep() && g_pSpritePool->sleeping.GetRect().contains(engine->GetWorldMousePos()))
-	{
-		RenderTooltip("Schläft", g_pSpritePool->sleeping.GetRect().left, g_pSpritePool->sleeping.GetRect().top);
-	}
-
-	if (status.IsConfused() && g_pSpritePool->confused.GetRect().contains(engine->GetWorldMousePos()))
-	{
-		if(status.RoundsConfused() > 1)
-			RenderTooltip("#bb77bb Verwirrt (" + std::to_string(status.RoundsConfused()) + " Runden)", g_pSpritePool->confused.GetRect().left, g_pSpritePool->confused.GetRect().top);
-		else
-			RenderTooltip("#bb77bb Verwirrt (" + std::to_string(status.RoundsConfused()) + " Runde)", g_pSpritePool->confused.GetRect().left, g_pSpritePool->confused.GetRect().top);
-	}
-
-	if (status.IsMarked() && g_pSpritePool->marked.GetRect().contains(engine->GetWorldMousePos()))
-	{
-		if(status.RoundsMarked() > 1)
-			RenderTooltip("Markiert (" + std::to_string(status.RoundsMarked()) + " Runden)", g_pSpritePool->marked.GetRect().left, g_pSpritePool->marked.GetRect().top);
-		else
-			RenderTooltip("Markiert (" + std::to_string(status.RoundsMarked()) + " Runde)", g_pSpritePool->marked.GetRect().left, g_pSpritePool->marked.GetRect().top);
-	}
-
-	if (status.IsBuffed() && g_pSpritePool->buff.GetRect().contains(engine->GetWorldMousePos()))
-	{
-		auto buff = status.GetBuff();
-
-		std::string tooltip("");
-
-		if(buff.duration > 1)
-			tooltip.append(std::to_string(buff.duration) + " Runden:\n#aaaadd ");
-		else 
-			tooltip.append(std::to_string(buff.duration) + " Runde:\n#aaaadd ");
-
-		if (buff.stats.attributes.strength != 0)
-			tooltip.append(" +" + std::to_string(buff.stats.attributes.strength) + " Stärke\n");
-		if (buff.stats.attributes.constitution != 0)
-			tooltip.append(" +" + std::to_string(buff.stats.attributes.constitution) + " Konstitution\n");
-		if (buff.stats.attributes.dexterity != 0)
-			tooltip.append(" +" + std::to_string(buff.stats.attributes.dexterity) + " Geschicklichkeit\n");
-		if (buff.stats.attributes.speed != 0)
-			tooltip.append(" +" + std::to_string(buff.stats.attributes.speed) + " Geschwindigkeit\n");
-		if (buff.stats.armour != 0)
-			tooltip.append(" +" + std::to_string(buff.stats.armour) + " Rüstung\n");
-		if (buff.stats.maxHealth != 0)
-			tooltip.append(" +" + std::to_string(buff.stats.maxHealth) + " Maximales Leben\n");
-		if (buff.stats.damageMin != 0)
-			tooltip.append(" +" + std::to_string(buff.stats.damageMin) + " Schaden\n");
-		if (buff.stats.initiative != 0)
-			tooltip.append(" +" + std::to_string(buff.stats.initiative) + " Initiative\n");
-		if (buff.stats.criticalHit != 0)
-			tooltip.append(" +" + std::to_string(buff.stats.criticalHit) + " Kritische Trefferchance\n");
-		if (buff.stats.dodge != 0)
-			tooltip.append(" +" + std::to_string(buff.stats.dodge) + " Ausweichen\n");
-		if (buff.stats.precision != 0)
-			tooltip.append(" +" + std::to_string(buff.stats.precision) + " Präzision\n");
-
-		tooltip.pop_back();
-		RenderTooltip(tooltip, g_pSpritePool->buff.GetRect().left, g_pSpritePool->buff.GetRect().top);
-	}
-
-	if (status.IsDebuffed() && g_pSpritePool->debuff.GetRect().contains(engine->GetWorldMousePos()))
-	{
-		auto buff = status.GetDebuff();
-
-		std::string tooltip("");
-		if (buff.duration > 1)
-			tooltip.append(std::to_string(buff.duration) + " Runden:\n#aaaadd ");
-		else
-			tooltip.append(std::to_string(buff.duration) + " Runde:\n#aaaadd ");
-
-		if (buff.stats.attributes.strength != 0)
-			tooltip.append(std::to_string(buff.stats.attributes.strength) + " Stärke\n");
-		if (buff.stats.attributes.constitution != 0)
-			tooltip.append(std::to_string(buff.stats.attributes.constitution) + " Konstitution\n");
-		if (buff.stats.attributes.dexterity != 0)
-			tooltip.append(std::to_string(buff.stats.attributes.dexterity) + " Geschicklichkeit\n");
-		if (buff.stats.attributes.speed != 0)
-			tooltip.append(std::to_string(buff.stats.attributes.speed) + " Geschwindigkeit\n");
-		if (buff.stats.armour != 0)
-			tooltip.append(std::to_string(buff.stats.armour) + " Rüstung\n");
-		if (buff.stats.maxHealth != 0)
-			tooltip.append(std::to_string(buff.stats.maxHealth) + " Maximales Leben\n");
-		if (buff.stats.damageMin != 0)
-			tooltip.append(std::to_string(buff.stats.damageMin) + " Schaden\n");
-		if (buff.stats.initiative != 0)
-			tooltip.append(std::to_string(buff.stats.initiative) + " Initiative\n");
-		if (buff.stats.criticalHit != 0)
-			tooltip.append(std::to_string(buff.stats.criticalHit) + " Kritische Trefferchance\n");
-		if (buff.stats.dodge != 0)
-			tooltip.append(std::to_string(buff.stats.dodge) + " Ausweichen\n");
-		if (buff.stats.precision != 0)
-			tooltip.append(std::to_string(buff.stats.precision) + " Präzision\n");
-
-		tooltip.pop_back();
-		RenderTooltip(tooltip, g_pSpritePool->debuff.GetRect().left, g_pSpritePool->debuff.GetRect().top);
-	}
-}
-
-
-void Combatant::RenderTooltip(std::string _tooltip, float _x, float _y)
-{
-	sfe::RichText tooltip;
-	tooltip.setCharacterSize(18);
-	tooltip.setFont(g_pFonts->f_arial);
-	tooltip.setString(_tooltip);
-	tooltip.setPosition(_x, _y - tooltip.getLocalBounds().height - 30.0f);
-
-	sf::FloatRect backgroundRect = tooltip.getLocalBounds();
-	sf::RoundedRectangleShape background(sf::Vector2f(backgroundRect.width + 10.0f, backgroundRect.height + 16.0f), 8, 10);
-	background.setFillColor(sf::Color(0, 0, 0, 200));
-	background.setOutlineThickness(2.0f);
-	background.setOutlineColor(sf::Color(60, 60, 60));
-	background.setPosition(tooltip.getPosition() + sf::Vector2f(-5.0f, -4.0f));
-
-	engine->GetWindow().draw(background);
-	engine->GetWindow().draw(tooltip);
-}
 
 void Combatant::RenderAbilityEffects()
 {
@@ -286,14 +139,14 @@ void Combatant::ScaleForAbilityAnimation()
 {
 	lastPosition = combatantObject->getPosition();
 
-	Scale(0.8, 0.8);
+	Scale(COMBATANT_ABILITY_SCALE, COMBATANT_ABILITY_SCALE);
 	SetPos(lastPosition.x - engine->GetViewPosition().x, 800);
 }
 
 
 void Combatant::ReverseScaleForAbilityAnimation()
 {
-	Scale(0.6, 0.6);
+	Scale(COMBATANT_NORMAL_SCALE, COMBATANT_NORMAL_SCALE);
 	SetPos(lastPosition.x, lastPosition.y);
 }
 
@@ -375,10 +228,8 @@ void Combatant::Quit()
 
 void Combatant::Update()
 {
-	healthBar.Update(g_pTimer->GetElapsedTime().asSeconds());
+	statusBar.Update(GetRect());
 }
-
-
 
 
 bool Combatant::AbilityEffectIsPlaying()
@@ -403,7 +254,7 @@ bool Combatant::CheckForDodging(Combatant *_attacker)
 void Combatant::RenderAbilityTargetMarker()
 {
 	int xPos = GetRect().left + (GetRect().width - g_pSpritePool->abilityTargetMarker.GetRect().width) / 2;
-	int yPos = healthBar.GetRect().top + healthBar.GetRect().height + 20;
+	int yPos = statusBar.GetRect().top + statusBar.GetRect().height + 20;
 	g_pSpritePool->abilityTargetMarker.SetPos(xPos, yPos);
 	g_pSpritePool->abilityTargetMarker.Render(engine->GetWindow());
 }
@@ -411,7 +262,7 @@ void Combatant::RenderAbilityTargetMarker()
 void Combatant::RenderTurnMarker()
 {
 	int xPos = GetRect().left + (GetRect().width - g_pSpritePool->turnMarker.GetRect().width) / 2;
-	int yPos = healthBar.GetRect().top + healthBar.GetRect().height + 20;
+	int yPos = statusBar.GetRect().top + statusBar.GetRect().height + 20;
 	g_pSpritePool->turnMarker.SetPos(xPos, yPos);
 	g_pSpritePool->turnMarker.Render(engine->GetWindow());
 }
@@ -431,14 +282,11 @@ void Combatant::ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & 
 			_target->Status().LooseHealth(damage, false);
 	}
 
-
 	if (_effect.heal != 0)
 		_target->Status().GainHealth(_effect.heal);
 
-
 	if (_effect.healSelf != 0)
 		status.GainHealth(_effect.healSelf);
-
 
 	if (_effect.confusion != 0)
 	{

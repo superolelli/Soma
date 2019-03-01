@@ -10,12 +10,12 @@
 
 #include "../Framework/Makros.hpp"
 
-#include "../Framework/Gui/Bar.hpp"
-#include "Resources\SpritePool.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
 #include "../Framework/Time.hpp"
 #include "CombatantStatus.hpp"
 #include "../Framework/Graphics/NotificationRenderer.hpp"
+
+#include "CombatantStatusBar.hpp"
 
 
 #include "BattleGUI.hpp"
@@ -27,12 +27,15 @@ const float IDLE_ANIMATION_SPEED = 0.7f;
 const float ABILITY_ANIMATION_SPEED = 1.0f;
 const float ABILITY_EFFECT_ANIMATION_SPEED = 0.9f;
 
+const float COMBATANT_NORMAL_SCALE = 0.6f;
+const float COMBATANT_ABILITY_SCALE = 0.8f;
+
 class Combatant
 {
 public:
 	static bool setElapsedTimeForAbilityEffect;
 
-	virtual void Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer) = 0;
+	virtual void Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
 	void Quit();
 	virtual void Render() = 0;
 	virtual void Update();
@@ -64,7 +67,6 @@ public:
 
 	abilityPhase GetAbilityStatus() { return abilityStatus; }
 
-	virtual void RenderHealthBar(sf::RenderTarget &_target);
 	void RenderAbilityTargetMarker();
 	void RenderTurnMarker();
 
@@ -86,7 +88,7 @@ protected:
 	bool actsInConfusion;
 	bool dying;
 
-	Bar healthBar;
+	CombatantStatusBar statusBar;
 
 	CGameEngine *engine;
 	BattleGUI *gui;
@@ -97,9 +99,6 @@ protected:
 	std::vector<Combatant*> *allCombatants;
 
 	std::vector<Combatant*> selectedTargets;
-
-	void RenderStatusSymbols(sf::RenderTarget &_target);
-	void RenderStatusSymbolsTooltips();
 
 	void RenderAbilityEffects();
 
@@ -118,6 +117,4 @@ protected:
 
 	bool AbilityEffectIsPlaying();
 	bool CheckForDodging(Combatant *_attacker);
-
-	void RenderTooltip(std::string _tooltip, float _x, float _y);
 };

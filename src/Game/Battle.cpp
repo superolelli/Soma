@@ -62,13 +62,13 @@ void Battle::Update()
 	for (Combatant *c : combatants)
 		c->Update();
 
+	HandleDeaths();
+
+	if (IsOneGroupDead() == true)
+		isBattleFinished = true;
+
 	if (combatants[currentCombatant]->FinishedTurn())
 	{
-		HandleDeaths();
-
-		if (IsOneGroupDead() == true)
-			isBattleFinished = true;
-
 		do {
 			ChooseNextCombatant();
 		} while (combatants[currentCombatant]->Status().GetCurrentHealth() <= 0);
@@ -147,11 +147,8 @@ void Battle::Render()
 	Combatant::setElapsedTimeForAbilityEffect = false;
 	for (Combatant* c : combatants)
 	{
-		if (c->GetAbilityStatus() != executing && c->GetAbilityStatus() != attacked)
-		{
+		if (c->GetAbilityStatus() != executing && c->GetAbilityStatus() != attacked && c->GetAbilityStatus() != dodging)
 			c->Render();
-			c->RenderHealthBar(engine->GetWindow());
-		}
 	}
 }
 
@@ -161,7 +158,7 @@ void Battle::RenderAbilityAnimations()
 {
 	for (Combatant* c : combatants)
 	{
-		if(c->GetAbilityStatus() == executing || c->GetAbilityStatus() == attacked)
+		if(c->GetAbilityStatus() == executing || c->GetAbilityStatus() == attacked || c->GetAbilityStatus() == dodging)
 			c->Render();
 	}
 }

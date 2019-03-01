@@ -465,6 +465,9 @@
     <ClCompile Include="src\Framework\Graphics\RoundedRectangleShape.cpp">
       <Filter>Quelldateien\Framework\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\CombatantStatusBar.cpp">
+      <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -901,6 +904,9 @@
     </ClInclude>
     <ClInclude Include="src\Framework\Graphics\RoundedRectangleShape.hpp">
       <Filter>Headerdateien\Framework\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\CombatantStatusBar.hpp">
+      <Filter>Headerdateien\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

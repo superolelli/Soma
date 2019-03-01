@@ -5,7 +5,6 @@
 #include "Resources\Resources.hpp"
 
 
-const float PLAYER_SCALE = 0.6f;
 const float WALKING_ANIMATION_SPEED = 0.85f;
 
 class Player : public Combatant

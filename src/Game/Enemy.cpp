@@ -5,10 +5,6 @@
 
 void Enemy::Init(int _id, CGameEngine * _engine, NotificationRenderer *_notificationRenderer)
 {
-	engine = _engine;
-	enemyID = _id;
-	notificationRenderer = _notificationRenderer;
-
 	switch (_id)
 	{
 	case 4:
@@ -19,25 +15,14 @@ void Enemy::Init(int _id, CGameEngine * _engine, NotificationRenderer *_notifica
 		break;
 	}
 
-	status.Init(this, notificationRenderer);
-	status.Reset();
+	Combatant::Init(_id, _engine, _notificationRenderer);
+
+	enemyID = _id;
+	
 	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);
 
-	SetAnimation("idle", IDLE_ANIMATION_SPEED);
-	Scale(ENEMY_SCALE, ENEMY_SCALE);
-	combatantObject->reprocessCurrentTime();
-
-	ReloadHitbox();
-	
-	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, status.GetCurrentHealthPointer(), status.GetMaxHealthPointer());
-	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
-	healthBar.SetSmoothTransformationTime(0.7f);
-
 	abilityAnnouncementTime = 0.0f;
-	abilityStatus = finished;
 	confusionChecked = false;
-	actsInConfusion = false;
-	dying = false;
 }
 
 
@@ -123,7 +108,7 @@ void Enemy::ChooseRandomEnemy()
 
     if (numberOfEnemies > 0)
     {
-		int target = rand() % numberOfEnemies;
+		int target = rand() % (numberOfEnemies-1);
 		for (Combatant *c : (*allCombatants))
 		{
 			if (!c->IsPlayer() && c != this)
@@ -252,6 +237,9 @@ void Enemy::Render()
 
 	if (abilityStatus == attacked || abilityStatus == dodging)
 		RenderAbilityEffects();
+
+	if (abilityStatus != executing && abilityStatus != attacked && abilityStatus != dodging)
+		statusBar.Render();
 }
 
 

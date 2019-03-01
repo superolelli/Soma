@@ -4,31 +4,11 @@
 
 void Player::Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer)
 {
+	Combatant::Init(_id, _engine, _notificationRenderer);
 
-	engine = _engine;
-	notificationRenderer = _notificationRenderer;
-
-	SetAnimation("idle", IDLE_ANIMATION_SPEED);
-
-	Scale(PLAYER_SCALE, PLAYER_SCALE);
-	combatantObject->reprocessCurrentTime();
-
-	status.Init(this, notificationRenderer);
 	status.SetStats(g_pObjectProperties->playerStats[_id]);
 
-	ReloadHitbox();
-
-	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, status.GetCurrentHealthPointer(), status.GetMaxHealthPointer());
-	healthBar.SetPos(GetRect().left + GetRect().width / 2 - healthBar.GetRect().width / 2, GetRect().top + GetRect().height + 30);
-	healthBar.SetSmoothTransformationTime(0.7f);
-
-	status.Reset();
-
 	is_walking = false;
-	actsInConfusion = false;
-	dying = false;
-
-	abilityStatus = finished;
 }
 
 
@@ -45,6 +25,7 @@ bool Player::CurrentAbilityAttacksAll()
 
 void Player::Update(int _xMove, bool _is_walking)
 {
+	Combatant::Update();
 	SetPos(combatantObject->getPosition().x + _xMove, combatantObject->getPosition().y);
 
 	if (abilityStatus != executing && abilityStatus != attacked)
@@ -90,6 +71,9 @@ void Player::Render()
 		RenderTurnMarker();
 		RenderAbilityTargetMarker();
 	}
+
+	if (abilityStatus != executing && abilityStatus != attacked && abilityStatus != dodging)
+		statusBar.Render();
 }
 
 

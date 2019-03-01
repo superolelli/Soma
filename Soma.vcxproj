@@ -248,6 +248,7 @@
     <ClCompile Include="src\Game\Combatant.cpp" />
     <ClCompile Include="src\Game\CombatantAttributes.cpp" />
     <ClCompile Include="src\Game\CombatantStatus.cpp" />
+    <ClCompile Include="src\Game\CombatantStatusBar.cpp" />
     <ClCompile Include="src\Game\Enemy.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Game\GUI.cpp" />
@@ -273,6 +274,7 @@
     <ClInclude Include="src\Framework\Graphics\RichText.hpp" />
     <ClInclude Include="src\Framework\Graphics\RoundedRectangleShape.hpp" />
     <ClInclude Include="src\Game\Ability.hpp" />
+    <ClInclude Include="src\Game\CombatantStatusBar.hpp" />
     <ClInclude Include="src\Game\Resources\EnemyAbilities.hpp" />
     <ClInclude Include="src\Framework\Animations\animation\animation.h" />
     <ClInclude Include="src\Framework\Animations\animation\animationinstance.h" />

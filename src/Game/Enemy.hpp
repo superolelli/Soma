@@ -5,8 +5,6 @@
 
 #include <numeric>
 
-const float ENEMY_SCALE = 0.6f;
-
 class Enemy : public Combatant
 {
 public:

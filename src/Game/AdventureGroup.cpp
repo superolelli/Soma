@@ -49,15 +49,9 @@ void AdventureGroup::Update(int xMove)
 void AdventureGroup::Render()
 {
 	for (auto a : adventurer)
-		a->Render();
-}
-
-void AdventureGroup::RenderWithHealthBars(sf::RenderTarget &_target)
-{
-	for (auto a : adventurer)
 	{
-		a->Render();
-		a->RenderHealthBar(_target);
+		if(a->Status().GetCurrentHealth() > 0)
+			a->Render();
 	}
 }
 
