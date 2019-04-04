@@ -59,6 +59,9 @@ void Player::Update(int _xMove, bool _is_walking)
 
 void Player::Render()
 {
+	if(abilityStatus != executing && abilityStatus != attacked && abilityStatus != dodging)
+		RenderShadow();
+
 	combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
 	combatantObject->render();
 	combatantObject->playSoundTriggers();
@@ -74,6 +77,7 @@ void Player::Render()
 
 	if (abilityStatus != executing && abilityStatus != attacked && abilityStatus != dodging)
 		statusBar.Render();
+
 }
 
 

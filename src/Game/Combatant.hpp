@@ -101,6 +101,7 @@ protected:
 	std::vector<Combatant*> selectedTargets;
 
 	void RenderAbilityEffects();
+	void RenderShadow();
 
 	void ApplyAbilityEffectToTarget(Combatant *_target, AbilityEffect &_effect);
 

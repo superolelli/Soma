@@ -5,7 +5,7 @@
 #include "Markus.hpp"
 #include "Simon.hpp"
 
-const int PLAYER_SPACING = 150;
+const int PLAYER_SPACING = 160;
 const int GROUP_Y_POS = 700;
 const int GROUP_OFFSET_LEFT = 100;
 

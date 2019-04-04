@@ -53,8 +53,8 @@ void Combatant::ReloadHitbox()
 
 	hitbox.left = hitboxObj->getPosition().x;
 	hitbox.top = hitboxObj->getPosition().y;
-	hitbox.width = hitboxObj->getSize().x * combatantObject->getScale().x;
-	hitbox.height = hitboxObj->getSize().y * combatantObject->getScale().y;
+	hitbox.width = hitboxObj->getSize().x  * hitboxObj->getScale().x;
+	hitbox.height = hitboxObj->getSize().y * hitboxObj->getScale().y;
 }
 
 
@@ -98,6 +98,28 @@ void Combatant::RenderAbilityEffects()
 		g_pSpritePool->abilityEffectsAnimation->render();
 		g_pSpritePool->abilityEffectsAnimation->playSoundTriggers();
 	}
+}
+
+
+void Combatant::RenderShadow()
+{
+	combatantObject->reprocessCurrentTime();
+	SpriterEngine::UniversalObjectInterface* pointObj = combatantObject->getObjectInstance("shadow_point");
+
+	ReloadHitbox();
+
+	sf::CircleShape shadow;
+	shadow.setRadius(GetRect().width / 2 + 10);
+	shadow.setPointCount(60);
+	shadow.scale(1.0, 0.2);
+
+	if (IsDying() && combatantObject->getCurrentTime() > 1100.0)
+		shadow.setFillColor(sf::Color(0, 0, 0, 100 - (combatantObject->getCurrentTime() - 1100.0) / 9.0));
+	else
+		shadow.setFillColor(sf::Color(0, 0, 0, 100));
+
+	shadow.setPosition(pointObj->getPosition().x - shadow.getLocalBounds().width / 2, pointObj->getPosition().y- shadow.getGlobalBounds().height / 2);
+	engine->GetWindow().draw(shadow);
 }
 
 

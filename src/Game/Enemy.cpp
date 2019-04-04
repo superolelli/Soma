@@ -70,7 +70,7 @@ void Enemy::CheckForMarkedPlayers()
 
 bool Enemy::CanAimAtCombatant(Combatant *_combatant)
 {
-	return g_pObjectProperties->enemyAbilities[chosenAbility].possibleAims.position[_combatant->GetBattlePos()];
+	return g_pObjectProperties->enemyAbilities[chosenAbility].possibleAims.position[_combatant->GetBattlePos()] && !_combatant->IsDying();
 }
 
 
@@ -220,6 +220,9 @@ void Enemy::ExecuteAbility()
 
 void Enemy::Render()
 {
+	if (abilityStatus != executing && abilityStatus != attacked && abilityStatus != dodging)
+		RenderShadow();
+
 	combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
 	combatantObject->render();
 	combatantObject->playSoundTriggers();
