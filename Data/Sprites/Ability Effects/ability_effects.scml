@@ -41,6 +41,10 @@
         <file id="37" name="beep.wav" type="sound"/>
         <file id="38" name="horror_impact.wav" type="sound"/>
         <file id="39" name="whoosh.wav" type="sound"/>
+        <file id="40" name="indianer_tomahawk.png" width="92" height="121" pivot_x="0.858696" pivot_y="0.099174"/>
+        <file id="41" name="tomahawk_hit.png" width="109" height="91" pivot_x="0" pivot_y="1"/>
+        <file id="42" name="woosh_short.wav" type="sound"/>
+        <file id="43" name="hit.wav" type="sound"/>
     </folder>
     <folder id="1" name="Letters">
         <file id="0" name="Letters/a.png" width="35" height="36" pivot_x="0.514286" pivot_y="0.416667"/>
@@ -2234,7 +2238,74 @@
                 </key>
             </soundline>
         </animation>
-        <animation id="12" name="springfield" length="1800" interval="100" looping="false">
+        <animation id="12" name="tomahawk" length="2100" interval="100" looping="false">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="2" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="801">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="2" key="0" z_index="1"/>
+                </key>
+                <key id="2" time="1100">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                    <object_ref id="1" timeline="2" key="0" z_index="1"/>
+                </key>
+                <key id="3" time="1354">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                    <object_ref id="1" timeline="2" key="0" z_index="1"/>
+                </key>
+                <key id="4" time="1557">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                    <object_ref id="1" timeline="2" key="0" z_index="1"/>
+                </key>
+                <key id="5" time="1563">
+                    <object_ref id="0" timeline="1" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="2" key="1" z_index="1"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="indianer_tomahawk">
+                <key id="0" time="801">
+                    <object folder="0" file="40" x="617.391304" y="138.043478" angle="0"/>
+                </key>
+                <key id="1" time="1100">
+                    <object folder="0" file="40" x="509.782609" y="202.173913" angle="133.698047"/>
+                </key>
+                <key id="2" time="1354">
+                    <object folder="0" file="40" x="319.565217" y="158.695652" angle="273.366461"/>
+                </key>
+                <key id="3" time="1557" spin="-1">
+                    <object folder="0" file="40" x="281.396096" y="174.588008" angle="32.309262"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="tomahawk_hit">
+                <key id="0" time="1563" spin="0">
+                    <object folder="0" file="41" x="192.391304" y="256.521739" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="attaching_point" object_type="point">
+                <key id="0" spin="0">
+                    <object x="194" y="120" angle="0"/>
+                </key>
+                <key id="1" time="1563" spin="0">
+                    <object x="194" y="120" angle="0"/>
+                </key>
+            </timeline>
+            <soundline id="-1" name="woosh_short">
+                <key id="0" time="799">
+                    <object folder="0" file="42"/>
+                </key>
+                <key id="1" time="1298">
+                    <object folder="0" file="42"/>
+                </key>
+            </soundline>
+            <soundline id="-1" name="hit">
+                <key id="0" time="201">
+                    <object folder="0" file="43"/>
+                </key>
+            </soundline>
+        </animation>
+        <animation id="13" name="springfield" length="1800" interval="100" looping="false">
             <mainline>
                 <key id="0">
                     <object_ref id="0" timeline="3" key="0" z_index="0"/>
@@ -2315,7 +2386,7 @@
                 </key>
             </soundline>
         </animation>
-        <animation id="13" name="horrible_grin" length="2500" interval="100" looping="false">
+        <animation id="14" name="horrible_grin" length="2500" interval="100" looping="false">
             <mainline>
                 <key id="0">
                     <object_ref id="0" timeline="10" key="0" z_index="0"/>
@@ -2546,7 +2617,7 @@
                 </key>
             </soundline>
         </animation>
-        <animation id="14" name="fist_of_revenge" length="1700" interval="100" looping="false">
+        <animation id="15" name="fist_of_revenge" length="1700" interval="100" looping="false">
             <mainline>
                 <key id="0">
                     <object_ref id="0" timeline="2" key="0" z_index="0"/>
@@ -2629,7 +2700,7 @@
                 </key>
             </soundline>
         </animation>
-        <animation id="15" name="hack_into_the_system" length="2800" interval="100" looping="false">
+        <animation id="16" name="hack_into_the_system" length="2800" interval="100" looping="false">
             <mainline>
                 <key id="0">
                     <object_ref id="0" timeline="23" key="0" z_index="0"/>
@@ -2863,7 +2934,7 @@
                 </key>
             </soundline>
         </animation>
-        <animation id="16" name="all_on_one" length="1000" interval="100" looping="false">
+        <animation id="17" name="all_on_one" length="1000" interval="100" looping="false">
             <mainline>
                 <key id="0">
                     <object_ref id="0" timeline="1" key="0" z_index="0"/>
@@ -2910,7 +2981,7 @@
                 </key>
             </soundline>
         </animation>
-        <animation id="17" name="empty" length="10" interval="100" looping="false">
+        <animation id="18" name="empty" length="10" interval="100" looping="false">
             <mainline>
                 <key id="0">
                     <object_ref id="0" timeline="0" key="0" z_index="0"/>
@@ -2922,7 +2993,7 @@
                 </key>
             </timeline>
         </animation>
-        <animation id="18" name="word_gush" length="1600" interval="100" looping="false">
+        <animation id="19" name="word_gush" length="1600" interval="100" looping="false">
             <mainline>
                 <key id="0">
                     <object_ref id="0" timeline="26" key="0" z_index="0"/>

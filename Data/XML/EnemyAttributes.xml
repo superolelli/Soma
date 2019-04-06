@@ -32,5 +32,21 @@
 	  dodge="3"
 	  precision="5"
   ></Abtruenniger>
+
+    <Indianer id="6"
+    strength="4"
+	  constitution="4"
+	  dexterity="5"
+	  speed="2"
+				 
+    armour ="1"
+    health ="20"
+    damageMin ="5"
+    damageMax ="8"
+    initiative ="2"
+	  criticalHit="5"
+	  dodge="6"
+	  precision="5"
+  ></Indianer>
   
 </EnemyAttributes>

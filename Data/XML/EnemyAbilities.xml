@@ -34,4 +34,20 @@
 	  </effect>
   </ability>
 
+	<ability id="2" name="Tomahawk">
+	  <animation>tomahawk</animation>
+	  <effectAnimation>tomahawk</effectAnimation>
+
+	  <positions>
+		  <value id="0">true</value>
+		  <value id="1">true</value>
+		  <value id="2">true</value>
+		  <value id="3">true</value>
+	  </positions>
+
+	  <effect>
+		  <damageFactor>1</damageFactor>
+	  </effect>
+  </ability>
+
 </Abilities>

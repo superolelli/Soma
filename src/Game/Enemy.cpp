@@ -13,11 +13,14 @@ void Enemy::Init(int _id, CGameEngine * _engine, NotificationRenderer *_notifica
 	case 5:
 		combatantObject = g_pModels->modelAbtruenniger->getNewEntityInstance("Abtruenniger");
 		break;
+	case 6:
+		combatantObject = g_pModels->modelIndianer->getNewEntityInstance("Indianer");
+		break;
 	}
 
-	Combatant::Init(_id, _engine, _notificationRenderer);
-
 	enemyID = _id;
+
+	Combatant::Init(_id, _engine, _notificationRenderer);
 	
 	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);
 
@@ -31,8 +34,10 @@ void Enemy::ChooseAbility()
 {
 	if (enemyID == 4)
 		chosenAbility = enemyAbilities::springfield;
-	else
+	else if (enemyID == 5)
 		chosenAbility = enemyAbilities::bang;
+	else
+		chosenAbility = enemyAbilities::tomahawk;
 }
 
 

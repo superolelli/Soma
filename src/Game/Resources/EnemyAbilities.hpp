@@ -1,4 +1,4 @@
 #pragma once
 
 
-enum enemyAbilities { bang, springfield };
+enum enemyAbilities { bang, springfield, tomahawk };

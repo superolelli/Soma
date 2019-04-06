@@ -18,7 +18,7 @@ public:
 	CombatantStats playerStats[4];
 	std::map<int, CombatantStats> enemyStats;
 
-	Ability enemyAbilities[2];
+	Ability enemyAbilities[3];
 
 private:
 	void LoadPlayerAbilities();

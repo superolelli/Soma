@@ -244,7 +244,7 @@
             </timeline>
             <timeline id="22" obj="7" name="bone_007" object_type="bone">
                 <key id="0" spin="0">
-                    <bone x="82.55814" y="-1.162791"/>
+                    <bone x="82.55814" y="-1.162791" angle="0"/>
                 </key>
             </timeline>
             <timeline id="23" obj="8" name="bone_008" object_type="bone">
@@ -641,7 +641,7 @@
             </timeline>
             <timeline id="22" obj="7" name="bone_007" object_type="bone">
                 <key id="0" spin="-1">
-                    <bone x="82.55814" y="-1.162791"/>
+                    <bone x="82.55814" y="-1.162791" angle="0"/>
                 </key>
                 <key id="1" time="500">
                     <bone x="60.05814" y="-26.162791" angle="258.423856"/>
@@ -719,19 +719,19 @@
             </timeline>
             <timeline id="28" name="shadow_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="192.857143" y="1.190476"/>
+                    <object x="192.857143" y="1.190476" angle="0"/>
                 </key>
                 <key id="1" time="500" spin="0">
-                    <object x="270.238095"/>
+                    <object x="270.238095" angle="0"/>
                 </key>
                 <key id="2" time="1101" spin="0">
-                    <object x="380.880111" y="1.667779"/>
+                    <object x="380.880111" y="1.667779" angle="0"/>
                 </key>
                 <key id="3" time="1499" spin="0">
-                    <object x="380" y="1.456235"/>
+                    <object x="380" y="1.456235" angle="0"/>
                 </key>
                 <key id="4" time="1999" spin="0">
-                    <object x="380" y="1.190476"/>
+                    <object x="380" y="1.190476" angle="0"/>
                 </key>
             </timeline>
             <timeline id="29" obj="12" name="bounding_box" object_type="box">
@@ -2171,6 +2171,7 @@
                     <object_ref id="12" timeline="29" key="0" z_index="12"/>
                     <object_ref id="13" parent="1" timeline="24" key="0" z_index="13"/>
                     <object_ref id="14" parent="1" timeline="25" key="0" z_index="14"/>
+                    <object_ref id="15" timeline="30" key="0" z_index="15"/>
                 </key>
                 <key id="1" time="300">
                     <bone_ref id="0" timeline="0" key="0"/>
@@ -2200,7 +2201,8 @@
                     <object_ref id="12" timeline="29" key="0" z_index="12"/>
                     <object_ref id="13" parent="1" timeline="24" key="0" z_index="13"/>
                     <object_ref id="14" parent="1" timeline="25" key="0" z_index="14"/>
-                    <object_ref id="15" timeline="26" key="0" z_index="15"/>
+                    <object_ref id="15" timeline="30" key="0" z_index="15"/>
+                    <object_ref id="16" timeline="26" key="0" z_index="16"/>
                 </key>
                 <key id="2" time="502">
                     <bone_ref id="0" timeline="0" key="0"/>
@@ -2230,8 +2232,9 @@
                     <object_ref id="12" timeline="29" key="0" z_index="12"/>
                     <object_ref id="13" parent="1" timeline="24" key="0" z_index="13"/>
                     <object_ref id="14" parent="1" timeline="25" key="0" z_index="14"/>
-                    <object_ref id="15" timeline="26" key="1" z_index="15"/>
-                    <object_ref id="16" timeline="27" key="0" z_index="16"/>
+                    <object_ref id="15" timeline="30" key="0" z_index="15"/>
+                    <object_ref id="16" timeline="26" key="1" z_index="16"/>
+                    <object_ref id="17" timeline="27" key="0" z_index="17"/>
                 </key>
                 <key id="3" time="698">
                     <bone_ref id="0" timeline="0" key="0"/>
@@ -2261,9 +2264,10 @@
                     <object_ref id="12" timeline="29" key="0" z_index="12"/>
                     <object_ref id="13" parent="1" timeline="24" key="0" z_index="13"/>
                     <object_ref id="14" parent="1" timeline="25" key="0" z_index="14"/>
-                    <object_ref id="15" timeline="26" key="2" z_index="15"/>
-                    <object_ref id="16" timeline="27" key="1" z_index="16"/>
-                    <object_ref id="17" timeline="28" key="0" z_index="17"/>
+                    <object_ref id="15" timeline="30" key="0" z_index="15"/>
+                    <object_ref id="16" timeline="26" key="2" z_index="16"/>
+                    <object_ref id="17" timeline="27" key="1" z_index="17"/>
+                    <object_ref id="18" timeline="28" key="0" z_index="18"/>
                 </key>
             </mainline>
             <timeline id="0" obj="0" name="bone_000" object_type="bone">
@@ -2312,7 +2316,7 @@
             </timeline>
             <timeline id="7" obj="7" name="bone_007" object_type="bone">
                 <key id="0" spin="0">
-                    <bone x="82.55814" y="-1.162791" angle="0"/>
+                    <bone x="82.55814" y="-1.162791"/>
                 </key>
             </timeline>
             <timeline id="8" obj="8" name="bone_008" object_type="bone">
@@ -2432,6 +2436,11 @@
             <timeline id="29" obj="12" name="bounding_box" object_type="box">
                 <key id="0" spin="0">
                     <object x="24.050633" y="560.759494" pivot_x="0" pivot_y="1" angle="0" scale_x="0.898451" scale_y="0.995527"/>
+                </key>
+            </timeline>
+            <timeline id="30" name="shadow_point" object_type="point">
+                <key id="0" spin="0">
+                    <object x="180.208333" y="5.208333"/>
                 </key>
             </timeline>
         </animation>
@@ -2772,7 +2781,7 @@
             </timeline>
             <timeline id="28" name="shadow_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="178.571429" y="1.190476"/>
+                    <object x="178.571429" y="1.190476" angle="0"/>
                 </key>
             </timeline>
         </animation>

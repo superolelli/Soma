@@ -27,6 +27,7 @@ public:
 
 	SpriterEngine::SpriterModel *modelAbtruenniger;
 	SpriterEngine::SpriterModel *modelGesetzloser;
+	SpriterEngine::SpriterModel *modelIndianer;
 
 	SpriterEngine::SpriterModel *modelAbilityEffects;
 };

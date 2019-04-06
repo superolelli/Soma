@@ -776,19 +776,19 @@
             </timeline>
             <timeline id="29" name="shadow_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="160.465116" y="5.813953"/>
+                    <object x="160.465116" y="5.813953" angle="0"/>
                 </key>
                 <key id="1" time="500" spin="0">
-                    <object x="210.465116" y="1.162791"/>
+                    <object x="210.465116" y="1.162791" angle="0"/>
                 </key>
                 <key id="2" time="1102" spin="0">
-                    <object x="386.883286" y="4.19474"/>
+                    <object x="386.883286" y="4.19474" angle="0"/>
                 </key>
                 <key id="3" time="1500" spin="0">
-                    <object x="395.611469" y="1.425617"/>
+                    <object x="395.611469" y="1.425617" angle="0"/>
                 </key>
                 <key id="4" time="1998" spin="0">
-                    <object x="389.534884" y="1.162791"/>
+                    <object x="389.534884" y="1.162791" angle="0"/>
                 </key>
             </timeline>
             <timeline id="30" obj="12" name="bounding_box" object_type="box">
@@ -796,7 +796,7 @@
                     <object x="11.363636" y="723.863636" pivot_x="0" pivot_y="1" angle="0" scale_x="0.891176" scale_y="0.942367"/>
                 </key>
                 <key id="1" time="500" spin="0">
-                    <object x="20.665962" y="565.116279" pivot_x="0" pivot_y="1" angle="0" scale_x="1.328196" scale_y="0.73446"/>
+                    <object x="20.665872" y="565.116494" pivot_x="0" pivot_y="1" angle="0" scale_x="1.328196" scale_y="0.73446"/>
                 </key>
                 <key id="2" time="500" spin="0">
                     <object x="189.534884" y="291.860465" pivot_x="0.464251" pivot_y="0.514237" angle="0" scale_x="1.328196" scale_y="0.73446"/>
@@ -808,7 +808,7 @@
                     <object x="389.570624" y="93.167513" pivot_x="0.464251" pivot_y="0.514237" angle="0" scale_x="2.670516" scale_y="0.239503"/>
                 </key>
                 <key id="5" time="1998" spin="0">
-                    <object x="387.549495" y="93.9499" pivot_x="0.464251" pivot_y="0.514237" angle="0" scale_x="2.654911" scale_y="0.231911"/>
+                    <object x="387.549767" y="93.949933" pivot_x="0.464251" pivot_y="0.514237" angle="0" scale_x="2.654911" scale_y="0.231911"/>
                 </key>
                 <key id="6" time="1998" spin="0">
                     <object x="397.674419" y="79.069767" pivot_x="0.478176" pivot_y="0.430463" angle="0" scale_x="2.654911" scale_y="0.231911"/>
@@ -3951,7 +3951,7 @@
             </timeline>
             <timeline id="28" name="shadow_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="155.813953" y="5.813953"/>
+                    <object x="155.813953" y="5.813953" angle="0"/>
                 </key>
             </timeline>
             <timeline id="29" obj="12" name="bounding_box" object_type="box">
