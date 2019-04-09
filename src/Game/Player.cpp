@@ -75,7 +75,7 @@ void Player::Render()
 		RenderAbilityTargetMarker();
 	}
 
-	if (abilityStatus != executing && abilityStatus != attacked && abilityStatus != dodging)
+	if (abilityStatus != executing && abilityStatus != attacked && abilityStatus != dodging && !IsDying())
 		statusBar.Render();
 
 }

@@ -40,10 +40,13 @@ void Combatant::SetPos(int _x, int _y)
 
 void Combatant::Scale(float _x, float _y)
 {
-	if (GetID() != 6)
-		combatantObject->setScale(SpriterEngine::point(_x, _y));
-	else
+	if (GetID() == CombatantID::Indianer)
 		combatantObject->setScale(SpriterEngine::point(_x + 0.1, _y + 0.1));
+	else if(GetID() == CombatantID::Hilfssheriff)
+		combatantObject->setScale(SpriterEngine::point(_x + 0.05, _y + 0.05));
+	else
+		combatantObject->setScale(SpriterEngine::point(_x, _y));
+
 	ReloadHitbox();
 }
 

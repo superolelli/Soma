@@ -274,6 +274,7 @@
     <ClInclude Include="src\Framework\Graphics\RichText.hpp" />
     <ClInclude Include="src\Framework\Graphics\RoundedRectangleShape.hpp" />
     <ClInclude Include="src\Game\Ability.hpp" />
+    <ClInclude Include="src\Game\CombatantID.hpp" />
     <ClInclude Include="src\Game\CombatantStatusBar.hpp" />
     <ClInclude Include="src\Game\Resources\EnemyAbilities.hpp" />
     <ClInclude Include="src\Framework\Animations\animation\animation.h" />
@@ -404,7 +405,6 @@
     <ClInclude Include="src\Game\Markus.hpp" />
     <ClInclude Include="src\Game\Ole.hpp" />
     <ClInclude Include="src\Game\Player.hpp" />
-    <ClInclude Include="src\Game\PlayerEnum.hpp" />
     <ClInclude Include="src\Game\Resources\BackgroundIDs.hpp" />
     <ClInclude Include="src\Game\Resources\FontManager.hpp" />
     <ClInclude Include="src\Game\Resources\ModelManager.hpp" />

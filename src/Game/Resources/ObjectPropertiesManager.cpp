@@ -1,5 +1,5 @@
 #include "ObjectPropertiesManager.hpp"
-#include "../PlayerEnum.hpp"
+#include "../CombatantID.hpp"
 
 
 
@@ -28,10 +28,10 @@ void ObjectPropertiesManager::LoadPlayerAbilities()
 
 	loadAbilityFromXML(doc.child("ability"), default);
 
-	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesSimon.xml", PlayerID::Simon, default);
-	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesOle.xml", PlayerID::Ole, default);
-	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesAnna.xml", PlayerID::Anna, default);
-	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesMarkus.xml", PlayerID::Markus, default);
+	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesSimon.xml", CombatantID::Simon, default);
+	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesOle.xml", CombatantID::Ole, default);
+	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesAnna.xml", CombatantID::Anna, default);
+	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesMarkus.xml", CombatantID::Markus, default);
 }
 
 

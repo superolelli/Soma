@@ -16,7 +16,7 @@
 #include "../Framework/Graphics/NotificationRenderer.hpp"
 
 #include "CombatantStatusBar.hpp"
-
+#include "CombatantID.hpp"
 
 #include "BattleGUI.hpp"
 

@@ -28,6 +28,7 @@ public:
 	SpriterEngine::SpriterModel *modelAbtruenniger;
 	SpriterEngine::SpriterModel *modelGesetzloser;
 	SpriterEngine::SpriterModel *modelIndianer;
+	SpriterEngine::SpriterModel *modelHilfssheriff;
 
 	SpriterEngine::SpriterModel *modelAbilityEffects;
 };

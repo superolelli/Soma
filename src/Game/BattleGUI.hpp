@@ -3,7 +3,7 @@
 #include "GUI.hpp"
 #include "../Framework/Graphics/Sprite.hpp"
 #include "Resources\Resources.hpp"
-#include "PlayerEnum.hpp"
+#include "CombatantID.hpp"
 
 class AdventureGroup;
 
@@ -22,7 +22,7 @@ public:
 private:
 
 	int currentAbility;
-	PlayerID currentPlayer;
+	CombatantID currentPlayer;
 	AdventureGroup *players;
 
 	CSprite abilities[4][4];

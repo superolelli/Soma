@@ -33,7 +33,7 @@
 	  precision="5"
   ></Abtruenniger>
 
-    <Indianer id="6"
+  <Indianer id="6"
     strength="4"
 	  constitution="4"
 	  dexterity="5"
@@ -48,5 +48,21 @@
 	  dodge="6"
 	  precision="5"
   ></Indianer>
+
+  <Hilfssheriff id="7"
+    strength="4"
+	  constitution="4"
+	  dexterity="5"
+	  speed="1"
+				 
+    armour ="1"
+    health ="20"
+    damageMin ="5"
+    damageMax ="8"
+    initiative ="1"
+	  criticalHit="5"
+	  dodge="3"
+	  precision="5"
+  ></Hilfssheriff>
   
 </EnemyAttributes>

@@ -7,15 +7,17 @@ void Enemy::Init(int _id, CGameEngine * _engine, NotificationRenderer *_notifica
 {
 	switch (_id)
 	{
-	case 4:
+	case CombatantID::Gesetzloser:
 		combatantObject = g_pModels->modelGesetzloser->getNewEntityInstance("Gesetzloser");
 		break;
-	case 5:
+	case CombatantID::Abtruenniger:
 		combatantObject = g_pModels->modelAbtruenniger->getNewEntityInstance("Abtruenniger");
 		break;
-	case 6:
+	case CombatantID::Indianer:
 		combatantObject = g_pModels->modelIndianer->getNewEntityInstance("Indianer");
 		break;
+	case CombatantID::Hilfssheriff:
+		combatantObject = g_pModels->modelHilfssheriff->getNewEntityInstance("Hilfssheriff");
 	}
 
 	enemyID = _id;
@@ -32,12 +34,21 @@ void Enemy::Init(int _id, CGameEngine * _engine, NotificationRenderer *_notifica
 
 void Enemy::ChooseAbility()
 {
-	if (enemyID == 4)
+	switch (enemyID) 
+	{
+	case CombatantID::Gesetzloser:
 		chosenAbility = enemyAbilities::springfield;
-	else if (enemyID == 5)
+		break;
+	case CombatantID::Abtruenniger:
 		chosenAbility = enemyAbilities::bang;
-	else
+		break;
+	case CombatantID::Indianer:
 		chosenAbility = enemyAbilities::tomahawk;
+		break;
+	case CombatantID::Hilfssheriff:
+		chosenAbility = enemyAbilities::bang;
+		break;
+	}
 }
 
 
@@ -109,14 +120,14 @@ void Enemy::ChooseRandomPlayer()
 
 void Enemy::ChooseRandomEnemy()
 {
-	int numberOfEnemies = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), 0, [&](int sum, Combatant *c) {if (!c->IsPlayer())return sum + 1; else return sum; });
+	int numberOfEnemies = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), 0, [&](int sum, Combatant *c) {if (!c->IsPlayer() && !c->IsDying())return sum + 1; else return sum; });
 
     if (numberOfEnemies > 0)
     {
 		int target = rand() % (numberOfEnemies-1);
 		for (Combatant *c : (*allCombatants))
 		{
-			if (!c->IsPlayer() && c != this)
+			if (!c->IsPlayer() && c != this && !c->IsDying())
 			{
 				if (target == 0)
 				{
@@ -246,7 +257,7 @@ void Enemy::Render()
 	if (abilityStatus == attacked || abilityStatus == dodging)
 		RenderAbilityEffects();
 
-	if (abilityStatus != executing && abilityStatus != attacked && abilityStatus != dodging)
+	if (abilityStatus != executing && abilityStatus != attacked && abilityStatus != dodging && !IsDying())
 		statusBar.Render();
 }
 
