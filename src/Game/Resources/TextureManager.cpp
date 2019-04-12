@@ -7,6 +7,13 @@ void CTextureManager::LoadTextures()
 	//backgrounds
 	bangBackgrounds[room_1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_raum1.png");
 	bangBackgrounds[corridor_1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_1.png");
+	bangBackgrounds[corridor_2].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_2.png");
+	bangBackgrounds[corridor_3].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_3.png");
+	bangBackgrounds[corridor_4].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_4.png");
+	bangBackgrounds[corridor_5].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_5.png");
+	bangBackgrounds[corridor_6].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_6.png");
+	bangBackgrounds[corridor_7].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_7.png");
+	bangBackgrounds[corridor_8].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_8.png");
 	bangBackgrounds[door_1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_tür_1.png");
 	bangBackgrounds[door_2].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_tür_2.png");
 	bangBackgrounds[end].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_ende.png");

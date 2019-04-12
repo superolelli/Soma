@@ -14,7 +14,7 @@ public:
 	//Loads all textures
 	void LoadTextures();
 
-	sf::Texture bangBackgrounds[5];
+	sf::Texture bangBackgrounds[12];
 
 	sf::Texture abilities[4][4];
 

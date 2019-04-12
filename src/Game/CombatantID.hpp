@@ -1,3 +1,27 @@
 #pragma once
 
-enum CombatantID { Simon, Ole, Anna, Markus, Gesetzloser, Abtruenniger, Indianer, Hilfssheriff };
+#include <unordered_map>
+
+enum CombatantID { 
+	Undefined = -1, 
+	Simon, 
+	Ole, 
+	Anna, 
+	Markus, 
+	Gesetzloser, 
+	Abtruenniger, 
+	Indianer, 
+	Hilfssheriff 
+};
+
+
+static std::unordered_map<std::string, CombatantID> combatantIdentifierMap = {
+	{ "Simon", CombatantID::Simon },
+	{ "Ole", CombatantID::Ole },
+	{ "Anna", CombatantID::Anna },
+	{ "Markus", CombatantID::Markus },
+	{ "Gesetzloser", CombatantID::Gesetzloser },
+	{ "Abtrünniger", CombatantID::Abtruenniger },
+	{ "Indianer", CombatantID::Indianer },
+	{ "Hilfssheriff", CombatantID::Hilfssheriff }
+};

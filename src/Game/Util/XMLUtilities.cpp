@@ -1,6 +1,5 @@
 #include "XMLUtilities.hpp"
 
-
 namespace pugi {
 
 
@@ -161,6 +160,30 @@ namespace pugi {
 		stats.attributes.constitution = attributeNode.attribute("constitution").as_int();
 		
 		stats.currentHealth = stats.maxHealth;
+	}
+
+	void loadLevelSpecsFromXML(const xml_node & levelSpecNode, LevelSpecs & specs)
+	{
+		specs.level = levelSpecNode.attribute("id").as_int();
+		specs.battleProbability = levelSpecNode.child("battleProbability").text().as_float();
+		specs.numberOfRooms = levelSpecNode.child("numberOfRooms").text().as_int();
+		specs.endBackground = backgroundIdentifierMap[levelSpecNode.child("endBackground").text().as_string()];
+
+		for (xml_node &group : levelSpecNode.child("enemyGroups").children())
+		{
+			std::array<CombatantID, 4> newGroup = {CombatantID::Undefined, CombatantID::Undefined, CombatantID::Undefined, CombatantID::Undefined };
+			int currentEnemy = 0;
+
+			for (xml_node &enemy : group.children())
+				newGroup[currentEnemy++] = combatantIdentifierMap[enemy.text().as_string()];
+
+			specs.possibleEnemyGroups.push_back(newGroup);
+		}
+
+		for (xml_node &background : levelSpecNode.child("backgrounds"))
+		{
+			specs.possibleBackgrounds.push_back(backgroundIdentifierMap[background.text().as_string()]);
+		}
 	}
 
 

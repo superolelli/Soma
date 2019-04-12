@@ -1,27 +1,17 @@
 #include "Level.hpp"
 
 
-
-
-void Level::Init()
-{
-	int backgroundIDs[7] = {corridor_1, corridor_1, door_1, corridor_1, door_2, room_1, end };
-	int battlesTemp[14] = { 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0 };
+Level::Level()
+{	
 	int position = 0;
 	battle = false;
+}
 
-	for (auto b : backgroundIDs)
+Level::~Level()
+{
+	for (auto room : rooms)
 	{
-		CSprite sprite;
-		sprite.Load(g_pTextures->bangBackgrounds[b]);
-		sprite.SetPos(position, 0);
-		backgrounds.push_back(sprite);
-
-		position += sprite.GetRect().width;	}
-
-	for (int i= 0; i < 14; i++)
-	{
-		battles[i] = battlesTemp[i];
+		SAFE_DELETE(room);
 	}
 }
 
@@ -31,13 +21,22 @@ void Level::Update(int _playerPos)
 {
 	battle = false;
 
-	if (battles[_playerPos / (backgrounds[0].GetRect().width / 2)] == 1)
+	if (rooms[_playerPos / (rooms[0]->background.GetRect().width)]->battle == 1)
 	{
 		battle = true;
-		battles[_playerPos / (backgrounds[0].GetRect().width / 2)] = 0;
+		rooms[_playerPos / (rooms[0]->background.GetRect().width)]->battle = 0;
+		currentEnemyIDs[0] = rooms[_playerPos / (rooms[0]->background.GetRect().width)]->enemyIds[0];
+		currentEnemyIDs[1] = rooms[_playerPos / (rooms[0]->background.GetRect().width)]->enemyIds[1];
+		currentEnemyIDs[2] = rooms[_playerPos / (rooms[0]->background.GetRect().width)]->enemyIds[2];
+		currentEnemyIDs[3] = rooms[_playerPos / (rooms[0]->background.GetRect().width)]->enemyIds[3];
 	}
 }
 
+
+int *Level::GetEnemyIDs()
+{
+	return currentEnemyIDs;
+}
 
 
 void Level::Render(sf::RenderTarget &_target, int _viewX)
@@ -45,17 +44,26 @@ void Level::Render(sf::RenderTarget &_target, int _viewX)
 	RenderBackground(_target, _viewX);
 }
 
+void Level::AddRoom(Room *_room)
+{
+	rooms.push_back(_room);
+}
 
+
+int Level::IsAtEnd(int _playerPos)
+{
+	return _playerPos >= rooms.size() * rooms[0]->background.GetRect().width - rooms[0]->background.GetRect().width / 2;
+}
 
 void Level::RenderBackground(sf::RenderTarget &_target, int _viewX)
 {
-	int backgroundNr = _viewX / backgrounds[0].GetRect().width;
+	int roomNumber = _viewX / rooms[0]->background.GetRect().width;
 
-	if (backgrounds.size() > backgroundNr)
+	if (rooms.size() > roomNumber)
 	{
-		backgrounds[backgroundNr].Render(_target);
+		rooms[roomNumber]->background.Render(_target);
 
-		if (backgrounds.size() > backgroundNr + 1)
-			backgrounds[backgroundNr + 1].Render(_target);
+		if (rooms.size() > roomNumber + 1)
+			rooms[roomNumber + 1]->background.Render(_target);
 	}
 }

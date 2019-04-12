@@ -30,7 +30,7 @@ public:
 private:
 
 	sf::View view;
-	Level level;
+	Level *level;
 	AdventureGroup adventureGroup;
 	GUI *currentGUI;
 

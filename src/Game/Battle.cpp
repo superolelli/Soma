@@ -2,20 +2,9 @@
 
 
 
-void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer)
+void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4])
 {
 	srand(time(0));
-	enemy[3].Init(7, _engine, _notificationRenderer);
-	enemy[2].Init(7, _engine, _notificationRenderer);
-	enemy[1].Init(7, _engine, _notificationRenderer);
-	enemy[0].Init(7, _engine, _notificationRenderer);
-
-	int pos = _xView + ENEMY_X_OFFSET;
-	for (auto &e : enemy)
-	{
-		e.SetPos(pos, ENEMY_Y_POS);
-		pos += ENEMY_SPACING;
-	}
 
 	players = _adventureGroup;
 	gui = _gui;
@@ -25,14 +14,23 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 	combatants.push_back(players->GetPlayer(1));
 	combatants.push_back(players->GetPlayer(2));
 	combatants.push_back(players->GetPlayer(3));
-	combatants.push_back(&enemy[0]);
-	combatants.push_back(&enemy[1]);
-	combatants.push_back(&enemy[2]);
-	combatants.push_back(&enemy[3]);
 
+	int pos = _xView + ENEMY_X_OFFSET;
+	for (int i = 0; i < 4; i++)
+	{
+		if (enemyIDs[i] != CombatantID::Undefined) {
+			enemy[i].Init(enemyIDs[i], _engine, _notificationRenderer);
+			enemy[i].SetPos(pos - enemy[i].GetLocalPosition().x, ENEMY_Y_POS);
+			pos += enemy[i].GetRect().width + ENEMY_SPACING;
+			combatants.push_back(&enemy[i]);
+		}
+	}
 
-	for (int i = 0; i < 8; i++)
-		combatants[i]->SetBattlePos(i);
+	int battlePos = 0;
+	for (auto &combatant : combatants) {
+		combatant->SetBattlePos(battlePos);
+		battlePos++;
+	}
 
 	CalculateTurnOrder();
 

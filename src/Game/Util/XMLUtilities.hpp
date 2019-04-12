@@ -3,6 +3,7 @@
 #include "../../Framework/Animations/pugixml/pugixml.hpp"
 
 #include "../Ability.hpp"
+#include "../LevelSpecs.hpp"
 
 
 namespace pugi {
@@ -14,5 +15,7 @@ namespace pugi {
 	void loadAbilityFromXML(const xml_node& abilityNode, Ability &ability);
 
 	void loadAttributesFromXML(const xml_node& attributeNode, CombatantStats &stats);
+
+	void loadLevelSpecsFromXML(const xml_node& levelSpecNode, LevelSpecs &specs);
 
 }

@@ -44,6 +44,8 @@ public:
 	void Scale(float _x, float _y);
 	sf::IntRect &GetRect() { return hitbox; }
 
+	sf::Vector2f GetLocalPosition();
+
 	virtual bool DoAbility(int _id, std::vector<Combatant*> &_targets) { return true; }
 	virtual int GetID() { return -2; }
 

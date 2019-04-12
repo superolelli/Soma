@@ -1,5 +1,5 @@
 #include "Game.hpp"
-
+#include "LevelBuilder.hpp"
 
 
 void Game::Init(CGameEngine * _engine)
@@ -9,7 +9,7 @@ void Game::Init(CGameEngine * _engine)
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetWindow().setView(view);
 
-	level.Init();
+	level = LevelBuilder::buildLevel(1);
 	adventureGroup.Init(_engine, &notificationRenderer);
 
 	currentGUI = new LevelGUI;
@@ -27,6 +27,7 @@ void Game::Cleanup()
 	g_pSpritePool->FreeSprites();   //Muss in letztem Gamestate passieren
 	m_pGameEngine = nullptr;
 	SAFE_DELETE(currentGUI);
+	SAFE_DELETE(level);
 }
 
 
@@ -74,10 +75,12 @@ void Game::UpdateLevel()
 	if (m_pGameEngine->GetKeystates(KeyID::Right) == Keystates::Held)
 		xMove = 3;
 
-	view.move(xMove, 0);
-	level.Update(view.getCenter().x);
+	if(!level->IsAtEnd(view.getCenter().x))
+		view.move(xMove, 0);
 
-	if (level.InBattle())
+	level->Update(view.getCenter().x);
+
+	if (level->InBattle())
 	{
 		inBattle = true;
 		InitNewBattle();
@@ -115,7 +118,7 @@ void Game::InitNewBattle()
 	currentGUI = newGui;
 
 	currentBattle = new Battle;
-	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer);
+	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer, level->GetEnemyIDs());
 }
 
 
@@ -127,7 +130,7 @@ void Game::Render(double _normalizedTimestep)
 
 	m_pGameEngine->GetWindow().setView(view);
 
-	level.Render(m_pGameEngine->GetWindow(), view.getCenter().x - view.getSize().x / 2);
+	level->Render(m_pGameEngine->GetWindow(), view.getCenter().x - view.getSize().x / 2);
 	
 	if (currentBattle == nullptr)
 		adventureGroup.Render();

@@ -50,6 +50,11 @@ void Combatant::Scale(float _x, float _y)
 	ReloadHitbox();
 }
 
+sf::Vector2f Combatant::GetLocalPosition() 
+{
+	return sf::Vector2f(combatantObject->getObjectInstance("bounding_box")->getPosition().x - combatantObject->getPosition().x, combatantObject->getPosition().y);
+}
+
 
 void Combatant::ReloadHitbox()
 {

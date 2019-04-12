@@ -4,6 +4,7 @@
 #include "../Util/XMLUtilities.hpp"
 
 #include "../Ability.hpp"
+#include "../LevelSpecs.hpp"
 
 #include <map>
 
@@ -20,11 +21,14 @@ public:
 
 	Ability enemyAbilities[3];
 
+	LevelSpecs levelSpecs;
+
 private:
 	void LoadPlayerAbilities();
 	void LoadAbilitiesOfSpecificPlayer(const char* _path, int _id, Ability &_default);
 	void LoadPlayerAttributes();
 	void LoadEnemyAbilities();
 	void LoadEnemyAttributes();
+	void LoadLevelSpecs();
 };
 

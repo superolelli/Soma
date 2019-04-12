@@ -10,6 +10,7 @@ void ObjectPropertiesManager::LoadObjectProperties()
 	LoadPlayerAttributes();
 	LoadEnemyAbilities();
 	LoadEnemyAttributes();
+	LoadLevelSpecs();
 }
 
 
@@ -100,10 +101,25 @@ void ObjectPropertiesManager::LoadEnemyAttributes()
 	xml_document doc;
 	doc.load_file("Data/XML/EnemyAttributes.xml");
 
-	for (xml_node enemy : doc.child("EnemyAttributes").children())
+	for (xml_node &enemy : doc.child("EnemyAttributes").children())
 	{
 		int enemyID = enemy.attribute("id").as_int();
 
 		loadAttributesFromXML(enemy, enemyStats[enemyID]);
+	}
+}
+
+
+void ObjectPropertiesManager::LoadLevelSpecs()
+{
+	using namespace pugi;
+
+	xml_document doc;
+	doc.load_file("Data/XML/levelSpecs.xml");
+
+	for (xml_node &level : doc.child("LevelSpecs").children())
+	{
+		int levelID = level.attribute("id").as_int();
+		loadLevelSpecsFromXML(level, levelSpecs);
 	}
 }
