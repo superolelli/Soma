@@ -115,7 +115,7 @@ void ObjectPropertiesManager::LoadLevelSpecs()
 	using namespace pugi;
 
 	xml_document doc;
-	doc.load_file("Data/XML/levelSpecs.xml");
+	doc.load_file("Data/XML/LevelSpecs.xml");
 
 	for (xml_node &level : doc.child("LevelSpecs").children())
 	{

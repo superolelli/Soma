@@ -20,15 +20,16 @@ Level::~Level()
 void Level::Update(int _playerPos)
 {
 	battle = false;
+	int roomNumber = (_playerPos - rooms[0]->background.GetRect().width / 2) / rooms[0]->background.GetRect().width;
 
-	if (rooms[_playerPos / (rooms[0]->background.GetRect().width)]->battle == 1)
+	if (rooms[roomNumber]->battle == 1)
 	{
 		battle = true;
-		rooms[_playerPos / (rooms[0]->background.GetRect().width)]->battle = 0;
-		currentEnemyIDs[0] = rooms[_playerPos / (rooms[0]->background.GetRect().width)]->enemyIds[0];
-		currentEnemyIDs[1] = rooms[_playerPos / (rooms[0]->background.GetRect().width)]->enemyIds[1];
-		currentEnemyIDs[2] = rooms[_playerPos / (rooms[0]->background.GetRect().width)]->enemyIds[2];
-		currentEnemyIDs[3] = rooms[_playerPos / (rooms[0]->background.GetRect().width)]->enemyIds[3];
+		rooms[roomNumber]->battle = 0;
+		currentEnemyIDs[0] = rooms[roomNumber]->enemyIds[0];
+		currentEnemyIDs[1] = rooms[roomNumber]->enemyIds[1];
+		currentEnemyIDs[2] = rooms[roomNumber]->enemyIds[2];
+		currentEnemyIDs[3] = rooms[roomNumber]->enemyIds[3];
 	}
 }
 

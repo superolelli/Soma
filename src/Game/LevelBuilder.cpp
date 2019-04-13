@@ -3,6 +3,7 @@
 
 Level *LevelBuilder::buildLevel(int _levelID)
 {
+	srand(time(0));
 	Level *newLevel = new Level;
 
 	int position = 0;

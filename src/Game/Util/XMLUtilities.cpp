@@ -1,4 +1,5 @@
 #include "XMLUtilities.hpp"
+#include <SFML\System\String.hpp>
 
 namespace pugi {
 
@@ -175,7 +176,10 @@ namespace pugi {
 			int currentEnemy = 0;
 
 			for (xml_node &enemy : group.children())
-				newGroup[currentEnemy++] = combatantIdentifierMap[enemy.text().as_string()];
+			{
+				std::string str(enemy.text().as_string());
+				newGroup[currentEnemy++] = combatantIdentifierMap[sf::String::fromUtf8(str.begin(), str.end())];
+			}
 
 			specs.possibleEnemyGroups.push_back(newGroup);
 		}

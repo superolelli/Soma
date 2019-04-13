@@ -70,10 +70,10 @@ void Game::UpdateLevel()
 	int xMove = 0;
 
 	if (m_pGameEngine->GetKeystates(KeyID::Left) == Keystates::Held)
-		xMove = -3;
+		xMove = -2;
 
 	if (m_pGameEngine->GetKeystates(KeyID::Right) == Keystates::Held)
-		xMove = 3;
+		xMove = 2;
 
 	if(!level->IsAtEnd(view.getCenter().x))
 		view.move(xMove, 0);

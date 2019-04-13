@@ -4,8 +4,6 @@
 
 void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4])
 {
-	srand(time(0));
-
 	players = _adventureGroup;
 	gui = _gui;
 	engine = _engine;
@@ -81,8 +79,9 @@ void Battle::Update()
 
 void Battle::HandleDeaths()
 {
+	int combatantNumber = 0;
 	std::vector<Combatant*>::iterator i;
-	for (i = combatants.begin(); i != combatants.end();)
+	for (i = combatants.begin(); i != combatants.end(); combatantNumber++)
 	{
 		if ((*i)->Status().GetCurrentHealth() <= 0)
 		{
@@ -90,6 +89,8 @@ void Battle::HandleDeaths()
 				(*i)->StartDeathAnimation();
 			else if ((*i)->AnimationFinished())
 			{
+				if (combatantNumber < currentCombatant)
+					currentCombatant--;
 				i = combatants.erase(i);
 				continue;
 			}

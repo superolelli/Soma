@@ -8,7 +8,7 @@
 
 class GameState;
 
-#define MS_PER_UPDATE 16
+#define MS_PER_UPDATE 12
 #define SCREEN_SIZE_X 1920
 
 

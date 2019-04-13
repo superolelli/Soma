@@ -33,8 +33,6 @@ void Combatant::Init(int _id, CGameEngine *_engine, NotificationRenderer *_notif
 void Combatant::SetPos(int _x, int _y)
 {
 	combatantObject->setPosition(SpriterEngine::point(_x, _y));
-
-	ReloadHitbox();
 }
 
 
@@ -46,8 +44,6 @@ void Combatant::Scale(float _x, float _y)
 		combatantObject->setScale(SpriterEngine::point(_x + 0.05, _y + 0.05));
 	else
 		combatantObject->setScale(SpriterEngine::point(_x, _y));
-
-	ReloadHitbox();
 }
 
 sf::Vector2f Combatant::GetLocalPosition() 
@@ -58,14 +54,14 @@ sf::Vector2f Combatant::GetLocalPosition()
 
 void Combatant::ReloadHitbox()
 {
-	combatantObject->reprocessCurrentTime();
-
-	SpriterEngine::UniversalObjectInterface* hitboxObj = combatantObject->getObjectInstance("bounding_box");
-
-	hitbox.left = hitboxObj->getPosition().x;
-	hitbox.top = hitboxObj->getPosition().y;
-	hitbox.width = hitboxObj->getSize().x  * hitboxObj->getScale().x;
-	hitbox.height = hitboxObj->getSize().y * hitboxObj->getScale().y;
+	SpriterEngine::UniversalObjectInterface* hitboxObj;
+	if (hitboxObj = combatantObject->objectIfExistsOnCurrentFrame("bounding_box"))
+	{
+		hitbox.left = hitboxObj->getPosition().x;
+		hitbox.top = hitboxObj->getPosition().y;
+		hitbox.width = hitboxObj->getSize().x  * hitboxObj->getScale().x;
+		hitbox.height = hitboxObj->getSize().y * hitboxObj->getScale().y;
+	}
 }
 
 
@@ -116,8 +112,6 @@ void Combatant::RenderShadow()
 {
 	combatantObject->reprocessCurrentTime();
 	SpriterEngine::UniversalObjectInterface* pointObj = combatantObject->getObjectInstance("shadow_point");
-
-	ReloadHitbox();
 
 	sf::CircleShape shadow;
 	shadow.setRadius(GetRect().width / 2 + 10);
@@ -261,6 +255,8 @@ void Combatant::Quit()
 
 void Combatant::Update()
 {
+	combatantObject->reprocessCurrentTime();
+	ReloadHitbox();
 	statusBar.Update(GetRect());
 }
 
