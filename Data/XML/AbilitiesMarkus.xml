@@ -84,7 +84,7 @@ Markus letze Runde angegriffen haben
             <damageFactor>0.8</damageFactor>
             <buff duration="3" isPositive="false">
                 <precision>-3</precision>
-                <initiative>-2</initiative>
+                <damage>-2</damage>
             </buff>
         </effect>
 

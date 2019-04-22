@@ -2,6 +2,7 @@
 #include "../Framework/Graphics/RichText.hpp"
 #include "../Framework/Graphics/RoundedRectangleShape.hpp"
 #include "AdventureGroup.hpp"
+#include "Combatant.hpp"
 
 
 void BattleGUI::Init(CGameEngine *_engine)
@@ -23,22 +24,31 @@ void BattleGUI::Init(CGameEngine *_engine)
 	currentAbilityFrame.Load(g_pTextures->currentAbilityFrame);
 	currentAbilityFrame.SetPos(x - 130, 900);
 
+	currentCombatantHealthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, nullptr, nullptr);
+	currentCombatantHealthBar.SetSmoothTransformationTime(0.7);
+	currentCombatantHealthBar.SetPos(engine->GetWindowSize().x - 200.0f, 890.0f);
+	currentCombatantHealthBar.SetText(g_pFonts->f_openSans, sf::Color::Black, 20);
+
 	currentAbility = 3;
-	currentPlayer = Simon;
+	currentCombatant = nullptr;
 }
 
 
 
 void BattleGUI::Update()
 {
-	if (engine->GetButtonstates(ButtonID::Left) == Keystates::Pressed)
+	currentCombatantHealthBar.Update(g_pTimer->GetElapsedTime().asSeconds());
+	if (currentCombatant->IsPlayer())
 	{
-		for (int i = 0; i < 4; i++)
+		if (engine->GetButtonstates(ButtonID::Left) == Keystates::Pressed)
 		{
-			if (abilities[currentPlayer][i].GetRect().contains(engine->GetMousePos()))
+			for (int i = 0; i < 4; i++)
 			{
-				currentAbility = i;
-				currentAbilityFrame.SetPos(abilities[currentPlayer][i].GetRect().left - 10, abilities[currentPlayer][i].GetRect().top - 10);
+				if (abilities[currentCombatant->GetID()][i].GetRect().contains(engine->GetMousePos()))
+				{
+					currentAbility = i;
+					currentAbilityFrame.SetPos(abilities[currentCombatant->GetID()][i].GetRect().left - 10, abilities[currentCombatant->GetID()][i].GetRect().top - 10);
+				}
 			}
 		}
 	}
@@ -47,18 +57,21 @@ void BattleGUI::Update()
 
 void BattleGUI::Render()
 {
-	for (CSprite a : abilities[currentPlayer])
-		a.Render(engine->GetWindow());
-
-	currentAbilityFrame.Render(engine->GetWindow());
-
-	for (int i = 0; i < 4; i++)
+	if (currentCombatant->IsPlayer())
 	{
-		if (abilities[currentPlayer][i].GetRect().contains(engine->GetMousePos()))
-			ShowTooltip(i);
-	}
+		for (CSprite &a : abilities[currentCombatant->GetID()])
+			a.Render(engine->GetWindow());
 
-	ShowPlayerAttributes();
+		currentAbilityFrame.Render(engine->GetWindow());
+
+		for (int i = 0; i < 4; i++)
+		{
+			if (abilities[currentCombatant->GetID()][i].GetRect().contains(engine->GetMousePos()))
+				ShowTooltip(i);
+		}
+	}
+	ShowCombatantAttributes();
+	currentCombatantHealthBar.Render(engine->GetWindow(), true);
 }
 
 
@@ -68,8 +81,8 @@ void BattleGUI::ShowTooltip(int _ability)
 	sfe::RichText tooltip;
 	tooltip.setCharacterSize(18);
 	tooltip.setFont(g_pFonts->f_arial);
-	tooltip.setString(sf::String::fromUtf8(g_pObjectProperties->playerAbilities[currentPlayer][_ability].description.begin(), g_pObjectProperties->playerAbilities[currentPlayer][_ability].description.end()));
-	tooltip.setPosition(abilities[currentPlayer][_ability].GetRect().left, abilities[currentPlayer][_ability].GetRect().top - tooltip.getLocalBounds().height - 25.0f);
+	tooltip.setString(sf::String::fromUtf8(g_pObjectProperties->playerAbilities[currentCombatant->GetID()][_ability].description.begin(), g_pObjectProperties->playerAbilities[currentCombatant->GetID()][_ability].description.end()));
+	tooltip.setPosition(abilities[currentCombatant->GetID()][_ability].GetRect().left, abilities[currentCombatant->GetID()][_ability].GetRect().top - tooltip.getLocalBounds().height - 25.0f);
 
 	sf::FloatRect backgroundRect = tooltip.getLocalBounds();
 	sf::RoundedRectangleShape background(sf::Vector2f(backgroundRect.width + 20.0f, backgroundRect.height + 20.0f), 8, 20);
@@ -83,9 +96,9 @@ void BattleGUI::ShowTooltip(int _ability)
 }
 
 
-void BattleGUI::ShowPlayerAttributes()
+void BattleGUI::ShowCombatantAttributes()
 {
-	auto playerStatus = players->GetPlayer(currentPlayer)->Status();
+	auto status = currentCombatant->Status();
 	std::stringstream attributeString1;
 	std::stringstream attributeString2;
 	std::stringstream valueString1;
@@ -96,10 +109,10 @@ void BattleGUI::ShowPlayerAttributes()
 	attributeString1 << "Geschicklichkeit:\n";
 	attributeString1 << "Geschwindigkeit:";
 
-	valueString1 << playerStatus.GetStrength() << std::endl;
-	valueString1 << playerStatus.GetConstitution() << std::endl;
-	valueString1 << playerStatus.GetDexterity() << std::endl;
-	valueString1 << playerStatus.GetSpeed();
+	valueString1 << status.GetStrength() << std::endl;
+	valueString1 << status.GetConstitution() << std::endl;
+	valueString1 << status.GetDexterity() << std::endl;
+	valueString1 << status.GetSpeed();
 
 	attributeString2 << "Rüstung:\n";
 	attributeString2 << "Schaden:\n";
@@ -108,12 +121,12 @@ void BattleGUI::ShowPlayerAttributes()
 	attributeString2 << "Ausweichen:\n";
 	attributeString2 << "Präzision:";
 
-	valueString2 << playerStatus.GetArmour() << std::endl;
-	valueString2 << playerStatus.GetDamageMin() << "-" << playerStatus.GetDamageMax() << std::endl;
-	valueString2 << playerStatus.GetInitiative() << std::endl;
-	valueString2 << playerStatus.GetCriticalHit() << std::endl;
-	valueString2 << playerStatus.GetDodge() << std::endl;
-	valueString2 << playerStatus.GetPrecision();
+	valueString2 << status.GetArmour() << std::endl;
+	valueString2 << status.GetDamageMin() << "-" << status.GetDamageMax() << std::endl;
+	valueString2 << status.GetInitiative() << std::endl;
+	valueString2 << status.GetCriticalHit() << std::endl;
+	valueString2 << status.GetDodge() << std::endl;
+	valueString2 << status.GetPrecision();
 
 	sf::Text attributeText1;
 	attributeText1.setCharacterSize(18);
@@ -147,7 +160,7 @@ void BattleGUI::ShowPlayerAttributes()
 	valueText2.setOutlineThickness(1.0f);
 	valueText2.setString(valueString2.str());
 
-	valueText2.setPosition(engine->GetWindowSize().x - 200.0f, abilities[currentPlayer][3].GetRect().top - 20.0f);
+	valueText2.setPosition(engine->GetWindowSize().x - 200.0f, 890.0f);
 	attributeText2.setPosition(valueText2.getGlobalBounds().left - attributeText2.getLocalBounds().width - 10.0f, valueText2.getGlobalBounds().top - 2.0f);
 	valueText1.setPosition(attributeText2.getGlobalBounds().left - 50.0f, valueText2.getGlobalBounds().top);
 	attributeText1.setPosition(valueText1.getGlobalBounds().left - attributeText1.getLocalBounds().width - 10.0f, valueText2.getGlobalBounds().top - 2.0f);
@@ -168,10 +181,11 @@ void BattleGUI::ShowPlayerAttributes()
 }
 
 
-void BattleGUI::SetCurrentPlayer(int _player)
+void BattleGUI::SetCurrentCombatant(Combatant *_combatant)
 {
-	if (_player >= 0 && _player < 4)
-		currentPlayer = (CombatantID)_player;
+	currentCombatant = _combatant;
+	currentCombatantHealthBar.SetMaxValuePtr(_combatant->Status().GetMaxHealthPointer());
+	currentCombatantHealthBar.SetValuePtr(_combatant->Status().GetCurrentHealthPointer());
 }
 
 

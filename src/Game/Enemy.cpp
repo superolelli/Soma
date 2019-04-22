@@ -1,11 +1,15 @@
 #include "Enemy.hpp"
 
 
-
-
-void Enemy::Init(int _id, CGameEngine * _engine, NotificationRenderer *_notificationRenderer)
+Enemy::Enemy(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
+	: Combatant(_id, _engine, _notificationRenderer)
 {
-	switch (_id)
+	enemyID = _id;
+}
+
+void Enemy::Init()
+{
+	switch (enemyID)
 	{
 	case CombatantID::Gesetzloser:
 		combatantObject = g_pModels->modelGesetzloser->getNewEntityInstance("Gesetzloser");
@@ -19,12 +23,10 @@ void Enemy::Init(int _id, CGameEngine * _engine, NotificationRenderer *_notifica
 	case CombatantID::Hilfssheriff:
 		combatantObject = g_pModels->modelHilfssheriff->getNewEntityInstance("Hilfssheriff");
 	}
-
-	enemyID = _id;
-
-	Combatant::Init(_id, _engine, _notificationRenderer);
 	
 	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);
+
+	Combatant::Init();
 
 	abilityAnnouncementTime = 0.0f;
 	confusionChecked = false;

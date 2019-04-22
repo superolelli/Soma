@@ -10,8 +10,9 @@ const float WALKING_ANIMATION_SPEED = 0.85f;
 class Player : public Combatant
 {
 public:
+	Player(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
 
-	virtual void Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer) override;
+	virtual void Init() override;
 	void Update(int _xMove, bool _is_walking);
 	virtual void Render() override;
 

@@ -6,7 +6,8 @@
 class PlayerAnna: public Player
 {
 public:
-	virtual void Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer) override;
+	PlayerAnna(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
+	virtual void Init() override;
 
 	virtual int GetID() override { return CombatantID::Anna; }
 

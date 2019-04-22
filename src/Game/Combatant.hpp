@@ -35,7 +35,9 @@ class Combatant
 public:
 	static bool setElapsedTimeForAbilityEffect;
 
-	virtual void Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
+	Combatant(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
+
+	virtual void Init();
 	void Quit();
 	virtual void Render() = 0;
 	virtual void Update();

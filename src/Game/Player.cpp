@@ -1,12 +1,16 @@
 #include "Player.hpp"
 #include "Markus.hpp"
 
-
-void Player::Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer)
+Player::Player(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
+	: Combatant(_id, _engine, _notificationRenderer)
 {
-	Combatant::Init(_id, _engine, _notificationRenderer);
+}
 
-	status.SetStats(g_pObjectProperties->playerStats[_id]);
+void Player::Init()
+{
+	status.SetStats(g_pObjectProperties->playerStats[GetID()]);
+
+	Combatant::Init();
 
 	is_walking = false;
 }

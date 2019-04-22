@@ -19,6 +19,9 @@ public:
 	//Sets the Position for int values
 	void SetPos(int _x, int _y);
 
+	void SetValuePtr(int *_value);
+	void SetMaxValuePtr(int *_maxValue);
+
 	sf::IntRect const &GetRect() { return m_frame.GetRect(); }
 
 	void SetSmoothTransformationTime(float _time) { baseAnimationTime = _time; currentAnimationTime = _time; }

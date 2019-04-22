@@ -1,10 +1,14 @@
 #include "Ole.hpp"
 
 
+PlayerOle::PlayerOle(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
+	: Player(_id, _engine, _notificationRenderer)
+{
+}
 
-void PlayerOle::Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer)
+void PlayerOle::Init()
 {
 	combatantObject = g_pModels->modelOle->getNewEntityInstance("Ole");
 
-	this->Player::Init(_id, _engine, _notificationRenderer);
+	this->Player::Init();
 }

@@ -1,13 +1,16 @@
 #include "Markus.hpp"
 
 
+PlayerMarkus::PlayerMarkus(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
+	: Player(_id, _engine, _notificationRenderer)
+{
+}
 
-
-void PlayerMarkus::Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer)
+void PlayerMarkus::Init()
 {
 	combatantObject = g_pModels->modelMarkus->getNewEntityInstance("Markus");
 
-	this->Player::Init(_id, _engine, _notificationRenderer);
+	this->Player::Init();
 
 	for (auto &b : wasAttackedLastRoundBy)
 		b = false;

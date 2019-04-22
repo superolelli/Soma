@@ -24,7 +24,7 @@ public:
 
 private:
 
-	Enemy enemy[4];
+	Enemy *enemy[4];
 	AdventureGroup *players;
 	BattleGUI *gui;
 	CGameEngine *engine;

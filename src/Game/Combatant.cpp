@@ -7,27 +7,29 @@ bool Combatant::setElapsedTimeForAbilityEffect;
 
 
 
-void Combatant::Init(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer)
+Combatant::Combatant(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
 {
 	engine = _engine;
 	notificationRenderer = _notificationRenderer;
 
+	status.Init(this, notificationRenderer);
+	status.Reset();
+
+	actsInConfusion = false;
+	dying = false;
+
+	abilityStatus = finished;
+}
+
+void Combatant::Init()
+{
 	SetAnimation("idle", IDLE_ANIMATION_SPEED);
 	Scale(COMBATANT_NORMAL_SCALE, COMBATANT_NORMAL_SCALE);
 	combatantObject->reprocessCurrentTime();
 
 	ReloadHitbox();
 
-	status.Init(this, notificationRenderer);
-	status.Reset();
-
 	statusBar.Init(&status, engine);
-
-	actsInConfusion = false;
-	dying = false;
-
-	abilityStatus = finished;
-
 }
 
 void Combatant::SetPos(int _x, int _y)

@@ -8,26 +8,26 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 	gui = _gui;
 	engine = _engine;
 
-	combatants.push_back(players->GetPlayer(0));
-	combatants.push_back(players->GetPlayer(1));
-	combatants.push_back(players->GetPlayer(2));
-	combatants.push_back(players->GetPlayer(3));
+	for(int i = 0; i < 4; i++)
+	{
+		if (players->GetPlayer(i)->Status().GetCurrentHealth() > 0)
+		{
+			combatants.push_back(players->GetPlayer(i));
+			combatants.back()->SetBattlePos(i);
+		}
+	}
 
 	int pos = _xView + ENEMY_X_OFFSET;
 	for (int i = 0; i < 4; i++)
 	{
 		if (enemyIDs[i] != CombatantID::Undefined) {
-			enemy[i].Init(enemyIDs[i], _engine, _notificationRenderer);
-			enemy[i].SetPos(pos - enemy[i].GetLocalPosition().x, ENEMY_Y_POS);
-			pos += enemy[i].GetRect().width + ENEMY_SPACING;
-			combatants.push_back(&enemy[i]);
+			enemy[i] = new Enemy(enemyIDs[i], _engine, _notificationRenderer);
+			enemy[i]->Init();
+			enemy[i]->SetPos(pos - enemy[i]->GetLocalPosition().x, ENEMY_Y_POS);
+			pos += enemy[i]->GetRect().width + ENEMY_SPACING;
+			enemy[i]->SetBattlePos(i + 4);
+			combatants.push_back(enemy[i]);
 		}
-	}
-
-	int battlePos = 0;
-	for (auto &combatant : combatants) {
-		combatant->SetBattlePos(battlePos);
-		battlePos++;
 	}
 
 	CalculateTurnOrder();
@@ -36,7 +36,7 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 
 	isBattleFinished = false;
 
-	gui->SetCurrentPlayer(combatants[currentCombatant]->GetID());
+	gui->SetCurrentCombatant(combatants[currentCombatant]);
 
 	combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
 }
@@ -47,8 +47,11 @@ void Battle::Quit()
 	for (Combatant *c : combatants)
 		c->ResetAbilityStatus();
 
-	for (Enemy &e : enemy)
-		e.Quit();
+	for (Enemy *e : enemy)
+	{
+		e->Quit();
+		SAFE_DELETE(e);
+	}
 }
 
 
@@ -69,7 +72,7 @@ void Battle::Update()
 			ChooseNextCombatant();
 		} while (combatants[currentCombatant]->Status().GetCurrentHealth() <= 0);
 
-		gui->SetCurrentPlayer(combatants[currentCombatant]->GetID());
+		gui->SetCurrentCombatant(combatants[currentCombatant]);
 
 		combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
 	}

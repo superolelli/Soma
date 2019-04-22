@@ -5,17 +5,17 @@
 
 void AdventureGroup::Init(CGameEngine *_engine, NotificationRenderer *_notificationRenderer)
 {
-	adventurer[CombatantID::Ole] = new PlayerOle;
-	adventurer[CombatantID::Ole]->Init(CombatantID::Ole, _engine, _notificationRenderer);
+	adventurer[CombatantID::Ole] = new PlayerOle(CombatantID::Ole, _engine, _notificationRenderer);
+	adventurer[CombatantID::Ole]->Init();
 
-	adventurer[CombatantID::Anna] = new PlayerAnna;
-	adventurer[CombatantID::Anna]->Init(CombatantID::Anna, _engine, _notificationRenderer);
+	adventurer[CombatantID::Anna] = new PlayerAnna(CombatantID::Anna, _engine, _notificationRenderer);
+	adventurer[CombatantID::Anna]->Init();
 
-	adventurer[CombatantID::Simon] = new PlayerSimon;
-	adventurer[CombatantID::Simon]->Init(CombatantID::Simon, _engine, _notificationRenderer);
+	adventurer[CombatantID::Simon] = new PlayerSimon(CombatantID::Simon, _engine, _notificationRenderer);
+	adventurer[CombatantID::Simon]->Init();
 
-	adventurer[CombatantID::Markus] = new PlayerMarkus;
-	adventurer[CombatantID::Markus]->Init(CombatantID::Markus, _engine, _notificationRenderer);
+	adventurer[CombatantID::Markus] = new PlayerMarkus(CombatantID::Markus, _engine, _notificationRenderer);
+	adventurer[CombatantID::Markus]->Init();
 
 
 	int x = GROUP_OFFSET_LEFT;

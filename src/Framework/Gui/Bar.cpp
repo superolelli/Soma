@@ -13,8 +13,6 @@ Bar::~Bar()
 }
 
 
-
-
 void Bar::Load(sf::Texture const &_beamTexture, sf::Texture const &_frameTexture, int *_value, int *_maxValue)
 {
 	//Set the texture
@@ -33,8 +31,22 @@ void Bar::Load(sf::Texture const &_beamTexture, sf::Texture const &_frameTexture
 
 	smoothAnimationBaseValue = 0;
 
+	if (_value != nullptr)
+	{
+		lastValue = *_value;
+		valueToRender = (float)*_value;
+	}
+}
+
+void Bar::SetValuePtr(int *_value)
+{
+	m_pValue = _value;
 	lastValue = *_value;
-	valueToRender = (float)*_value;
+}
+
+void Bar::SetMaxValuePtr(int * _maxValue)
+{
+	m_pMaxValue = _maxValue;
 }
 
 
@@ -110,8 +122,6 @@ void Bar::Render(sf::RenderTarget &_target, bool _withNumbers)
 		}
 	}
 }
-
-
 
 
 
