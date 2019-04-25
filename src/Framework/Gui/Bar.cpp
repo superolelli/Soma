@@ -31,6 +31,9 @@ void Bar::Load(sf::Texture const &_beamTexture, sf::Texture const &_frameTexture
 
 	smoothAnimationBaseValue = 0;
 
+	xOffset = 0;
+	yOffset = 0;
+
 	if (_value != nullptr)
 	{
 		lastValue = *_value;
@@ -49,19 +52,23 @@ void Bar::SetMaxValuePtr(int * _maxValue)
 	m_pMaxValue = _maxValue;
 }
 
-
+void Bar::SetOffsetForInnerPart(int _x, int _y)
+{
+	xOffset = _x;
+	yOffset = _y;
+}
 
 void Bar::SetPos(int _x, int _y)
 {
 	m_frame.SetPos(_x, _y);
-	m_bar.SetPos(_x, _y);
+	m_bar.SetPos(_x + xOffset, _y + yOffset);
 }
 
 
 void Bar::SetPos(float _x, float _y)
 {
 	m_frame.SetPos(_x, _y);
-	m_bar.SetPos(_x, _y);
+	m_bar.SetPos(_x + xOffset, _y + yOffset);
 }
 
 

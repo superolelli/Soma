@@ -28,6 +28,9 @@ public:
 	sf::Texture marked;
 	sf::Texture sleeping;
 
+	sf::Texture healthBarBigFrame;
+	sf::Texture healthBarBig;
+
 	sf::Texture abilityAnnouncementBanner;
 	sf::Texture abilityTargetMarker;
 	sf::Texture turnMarker;

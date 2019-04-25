@@ -24,10 +24,11 @@ void BattleGUI::Init(CGameEngine *_engine)
 	currentAbilityFrame.Load(g_pTextures->currentAbilityFrame);
 	currentAbilityFrame.SetPos(x - 130, 900);
 
-	currentCombatantHealthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, nullptr, nullptr);
+	currentCombatantHealthBar.Load(g_pTextures->healthBarBig, g_pTextures->healthBarBigFrame, nullptr, nullptr);
 	currentCombatantHealthBar.SetSmoothTransformationTime(0.7);
-	currentCombatantHealthBar.SetPos(engine->GetWindowSize().x - 200.0f, 890.0f);
-	currentCombatantHealthBar.SetText(g_pFonts->f_openSans, sf::Color::Black, 20);
+	currentCombatantHealthBar.SetOffsetForInnerPart(17, 20);
+	currentCombatantHealthBar.SetPos(engine->GetWindowSize().x - 750.0f, 850.0f);
+	currentCombatantHealthBar.SetText(g_pFonts->f_openSans, sf::Color::Black, 14);
 
 	currentAbility = 3;
 	currentCombatant = nullptr;
@@ -129,7 +130,7 @@ void BattleGUI::ShowCombatantAttributes()
 	valueString2 << status.GetPrecision();
 
 	sf::Text attributeText1;
-	attributeText1.setCharacterSize(18);
+	attributeText1.setCharacterSize(16);
 	attributeText1.setFont(g_pFonts->f_trajan);
 	attributeText1.setFillColor(sf::Color(220, 220, 220));
 	attributeText1.setOutlineColor(sf::Color::Black);
@@ -137,7 +138,7 @@ void BattleGUI::ShowCombatantAttributes()
 	attributeText1.setString(attributeString1.str());
 
 	sf::Text attributeText2;
-	attributeText2.setCharacterSize(18);
+	attributeText2.setCharacterSize(16);
 	attributeText2.setFont(g_pFonts->f_trajan);
 	attributeText2.setFillColor(sf::Color(150, 150, 150));
 	attributeText2.setOutlineColor(sf::Color::Black);
@@ -145,7 +146,7 @@ void BattleGUI::ShowCombatantAttributes()
 	attributeText2.setString(attributeString2.str());
 
 	sf::Text valueText1;
-	valueText1.setCharacterSize(18);
+	valueText1.setCharacterSize(16);
 	valueText1.setFont(g_pFonts->f_trajan);
 	valueText1.setFillColor(sf::Color(220, 220, 220));
 	valueText1.setOutlineColor(sf::Color::Black);
@@ -153,14 +154,14 @@ void BattleGUI::ShowCombatantAttributes()
 	valueText1.setString(valueString1.str());
 
 	sf::Text valueText2;
-	valueText2.setCharacterSize(18);
+	valueText2.setCharacterSize(16);
 	valueText2.setFont(g_pFonts->f_trajan);
 	valueText2.setFillColor(sf::Color(150, 150, 150));
 	valueText2.setOutlineColor(sf::Color::Black);
 	valueText2.setOutlineThickness(1.0f);
 	valueText2.setString(valueString2.str());
 
-	valueText2.setPosition(engine->GetWindowSize().x - 200.0f, 890.0f);
+	valueText2.setPosition(engine->GetWindowSize().x - 300.0f, 935.0f);
 	attributeText2.setPosition(valueText2.getGlobalBounds().left - attributeText2.getLocalBounds().width - 10.0f, valueText2.getGlobalBounds().top - 2.0f);
 	valueText1.setPosition(attributeText2.getGlobalBounds().left - 50.0f, valueText2.getGlobalBounds().top);
 	attributeText1.setPosition(valueText1.getGlobalBounds().left - attributeText1.getLocalBounds().width - 10.0f, valueText2.getGlobalBounds().top - 2.0f);

@@ -48,6 +48,9 @@ void CTextureManager::LoadTextures()
 	marked.loadFromFile("Data/Sprites/Battle/marked.png");
 	sleeping.loadFromFile("Data/Sprites/Battle/sleeping.png");
 
+	healthBarBigFrame.loadFromFile("Data/Sprites/Battle/health_bar_big_frame.png");
+	healthBarBig.loadFromFile("Data/Sprites/Battle/health_bar_big.png");
+
 	abilityAnnouncementBanner.loadFromFile("Data/Sprites/Battle/ability_announcement.png");
 
 	abilityTargetMarker.loadFromFile("Data/Sprites/Battle/battle_marker.png");

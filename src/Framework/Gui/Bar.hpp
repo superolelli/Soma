@@ -19,6 +19,8 @@ public:
 	//Sets the Position for int values
 	void SetPos(int _x, int _y);
 
+	void SetOffsetForInnerPart(int _x, int _y);
+
 	void SetValuePtr(int *_value);
 	void SetMaxValuePtr(int *_maxValue);
 
@@ -45,6 +47,9 @@ private:
 
 	int *m_pValue;                    //the current value
 	int *m_pMaxValue;                //the maximum of the value
+
+	int xOffset;
+	int yOffset;
 
 	float valueToRender;
 
