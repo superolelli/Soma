@@ -31,6 +31,9 @@ private:
 	CSprite currentAbilityFrame;
 	Bar currentCombatantHealthBar;
 
+	sf::Text currentCombatantName;
+
 	void ShowTooltip(int _ability);
 	void ShowCombatantAttributes();
+	void RenderCombatantInformation();
 };

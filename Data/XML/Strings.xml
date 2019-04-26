@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Strings>
+  <CombatantNames>
+    <Name id="0">Simon</Name>
+    <Name id="1">Ole</Name>
+    <Name id="2">Anna</Name>
+    <Name id="3">Markus</Name>
+    <Name id="4">Gesetzloser</Name>
+    <Name id="5">Abtrünniger</Name>
+    <Name id="6">Indianer</Name>
+    <Name id="7">Hilfssheriff</Name>
+  </CombatantNames>
+</Strings>

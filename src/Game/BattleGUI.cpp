@@ -27,8 +27,14 @@ void BattleGUI::Init(CGameEngine *_engine)
 	currentCombatantHealthBar.Load(g_pTextures->healthBarBig, g_pTextures->healthBarBigFrame, nullptr, nullptr);
 	currentCombatantHealthBar.SetSmoothTransformationTime(0.7);
 	currentCombatantHealthBar.SetOffsetForInnerPart(17, 20);
-	currentCombatantHealthBar.SetPos(engine->GetWindowSize().x - 750.0f, 850.0f);
-	currentCombatantHealthBar.SetText(g_pFonts->f_openSans, sf::Color::Black, 14);
+	currentCombatantHealthBar.SetPos(engine->GetWindowSize().x - 600.0f, 850.0f);
+	currentCombatantHealthBar.SetText(g_pFonts->f_trajan, sf::Color::White, 14);
+
+	currentCombatantName.setCharacterSize(25);
+	currentCombatantName.setFont(g_pFonts->f_trajan);
+	currentCombatantName.setFillColor(sf::Color::White);
+	currentCombatantName.setOutlineColor(sf::Color::Black);
+	currentCombatantName.setOutlineThickness(4.0);
 
 	currentAbility = 3;
 	currentCombatant = nullptr;
@@ -71,10 +77,25 @@ void BattleGUI::Render()
 				ShowTooltip(i);
 		}
 	}
-	ShowCombatantAttributes();
-	currentCombatantHealthBar.Render(engine->GetWindow(), true);
+
+	RenderCombatantInformation();	
 }
 
+
+void BattleGUI::RenderCombatantInformation()
+{
+	auto backgroundWidth = engine->GetWindowSize().x - currentCombatantName.getGlobalBounds().left;
+	sf::RoundedRectangleShape background(sf::Vector2f(backgroundWidth, 225.0f), 8, 20);
+	background.setFillColor(sf::Color(0, 0, 0, 150));
+	background.setOutlineThickness(2.0f);
+	background.setOutlineColor(sf::Color(40, 40, 40));
+	background.setPosition(sf::Vector2f(currentCombatantName.getGlobalBounds().left - 50, 855) + sf::Vector2f(-10.0f, -7.0f));
+
+	engine->GetWindow().draw(background);
+	ShowCombatantAttributes();
+	currentCombatantHealthBar.Render(engine->GetWindow(), true);
+	engine->GetWindow().draw(currentCombatantName);
+}
 
 
 void BattleGUI::ShowTooltip(int _ability)
@@ -161,7 +182,7 @@ void BattleGUI::ShowCombatantAttributes()
 	valueText2.setOutlineThickness(1.0f);
 	valueText2.setString(valueString2.str());
 
-	valueText2.setPosition(engine->GetWindowSize().x - 300.0f, 935.0f);
+	valueText2.setPosition(engine->GetWindowSize().x - 200.0f, 935.0f);
 	attributeText2.setPosition(valueText2.getGlobalBounds().left - attributeText2.getLocalBounds().width - 10.0f, valueText2.getGlobalBounds().top - 2.0f);
 	valueText1.setPosition(attributeText2.getGlobalBounds().left - 50.0f, valueText2.getGlobalBounds().top);
 	attributeText1.setPosition(valueText1.getGlobalBounds().left - attributeText1.getLocalBounds().width - 10.0f, valueText2.getGlobalBounds().top - 2.0f);
@@ -187,6 +208,8 @@ void BattleGUI::SetCurrentCombatant(Combatant *_combatant)
 	currentCombatant = _combatant;
 	currentCombatantHealthBar.SetMaxValuePtr(_combatant->Status().GetMaxHealthPointer());
 	currentCombatantHealthBar.SetValuePtr(_combatant->Status().GetCurrentHealthPointer());
+	currentCombatantName.setString(g_pStringContainer->combatantNames[_combatant->GetID()]); 
+	currentCombatantName.setPosition(currentCombatantHealthBar.GetRect().left - currentCombatantName.getLocalBounds().width - 20, currentCombatantHealthBar.GetRect().top + currentCombatantName.getLocalBounds().height / 2 + 5);
 }
 
 

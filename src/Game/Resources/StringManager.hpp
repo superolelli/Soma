@@ -6,6 +6,8 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 
+#include <SFML\System.hpp>
+
 
 //the class for loading all properties at once
 #define g_pStringContainer CStringContainer::Get()
@@ -16,7 +18,5 @@ public:
 	//loads all strings for the specific language
 	void LoadStrings();
 
-	//the string container
-	std::map<int, std::string> m_Strings;
-
+	sf::String combatantNames[8];
 };
