@@ -26,9 +26,11 @@ private:
 	Combatant *currentCombatant;
 	AdventureGroup *players;
 
+	CSprite abilityPanel;
 	CSprite abilities[4][4];
-
 	CSprite currentAbilityFrame;
+
+	CSprite combatantInformationPanel;
 	Bar currentCombatantHealthBar;
 
 	sf::Text currentCombatantName;

@@ -10,25 +10,31 @@ void BattleGUI::Init(CGameEngine *_engine)
 	engine = _engine;
 	int x = 0;
 
+	abilityPanel.Load(g_pTextures->abilityPanel);
+	abilityPanel.SetPos(130, 870);
+
 	for (int j = 0; j < 4; j++)
 	{
-		 x = 150;
+		 x = abilityPanel.GetGlobalRect().left + 40;
 		for (int i = 0; i < 4; i++)
 		{
 			abilities[j][i].Load(g_pTextures->abilities[j][i]);
-			abilities[j][i].SetPos(x, 910);
-			x += 120;
+			abilities[j][i].SetPos(x, abilityPanel.GetGlobalRect().top + 32);
+			x += 132;
 		}
 	}
 
 	currentAbilityFrame.Load(g_pTextures->currentAbilityFrame);
-	currentAbilityFrame.SetPos(x - 130, 900);
+	currentAbilityFrame.SetPos(abilities[0][3].GetRect().left - 10, abilities[0][3].GetRect().top - 10);
+
+	combatantInformationPanel.Load(g_pTextures->combatantInformationPanel);
+	combatantInformationPanel.SetPos(820, 850);
 
 	currentCombatantHealthBar.Load(g_pTextures->healthBarBig, g_pTextures->healthBarBigFrame, nullptr, nullptr);
 	currentCombatantHealthBar.SetSmoothTransformationTime(0.7);
 	currentCombatantHealthBar.SetOffsetForInnerPart(17, 20);
-	currentCombatantHealthBar.SetPos(engine->GetWindowSize().x - 600.0f, 850.0f);
-	currentCombatantHealthBar.SetText(g_pFonts->f_trajan, sf::Color::White, 14);
+	currentCombatantHealthBar.SetPos(combatantInformationPanel.GetGlobalRect().left + 40, combatantInformationPanel.GetGlobalRect().top + 70);
+	currentCombatantHealthBar.SetText(g_pFonts->f_trajan, sf::Color::Black, 14);
 
 	currentCombatantName.setCharacterSize(25);
 	currentCombatantName.setFont(g_pFonts->f_trajan);
@@ -66,6 +72,7 @@ void BattleGUI::Render()
 {
 	if (currentCombatant->IsPlayer())
 	{
+		abilityPanel.Render(engine->GetWindow());
 		for (CSprite &a : abilities[currentCombatant->GetID()])
 			a.Render(engine->GetWindow());
 
@@ -84,14 +91,7 @@ void BattleGUI::Render()
 
 void BattleGUI::RenderCombatantInformation()
 {
-	auto backgroundWidth = engine->GetWindowSize().x - currentCombatantName.getGlobalBounds().left;
-	sf::RoundedRectangleShape background(sf::Vector2f(backgroundWidth, 225.0f), 8, 20);
-	background.setFillColor(sf::Color(0, 0, 0, 150));
-	background.setOutlineThickness(2.0f);
-	background.setOutlineColor(sf::Color(40, 40, 40));
-	background.setPosition(sf::Vector2f(currentCombatantName.getGlobalBounds().left - 50, 855) + sf::Vector2f(-10.0f, -7.0f));
-
-	engine->GetWindow().draw(background);
+	combatantInformationPanel.Render(engine->GetWindow());
 	ShowCombatantAttributes();
 	currentCombatantHealthBar.Render(engine->GetWindow(), true);
 	engine->GetWindow().draw(currentCombatantName);
@@ -182,7 +182,9 @@ void BattleGUI::ShowCombatantAttributes()
 	valueText2.setOutlineThickness(1.0f);
 	valueText2.setString(valueString2.str());
 
-	valueText2.setPosition(engine->GetWindowSize().x - 200.0f, 935.0f);
+	int xPos = combatantInformationPanel.GetGlobalRect().left + combatantInformationPanel.GetRect().width - valueText2.getLocalBounds().width - 30;
+	int yPos = combatantInformationPanel.GetGlobalRect().top + (combatantInformationPanel.GetRect().height - valueText2.getLocalBounds().height) / 2;
+	valueText2.setPosition(xPos, yPos);
 	attributeText2.setPosition(valueText2.getGlobalBounds().left - attributeText2.getLocalBounds().width - 10.0f, valueText2.getGlobalBounds().top - 2.0f);
 	valueText1.setPosition(attributeText2.getGlobalBounds().left - 50.0f, valueText2.getGlobalBounds().top);
 	attributeText1.setPosition(valueText1.getGlobalBounds().left - attributeText1.getLocalBounds().width - 10.0f, valueText2.getGlobalBounds().top - 2.0f);
@@ -209,7 +211,9 @@ void BattleGUI::SetCurrentCombatant(Combatant *_combatant)
 	currentCombatantHealthBar.SetMaxValuePtr(_combatant->Status().GetMaxHealthPointer());
 	currentCombatantHealthBar.SetValuePtr(_combatant->Status().GetCurrentHealthPointer());
 	currentCombatantName.setString(g_pStringContainer->combatantNames[_combatant->GetID()]); 
-	currentCombatantName.setPosition(currentCombatantHealthBar.GetRect().left - currentCombatantName.getLocalBounds().width - 20, currentCombatantHealthBar.GetRect().top + currentCombatantName.getLocalBounds().height / 2 + 5);
+
+	int nameXPos = currentCombatantHealthBar.GetRect().left + (currentCombatantHealthBar.GetRect().width - currentCombatantName.getLocalBounds().width) / 2;
+	currentCombatantName.setPosition(nameXPos, currentCombatantHealthBar.GetRect().top - currentCombatantName.getLocalBounds().height - 10);
 }
 
 

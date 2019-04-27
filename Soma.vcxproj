@@ -69,13 +69,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\SFML-2.4.2\include;$(SolutionDir)Dependencies\boost_1_61_0;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.4.2\lib;$(SolutionDir)Dependencies\boost_1_61_0\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\SFML-2.5.1\include;$(SolutionDir)Dependencies\boost_1_61_0;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.5.1\lib;$(SolutionDir)Dependencies\boost_1_61_0\libs;$(LibraryPath)</LibraryPath>
     <IntDir>$(Configuration)\temps\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\SFML-2.4.2\include;$(SolutionDir)Dependencies\boost_1_61_0;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.4.2\lib;$(SolutionDir)Dependencies\boost_1_61_0\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\SFML-2.5.1\include;$(SolutionDir)Dependencies\boost_1_61_0;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.5.1\lib;$(SolutionDir)Dependencies\boost_1_61_0\libs;$(LibraryPath)</LibraryPath>
     <IntDir>$(Configuration)\temps\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

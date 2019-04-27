@@ -39,6 +39,9 @@ void CTextureManager::LoadTextures()
 	abilities[3][3].loadFromFile("Data/Sprites/Abilities/horrible_grin.png");
 
 	currentAbilityFrame.loadFromFile("Data/Sprites/Abilities/currentAbilityFrame.png");
+	abilityPanel.loadFromFile("Data/Sprites/Abilities/ability_panel.png");
+
+	combatantInformationPanel.loadFromFile("Data/Sprites/Battle/combatant_information_panel.png");
 
 	healthBarFrame.loadFromFile("Data/Sprites/Battle/health_bar_frame.png");
 	healthBar.loadFromFile("Data/Sprites/Battle/health_bar.png");

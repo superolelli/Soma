@@ -45,6 +45,7 @@ void Bar::SetValuePtr(int *_value)
 {
 	m_pValue = _value;
 	lastValue = *_value;
+	currentAnimationTime = baseAnimationTime;
 }
 
 void Bar::SetMaxValuePtr(int * _maxValue)
