@@ -36,7 +36,7 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 
 	isBattleFinished = false;
 
-	gui->SetCurrentCombatant(combatants[currentCombatant]);
+	gui->SetCombatantToDisplay(combatants[currentCombatant]);
 
 	combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
 }
@@ -72,12 +72,29 @@ void Battle::Update()
 			ChooseNextCombatant();
 		} while (combatants[currentCombatant]->Status().GetCurrentHealth() <= 0);
 
-		gui->SetCurrentCombatant(combatants[currentCombatant]);
-
 		combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
 	}
+
+	SetCombatantToDisplayForGUI();
 }
 
+
+void Battle::SetCombatantToDisplayForGUI()
+{
+	bool combatantSet = false;
+	for (auto c : combatants)
+	{
+		if (c->GetRect().contains(engine->GetWorldMousePos()))
+		{
+			gui->SetCombatantToDisplay(c);
+			combatantSet = true;
+			break;
+		}
+	}
+
+	if (!combatantSet)
+		gui->SetCombatantToDisplay(combatants[currentCombatant]);
+}
 
 
 void Battle::HandleDeaths()

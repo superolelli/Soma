@@ -17,13 +17,13 @@ public:
 	virtual void Render() override;
 
 	int GetCurrentAbility() { return currentAbility; }
-	void SetCurrentCombatant(Combatant *_combatant);
+	void SetCombatantToDisplay(Combatant *_combatant);
 	void SetAdventureGroup(AdventureGroup *_adventureGroup);
 
 private:
 
 	int currentAbility;
-	Combatant *currentCombatant;
+	Combatant *combatantToDisplay;
 	AdventureGroup *players;
 
 	CSprite abilityPanel;

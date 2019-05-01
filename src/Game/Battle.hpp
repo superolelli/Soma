@@ -39,5 +39,7 @@ private:
 	void HandleDeaths();
 	void ChooseNextCombatant();
 
+	void SetCombatantToDisplayForGUI();
+
 	bool IsOneGroupDead();
 };
