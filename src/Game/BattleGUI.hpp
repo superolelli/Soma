@@ -4,6 +4,7 @@
 #include "../Framework/Graphics/Sprite.hpp"
 #include "../Framework/Gui/Bar.hpp"
 #include "Resources\Resources.hpp"
+#include "CombatantAttributesPanel.hpp"
 
 class AdventureGroup;
 class Combatant;
@@ -18,12 +19,14 @@ public:
 
 	int GetCurrentAbility() { return currentAbility; }
 	void SetCombatantToDisplay(Combatant *_combatant);
+	void SetCurrentPlayer(Combatant *_combatant);
 	void SetAdventureGroup(AdventureGroup *_adventureGroup);
 
 private:
 
 	int currentAbility;
 	Combatant *combatantToDisplay;
+	Combatant *currentPlayer;
 	AdventureGroup *players;
 
 	CSprite abilityPanel;
@@ -31,11 +34,11 @@ private:
 	CSprite currentAbilityFrame;
 
 	CSprite combatantInformationPanel;
+	CombatantAttributesPanel combatantAttributesPanel;
 	Bar currentCombatantHealthBar;
 
 	sf::Text currentCombatantName;
 
 	void ShowTooltip(int _ability);
-	void ShowCombatantAttributes();
 	void RenderCombatantInformation();
 };

@@ -38,6 +38,9 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 
 	gui->SetCombatantToDisplay(combatants[currentCombatant]);
 
+	if (combatants[currentCombatant]->IsPlayer())
+		gui->SetCurrentPlayer(combatants[currentCombatant]);
+
 	combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
 }
 
@@ -73,6 +76,10 @@ void Battle::Update()
 		} while (combatants[currentCombatant]->Status().GetCurrentHealth() <= 0);
 
 		combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
+		if (combatants[currentCombatant]->IsPlayer())
+			gui->SetCurrentPlayer(combatants[currentCombatant]);
+		else
+			gui->SetCurrentPlayer(nullptr);
 	}
 
 	SetCombatantToDisplayForGUI();

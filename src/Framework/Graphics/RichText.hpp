@@ -34,6 +34,9 @@ namespace sfe
 			const sf::Font* getFont() const;
 			void setFont(const sf::Font& font);
 
+			void setOutlineThickness(float _thickness);
+			void setOutlineColor(sf::Color _color);
+
 			void setCentered(bool _centered);
 
 			sf::FloatRect getLocalBounds() const;
@@ -57,6 +60,8 @@ namespace sfe
 
 			unsigned int characterSize;
 			const sf::Font* font;
+			float outlineThickness;
+			sf::Color outlineColor;
 
 			bool centered;
 

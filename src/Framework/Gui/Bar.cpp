@@ -123,7 +123,7 @@ void Bar::Render(sf::RenderTarget &_target, bool _withNumbers)
 			std::stringstream stream("");
 			stream.str("");
 
-			stream << valueToRender << "/" << *m_pMaxValue;
+			stream << static_cast<int>(valueToRender) << "/" << *m_pMaxValue;
 			m_text.setString(stream.str());
 			m_text.setPosition(m_bar.GetRect().width / 2 + m_bar.GetRect().left - m_text.getGlobalBounds().width / 2, m_bar.GetRect().height / 2 + m_bar.GetRect().top - m_text.getGlobalBounds().height / 2 - 2);
 			_target.draw(m_text);

@@ -247,6 +247,7 @@
     <ClCompile Include="src\Game\Buff.cpp" />
     <ClCompile Include="src\Game\Combatant.cpp" />
     <ClCompile Include="src\Game\CombatantAttributes.cpp" />
+    <ClCompile Include="src\Game\CombatantAttributesPanel.cpp" />
     <ClCompile Include="src\Game\CombatantStatus.cpp" />
     <ClCompile Include="src\Game\CombatantStatusBar.cpp" />
     <ClCompile Include="src\Game\Enemy.cpp" />
@@ -276,6 +277,7 @@
     <ClInclude Include="src\Framework\Graphics\RoundedRectangleShape.hpp" />
     <ClInclude Include="src\Game\Ability.hpp" />
     <ClInclude Include="src\Game\CombatantID.hpp" />
+    <ClInclude Include="src\Game\CombatantAttributesPanel.hpp" />
     <ClInclude Include="src\Game\CombatantStatusBar.hpp" />
     <ClInclude Include="src\Game\LevelBuilder.hpp" />
     <ClInclude Include="src\Game\LevelSpecs.hpp" />

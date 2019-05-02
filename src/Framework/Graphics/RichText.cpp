@@ -62,12 +62,22 @@ namespace
 
 namespace sfe
 {
-	RichText::RichText() : characterSize(30), font(NULL), centered(false)
+	RichText::RichText() 
+		: characterSize(30)
+		, font(NULL)
+		, centered(false) 
+		, outlineThickness(0.0f)
+		, outlineColor(sf::Color::Black)
 	{
 		initializeColors();
 	}
 
-	RichText::RichText(const sf::String& source, const sf::Font& font, unsigned int characterSize) : characterSize(characterSize), font(&font), centered(false)
+	RichText::RichText(const sf::String& source, const sf::Font& font, unsigned int characterSize) 
+		: characterSize(characterSize)
+		, font(&font)
+		, centered(false)
+		, outlineThickness(0.0f)
+		, outlineColor(sf::Color::Black)
 	{
 		initializeColors();
 		setString(source);
@@ -249,6 +259,8 @@ namespace sfe
 			t.setString(chunks[i].text);
 			t.setStyle(chunks[i].style);
 			t.setCharacterSize(characterSize);
+			t.setOutlineColor(outlineColor);
+			t.setOutlineThickness(outlineThickness);
 
 			if (font != NULL)
 			{
@@ -301,6 +313,16 @@ namespace sfe
 		this->font = &font;
 
 		setString(source);
+	}
+
+	void RichText::setOutlineColor(sf::Color _color)
+	{
+		outlineColor = _color;
+	}
+
+	void RichText::setOutlineThickness(float _thickness)
+	{
+		outlineThickness = _thickness;
 	}
 
 
