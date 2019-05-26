@@ -19,7 +19,7 @@ public:
 	CombatantStats playerStats[4];
 	std::map<int, CombatantStats> enemyStats;
 
-	Ability enemyAbilities[3];
+	Ability enemyAbilities[5];
 
 	LevelSpecs levelSpecs;
 

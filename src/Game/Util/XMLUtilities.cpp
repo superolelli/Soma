@@ -172,21 +172,28 @@ namespace pugi {
 
 		for (xml_node &group : levelSpecNode.child("enemyGroups").children())
 		{
-			std::array<CombatantID, 4> newGroup = {CombatantID::Undefined, CombatantID::Undefined, CombatantID::Undefined, CombatantID::Undefined };
-			int currentEnemy = 0;
-
-			for (xml_node &enemy : group.children())
-			{
-				std::string str(enemy.text().as_string());
-				newGroup[currentEnemy++] = combatantIdentifierMap[sf::String::fromUtf8(str.begin(), str.end())];
-			}
-
+			std::array<CombatantID, 4> newGroup;
+			loadEnemyGroupFromXML(group, newGroup);
 			specs.possibleEnemyGroups.push_back(newGroup);
 		}
+
+		loadEnemyGroupFromXML(levelSpecNode.child("bossGroup"), specs.bossGroup);
 
 		for (xml_node &background : levelSpecNode.child("backgrounds"))
 		{
 			specs.possibleBackgrounds.push_back(backgroundIdentifierMap[background.text().as_string()]);
+		}
+	}
+
+
+	void loadEnemyGroupFromXML(const xml_node & enemyGroupNode, std::array<CombatantID, 4> &newGroup)
+	{
+		newGroup = { CombatantID::Undefined, CombatantID::Undefined, CombatantID::Undefined, CombatantID::Undefined };
+		int currentEnemy = 0;
+		for (xml_node &enemy : enemyGroupNode)
+		{
+			std::string str(enemy.text().as_string());
+			newGroup[currentEnemy++] = combatantIdentifierMap[sf::String::fromUtf8(str.begin(), str.end())];
 		}
 	}
 

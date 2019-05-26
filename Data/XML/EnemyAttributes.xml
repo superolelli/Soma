@@ -64,5 +64,21 @@
 	  dodge="3"
 	  precision="5"
   ></Hilfssheriff>
+
+  <Greg id="8"
+    strength="5"
+	  constitution="7"
+	  dexterity="10"
+	  speed="5"
+				 
+    armour ="1"
+    health ="35"
+    damageMin ="7"
+    damageMax ="10"
+    initiative ="5"
+	  criticalHit="10"
+	  dodge="15"
+	  precision="10"
+  ></Greg>
   
 </EnemyAttributes>

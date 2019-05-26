@@ -474,6 +474,9 @@
     <ClCompile Include="src\Game\CombatantAttributesPanel.cpp">
       <Filter>Quelldateien\Game\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\Greg.cpp">
+      <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -922,6 +925,9 @@
     </ClInclude>
     <ClInclude Include="src\Game\CombatantAttributesPanel.hpp">
       <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Greg.hpp">
+      <Filter>Headerdateien\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

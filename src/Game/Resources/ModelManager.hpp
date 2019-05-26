@@ -29,6 +29,7 @@ public:
 	SpriterEngine::SpriterModel *modelGesetzloser;
 	SpriterEngine::SpriterModel *modelIndianer;
 	SpriterEngine::SpriterModel *modelHilfssheriff;
+	SpriterEngine::SpriterModel *modelGreg;
 
 	SpriterEngine::SpriterModel *modelAbilityEffects;
 };

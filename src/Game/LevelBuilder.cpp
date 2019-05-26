@@ -28,9 +28,11 @@ Level *LevelBuilder::buildLevel(int _levelID)
 
 	//add end room
 	Room *newRoom = new Room;
-	newRoom->battle = false;
+	newRoom->battle = true;
 	newRoom->background.Load(g_pTextures->bangBackgrounds[g_pObjectProperties->levelSpecs.endBackground]);
 	newRoom->background.SetPos(position, 0);
+	for(int i = 0; i < 4; i++)
+		newRoom->enemyIds[i] = g_pObjectProperties->levelSpecs.bossGroup[i];
 	newLevel->AddRoom(newRoom);
 
 	return newLevel;

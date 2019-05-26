@@ -1,4 +1,5 @@
 #include "Enemy.hpp"
+#include "Greg.hpp"
 
 
 Enemy::Enemy(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
@@ -22,6 +23,9 @@ void Enemy::Init()
 		break;
 	case CombatantID::Hilfssheriff:
 		combatantObject = g_pModels->modelHilfssheriff->getNewEntityInstance("Hilfssheriff");
+		break;
+	case CombatantID::Greg:
+		combatantObject = g_pModels->modelGreg->getNewEntityInstance("Greg");
 	}
 	
 	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);
@@ -50,6 +54,15 @@ void Enemy::ChooseAbility()
 	case CombatantID::Hilfssheriff:
 		chosenAbility = enemyAbilities::bang;
 		break;
+	case CombatantID::Greg:
+		if (dynamic_cast<GregDigger*>(this)->CompanionDiedLastRound())
+		{
+			chosenAbility = enemyAbilities::bury_the_dead;
+			dynamic_cast<GregDigger*>(this)->SetCompanionDiedLastRound(false);
+		}
+		else
+			chosenAbility = enemyAbilities::shovel_hit;
+		break;
 	}
 }
 
@@ -59,11 +72,15 @@ void Enemy::ChooseTarget()
 {
 	selectedTargets.clear();
 
-	CheckForMarkedPlayers();
+	if (chosenAbility == enemyAbilities::bury_the_dead)
+		selectedTargets.push_back(this);
+	else {
+		CheckForMarkedPlayers();
 
-	if (selectedTargets.empty())
-	{
-		ChooseRandomPlayer();
+		if (selectedTargets.empty())
+		{
+			ChooseRandomPlayer();
+		}
 	}
 }
 

@@ -11,7 +11,7 @@
     health ="25"
     damageMin ="5"
     damageMax = "8"
-    initiative ="1"
+    initiative ="10"
 		criticalHit="6"
 		dodge="3"
 		precision="6"

@@ -1,5 +1,5 @@
 #include "Battle.hpp"
-
+#include "Greg.hpp"
 
 
 void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4])
@@ -21,7 +21,10 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 	for (int i = 0; i < 4; i++)
 	{
 		if (enemyIDs[i] != CombatantID::Undefined) {
-			enemy[i] = new Enemy(enemyIDs[i], _engine, _notificationRenderer);
+			if(enemyIDs[i] == CombatantID::Greg)
+				enemy[i] = new GregDigger(enemyIDs[i], _engine, _notificationRenderer);
+			else
+				enemy[i] = new Enemy(enemyIDs[i], _engine, _notificationRenderer);
 			enemy[i]->Init();
 			enemy[i]->SetPos(pos - enemy[i]->GetLocalPosition().x, ENEMY_Y_POS);
 			pos += enemy[i]->GetRect().width + ENEMY_SPACING;
@@ -112,8 +115,11 @@ void Battle::HandleDeaths()
 	{
 		if ((*i)->Status().GetCurrentHealth() <= 0)
 		{
-			if(!(*i)->IsDying())
+			if (!(*i)->IsDying()) {
 				(*i)->StartDeathAnimation();
+				if(!(*i)->IsPlayer())
+					InformGregAboutDeath();
+			}
 			else if ((*i)->AnimationFinished())
 			{
 				if (combatantNumber < currentCombatant)
@@ -124,6 +130,15 @@ void Battle::HandleDeaths()
 		}
 
 		i++;
+	}
+}
+
+void Battle::InformGregAboutDeath()
+{
+	for (auto c : combatants)
+	{
+		if (c->GetID() == CombatantID::Greg)
+			dynamic_cast<GregDigger*>(c)->SetCompanionDiedLastRound(true);
 	}
 }
 

@@ -42,4 +42,6 @@ private:
 	void SetCombatantToDisplayForGUI();
 
 	bool IsOneGroupDead();
+
+	void InformGregAboutDeath();
 };

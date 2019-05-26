@@ -50,4 +50,32 @@
 	  </effect>
   </ability>
 
+	<ability id="3" name="Schaufelschlag">
+	  <animation>shovel_hit</animation>
+	  <effectAnimation>shovel_hit</effectAnimation>
+
+	  <positions>
+		  <value id="0">true</value>
+		  <value id="1">true</value>
+		  <value id="2">true</value>
+		  <value id="3">true</value>
+	  </positions>
+
+	  <effect>
+		  <damageFactor>1</damageFactor>
+	  </effect>
+  </ability>
+
+	<ability id="4" name="Die Toten begraben">
+	  <animation>bury_the_dead</animation>
+
+	  <positions>
+		  <value id="7">true</value>
+	  </positions>
+
+	  <effect>
+		  <healSelf>20</healSelf>
+	  </effect>
+  </ability>
+
 </Abilities>
