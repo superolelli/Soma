@@ -46,6 +46,7 @@ void CInitialState::Update()
 	g_pSounds->LoadSounds();
 	g_pStringContainer->LoadStrings();
 	g_pObjectProperties->LoadObjectProperties();
+	g_pVideos->LoadVideos();
 
 	m_pGameEngine->ChangeStateImmediately(new Game);
 }

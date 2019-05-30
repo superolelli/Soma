@@ -21,6 +21,7 @@ Level *LevelBuilder::buildLevel(int _levelID)
 		auto backgroundID = rand() % g_pObjectProperties->levelSpecs.possibleBackgrounds.size();
 		newRoom->background.Load(g_pTextures->bangBackgrounds[g_pObjectProperties->levelSpecs.possibleBackgrounds[backgroundID]]);
 		newRoom->background.SetPos(position, 0);
+		newRoom->boss = false;
 		position += newRoom->background.GetRect().width;
 
 		newLevel->AddRoom(newRoom);
@@ -31,6 +32,7 @@ Level *LevelBuilder::buildLevel(int _levelID)
 	newRoom->battle = true;
 	newRoom->background.Load(g_pTextures->bangBackgrounds[g_pObjectProperties->levelSpecs.endBackground]);
 	newRoom->background.SetPos(position, 0);
+	newRoom->boss = true;
 	for(int i = 0; i < 4; i++)
 		newRoom->enemyIds[i] = g_pObjectProperties->levelSpecs.bossGroup[i];
 	newLevel->AddRoom(newRoom);

@@ -7,6 +7,7 @@
 struct Room {
 	CSprite background;
 	bool battle;
+	bool boss;
 	int enemyIds[4];
 };
 
@@ -23,6 +24,7 @@ public:
 	void AddRoom(Room *_room);
 
 	bool InBattle() { return battle; }
+
 	int *GetEnemyIDs();
 	int IsAtEnd(int _playerPos);
 

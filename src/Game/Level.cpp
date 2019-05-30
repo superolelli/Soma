@@ -22,14 +22,19 @@ void Level::Update(int _playerPos)
 	battle = false;
 	int roomNumber = (_playerPos - rooms[0]->background.GetRect().width / 2) / rooms[0]->background.GetRect().width;
 
-	if (rooms[roomNumber]->battle == 1)
+	if (rooms[roomNumber]->battle == true)
 	{
 		battle = true;
-		rooms[roomNumber]->battle = 0;
+		rooms[roomNumber]->battle = false;
 		currentEnemyIDs[0] = rooms[roomNumber]->enemyIds[0];
 		currentEnemyIDs[1] = rooms[roomNumber]->enemyIds[1];
 		currentEnemyIDs[2] = rooms[roomNumber]->enemyIds[2];
 		currentEnemyIDs[3] = rooms[roomNumber]->enemyIds[3];
+	}
+	if (rooms[roomNumber]->boss)
+	{
+		rooms[roomNumber]->boss = false;
+		g_pVideos->PlayVideo(videoId::introGreg);
 	}
 }
 

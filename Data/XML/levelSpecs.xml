@@ -2,7 +2,7 @@
 
 <LevelSpecs>
     <level id="1">
-        <numberOfRooms>1</numberOfRooms>
+        <numberOfRooms>3</numberOfRooms>
         <backgrounds>
             <background>bang_gang_1</background>
             <background>bang_gang_2</background>

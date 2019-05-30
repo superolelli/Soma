@@ -9,3 +9,4 @@
 #include "SpritePool.hpp"
 #include "EnemyAbilities.hpp"
 #include "ObjectPropertiesManager.hpp"
+#include "VideoManager.hpp"

@@ -477,6 +477,9 @@
     <ClCompile Include="src\Game\Greg.cpp">
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\Resources\VideoManager.cpp">
+      <Filter>Quelldateien\Game\Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -928,6 +931,9 @@
     </ClInclude>
     <ClInclude Include="src\Game\Greg.hpp">
       <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Resources\VideoManager.hpp">
+      <Filter>Headerdateien\Game\Resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

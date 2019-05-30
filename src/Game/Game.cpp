@@ -54,14 +54,19 @@ void Game::Update()
 
 	m_pGameEngine->GetWindow().setView(view);
 
-	if (inBattle)
-		UpdateBattle();
-	else
-		UpdateLevel();
+	if (!g_pVideos->IsPlayingVideo())
+	{
+		if (inBattle)
+			UpdateBattle();
+		else
+			UpdateLevel();
 
-	notificationRenderer.Update();
+		notificationRenderer.Update();
 
-	currentGUI->Update();
+		currentGUI->Update();
+	}
+
+	g_pVideos->Update();
 }
 
 
@@ -128,23 +133,30 @@ void Game::Render(double _normalizedTimestep)
 {
 	m_pGameEngine->ClearWindow(sf::Color::Black);
 
-	m_pGameEngine->GetWindow().setView(view);
+	if (g_pVideos->IsPlayingVideo())
+	{
+		m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
+		g_pVideos->Render(m_pGameEngine->GetWindow());
+	}
+	else 
+	{
+		m_pGameEngine->GetWindow().setView(view);
+		level->Render(m_pGameEngine->GetWindow(), view.getCenter().x - view.getSize().x / 2);
 
-	level->Render(m_pGameEngine->GetWindow(), view.getCenter().x - view.getSize().x / 2);
-	
-	if (currentBattle == nullptr)
-		adventureGroup.Render();
-	else
-		currentBattle->Render();
+		if (currentBattle == nullptr)
+			adventureGroup.Render();
+		else
+			currentBattle->Render();
 
-	notificationRenderer.Render(m_pGameEngine->GetWindow());
+		notificationRenderer.Render(m_pGameEngine->GetWindow());
 
-	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
+		m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
 
-	if (currentBattle != nullptr)
-		currentBattle->RenderAbilityAnimations();
+		if (currentBattle != nullptr)
+			currentBattle->RenderAbilityAnimations();
 
-	currentGUI->Render();
+		currentGUI->Render();
+	}
 
 	m_pGameEngine->FlipWindow();
 }
