@@ -1,15 +1,22 @@
 #include "VideoManager.hpp"
 
 
-void VideoManager::LoadVideos()
+void VideoManager::LoadVideos(CGameEngine *_engine)
 {
+	isPlaying = false;
+	engine = _engine;
 	introGreg.openFromFile("Data/Videos/Greg.mp4");
 }
 
 void VideoManager::Update()
 {
-	if(introGreg.getStatus() == sfe::Status::Playing)
+	if (introGreg.getStatus() == sfe::Status::Playing)
 		introGreg.update();
+	else if (isPlaying == true)
+	{
+		isPlaying = false;
+		engine->UseSimpleRenderLoop(false);
+	}
 }
 
 void VideoManager::Render(sf::RenderTarget &_target)
@@ -21,7 +28,11 @@ void VideoManager::Render(sf::RenderTarget &_target)
 void VideoManager::PlayVideo(videoId _id)
 {
 	if (_id == videoId::introGreg)
+	{
+		isPlaying = true;
+		engine->UseSimpleRenderLoop(true);
 		introGreg.play();
+	}
 }
 
 bool VideoManager::IsPlayingVideo()

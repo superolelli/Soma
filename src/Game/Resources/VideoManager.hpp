@@ -2,6 +2,7 @@
 
 #include "../../Framework/Patterns/Singleton.hpp"
 #include <sfeMovie\Movie.hpp>
+#include "../../Framework/Gameengine.hpp"
 
 enum class videoId { introGreg };
 
@@ -10,7 +11,7 @@ enum class videoId { introGreg };
 class VideoManager : public TSingleton<VideoManager> {
 public:
 
-	void LoadVideos();
+	void LoadVideos(CGameEngine *_engine);
 
 	void Update();
 	void Render(sf::RenderTarget &_target);
@@ -23,4 +24,7 @@ private:
 	sfe::Movie introGreg;
 
 	videoId currentVideo;
+	CGameEngine *engine;
+
+	bool isPlaying;
 };

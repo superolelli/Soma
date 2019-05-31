@@ -10,6 +10,7 @@ void CGameEngine::Init(std::string const &_name)
 
 	nextAction = action::hold;
 	m_running = true;
+	m_simpleRenderLoop = false;
 }
 
 
@@ -38,16 +39,23 @@ void CGameEngine::Run()
 
 		//update the timer and calculate the lag
 		g_pTimer->Update();
-		lag += static_cast<double>(g_pTimer->GetElapsedTime().asMicroseconds()) / 1000.0;
 
 		//process events
 		m_pStates.back()->HandleEvents();
 
-		//updates
-		while (lag >= MS_PER_UPDATE)
+		if (m_simpleRenderLoop)
 		{
 			m_pStates.back()->Update();
-			lag -= MS_PER_UPDATE;
+		}
+		else
+		{
+			lag += static_cast<double>(g_pTimer->GetElapsedTime().asMicroseconds()) / 1000.0;
+			//updates
+			while (lag >= MS_PER_UPDATE)
+			{
+				m_pStates.back()->Update();
+				lag -= MS_PER_UPDATE;
+			}
 		}
 
 		//renders

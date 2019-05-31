@@ -36,6 +36,8 @@ public:
 	//stops the engine
 	void StopEngine() { m_running = false; }
 
+	void UseSimpleRenderLoop(bool _simple) { m_simpleRenderLoop = _simple; double lag = 0.0;}
+
 	//Returns the render window
 	sf::RenderWindow &GetWindow() { return *m_Window.GetRenderWindow();}
 
@@ -71,6 +73,7 @@ private:
 	CWindow m_Window;
 
 	bool m_running;
+	bool m_simpleRenderLoop;
 
 	GameState *nextGameState;
 	enum class action {hold, push, pop, change} nextAction;
