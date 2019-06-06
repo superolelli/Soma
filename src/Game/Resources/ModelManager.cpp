@@ -16,6 +16,7 @@ void CModelManager::LoadModels(CGameEngine &_engine)
 	modelHilfssheriff = new SpriterEngine::SpriterModel("./Data/Sprites/Enemies/Bang/Hilfssheriff/hilfssheriff.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetWindow()), new SpriterEngine::ExampleObjectFactory(&_engine.GetWindow()));
 	modelGreg = new SpriterEngine::SpriterModel("./Data/Sprites/Enemies/Bang/Greg Digger/greg.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetWindow()), new SpriterEngine::ExampleObjectFactory(&_engine.GetWindow()));
 	modelAbilityEffects = new SpriterEngine::SpriterModel("./Data/Sprites/Ability Effects/ability_effects.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetWindow()), new SpriterEngine::ExampleObjectFactory(&_engine.GetWindow()));
+	modelNewBattleAnimation = new SpriterEngine::SpriterModel("./Data/Sprites/Battle/New Battle Animation/new_battle_animation.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetWindow()), new SpriterEngine::ExampleObjectFactory(&_engine.GetWindow()));
 }
 
 
@@ -33,4 +34,5 @@ void CModelManager::Quit()
 	SAFE_DELETE(modelHilfssheriff);
 	SAFE_DELETE(modelGreg);
 	SAFE_DELETE(modelAbilityEffects);
+	SAFE_DELETE(modelNewBattleAnimation);
 }

@@ -55,13 +55,17 @@ void Enemy::ChooseAbility()
 		chosenAbility = enemyAbilities::bang;
 		break;
 	case CombatantID::Greg:
-		if (dynamic_cast<GregDigger*>(this)->CompanionDiedLastRound())
+		if (dynamic_cast<GregDigger*>(this)->CompanionDiedLastRound() && status.GetCurrentHealth() < status.GetMaxHealth())
 		{
 			chosenAbility = enemyAbilities::bury_the_dead;
-			dynamic_cast<GregDigger*>(this)->SetCompanionDiedLastRound(false);
 		}
 		else
-			chosenAbility = enemyAbilities::shovel_hit;
+			if (rand() % 2 == 0)
+				chosenAbility = enemyAbilities::shovel_hit;
+			else
+				chosenAbility = enemyAbilities::gravedigger_gaze;
+
+		dynamic_cast<GregDigger*>(this)->SetCompanionDiedLastRound(false);
 		break;
 	}
 }

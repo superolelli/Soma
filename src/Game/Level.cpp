@@ -5,6 +5,7 @@ Level::Level()
 {	
 	int position = 0;
 	battle = false;
+	bossBattle = false;
 }
 
 Level::~Level()
@@ -32,10 +33,9 @@ void Level::Update(int _playerPos)
 		currentEnemyIDs[3] = rooms[roomNumber]->enemyIds[3];
 	}
 	if (rooms[roomNumber]->boss)
-	{
-		rooms[roomNumber]->boss = false;
-		g_pVideos->PlayVideo(videoId::introGreg);
-	}
+		bossBattle = true;
+	else
+		bossBattle = false;
 }
 
 

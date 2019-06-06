@@ -14,7 +14,7 @@ class Battle
 {
 public:
 
-	void Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4]);
+	void Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss);
 	void Update();
 	void Render();
 	void RenderAbilityAnimations();
@@ -34,7 +34,13 @@ private:
 	int currentCombatant;
 
 	bool isBattleFinished;
+	bool isPlayingIntro;
+	bool isBossBattle;
+	int finishedCycles;
+	float afterIntroWaitingTime;
 
+	void HandleIntro();
+	
 	void CalculateTurnOrder();
 	void HandleDeaths();
 	void ChooseNextCombatant();

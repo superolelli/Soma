@@ -16,6 +16,7 @@ void VideoManager::Update()
 	{
 		isPlaying = false;
 		engine->UseSimpleRenderLoop(false);
+		engine->GetWindow().setVerticalSyncEnabled(true);
 	}
 }
 
@@ -31,6 +32,7 @@ void VideoManager::PlayVideo(videoId _id)
 	{
 		isPlaying = true;
 		engine->UseSimpleRenderLoop(true);
+		engine->GetWindow().setVerticalSyncEnabled(false);
 		introGreg.play();
 	}
 }

@@ -18,6 +18,8 @@ void SpritePool::LoadSprites()
 	abilityAnnouncementBanner.SetTextColor(0, sf::Color(220, 220, 220));
 
 	abilityEffectsAnimation = g_pModels->modelAbilityEffects->getNewEntityInstance("ability_effects");
+	newBattleAnimation = g_pModels->modelNewBattleAnimation->getNewEntityInstance("New Battle");
+	newBattleAnimation->setScale(SpriterEngine::point(0.7, 0.7));
 
 	abilityTargetMarker.Load(g_pTextures->abilityTargetMarker);
 	turnMarker.Load(g_pTextures->turnMarker);
@@ -29,4 +31,5 @@ void SpritePool::LoadSprites()
 void SpritePool::FreeSprites()
 {
 	SAFE_DELETE(abilityEffectsAnimation);
+	SAFE_DELETE(newBattleAnimation);
 }

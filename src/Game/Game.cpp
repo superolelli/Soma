@@ -123,7 +123,7 @@ void Game::InitNewBattle()
 	currentGUI = newGui;
 
 	currentBattle = new Battle;
-	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer, level->GetEnemyIDs());
+	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer, level->GetEnemyIDs(), level->IsBossBattle());
 }
 
 

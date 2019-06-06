@@ -24,6 +24,7 @@ public:
 	void AddRoom(Room *_room);
 
 	bool InBattle() { return battle; }
+	bool IsBossBattle() { return bossBattle; }
 
 	int *GetEnemyIDs();
 	int IsAtEnd(int _playerPos);
@@ -35,5 +36,6 @@ private:
 	void RenderBackground(sf::RenderTarget &_target, int _viewX);
 
 	bool battle;
+	bool bossBattle;
 	int currentEnemyIDs[4];
 };

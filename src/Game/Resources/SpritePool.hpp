@@ -27,6 +27,8 @@ public:
 
 	SpriterEngine::EntityInstance *abilityEffectsAnimation;
 
+	SpriterEngine::EntityInstance *newBattleAnimation;
+
 	CSprite abilityTargetMarker;
 	CSprite turnMarker;
 };

@@ -33,6 +33,8 @@ public:
 	//returns a pointer to the window
 	inline sf::RenderWindow *GetRenderWindow() { return m_pWindow; }
 
+	void SetVerticalSyncEnabled(bool _enable) { m_pWindow->setVerticalSyncEnabled(_enable); }
+
 	//The getters
 	Keystates const &GetKeystates(KeyID _id) const { return m_keyStates[_id]; }
 	Keystates const &GetButtonstates(ButtonID _id) const { return m_mouseStates[_id]; }

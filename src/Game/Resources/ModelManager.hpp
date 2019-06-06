@@ -32,4 +32,5 @@ public:
 	SpriterEngine::SpriterModel *modelGreg;
 
 	SpriterEngine::SpriterModel *modelAbilityEffects;
+	SpriterEngine::SpriterModel *modelNewBattleAnimation;
 };

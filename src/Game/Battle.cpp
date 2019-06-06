@@ -2,7 +2,7 @@
 #include "Greg.hpp"
 
 
-void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4])
+void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss)
 {
 	players = _adventureGroup;
 	gui = _gui;
@@ -38,13 +38,20 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 	currentCombatant = 0;
 
 	isBattleFinished = false;
+	isPlayingIntro = true;
+	isBossBattle = _boss;
+	finishedCycles = 0;
+	afterIntroWaitingTime = 2.0f;
 
 	gui->SetCombatantToDisplay(combatants[currentCombatant]);
 
 	if (combatants[currentCombatant]->IsPlayer())
 		gui->SetCurrentPlayer(combatants[currentCombatant]);
 
-	combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
+	g_pSpritePool->newBattleAnimation->setCurrentAnimation("new_battle");
+	g_pSpritePool->newBattleAnimation->setCurrentTime(0);
+	g_pSpritePool->newBattleAnimation->reprocessCurrentTime();
+	g_pSpritePool->newBattleAnimation->setPosition(SpriterEngine::point(_xView - 300, engine->GetWindowSize().y / 2 - 30));
 }
 
 
@@ -67,25 +74,47 @@ void Battle::Update()
 	for (Combatant *c : combatants)
 		c->Update();
 
-	HandleDeaths();
-
-	if (IsOneGroupDead() == true)
-		isBattleFinished = true;
-
-	if (combatants[currentCombatant]->FinishedTurn())
+	if (!isPlayingIntro)
 	{
-		do {
-			ChooseNextCombatant();
-		} while (combatants[currentCombatant]->Status().GetCurrentHealth() <= 0);
+		HandleDeaths();
 
-		combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
-		if (combatants[currentCombatant]->IsPlayer())
-			gui->SetCurrentPlayer(combatants[currentCombatant]);
-		else
-			gui->SetCurrentPlayer(nullptr);
+		if (IsOneGroupDead() == true)
+			isBattleFinished = true;
+
+		if (combatants[currentCombatant]->FinishedTurn())
+		{
+			do {
+				ChooseNextCombatant();
+			} while (combatants[currentCombatant]->Status().GetCurrentHealth() <= 0);
+
+			combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
+			if (combatants[currentCombatant]->IsPlayer())
+				gui->SetCurrentPlayer(combatants[currentCombatant]);
+			else
+				gui->SetCurrentPlayer(nullptr);
+		}
+
+		SetCombatantToDisplayForGUI();
 	}
+	else
+		HandleIntro();
+}
 
-	SetCombatantToDisplayForGUI();
+void Battle::HandleIntro()
+{
+	if (g_pSpritePool->newBattleAnimation->animationIsPlaying() == false)
+	{
+		if (afterIntroWaitingTime > 0.0f)
+			afterIntroWaitingTime -= g_pTimer->GetElapsedTime().asSeconds();
+		else
+		{
+			isPlayingIntro = false;
+			combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
+
+			if (isBossBattle)
+				g_pVideos->PlayVideo(videoId::introGreg);
+		}
+	} 
 }
 
 
@@ -191,6 +220,19 @@ void Battle::Render()
 		if (c->GetAbilityStatus() != executing && c->GetAbilityStatus() != attacked && c->GetAbilityStatus() != dodging)
 			c->Render();
 	}
+
+	if (isPlayingIntro)
+	{
+		if (finishedCycles >= 2)
+		{
+			g_pSpritePool->newBattleAnimation->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
+			g_pSpritePool->newBattleAnimation->render();
+			g_pSpritePool->newBattleAnimation->playSoundTriggers();
+		}
+		else
+			finishedCycles++;
+	}
+
 }
 
 

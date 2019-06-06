@@ -78,4 +78,22 @@
 	  </effect>
   </ability>
 
+		<ability id="5" name="Totengräberblick">
+	  <animation>gravedigger_gaze</animation>
+
+	  <positions>
+		  <value id="0">true</value>
+		  <value id="1">true</value>
+		  <value id="2">true</value>
+		  <value id="3">true</value>
+	  </positions>
+
+	  <effect>
+		  <buff duration="3" isPositive="false">
+          <dodge>-3</dodge>
+          <damage>-3</damage>
+      </buff>
+	  </effect>
+  </ability>
+
 </Abilities>
