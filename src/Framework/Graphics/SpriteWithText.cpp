@@ -10,7 +10,7 @@ void SpriteWithText::Load(sf::Texture const & _texture)
 
 
 
-int SpriteWithText::AddText(std::string const &_str)
+int SpriteWithText::AddText(const sf::String &_str)
 {
 	sf::Text text;
 	text.setString(_str);
@@ -73,7 +73,12 @@ void SpriteWithText::SetTextPosCentered(int _textID)
 	SetTextPosYCentered(_textID);
 }
 
-void SpriteWithText::ChangeString(int _textID, std::string const &_str)
+void SpriteWithText::MoveText(int _textID, int _x, int _y)
+{
+	allTextsOnSprite[_textID].setPosition(allTextsOnSprite[_textID].getGlobalBounds().left + _x, allTextsOnSprite[_textID].getGlobalBounds().top + _y);
+}
+
+void SpriteWithText::ChangeString(int _textID, const sf::String &_str)
 {
 	allTextsOnSprite[_textID].setString(_str);
 }

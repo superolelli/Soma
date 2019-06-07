@@ -80,6 +80,7 @@ void ObjectPropertiesManager::LoadEnemyAbilities()
 
 	//get default values
 	Ability default;
+	default.clear();
 	loadAbilityFromXML(doc.child("ability"), default);
 
 	doc.load_file("Data/XML/EnemyAbilities.xml");

@@ -21,9 +21,9 @@ public:
 
 	virtual void Render() override;
 
-	std::string GetChosenAbilityName() { return g_pObjectProperties->enemyAbilities[chosenAbility].name; }
+	sf::String GetChosenAbilityName() { return g_pObjectProperties->enemyAbilities[chosenAbility].name; }
 
-private:
+protected:
 
 	int enemyID;
 
@@ -34,7 +34,7 @@ private:
 	bool confusionChecked;
 
 	void PrepareAbility();
-	void ChooseAbility();
+	virtual void ChooseAbility();
 
 	void ChooseTarget();
 	void CheckForMarkedPlayers();

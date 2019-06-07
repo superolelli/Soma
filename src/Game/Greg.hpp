@@ -12,7 +12,10 @@ public:
 
 	bool CompanionDiedLastRound() { return companionDiedLastRound; }
 
+	void OnNotify(ObserverNotification &_notification);
+
 private:
+	void ChooseAbility() override;
 
 	bool companionDiedLastRound;
 

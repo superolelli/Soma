@@ -111,7 +111,7 @@ void BattleGUI::ShowTooltip(int _ability)
 	sfe::RichText tooltip;
 	tooltip.setCharacterSize(18);
 	tooltip.setFont(g_pFonts->f_arial);
-	tooltip.setString(sf::String::fromUtf8(g_pObjectProperties->playerAbilities[combatantToDisplay->GetID()][_ability].description.begin(), g_pObjectProperties->playerAbilities[combatantToDisplay->GetID()][_ability].description.end()));
+	tooltip.setString(g_pObjectProperties->playerAbilities[combatantToDisplay->GetID()][_ability].description);
 	tooltip.setPosition(abilities[combatantToDisplay->GetID()][_ability].GetRect().left, abilities[combatantToDisplay->GetID()][_ability].GetRect().top - tooltip.getLocalBounds().height - 25.0f);
 
 	sf::FloatRect backgroundRect = tooltip.getLocalBounds();

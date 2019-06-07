@@ -54,19 +54,6 @@ void Enemy::ChooseAbility()
 	case CombatantID::Hilfssheriff:
 		chosenAbility = enemyAbilities::bang;
 		break;
-	case CombatantID::Greg:
-		if (dynamic_cast<GregDigger*>(this)->CompanionDiedLastRound() && status.GetCurrentHealth() < status.GetMaxHealth())
-		{
-			chosenAbility = enemyAbilities::bury_the_dead;
-		}
-		else
-			if (rand() % 2 == 0)
-				chosenAbility = enemyAbilities::shovel_hit;
-			else
-				chosenAbility = enemyAbilities::gravedigger_gaze;
-
-		dynamic_cast<GregDigger*>(this)->SetCompanionDiedLastRound(false);
-		break;
 	}
 }
 
@@ -291,6 +278,7 @@ void Enemy::RenderAbilityAnnouncement()
 	g_pSpritePool->abilityAnnouncementBanner.SetPos(engine->GetWindow().getView().getCenter().x + 100.0f, 150.0f);
 	g_pSpritePool->abilityAnnouncementBanner.ChangeString(0, GetChosenAbilityName());
 	g_pSpritePool->abilityAnnouncementBanner.SetTextPosCentered(0);
+	g_pSpritePool->abilityAnnouncementBanner.MoveText(0, 0, -20);
 	g_pSpritePool->abilityAnnouncementBanner.Render(engine->GetWindow());
 }
 

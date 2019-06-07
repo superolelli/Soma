@@ -98,10 +98,16 @@ namespace pugi {
 	void loadAbilityFromXML(const xml_node & abilityNode, Ability & ability)
 	{
 		if (abilityNode.attribute("name"))
-			ability.name = abilityNode.attribute("name").as_string();
+		{
+			std::string str(abilityNode.attribute("name").as_string());
+			ability.name = sf::String::fromUtf8(str.begin(), str.end());
+		}
 
 		if (abilityNode.child("description"))
-			ability.description = abilityNode.child("description").text().as_string();
+		{
+			std::string str(abilityNode.child("description").text().as_string());
+			ability.description = sf::String::fromUtf8(str.begin(), str.end());
+		}
 
 		if (abilityNode.child("animation"))
 			ability.animation = abilityNode.child("animation").text().as_string();

@@ -1,12 +1,17 @@
 #pragma once
 
 
+class ObserverNotification {
+public:
+	virtual ~ObserverNotification() {};
+};
+
 //base class for the observer pattern
 class CObserver
 {
 public:
 
-	virtual void OnNotify(int _subject, int _action, int _object) = 0;
+	virtual void OnNotify(ObserverNotification &_notification) {};
 };
 
 

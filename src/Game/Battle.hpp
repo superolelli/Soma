@@ -4,13 +4,14 @@
 #include "BattleGUI.hpp"
 #include "Enemy.hpp"
 #include "../Framework/Graphics/NotificationRenderer.hpp"
+#include "../Framework/Patterns/Subject.hpp"
 
 
 const int ENEMY_X_OFFSET = 20;
 const int ENEMY_Y_POS = 700;
 const int ENEMY_SPACING = 40;
 
-class Battle
+class Battle : public CSubject
 {
 public:
 
@@ -48,6 +49,4 @@ private:
 	void SetCombatantToDisplayForGUI();
 
 	bool IsOneGroupDead();
-
-	void InformGregAboutDeath();
 };

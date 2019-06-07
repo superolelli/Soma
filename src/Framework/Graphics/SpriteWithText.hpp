@@ -3,7 +3,6 @@
 
 #include "Sprite.hpp"
 
-
 class SpriteWithText
 {
 public:
@@ -11,7 +10,7 @@ public:
 	void Load(sf::Texture const &_texture);
 
 	//adds text to the sprite and returns the index
-	int AddText(std::string const &_str);
+	int AddText(const sf::String &_str);
 
 	void SetTextFont(int _textID, sf::Font const &_font);
 
@@ -31,11 +30,13 @@ public:
 
 	void Scale(float _x, float _y);
 
-	void ChangeString(int _textID, std::string const &_str);
+	void ChangeString(int _textID, const sf::String &_str);
 
 	void Render(sf::RenderTarget &_target, sf::IntRect *_clip = nullptr);
 
 	sf::IntRect const &GetRect() { return sprite.GetRect(); }
+
+	void MoveText(int _textID, int _x, int _y);
 
 private:
 

@@ -64,6 +64,9 @@
     <Filter Include="Quelldateien\Game\Util">
       <UniqueIdentifier>{6ba0a4fc-7d54-4741-9599-772653192a94}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Framework\Patterns">
+      <UniqueIdentifier>{c3f3bf45-5372-48e7-8406-a969427256b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -479,6 +482,9 @@
     </ClCompile>
     <ClCompile Include="src\Game\Resources\VideoManager.cpp">
       <Filter>Quelldateien\Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Patterns\Subject.cpp">
+      <Filter>Quelldateien\Framework\Patterns</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -934,6 +940,15 @@
     </ClInclude>
     <ClInclude Include="src\Game\Resources\VideoManager.hpp">
       <Filter>Headerdateien\Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Patterns\Observer.hpp">
+      <Filter>Headerdateien\Framework\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Patterns\Subject.hpp">
+      <Filter>Headerdateien\Framework\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ObserverNotificationBattle.h">
+      <Filter>Headerdateien\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

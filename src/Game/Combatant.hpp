@@ -9,6 +9,7 @@
 
 
 #include "../Framework/Makros.hpp"
+#include "../Framework/Patterns/Observer.hpp"
 
 #include "Resources\ObjectPropertiesManager.hpp"
 #include "../Framework/Time.hpp"
@@ -30,7 +31,7 @@ const float ABILITY_EFFECT_ANIMATION_SPEED = 0.9f;
 const float COMBATANT_NORMAL_SCALE = 0.6f;
 const float COMBATANT_ABILITY_SCALE = 0.8f;
 
-class Combatant
+class Combatant : public CObserver
 {
 public:
 	static bool setElapsedTimeForAbilityEffect;

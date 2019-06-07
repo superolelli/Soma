@@ -12,9 +12,9 @@ void SpritePool::LoadSprites()
 	sleeping.Load(g_pTextures->sleeping);
 
 	abilityAnnouncementBanner.Load(g_pTextures->abilityAnnouncementBanner);
-	abilityAnnouncementBanner.AddText("No ability");
+	abilityAnnouncementBanner.AddText("Keine Fähigkeit");
 	abilityAnnouncementBanner.SetTextFont(0, g_pFonts->f_kingArthur);
-	abilityAnnouncementBanner.SetTextCharacterSize(0, 28);
+	abilityAnnouncementBanner.SetTextCharacterSize(0, 42);
 	abilityAnnouncementBanner.SetTextColor(0, sf::Color(220, 220, 220));
 
 	abilityEffectsAnimation = g_pModels->modelAbilityEffects->getNewEntityInstance("ability_effects");

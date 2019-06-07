@@ -3,6 +3,7 @@
 #include "Buff.hpp"
 
 #include <string>
+#include <SFML/System.hpp>
 
 
 
@@ -33,8 +34,8 @@ struct AbilityEffect
 
 struct Ability
 {
-    std::string name;
-	std::string description;
+    sf::String name;
+	sf::String description;
     PossibleAims possibleAims;
     std::string animation;
     std::string effectAnimationFriendly;
