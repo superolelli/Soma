@@ -1,5 +1,5 @@
 #include "InitialState.hpp"
-
+#include "MainRoom.hpp"
 
 
 void CInitialState::Init(CGameEngine *_engine)
@@ -48,7 +48,7 @@ void CInitialState::Update()
 	g_pObjectProperties->LoadObjectProperties();
 	g_pVideos->LoadVideos(m_pGameEngine);
 
-	m_pGameEngine->ChangeStateImmediately(new Game);
+	m_pGameEngine->ChangeStateImmediately(new MainRoom);
 }
 
 

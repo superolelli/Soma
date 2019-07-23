@@ -486,6 +486,9 @@
     <ClCompile Include="src\Framework\Patterns\Subject.cpp">
       <Filter>Quelldateien\Framework\Patterns</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\MainRoom.cpp">
+      <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -948,6 +951,9 @@
       <Filter>Headerdateien\Framework\Patterns</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\ObserverNotificationBattle.h">
+      <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\MainRoom.hpp">
       <Filter>Headerdateien\Game</Filter>
     </ClInclude>
   </ItemGroup>

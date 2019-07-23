@@ -259,6 +259,7 @@
     <ClCompile Include="src\Game\Level.cpp" />
     <ClCompile Include="src\Game\LevelBuilder.cpp" />
     <ClCompile Include="src\Game\LevelGUI.cpp" />
+    <ClCompile Include="src\Game\MainRoom.cpp" />
     <ClCompile Include="src\Game\Markus.cpp" />
     <ClCompile Include="src\Game\Ole.cpp" />
     <ClCompile Include="src\Game\Player.cpp" />
@@ -287,6 +288,7 @@
     <ClInclude Include="src\Game\Greg.hpp" />
     <ClInclude Include="src\Game\LevelBuilder.hpp" />
     <ClInclude Include="src\Game\LevelSpecs.hpp" />
+    <ClInclude Include="src\Game\MainRoom.hpp" />
     <ClInclude Include="src\Game\ObserverNotificationBattle.h" />
     <ClInclude Include="src\Game\Resources\EnemyAbilities.hpp" />
     <ClInclude Include="src\Framework\Animations\animation\animation.h" />

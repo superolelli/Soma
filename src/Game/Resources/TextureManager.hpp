@@ -16,6 +16,9 @@ public:
 
 	sf::Texture bangBackgrounds[12];
 
+	sf::Texture mainRoomBackgrounds[4];
+	sf::Texture mainRoomDoors[3];
+
 	sf::Texture abilities[4][4];
 
 	sf::Texture currentAbilityFrame;

@@ -20,6 +20,11 @@ public:
 	void LoadModels(CGameEngine &_engine);
 	void Quit();
 
+	SpriterEngine::SpriterModel *modelOleMainRoom;
+	SpriterEngine::SpriterModel *modelAnnaMainRoom;
+	SpriterEngine::SpriterModel *modelSimonMainRoom;
+	SpriterEngine::SpriterModel *modelMarkusMainRoom;
+
 	SpriterEngine::SpriterModel *modelOle;
 	SpriterEngine::SpriterModel *modelAnna;
 	SpriterEngine::SpriterModel *modelSimon;

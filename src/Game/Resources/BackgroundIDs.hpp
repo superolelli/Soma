@@ -18,6 +18,12 @@ enum BackgroundID {
 	room_1 
 };
 
+enum MainRoomDoors {
+	door_bang,
+	door_kutschfahrt,
+	door_tichu
+};
+
 static std::unordered_map<std::string, BackgroundID> backgroundIdentifierMap = {
 	{ "bang_gang_ende", BackgroundID::end },
 	{ "bang_gang_1", BackgroundID::corridor_1 },

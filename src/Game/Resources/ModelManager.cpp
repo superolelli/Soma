@@ -5,6 +5,11 @@ void CModelManager::LoadModels(CGameEngine &_engine)
 {
 	SpriterEngine::Settings::setErrorFunction(SpriterEngine::Settings::simpleError);
 
+	modelOleMainRoom = new SpriterEngine::SpriterModel("./Data/Sprites/Players/Ole2/oleMainRoom.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetWindow()), new SpriterEngine::ExampleObjectFactory(&_engine.GetWindow()));
+	modelAnnaMainRoom = new SpriterEngine::SpriterModel("./Data/Sprites/Players/Anna2/annaMainRoom.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetWindow()), new SpriterEngine::ExampleObjectFactory(&_engine.GetWindow()));
+	modelSimonMainRoom = new SpriterEngine::SpriterModel("./Data/Sprites/Players/Simon2/simonMainRoom.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetWindow()), new SpriterEngine::ExampleObjectFactory(&_engine.GetWindow()));
+	modelMarkusMainRoom = new SpriterEngine::SpriterModel("./Data/Sprites/Players/Markus2/markusMainRoom.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetWindow()), new SpriterEngine::ExampleObjectFactory(&_engine.GetWindow()));
+
 	modelOle = new SpriterEngine::SpriterModel("./Data/Sprites/Players/Ole2/ole2.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetWindow()), new SpriterEngine::ExampleObjectFactory(&_engine.GetWindow()));
 	modelAnna = new SpriterEngine::SpriterModel("./Data/Sprites/Players/Anna2/anna.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetWindow()), new SpriterEngine::ExampleObjectFactory(&_engine.GetWindow()));
 	modelSimon = new SpriterEngine::SpriterModel("./Data/Sprites/Players/Simon2/simon.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetWindow()), new SpriterEngine::ExampleObjectFactory(&_engine.GetWindow()));
@@ -23,6 +28,11 @@ void CModelManager::LoadModels(CGameEngine &_engine)
 
 void CModelManager::Quit()
 {
+	SAFE_DELETE(modelOleMainRoom);
+	SAFE_DELETE(modelAnnaMainRoom);
+	SAFE_DELETE(modelSimonMainRoom);
+	SAFE_DELETE(modelMarkusMainRoom);
+
 	SAFE_DELETE(modelOle);
 	SAFE_DELETE(modelAnna);
 	SAFE_DELETE(modelSimon);

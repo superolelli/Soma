@@ -18,6 +18,15 @@ void CTextureManager::LoadTextures()
 	bangBackgrounds[door_2].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_tür_2.png");
 	bangBackgrounds[end].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_ende.png");
 
+	mainRoomBackgrounds[0].loadFromFile("Data/Sprites/Backgrounds/Main Room/main_room_1.png");
+	mainRoomBackgrounds[1].loadFromFile("Data/Sprites/Backgrounds/Main Room/main_room_2.png");
+	mainRoomBackgrounds[2].loadFromFile("Data/Sprites/Backgrounds/Main Room/main_room_3.png");
+	mainRoomBackgrounds[3].loadFromFile("Data/Sprites/Backgrounds/Main Room/main_room_4.png");
+
+	mainRoomDoors[MainRoomDoors::door_bang].loadFromFile("Data/Sprites/Backgrounds/Main Room/door_wood.png");
+	mainRoomDoors[MainRoomDoors::door_kutschfahrt].loadFromFile("Data/Sprites/Backgrounds/Main Room/door_stone.png");
+	mainRoomDoors[MainRoomDoors::door_tichu].loadFromFile("Data/Sprites/Backgrounds/Main Room/door_tichu.png");
+
 	abilities[0][0].loadFromFile("Data/Sprites/Abilities/marshmallow_flash.png");
 	abilities[0][3].loadFromFile("Data/Sprites/Abilities/alle_auf_einen.png");
 	abilities[0][2].loadFromFile("Data/Sprites/Abilities/reparieren.png");
