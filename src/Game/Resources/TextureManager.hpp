@@ -18,6 +18,8 @@ public:
 
 	sf::Texture mainRoomBackgrounds[4];
 	sf::Texture mainRoomDoors[3];
+	sf::Texture mainRoomSigns[3];
+	sf::Texture mainRoomRoots;
 
 	sf::Texture abilities[4][4];
 

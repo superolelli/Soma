@@ -17,5 +17,6 @@ public:
 	sf::Font f_plantc;
 	sf::Font f_openSans;
 	sf::Font f_trajan;
+	sf::Font f_boris;
 
 };

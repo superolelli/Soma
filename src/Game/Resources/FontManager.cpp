@@ -10,5 +10,6 @@ void CFontManager::LoadFonts()
 	f_plantc.loadFromFile("Data/Fonts/plantc.ttf");
 	f_openSans.loadFromFile("Data/Fonts/openSans.ttf");
 	f_trajan.loadFromFile("Data/Fonts/trajan.ttf");
+	f_boris.loadFromFile("Data/Fonts/boris.ttf");
 }
 

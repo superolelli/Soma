@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Positions>
+    <doors>
+        <door id="0" x="3992" y="240"/>
+        <door id="1" x="4651" y="250"/>
+        <door id="2" x="5299" y="243"/>
+    </doors>
+
+    <signs>
+        <sign id="0" x="4090" y="105"/>
+        <sign id="1" x="4750" y="165"/>
+        <sign id="2" x="5385" y="137"/>
+    </signs>
+
+    <roots x="4572" y="120"/>
+
+    <players>
+        <player id="0" x="2040" y="770"/>
+        <player id="1" x="177" y="850"/>
+        <player id="2" x="3040" y="830"/>
+        <player id="3" x="1006" y="760"/>
+    </players>
+</Positions>

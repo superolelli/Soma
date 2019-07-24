@@ -23,6 +23,11 @@ public:
 
 	LevelSpecs levelSpecs;
 
+	sf::Vector2i mainRoomDoorPositions[3];
+	sf::Vector2i mainRoomPlayerPositions[4];
+	sf::Vector2i mainRoomSignPositions[3];
+	sf::Vector2i mainRoomRootsPosition;
+
 private:
 	void LoadPlayerAbilities();
 	void LoadAbilitiesOfSpecificPlayer(const char* _path, int _id, Ability &_default);
@@ -30,5 +35,6 @@ private:
 	void LoadEnemyAbilities();
 	void LoadEnemyAttributes();
 	void LoadLevelSpecs();
+	void LoadMainRoomPositions();
 };
 

@@ -3,6 +3,7 @@
     <folder id="0" name="MainRoom">
         <file id="0" name="MainRoom/table.png" width="490" height="577" pivot_x="0" pivot_y="1"/>
         <file id="1" name="MainRoom/chair.png" width="242" height="475" pivot_x="0" pivot_y="1"/>
+        <file id="2" name="MainRoom/ole_koerper_2.png" width="165" height="277" pivot_x="0.5" pivot_y="0.5"/>
     </folder>
     <folder id="1">
         <file id="0" name="ole_koerper.png" width="176" height="295" pivot_x="0.5" pivot_y="0.5"/>
@@ -18,6 +19,16 @@
         <file id="10" name="ole_auge_pupille.png" width="12" height="10" pivot_x="0" pivot_y="1"/>
         <file id="11" name="ole_mund_froehlich.png" width="46" height="23" pivot_x="0" pivot_y="1"/>
         <file id="12" name="ole_unterarm.png" width="181" height="128" pivot_x="0" pivot_y="1"/>
+        <file id="13" name="ole_unterarm_faust.png" width="170" height="64" pivot_x="0" pivot_y="1"/>
+        <file id="14" name="ole_unterarm_lang.png" width="457" height="82" pivot_x="0" pivot_y="1"/>
+        <file id="15" name="star.png" width="79" height="75" pivot_x="0" pivot_y="1"/>
+        <file id="16" name="unterarm_poetry_slam.png" width="232" height="155" pivot_x="0" pivot_y="1"/>
+        <file id="17" name="z.png" width="48" height="51" pivot_x="0" pivot_y="1"/>
+        <file id="18" name="z2.png" width="40" height="43" pivot_x="0" pivot_y="1"/>
+        <file id="19" name="z3.png" width="44" height="47" pivot_x="0" pivot_y="1"/>
+        <file id="20" name="mund_offen.png" width="47" height="39" pivot_x="0" pivot_y="1"/>
+        <file id="21" name="computer2.png" width="225" height="385" pivot_x="0" pivot_y="1"/>
+        <file id="22" name="auge_geschlossen.png" width="21" height="11" pivot_x="0" pivot_y="1"/>
     </folder>
     <entity id="0" name="Ole">
         <obj_info name="bone_000" type="bone" w="216.981" h="10"/>
@@ -87,7 +98,7 @@
             </timeline>
             <timeline id="2" name="ole_koerper">
                 <key id="0" spin="0">
-                    <object folder="1" file="0" x="129.503663" y="-1.486656" angle="269.292681" scale_x="-0.621438"/>
+                    <object folder="0" file="2" x="129.503663" y="-1.486656" angle="269.292681" scale_x="-0.652992"/>
                 </key>
             </timeline>
             <timeline id="3" name="ole_kopf">
@@ -487,18 +498,18 @@
                     <object folder="1" file="7" x="488.873926" y="364.631729" angle="14.316062" scale_x="-1"/>
                 </key>
                 <key id="5" time="999" spin="-1">
-                    <object folder="1" file="7" x="524.87393" y="370.69055" angle="0.347371" scale_x="-1" scale_y="1"/>
+                    <object folder="1" file="7" x="524.87393" y="370.69055" angle="0.347371" scale_x="-1"/>
                 </key>
             </timeline>
             <timeline id="11" name="ole_koerper">
                 <key id="0" spin="0">
-                    <object folder="1" file="0" x="129.503663" y="-1.486656" angle="269.292681" scale_x="-0.621438"/>
+                    <object folder="0" file="2" x="129.503663" y="-1.486656" angle="269.292681" scale_x="-0.658276"/>
                 </key>
                 <key id="1" time="292" spin="0">
-                    <object folder="1" file="0" x="129.503663" y="-1.486656" angle="269.292681" scale_x="-0.621438"/>
+                    <object folder="0" file="2" x="129.503663" y="-1.486656" angle="269.292681" scale_x="-0.688947"/>
                 </key>
                 <key id="2" time="802" spin="0">
-                    <object folder="1" file="0" x="129.503663" y="-1.486656" angle="269.292681" scale_x="-0.621438"/>
+                    <object folder="0" file="2" x="129.503663" y="-1.486656" angle="269.292681" scale_x="-0.680365" scale_y="1"/>
                 </key>
             </timeline>
             <timeline id="12" name="ole_kopf">

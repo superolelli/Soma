@@ -27,6 +27,12 @@ void CTextureManager::LoadTextures()
 	mainRoomDoors[MainRoomDoors::door_kutschfahrt].loadFromFile("Data/Sprites/Backgrounds/Main Room/door_stone.png");
 	mainRoomDoors[MainRoomDoors::door_tichu].loadFromFile("Data/Sprites/Backgrounds/Main Room/door_tichu.png");
 
+	mainRoomSigns[0].loadFromFile("Data/Sprites/Backgrounds/Main Room/level_sign_1.png");
+	mainRoomSigns[1].loadFromFile("Data/Sprites/Backgrounds/Main Room/level_sign_2.png");
+	mainRoomSigns[2].loadFromFile("Data/Sprites/Backgrounds/Main Room/level_sign_3.png");
+
+	mainRoomRoots.loadFromFile("Data/Sprites/Backgrounds/Main Room/roots.png");
+
 	abilities[0][0].loadFromFile("Data/Sprites/Abilities/marshmallow_flash.png");
 	abilities[0][3].loadFromFile("Data/Sprites/Abilities/alle_auf_einen.png");
 	abilities[0][2].loadFromFile("Data/Sprites/Abilities/reparieren.png");

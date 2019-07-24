@@ -11,6 +11,7 @@ void ObjectPropertiesManager::LoadObjectProperties()
 	LoadEnemyAbilities();
 	LoadEnemyAttributes();
 	LoadLevelSpecs();
+	LoadMainRoomPositions();
 }
 
 
@@ -123,4 +124,37 @@ void ObjectPropertiesManager::LoadLevelSpecs()
 		int levelID = level.attribute("id").as_int();
 		loadLevelSpecsFromXML(level, levelSpecs);
 	}
+}
+
+
+void ObjectPropertiesManager::LoadMainRoomPositions()
+{
+	using namespace pugi;
+
+	xml_document doc;
+	doc.load_file("Data/XML/MainRoomPositions.xml");
+
+	for (xml_node &door : doc.child("Positions").child("doors").children())
+	{
+		int doorID = door.attribute("id").as_int();
+		mainRoomDoorPositions[doorID].x = door.attribute("x").as_int();
+		mainRoomDoorPositions[doorID].y = door.attribute("y").as_int();
+	}
+
+	for (xml_node &sign : doc.child("Positions").child("signs").children())
+	{
+		int signID = sign.attribute("id").as_int();
+		mainRoomSignPositions[signID].x = sign.attribute("x").as_int();
+		mainRoomSignPositions[signID].y = sign.attribute("y").as_int();
+	}
+
+	for (xml_node &player : doc.child("Positions").child("players").children())
+	{
+		int playerID = player.attribute("id").as_int();
+		mainRoomPlayerPositions[playerID].x = player.attribute("x").as_int();
+		mainRoomPlayerPositions[playerID].y = player.attribute("y").as_int();
+	}
+
+	mainRoomRootsPosition.x = doc.child("Positions").child("roots").attribute("x").as_int();
+	mainRoomRootsPosition.y = doc.child("Positions").child("roots").attribute("y").as_int();
 }
