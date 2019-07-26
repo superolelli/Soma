@@ -18,5 +18,6 @@ public:
 	sf::Font f_openSans;
 	sf::Font f_trajan;
 	sf::Font f_boris;
-
+	sf::Font f_tiza;
+	sf::Font f_shanghai;
 };

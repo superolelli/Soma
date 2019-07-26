@@ -34,4 +34,5 @@ private:
 
 	void CheckForMovement();
 	void HandlePlayerAnimation();
+	void HandleDoors();
 };

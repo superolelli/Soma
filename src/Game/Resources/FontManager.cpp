@@ -11,5 +11,7 @@ void CFontManager::LoadFonts()
 	f_openSans.loadFromFile("Data/Fonts/openSans.ttf");
 	f_trajan.loadFromFile("Data/Fonts/trajan.ttf");
 	f_boris.loadFromFile("Data/Fonts/boris.ttf");
+	f_tiza.loadFromFile("Data/Fonts/tiza.ttf");
+	f_shanghai.loadFromFile("Data/Fonts/shanghai.ttf");
 }
 

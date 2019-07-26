@@ -6,6 +6,8 @@ void CGameEngine::Init(std::string const &_name)
 {
 	m_Window.Init(_name);
 
+	m_CursorManager.Init(&m_Window);
+
 	nextGameState = NULL;
 
 	nextAction = action::hold;
@@ -46,6 +48,7 @@ void CGameEngine::Run()
 		if (m_simpleRenderLoop)
 		{
 			m_pStates.back()->Update();
+			m_CursorManager.Update();
 		}
 		else
 		{
@@ -54,6 +57,7 @@ void CGameEngine::Run()
 			while (lag >= MS_PER_UPDATE)
 			{
 				m_pStates.back()->Update();
+				m_CursorManager.Update();
 				lag -= MS_PER_UPDATE;
 			}
 		}

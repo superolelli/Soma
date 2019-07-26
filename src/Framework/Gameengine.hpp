@@ -5,6 +5,7 @@
 #include <memory>
 #include "Time.hpp"
 #include "Window.hpp"
+#include "CursorManager.hpp"
 
 class GameState;
 
@@ -64,6 +65,8 @@ public:
 	inline sf::Vector2i const &GetMousePos() { return m_Window.GetMousePos(); }
 	inline sf::Vector2i const GetWorldMousePos() { return m_Window.GetWorldMousePos(); }
 
+	void SetCursor(sf::Cursor::Type _type) { m_CursorManager.SetCursor(_type); }
+
 
 private:
 	// the stack of states
@@ -71,6 +74,8 @@ private:
 
 	//the window
 	CWindow m_Window;
+
+	CursorManager m_CursorManager;
 
 	bool m_running;
 	bool m_simpleRenderLoop;

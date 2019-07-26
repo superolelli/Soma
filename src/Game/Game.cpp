@@ -22,6 +22,8 @@ void Game::Init(CGameEngine * _engine)
 
 void Game::Cleanup()
 {
+	g_pModels->Quit();  //Muss in letztem Gamestate passieren
+	g_pSpritePool->FreeSprites();   //Muss in letztem Gamestate passieren
 	adventureGroup.Quit();
 	m_pGameEngine = nullptr;
 	SAFE_DELETE(currentGUI);

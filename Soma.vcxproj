@@ -228,6 +228,7 @@
     <ClCompile Include="src\Framework\Animations\variable\variable.cpp" />
     <ClCompile Include="src\Framework\Animations\variable\variablecontainer.cpp" />
     <ClCompile Include="src\Framework\Animations\variable\variableinstancenameandidmap.cpp" />
+    <ClCompile Include="src\Framework\CursorManager.cpp" />
     <ClCompile Include="src\Framework\Gameengine.cpp" />
     <ClCompile Include="src\Framework\Graphics\NotificationRenderer.cpp" />
     <ClCompile Include="src\Framework\Graphics\RichText.cpp" />
@@ -276,6 +277,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Framework\CursorManager.hpp" />
     <ClInclude Include="src\Framework\Graphics\NotificationRenderer.hpp" />
     <ClInclude Include="src\Framework\Graphics\RichText.hpp" />
     <ClInclude Include="src\Framework\Graphics\RoundedRectangleShape.hpp" />

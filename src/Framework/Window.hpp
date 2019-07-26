@@ -43,6 +43,8 @@ public:
 	inline sf::Vector2i const &GetMousePos()  { return m_mousePosition; }
 	inline sf::Vector2i const GetWorldMousePos() { return (sf::Vector2i)m_pWindow->mapPixelToCoords(m_mousePosition); }
 
+	void SetMouseCursor(const sf::Cursor &_cursor) { m_pWindow->setMouseCursor(_cursor); }
+
 
 private:
 	//arrays for saving the key- and buttonstates

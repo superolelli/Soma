@@ -1,4 +1,5 @@
 #include "MainRoom.hpp"
+#include "Game.hpp"
 
 
 void MainRoom::Init(CGameEngine * _engine)
@@ -22,11 +23,22 @@ void MainRoom::Init(CGameEngine * _engine)
 		signs[i].Load(g_pTextures->mainRoomSigns[i]);
 		signs[i].SetPos(g_pObjectProperties->mainRoomSignPositions[i].x, g_pObjectProperties->mainRoomSignPositions[i].y);
 		auto textID = signs[i].AddText("1");
-		signs[i].SetTextFont(textID, g_pFonts->f_boris);
-		signs[i].SetTextCharacterSize(textID, 70);
-		signs[i].SetTextPosCentered(textID);
-		signs[i].MoveText(textID, 0, -10);
 	}
+
+	signs[0].SetTextFont(0, g_pFonts->f_tiza);
+	signs[0].SetTextCharacterSize(0, 70);
+	signs[0].SetTextPosCentered(0);
+	signs[0].MoveText(0, 0, -20);
+
+	signs[1].SetTextFont(0, g_pFonts->f_kingArthur);
+	signs[1].SetTextCharacterSize(0, 70);
+	signs[1].SetTextPosCentered(0);
+	signs[1].MoveText(0, 0, -45);
+
+	signs[2].SetTextFont(0, g_pFonts->f_shanghai);
+	signs[2].SetTextCharacterSize(0, 70);
+	signs[2].SetTextPosCentered(0);
+	signs[2].MoveText(0, -55, -40);
 
 	players[0] = g_pModels->modelSimonMainRoom->getNewEntityInstance("Simon");
 	players[1] = g_pModels->modelOleMainRoom->getNewEntityInstance("Ole");
@@ -51,8 +63,6 @@ void MainRoom::Init(CGameEngine * _engine)
 
 void MainRoom::Cleanup()
 {
-	g_pModels->Quit();  //Muss in letztem Gamestate passieren
-	g_pSpritePool->FreeSprites();   //Muss in letztem Gamestate passieren
 	m_pGameEngine = nullptr;
 
 	for(auto p : players)
@@ -78,16 +88,14 @@ void MainRoom::HandleEvents()
 
 void MainRoom::Update()
 {
+	m_pGameEngine->GetWindow().setView(view);
+
 	if (m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
 
-	if(m_pGameEngine->GetKeystates(KeyID::G) == Keystates::Pressed)
-		m_pGameEngine->ChangeStateImmediately(new MainRoom);
-
 	CheckForMovement();
 	HandlePlayerAnimation();
-
-	m_pGameEngine->GetWindow().setView(view);
+	HandleDoors();
 }
 
 
@@ -116,6 +124,21 @@ void MainRoom::HandlePlayerAnimation()
 				p->setCurrentAnimation("busy");
 				p->setCurrentTime(0);
 			}
+		}
+	}
+}
+
+
+void MainRoom::HandleDoors()
+{
+	for (auto &d : doors)
+	{
+		if (d.GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos())) 
+		{
+			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
+
+			if(m_pGameEngine->GetButtonstates(ButtonID::Left) == Pressed)
+				m_pGameEngine->ChangeState(new Game);
 		}
 	}
 }

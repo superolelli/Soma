@@ -14,6 +14,9 @@ public:
 	//Loads all textures
 	void LoadTextures();
 
+	sf::Image cursorNormal;
+	sf::Image cursorHand;
+
 	sf::Texture bangBackgrounds[12];
 
 	sf::Texture mainRoomBackgrounds[4];
