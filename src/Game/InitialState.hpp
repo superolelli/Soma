@@ -7,6 +7,9 @@
 
 #include "../Game/Resources/Resources.hpp"
 
+#include <thread>
+#include <atomic>
+
 
 class CInitialState : public GameState
 {
@@ -23,5 +26,11 @@ public:
 	void Render(double _normalizedTimestep) override;
 
 private:
+
+	SpriterEngine::SpriterModel *modelLoadingScreen;
+	SpriterEngine::EntityInstance *loadingScreen;
+
+	std::atomic<bool> everythingLoaded;
+	std::thread *loadingThread;
 };
 

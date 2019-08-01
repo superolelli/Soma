@@ -22,6 +22,7 @@ public:
 	void Quit();
 
 	bool isFinished() { return isBattleFinished; }
+	bool isBossBattle;
 
 private:
 
@@ -36,7 +37,6 @@ private:
 
 	bool isBattleFinished;
 	bool isPlayingIntro;
-	bool isBossBattle;
 	int finishedCycles;
 	float afterIntroWaitingTime;
 

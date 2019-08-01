@@ -20,4 +20,5 @@ public:
 	sf::Font f_boris;
 	sf::Font f_tiza;
 	sf::Font f_shanghai;
+	sf::Font f_blackwoodCastle;
 };

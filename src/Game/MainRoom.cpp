@@ -67,6 +67,9 @@ void MainRoom::Cleanup()
 
 	for(auto p : players)
 		SAFE_DELETE(p);
+
+	g_pModels->Quit();  //Muss in letztem Gamestate passieren
+	g_pSpritePool->FreeSprites();   //Muss in letztem Gamestate passieren
 }
 
 
@@ -137,8 +140,8 @@ void MainRoom::HandleDoors()
 		{
 			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
 
-			if(m_pGameEngine->GetButtonstates(ButtonID::Left) == Pressed)
-				m_pGameEngine->ChangeState(new Game);
+			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Pressed)
+				m_pGameEngine->PushState(new Game);
 		}
 	}
 }

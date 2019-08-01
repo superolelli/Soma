@@ -13,7 +13,7 @@ void SpritePool::LoadSprites()
 
 	abilityAnnouncementBanner.Load(g_pTextures->abilityAnnouncementBanner);
 	abilityAnnouncementBanner.AddText("Keine Fähigkeit");
-	abilityAnnouncementBanner.SetTextFont(0, g_pFonts->f_kingArthur);
+	abilityAnnouncementBanner.SetTextFont(0, g_pFonts->f_blackwoodCastle);
 	abilityAnnouncementBanner.SetTextCharacterSize(0, 42);
 	abilityAnnouncementBanner.SetTextColor(0, sf::Color(220, 220, 220));
 

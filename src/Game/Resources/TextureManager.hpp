@@ -18,6 +18,7 @@ public:
 	sf::Image cursorHand;
 
 	sf::Texture bangBackgrounds[12];
+	sf::Texture bangDoor;
 
 	sf::Texture mainRoomBackgrounds[4];
 	sf::Texture mainRoomDoors[3];

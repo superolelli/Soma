@@ -2,14 +2,41 @@
 #include "MainRoom.hpp"
 
 
+void LoadAllData(std::atomic<bool> *_everythingLoaded, CGameEngine *_engine)
+{
+	g_pTextures->LoadTextures();
+	g_pModels->LoadModels(*_engine);
+	g_pSpritePool->LoadSprites();
+	g_pFonts->LoadFonts();
+	g_pSounds->LoadSounds();
+	g_pStringContainer->LoadStrings();
+	g_pObjectProperties->LoadObjectProperties();
+	g_pVideos->LoadVideos(_engine);
+	*_everythingLoaded = true;
+}
+
+
 void CInitialState::Init(CGameEngine *_engine)
 {
 	m_pGameEngine = _engine;
+
+	_engine->UseSimpleRenderLoop(true);
+
+	modelLoadingScreen = new SpriterEngine::SpriterModel("./Data/Sprites/LoadingScreen/loadingScreen.scml", new SpriterEngine::ExampleFileFactory(&_engine->GetWindow()), new SpriterEngine::ExampleObjectFactory(&_engine->GetWindow()));
+	loadingScreen = modelLoadingScreen->getNewEntityInstance("LoadingScreen");
+	loadingScreen->setCurrentAnimation("loading");
+	loadingScreen->setPlaybackSpeedRatio(0.65);
+	loadingScreen->setPosition(SpriterEngine::point(0, 1080));
+	everythingLoaded = false;
+	loadingThread = new std::thread(&LoadAllData, &everythingLoaded, m_pGameEngine);
 }
 
 
 void CInitialState::Cleanup()
 {
+	m_pGameEngine->UseSimpleRenderLoop(false);
+	SAFE_DELETE(modelLoadingScreen);
+	SAFE_DELETE(loadingScreen);
 	m_pGameEngine = nullptr;
 }
 
@@ -38,27 +65,30 @@ void CInitialState::HandleEvents()
 
 void CInitialState::Update()
 {
-	//Load the resources
-	g_pTextures->LoadTextures();
-	g_pModels->LoadModels(*m_pGameEngine);
-	g_pSpritePool->LoadSprites();
-	g_pFonts->LoadFonts();
-	g_pSounds->LoadSounds();
-	g_pStringContainer->LoadStrings();
-	g_pObjectProperties->LoadObjectProperties();
-	g_pVideos->LoadVideos(m_pGameEngine);
+	if (everythingLoaded)
+	{
+		loadingThread->join();
 
-	m_pGameEngine->ChangeStateImmediately(new MainRoom);
+		SAFE_DELETE(loadingThread);
+		SAFE_DELETE(modelLoadingScreen);
+		SAFE_DELETE(loadingScreen);
+
+		m_pGameEngine->ChangeStateImmediately(new MainRoom);
+	}
 }
 
 
 
 void CInitialState::Render(double _normalizedTimestep)
 {
+	using namespace std::chrono_literals;
+
 	m_pGameEngine->ClearWindow(sf::Color::Black);
 
-	//Renders everything
+	loadingScreen->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
+	loadingScreen->render();
 
 	m_pGameEngine->FlipWindow();
-}
 
+	std::this_thread::sleep_for(20ms);
+}

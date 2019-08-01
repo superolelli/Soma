@@ -62,12 +62,13 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 void Battle::Quit()
 {
 	for (Combatant *c : combatants)
+	{
 		c->ResetAbilityStatus();
 
-	for (Enemy *e : enemy)
-	{
-		e->Quit();
-		SAFE_DELETE(e);
+		if (!c->IsPlayer()) {
+			c->Quit();
+			SAFE_DELETE(c);
+		}
 	}
 }
 
@@ -159,6 +160,7 @@ void Battle::HandleDeaths()
 			{
 				if (combatantNumber < currentCombatant)
 					currentCombatant--;
+				(*i)->Quit();
 				i = combatants.erase(i);
 				continue;
 			}
