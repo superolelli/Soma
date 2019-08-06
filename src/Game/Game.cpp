@@ -15,8 +15,11 @@ void Game::Init(CGameEngine * _engine)
 	currentGUI = new LevelGUI;
 	currentGUI->Init(m_pGameEngine);
 
+	levelFinishedPanel.Init(m_pGameEngine);
+
 	currentBattle = nullptr;
 	inBattle = false;
+	levelFinished = false;
 }
 
 
@@ -64,6 +67,13 @@ void Game::Update()
 		currentGUI->Update();
 	}
 
+	if (levelFinished)
+	{
+		levelFinishedPanel.Update();
+		if(levelFinishedPanel.ContinueButtonClicked())
+			m_pGameEngine->PopState();
+	}
+
 	g_pVideos->Update();
 }
 
@@ -100,7 +110,11 @@ void Game::UpdateBattle()
 	if (currentBattle->isFinished())
 	{
 		if (currentBattle->isBossBattle)
-			m_pGameEngine->PopState();
+		{
+			levelFinished = true;
+			levelFinishedPanel.SetReward(level->GetReward());
+			levelFinishedPanel.SetPos(m_pGameEngine->GetWindowSize().x / 2 - 458, 200);
+		}
 
 		inBattle = false;
 		currentBattle->Quit();
@@ -157,6 +171,9 @@ void Game::Render(double _normalizedTimestep)
 			currentBattle->RenderAbilityAnimations();
 
 		currentGUI->Render();
+
+		 if (levelFinished)
+			levelFinishedPanel.Render();
 	}
 
 	m_pGameEngine->FlipWindow();

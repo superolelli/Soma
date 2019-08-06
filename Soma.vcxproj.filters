@@ -492,6 +492,9 @@
     <ClCompile Include="src\Framework\CursorManager.cpp">
       <Filter>Quelldateien\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\LevelFinishedPanel.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -961,6 +964,9 @@
     </ClInclude>
     <ClInclude Include="src\Framework\CursorManager.hpp">
       <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\LevelFinishedPanel.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

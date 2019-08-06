@@ -37,5 +37,7 @@ Level *LevelBuilder::buildLevel(int _levelID)
 		newRoom->enemyIds[i] = g_pObjectProperties->levelSpecs.bossGroup[i];
 	newLevel->AddRoom(newRoom);
 
+	newLevel->SetReward(g_pObjectProperties->levelSpecs.reward);
+
 	return newLevel;
 }

@@ -11,6 +11,7 @@
 #include "BattleGUI.hpp"
 #include "LevelGUI.hpp"
 #include "../Framework/Graphics/NotificationRenderer.hpp"
+#include "LevelFinishedPanel.hpp"
 
 
 class Game : public GameState
@@ -34,12 +35,14 @@ private:
 	AdventureGroup adventureGroup;
 	GUI *currentGUI;
 
+	LevelFinishedPanel levelFinishedPanel;
+
 	Battle *currentBattle;
 
 	NotificationRenderer notificationRenderer;
 
 	bool inBattle;
-
+	bool levelFinished;
 
 	void UpdateLevel();
 	void UpdateBattle();

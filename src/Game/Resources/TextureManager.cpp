@@ -20,6 +20,9 @@ void CTextureManager::LoadTextures()
 
 	bangDoor.loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_tür.png");
 
+	bangLevelFinishedPanel.loadFromFile("Data/Sprites/Panels & Buttons/Bang/level_finished.png");
+	bangGenericButton.loadFromFile("Data/Sprites/Panels & Buttons/Bang/generic_button.png");
+
 	mainRoomBackgrounds[0].loadFromFile("Data/Sprites/Backgrounds/Main Room/main_room_1.png");
 	mainRoomBackgrounds[1].loadFromFile("Data/Sprites/Backgrounds/Main Room/main_room_2.png");
 	mainRoomBackgrounds[2].loadFromFile("Data/Sprites/Backgrounds/Main Room/main_room_3.png");

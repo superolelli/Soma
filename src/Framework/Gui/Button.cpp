@@ -101,6 +101,8 @@ bool CButton::Update(CGameEngine &_engine)
 	//if the mouse is at the button
 	if (m_ButtonSprite.GetRect().contains(_engine.GetMousePos()))
 	{
+		_engine.SetCursor(sf::Cursor::Hand);
+
 		//If the left mouse button was released
 		if (_engine.GetButtonstates(ButtonID::Left) == Released)
 		{

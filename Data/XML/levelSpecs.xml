@@ -14,6 +14,10 @@
             <background>bang_gang_8</background>
         </backgrounds>
         <endBackground>bang_gang_ende</endBackground>
+        <reward>
+            <dice>1</dice>
+            <cards>25</cards>
+        </reward>
         <battleProbability>0.4</battleProbability>
         <enemyGroups>
             <group>

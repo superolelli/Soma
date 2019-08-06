@@ -5,6 +5,11 @@
 #include "Resources\BackgroundIDs.hpp"
 #include <array>
 
+struct LevelReward {
+	int dice;
+	int cards;
+};
+
 struct LevelSpecs {
 	int level;
 	float battleProbability;
@@ -13,4 +18,5 @@ struct LevelSpecs {
 	std::array<CombatantID, 4> bossGroup;
 	BackgroundID endBackground;
 	std::vector<BackgroundID> possibleBackgrounds;
+	LevelReward reward;
 };

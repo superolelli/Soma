@@ -23,6 +23,9 @@ public:
 
 	void AddRoom(Room *_room);
 
+	void SetReward(LevelReward _reward) { reward = _reward; };
+	LevelReward &GetReward() { return reward; }
+
 	bool InBattle() { return battle; }
 	bool IsBossBattle() { return bossBattle; }
 
@@ -38,4 +41,6 @@ private:
 	bool battle;
 	bool bossBattle;
 	int currentEnemyIDs[4];
+
+	LevelReward reward;
 };

@@ -30,7 +30,7 @@ void MainRoom::Init(CGameEngine * _engine)
 	signs[0].SetTextPosCentered(0);
 	signs[0].MoveText(0, 0, -20);
 
-	signs[1].SetTextFont(0, g_pFonts->f_kingArthur);
+	signs[1].SetTextFont(0, g_pFonts->f_blackwoodCastle);
 	signs[1].SetTextCharacterSize(0, 70);
 	signs[1].SetTextPosCentered(0);
 	signs[1].MoveText(0, 0, -45);

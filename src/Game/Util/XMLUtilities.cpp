@@ -176,6 +176,9 @@ namespace pugi {
 		specs.numberOfRooms = levelSpecNode.child("numberOfRooms").text().as_int();
 		specs.endBackground = backgroundIdentifierMap[levelSpecNode.child("endBackground").text().as_string()];
 
+		specs.reward.dice = levelSpecNode.child("reward").child("dice").text().as_int();
+		specs.reward.cards = levelSpecNode.child("reward").child("cards").text().as_int();
+
 		for (xml_node &group : levelSpecNode.child("enemyGroups").children())
 		{
 			std::array<CombatantID, 4> newGroup;
