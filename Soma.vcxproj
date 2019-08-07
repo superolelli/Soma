@@ -274,6 +274,7 @@
     <ClCompile Include="src\Game\Resources\TextureManager.cpp" />
     <ClCompile Include="src\Game\Resources\VideoManager.cpp" />
     <ClCompile Include="src\Game\Simon.cpp" />
+    <ClCompile Include="src\Game\TreasureStatus.cpp" />
     <ClCompile Include="src\Game\Util\XMLUtilities.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
@@ -434,6 +435,7 @@
     <ClInclude Include="src\Game\Resources\TextureManager.hpp" />
     <ClInclude Include="src\Game\Resources\VideoManager.hpp" />
     <ClInclude Include="src\Game\Simon.hpp" />
+    <ClInclude Include="src\Game\TreasureStatus.hpp" />
     <ClInclude Include="src\Game\Util\XMLUtilities.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

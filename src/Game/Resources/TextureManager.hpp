@@ -17,6 +17,8 @@ public:
 	sf::Image cursorNormal;
 	sf::Image cursorHand;
 
+	sf::Texture statusBar;
+
 	sf::Texture bangLevelFinishedPanel;
 	sf::Texture bangGenericButton;
 

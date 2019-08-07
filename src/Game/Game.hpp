@@ -12,7 +12,7 @@
 #include "LevelGUI.hpp"
 #include "../Framework/Graphics/NotificationRenderer.hpp"
 #include "LevelFinishedPanel.hpp"
-
+#include "TreasureStatus.hpp"
 
 class Game : public GameState
 {
@@ -24,6 +24,8 @@ public:
 	void Pause() override;
 	void Resume() override;
 
+	void SetTreasureStatusPtr(TreasureStatus *_statusPtr) { treasureStatus = _statusPtr; }
+
 	void HandleEvents() override;
 	void Update() override;
 	void Render(double _normalizedTimestep) override;
@@ -34,6 +36,8 @@ private:
 	Level *level;
 	AdventureGroup adventureGroup;
 	GUI *currentGUI;
+
+	TreasureStatus *treasureStatus;
 
 	LevelFinishedPanel levelFinishedPanel;
 

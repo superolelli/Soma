@@ -58,15 +58,14 @@ void CGameEngine::Run()
 			{
 				m_pStates.back()->Update();
 				m_CursorManager.Update();
+				//checks if the current state needs to be popped
+				CheckStates();
 				lag -= MS_PER_UPDATE;
 			}
 		}
 
 		//renders
 		m_pStates.back()->Render(lag / (double)MS_PER_UPDATE);
-
-		//checks if the current state needs to be popped
-		CheckStates();
 	}
 }
 

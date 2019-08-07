@@ -70,8 +70,12 @@ void Game::Update()
 	if (levelFinished)
 	{
 		levelFinishedPanel.Update();
-		if(levelFinishedPanel.ContinueButtonClicked())
+		if (levelFinishedPanel.ContinueButtonClicked())
+		{
+			treasureStatus->AddDice(level->GetReward().dice);
+			treasureStatus->AddCards(level->GetReward().cards);
 			m_pGameEngine->PopState();
+		}
 	}
 
 	g_pVideos->Update();
@@ -171,6 +175,7 @@ void Game::Render(double _normalizedTimestep)
 			currentBattle->RenderAbilityAnimations();
 
 		currentGUI->Render();
+		treasureStatus->RenderStatusBar();
 
 		 if (levelFinished)
 			levelFinishedPanel.Render();

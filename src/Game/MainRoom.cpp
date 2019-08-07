@@ -54,6 +54,8 @@ void MainRoom::Init(CGameEngine * _engine)
 	roots.Load(g_pTextures->mainRoomRoots);
 	roots.SetPos(g_pObjectProperties->mainRoomRootsPosition.x, g_pObjectProperties->mainRoomRootsPosition.y);
 
+	treasureStatus.Init(m_pGameEngine);
+
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetWindow().setView(view);
 
@@ -141,7 +143,11 @@ void MainRoom::HandleDoors()
 			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
 
 			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Pressed)
-				m_pGameEngine->PushState(new Game);
+			{
+				auto newGame = new Game();
+				newGame->SetTreasureStatusPtr(&treasureStatus);
+				m_pGameEngine->PushState(newGame);
+			}
 		}
 	}
 }
@@ -191,6 +197,7 @@ void MainRoom::Render(double _normalizedTimestep)
 	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
 
 	// GUI
+	treasureStatus.RenderStatusBar();
 
 	m_pGameEngine->FlipWindow();
 }

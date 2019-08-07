@@ -62,14 +62,14 @@ void LevelFinishedPanel::SetPos(int _x, int _y)
 
 void LevelFinishedPanel::SetReward(LevelReward &_reward)
 {
-	rewardDiceText.setString(std::to_string(_reward.dice));
-	rewardCardsText.setString(std::to_string(_reward.cards));
+	rewardDiceText.setString(std::to_string(_reward.dice) + "x");
+	rewardCardsText.setString(std::to_string(_reward.cards) + "x");
 }
 
 void LevelFinishedPanel::PositionComponentsRelativeToPanel()
 {
-	continueButton.SetPos(panel.GetGlobalRect().left + panel.GetGlobalRect().width / 2 - continueButton.GetRect().width / 2, panel.GetGlobalRect().top + 470);
-	levelFinishedText.setPosition(panel.GetGlobalRect().left + panel.GetGlobalRect().width / 2 - levelFinishedText.getGlobalBounds().width / 2, panel.GetGlobalRect().top + 162);
-	rewardDiceText.setPosition(panel.GetGlobalRect().left + 325, panel.GetGlobalRect().top + 400);
-	rewardCardsText.setPosition(panel.GetGlobalRect().left + 540, panel.GetGlobalRect().top + 400);
+	continueButton.SetPos(panel.GetGlobalRect().left + panel.GetGlobalRect().width / 2 - continueButton.GetRect().width / 2, panel.GetGlobalRect().top + 485);
+	levelFinishedText.setPosition(panel.GetGlobalRect().left + panel.GetGlobalRect().width / 2 - levelFinishedText.getGlobalBounds().width / 2, panel.GetGlobalRect().top + 175);
+	rewardDiceText.setPosition(panel.GetGlobalRect().left + 335, panel.GetGlobalRect().top + 405);
+	rewardCardsText.setPosition(panel.GetGlobalRect().left + 545, panel.GetGlobalRect().top + 405);
 }

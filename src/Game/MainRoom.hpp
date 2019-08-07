@@ -5,6 +5,8 @@
 
 #include "../Game/Resources/Resources.hpp"
 
+#include "TreasureStatus.hpp"
+
 
 class MainRoom : public GameState
 {
@@ -27,6 +29,8 @@ private:
 	CSprite doors[3];
 	SpriteWithText signs[3];
 	CSprite roots;
+
+	TreasureStatus treasureStatus;
 
 	sf::View view;
 
