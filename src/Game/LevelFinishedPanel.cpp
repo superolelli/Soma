@@ -1,9 +1,10 @@
 #include "LevelFinishedPanel.hpp"
 
 
-void LevelFinishedPanel::Init(CGameEngine *_engine)
+void LevelFinishedPanel::Init(CGameEngine *_engine, bool _levelFailed)
 {
 	engine = _engine;
+	levelFailed = _levelFailed;
 
 	panel.Load(g_pTextures->bangLevelFinishedPanel);
 
@@ -17,7 +18,11 @@ void LevelFinishedPanel::Init(CGameEngine *_engine)
 	levelFinishedText.setOutlineColor(sf::Color::Black);
 	levelFinishedText.setOutlineThickness(4);
 	levelFinishedText.setFont(g_pFonts->f_kingArthur);
-	levelFinishedText.setString("Level beendet!");
+
+	if(_levelFailed)
+		levelFinishedText.setString("Versagt!");
+	else
+		levelFinishedText.setString("Level beendet!");
 
 	rewardDiceText.setCharacterSize(20);
 	rewardDiceText.setFillColor(sf::Color::White);
@@ -48,8 +53,13 @@ void LevelFinishedPanel::Render()
 {
 	panel.Render(engine->GetWindow());
 	engine->GetWindow().draw(levelFinishedText);
-	engine->GetWindow().draw(rewardDiceText);
-	engine->GetWindow().draw(rewardCardsText);
+
+	if (!levelFailed) 
+	{
+		engine->GetWindow().draw(rewardDiceText);
+		engine->GetWindow().draw(rewardCardsText);
+	}
+
 	continueButton.Render(*engine);
 }
 

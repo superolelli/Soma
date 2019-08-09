@@ -9,7 +9,7 @@ class LevelFinishedPanel
 {
 public:
 
-	void Init(CGameEngine *_engine);
+	void Init(CGameEngine *_engine, bool _levelFailed);
 	void Update();
 	void Render();
 
@@ -28,6 +28,7 @@ private:
 	sf::Text rewardCardsText;
 
 	bool continueButtonClicked;
+	bool levelFailed;
 
 	void PositionComponentsRelativeToPanel();
 

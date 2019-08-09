@@ -72,9 +72,12 @@ void Game::Update()
 		levelFinishedPanel.Update();
 		if (levelFinishedPanel.ContinueButtonClicked())
 		{
-			gameStatus->AddDice(level->GetReward().dice);
-			gameStatus->AddCards(level->GetReward().cards);
-			gameStatus->bangLevel++;
+			if (!adventureGroup.IsDead())
+			{
+				gameStatus->AddDice(level->GetReward().dice);
+				gameStatus->AddCards(level->GetReward().cards);
+				gameStatus->bangLevel++;
+			}
 			m_pGameEngine->PopState();
 		}
 	}
@@ -116,7 +119,8 @@ void Game::UpdateBattle()
 	{
 		if (adventureGroup.IsDead())
 		{
-			m_pGameEngine->PopState();
+			levelFinished = true;
+			levelFinishedPanel.SetPos(m_pGameEngine->GetWindowSize().x / 2 - 458, 190);
 		}
 		else if (currentBattle->isBossBattle)
 		{

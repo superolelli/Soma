@@ -20,6 +20,7 @@ public:
 	sf::Texture statusBar;
 
 	sf::Texture bangLevelFinishedPanel;
+	sf::Texture bangLevelFailedPanel;
 	sf::Texture bangGenericButton;
 
 	sf::Texture bangBackgrounds[12];
