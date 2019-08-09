@@ -12,19 +12,19 @@
 #include "LevelGUI.hpp"
 #include "../Framework/Graphics/NotificationRenderer.hpp"
 #include "LevelFinishedPanel.hpp"
-#include "TreasureStatus.hpp"
+#include "GameStatus.hpp"
 
 class Game : public GameState
 {
 public:
+
+	void SetGameStatusPtr(GameStatus *_statusPtr) { gameStatus = _statusPtr; } //has to be called before Game::Init()
 
 	void Init(CGameEngine *_engine) override;
 	void Cleanup() override;
 
 	void Pause() override;
 	void Resume() override;
-
-	void SetTreasureStatusPtr(TreasureStatus *_statusPtr) { treasureStatus = _statusPtr; }
 
 	void HandleEvents() override;
 	void Update() override;
@@ -37,7 +37,7 @@ private:
 	AdventureGroup adventureGroup;
 	GUI *currentGUI;
 
-	TreasureStatus *treasureStatus;
+	GameStatus *gameStatus;
 
 	LevelFinishedPanel levelFinishedPanel;
 

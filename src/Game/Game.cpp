@@ -9,7 +9,7 @@ void Game::Init(CGameEngine * _engine)
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetWindow().setView(view);
 
-	level = LevelBuilder::buildLevel(1);
+	level = LevelBuilder::buildLevel(gameStatus->bangLevel);
 	adventureGroup.Init(_engine, &notificationRenderer);
 
 	currentGUI = new LevelGUI;
@@ -72,8 +72,9 @@ void Game::Update()
 		levelFinishedPanel.Update();
 		if (levelFinishedPanel.ContinueButtonClicked())
 		{
-			treasureStatus->AddDice(level->GetReward().dice);
-			treasureStatus->AddCards(level->GetReward().cards);
+			gameStatus->AddDice(level->GetReward().dice);
+			gameStatus->AddCards(level->GetReward().cards);
+			gameStatus->bangLevel++;
 			m_pGameEngine->PopState();
 		}
 	}
@@ -113,7 +114,11 @@ void Game::UpdateBattle()
 
 	if (currentBattle->isFinished())
 	{
-		if (currentBattle->isBossBattle)
+		if (adventureGroup.IsDead())
+		{
+			m_pGameEngine->PopState();
+		}
+		else if (currentBattle->isBossBattle)
 		{
 			levelFinished = true;
 			levelFinishedPanel.SetReward(level->GetReward());
@@ -175,7 +180,7 @@ void Game::Render(double _normalizedTimestep)
 			currentBattle->RenderAbilityAnimations();
 
 		currentGUI->Render();
-		treasureStatus->RenderStatusBar();
+		gameStatus->RenderStatusBar();
 
 		 if (levelFinished)
 			levelFinishedPanel.Render();

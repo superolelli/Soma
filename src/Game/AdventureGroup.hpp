@@ -19,6 +19,8 @@ public:
 	void Update(int xMove);
 	void Render();
 
+	bool IsDead();
+
 	Player *GetPlayer(int _id) { return adventurer[_id]; }
 
 private:

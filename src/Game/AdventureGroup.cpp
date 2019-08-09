@@ -55,3 +55,14 @@ void AdventureGroup::Render()
 	}
 }
 
+
+bool AdventureGroup::IsDead()
+{
+	for (auto &a : adventurer)
+	{
+		if (a->Status().GetCurrentHealth() > 0)
+			return false;
+	}
+
+	return true;
+}

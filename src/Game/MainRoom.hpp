@@ -5,7 +5,7 @@
 
 #include "../Game/Resources/Resources.hpp"
 
-#include "TreasureStatus.hpp"
+#include "GameStatus.hpp"
 
 
 class MainRoom : public GameState
@@ -30,7 +30,7 @@ private:
 	SpriteWithText signs[3];
 	CSprite roots;
 
-	TreasureStatus treasureStatus;
+	GameStatus gameStatus;
 
 	sf::View view;
 
@@ -39,4 +39,5 @@ private:
 	void CheckForMovement();
 	void HandlePlayerAnimation();
 	void HandleDoors();
+	void UpdateLevelSigns();
 };

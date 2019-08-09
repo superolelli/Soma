@@ -54,7 +54,7 @@ void MainRoom::Init(CGameEngine * _engine)
 	roots.Load(g_pTextures->mainRoomRoots);
 	roots.SetPos(g_pObjectProperties->mainRoomRootsPosition.x, g_pObjectProperties->mainRoomRootsPosition.y);
 
-	treasureStatus.Init(m_pGameEngine);
+	gameStatus.Init(m_pGameEngine);
 
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetWindow().setView(view);
@@ -93,6 +93,8 @@ void MainRoom::HandleEvents()
 
 void MainRoom::Update()
 {
+	UpdateLevelSigns();
+
 	m_pGameEngine->GetWindow().setView(view);
 
 	if (m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
@@ -101,6 +103,15 @@ void MainRoom::Update()
 	CheckForMovement();
 	HandlePlayerAnimation();
 	HandleDoors();
+}
+
+
+
+void MainRoom::UpdateLevelSigns()
+{
+	signs[0].ChangeString(0, std::to_string(gameStatus.bangLevel));
+	signs[1].ChangeString(0, std::to_string(gameStatus.kutschfahrtLevel));
+	signs[2].ChangeString(0, std::to_string(gameStatus.tichuLevel));
 }
 
 
@@ -145,7 +156,7 @@ void MainRoom::HandleDoors()
 			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Pressed)
 			{
 				auto newGame = new Game();
-				newGame->SetTreasureStatusPtr(&treasureStatus);
+				newGame->SetGameStatusPtr(&gameStatus);
 				m_pGameEngine->PushState(newGame);
 			}
 		}
@@ -197,7 +208,7 @@ void MainRoom::Render(double _normalizedTimestep)
 	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
 
 	// GUI
-	treasureStatus.RenderStatusBar();
+	gameStatus.RenderStatusBar();
 
 	m_pGameEngine->FlipWindow();
 }

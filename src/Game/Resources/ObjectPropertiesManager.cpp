@@ -122,7 +122,7 @@ void ObjectPropertiesManager::LoadLevelSpecs()
 	for (xml_node &level : doc.child("LevelSpecs").children())
 	{
 		int levelID = level.attribute("id").as_int();
-		loadLevelSpecsFromXML(level, levelSpecs);
+		loadLevelSpecsFromXML(level, levelSpecs[levelID - 1]);
 	}
 }
 

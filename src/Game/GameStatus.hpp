@@ -6,7 +6,7 @@
 #include "../Framework/Gameengine.hpp"
 #include "../Framework/Graphics/Sprite.hpp"
 
-class TreasureStatus
+class GameStatus
 {
 public:
 
@@ -20,6 +20,10 @@ public:
 	void AddCards(int _amount);
 	void RemoveDice(int _amount);
 	void RemoveCards(int _amount);
+
+	int bangLevel;
+	int kutschfahrtLevel;
+	int tichuLevel;
 
 private:
 	CGameEngine *engine;

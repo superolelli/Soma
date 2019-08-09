@@ -21,7 +21,7 @@ public:
 
 	Ability enemyAbilities[6];
 
-	LevelSpecs levelSpecs;
+	LevelSpecs levelSpecs[5];
 
 	sf::Vector2i mainRoomDoorPositions[3];
 	sf::Vector2i mainRoomPlayerPositions[4];
