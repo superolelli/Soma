@@ -42,10 +42,12 @@ void Combatant::Scale(float _x, float _y)
 {
 	if (GetID() == CombatantID::Indianer)
 		combatantObject->setScale(SpriterEngine::point(_x + 0.1, _y + 0.1));
-	else if(GetID() == CombatantID::Hilfssheriff)
+	else if (GetID() == CombatantID::Hilfssheriff)
 		combatantObject->setScale(SpriterEngine::point(_x + 0.05, _y + 0.05));
-	else if(GetID() == CombatantID::Greg)
+	else if (GetID() == CombatantID::Greg)
 		combatantObject->setScale(SpriterEngine::point(_x + 0.1, _y + 0.1));
+	else if (GetID() == CombatantID::Apachekid)
+		combatantObject->setScale(SpriterEngine::point(_x + 0.15, _y + 0.15));
 	else
 		combatantObject->setScale(SpriterEngine::point(_x, _y));
 }

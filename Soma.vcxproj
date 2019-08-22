@@ -244,6 +244,7 @@
     <ClCompile Include="src\Game\Ability.cpp" />
     <ClCompile Include="src\Game\AdventureGroup.cpp" />
     <ClCompile Include="src\Game\Anna.cpp" />
+    <ClCompile Include="src\Game\ApacheKid.cpp" />
     <ClCompile Include="src\Game\Battle.cpp" />
     <ClCompile Include="src\Game\BattleGUI.cpp" />
     <ClCompile Include="src\Game\Buff.cpp" />
@@ -286,6 +287,7 @@
     <ClInclude Include="src\Framework\Patterns\Observer.hpp" />
     <ClInclude Include="src\Framework\Patterns\Subject.hpp" />
     <ClInclude Include="src\Game\Ability.hpp" />
+    <ClInclude Include="src\Game\ApacheKid.hpp" />
     <ClInclude Include="src\Game\CombatantID.hpp" />
     <ClInclude Include="src\Game\CombatantAttributesPanel.hpp" />
     <ClInclude Include="src\Game\CombatantStatusBar.hpp" />

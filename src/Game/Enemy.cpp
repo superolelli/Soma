@@ -26,6 +26,10 @@ void Enemy::Init()
 		break;
 	case CombatantID::Greg:
 		combatantObject = g_pModels->modelGreg->getNewEntityInstance("Greg");
+		break;
+	case CombatantID::Apachekid:
+		combatantObject = g_pModels->modelApacheKid->getNewEntityInstance("ApacheKid");
+		break;
 	}
 	
 	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);
@@ -63,7 +67,7 @@ void Enemy::ChooseTarget()
 {
 	selectedTargets.clear();
 
-	if (chosenAbility == enemyAbilities::bury_the_dead)
+	if (chosenAbility == enemyAbilities::bury_the_dead || chosenAbility == enemyAbilities::indians)
 		selectedTargets.push_back(this);
 	else {
 		CheckForMarkedPlayers();

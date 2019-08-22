@@ -80,5 +80,21 @@
 	  dodge="15"
 	  precision="10"
   ></Greg>
+
+    <ApacheKid id="9"
+    strength="6"
+	  constitution="7"
+	  dexterity="9"
+	  speed="8"
+				 
+    armour ="1"
+    health ="35"
+    damageMin ="9"
+    damageMax ="12"
+    initiative ="8"
+	  criticalHit="9"
+	  dodge="24"
+	  precision="9"
+  ></ApacheKid>
   
 </EnemyAttributes>

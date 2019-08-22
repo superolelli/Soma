@@ -498,6 +498,9 @@
     <ClCompile Include="src\Game\GameStatus.cpp">
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\ApacheKid.cpp">
+      <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -972,6 +975,9 @@
       <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\GameStatus.hpp">
+      <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ApacheKid.hpp">
       <Filter>Headerdateien\Game</Filter>
     </ClInclude>
   </ItemGroup>

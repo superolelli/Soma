@@ -15,8 +15,6 @@ void Game::Init(CGameEngine * _engine)
 	currentGUI = new LevelGUI;
 	currentGUI->Init(m_pGameEngine);
 
-	levelFinishedPanel.Init(m_pGameEngine);
-
 	currentBattle = nullptr;
 	inBattle = false;
 	levelFinished = false;
@@ -113,6 +111,7 @@ void Game::UpdateLevel()
 
 void Game::UpdateBattle()
 {
+	adventureGroup.Update(0);
 	currentBattle->Update();
 
 	if (currentBattle->isFinished())
@@ -120,11 +119,14 @@ void Game::UpdateBattle()
 		if (adventureGroup.IsDead())
 		{
 			levelFinished = true;
+			levelFinishedPanel.Init(m_pGameEngine, false);
 			levelFinishedPanel.SetPos(m_pGameEngine->GetWindowSize().x / 2 - 458, 190);
 		}
 		else if (currentBattle->isBossBattle)
 		{
 			levelFinished = true;
+
+			levelFinishedPanel.Init(m_pGameEngine, true);
 			levelFinishedPanel.SetReward(level->GetReward());
 			levelFinishedPanel.SetPos(m_pGameEngine->GetWindowSize().x / 2 - 458, 200);
 		}
@@ -137,8 +139,6 @@ void Game::UpdateBattle()
 		currentGUI = new LevelGUI;
 		currentGUI->Init(m_pGameEngine);
 	}
-
-	adventureGroup.Update(0);
 }
 
 

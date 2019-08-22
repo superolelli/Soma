@@ -1,6 +1,7 @@
 #include "Battle.hpp"
 #include "Greg.hpp"
 #include "ObserverNotificationBattle.h"
+#include "ApacheKid.hpp"
 
 
 void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss)
@@ -8,6 +9,7 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 	players = _adventureGroup;
 	gui = _gui;
 	engine = _engine;
+	notificationRenderer = _notificationRenderer;
 
 	for(int i = 0; i < 4; i++)
 	{
@@ -21,19 +23,26 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 	int pos = _xView + ENEMY_X_OFFSET;
 	for (int i = 0; i < 4; i++)
 	{
+		enemies[i] = nullptr;
 		if (enemyIDs[i] != CombatantID::Undefined) {
+			Enemy *enemy;
 			if (enemyIDs[i] == CombatantID::Greg) {
-				enemy[i] = new GregDigger(enemyIDs[i], _engine, _notificationRenderer);
-				AddObserver(enemy[i]);
+				enemy = new GregDigger(enemyIDs[i], _engine, _notificationRenderer);
+				AddObserver(enemy);
+			}
+			else if (enemyIDs[i] == CombatantID::Apachekid) {
+				enemy = new ApacheKid(enemyIDs[i], _engine, _notificationRenderer);
+				dynamic_cast<ApacheKid*>(enemy)->SetCallbackForAddingEnemy([&](int id) {AddEnemy(id); });
 			}
 			else
-				enemy[i] = new Enemy(enemyIDs[i], _engine, _notificationRenderer);
+				enemy = new Enemy(enemyIDs[i], _engine, _notificationRenderer);
 
-			enemy[i]->Init();
-			enemy[i]->SetPos(pos - enemy[i]->GetLocalPosition().x, ENEMY_Y_POS);
-			pos += enemy[i]->GetRect().width + ENEMY_SPACING;
-			enemy[i]->SetBattlePos(i + 4);
-			combatants.push_back(enemy[i]);
+			enemies[i] = enemy;
+			enemy->Init();
+			enemy->SetPos(pos - enemy->GetLocalPosition().x, ENEMY_Y_POS);
+			pos += enemy->GetRect().width + ENEMY_SPACING;
+			enemy->SetBattlePos(i + 4);
+			combatants.push_back(enemy);
 		}
 	}
 
@@ -73,11 +82,71 @@ void Battle::Quit()
 }
 
 
+void Battle::AddEnemy(int enemyID)
+{
+	int battlePosition = GetEmptyEnemyBattlePosition();
+	if (battlePosition != -1)
+	{
+		Enemy *enemy;
+		if (enemyID == CombatantID::Greg) {
+			enemy = new GregDigger(enemyID, engine, notificationRenderer);
+			AddObserver(enemy);
+		}
+		else if (enemyID == CombatantID::Apachekid) {
+			enemy = new ApacheKid(enemyID, engine, notificationRenderer);
+			dynamic_cast<ApacheKid*>(enemy)->SetCallbackForAddingEnemy([&](int id) {AddEnemy(id); });
+		}
+		else
+			enemy = new Enemy(enemyID, engine, notificationRenderer);
+
+		enemies[battlePosition - 4] = enemy;
+		enemy->Init();
+		enemy->SetBattlePos(battlePosition);
+		combatants.insert(combatants.begin(), enemy);
+		currentCombatant++;
+		RecalculateEnemyPositions();
+		enemy->Combatant::Update();
+	}
+}
+
+
+int Battle::GetEmptyEnemyBattlePosition()
+{
+	int battlePosition;
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (enemies[i] == nullptr)
+			return i + 4;
+	}
+
+	return -1;
+}
+
+
+void Battle::RecalculateEnemyPositions()
+{
+	int xPos = engine->GetWindow().getView().getCenter().x + ENEMY_X_OFFSET;
+	int width = 100;
+	for (auto e : enemies)
+	{
+		if (e != nullptr)
+		{
+			e->SetPos(xPos - e->GetLocalPosition().x, ENEMY_Y_POS);
+			width = e->GetRect().width;
+		}
+
+		xPos += width + ENEMY_SPACING;
+	}
+}
 
 void Battle::Update()
 {
-	for (Combatant *c : combatants)
-		c->Update();
+	for (int i = 0; i < 4; i++)
+	{
+		if(enemies[i] != nullptr)
+			enemies[i]->Update();
+	}
 
 	if (!isPlayingIntro)
 	{
@@ -158,9 +227,16 @@ void Battle::HandleDeaths()
 			}
 			else if ((*i)->AnimationFinished())
 			{
+				int battlePos = (*i)->GetBattlePos();
 				if (combatantNumber < currentCombatant)
 					currentCombatant--;
-				(*i)->Quit();
+
+				if (!(*i)->IsPlayer())
+				{
+					(*i)->Quit();
+					SAFE_DELETE(enemies[battlePos - 4]);
+				}
+
 				i = combatants.erase(i);
 				continue;
 			}

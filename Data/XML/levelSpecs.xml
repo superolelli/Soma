@@ -2,7 +2,7 @@
 
 <LevelSpecs>
     <level id="1">
-        <numberOfRooms>5</numberOfRooms>
+        <numberOfRooms>2</numberOfRooms>
         <backgrounds>
             <background>bang_gang_1</background>
             <background>bang_gang_2</background>
@@ -126,10 +126,10 @@
             </group>
         </enemyGroups>
         <bossGroup>
-            <enemy>Abtrünniger</enemy>
-            <enemy>Gesetzloser</enemy>
-            <enemy>Gesetzloser</enemy>
-            <enemy>Greg Digger</enemy>
+            <enemy>Indianer</enemy>
+            <enemy>Indianer</enemy>
+            <enemy>Indianer</enemy>
+            <enemy>Apache Kid</enemy>
         </bossGroup>
     </level>
 

@@ -21,16 +21,20 @@ public:
 	void RenderAbilityAnimations();
 	void Quit();
 
+	void AddEnemy(int enemyID);
+
 	bool isFinished() { return isBattleFinished; }
 	bool isBossBattle;
 
 private:
 
-	Enemy *enemy[4];
 	AdventureGroup *players;
 	BattleGUI *gui;
 	CGameEngine *engine;
+	NotificationRenderer *notificationRenderer;
 
+
+	Enemy *enemies[4];
 	std::vector<Combatant*> combatants;
 
 	int currentCombatant;
@@ -49,4 +53,7 @@ private:
 	void SetCombatantToDisplayForGUI();
 
 	bool IsOneGroupDead();
+
+	int GetEmptyEnemyBattlePosition();
+	void RecalculateEnemyPositions();
 };

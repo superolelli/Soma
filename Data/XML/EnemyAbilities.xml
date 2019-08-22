@@ -96,4 +96,34 @@
 	  </effect>
   </ability>
 
+	<ability id="6" name="Indianer!">
+	  <animation>indians</animation>
+
+	  <positions>
+		  <value id="7">true</value>
+	  </positions>
+
+	  <effect>
+	  </effect>
+  </ability>
+
+	<ability id="7" name="Messer">
+	  <animation>knife</animation>
+		<effectAnimation>knife</effectAnimation>
+
+	  <positions>
+		  <value id="0">true</value>
+		  <value id="1">true</value>
+		  <value id="2">true</value>
+		  <value id="3">true</value>
+	  </positions>
+
+	  <effect>
+			<damageFactor>1</damageFactor>
+			<buff duration="3" isPositive="false">
+				<precision>-3</precision>
+			</buf>
+	  </effect>
+  </ability>
+
 </Abilities>

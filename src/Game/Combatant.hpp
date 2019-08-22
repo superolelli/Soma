@@ -108,7 +108,7 @@ protected:
 	void RenderAbilityEffects();
 	void RenderShadow();
 
-	void ApplyAbilityEffectToTarget(Combatant *_target, AbilityEffect &_effect);
+	virtual void ApplyAbilityEffectToTarget(Combatant *_target, AbilityEffect &_effect);
 
 	void StartTargetsAttackedAnimation();
 	void StopTargetsAttackedAnimation();

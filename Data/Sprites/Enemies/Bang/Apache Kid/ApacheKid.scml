@@ -8,7 +8,7 @@
         <file id="4" name="ap_kid_ear.png" width="30" height="41" pivot_x="0.3" pivot_y="0.317073"/>
         <file id="5" name="ap_kid_eyebrow.png" width="30" height="8" pivot_x="0.166667" pivot_y="0.375"/>
         <file id="6" name="ap_kid_feather2.png" width="114" height="81" pivot_x="0.0438596" pivot_y="0.938272"/>
-        <file id="7" name="ap_kid_fuß.png" width="78" height="57" pivot_x="0.705128" pivot_y="0.842105"/>
+        <file id="7" name="ap_kid_fuss.png" width="78" height="57" pivot_x="0.705128" pivot_y="0.842105"/>
         <file id="8" name="ap_kid_hair1.png" width="65" height="200" pivot_x="0.369231" pivot_y="0.95"/>
         <file id="9" name="ap_kid_hair2.png" width="59" height="161" pivot_x="0.288136" pivot_y="0.900621"/>
         <file id="10" name="ap_kid_hair3.png" width="92" height="44" pivot_x="0.26087" pivot_y="0.659091"/>
@@ -34,7 +34,7 @@
         <file id="2" name="Sounds/knife.wav" type="sound"/>
         <file id="3" name="Sounds/kenacho_flute.wav" type="sound"/>
     </folder>
-    <entity id="0" name="apkid">
+    <entity id="0" name="ApacheKid">
         <obj_info name="bone_000" type="bone" w="160.501" h="10"/>
         <obj_info name="bone_001" type="bone" w="75.1157" h="10"/>
         <obj_info name="bone_002" type="bone" w="102.274" h="10"/>
@@ -3109,10 +3109,10 @@
             </timeline>
             <timeline id="41" name="ability_effect_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="94.927536" y="267.391304"/>
+                    <object x="94.927536" y="267.391304" angle="0"/>
                 </key>
                 <key id="1" time="599" spin="0">
-                    <object x="110.144928" y="265.942029"/>
+                    <object x="110.144928" y="265.942029" angle="0"/>
                 </key>
             </timeline>
         </animation>
