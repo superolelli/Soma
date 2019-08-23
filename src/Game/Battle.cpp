@@ -186,7 +186,12 @@ void Battle::HandleIntro()
 			combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
 
 			if (isBossBattle)
-				g_pVideos->PlayVideo(videoId::introGreg);
+			{
+				if(enemies[3]->GetID() == CombatantID::Greg)
+					g_pVideos->PlayVideo(videoId::introGreg);
+				else if(enemies[3]->GetID() == CombatantID::Apachekid)
+					g_pVideos->PlayVideo(videoId::introApacheKid);
+			}
 		}
 	} 
 }
