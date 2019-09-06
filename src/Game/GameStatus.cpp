@@ -26,6 +26,15 @@ void GameStatus::Init(CGameEngine * _engine)
 	dice = 0;
 	cards = 0;
 
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			for (int a = 1; a < 8; a++)
+				skillAcquired[i][j][a] = false;
+		}
+	}
+
 	bangLevel = 1;
 	kutschfahrtLevel = 1;
 	tichuLevel = 1;
@@ -42,6 +51,11 @@ void GameStatus::SetPos(int _x, int _y)
 {
 	statusBar.SetPos(_x, _y);
 	PositionComponentsRelativeToPanel();
+}
+
+bool GameStatus::IsSkillAcquired(int player, int ability, int skill)
+{
+	return skillAcquired[player][ability][skill];
 }
 
 int GameStatus::GetDiceAmount()

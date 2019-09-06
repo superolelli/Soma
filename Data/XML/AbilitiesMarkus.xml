@@ -26,7 +26,7 @@ Markus letze Runde angegriffen haben
         <animation>nose_ram</animation>
         <effectAnimation>nose_ram</effectAnimation>
 
-        <howMany>3</howMany>
+        <howMany>1</howMany>
         <positions>
             <value id="4">true</value>
         </positions>
@@ -81,7 +81,7 @@ Markus letze Runde angegriffen haben
         </positions>
 
         <effect>
-            <damageFactor>0.8</damageFactor>
+            <damageFactor>0.5</damageFactor>
             <buff duration="3" isPositive="false">
                 <precision>-3</precision>
                 <damage>-2</damage>
@@ -89,7 +89,7 @@ Markus letze Runde angegriffen haben
         </effect>
 
         <description>*#ffa500 Fürchterliches Grinsen*    
-#white Schadensfaktor: 80%
+#white Schadensfaktor: 50%
 Für 3 Runden:
     #aaaadd -2 Schaden
     -3 Präzision</description>

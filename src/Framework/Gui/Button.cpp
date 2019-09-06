@@ -131,7 +131,7 @@ bool CButton::Update(CGameEngine &_engine)
 			}
 		}
 		//if the left mouse button was pressed or is held
-		else if (_engine.GetButtonstates(ButtonID::Left) == Pressed)
+		else if (_engine.GetButtonstates(ButtonID::Left) == Pressed || _engine.GetButtonstates(ButtonID::Left) == Held)
 		{
 			//Render the right button frame
 			switch (m_Buttontype)

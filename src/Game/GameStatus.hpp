@@ -21,6 +21,8 @@ public:
 	void RemoveDice(int _amount);
 	void RemoveCards(int _amount);
 
+	bool IsSkillAcquired(int player, int ability, int skill);
+
 	int bangLevel;
 	int kutschfahrtLevel;
 	int tichuLevel;
@@ -34,6 +36,8 @@ private:
 
 	int dice;
 	int cards;
+
+	bool skillAcquired[4][4][8];
 
 	void PositionComponentsRelativeToPanel();
 

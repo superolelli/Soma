@@ -56,6 +56,8 @@ void MainRoom::Init(CGameEngine * _engine)
 
 	gameStatus.Init(m_pGameEngine);
 
+	skillPanel.Init(&gameStatus, m_pGameEngine);
+
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetWindow().setView(view);
 
@@ -94,11 +96,15 @@ void MainRoom::HandleEvents()
 void MainRoom::Update()
 {
 	UpdateLevelSigns();
+	skillPanel.Update();
 
 	m_pGameEngine->GetWindow().setView(view);
 
 	if (m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
+
+	if (m_pGameEngine->GetKeystates(KeyID::Space) == Keystates::Pressed)
+		skillPanel.Open();
 
 	CheckForMovement();
 	HandlePlayerAnimation();
@@ -209,6 +215,7 @@ void MainRoom::Render(double _normalizedTimestep)
 
 	// GUI
 	gameStatus.RenderStatusBar();
+	skillPanel.Render();
 
 	m_pGameEngine->FlipWindow();
 }

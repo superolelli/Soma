@@ -501,6 +501,9 @@
     <ClCompile Include="src\Game\ApacheKid.cpp">
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\SkillPanel.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -979,6 +982,9 @@
     </ClInclude>
     <ClInclude Include="src\Game\ApacheKid.hpp">
       <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\SkillPanel.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

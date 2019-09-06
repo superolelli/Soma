@@ -1,11 +1,8 @@
 #pragma once
 
 #include "../Framework/Gamestate.hpp"
-#include "../Framework/Graphics/Sprite.hpp"
-
 #include "../Game/Resources/Resources.hpp"
-
-#include "GameStatus.hpp"
+#include "SkillPanel.hpp"
 
 
 class MainRoom : public GameState
@@ -29,6 +26,8 @@ private:
 	CSprite doors[3];
 	SpriteWithText signs[3];
 	CSprite roots;
+
+	SkillPanel skillPanel;
 
 	GameStatus gameStatus;
 

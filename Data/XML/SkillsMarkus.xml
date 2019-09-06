@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Skills>
+    <fist_of_revenge abilityID="0">
+        <skill id="1">
+            <precision>7</precision>
+        </skill>
+
+        <skill id="2">
+            <criticalHit>5</criticalHit>
+        </skill>
+
+        <skill id="3">
+            <precision>7</precision>
+        </skill>
+
+        <skill id="4">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="5">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="6">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="7">
+            <removeBuffs>true</removeBuffs>
+        </skill>
+
+        <skill id="8">
+            <confusionProbability>0.2</confusionProbability>
+            <confusionRounds>2</confusionRounds>
+        </skill>
+    </fist_of_revenge>
+
+    <nose_ram abilityID="1">
+        <skill id="1">
+            <howMany>1</howMany>
+        </skill>
+
+        <skill id="2">
+            <positions>
+                <value id="5">true</value>
+            </positions>
+        </skill>
+
+        <skill id="3">
+            <howMany>1</howMany>
+        </skill>
+
+        <skill id="4">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="5">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="6">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="7">
+            <precision>10</precision>
+        </skill>
+
+        <skill id="8">
+            <criticalHit>5</criticalHit>
+        </skill>
+    </nose_ram>
+
+    <hard_destruction abilityID="2">
+        <skill id="1">
+            <damageFactor target="friend">-0.05</damageFactor>
+        </skill>
+
+        <skill id="2">
+            <damageFactor target="friend">-0.05</damageFactor>
+        </skill>
+
+        <skill id="3">
+            <damageFactor target="friend">-0.05</damageFactor>
+        </skill>
+
+        <skill id="4">
+            <damageFactor target="enemy">0.05</damageFactor>
+        </skill>
+
+        <skill id="5">
+            <damageFactor target="enemy">0.05</damageFactor>
+        </skill>
+
+        <skill id="6">
+            <damageFactor target="enemy">0.05</damageFactor>
+        </skill>
+
+        <skill id="7">
+            <precision>10</precision>
+        </skill>
+
+        <skill id="8">
+            <criticalHit target="enemy">5</criticalHit>
+        </skill>
+    </hard_destruction>
+
+    <horrible_grin abilityID="3">
+        <skill id="1">
+            <buff>
+                <precision>-5</precision>
+            </buff>
+        </skill>
+
+        <skill id="2">
+            <buff>
+                <damage>-3</damage>
+            </buff>
+        </skill>
+
+        <skill id="3">
+            <buff>
+                <precision>-5</precision>
+                <damage>-3</damage>
+            </buff>
+        </skill>
+
+        <skill id="4">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="5">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="6">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="7">
+            <precision>10</precision>
+        </skill>
+
+        <skill id="8">
+            <buff>
+                <duration>2</duration>
+            </buff>
+        </skill>
+    </horrible_grin>
+</Skills>

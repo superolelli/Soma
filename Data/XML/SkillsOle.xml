@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Skills>
+    <gummi_arm abilityID="0">
+        <skill id="1">
+            <howMany>1</howMany>
+        </skill>
+
+        <skill id="2">
+            <criticalHit>5</criticalHit>
+        </skill>
+
+        <skill id="3">
+            <howMany>1</howMany>
+        </skill>
+
+        <skill id="4">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="5">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="6">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="7">
+            <precision>10</precision>
+        </skill>
+
+        <skill id="8">
+            <lessTargetsMoreDamage>0.1</lessTargetsMoreDamage>
+        </skill>
+    </gummi_arm>
+
+    <whole_body_kick abilityID="1">
+        <skill id="1">
+            <buff>
+                <initiative>-1</initiative>
+                <damage>-2</damage>
+            </buff>
+        </skill>
+
+        <skill id="2">
+            <buff>
+                <duration>2</duration>
+            </buff>
+        </skill>
+
+        <skill id="3">
+            <buff>
+                <initiative>-2</initiative>
+                <damage>-3</damage>
+            </buff>
+        </skill>
+
+        <skill id="4">
+            <positions>
+                <value id="5">true</value>
+            </positions>
+        </skill>
+
+        <skill id="5">
+            <positions>
+                <value id="6">true</value>
+            </positions>
+        </skill>
+
+        <skill id="6">
+            <positions>
+                <value id="7">true</value>
+            </positions>
+        </skill>
+
+        <skill id="7">
+            <precision>10</precision>
+        </skill>
+
+        <skill id="8">
+            <damageFactor>0.2</damageFactor>
+        </skill>
+    </whole_body_kick>
+
+    <hack_into_the_system abilityID="2">
+        <skill id="1">
+            <buff>
+                <armour>-5</armour>
+                <dodge>-2</dodge>
+            </buff>
+        </skill>
+
+        <skill id="2">
+            <buff>
+                <duration>2</duration>
+            </buff>
+        </skill>
+
+        <skill id="3">
+            <buff>
+                <armour>-7</armour>
+                <dodge>-5</dodge>
+            </buff>
+        </skill>
+
+        <skill id="4">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="5">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="6">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="7">
+            <precision>10</precision>
+        </skill>
+
+        <skill id="8">
+            <buff>
+                <precision>-10</precision>
+            </buff>
+        </skill>
+    </hack_into_the_system>
+
+    <poetry_slam abilityID="3">
+        <skill id="1">
+            <putToSleepProbability>0.1</putToSleepProbability>
+        </skill>
+
+        <skill id="2">
+            <putToSleepProbability>0.1</putToSleepProbability>
+        </skill>
+
+        <skill id="3">
+            <putToSleepProbability>0.1</putToSleepProbability>
+        </skill>
+
+        <skill id="4">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="5">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="6">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="7">
+            <precision>10</precision>
+        </skill>
+
+        <skill id="8">
+            <buffSelf>
+                <criticalHit>5</criticalHit>
+            </buffSelf>
+        </skill>
+    </poetry_slam>
+</Skills>

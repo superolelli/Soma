@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Skills>
+    <marshmallow_flash abilityID="0">
+        <skill id="1">
+            <buff>
+                <armour>10</armour>
+            </buff>
+        </skill>
+
+        <skill id="2">
+            <buff>
+                <duration>2</duration>
+            </buff>
+        </skill>
+
+        <skill id="3">
+            <buff>
+                <damage>5</damage>
+            </buff>
+        </skill>
+
+        <skill id="4">
+            <healSelf>2</healSelf>
+        </skill>
+
+        <skill id="5">
+            <healSelf>3</healSelf>
+        </skill>
+
+        <skill id="6">
+            <healSelf>4</healSelf>
+        </skill>
+
+        <skill id="7">
+            <removeDebuffs>true</removeDebuffs>
+        </skill>
+
+        <skill id="8">
+            <buff>
+                <initiative>1</initiative>
+                <armour>10</armour>
+            </buff>
+        </skill>
+    </marshmallow_flash>
+
+    <mess_around abilityID="1">
+        <skill id="1">
+            <confusionProbability>0.1</confusionProbability>
+        </skill>
+
+        <skill id="2">
+            <confusionProbability>0.1</confusionProbability>
+        </skill>
+
+        <skill id="3">
+            <confusionProbability>0.1</confusionProbability>
+        </skill>
+
+        <skill id="4">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="5">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="6">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="7">
+            <precision>10</precision>
+        </skill>
+
+        <skill id="8">
+            <confusionRounds>1</confusionRounds>
+        </skill>
+    </mess_around>
+
+    <repair abilityID="2">
+        <skill id="1">
+            <heal target="friend">2</heal>
+        </skill>
+
+        <skill id="2">
+            <heal target="friend">3</heal>
+        </skill>
+
+        <skill id="3">
+            <heal target="friend">4</heal>
+        </skill>
+
+        <skill id="4">
+            <damageFactor target="enemy">0.1</damageFactor>
+        </skill>
+
+        <skill id="5">
+            <damageFactor target="enemy">0.1</damageFactor>
+        </skill>
+
+        <skill id="6">
+            <damageFactor target="enemy">0.1</damageFactor>
+        </skill>
+
+        <skill id="7">
+            <removeBuffs target="enemy">true</removeBuffs>
+        </skill>
+
+        <skill id="8">
+            <removeDebuffs target="friend">true</removeDebuffs>
+        </skill>
+    </repair>
+
+    <all_on_one abilityID="3">
+        <skill id="1">
+            <buff>
+                <armour>10</armour>
+            </buff>
+        </skill>
+
+        <skill id="2">
+            <buff>
+                <armour>10</armour>
+            </buff>
+        </skill>
+
+        <skill id="3">
+            <buff>
+                <armour>10</armour>
+            </buff>
+        </skill>
+
+        <skill id="4">
+            <buff>
+                <dodge>5</dodge>
+            </buff>
+        </skill>
+
+        <skill id="5">
+            <buff>
+                <dodge>5</dodge>
+            </buff>
+        </skill>
+
+        <skill id="6">
+            <buff>
+                <dodge>5</dodge>
+            </buff>
+        </skill>
+
+        <skill id="7">
+            <buff>
+                <duration>2</duration>
+            </buff>
+        </skill>
+
+        <skill id="8">
+            <heal>5</heal>
+        </skill>
+    </all_on_one>
+</Skills>

@@ -41,19 +41,19 @@
         <animation>word_gush</animation>
         <effectAnimation>word_gush</effectAnimation>
 
-        <howMany>2</howMany>
+        <howMany>1</howMany>
         <positions>
             <value id="6">true</value>
             <value id="7">true</value>
         </positions>
 
         <effect>
-            <damageFactor>0.3</damageFactor>
+            <damageFactor>0.1</damageFactor>
             <putToSleepProbability>0.25</putToSleepProbability>
         </effect>
 
         <description>*#ffa500 Wortschwall*
-#white Schadensfaktor: 30%
+#white Schadensfaktor: 10%
 Schlaf: 25%</description>
     </ability>
 
@@ -61,11 +61,8 @@ Schlaf: 25%</description>
         <animation>side_of_nose_blow</animation>
         <effectAnimation>side_of_nose_blow</effectAnimation>
 
-        <howMany>2</howMany>
+        <howMany>1</howMany>
         <positions>
-            <value id="4">true</value>
-            <value id="5">true</value>
-            <value id="6">true</value>
             <value id="7">true</value>
         </positions>
 

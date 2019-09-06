@@ -10,7 +10,6 @@
 
         <effect>
             <healSelf>5</healSelf>
-            <removeDebuffs>true</removeDebuffs>
             <buff duration="3" isPositive="true" onSelf="true"> 
                 <armour>20</armour>
                 <damage>3</damage>
@@ -40,12 +39,12 @@ Für 3 Runden:
 
         <effect>
             <damageFactor>0.5</damageFactor>
-            <confusion probability="0.9">3</confusion>
+            <confusion probability="0.6">3</confusion>
         </effect>
         
         <description>*#ffa500 Verarschen*
 #white Schadensfaktor: 50%
-#bb77bb Verwirrung (3 Runden): 90%</description>
+#bb77bb Verwirrung (3 Runden): 60%</description>
     </ability>
 
     <ability id="2" name="Reparieren">
@@ -66,20 +65,16 @@ Für 3 Runden:
 
         <effect target="friend">
             <heal>3</heal>
-            <removeDebuffs>true</removeDebuffs>
         </effect>
         <effect target="enemy">
-            <damageFactor>1</damageFactor>
-            <removeBuffs>true</removeBuffs>
+            <damageFactor>0.7</damageFactor>
         </effect>
 
         <description>*#ffa500 Reparieren*
 #888888 Auf Freund
     #00aa00 Heilung: 3
-    #white Entfernt Debuffs
 #888888 Auf Gegner
-    #white Schadensfaktor: 100%
-    Entfernt Buffs</description>
+    #white Schadensfaktor: 70%</description>
     </ability>
 
     <ability id="3" name="Alle auf einen">

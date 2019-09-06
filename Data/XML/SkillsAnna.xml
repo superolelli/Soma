@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Skills>
+    <indomitable_happiness abilityID="0">
+        <skill id="1">
+            <buff target="friend">
+                <damage>3</damage>
+            </buff>
+        </skill>
+
+        <skill id="2">
+            <buff target="friend">
+                <duration>2</duration>
+            </buff>
+        </skill>
+
+        <skill id="3">
+            <buff target="friend">
+                <damage>5</damage>
+            </buff>
+        </skill>
+
+        <skill id="4">
+            <confusionProbability target="enemy">0.1</confusionProbability>
+        </skill>
+
+        <skill id="5">
+            <healSelf target="enemy">3</healSelf>
+        </skill>
+
+        <skill id="6">
+            <confusionProbability target="enemy">0.1</confusionProbability>
+        </skill>
+
+        <skill id="7">
+            <confusionRounds>1</confusionRounds>
+        </skill>
+
+        <skill id="8">
+            <confusionRounds target="enemy">2</confusionRounds>
+        </skill>
+    </indomitable_happiness>
+
+    <word_gush abilityID="1">
+        <skill id="1">
+            <putToSleepProbability>0.05</putToSleepProbability>
+        </skill>
+
+        <skill id="2">
+            <confusionProbability>0.05</confusionProbability>
+        </skill>
+
+        <skill id="3">
+            <confusionProbability>0.05</confusionProbability>
+        </skill>
+
+        <skill id="4">
+            <damageFactor>0.05</damageFactor>
+        </skill>
+
+        <skill id="5">
+            <damageFactor>0.05</damageFactor>
+        </skill>
+
+        <skill id="6">
+            <damageFactor>0.05</damageFactor>
+        </skill>
+
+        <skill id="7">
+            <howMany>1</howMany>
+        </skill>
+
+        <skill id="8">
+            <howMany>1</howMany>
+        </skill>
+    </word_gush>
+
+    <side_of_nose_blow abilityID="2">
+        <skill id="1">
+            <positions>
+                <value id="6">true</value>
+            </positions>
+        </skill>
+
+        <skill id="2">
+            <positions>
+                <value id="5">true</value>
+            </positions>
+        </skill>
+
+        <skill id="3">
+            <positions>
+                <value id="4">true</value>
+            </positions>
+        </skill>
+
+        <skill id="4">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="5">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="6">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="7">
+            <howMany>1</howMany>
+        </skill>
+
+        <skill id="8">
+            <precision>10</precision>
+        </skill>
+    </side_of_nose_blow>
+
+    <death_hug abilityID="3">
+        <skill id="1">
+            <healSelf>2</healSelf>
+        </skill>
+
+        <skill id="2">
+            <healSelf>2</healSelf>
+        </skill>
+
+        <skill id="3">
+            <healSelf>2</healSelf>
+        </skill>
+
+        <skill id="4">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="5">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="6">
+            <damageFactor>0.1</damageFactor>
+        </skill>
+
+        <skill id="7">
+            <precision>10</precision>
+        </skill>
+
+        <skill id="8">
+            <criticalHit>10</criticalHit>
+        </skill>
+    </death_hug>
+</Skills>
