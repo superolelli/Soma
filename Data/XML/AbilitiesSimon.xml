@@ -10,7 +10,10 @@
 
         <effect>
             <healSelf>5</healSelf>
-            <buff duration="3" isPositive="true" onSelf="true"> 
+            <buff>
+                <duration>3</duration>
+                <isPositive>true</isPositive>
+                <onSelf>true</onSelf>
                 <armour>20</armour>
                 <damage>3</damage>
                 <initiative>1</initiative>
@@ -39,7 +42,10 @@ Für 3 Runden:
 
         <effect>
             <damageFactor>0.5</damageFactor>
-            <confusion probability="0.6">3</confusion>
+            <confusion>
+                <probability>0.6</probability>
+                <rounds>3</rounds>
+            </confusion>
         </effect>
         
         <description>*#ffa500 Verarschen*
@@ -89,7 +95,10 @@ Für 3 Runden:
 
         <effect>
             <mark>2</mark>
-            <buff duration="2" isPositive="true" onSelf="false">
+            <buff>
+                <duration>2</duration>
+                <isPositive>true</isPositive>
+                <onSelf>false</onSelf>
                 <armour>30</armour>
             </buff>
         </effect>

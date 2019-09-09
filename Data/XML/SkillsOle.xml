@@ -4,162 +4,284 @@
     <gummi_arm abilityID="0">
         <skill id="1">
             <howMany>1</howMany>
+                <description>*#ffa500 Verlängerter Arm I*
+#white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
 
         <skill id="2">
             <criticalHit>5</criticalHit>
+                <description>*#ffa500 Kritischer Schlag*
+#white Erhöht die kritische Trefferchance um 5.</description>
         </skill>
 
         <skill id="3">
             <howMany>1</howMany>
+                <description>*#ffa500 Verlängerter Arm II*
+#white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
 
         <skill id="4">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="5">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung II*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="6">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung III*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="7">
             <precision>10</precision>
+                <description>*#ffa500 Präziser Schlag*
+#white Erhöht die Präzision um 10.</description>
         </skill>
 
         <skill id="8">
             <lessTargetsMoreDamage>0.1</lessTargetsMoreDamage>
+                <description>*#ffa500 Weniger ist mehr*
+#white Werden weniger Gegner angegriffen, als durch
+diese Fähigkeit möglich wäre, wird der Schadensfaktor um 10%
+pro fehlendem Gegner erhöht.</description>
         </skill>
     </gummi_arm>
 
     <whole_body_kick abilityID="1">
         <skill id="1">
-            <buff>
-                <initiative>-1</initiative>
-                <damage>-2</damage>
-            </buff>
+            <effect>
+                <buff>
+                    <initiative>-1</initiative>
+                    <damage>-2</damage>
+                </buff>
+            </effect>
+                <description>*#ffa500 Schwächender Tritt I*
+#white Verringert die Initiative des Ziels um 1.
+Verringert den Schaden des Ziels um 2.</description>
         </skill>
 
         <skill id="2">
-            <buff>
-                <duration>2</duration>
-            </buff>
+            <effect>
+                <buff>
+                    <duration>2</duration>
+                </buff>
+            </effect>
+                <description>*#ffa500 Nachhaltiger Tritt*
+#white Verlängert die Dauer des Debuffs um 2 Runden.</description>
         </skill>
 
         <skill id="3">
-            <buff>
-                <initiative>-2</initiative>
-                <damage>-3</damage>
-            </buff>
+            <effect>
+                <buff>
+                    <initiative>-2</initiative>
+                    <damage>-3</damage>
+                </buff>
+            </effect>
+                <description>*#ffa500 Schwächender Tritt II*
+#white Verringert die Initiative des Ziels um 2.
+Verringert den Schaden des Ziels um 3.</description>
         </skill>
 
         <skill id="4">
             <positions>
                 <value id="5">true</value>
             </positions>
+                <description>*#ffa500 Langes Bein I*
+#white Auch der Gegner auf der zweiten Position kann 
+als Ziel gewählt werden.</description>
         </skill>
 
         <skill id="5">
             <positions>
                 <value id="6">true</value>
             </positions>
+                <description>*#ffa500 Langes Bein II*
+#white Auch der Gegner auf der dritten Position kann 
+als Ziel gewählt werden.</description>
         </skill>
 
         <skill id="6">
             <positions>
                 <value id="7">true</value>
             </positions>
+                <description>*#ffa500 Langes Bein III*
+#white Auch der Gegner auf der vierten Position kann 
+als Ziel gewählt werden.</description>
         </skill>
 
         <skill id="7">
             <precision>10</precision>
+                <description>*#ffa500 Präziser Tritt*
+#white Erhöht die Präzision um 10.</description>
         </skill>
 
         <skill id="8">
-            <damageFactor>0.2</damageFactor>
+            <effect>
+                <damageFactor>0.2</damageFactor>
+            </effect>
+                <description>*#ffa500 Harter Tritt*
+#white Erhöht den Schadensfaktor um 20%.</description>
         </skill>
     </whole_body_kick>
 
     <hack_into_the_system abilityID="2">
         <skill id="1">
-            <buff>
-                <armour>-5</armour>
-                <dodge>-2</dodge>
-            </buff>
+            <effect>
+                <buff>
+                    <armour>-5</armour>
+                    <dodge>-2</dodge>
+                </buff>
+            </effect>
+                <description>*#ffa500 Computervirus I*
+#white Verringert die Rüstung des Ziels um 5.
+Verringert den Wert des Ziels für Ausweichen um 2.</description>
         </skill>
 
         <skill id="2">
-            <buff>
-                <duration>2</duration>
-            </buff>
+            <effect>
+                <buff>
+                    <duration>2</duration>
+                </buff>
+            </effect>
+                <description>*#ffa500 Angriff verschleiern*
+#white Verlängert die Dauer des Debuffs um 2 Runden.</description>
         </skill>
 
         <skill id="3">
-            <buff>
-                <armour>-7</armour>
-                <dodge>-5</dodge>
-            </buff>
+            <effect>
+                <buff>
+                    <armour>-7</armour>
+                    <dodge>-5</dodge>
+                </buff>
+            </effect>
+                <description>*#ffa500 Computervirus II*
+#white Verringert die Rüstung des Ziels um 7.
+Verringert den Wert des Ziels für Ausweichen um 5.</description>
         </skill>
 
         <skill id="4">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="5">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung II*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="6">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung III*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="7">
             <precision>10</precision>
+                <description>*#ffa500 Gut geplanter Angriff*
+#white Erhöht die Präzision um 10.</description>
         </skill>
 
         <skill id="8">
-            <buff>
-                <precision>-10</precision>
-            </buff>
+            <effect>
+                <buff>
+                    <precision>-10</precision>
+                </buff>
+            </effect>
+                <description>*#ffa500 Spamangriff*
+#white Verringert die Präzision des Ziels um 10.</description>
         </skill>
     </hack_into_the_system>
 
     <poetry_slam abilityID="3">
         <skill id="1">
-            <putToSleepProbability>0.1</putToSleepProbability>
+            <effect>
+                <putToSleepProbability>0.1</putToSleepProbability>
+            </effect>
+                <description>*#ffa500 Langweiliger Text I*
+#white Die Chance den Gegner einschlafen zu
+lassen steigt um 10%.</description>
         </skill>
 
         <skill id="2">
-            <putToSleepProbability>0.1</putToSleepProbability>
+            <effect>
+                <putToSleepProbability>0.1</putToSleepProbability>
+            </effect>
+                <description>*#ffa500 Langweiliger Text II*
+#white Die Chance den Gegner einschlafen zu
+lassen steigt um 10%.</description>
         </skill>
 
         <skill id="3">
-            <putToSleepProbability>0.1</putToSleepProbability>
+            <effect>
+                <putToSleepProbability>0.1</putToSleepProbability>
+            </effect>
+                <description>*#ffa500 Langweiliger Text III*
+#white Die Chance den Gegner einschlafen zu
+lassen steigt um 10%.</description>
         </skill>
 
         <skill id="4">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="5">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                    <description>*#ffa500 Schadenserhöhung II*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="6">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung III*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="7">
             <precision>10</precision>
+                <description>*#ffa500 Gut geübt*
+#white Erhöht die Präzision um 10.</description>
         </skill>
 
         <skill id="8">
-            <buffSelf>
-                <criticalHit>5</criticalHit>
-            </buffSelf>
+            <effect>
+                <buff>
+                    <duration>3</duration>
+                    <isPositive>true</isPositive>
+                    <onSelf>true</onSelf>
+                    <criticalHit>5</criticalHit>
+                </buff>
+            </effect>
+                <description>*#ffa500 Kritischer Text*
+#white Erhöht Oles kritische Trefferchance für
+3 Runden um 5%.</description>
         </skill>
     </poetry_slam>
 </Skills>

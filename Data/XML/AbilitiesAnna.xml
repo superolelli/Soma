@@ -17,14 +17,18 @@
         </positions>
 
         <effect target="friend">
-            <buff duration="3">
+            <buff>
+                <duration>3</duration>
                 <damage>5</damage>
                 <initiative>2</initiative>
             </buff>
         </effect>
         <effect target="enemy">
             <healSelf>3</healSelf>
-            <confusion probability="0.3">3</confusion>
+            <confusion>
+                <probability>0.3</probability>
+                <rounds>3</rounds>
+            </confusion>
         </effect>
 
         <description>*#ffa500 Unbezwingbare Fröhlichkeit    *

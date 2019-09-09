@@ -18,16 +18,26 @@
       <value id="7">false</value>
     </positions>
 
+    <precision>0</precision>
+    <criticalHit>0</criticalHit>
+    <lessTargetsMoreDamage>0</lessTargetsMoreDamage>
+
     <effect>
         <damageFactor>0</damageFactor>
         <heal>0</heal>
         <healSelf>0</healSelf>
-        <confusion probability="0">0</confusion>
+        <confusion>
+            <probability>0</probability>
+            <rounds>0</rounds>
+        </confusion>
         <mark>0</mark>
         <putToSleepProbability>0</putToSleepProbability>
         <removeDebuffs>false</removeDebuffs>
         <removeBuffs>false</removeBuffs>
-        <buff duration="0" isPositive="true" onSelf="false">
+        <buff>
+            <duration>0</duration>
+            <isPositive>true</isPositive>
+            <onSelf>false</onSelf>
             <armour>0</armour>
             <damage>0</damage>
             <initiative>0</initiative>

@@ -1,5 +1,9 @@
 #include "SkillPanel.hpp"
 #include "Resources\StringManager.hpp"
+#include "../Framework/Graphics/RichText.hpp"
+#include "../Framework/Graphics/RoundedRectangleShape.hpp"
+#include "Resources\ObjectPropertiesManager.hpp"
+
 
 void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 {
@@ -12,7 +16,7 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 	closed = true;
 
 	skillPanel.Load(g_pTextures->skillPanel);
-	skillPanel.SetPos(100, 100);
+	skillPanel.SetPos(150, 70);
 
 	bridgePiece.Load(g_pTextures->skillPanelBridgePiece);
 	bridgePiece.SetPos(skillPanel.GetGlobalRect().left + 525, skillPanel.GetGlobalRect().top + 176);
@@ -58,7 +62,7 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 		for (int j = 0; j < 4; j++)
 		{
 			abilities[i][j].Load(g_pTextures->abilities[i][j]);
-			abilities[i][j].SetPos(skillPanel.GetGlobalRect().left + 400, skillPanel.GetGlobalRect().top + 195 + j * 155);
+			abilities[i][j].SetPos(skillPanel.GetGlobalRect().left + 398, skillPanel.GetGlobalRect().top + 195 + j * 155);
 		}
 	}
 
@@ -92,6 +96,12 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 	currentPlayerName.setFillColor(sf::Color::Black);
 	currentPlayerName.setString(g_pStringContainer->combatantNames[currentPlayer]);
 	currentPlayerName.setPosition(skillPanel.GetGlobalRect().left + 52 + (162 - currentPlayerName.getLocalBounds().width)/2, skillPanel.GetGlobalRect().top + 55);
+
+	panelTitle.setCharacterSize(70);
+	panelTitle.setFont(g_pFonts->f_blackwoodCastle);
+	panelTitle.setFillColor(sf::Color::Black);
+	panelTitle.setString("Fähigkeiten");
+	panelTitle.setPosition(skillPanel.GetGlobalRect().left + 850, skillPanel.GetGlobalRect().top + 70);
 
 	buttonNext.Load(g_pTextures->skillPanelButtonNext, Buttontypes::Up);
 	buttonNext.SetPos(skillPanel.GetGlobalRect().left + 217, skillPanel.GetGlobalRect().top + 66);
@@ -180,6 +190,8 @@ void SkillPanel::Render()
 
 		abilityPlaceholders.Render(engine->GetWindow());
 
+		RenderSkilledIndicators();
+
 		for (auto &a : abilities[currentPlayer])
 			a.Render(engine->GetWindow());
 
@@ -194,18 +206,63 @@ void SkillPanel::Render()
 			s.Render(engine->GetWindow());
 
 		engine->GetWindow().draw(currentPlayerName);
+		engine->GetWindow().draw(panelTitle);
 
 		buttonNext.Render(*engine);
 		buttonPrevious.Render(*engine);
 		buttonClose.Render(*engine);
+
+		for (int i = 0; i < 8; i++)
+		{
+			if (skills[currentPlayer][currentAbility][i].GetGlobalRect().contains(engine->GetMousePos()))
+				ShowTooltip(i);
+		}
 	}
 }
 
 
-void SkillPanel::RenderConnection(int connection, int parentAbility)
+
+void SkillPanel::RenderConnection(int connection, int parentSkill)
 {
-	if (gameStatus->IsSkillAcquired(currentPlayer, currentAbility, parentAbility))
+	if (gameStatus->IsSkillAcquired(currentPlayer, currentAbility, parentSkill))
 		connectionsSkilled[connection].Render(engine->GetWindow());
 	else
 		connectionsNotSkilled[connection].Render(engine->GetWindow());
+}
+
+
+
+void SkillPanel::RenderSkilledIndicators()
+{
+	skilledIndicator.SetPos(abilityPlaceholders.GetGlobalRect().left + 368, abilityPlaceholders.GetGlobalRect().top + 3);
+	skilledIndicator.Render(engine->GetWindow());
+
+	for (int i = 0; i < 8; i++)
+	{
+		if (gameStatus->IsSkillAcquired(currentPlayer, currentAbility, i))
+		{
+			skilledIndicator.SetPos(skills[currentPlayer][currentAbility][i].GetGlobalRect().left - 9, skills[currentPlayer][currentAbility][i].GetGlobalRect().top - 9);
+			skilledIndicator.Render(engine->GetWindow());
+		}
+	}
+}
+
+
+void SkillPanel::ShowTooltip(int _skill)
+{
+	sfe::RichText tooltip;
+	tooltip.setCharacterSize(18);
+	tooltip.setFont(g_pFonts->f_arial);
+	tooltip.setString(g_pObjectProperties->skills[currentPlayer][currentAbility][_skill].description);
+	tooltip.setPosition(engine->GetMousePos().x + 10, engine->GetMousePos().y - (tooltip.getGlobalBounds().height + 15));
+
+	sf::FloatRect backgroundRect = tooltip.getLocalBounds();
+	sf::RoundedRectangleShape background(sf::Vector2f(backgroundRect.width + 20.0f, backgroundRect.height + 20.0f), 8, 20);
+	background.setFillColor(sf::Color(0, 0, 0, 220));
+	background.setOutlineThickness(2.0f);
+	background.setOutlineColor(sf::Color(40, 40, 40));
+	background.setPosition(tooltip.getPosition() + sf::Vector2f(-10.0f, -7.0f));
+
+	engine->GetWindow().draw(background);
+	engine->GetWindow().draw(tooltip);
 }

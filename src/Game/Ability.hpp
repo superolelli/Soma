@@ -43,6 +43,9 @@ struct Ability
     AbilityEffect effectFriendly;
     AbilityEffect effectHostile;
 
+	int precisionModificator;
+	int criticalHitModificator;
+	float lessTargetsMoreDamage;
+
 	void clear();
 };
-

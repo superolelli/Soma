@@ -25,4 +25,8 @@ void Ability::clear()
 	effectAnimationHostile.clear();
 	effectFriendly.clear();
 	effectHostile.clear();
+
+	precisionModificator = 0;
+	criticalHitModificator = 0;
+	lessTargetsMoreDamage = 0.0f;
 }

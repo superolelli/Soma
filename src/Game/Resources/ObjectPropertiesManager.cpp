@@ -8,6 +8,7 @@ void ObjectPropertiesManager::LoadObjectProperties()
 {
 	LoadPlayerAbilities();
 	LoadPlayerAttributes();
+	LoadSkills();
 	LoadEnemyAbilities();
 	LoadEnemyAttributes();
 	LoadLevelSpecs();
@@ -71,6 +72,45 @@ void ObjectPropertiesManager::LoadPlayerAttributes()
 }
 
 
+void ObjectPropertiesManager::LoadSkills()
+{
+	using namespace pugi;
+
+	xml_document doc;
+	doc.load_file("Data/XML/AbilitiesDefault.xml");
+
+	//get default values
+	Ability default;
+	default.clear();
+
+	loadAbilityFromXML(doc.child("ability"), default);
+
+	LoadSkillsOfSpecificPlayer("Data/XML/SkillsSimon.xml", CombatantID::Simon, default);
+	LoadSkillsOfSpecificPlayer("Data/XML/SkillsOle.xml", CombatantID::Ole, default);
+	LoadSkillsOfSpecificPlayer("Data/XML/SkillsAnna.xml", CombatantID::Anna, default);
+	LoadSkillsOfSpecificPlayer("Data/XML/SkillsMarkus.xml", CombatantID::Markus, default);
+}
+
+
+
+void ObjectPropertiesManager::LoadSkillsOfSpecificPlayer(const char* _path, int _id, Ability &_default)
+{
+	using namespace pugi;
+
+	xml_document doc;
+	doc.load_file(_path);
+
+	for (xml_node &ability : doc.child("Skills").children())
+	{
+		int abilityID = ability.attribute("abilityID").as_int();
+		for (xml_node &skill : ability.children())
+		{
+			int skillID = skill.attribute("id").as_int();
+			skills[_id][abilityID][skillID - 1] = _default;
+			loadAbilityFromXML(skill, skills[_id][abilityID][skillID - 1]);
+		}
+	}
+}
 
 void ObjectPropertiesManager::LoadEnemyAbilities()
 {

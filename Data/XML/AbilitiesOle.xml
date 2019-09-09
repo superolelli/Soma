@@ -30,7 +30,9 @@
 
         <effect>
             <damageFactor>1</damageFactor>
-            <buff duration="3" isPositive="false">
+            <buff>
+                <duration>3</duration>
+                <isPositive>false</isPositive>
                 <initiative>-1</initiative>
                 <damage>-1</damage>
             </buff>
@@ -56,7 +58,9 @@ Für 3 Runden:
 
         <effect>
             <damageFactor>0.6</damageFactor>
-            <buff duration="3" isPositive="false">
+            <buff>
+                <duration>3</duration>
+                <isPositive>false</isPositive>
                 <armour>-10</armour>
                 <dodge>-3</dodge>
             </buff>

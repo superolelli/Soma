@@ -4,148 +4,259 @@
     <fist_of_revenge abilityID="0">
         <skill id="1">
             <precision>7</precision>
+                    <description>*#ffa500 Präzisionsfaust I*
+#white Erhöht die Präzision um 7.</description>
         </skill>
 
         <skill id="2">
             <criticalHit>5</criticalHit>
+                    <description>*#ffa500 Kritischer Schlag*
+#white Erhöht die kritische Trefferchance um 5.</description>
         </skill>
 
         <skill id="3">
             <precision>7</precision>
+                    <description>*#ffa500 Präzisionsfaust II*
+#white Erhöht die Präzision um 7.</description>
         </skill>
 
         <skill id="4">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                    <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="5">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                    <description>*#ffa500 Schadenserhöhung II*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="6">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                    <description>*#ffa500 Schadenserhöhung III*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="7">
-            <removeBuffs>true</removeBuffs>
+            <effect>
+                <removeBuffs>true</removeBuffs>
+            </effect>
+                    <description>*#ffa500 Schwächender Schlag*
+#white Fist of Revenge entfernt zusätzlich alle Buffs des Ziels.</description>
         </skill>
 
         <skill id="8">
-            <confusionProbability>0.2</confusionProbability>
-            <confusionRounds>2</confusionRounds>
+            <effect>
+                <confusion>
+                    <probability>0.2</probability>
+                    <rounds>2</rounds>
+                </confusion>
+            </effect>
+                    <description>*#ffa500 Verwirrender Schlag*
+#white Fist of Revenge hat eine Chance von 20% den
+Gegner 2 Runden lang zu verwirren.</description>
         </skill>
     </fist_of_revenge>
 
     <nose_ram abilityID="1">
         <skill id="1">
             <howMany>1</howMany>
+                <description>*#ffa500 Nasengröße I*
+#white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
 
         <skill id="2">
             <positions>
                 <value id="5">true</value>
             </positions>
+                <description>*#ffa500 Nasenlänge*
+#white Auch der Gegner auf der zweiten Position kann
+als Ziel gewählt werden.</description>
         </skill>
 
         <skill id="3">
             <howMany>1</howMany>
+                <description>*#ffa500 Nasengröße II*
+#white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
 
         <skill id="4">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="5">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung II*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="6">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung III*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="7">
             <precision>10</precision>
+                    <description>*#ffa500 Präzisionsnase*
+#white Erhöht die Präzision um 10.</description>
         </skill>
 
         <skill id="8">
             <criticalHit>5</criticalHit>
+                <description>*#ffa500 Kritischer Nasenrammer*
+#white Erhöht die kritische Trefferchance um 5.</description>
         </skill>
     </nose_ram>
 
     <hard_destruction abilityID="2">
         <skill id="1">
-            <damageFactor target="friend">-0.05</damageFactor>
+        <effect target="friend">
+            <damageFactor>-0.05</damageFactor>
+        </effect>
+                <description>*#ffa500 Schadensreduktion I*
+#white Verringert den Schadensfaktor gegen Freunde um 5%.</description>
         </skill>
 
         <skill id="2">
-            <damageFactor target="friend">-0.05</damageFactor>
+        <effect target="friend">
+            <damageFactor>-0.05</damageFactor>
+        </effect>
+                <description>*#ffa500 Schadensreduktion II*
+#white Verringert den Schadensfaktor gegen Freunde um 5%.</description>
         </skill>
 
         <skill id="3">
-            <damageFactor target="friend">-0.05</damageFactor>
+        <effect target="friend">
+            <damageFactor>-0.05</damageFactor>
+        </effect>
+                <description>*#ffa500 Schadensreduktion III*
+#white Verringert den Schadensfaktor gegen Freunde um 5%.</description>
         </skill>
 
         <skill id="4">
-            <damageFactor target="enemy">0.05</damageFactor>
+        <effect target="enemy">
+            <damageFactor>0.05</damageFactor>
+        </effect>
+                <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor um 5%.</description>
         </skill>
 
         <skill id="5">
-            <damageFactor target="enemy">0.05</damageFactor>
+        <effect target="enemy">
+            <damageFactor>0.05</damageFactor>
+        </effect>
+                <description>*#ffa500 Schadenserhöhung II*
+#white Erhöht den Schadensfaktor um 5%.</description>
         </skill>
 
         <skill id="6">
-            <damageFactor target="enemy">0.05</damageFactor>
+        <effect target="enemy">
+            <damageFactor>0.05</damageFactor>
+        </effect>
+                <description>*#ffa500 Schadenserhöhung III*
+#white Erhöht den Schadensfaktor um 5%.</description>
         </skill>
 
         <skill id="7">
             <precision>10</precision>
+                <description>*#ffa500 Präzisionszerstörung*
+#white Erhöht die Präzision um 10.</description>
         </skill>
 
         <skill id="8">
-            <criticalHit target="enemy">5</criticalHit>
+            <criticalHit>5</criticalHit>
+                <description>*#ffa500 Kritische Zerstörung*
+#white Erhöht die kritische Trefferchance um 5.</description>
         </skill>
     </hard_destruction>
 
     <horrible_grin abilityID="3">
         <skill id="1">
-            <buff>
-                <precision>-5</precision>
-            </buff>
+            <effect>
+                <buff>
+                    <precision>-5</precision>
+                </buff>
+            </effect>
+                <description>*#ffa500 Zittern vor Angst*
+#white Die Präzision des Ziels wird um 5 verringert.</description>
         </skill>
 
         <skill id="2">
-            <buff>
-                <damage>-3</damage>
-            </buff>
+            <effect>
+                <buff>
+                    <damage>-3</damage>
+                </buff>
+            </effect>
+                <description>*#ffa500 Halbherziges Zuschlagen vor Angst*
+#white Der Schaden des Ziels wird um 3 verringert.</description>
         </skill>
 
         <skill id="3">
-            <buff>
-                <precision>-5</precision>
-                <damage>-3</damage>
-            </buff>
+            <effect>
+                <buff>
+                    <precision>-5</precision>
+                    <damage>-3</damage>
+                </buff>
+            </effect>
+                <description>*#ffa500 Einschüchterung*
+#white Die Präzision des Ziels wird um 5 verringert.
+Der Schaden des Ziels wird um 3 verringert.</description>
         </skill>
 
         <skill id="4">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="5">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung II*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="6">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung III*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="7">
             <precision>10</precision>
+                <description>*#ffa500 Präzisionsgrinsen*
+#white Erhöht die Präzision um 10.</description>
         </skill>
 
         <skill id="8">
-            <buff>
-                <duration>2</duration>
-            </buff>
+            <effect>
+                <buff>
+                    <duration>2</duration>
+                </buff>
+            </effect>
+                <description>*#ffa500 Nachhaltige Angst*
+#white Verlängert die Wirkung des Debuffs um 2 Runden.</description>
         </skill>
     </horrible_grin>
 </Skills>

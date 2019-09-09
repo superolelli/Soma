@@ -21,6 +21,8 @@ public:
 
 	Ability enemyAbilities[8];
 
+	Ability skills[4][4][8];
+
 	LevelSpecs levelSpecs[5];
 
 	sf::Vector2i mainRoomDoorPositions[3];
@@ -32,6 +34,10 @@ private:
 	void LoadPlayerAbilities();
 	void LoadAbilitiesOfSpecificPlayer(const char* _path, int _id, Ability &_default);
 	void LoadPlayerAttributes();
+
+	void LoadSkills();
+	void LoadSkillsOfSpecificPlayer(const char* _path, int _id, Ability &_default);
+
 	void LoadEnemyAbilities();
 	void LoadEnemyAttributes();
 	void LoadLevelSpecs();

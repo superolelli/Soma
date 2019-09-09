@@ -30,7 +30,7 @@ void GameStatus::Init(CGameEngine * _engine)
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			for (int a = 1; a < 8; a++)
+			for (int a = 0; a < 8; a++)
 				skillAcquired[i][j][a] = false;
 		}
 	}

@@ -19,5 +19,4 @@ namespace pugi {
 	void loadLevelSpecsFromXML(const xml_node& levelSpecNode, LevelSpecs &specs);
 
 	void loadEnemyGroupFromXML(const xml_node& enemyGroupNode, std::array<CombatantID, 4> &newGroup);
-
 }

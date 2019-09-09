@@ -3,160 +3,299 @@
 <Skills>
     <marshmallow_flash abilityID="0">
         <skill id="1">
-            <buff>
-                <armour>10</armour>
-            </buff>
+            <effect>
+                <buff>
+                    <armour>10</armour>
+                </buff>
+            </effect>
+                <description>*#ffa500 Marshmallowpanzerung I*
+#white Erhöht Simons Rüstung um 10.</description>
         </skill>
 
         <skill id="2">
-            <buff>
-                <duration>2</duration>
-            </buff>
+            <effect>
+                <buff>
+                    <duration>2</duration>
+                </buff>
+            </effect>
+                <description>*#ffa500 Nachhaltiger Flash*
+#white Verlängert die Dauer des Buffs um 2 Runden.</description>
         </skill>
 
         <skill id="3">
-            <buff>
-                <damage>5</damage>
-            </buff>
+            <effect>
+                <buff>
+                    <damage>5</damage>
+                </buff>
+            </effect>
+                <description>*#ffa500 Marshmallow der Vernichtung*
+#white Erhöht Simons Schaden um 5.</description>
         </skill>
 
         <skill id="4">
-            <healSelf>2</healSelf>
+            <effect>
+                <healSelf>2</healSelf>
+            </effect>
+                <description>*#ffa500 Verbesserte Heilung I*
+#white Heilt Simon um 2 Leben mehr.</description>
         </skill>
 
         <skill id="5">
-            <healSelf>3</healSelf>
+            <effect>
+                <healSelf>3</healSelf>
+            </effect>
+                <description>*#ffa500 Verbesserte Heilung II*
+#white Heilt Simon um 3 Leben mehr.</description>
         </skill>
 
         <skill id="6">
-            <healSelf>4</healSelf>
+            <effect>
+                <healSelf>4</healSelf>
+            </effect>
+                <description>*#ffa500 Verbesserte Heilung III*
+#white Heilt Simon um 4 Leben mehr.</description>
         </skill>
 
         <skill id="7">
-            <removeDebuffs>true</removeDebuffs>
+            <effect>
+                <removeDebuffs>true</removeDebuffs>
+            </effect>
+                <description>*#ffa500 Entschlackende Marshmallows*
+#white Alle Debuffs werden von Simon entfernt.</description>
         </skill>
 
         <skill id="8">
-            <buff>
-                <initiative>1</initiative>
-                <armour>10</armour>
-            </buff>
+            <effect>
+                <buff>
+                    <initiative>1</initiative>
+                    <armour>10</armour>
+                </buff>
+            </effect>
+                <description>*#ffa500 Marshmallowpanzerung II*
+#white Erhöht Simons Initiative um 1.
+Erhöht Simons Rüstung um 10.</description>
         </skill>
     </marshmallow_flash>
 
     <mess_around abilityID="1">
         <skill id="1">
-            <confusionProbability>0.1</confusionProbability>
+            <effect>
+                <confusion>
+                    <probability>0.1</probability>
+                </confusion>
+            </effect>
+                <description>*#ffa500 Verwirrende Verarsche I*
+#white Die Chance das Ziel zu verwirren steigt um 10%.</description>
         </skill>
 
         <skill id="2">
-            <confusionProbability>0.1</confusionProbability>
+            <effect>
+                <confusion>
+                    <probability>0.1</probability>
+                </confusion>
+            </effect>
+                <description>*#ffa500 Verwirrende Verarsche II*
+#white Die Chance das Ziel zu verwirren steigt um 10%.</description>
         </skill>
 
         <skill id="3">
-            <confusionProbability>0.1</confusionProbability>
+            <effect>
+                <confusion>
+                    <probability>0.1</probability>
+                </confusion>
+            </effect>
+                <description>*#ffa500 Verwirrende Verarsche III*
+#white Die Chance das Ziel zu verwirren steigt um 10%.</description>
         </skill>
 
         <skill id="4">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="5">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung II*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="6">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung III*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="7">
             <precision>10</precision>
+                <description>*#ffa500 Präzisionsverarsche*
+#white Erhöht die Präzision um 10.</description>
         </skill>
 
         <skill id="8">
-            <confusionRounds>1</confusionRounds>
+            <effect>
+                <confusion>
+                    <rounds>1</rounds>
+                </confusion>
+            </effect>
+                <description>*#ffa500 Länger Verwirrt*
+#white Erhöht die Dauer der Verwirrung um 1 Runde.</description>
         </skill>
     </mess_around>
 
     <repair abilityID="2">
         <skill id="1">
-            <heal target="friend">2</heal>
+            <effect target="friend">
+                <heal>2</heal>
+            </effect>
+                <description>*#ffa500 Verbesserte Heilung I*
+#white Heilt einen Freund um 2 Leben mehr.</description>
         </skill>
 
         <skill id="2">
-            <heal target="friend">3</heal>
+            <effect target="friend">
+                <heal>3</heal>
+            </effect>
+                <description>*#ffa500 Verbesserte Heilung II*
+#white Heilt einen Freund um 3 Leben mehr.</description>
         </skill>
 
         <skill id="3">
-            <heal target="friend">4</heal>
+            <effect target="friend">
+                <heal>4</heal>
+            </effect>
+                <description>*#ffa500 Verbesserte Heilung III*
+#white Heilt einen Freund um 4 Leben mehr.</description>
         </skill>
 
         <skill id="4">
-            <damageFactor target="enemy">0.1</damageFactor>
+            <effect target="enemy">
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor
+gegen Gegner um 10%.</description>
         </skill>
 
         <skill id="5">
-            <damageFactor target="enemy">0.1</damageFactor>
+            <effect target="enemy">
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor
+gegen Gegner um 10%.</description>
         </skill>
 
         <skill id="6">
-            <damageFactor target="enemy">0.1</damageFactor>
+            <effect target="enemy">
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor
+gegen Gegner um 10%.</description>
         </skill>
 
         <skill id="7">
-            <removeBuffs target="enemy">true</removeBuffs>
+            <effect target="enemy">
+                <removeBuffs>true</removeBuffs>
+            </effect>
+                <description>*#ffa500 Schwächender Hammer*
+#white Entfernt Buffs, wenn das Ziel ein Gegner ist.</description>
         </skill>
 
         <skill id="8">
-            <removeDebuffs target="friend">true</removeDebuffs>
+            <effect target="friend">
+                <removeDebuffs>true</removeDebuffs>
+            </effect>
+                <description>*#ffa500 Erfolgreichere Reparatur*
+#white Entfernt Debuffs, wenn das Ziel ein Freund ist.</description>
         </skill>
     </repair>
 
     <all_on_one abilityID="3">
         <skill id="1">
-            <buff>
-                <armour>10</armour>
-            </buff>
+            <effect>
+                <buff>
+                    <armour>10</armour>
+                </buff>
+            </effect>
+                <description>*#ffa500 Rüstungserhöhung I*
+#white Erhöht die Rüstung des Ziels um 10.</description>
         </skill>
 
         <skill id="2">
-            <buff>
-                <armour>10</armour>
-            </buff>
+            <effect>>
+                <buff>
+                    <armour>10</armour>
+                </buff>
+            </effect>
+                <description>*#ffa500 Rüstungserhöhung II*
+#white Erhöht die Rüstung des Ziels um 10.</description>
         </skill>
 
         <skill id="3">
-            <buff>
-                <armour>10</armour>
-            </buff>
+            <effect>
+                <buff>
+                    <armour>10</armour>
+                </buff>
+            </effect>
+                <description>*#ffa500 Rüstungserhöhung III*
+#white Erhöht die Rüstung des Ziels um 10.</description>
         </skill>
 
         <skill id="4">
-            <buff>
-                <dodge>5</dodge>
-            </buff>
+            <effect>
+                <buff>
+                    <dodge>5</dodge>
+                </buff>
+            </effect>
+                <description>*#ffa500 Verbesserte Reflexe I*
+#white Erhöht den Wert des Ziels für Ausweichen um 5.</description>
         </skill>
 
         <skill id="5">
-            <buff>
-                <dodge>5</dodge>
-            </buff>
+            <effect>
+                <buff>
+                    <dodge>5</dodge>
+                </buff>
+            </effect>
+                <description>*#ffa500 Verbesserte Reflexe II*
+#white Erhöht den Wert des Ziels für Ausweichen um 5.</description>
         </skill>
 
         <skill id="6">
-            <buff>
-                <dodge>5</dodge>
-            </buff>
+            <effect>
+                <buff>
+                    <dodge>5</dodge>
+                </buff>
+            </effect>
+                <description>*#ffa500 Verbesserte Reflexe III*
+#white Erhöht den Wert des Ziels für Ausweichen um 5.</description>
         </skill>
 
         <skill id="7">
-            <buff>
-                <duration>2</duration>
-            </buff>
+            <effect>
+                <buff>
+                    <duration>2</duration>
+                </buff>
+            </effect>
+                <description>*#ffa500 Verlängerte Hetzjagd*
+#white Die Dauer der Markierung und des Buffs wird um 
+2 Runden verlängert.</description>
         </skill>
 
         <skill id="8">
-            <heal>5</heal>
+            <effect>
+                <heal>5</heal>
+            </effect>
+                <description>*#ffa500 Kleiner Vorsprung*
+#white Das Ziel wird um 5 Leben geheilt.</description>
         </skill>
     </all_on_one>
 </Skills>

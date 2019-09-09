@@ -6,14 +6,14 @@ namespace pugi {
 
     void loadBuffFromXML(const xml_node & buffNode, Buff & buff)
     {
-		if(buffNode.attribute("duration"))
-			buff.duration = buffNode.attribute("duration").as_int();
+		if(buffNode.child("duration"))
+			buff.duration = buffNode.child("duration").text().as_int();
 
-		if (buffNode.attribute("isPositive"))
-			buff.isPositive = buffNode.attribute("isPositive").as_bool();
+		if (buffNode.child("isPositive"))
+			buff.isPositive = buffNode.child("isPositive").text().as_bool();
 
-		if (buffNode.attribute("onSelf"))
-			buff.onSelf = buffNode.attribute("onSelf").as_bool();
+		if (buffNode.child("onSelf"))
+			buff.onSelf = buffNode.child("onSelf").text().as_bool();
         
         if (buffNode.child("armour"))
             buff.stats.armour = buffNode.child("armour").text().as_int(); 
@@ -71,9 +71,11 @@ namespace pugi {
 
 		if (effectNode.child("confusion"))
 		{
-			effect.confusion = effectNode.child("confusion").text().as_int();
-			if (effectNode.child("confusion").attribute("probability"))
-				effect.confusionProbability = effectNode.child("confusion").attribute("probability").as_float();
+			if(effectNode.child("confusion").child("rounds"))
+				effect.confusion = effectNode.child("confusion").child("rounds").text().as_int();
+
+			if (effectNode.child("confusion").child("probability"))
+				effect.confusionProbability = effectNode.child("confusion").child("probability").text().as_float();
 		}
 
 		if (effectNode.child("mark"))
@@ -135,6 +137,15 @@ namespace pugi {
 		{
 			ability.possibleAims.position[pos.attribute("id").as_int()] = pos.text().as_bool();
 		}
+
+		if (abilityNode.child("precision"))
+			ability.precisionModificator = abilityNode.child("precision").text().as_int();
+
+		if (abilityNode.child("criticalHit"))
+			ability.criticalHitModificator = abilityNode.child("criticalHit").text().as_int();
+
+		if(abilityNode.child("lessTargetsMoreDamage"))
+			ability.lessTargetsMoreDamage = abilityNode.child("lessTargetsMoreDamage").text().as_float();
 
 		for (auto &effect : abilityNode.children("effect"))
 		{
@@ -205,6 +216,4 @@ namespace pugi {
 			newGroup[currentEnemy++] = combatantIdentifierMap[sf::String::fromUtf8(str.begin(), str.end())];
 		}
 	}
-
-
 }

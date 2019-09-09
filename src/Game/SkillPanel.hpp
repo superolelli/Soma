@@ -35,10 +35,13 @@ private:
 	CSprite skills[4][4][8];
 
 	sf::Text currentPlayerName;
+	sf::Text panelTitle;
 
 	CButton buttonNext;
 	CButton buttonPrevious;
 	CButton buttonClose;
 
-	void RenderConnection(int connection, int parentAbility);
+	void RenderConnection(int connection, int parentSkill);
+	void RenderSkilledIndicators();
+	void ShowTooltip(int _skill);
 };

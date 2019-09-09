@@ -3,75 +3,154 @@
 <Skills>
     <indomitable_happiness abilityID="0">
         <skill id="1">
-            <buff target="friend">
-                <damage>3</damage>
-            </buff>
+            <effect target="friend">
+                <buff>
+                    <damage>3</damage>
+                </buff>
+            </effect>
+                <description>*#ffa500 Inspirierende Fröhlichkeit I*
+#white Wenn das Ziel ein Freund ist,
+wird dessen Schaden um 3 erhöht.</description>
         </skill>
 
         <skill id="2">
-            <buff target="friend">
-                <duration>2</duration>
-            </buff>
+            <effect target="friend">
+                <buff>
+                    <duration>2</duration>
+                </buff>
+            </effect>
+                <description>*#ffa500 Anhaltende Fröhlichkeit*
+#white Verlängert die Dauer des 
+Buffs bzw. Debuffs um 2 Runden.</description>
         </skill>
 
         <skill id="3">
-            <buff target="friend">
-                <damage>5</damage>
-            </buff>
+            <effect target="friend">
+                <buff>
+                    <damage>5</damage>
+                </buff>
+            </effect>
+                <description>*#ffa500 Inspirierende Fröhlichkeit II*
+#white Wenn das Ziel ein Freund ist,
+wird dessen Schaden um 5 erhöht.</description>
         </skill>
 
         <skill id="4">
-            <confusionProbability target="enemy">0.1</confusionProbability>
+            <effect target="enemy">
+                <confusion>
+                    <probability>0.1</probability>
+                </confusion>
+            </effect>
+                <description>*#ffa500 Verwirrende Fröhlichkeit I*
+#white Die Chance einen Gegner zu verwirren
+steigt um 10%.</description>
         </skill>
 
         <skill id="5">
-            <healSelf target="enemy">3</healSelf>
+            <effect target="enemy">
+                <healSelf>3</healSelf>
+            </effect>
+                <description>*#ffa500 Heilsame Fröhlichkeit*
+#white Heilt Anna um 3 Leben mehr, wenn 
+sie einen Gegner trifft.</description>
         </skill>
 
         <skill id="6">
-            <confusionProbability target="enemy">0.1</confusionProbability>
+            <effect target="enemy">
+                <confusion>
+                    <probability>0.1</probability>
+                </confusion>
+            </effect>
+                <description>*#ffa500 Verwirrende Fröhlichkeit II*
+#white Die Chance einen Gegner zu verwirren
+steigt um 10%.</description>
         </skill>
 
         <skill id="7">
-            <confusionRounds>1</confusionRounds>
+            <effect target="enemy">
+                <confusion>
+                    <rounds>1</rounds>
+                </confusion>
+            </effect>
+                <description>*#ffa500 Anhaltende Verwirrung I*
+#white Die Dauer der Verwirrung steigt
+um 1 Runde.</description>
         </skill>
 
         <skill id="8">
-            <confusionRounds target="enemy">2</confusionRounds>
+            <effect target="enemy">
+                <confusion>
+                    <rounds>2</rounds>
+                </confusion>
+            </effect>
+                <description>*#ffa500 Anhaltende Verwirrung II*
+#white Die Dauer der Verwirrung steigt
+um 2 Runden.</description>
         </skill>
     </indomitable_happiness>
 
     <word_gush abilityID="1">
         <skill id="1">
-            <putToSleepProbability>0.05</putToSleepProbability>
+            <effect>
+                <putToSleepProbability>0.05</putToSleepProbability>
+            </effect>
+                <description>*#ffa500 Langweiliges Gelaber I*
+#white Die Chance den Gegner einschlafen zu
+lassen steigt um 5%.</description>
         </skill>
 
         <skill id="2">
-            <confusionProbability>0.05</confusionProbability>
+            <effect>
+                <putToSleepProbability>0.05</putToSleepProbability>
+            </effect>
+                <description>*#ffa500 Langweiliges Gelaber II*
+#white Die Chance den Gegner einschlafen zu
+lassen steigt um 5%.</description>
         </skill>
 
         <skill id="3">
-            <confusionProbability>0.05</confusionProbability>
+            <effect>
+                <putToSleepProbability>0.05</putToSleepProbability>
+            </effect>
+                <description>*#ffa500 Langweiliges Gelaber III*
+#white Die Chance den Gegner einschlafen zu
+lassen steigt um 5%.</description>
         </skill>
 
         <skill id="4">
-            <damageFactor>0.05</damageFactor>
+            <effect>
+                <damageFactor>0.05</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor um 5%.</description>
         </skill>
 
         <skill id="5">
-            <damageFactor>0.05</damageFactor>
+            <effect>
+                <damageFactor>0.05</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung II*
+#white Erhöht den Schadensfaktor um 5%.</description>
         </skill>
 
         <skill id="6">
-            <damageFactor>0.05</damageFactor>
+            <effect>
+                <damageFactor>0.05</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung III*
+#white Erhöht den Schadensfaktor um 5%.</description>
         </skill>
 
         <skill id="7">
             <howMany>1</howMany>
+                <description>*#ffa500 Mehr Leute zulabern I*
+#white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
 
         <skill id="8">
             <howMany>1</howMany>
+                <description>*#ffa500 Mehr Leute zulabern II*
+#white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
     </word_gush>
 
@@ -80,72 +159,125 @@
             <positions>
                 <value id="6">true</value>
             </positions>
+                <description>*#ffa500 Weitreichende Schwingungen I*
+#white Auch der Gegner auf der dritten Position kann 
+als Ziel gewählt werden.</description>
         </skill>
 
         <skill id="2">
             <positions>
                 <value id="5">true</value>
             </positions>
+                <description>*#ffa500 Weitreichende Schwingungen II*
+#white Auch der Gegner auf der zweiten Position kann 
+als Ziel gewählt werden.</description>
         </skill>
 
         <skill id="3">
             <positions>
                 <value id="4">true</value>
             </positions>
+                <description>*#ffa500 Weitreichende Schwingungen III*
+#white Auch der Gegner auf der ersten Position kann 
+als Ziel gewählt werden.</description>
         </skill>
 
         <skill id="4">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="5">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung II*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="6">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung III*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="7">
             <howMany>1</howMany>
+                <description>*#ffa500 Große Nasenflügel*
+#white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
 
         <skill id="8">
             <precision>10</precision>
+                <description>*#ffa500 Präzisionsnasenflügel*
+#white Erhöht die Präzision um 10.</description>
         </skill>
     </side_of_nose_blow>
 
     <death_hug abilityID="3">
         <skill id="1">
-            <healSelf>2</healSelf>
+            <effect>
+                <healSelf>2</healSelf>
+            </effect>
+                <description>*#ffa500 Verbesserte Heilung I*
+#white Heilt Anna um 2 Leben mehr.</description>
         </skill>
 
         <skill id="2">
-            <healSelf>2</healSelf>
+            <effect>
+                <healSelf>2</healSelf>
+            </effect>
+                <description>*#ffa500 Verbesserte Heilung II*
+#white Heilt Anna um 2 Leben mehr.</description>
         </skill>
 
         <skill id="3">
-            <healSelf>2</healSelf>
+            <effect>
+                <healSelf>2</healSelf>
+            </effect>
+                <description>*#ffa500 Verbesserte Heilung III*
+#white Heilt Anna um 2 Leben mehr.</description>
         </skill>
 
         <skill id="4">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung I*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="5">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung II*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="6">
-            <damageFactor>0.1</damageFactor>
+            <effect>
+                <damageFactor>0.1</damageFactor>
+            </effect>
+                <description>*#ffa500 Schadenserhöhung III*
+#white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
         <skill id="7">
             <precision>10</precision>
+                <description>*#ffa500 Präzisionsumarmung*
+#white Erhöht die Präzision um 10.</description>
         </skill>
 
         <skill id="8">
             <criticalHit>10</criticalHit>
+                <description>*#ffa500 Höchst kritische Umarmung*
+#white Erhöht die kritische Trefferchance um 10%.</description>
         </skill>
     </death_hug>
 </Skills>
