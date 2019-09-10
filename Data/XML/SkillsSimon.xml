@@ -2,7 +2,7 @@
 
 <Skills>
     <marshmallow_flash abilityID="0">
-        <skill id="1">
+        <skill id="1" name="Marshmallowpanzerung I">
             <effect>
                 <buff>
                     <armour>10</armour>
@@ -12,7 +12,7 @@
 #white Erhöht Simons Rüstung um 10.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Nachhaltiger Flash">
             <effect>
                 <buff>
                     <duration>2</duration>
@@ -22,17 +22,17 @@
 #white Verlängert die Dauer des Buffs um 2 Runden.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Marshmallow der Vernichtung">
             <effect>
                 <buff>
                     <damage>5</damage>
                 </buff>
             </effect>
-                <description>*#ffa500 Marshmallow der Vernichtung*
+                <description>*#ffa500 Marshmallow der Vernichtung      *
 #white Erhöht Simons Schaden um 5.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Verbesserte Heilung I">
             <effect>
                 <healSelf>2</healSelf>
             </effect>
@@ -40,7 +40,7 @@
 #white Heilt Simon um 2 Leben mehr.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Verbesserte Heilung II">
             <effect>
                 <healSelf>3</healSelf>
             </effect>
@@ -48,7 +48,7 @@
 #white Heilt Simon um 3 Leben mehr.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Verbesserte Heilung III">
             <effect>
                 <healSelf>4</healSelf>
             </effect>
@@ -56,7 +56,7 @@
 #white Heilt Simon um 4 Leben mehr.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Entschlackende Marshmallows">
             <effect>
                 <removeDebuffs>true</removeDebuffs>
             </effect>
@@ -64,7 +64,7 @@
 #white Alle Debuffs werden von Simon entfernt.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Marshmallowpanzerung II">
             <effect>
                 <buff>
                     <initiative>1</initiative>
@@ -78,7 +78,7 @@ Erhöht Simons Rüstung um 10.</description>
     </marshmallow_flash>
 
     <mess_around abilityID="1">
-        <skill id="1">
+        <skill id="1" name="Verwirrende Verarsche I">
             <effect>
                 <confusion>
                     <probability>0.1</probability>
@@ -88,7 +88,7 @@ Erhöht Simons Rüstung um 10.</description>
 #white Die Chance das Ziel zu verwirren steigt um 10%.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Verwirrende Verarsche II">
             <effect>
                 <confusion>
                     <probability>0.1</probability>
@@ -98,7 +98,7 @@ Erhöht Simons Rüstung um 10.</description>
 #white Die Chance das Ziel zu verwirren steigt um 10%.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Verwirrende Verarsche III">
             <effect>
                 <confusion>
                     <probability>0.1</probability>
@@ -108,7 +108,7 @@ Erhöht Simons Rüstung um 10.</description>
 #white Die Chance das Ziel zu verwirren steigt um 10%.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Schadenserhöhung I">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -116,7 +116,7 @@ Erhöht Simons Rüstung um 10.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Schadenserhöhung II">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -124,7 +124,7 @@ Erhöht Simons Rüstung um 10.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Schadenserhöhung III">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -132,13 +132,13 @@ Erhöht Simons Rüstung um 10.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Präzisionsverarsche">
             <precision>10</precision>
                 <description>*#ffa500 Präzisionsverarsche*
 #white Erhöht die Präzision um 10.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Länger Verwirrt">
             <effect>
                 <confusion>
                     <rounds>1</rounds>
@@ -150,7 +150,7 @@ Erhöht Simons Rüstung um 10.</description>
     </mess_around>
 
     <repair abilityID="2">
-        <skill id="1">
+        <skill id="1" name="Verbesserte Heilung I">
             <effect target="friend">
                 <heal>2</heal>
             </effect>
@@ -158,7 +158,7 @@ Erhöht Simons Rüstung um 10.</description>
 #white Heilt einen Freund um 2 Leben mehr.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Verbesserte Heilung II">
             <effect target="friend">
                 <heal>3</heal>
             </effect>
@@ -166,7 +166,7 @@ Erhöht Simons Rüstung um 10.</description>
 #white Heilt einen Freund um 3 Leben mehr.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Verbesserte Heilung III">
             <effect target="friend">
                 <heal>4</heal>
             </effect>
@@ -174,7 +174,7 @@ Erhöht Simons Rüstung um 10.</description>
 #white Heilt einen Freund um 4 Leben mehr.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Schadenserhöhung I">
             <effect target="enemy">
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -183,25 +183,25 @@ Erhöht Simons Rüstung um 10.</description>
 gegen Gegner um 10%.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Schadenserhöhung II">
             <effect target="enemy">
                 <damageFactor>0.1</damageFactor>
             </effect>
-                <description>*#ffa500 Schadenserhöhung I*
+                <description>*#ffa500 Schadenserhöhung II*
 #white Erhöht den Schadensfaktor
 gegen Gegner um 10%.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Schadenserhöhung III">
             <effect target="enemy">
                 <damageFactor>0.1</damageFactor>
             </effect>
-                <description>*#ffa500 Schadenserhöhung I*
+                <description>*#ffa500 Schadenserhöhung III*
 #white Erhöht den Schadensfaktor
 gegen Gegner um 10%.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Schwächender Hammer">
             <effect target="enemy">
                 <removeBuffs>true</removeBuffs>
             </effect>
@@ -209,7 +209,7 @@ gegen Gegner um 10%.</description>
 #white Entfernt Buffs, wenn das Ziel ein Gegner ist.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Erfolgreichere Reparatur">
             <effect target="friend">
                 <removeDebuffs>true</removeDebuffs>
             </effect>
@@ -219,7 +219,7 @@ gegen Gegner um 10%.</description>
     </repair>
 
     <all_on_one abilityID="3">
-        <skill id="1">
+        <skill id="1" name="Rüstungserhöhung I">
             <effect>
                 <buff>
                     <armour>10</armour>
@@ -229,7 +229,7 @@ gegen Gegner um 10%.</description>
 #white Erhöht die Rüstung des Ziels um 10.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Rüstungserhöhung II">
             <effect>>
                 <buff>
                     <armour>10</armour>
@@ -239,7 +239,7 @@ gegen Gegner um 10%.</description>
 #white Erhöht die Rüstung des Ziels um 10.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Rüstungserhöhung III">
             <effect>
                 <buff>
                     <armour>10</armour>
@@ -249,7 +249,7 @@ gegen Gegner um 10%.</description>
 #white Erhöht die Rüstung des Ziels um 10.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Verbesserte Reflexe I">
             <effect>
                 <buff>
                     <dodge>5</dodge>
@@ -259,7 +259,7 @@ gegen Gegner um 10%.</description>
 #white Erhöht den Wert des Ziels für Ausweichen um 5.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Verbesserte Reflexe II">
             <effect>
                 <buff>
                     <dodge>5</dodge>
@@ -269,7 +269,7 @@ gegen Gegner um 10%.</description>
 #white Erhöht den Wert des Ziels für Ausweichen um 5.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Verbesserte Reflexe III">
             <effect>
                 <buff>
                     <dodge>5</dodge>
@@ -279,7 +279,7 @@ gegen Gegner um 10%.</description>
 #white Erhöht den Wert des Ziels für Ausweichen um 5.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Verlängerte Hetzjagd">
             <effect>
                 <buff>
                     <duration>2</duration>
@@ -290,7 +290,7 @@ gegen Gegner um 10%.</description>
 2 Runden verlängert.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Kleiner Vorsprung">
             <effect>
                 <heal>5</heal>
             </effect>

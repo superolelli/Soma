@@ -2,25 +2,25 @@
 
 <Skills>
     <gummi_arm abilityID="0">
-        <skill id="1">
+        <skill id="1" name="Verlängerter Arm I">
             <howMany>1</howMany>
                 <description>*#ffa500 Verlängerter Arm I*
 #white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Kritischer Schlag">
             <criticalHit>5</criticalHit>
                 <description>*#ffa500 Kritischer Schlag*
 #white Erhöht die kritische Trefferchance um 5.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Verlängerter Arm II">
             <howMany>1</howMany>
                 <description>*#ffa500 Verlängerter Arm II*
 #white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Schadenserhöhung I">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -28,7 +28,7 @@
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Schadenserhöhung II">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -36,7 +36,7 @@
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Schadenserhöhung III">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -44,13 +44,13 @@
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Präziser Schlag">
             <precision>10</precision>
                 <description>*#ffa500 Präziser Schlag*
 #white Erhöht die Präzision um 10.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Weniger ist mehr">
             <lessTargetsMoreDamage>0.1</lessTargetsMoreDamage>
                 <description>*#ffa500 Weniger ist mehr*
 #white Werden weniger Gegner angegriffen, als durch
@@ -60,7 +60,7 @@ pro fehlendem Gegner erhöht.</description>
     </gummi_arm>
 
     <whole_body_kick abilityID="1">
-        <skill id="1">
+        <skill id="1" name="Schächender Tritt I">
             <effect>
                 <buff>
                     <initiative>-1</initiative>
@@ -72,7 +72,7 @@ pro fehlendem Gegner erhöht.</description>
 Verringert den Schaden des Ziels um 2.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Nachhaltiger Tritt">
             <effect>
                 <buff>
                     <duration>2</duration>
@@ -82,7 +82,7 @@ Verringert den Schaden des Ziels um 2.</description>
 #white Verlängert die Dauer des Debuffs um 2 Runden.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Schwächender Tritt II">
             <effect>
                 <buff>
                     <initiative>-2</initiative>
@@ -94,7 +94,7 @@ Verringert den Schaden des Ziels um 2.</description>
 Verringert den Schaden des Ziels um 3.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Langes Bein I">
             <positions>
                 <value id="5">true</value>
             </positions>
@@ -103,7 +103,7 @@ Verringert den Schaden des Ziels um 3.</description>
 als Ziel gewählt werden.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Langes Bein II">
             <positions>
                 <value id="6">true</value>
             </positions>
@@ -112,7 +112,7 @@ als Ziel gewählt werden.</description>
 als Ziel gewählt werden.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Langes Bein III">
             <positions>
                 <value id="7">true</value>
             </positions>
@@ -121,13 +121,13 @@ als Ziel gewählt werden.</description>
 als Ziel gewählt werden.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Präziser Tritt">
             <precision>10</precision>
                 <description>*#ffa500 Präziser Tritt*
 #white Erhöht die Präzision um 10.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Harter Tritt">
             <effect>
                 <damageFactor>0.2</damageFactor>
             </effect>
@@ -137,7 +137,7 @@ als Ziel gewählt werden.</description>
     </whole_body_kick>
 
     <hack_into_the_system abilityID="2">
-        <skill id="1">
+        <skill id="1" name="Computervirus I">
             <effect>
                 <buff>
                     <armour>-5</armour>
@@ -149,7 +149,7 @@ als Ziel gewählt werden.</description>
 Verringert den Wert des Ziels für Ausweichen um 2.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Angriff verschleiern">
             <effect>
                 <buff>
                     <duration>2</duration>
@@ -159,7 +159,7 @@ Verringert den Wert des Ziels für Ausweichen um 2.</description>
 #white Verlängert die Dauer des Debuffs um 2 Runden.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Computervirus II">
             <effect>
                 <buff>
                     <armour>-7</armour>
@@ -171,7 +171,7 @@ Verringert den Wert des Ziels für Ausweichen um 2.</description>
 Verringert den Wert des Ziels für Ausweichen um 5.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Schadenserhöhung I">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -179,7 +179,7 @@ Verringert den Wert des Ziels für Ausweichen um 5.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Schadenserhöhung II">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -187,7 +187,7 @@ Verringert den Wert des Ziels für Ausweichen um 5.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Schadenserhöhung III">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -195,13 +195,13 @@ Verringert den Wert des Ziels für Ausweichen um 5.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Gut geplanter Angriff">
             <precision>10</precision>
                 <description>*#ffa500 Gut geplanter Angriff*
 #white Erhöht die Präzision um 10.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Spamangriff">
             <effect>
                 <buff>
                     <precision>-10</precision>
@@ -213,7 +213,7 @@ Verringert den Wert des Ziels für Ausweichen um 5.</description>
     </hack_into_the_system>
 
     <poetry_slam abilityID="3">
-        <skill id="1">
+        <skill id="1" name="Langweiliger Text I">
             <effect>
                 <putToSleepProbability>0.1</putToSleepProbability>
             </effect>
@@ -222,7 +222,7 @@ Verringert den Wert des Ziels für Ausweichen um 5.</description>
 lassen steigt um 10%.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Langweiliger Text II">
             <effect>
                 <putToSleepProbability>0.1</putToSleepProbability>
             </effect>
@@ -231,7 +231,7 @@ lassen steigt um 10%.</description>
 lassen steigt um 10%.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Langweiliger Text III">
             <effect>
                 <putToSleepProbability>0.1</putToSleepProbability>
             </effect>
@@ -240,7 +240,7 @@ lassen steigt um 10%.</description>
 lassen steigt um 10%.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Schadenserhöhung I">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -248,7 +248,7 @@ lassen steigt um 10%.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Schadenserhöhung II">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -256,7 +256,7 @@ lassen steigt um 10%.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Schadenserhöhung III">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -264,13 +264,13 @@ lassen steigt um 10%.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Gut geübt">
             <precision>10</precision>
                 <description>*#ffa500 Gut geübt*
 #white Erhöht die Präzision um 10.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Kritischer Text">
             <effect>
                 <buff>
                     <duration>3</duration>

@@ -2,25 +2,25 @@
 
 <Skills>
     <fist_of_revenge abilityID="0">
-        <skill id="1">
+        <skill id="1" name="Präzisionsfaust I">
             <precision>7</precision>
                     <description>*#ffa500 Präzisionsfaust I*
 #white Erhöht die Präzision um 7.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Kritischer Schlag">
             <criticalHit>5</criticalHit>
                     <description>*#ffa500 Kritischer Schlag*
 #white Erhöht die kritische Trefferchance um 5.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Präzisionsfaust II">
             <precision>7</precision>
                     <description>*#ffa500 Präzisionsfaust II*
 #white Erhöht die Präzision um 7.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Schadenserhöhung I">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -28,7 +28,7 @@
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Schadenserhöhung II">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -36,7 +36,7 @@
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Schadenserhöhung III">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -44,7 +44,7 @@
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Schwächender Schlag">
             <effect>
                 <removeBuffs>true</removeBuffs>
             </effect>
@@ -52,7 +52,7 @@
 #white Fist of Revenge entfernt zusätzlich alle Buffs des Ziels.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Verwirrender Schlag">
             <effect>
                 <confusion>
                     <probability>0.2</probability>
@@ -66,13 +66,13 @@ Gegner 2 Runden lang zu verwirren.</description>
     </fist_of_revenge>
 
     <nose_ram abilityID="1">
-        <skill id="1">
+        <skill id="1" name="Nasengröße I">
             <howMany>1</howMany>
                 <description>*#ffa500 Nasengröße I*
 #white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Nasenlänge">
             <positions>
                 <value id="5">true</value>
             </positions>
@@ -81,13 +81,13 @@ Gegner 2 Runden lang zu verwirren.</description>
 als Ziel gewählt werden.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Nasengröße II">
             <howMany>1</howMany>
                 <description>*#ffa500 Nasengröße II*
 #white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Schadenserhöhung I">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -95,7 +95,7 @@ als Ziel gewählt werden.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Schadenserhöhung II">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -103,7 +103,7 @@ als Ziel gewählt werden.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Schadenserhöhung III">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -111,13 +111,13 @@ als Ziel gewählt werden.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Präzisionsnase">
             <precision>10</precision>
                     <description>*#ffa500 Präzisionsnase*
 #white Erhöht die Präzision um 10.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Kritischer Nasenrammer">
             <criticalHit>5</criticalHit>
                 <description>*#ffa500 Kritischer Nasenrammer*
 #white Erhöht die kritische Trefferchance um 5.</description>
@@ -125,7 +125,7 @@ als Ziel gewählt werden.</description>
     </nose_ram>
 
     <hard_destruction abilityID="2">
-        <skill id="1">
+        <skill id="1" name="Schadensreduktion I">
         <effect target="friend">
             <damageFactor>-0.05</damageFactor>
         </effect>
@@ -133,7 +133,7 @@ als Ziel gewählt werden.</description>
 #white Verringert den Schadensfaktor gegen Freunde um 5%.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Schadensreduktion II">
         <effect target="friend">
             <damageFactor>-0.05</damageFactor>
         </effect>
@@ -141,7 +141,7 @@ als Ziel gewählt werden.</description>
 #white Verringert den Schadensfaktor gegen Freunde um 5%.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Schadensreduktion III">
         <effect target="friend">
             <damageFactor>-0.05</damageFactor>
         </effect>
@@ -149,7 +149,7 @@ als Ziel gewählt werden.</description>
 #white Verringert den Schadensfaktor gegen Freunde um 5%.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Schadenserhöhung I">
         <effect target="enemy">
             <damageFactor>0.05</damageFactor>
         </effect>
@@ -157,7 +157,7 @@ als Ziel gewählt werden.</description>
 #white Erhöht den Schadensfaktor um 5%.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Schadenserhöhung II">
         <effect target="enemy">
             <damageFactor>0.05</damageFactor>
         </effect>
@@ -165,7 +165,7 @@ als Ziel gewählt werden.</description>
 #white Erhöht den Schadensfaktor um 5%.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Schadenserhöhung III">
         <effect target="enemy">
             <damageFactor>0.05</damageFactor>
         </effect>
@@ -173,13 +173,13 @@ als Ziel gewählt werden.</description>
 #white Erhöht den Schadensfaktor um 5%.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Präzisionszerstörung">
             <precision>10</precision>
                 <description>*#ffa500 Präzisionszerstörung*
 #white Erhöht die Präzision um 10.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Kritische Zerstörung">
             <criticalHit>5</criticalHit>
                 <description>*#ffa500 Kritische Zerstörung*
 #white Erhöht die kritische Trefferchance um 5.</description>
@@ -187,7 +187,7 @@ als Ziel gewählt werden.</description>
     </hard_destruction>
 
     <horrible_grin abilityID="3">
-        <skill id="1">
+        <skill id="1" name="Zittern vor Angst">
             <effect>
                 <buff>
                     <precision>-5</precision>
@@ -197,7 +197,7 @@ als Ziel gewählt werden.</description>
 #white Die Präzision des Ziels wird um 5 verringert.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Halbherziges Zuschlagen vor Angst">
             <effect>
                 <buff>
                     <damage>-3</damage>
@@ -207,7 +207,7 @@ als Ziel gewählt werden.</description>
 #white Der Schaden des Ziels wird um 3 verringert.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Einschüchterung">
             <effect>
                 <buff>
                     <precision>-5</precision>
@@ -219,7 +219,7 @@ als Ziel gewählt werden.</description>
 Der Schaden des Ziels wird um 3 verringert.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Schadenserhöhung I">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -227,7 +227,7 @@ Der Schaden des Ziels wird um 3 verringert.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Schadenserhöhung II">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -235,7 +235,7 @@ Der Schaden des Ziels wird um 3 verringert.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Schadenserhöhung III">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -243,13 +243,13 @@ Der Schaden des Ziels wird um 3 verringert.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Präzisionsgrinsen">
             <precision>10</precision>
                 <description>*#ffa500 Präzisionsgrinsen*
 #white Erhöht die Präzision um 10.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Nachhaltige Angst">
             <effect>
                 <buff>
                     <duration>2</duration>

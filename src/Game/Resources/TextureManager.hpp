@@ -34,6 +34,7 @@ public:
 
 	/** SKILLING **/
 	sf::Texture skills[4][4][8];
+	sf::Texture skillPanelSelectedSkillFrame;
 	sf::Texture skillPanel;
 	sf::Texture skillPanelBridgePiece;
 	sf::Texture skillPanelAbilityPlaceholder;

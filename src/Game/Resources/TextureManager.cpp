@@ -63,6 +63,8 @@ void CTextureManager::LoadTextures()
 	LoadSkillTextures("Data/Sprites/Abilities/Markus/hard_destruction/hard_destruction_skill", 3, 2);
 	LoadSkillTextures("Data/Sprites/Abilities/Markus/horrible_grin/horrible_grin_skill", 3, 3);
 
+	skillPanelSelectedSkillFrame.loadFromFile("Data/Sprites/Panels & Buttons/Skill_Panel/selected_skill_frame.png");
+
 	skillPanel.loadFromFile("Data/Sprites/Panels & Buttons/Skill_Panel/skill_panel.png");
 	skillPanelBridgePiece.loadFromFile("Data/Sprites/Panels & Buttons/Skill_Panel/bridge_piece.png");
 	skillPanelAbilityPlaceholder.loadFromFile("Data/Sprites/Panels & Buttons/Skill_Panel/ability_placeholders.png");

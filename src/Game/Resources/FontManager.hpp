@@ -21,4 +21,5 @@ public:
 	sf::Font f_tiza;
 	sf::Font f_shanghai;
 	sf::Font f_blackwoodCastle;
+	sf::Font f_showcard;
 };

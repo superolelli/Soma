@@ -58,6 +58,11 @@ bool GameStatus::IsSkillAcquired(int player, int ability, int skill)
 	return skillAcquired[player][ability][skill];
 }
 
+void GameStatus::AcquireSkill(int player, int ability, int skill)
+{
+	skillAcquired[player][ability][skill] = true;
+}
+
 int GameStatus::GetDiceAmount()
 {
 	return dice;

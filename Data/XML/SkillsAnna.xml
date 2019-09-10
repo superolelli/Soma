@@ -2,7 +2,7 @@
 
 <Skills>
     <indomitable_happiness abilityID="0">
-        <skill id="1">
+        <skill id="1" name="Inspirierende Fröhlichkeit I">
             <effect target="friend">
                 <buff>
                     <damage>3</damage>
@@ -13,7 +13,7 @@
 wird dessen Schaden um 3 erhöht.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Anhaltende Fröhlichkeit">
             <effect target="friend">
                 <buff>
                     <duration>2</duration>
@@ -24,7 +24,7 @@ wird dessen Schaden um 3 erhöht.</description>
 Buffs bzw. Debuffs um 2 Runden.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Inspirierenden Fröhlichkeit II">
             <effect target="friend">
                 <buff>
                     <damage>5</damage>
@@ -35,7 +35,7 @@ Buffs bzw. Debuffs um 2 Runden.</description>
 wird dessen Schaden um 5 erhöht.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Verwirrende Fröhlichkeit I">
             <effect target="enemy">
                 <confusion>
                     <probability>0.1</probability>
@@ -46,7 +46,7 @@ wird dessen Schaden um 5 erhöht.</description>
 steigt um 10%.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Heilsame Fröhlichkeit">
             <effect target="enemy">
                 <healSelf>3</healSelf>
             </effect>
@@ -55,7 +55,7 @@ steigt um 10%.</description>
 sie einen Gegner trifft.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Verwirrende Fröhlichkeit II">
             <effect target="enemy">
                 <confusion>
                     <probability>0.1</probability>
@@ -66,7 +66,7 @@ sie einen Gegner trifft.</description>
 steigt um 10%.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Anhaltende Verwirrung I">
             <effect target="enemy">
                 <confusion>
                     <rounds>1</rounds>
@@ -77,7 +77,7 @@ steigt um 10%.</description>
 um 1 Runde.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Anhaltende Verwirrung II">
             <effect target="enemy">
                 <confusion>
                     <rounds>2</rounds>
@@ -90,7 +90,7 @@ um 2 Runden.</description>
     </indomitable_happiness>
 
     <word_gush abilityID="1">
-        <skill id="1">
+        <skill id="1" name="Langweiliges Gelaber I">
             <effect>
                 <putToSleepProbability>0.05</putToSleepProbability>
             </effect>
@@ -99,7 +99,7 @@ um 2 Runden.</description>
 lassen steigt um 5%.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Langweiliges Gelaber II">
             <effect>
                 <putToSleepProbability>0.05</putToSleepProbability>
             </effect>
@@ -108,7 +108,7 @@ lassen steigt um 5%.</description>
 lassen steigt um 5%.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Langweiliges Gelaber III">
             <effect>
                 <putToSleepProbability>0.05</putToSleepProbability>
             </effect>
@@ -117,7 +117,7 @@ lassen steigt um 5%.</description>
 lassen steigt um 5%.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Schadenserhöhung I">
             <effect>
                 <damageFactor>0.05</damageFactor>
             </effect>
@@ -125,7 +125,7 @@ lassen steigt um 5%.</description>
 #white Erhöht den Schadensfaktor um 5%.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Schadenserhöhung II">
             <effect>
                 <damageFactor>0.05</damageFactor>
             </effect>
@@ -133,7 +133,7 @@ lassen steigt um 5%.</description>
 #white Erhöht den Schadensfaktor um 5%.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Schadenserhöhung III">
             <effect>
                 <damageFactor>0.05</damageFactor>
             </effect>
@@ -141,13 +141,13 @@ lassen steigt um 5%.</description>
 #white Erhöht den Schadensfaktor um 5%.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Mehr Leute zulabern I">
             <howMany>1</howMany>
                 <description>*#ffa500 Mehr Leute zulabern I*
 #white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Mehr Leute zulabern II">
             <howMany>1</howMany>
                 <description>*#ffa500 Mehr Leute zulabern II*
 #white Es wird ein zusätzlicher Gegner getroffen.</description>
@@ -155,7 +155,7 @@ lassen steigt um 5%.</description>
     </word_gush>
 
     <side_of_nose_blow abilityID="2">
-        <skill id="1">
+        <skill id="1" name="Weitreichende Schwingungen I">
             <positions>
                 <value id="6">true</value>
             </positions>
@@ -164,7 +164,7 @@ lassen steigt um 5%.</description>
 als Ziel gewählt werden.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Weitreichende Schwingungen II">
             <positions>
                 <value id="5">true</value>
             </positions>
@@ -173,7 +173,7 @@ als Ziel gewählt werden.</description>
 als Ziel gewählt werden.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Weitreichende Schwingungen III">
             <positions>
                 <value id="4">true</value>
             </positions>
@@ -182,7 +182,7 @@ als Ziel gewählt werden.</description>
 als Ziel gewählt werden.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Schadenserhöhung I">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -190,7 +190,7 @@ als Ziel gewählt werden.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Schadenserhöhung II">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -198,7 +198,7 @@ als Ziel gewählt werden.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Schadenserhöhung III">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -206,13 +206,13 @@ als Ziel gewählt werden.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Große Nasenflügel">
             <howMany>1</howMany>
                 <description>*#ffa500 Große Nasenflügel*
 #white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Präzisionsnasenflügel">
             <precision>10</precision>
                 <description>*#ffa500 Präzisionsnasenflügel*
 #white Erhöht die Präzision um 10.</description>
@@ -220,7 +220,7 @@ als Ziel gewählt werden.</description>
     </side_of_nose_blow>
 
     <death_hug abilityID="3">
-        <skill id="1">
+        <skill id="1" name="Verbesserte Heilung I">
             <effect>
                 <healSelf>2</healSelf>
             </effect>
@@ -228,7 +228,7 @@ als Ziel gewählt werden.</description>
 #white Heilt Anna um 2 Leben mehr.</description>
         </skill>
 
-        <skill id="2">
+        <skill id="2" name="Verbesserte Heilung II">
             <effect>
                 <healSelf>2</healSelf>
             </effect>
@@ -236,7 +236,7 @@ als Ziel gewählt werden.</description>
 #white Heilt Anna um 2 Leben mehr.</description>
         </skill>
 
-        <skill id="3">
+        <skill id="3" name="Verbesserte Heilung III">
             <effect>
                 <healSelf>2</healSelf>
             </effect>
@@ -244,7 +244,7 @@ als Ziel gewählt werden.</description>
 #white Heilt Anna um 2 Leben mehr.</description>
         </skill>
 
-        <skill id="4">
+        <skill id="4" name="Schadenserhöhung I">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -252,7 +252,7 @@ als Ziel gewählt werden.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="5">
+        <skill id="5" name="Schadenserhöhung II">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -260,7 +260,7 @@ als Ziel gewählt werden.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="6">
+        <skill id="6" name="Schadenserhöhung III">
             <effect>
                 <damageFactor>0.1</damageFactor>
             </effect>
@@ -268,13 +268,13 @@ als Ziel gewählt werden.</description>
 #white Erhöht den Schadensfaktor um 10%.</description>
         </skill>
 
-        <skill id="7">
+        <skill id="7" name="Präzisionsumarmung">
             <precision>10</precision>
                 <description>*#ffa500 Präzisionsumarmung*
 #white Erhöht die Präzision um 10.</description>
         </skill>
 
-        <skill id="8">
+        <skill id="8" name="Höchst kritische Umarmung">
             <criticalHit>10</criticalHit>
                 <description>*#ffa500 Höchst kritische Umarmung*
 #white Erhöht die kritische Trefferchance um 10%.</description>

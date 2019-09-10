@@ -14,5 +14,6 @@ void CFontManager::LoadFonts()
 	f_tiza.loadFromFile("Data/Fonts/tiza.ttf");
 	f_shanghai.loadFromFile("Data/Fonts/shanghai.ttf");
 	f_blackwoodCastle.loadFromFile("Data/Fonts/blackwoodCastle.ttf");
+	f_showcard.loadFromFile("Data/Fonts/showcard.ttf");
 }
 

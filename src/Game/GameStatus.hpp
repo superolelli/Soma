@@ -22,6 +22,7 @@ public:
 	void RemoveCards(int _amount);
 
 	bool IsSkillAcquired(int player, int ability, int skill);
+	void AcquireSkill(int player, int ability, int skill);
 
 	int bangLevel;
 	int kutschfahrtLevel;
