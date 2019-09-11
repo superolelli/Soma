@@ -12,6 +12,8 @@ struct PossibleAims
     bool position[8];
 	bool attackAll;
     int howMany;
+
+	void applySkill(const PossibleAims &_aims);
 };
 
 
@@ -28,6 +30,7 @@ struct AbilityEffect
     bool removeDebuffs;
     Buff buff;
 
+	void applySkill(const AbilityEffect &_effect);
 	void clear();
 };
 
@@ -43,9 +46,12 @@ struct Ability
     AbilityEffect effectFriendly;
     AbilityEffect effectHostile;
 
+	bool canTargetEnemiesOrFriends;
+
 	int precisionModificator;
 	int criticalHitModificator;
 	float lessTargetsMoreDamage;
 
+	void applySkill (const Ability &_ability);
 	void clear();
 };

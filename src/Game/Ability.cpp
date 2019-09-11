@@ -15,6 +15,33 @@ void AbilityEffect::clear()
 	buff.SetStandardValues();
 }
 
+void AbilityEffect::applySkill(const AbilityEffect &_effect)
+{
+	damageFactor += _effect.damageFactor;
+	heal += _effect.heal;
+	healSelf += _effect.healSelf;
+	confusion += _effect.confusion;
+	confusionProbability += _effect.confusionProbability;
+	mark += _effect.mark;
+	putToSleepProbability += _effect.putToSleepProbability;
+	removeBuffs = removeBuffs || _effect.removeBuffs;
+	removeDebuffs = removeDebuffs || _effect.removeDebuffs;
+	buff.ApplySkill(_effect.buff);
+}
+
+
+
+void Ability::applySkill(const Ability & _ability)
+{
+	precisionModificator += _ability.precisionModificator;
+	criticalHitModificator += _ability.criticalHitModificator;
+	lessTargetsMoreDamage += _ability.lessTargetsMoreDamage;
+
+	possibleAims.applySkill(_ability.possibleAims);
+	effectFriendly.applySkill(_ability.effectFriendly);
+	effectHostile.applySkill(_ability.effectHostile);
+}
+
 
 void Ability::clear()
 {
@@ -26,7 +53,20 @@ void Ability::clear()
 	effectFriendly.clear();
 	effectHostile.clear();
 
+	canTargetEnemiesOrFriends = false;
+
 	precisionModificator = 0;
 	criticalHitModificator = 0;
 	lessTargetsMoreDamage = 0.0f;
+}
+
+void PossibleAims::applySkill(const PossibleAims & _aims)
+{
+	attackAll = attackAll || _aims.attackAll;
+	howMany += _aims.howMany;
+	
+	for (int i = 0; i < 8; i++)
+	{
+		position[i] = position[i] || _aims.position[i];
+	}
 }

@@ -154,11 +154,14 @@ namespace pugi {
 				loadAbilityEffectFromXML(effect, ability.effectFriendly);
 				ability.effectHostile = ability.effectFriendly;
 			}
-			else if (std::strcmp(effect.attribute("target").as_string(), "friend") == 0)
-				loadAbilityEffectFromXML(effect, ability.effectFriendly);
-			else
-				loadAbilityEffectFromXML(effect, ability.effectHostile);
-			
+			else {
+				ability.canTargetEnemiesOrFriends = true;
+
+				if (std::strcmp(effect.attribute("target").as_string(), "friend") == 0)
+					loadAbilityEffectFromXML(effect, ability.effectFriendly);
+				else
+					loadAbilityEffectFromXML(effect, ability.effectHostile);
+			}
 		}
 	}
 

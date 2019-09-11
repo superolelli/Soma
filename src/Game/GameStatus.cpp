@@ -1,4 +1,5 @@
 #include "GameStatus.hpp"
+#include "Resources\ObjectPropertiesManager.hpp"
 
 void GameStatus::Init(CGameEngine * _engine)
 {
@@ -60,7 +61,11 @@ bool GameStatus::IsSkillAcquired(int player, int ability, int skill)
 
 void GameStatus::AcquireSkill(int player, int ability, int skill)
 {
-	skillAcquired[player][ability][skill] = true;
+	if (!skillAcquired[player][ability][skill])
+	{
+		skillAcquired[player][ability][skill] = true;
+		g_pObjectProperties->playerAbilities[player][ability].applySkill(g_pObjectProperties->skills[player][ability][skill]);
+	}
 }
 
 int GameStatus::GetDiceAmount()

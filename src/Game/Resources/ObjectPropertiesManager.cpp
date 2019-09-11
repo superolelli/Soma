@@ -84,6 +84,7 @@ void ObjectPropertiesManager::LoadSkills()
 	default.clear();
 
 	loadAbilityFromXML(doc.child("ability"), default);
+	default.possibleAims.howMany = 0;
 
 	LoadSkillsOfSpecificPlayer("Data/XML/SkillsSimon.xml", CombatantID::Simon, default);
 	LoadSkillsOfSpecificPlayer("Data/XML/SkillsOle.xml", CombatantID::Ole, default);

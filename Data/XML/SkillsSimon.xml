@@ -281,6 +281,7 @@ gegen Gegner um 10%.</description>
 
         <skill id="7" name="Verlängerte Hetzjagd">
             <effect>
+                <mark>2</mark>
                 <buff>
                     <duration>2</duration>
                 </buff>

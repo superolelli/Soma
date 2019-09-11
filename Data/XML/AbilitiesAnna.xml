@@ -70,7 +70,7 @@ Schlaf: 25%</description>
             <value id="7">true</value>
         </positions>
 
-        <effect target="enemy">
+        <effect>
             <damageFactor>0.4</damageFactor>
         </effect>
 
