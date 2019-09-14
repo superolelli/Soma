@@ -19,10 +19,10 @@
     </positions>
 
     <precision>0</precision>
-    <criticalHit>0</criticalHit>
-    <lessTargetsMoreDamage>0</lessTargetsMoreDamage>
 
     <effect>
+		<criticalHit>0</criticalHit>
+		<lessTargetsMoreDamage>0</lessTargetsMoreDamage>
         <damageFactor>0</damageFactor>
         <heal>0</heal>
         <healSelf>0</healSelf>

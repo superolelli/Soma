@@ -213,7 +213,7 @@ als Ziel gewählt werden.</description>
         </skill>
 
         <skill id="8" name="Präzisionsnasenflügel">
-            <precision>10</precision>
+				<precision>10</precision>
                 <description>*#ffa500 Präzisionsnasenflügel*
 #white Erhöht die Präzision um 10.</description>
         </skill>
@@ -269,13 +269,15 @@ als Ziel gewählt werden.</description>
         </skill>
 
         <skill id="7" name="Präzisionsumarmung">
-            <precision>10</precision>
+				<precision>10</precision>
                 <description>*#ffa500 Präzisionsumarmung*
 #white Erhöht die Präzision um 10.</description>
         </skill>
 
         <skill id="8" name="Höchst kritische Umarmung">
-            <criticalHit>10</criticalHit>
+			<effect>
+				<criticalHit>10</criticalHit>
+			</effect>
                 <description>*#ffa500 Höchst kritische Umarmung*
 #white Erhöht die kritische Trefferchance um 10%.</description>
         </skill>

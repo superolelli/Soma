@@ -135,7 +135,7 @@ void Combatant::RenderShadow()
 
 
 
-void Combatant::StartTargetsAttackedAnimation()
+void Combatant::StartTargetsAttackedAnimation(int _abilityPrecision)
 {
 	for (Combatant *c : selectedTargets)
 	{
@@ -146,7 +146,7 @@ void Combatant::StartTargetsAttackedAnimation()
 
 			if ((c->IsPlayer() ^ this->IsPlayer()) || actsInConfusion) //^ = XOR
 			{
-				if (c->CheckForDodging(this))
+				if (c->CheckForDodging(this, _abilityPrecision))
 					c->StartDodgingAnimation();
 				else
 					c->StartAttackedAnimation();
@@ -276,15 +276,14 @@ bool Combatant::AbilityEffectIsPlaying()
 }
 
 
-bool Combatant::CheckForDodging(Combatant *_attacker)
+bool Combatant::CheckForDodging(Combatant *_attacker, int _precisionModificator)
 {
-	int difference = status.GetDodge() - _attacker->Status().GetPrecision();
+	int difference = status.GetDodge() - (_attacker->Status().GetPrecision() + _precisionModificator);
 	if (rand()%100 < difference * 2)
 		return true;
 
 	return false;
 }
-
 
 void Combatant::RenderAbilityTargetMarker()
 {
@@ -304,12 +303,12 @@ void Combatant::RenderTurnMarker()
 
 
 
-void Combatant::ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & _effect)
+void Combatant::ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & _effect, float _additionalDamageFactor)
 {
 	if (_effect.damageFactor != 0) 
 	{
-		auto damage = status.GetDamage() * _effect.damageFactor;
-		if (rand() % 100 < status.GetCriticalHit())
+		auto damage = status.GetDamage() * (_effect.damageFactor + _additionalDamageFactor);
+		if (rand() % 100 < status.GetCriticalHit() + _effect.criticalHitModificator)
 		{
 			_target->Status().LooseHealth(damage * 2, true);
 		}

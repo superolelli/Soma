@@ -9,7 +9,9 @@
         </skill>
 
         <skill id="2" name="Kritischer Schlag">
-            <criticalHit>5</criticalHit>
+			<effect>
+				<criticalHit>5</criticalHit>
+			</effect>
                 <description>*#ffa500 Kritischer Schlag*
 #white Erhöht die kritische Trefferchance um 5.</description>
         </skill>
@@ -45,13 +47,15 @@
         </skill>
 
         <skill id="7" name="Präziser Schlag">
-            <precision>10</precision>
+				<precision>10</precision>
                 <description>*#ffa500 Präziser Schlag*
 #white Erhöht die Präzision um 10.</description>
         </skill>
 
         <skill id="8" name="Weniger ist mehr">
-            <lessTargetsMoreDamage>0.1</lessTargetsMoreDamage>
+			<effect>
+				<lessTargetsMoreDamage>0.1</lessTargetsMoreDamage>
+			</effect>
                 <description>*#ffa500 Weniger ist mehr*
 #white Werden weniger Gegner angegriffen, als durch
 diese Fähigkeit möglich wäre, wird der Schadensfaktor um 10%

@@ -5,6 +5,9 @@ void GameStatus::Init(CGameEngine * _engine)
 {
 	engine = _engine;
 
+	dice = 20;
+	cards = 0;
+
 	statusBar.Load(g_pTextures->statusBar);
 	statusBar.SetPos(engine->GetWindowSize().x - statusBar.GetGlobalRect().width, 0);
 
@@ -13,19 +16,16 @@ void GameStatus::Init(CGameEngine * _engine)
 	//diceAmountText.setOutlineColor(sf::Color::Black);
 	//diceAmountText.setOutlineThickness(2);
 	diceAmountText.setFont(g_pFonts->f_kingArthur);
-	diceAmountText.setString("0");
+	diceAmountText.setString(std::to_string(dice));
 
 	cardsAmountText.setCharacterSize(14);
 	cardsAmountText.setFillColor(sf::Color::White);
 	//cardsAmountText.setOutlineColor(sf::Color::Black);
 	//cardsAmountText.setOutlineThickness(2);
 	cardsAmountText.setFont(g_pFonts->f_kingArthur);
-	cardsAmountText.setString("0");
+	cardsAmountText.setString(std::to_string(cards));
 
 	PositionComponentsRelativeToPanel();
-
-	dice = 0;
-	cards = 0;
 
 	for (int i = 0; i < 4; i++)
 	{

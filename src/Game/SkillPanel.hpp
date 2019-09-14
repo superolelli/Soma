@@ -36,6 +36,8 @@ private:
 	CSprite skills[4][4][8];
 	CSprite currentSkillFrame;
 
+	int skillCost[8] = {1, 3, 5, 1, 3, 5, 7, 8};
+
 	sf::Text currentPlayerName;
 	sf::Text panelTitle;
 	sf::Text abilityName[4];
@@ -51,6 +53,7 @@ private:
 	void ShowTooltip(int _skill);
 
 	void UpdateChosenSkillName();
+	void UpdateAbilityNames();
 
 	void RecolorSkills();
 

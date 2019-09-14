@@ -60,6 +60,12 @@ namespace pugi {
 
     void loadAbilityEffectFromXML(const xml_node & effectNode, AbilityEffect & effect)
     {
+		if (effectNode.child("criticalHit"))
+			effect.criticalHitModificator = effectNode.child("criticalHit").text().as_int();
+
+		if (effectNode.child("lessTargetsMoreDamage"))
+			effect.lessTargetsMoreDamage = effectNode.child("lessTargetsMoreDamage").text().as_float();
+
 		if (effectNode.child("damageFactor"))
 			effect.damageFactor = effectNode.child("damageFactor").text().as_float();
 
@@ -140,12 +146,6 @@ namespace pugi {
 
 		if (abilityNode.child("precision"))
 			ability.precisionModificator = abilityNode.child("precision").text().as_int();
-
-		if (abilityNode.child("criticalHit"))
-			ability.criticalHitModificator = abilityNode.child("criticalHit").text().as_int();
-
-		if(abilityNode.child("lessTargetsMoreDamage"))
-			ability.lessTargetsMoreDamage = abilityNode.child("lessTargetsMoreDamage").text().as_float();
 
 		for (auto &effect : abilityNode.children("effect"))
 		{

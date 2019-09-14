@@ -51,7 +51,7 @@ void Player::Update(int _xMove, bool _is_walking)
 	{
 		abilityStatus = executing;
 		StartAbilityAnimation(gui->GetCurrentAbility());
-		StartTargetsAttackedAnimation();
+		StartTargetsAttackedAnimation(g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].precisionModificator);
 	}
 	
 
@@ -171,9 +171,15 @@ void Player::DoCurrentAbility()
 		for (Combatant *t : selectedTargets)
 		{
 			if (t->IsPlayer() && !actsInConfusion)
-				ApplyAbilityEffectToTarget(t, ability.effectFriendly);
-			else if(t->GetAbilityStatus() != dodging)
-				ApplyAbilityEffectToTarget(t, ability.effectHostile);
+			{
+				float additionalDamage = ability.effectFriendly.lessTargetsMoreDamage * (ability.possibleAims.howMany - selectedTargets.size());
+				ApplyAbilityEffectToTarget(t, ability.effectFriendly, additionalDamage);
+			}
+			else if (t->GetAbilityStatus() != dodging)
+			{
+				float additionalDamage = ability.effectHostile.lessTargetsMoreDamage * (ability.possibleAims.howMany - selectedTargets.size());
+				ApplyAbilityEffectToTarget(t, ability.effectHostile, additionalDamage);
+			}
 		}
 
 		SetAnimation("idle", IDLE_ANIMATION_SPEED);

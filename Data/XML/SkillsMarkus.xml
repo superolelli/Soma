@@ -3,19 +3,21 @@
 <Skills>
     <fist_of_revenge abilityID="0">
         <skill id="1" name="Präzisionsfaust I">
-            <precision>7</precision>
+				<precision>7</precision>
                     <description>*#ffa500 Präzisionsfaust I*
 #white Erhöht die Präzision um 7.</description>
         </skill>
 
         <skill id="2" name="Kritischer Schlag">
-            <criticalHit>5</criticalHit>
+			<effect>
+				<criticalHit>5</criticalHit>
+			</effect>
                     <description>*#ffa500 Kritischer Schlag*
 #white Erhöht die kritische Trefferchance um 5.</description>
         </skill>
 
         <skill id="3" name="Präzisionsfaust II">
-            <precision>7</precision>
+				<precision>7</precision>
                     <description>*#ffa500 Präzisionsfaust II*
 #white Erhöht die Präzision um 7.</description>
         </skill>
@@ -112,13 +114,15 @@ als Ziel gewählt werden.</description>
         </skill>
 
         <skill id="7" name="Präzisionsnase">
-            <precision>10</precision>
+				<precision>10</precision>
                     <description>*#ffa500 Präzisionsnase*
 #white Erhöht die Präzision um 10.</description>
         </skill>
 
         <skill id="8" name="Kritischer Nasenrammer">
-            <criticalHit>5</criticalHit>
+			<effect>
+				<criticalHit>5</criticalHit>
+			</effect>
                 <description>*#ffa500 Kritischer Nasenrammer*
 #white Erhöht die kritische Trefferchance um 5.</description>
         </skill>
@@ -174,13 +178,15 @@ als Ziel gewählt werden.</description>
         </skill>
 
         <skill id="7" name="Präzisionszerstörung">
-            <precision>10</precision>
+				<precision>10</precision>				
                 <description>*#ffa500 Präzisionszerstörung*
 #white Erhöht die Präzision um 10.</description>
         </skill>
 
         <skill id="8" name="Kritische Zerstörung">
-            <criticalHit>5</criticalHit>
+			<effect>
+				<criticalHit>5</criticalHit>
+			</effect>
                 <description>*#ffa500 Kritische Zerstörung*
 #white Erhöht die kritische Trefferchance um 5.</description>
         </skill>
@@ -244,7 +250,7 @@ Der Schaden des Ziels wird um 3 verringert.</description>
         </skill>
 
         <skill id="7" name="Präzisionsgrinsen">
-            <precision>10</precision>
+				<precision>10</precision>
                 <description>*#ffa500 Präzisionsgrinsen*
 #white Erhöht die Präzision um 10.</description>
         </skill>

@@ -108,9 +108,9 @@ protected:
 	void RenderAbilityEffects();
 	void RenderShadow();
 
-	virtual void ApplyAbilityEffectToTarget(Combatant *_target, AbilityEffect &_effect);
+	virtual void ApplyAbilityEffectToTarget(Combatant *_target, AbilityEffect &_effect, float _additionalDamageFactor = 0.0f);
 
-	void StartTargetsAttackedAnimation();
+	void StartTargetsAttackedAnimation(int _abilityPrecision);
 	void StopTargetsAttackedAnimation();
 
 	void ScaleForAbilityAnimation();
@@ -122,5 +122,5 @@ protected:
 	void ReloadAbilityEffectPoint();
 
 	bool AbilityEffectIsPlaying();
-	bool CheckForDodging(Combatant *_attacker);
+	bool CheckForDodging(Combatant *_attacker, int _precisionModificator);
 };

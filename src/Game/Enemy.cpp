@@ -161,12 +161,19 @@ void Enemy::ChooseRandomEnemy()
 
 bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
+	auto &ability = g_pObjectProperties->enemyAbilities[chosenAbility];
 	for (Combatant *t : selectedTargets)
 	{
 		if (!t->IsPlayer() || actsInConfusion)
-			ApplyAbilityEffectToTarget(t, g_pObjectProperties->enemyAbilities[chosenAbility].effectFriendly);
-		else if(t->GetAbilityStatus() != dodging)
-			ApplyAbilityEffectToTarget(t, g_pObjectProperties->enemyAbilities[chosenAbility].effectHostile);
+		{
+			float additionalDamage = ability.effectFriendly.lessTargetsMoreDamage * (ability.possibleAims.howMany - selectedTargets.size());
+			ApplyAbilityEffectToTarget(t, ability.effectFriendly, additionalDamage);
+		}
+		else if (t->GetAbilityStatus() != dodging)
+		{
+			float additionalDamage = ability.effectHostile.lessTargetsMoreDamage * (ability.possibleAims.howMany - selectedTargets.size());
+			ApplyAbilityEffectToTarget(t, ability.effectHostile, additionalDamage);
+		}
 	}
 
 	return true;
@@ -229,7 +236,7 @@ void Enemy::AnnounceAndStartAbilityAnimation()
 	if (abilityAnnouncementTime <= 0.0f)
 	{
 		StartAbilityAnimation(chosenAbility);
-		StartTargetsAttackedAnimation();
+		StartTargetsAttackedAnimation(g_pObjectProperties->playerAbilities[GetID()][chosenAbility].precisionModificator);
 		abilityStatus = executing;
 	}
 }

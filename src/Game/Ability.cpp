@@ -3,6 +3,9 @@
 
 void AbilityEffect::clear()
 {
+	criticalHitModificator = 0;
+	lessTargetsMoreDamage = 0.0f;
+
 	damageFactor = 0.0f;
 	heal = 0;
 	healSelf = 0;
@@ -17,6 +20,9 @@ void AbilityEffect::clear()
 
 void AbilityEffect::applySkill(const AbilityEffect &_effect)
 {
+	criticalHitModificator += _effect.criticalHitModificator;
+	lessTargetsMoreDamage += _effect.lessTargetsMoreDamage;
+
 	damageFactor += _effect.damageFactor;
 	heal += _effect.heal;
 	healSelf += _effect.healSelf;
@@ -34,8 +40,6 @@ void AbilityEffect::applySkill(const AbilityEffect &_effect)
 void Ability::applySkill(const Ability & _ability)
 {
 	precisionModificator += _ability.precisionModificator;
-	criticalHitModificator += _ability.criticalHitModificator;
-	lessTargetsMoreDamage += _ability.lessTargetsMoreDamage;
 
 	possibleAims.applySkill(_ability.possibleAims);
 	effectFriendly.applySkill(_ability.effectFriendly);
@@ -56,8 +60,6 @@ void Ability::clear()
 	canTargetEnemiesOrFriends = false;
 
 	precisionModificator = 0;
-	criticalHitModificator = 0;
-	lessTargetsMoreDamage = 0.0f;
 }
 
 void PossibleAims::applySkill(const PossibleAims & _aims)

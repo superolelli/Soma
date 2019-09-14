@@ -19,6 +19,9 @@ struct PossibleAims
 
 struct AbilityEffect
 {
+	int criticalHitModificator;
+	float lessTargetsMoreDamage;
+
     float damageFactor;
     int heal;
     int healSelf;
@@ -49,8 +52,6 @@ struct Ability
 	bool canTargetEnemiesOrFriends;
 
 	int precisionModificator;
-	int criticalHitModificator;
-	float lessTargetsMoreDamage;
 
 	void applySkill (const Ability &_ability);
 	void clear();

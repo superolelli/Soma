@@ -69,13 +69,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\SFML-2.5.1\include;$(SolutionDir)Dependencies\boost_1_61_0;F:\Soma\Dependencies\sfe-movie\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.5.1\lib;$(SolutionDir)Dependencies\boost_1_61_0\libs;F:\Soma\Dependencies\sfe-movie\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\SFML-2.5.1\include;$(SolutionDir)Dependencies\boost_1_61_0;$(SolutionDir)\Dependencies\sfe-movie\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.5.1\lib;$(SolutionDir)Dependencies\boost_1_61_0\libs;$(SolutionDir)\Dependencies\sfe-movie\lib;$(LibraryPath)</LibraryPath>
     <IntDir>$(Configuration)\temps\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\SFML-2.5.1\include;$(SolutionDir)Dependencies\boost_1_61_0;F:\Soma\Dependencies\sfe-movie\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.5.1\lib;$(SolutionDir)Dependencies\boost_1_61_0\libs;F:\Soma\Dependencies\sfe-movie\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\SFML-2.5.1\include;$(SolutionDir)Dependencies\boost_1_61_0;$(SolutionDir)\Dependencies\sfe-movie\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.5.1\lib;$(SolutionDir)Dependencies\boost_1_61_0\libs;$(SolutionDir)\Dependencies\sfe-movie\lib;$(LibraryPath)</LibraryPath>
     <IntDir>$(Configuration)\temps\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

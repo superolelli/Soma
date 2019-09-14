@@ -12,7 +12,7 @@ public:
 
 private:
 	void ChooseAbility() override;
-	void ApplyAbilityEffectToTarget(Combatant *_target, AbilityEffect &_effect) override;
+	void ApplyAbilityEffectToTarget(Combatant *_target, AbilityEffect &_effect, float _additionalDamageFactor = 0.0f) override;
 
 	bool OnlyOneCompanionLeft();
 

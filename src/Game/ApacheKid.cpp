@@ -16,7 +16,7 @@ void ApacheKid::ChooseAbility()
 }
 
 
-void ApacheKid::ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & _effect)
+void ApacheKid::ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & _effect, float _additionalDamageFactor)
 {
 	if (chosenAbility == enemyAbilities::indians)
 	{
@@ -25,7 +25,7 @@ void ApacheKid::ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & 
 	}
 	else
 	{
-		Combatant::ApplyAbilityEffectToTarget(_target, _effect);
+		Combatant::ApplyAbilityEffectToTarget(_target, _effect, _additionalDamageFactor);
 	}
 }
 

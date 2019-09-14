@@ -145,9 +145,6 @@ void BattleGUI::GenerateTooltipString(std::string & _tooltip, int _ability)
 	if (currentAbility.precisionModificator != 0)
 		_tooltip.append("#white Präzision: " + std::to_string(currentAbility.precisionModificator) + "\n");
 
-	if (currentAbility.criticalHitModificator != 0)
-		_tooltip.append("#white Kritische Trefferchance: " + std::to_string(currentAbility.criticalHitModificator) + "\n");
-
 	if (currentAbility.canTargetEnemiesOrFriends)
 	{
 		_tooltip.append("#888888 Auf Freund\n");
@@ -177,12 +174,15 @@ void BattleGUI::AppendTooltipStringForOneTarget(std::string & _tooltip, int _abi
 	if (_indent)
 		indentation = "\t";
 
+	if (effect->criticalHitModificator != 0)
+		_tooltip.append("#white Kritische Trefferchance: " + std::to_string(effect->criticalHitModificator) + "\n");
+
 	if (effect->damageFactor != 0)
 		_tooltip.append(indentation + "#white Schadensfaktor: " + std::to_string(static_cast<int>(effect->damageFactor * 100)) + "%\n");
 
-	if (currentAbility.lessTargetsMoreDamage != 0)
+	if (effect->lessTargetsMoreDamage != 0)
 		_tooltip.append("#aa5000 Werden weniger als " + std::to_string(currentAbility.possibleAims.howMany) + " Gegner attackiert,\n"
-			+ "steigt der Schadensfaktor pro fehlendem\nGegner um " + std::to_string(static_cast<int>(currentAbility.lessTargetsMoreDamage * 100)) + " Prozentpunkte\n");
+			+ "steigt der Schadensfaktor pro fehlendem\nGegner um " + std::to_string(static_cast<int>(effect->lessTargetsMoreDamage * 100)) + " Prozentpunkte\n");
 
 	if (effect->confusion != 0)
 		_tooltip.append(indentation + "#bb77bb Verwirrung (" + std::to_string(effect->confusion) + " Runden): " + std::to_string(static_cast<int>(effect->confusionProbability * 100)) + "%\n");

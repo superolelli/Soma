@@ -181,8 +181,12 @@ void SkillPanel::Update()
 
 		if (buttonBuy.Update(*engine) == true && SkillCanBeAcquired(currentPlayer, currentAbility, currentSkill))
 		{
-			gameStatus->AcquireSkill(currentPlayer, currentAbility, currentSkill);
-			RecolorSkills();
+			if (gameStatus->GetDiceAmount() >= skillCost[currentSkill])
+			{
+				gameStatus->RemoveDice(skillCost[currentSkill]);
+				gameStatus->AcquireSkill(currentPlayer, currentAbility, currentSkill);
+				RecolorSkills();
+			}
 		}
 
 		if (currentPlayer > 3)
@@ -195,12 +199,7 @@ void SkillPanel::Update()
 			currentPlayerName.setString(g_pStringContainer->combatantNames[currentPlayer]);
 			currentPlayerName.setPosition(skillPanel.GetGlobalRect().left + 52 + (162 - currentPlayerName.getLocalBounds().width) / 2, skillPanel.GetGlobalRect().top + 55);
 
-			for (int i = 0; i < 4; i++)
-			{
-				abilityName[i].setString(g_pObjectProperties->playerAbilities[currentPlayer][i].name);
-				abilityName[i].setPosition(skillPanel.GetGlobalRect().left + 224 - abilityName[i].getGlobalBounds().width / 2, skillPanel.GetGlobalRect().top + 235 + i * 155);
-			}
-
+			UpdateAbilityNames();
 			UpdateChosenSkillName();
 		}
 
@@ -234,6 +233,23 @@ void SkillPanel::UpdateChosenSkillName()
 	chosenSkillName.setPosition(skillPanel.GetGlobalRect().left + 700 - chosenSkillName.getGlobalBounds().width / 2, skillPanel.GetGlobalRect().top + 810);
 }
 
+
+void SkillPanel::UpdateAbilityNames()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		abilityName[i].setString(g_pObjectProperties->playerAbilities[currentPlayer][i].name);
+
+		if (abilityName[i].getGlobalBounds().width >= 346)
+		{
+			sf::String newString = abilityName[i].getString();
+			newString.insert(abilityName[i].getString().find(" ") + 1, "\n");
+			abilityName[i].setString(newString);
+		}
+
+		abilityName[i].setPosition(skillPanel.GetGlobalRect().left + 224 - abilityName[i].getGlobalBounds().width / 2, skillPanel.GetGlobalRect().top + 235 + i * 155);
+	}
+}
 
 void SkillPanel::Render()
 {
@@ -339,6 +355,9 @@ void SkillPanel::ShowTooltip(int _skill)
 
 bool SkillPanel::SkillCanBeAcquired(int _player, int _ability, int _skill)
 {
+	if (gameStatus->IsSkillAcquired(_player, _ability, _skill))
+		return false;
+
 	if (_skill == 0 || _skill == 3)
 		return true;
 
