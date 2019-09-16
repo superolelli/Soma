@@ -95,6 +95,9 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 	currentSkillFrame.Load(g_pTextures->skillPanelSelectedSkillFrame);
 	currentSkillFrame.SetPos(skills[currentPlayer][currentAbility][currentSkill].GetGlobalRect().left - 36, skills[currentPlayer][currentAbility][currentSkill].GetGlobalRect().top - 37);
 
+	diceSymbol.Load(g_pTextures->skillPanelDice);
+	diceSymbol.SetPos(skillPanel.GetGlobalRect().left + 1240, skillPanel.GetGlobalRect().top + 795);
+
 	currentPlayerName.setCharacterSize(47);
 	currentPlayerName.setFont(g_pFonts->f_blackwoodCastle);
 	currentPlayerName.setFillColor(sf::Color::Black);
@@ -122,6 +125,14 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 	chosenSkillName.setString(g_pObjectProperties->skills[currentPlayer][currentAbility][currentSkill].name);
 	chosenSkillName.setPosition(skillPanel.GetGlobalRect().left + 700 - chosenSkillName.getGlobalBounds().width / 2, skillPanel.GetGlobalRect().top + 810);
 
+	chosenSkillPrice.setCharacterSize(26);
+	chosenSkillPrice.setFont(g_pFonts->f_kingArthur);
+	chosenSkillPrice.setFillColor(sf::Color::White);
+	chosenSkillPrice.setOutlineColor(sf::Color::Black);
+	chosenSkillPrice.setOutlineThickness(3);
+	chosenSkillPrice.setString(std::to_string(skillCost[currentSkill]));
+	chosenSkillPrice.setPosition(diceSymbol.GetGlobalRect().left + 65, diceSymbol.GetGlobalRect().top + 20);
+
 	buttonNext.Load(g_pTextures->skillPanelButtonNext, Buttontypes::Up);
 	buttonNext.SetPos(skillPanel.GetGlobalRect().left + 217, skillPanel.GetGlobalRect().top + 66);
 
@@ -135,7 +146,7 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 	buttonBuy.SetButtonstring("Kaufen");
 	buttonBuy.SetButtontextFont(g_pFonts->f_trajan);
 	buttonBuy.SetButtontextCharactersize(30);
-	buttonBuy.SetPos(skillPanel.GetGlobalRect().left + 985, skillPanel.GetGlobalRect().top + 789);
+	buttonBuy.SetPos(skillPanel.GetGlobalRect().left + 984, skillPanel.GetGlobalRect().top + 789);
 
 	abilityPanelRect[0].left = skillPanel.GetGlobalRect().left + 51;
 	abilityPanelRect[0].top = skillPanel.GetGlobalRect().top + 176;
@@ -186,6 +197,7 @@ void SkillPanel::Update()
 				gameStatus->RemoveDice(skillCost[currentSkill]);
 				gameStatus->AcquireSkill(currentPlayer, currentAbility, currentSkill);
 				RecolorSkills();
+				UpdateCurrentSkillFrame();
 			}
 		}
 
@@ -201,6 +213,8 @@ void SkillPanel::Update()
 
 			UpdateAbilityNames();
 			UpdateChosenSkillName();
+			chosenSkillPrice.setString(std::to_string(skillCost[currentSkill]));
+			UpdateCurrentSkillFrame();
 		}
 
 
@@ -211,6 +225,8 @@ void SkillPanel::Update()
 				currentAbility = i;
 				bridgePiece.SetPos(skillPanel.GetGlobalRect().left + 525, abilityPanelRect[i].top);
 				UpdateChosenSkillName();
+				chosenSkillPrice.setString(std::to_string(skillCost[currentSkill]));
+				UpdateCurrentSkillFrame();
 			}
 		}
 
@@ -221,6 +237,8 @@ void SkillPanel::Update()
 				currentSkill = i;
 				currentSkillFrame.SetPos(skills[currentPlayer][currentAbility][currentSkill].GetGlobalRect().left - 36, skills[currentPlayer][currentAbility][currentSkill].GetGlobalRect().top - 37);
 				UpdateChosenSkillName();
+				chosenSkillPrice.setString(std::to_string(skillCost[currentSkill]));
+				UpdateCurrentSkillFrame();
 			}
 		}
 	}
@@ -231,6 +249,18 @@ void SkillPanel::UpdateChosenSkillName()
 {
 	chosenSkillName.setString(g_pObjectProperties->skills[currentPlayer][currentAbility][currentSkill].name);
 	chosenSkillName.setPosition(skillPanel.GetGlobalRect().left + 700 - chosenSkillName.getGlobalBounds().width / 2, skillPanel.GetGlobalRect().top + 810);
+}
+
+
+void SkillPanel::UpdateCurrentSkillFrame()
+{
+	if (!SkillCanBeAcquired(currentPlayer, currentAbility, currentSkill) &&
+		!gameStatus->IsSkillAcquired(currentPlayer, currentAbility, currentSkill))
+	{
+		currentSkillFrame.SetColor(180, 150, 150);
+	}
+	else
+		currentSkillFrame.SetColor(255, 255, 255);
 }
 
 
@@ -292,10 +322,16 @@ void SkillPanel::Render()
 		for(auto &n : abilityName)
 			engine->GetWindow().draw(n);
 
+		if (!gameStatus->IsSkillAcquired(currentPlayer, currentAbility, currentSkill))
+		{
+			diceSymbol.Render(engine->GetWindow());
+			engine->GetWindow().draw(chosenSkillPrice);
+			buttonBuy.Render(*engine);
+		}
+
 		buttonNext.Render(*engine);
 		buttonPrevious.Render(*engine);
 		buttonClose.Render(*engine);
-		buttonBuy.Render(*engine);
 
 		for (int i = 0; i < 8; i++)
 		{

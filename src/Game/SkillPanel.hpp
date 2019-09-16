@@ -31,6 +31,7 @@ private:
 	CSprite abilityPlaceholders;
 	CSprite connectionsNotSkilled[6];
 	CSprite connectionsSkilled[6];
+	CSprite diceSymbol;
 
 	CSprite abilities[4][4];
 	CSprite skills[4][4][8];
@@ -42,6 +43,7 @@ private:
 	sf::Text panelTitle;
 	sf::Text abilityName[4];
 	sf::Text chosenSkillName;
+	sf::Text chosenSkillPrice;
 
 	CButton buttonNext;
 	CButton buttonPrevious;
@@ -54,6 +56,7 @@ private:
 
 	void UpdateChosenSkillName();
 	void UpdateAbilityNames();
+	void UpdateCurrentSkillFrame();
 
 	void RecolorSkills();
 

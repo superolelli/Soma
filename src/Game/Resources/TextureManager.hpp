@@ -41,6 +41,7 @@ public:
 	sf::Texture skillPanelSkilledIndicator;
 	sf::Texture skillPanelConnectionsSkilled[4];
 	sf::Texture skillPanelConnectionsNotSkilled[4];
+	sf::Texture skillPanelDice;
 	sf::Texture skillPanelButtonNext;
 	sf::Texture skillPanelButtonPrevious;
 	sf::Texture skillPanelButtonClose;

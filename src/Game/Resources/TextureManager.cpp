@@ -80,6 +80,8 @@ void CTextureManager::LoadTextures()
 	skillPanelConnectionsNotSkilled[2].loadFromFile("Data/Sprites/Panels & Buttons/Skill_Panel/connection_2_not_skilled.png");
 	skillPanelConnectionsNotSkilled[3].loadFromFile("Data/Sprites/Panels & Buttons/Skill_Panel/connection_4_not_skilled.png");
 
+	skillPanelDice.loadFromFile("Data/Sprites/Panels & Buttons/Skill_Panel/dice.png");
+
 	skillPanelButtonNext.loadFromFile("Data/Sprites/Panels & Buttons/Skill_Panel/button_next.png");
 	skillPanelButtonPrevious.loadFromFile("Data/Sprites/Panels & Buttons/Skill_Panel/button_previous.png");
 	skillPanelButtonClose.loadFromFile("Data/Sprites/Panels & Buttons/Skill_Panel/close_button.png");
