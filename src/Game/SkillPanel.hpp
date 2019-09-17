@@ -57,6 +57,7 @@ private:
 	void UpdateChosenSkillName();
 	void UpdateAbilityNames();
 	void UpdateCurrentSkillFrame();
+	void UpdateBuyButton();
 
 	void RecolorSkills();
 

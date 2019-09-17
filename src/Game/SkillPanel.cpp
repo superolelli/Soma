@@ -215,6 +215,7 @@ void SkillPanel::Update()
 			UpdateChosenSkillName();
 			chosenSkillPrice.setString(std::to_string(skillCost[currentSkill]));
 			UpdateCurrentSkillFrame();
+			UpdateBuyButton();
 		}
 
 
@@ -227,6 +228,7 @@ void SkillPanel::Update()
 				UpdateChosenSkillName();
 				chosenSkillPrice.setString(std::to_string(skillCost[currentSkill]));
 				UpdateCurrentSkillFrame();
+				UpdateBuyButton();
 			}
 		}
 
@@ -239,9 +241,19 @@ void SkillPanel::Update()
 				UpdateChosenSkillName();
 				chosenSkillPrice.setString(std::to_string(skillCost[currentSkill]));
 				UpdateCurrentSkillFrame();
+				UpdateBuyButton();
 			}
 		}
 	}
+}
+
+
+void SkillPanel::UpdateBuyButton()
+{
+	if (SkillCanBeAcquired(currentPlayer, currentAbility, currentSkill))
+		buttonBuy.SetEnabled();
+	else
+		buttonBuy.SetDisabled();
 }
 
 

@@ -27,6 +27,9 @@ public:
 	void SetButtontextColor(sf::Color const &_color);
 	void SetButtontextStyle(sf::Text::Style _style);
 
+	void SetDisabled();
+	void SetEnabled();
+
 	//sets the buttonstring
 	void SetButtonstring(std::string const &_buttonstring);
 
@@ -47,6 +50,8 @@ private:
 	sf::Text m_Buttontext; 
 
 	float nextFrame;
+
+	bool isEnabled;
 
 	void RenderButtontext(CGameEngine &_engine);
 

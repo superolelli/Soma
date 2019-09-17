@@ -39,6 +39,9 @@ private:
 
 	sf::Text currentCombatantName;
 
+	CSprite possibleTargets[8];
+	sf::Text currentAbilityTargetsInformation;
+
 	void ShowTooltip(int _ability);
 	void RenderCombatantInformation();
 	void GenerateTooltipString(std::string &_tooltip, int _ability);

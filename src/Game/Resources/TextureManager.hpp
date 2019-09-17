@@ -68,6 +68,13 @@ public:
 	sf::Texture abilityTargetMarker;
 	sf::Texture turnMarker;
 
+	/** POSSIBLE TARGETS **/
+	sf::Texture possibleTargetSimon;
+	sf::Texture possibleTargetOle;
+	sf::Texture possibleTargetAnna;
+	sf::Texture possibleTargetMarkus;
+	sf::Texture possibleTargetEnemy;
+
 private:
 
 	void LoadSkillTextures(const std::string &_path, int playerID, int abilityID);

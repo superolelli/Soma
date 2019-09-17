@@ -13,6 +13,18 @@ CButton::~CButton()
 }
 
 
+void CButton::SetDisabled()
+{
+	isEnabled = false;
+	m_ButtonSprite.SetColor(80, 80, 80);
+}
+
+void CButton::SetEnabled()
+{
+	isEnabled = true;
+	m_ButtonSprite.SetColor(255, 255, 255);
+}
+
 
 //Loads the texture, sets the position and type of the button
 void CButton::Load(sf::Texture const &_texture, Buttontypes _type, std::string const &_str)
@@ -25,6 +37,8 @@ void CButton::Load(sf::Texture const &_texture, Buttontypes _type, std::string c
 	m_Buttontype = _type;
 
 	nextFrame = 0.0f;
+
+	isEnabled = true;
 
 	//sets the buttonstring
 	m_Buttonstring = _str;
@@ -99,7 +113,7 @@ bool CButton::Update(CGameEngine &_engine)
 	nextFrame = 0.0f;
 
 	//if the mouse is at the button
-	if (m_ButtonSprite.GetRect().contains(_engine.GetMousePos()))
+	if (isEnabled && m_ButtonSprite.GetRect().contains(_engine.GetMousePos()))
 	{
 		_engine.SetCursor(sf::Cursor::Hand);
 

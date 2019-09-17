@@ -11,7 +11,7 @@ void BattleGUI::Init(CGameEngine *_engine)
 	int x = 0;
 
 	abilityPanel.Load(g_pTextures->abilityPanel);
-	abilityPanel.SetPos(130, 870);
+	abilityPanel.SetPos(130, 860);
 
 	for (int j = 0; j < 4; j++)
 	{
@@ -41,6 +41,19 @@ void BattleGUI::Init(CGameEngine *_engine)
 	currentCombatantName.setFillColor(sf::Color::White);
 	currentCombatantName.setOutlineColor(sf::Color::Black);
 	currentCombatantName.setOutlineThickness(4.0);
+
+	currentAbilityTargetsInformation.setCharacterSize(16);
+	currentAbilityTargetsInformation.setFont(g_pFonts->f_trajan);
+	currentAbilityTargetsInformation.setFillColor(sf::Color::White);
+
+	possibleTargets[0].Load(g_pTextures->possibleTargetSimon);
+	possibleTargets[1].Load(g_pTextures->possibleTargetOle);
+	possibleTargets[2].Load(g_pTextures->possibleTargetAnna);
+	possibleTargets[3].Load(g_pTextures->possibleTargetMarkus);
+	possibleTargets[4].Load(g_pTextures->possibleTargetEnemy);
+	possibleTargets[5].Load(g_pTextures->possibleTargetEnemy);
+	possibleTargets[6].Load(g_pTextures->possibleTargetEnemy);
+	possibleTargets[7].Load(g_pTextures->possibleTargetEnemy);
 
 	currentAbility = 3;
 	combatantToDisplay = nullptr;
@@ -124,8 +137,55 @@ void BattleGUI::ShowTooltip(int _ability)
 	background.setOutlineColor(sf::Color(40, 40, 40));
 	background.setPosition(tooltip.getPosition() + sf::Vector2f(-10.0f, -7.0f));
 
+	sf::RectangleShape targetsBackground(sf::Vector2f(450, 40));
+	targetsBackground.setFillColor(sf::Color(0, 0, 0, 220));
+	targetsBackground.setOutlineThickness(2.0f);
+	targetsBackground.setOutlineColor(sf::Color(40, 40, 40));
+	targetsBackground.setPosition(abilityPanel.GetGlobalRect().left + 65, abilityPanel.GetGlobalRect().top + abilityPanel.GetGlobalRect().height + 5);
+
+	int targetX = 315;
+	for (int i = 0; i < 4; i++)
+	{
+		possibleTargets[i].SetPos(targetsBackground.getPosition().x + targetX, targetsBackground.getPosition().y - possibleTargets[i].GetGlobalRect().height + 37);
+		targetX += possibleTargets[i].GetRect().width;
+	}
+
+	targetX += 10;
+
+	for (int i = 4; i < 8; i++)
+	{
+		possibleTargets[i].SetPos(targetsBackground.getPosition().x + targetX, targetsBackground.getPosition().y - possibleTargets[i].GetGlobalRect().height + 37);
+		targetX += possibleTargets[i].GetRect().width + 1;
+	}
+
+	int numberOfTargets = g_pObjectProperties->playerAbilities[currentPlayer->GetID()][_ability].possibleAims.howMany;
+	if (g_pObjectProperties->playerAbilities[currentPlayer->GetID()][_ability].possibleAims.attackAll)
+		currentAbilityTargetsInformation.setString("Die Fähigkeit trifft ALLE.");
+	else if(numberOfTargets > 1)
+		currentAbilityTargetsInformation.setString("Die Fähigkeit trifft " + std::to_string(numberOfTargets) + " Ziele.");
+	else
+		currentAbilityTargetsInformation.setString("Die Fähigkeit trifft 1 Ziel.");
+
+	currentAbilityTargetsInformation.setPosition(targetsBackground.getPosition().x + 10, targetsBackground.getPosition().y + 10);
+
 	engine->GetWindow().draw(background);
 	engine->GetWindow().draw(tooltip);
+	engine->GetWindow().draw(targetsBackground);
+	engine->GetWindow().draw(currentAbilityTargetsInformation);
+	for (int i = 0; i < 8; i++)
+	{
+		if (g_pObjectProperties->playerAbilities[currentPlayer->GetID()][_ability].possibleAims.position[i])
+		{
+			if (i < 4)
+				possibleTargets[i].SetColor(0, 200, 0);
+			else
+				possibleTargets[i].SetColor(255, 0, 0);
+		}
+		else
+			possibleTargets[i].SetColor(60, 60, 60);
+
+		possibleTargets[i].Render(engine->GetWindow());
+	}
 }
 
 
@@ -136,7 +196,7 @@ void BattleGUI::GenerateTooltipString(std::string & _tooltip, int _ability)
 	_tooltip.append("*#ffa500 " + GetAbility(_ability).name + "*\n");
 
 	if (currentAbility.possibleAims.attackAll == true)
-		_tooltip.append("#aa5000 Geht auf alle (Gegner und Freunde)\n");
+		_tooltip.append("#aa5000 Trifft alle (Gegner und Freunde)\n");
 
 	//fist of revenge special text
 	if (_ability == 0 && combatantToDisplay->GetID() == CombatantID::Markus)
