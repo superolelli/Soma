@@ -41,21 +41,11 @@ void BattleGUI::Init(CGameEngine *_engine)
 	currentCombatantName.setFillColor(sf::Color::White);
 	currentCombatantName.setOutlineColor(sf::Color::Black);
 	currentCombatantName.setOutlineThickness(4.0);
+	
+	tooltip.Init(engine);
+	tooltip.SetShowAboveY(true);
 
-	currentAbilityTargetsInformation.setCharacterSize(16);
-	currentAbilityTargetsInformation.setFont(g_pFonts->f_trajan);
-	currentAbilityTargetsInformation.setFillColor(sf::Color::White);
-
-	possibleTargets[0].Load(g_pTextures->possibleTargetSimon);
-	possibleTargets[1].Load(g_pTextures->possibleTargetOle);
-	possibleTargets[2].Load(g_pTextures->possibleTargetAnna);
-	possibleTargets[3].Load(g_pTextures->possibleTargetMarkus);
-	possibleTargets[4].Load(g_pTextures->possibleTargetEnemy);
-	possibleTargets[5].Load(g_pTextures->possibleTargetEnemy);
-	possibleTargets[6].Load(g_pTextures->possibleTargetEnemy);
-	possibleTargets[7].Load(g_pTextures->possibleTargetEnemy);
-
-	currentAbility = 3;
+	currentAbility = 0;
 	combatantToDisplay = nullptr;
 	currentPlayer = nullptr;
 }
@@ -102,7 +92,9 @@ void BattleGUI::Render()
 		for (int i = 0; i < 4; i++)
 		{
 			if (abilities[currentPlayer->GetID()][i].GetRect().contains(engine->GetMousePos()))
+			{
 				ShowTooltip(i);
+			}
 		}
 	}
 
@@ -121,197 +113,12 @@ void BattleGUI::RenderCombatantInformation()
 
 void BattleGUI::ShowTooltip(int _ability)
 {
-	std::string tooltipString("");
-	GenerateTooltipString(tooltipString, _ability);
-
-	sfe::RichText tooltip;
-	tooltip.setCharacterSize(18);
-	tooltip.setFont(g_pFonts->f_arial);
-	tooltip.setString(tooltipString);
-	tooltip.setPosition(abilities[combatantToDisplay->GetID()][_ability].GetRect().left, abilities[combatantToDisplay->GetID()][_ability].GetRect().top - tooltip.getLocalBounds().height - 25.0f);
-
-	sf::FloatRect backgroundRect = tooltip.getLocalBounds();
-	sf::RoundedRectangleShape background(sf::Vector2f(backgroundRect.width + 20.0f, backgroundRect.height + 20.0f), 8, 20);
-	background.setFillColor(sf::Color(0, 0, 0, 220));
-	background.setOutlineThickness(2.0f);
-	background.setOutlineColor(sf::Color(40, 40, 40));
-	background.setPosition(tooltip.getPosition() + sf::Vector2f(-10.0f, -7.0f));
-
-	sf::RectangleShape targetsBackground(sf::Vector2f(450, 40));
-	targetsBackground.setFillColor(sf::Color(0, 0, 0, 220));
-	targetsBackground.setOutlineThickness(2.0f);
-	targetsBackground.setOutlineColor(sf::Color(40, 40, 40));
-	targetsBackground.setPosition(abilityPanel.GetGlobalRect().left + 65, abilityPanel.GetGlobalRect().top + abilityPanel.GetGlobalRect().height + 5);
-
-	int targetX = 315;
-	for (int i = 0; i < 4; i++)
-	{
-		possibleTargets[i].SetPos(targetsBackground.getPosition().x + targetX, targetsBackground.getPosition().y - possibleTargets[i].GetGlobalRect().height + 37);
-		targetX += possibleTargets[i].GetRect().width;
-	}
-
-	targetX += 10;
-
-	for (int i = 4; i < 8; i++)
-	{
-		possibleTargets[i].SetPos(targetsBackground.getPosition().x + targetX, targetsBackground.getPosition().y - possibleTargets[i].GetGlobalRect().height + 37);
-		targetX += possibleTargets[i].GetRect().width + 1;
-	}
-
-	int numberOfTargets = g_pObjectProperties->playerAbilities[currentPlayer->GetID()][_ability].possibleAims.howMany;
-	if (g_pObjectProperties->playerAbilities[currentPlayer->GetID()][_ability].possibleAims.attackAll)
-		currentAbilityTargetsInformation.setString("Die Fähigkeit trifft ALLE.");
-	else if(numberOfTargets > 1)
-		currentAbilityTargetsInformation.setString("Die Fähigkeit trifft " + std::to_string(numberOfTargets) + " Ziele.");
-	else
-		currentAbilityTargetsInformation.setString("Die Fähigkeit trifft 1 Ziel.");
-
-	currentAbilityTargetsInformation.setPosition(targetsBackground.getPosition().x + 10, targetsBackground.getPosition().y + 10);
-
-	engine->GetWindow().draw(background);
-	engine->GetWindow().draw(tooltip);
-	engine->GetWindow().draw(targetsBackground);
-	engine->GetWindow().draw(currentAbilityTargetsInformation);
-	for (int i = 0; i < 8; i++)
-	{
-		if (g_pObjectProperties->playerAbilities[currentPlayer->GetID()][_ability].possibleAims.position[i])
-		{
-			if (i < 4)
-				possibleTargets[i].SetColor(0, 200, 0);
-			else
-				possibleTargets[i].SetColor(255, 0, 0);
-		}
-		else
-			possibleTargets[i].SetColor(60, 60, 60);
-
-		possibleTargets[i].Render(engine->GetWindow());
-	}
+	tooltip.SetAbilityID(_ability);
+	tooltip.ShowTooltip(abilities[combatantToDisplay->GetID()][_ability].GetRect().left, abilities[combatantToDisplay->GetID()][_ability].GetRect().top - 35.0f);
+	tooltip.ShowPossibleTargets(abilityPanel.GetGlobalRect().left + 65, abilityPanel.GetGlobalRect().top + abilityPanel.GetGlobalRect().height + 5);
 }
 
 
-void BattleGUI::GenerateTooltipString(std::string & _tooltip, int _ability)
-{
-	Ability &currentAbility = GetAbility(_ability);
-
-	_tooltip.append("*#ffa500 " + GetAbility(_ability).name + "*\n");
-
-	if (currentAbility.possibleAims.attackAll == true)
-		_tooltip.append("#aa5000 Trifft alle (Gegner und Freunde)\n");
-
-	//fist of revenge special text
-	if (_ability == 0 && combatantToDisplay->GetID() == CombatantID::Markus)
-		_tooltip.append("#aa5000 Geht nur auf Gegner, die\nMarkus letze Runde angegriffen haben");
-
-	if (currentAbility.precisionModificator != 0)
-		_tooltip.append("#white Präzision: " + std::to_string(currentAbility.precisionModificator) + "\n");
-
-	if (currentAbility.canTargetEnemiesOrFriends)
-	{
-		_tooltip.append("#888888 Auf Freund\n");
-		AppendTooltipStringForOneTarget(_tooltip, _ability, false, true);
-		_tooltip.append("#888888 Auf Gegner\n");
-		AppendTooltipStringForOneTarget(_tooltip, _ability, true, true);
-	}
-	else
-		AppendTooltipStringForOneTarget(_tooltip, _ability, true, false);
-
-	_tooltip.pop_back();
-}
-
-
-void BattleGUI::AppendTooltipStringForOneTarget(std::string & _tooltip, int _ability, bool _hostileAbility, bool _indent)
-{
-	Ability &currentAbility = GetAbility(_ability);
-	AbilityEffect *effect;
-
-	if (_hostileAbility)
-		effect = &currentAbility.effectHostile;
-	else
-		effect = &currentAbility.effectFriendly;
-
-	std::string indentation("");
-
-	if (_indent)
-		indentation = "\t";
-
-	if (effect->criticalHitModificator != 0)
-		_tooltip.append("#white Kritische Trefferchance: " + std::to_string(effect->criticalHitModificator) + "\n");
-
-	if (effect->damageFactor != 0)
-		_tooltip.append(indentation + "#white Schadensfaktor: " + std::to_string(static_cast<int>(effect->damageFactor * 100)) + "%\n");
-
-	if (effect->lessTargetsMoreDamage != 0)
-		_tooltip.append("#aa5000 Werden weniger als " + std::to_string(currentAbility.possibleAims.howMany) + " Gegner attackiert,\n"
-			+ "steigt der Schadensfaktor pro fehlendem\nGegner um " + std::to_string(static_cast<int>(effect->lessTargetsMoreDamage * 100)) + " Prozentpunkte\n");
-
-	if (effect->confusion != 0)
-		_tooltip.append(indentation + "#bb77bb Verwirrung (" + std::to_string(effect->confusion) + " Runden): " + std::to_string(static_cast<int>(effect->confusionProbability * 100)) + "%\n");
-
-	if (effect->heal != 0)
-		_tooltip.append(indentation + "#00aa00 Heilung: " + std::to_string(effect->heal) + "\n");
-
-	if (effect->healSelf != 0)
-		_tooltip.append(indentation + "#00aa00 Heilung (selbst): " + std::to_string(effect->healSelf) + "\n");
-
-	if (effect->removeDebuffs != false)
-		_tooltip.append(indentation + "#white Entfernt Debuffs\n");
-
-	if (effect->removeBuffs != false)
-		_tooltip.append(indentation + "#white Entfernt Buffs\n");
-
-	if (effect->mark != 0)
-		_tooltip.append(indentation + "#white Markiert (" + std::to_string(effect->mark) + " Runden)\n");
-
-	if (effect->putToSleepProbability != 0)
-		_tooltip.append(indentation + "#white Schlaf: " + std::to_string(static_cast<int>(effect->putToSleepProbability * 100)) + "%\n");
-
-	if (effect->buff.duration != 0)
-	{
-		_tooltip.append(indentation + "#white Für " + std::to_string(effect->buff.duration) + " Runden:\n");
-
-		std::string sign("");
-		if (effect->buff.isPositive)
-			sign = "+";
-
-		if (effect->buff.stats.initiative != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.initiative) + " Initiative\n");
-
-		if (effect->buff.stats.armour != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.armour) + " Rüstung\n");
-
-		if (effect->buff.stats.damageMax != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.damageMax) + " Schaden\n");
-
-		if (effect->buff.stats.criticalHit != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.criticalHit) + " Kritische Trefferchance\n");
-
-		if (effect->buff.stats.dodge != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.dodge) + " Ausweichen\n");
-
-		if (effect->buff.stats.precision != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.precision) + " Präzision\n");
-
-		if (effect->buff.stats.maxHealth != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.maxHealth) + " Maximales Leben\n");
-
-		if (effect->buff.stats.attributes.constitution != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.attributes.constitution) + " Konstitution\n");
-
-		if (effect->buff.stats.attributes.dexterity != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.attributes.dexterity) + " Geschicklichkeit\n");
-
-		if (effect->buff.stats.attributes.strength != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.attributes.strength) + " Stärke\n");
-
-		if (effect->buff.stats.attributes.speed != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.attributes.speed) + " Geschwindigkeit\n");
-	}
-}
-
-Ability &BattleGUI::GetAbility(int _ability)
-{
-	return g_pObjectProperties->playerAbilities[combatantToDisplay->GetID()][_ability];
-}
 
 void BattleGUI::SetCombatantToDisplay(Combatant *_combatant)
 {
@@ -337,4 +144,5 @@ void BattleGUI::SetAdventureGroup(AdventureGroup *_adventureGroup)
 void BattleGUI::SetCurrentPlayer(Combatant *_combatant)
 {
 	currentPlayer = _combatant;
+	tooltip.SetPlayerID(currentPlayer->GetID());
 }

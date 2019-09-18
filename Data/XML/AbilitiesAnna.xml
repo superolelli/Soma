@@ -45,7 +45,6 @@
         <animation>word_gush</animation>
         <effectAnimation>word_gush</effectAnimation>
 
-        <howMany>1</howMany>
         <positions>
             <value id="6">true</value>
             <value id="7">true</value>
@@ -65,7 +64,6 @@ Schlaf: 25%</description>
         <animation>side_of_nose_blow</animation>
         <effectAnimation>side_of_nose_blow</effectAnimation>
 
-        <howMany>1</howMany>
         <positions>
             <value id="7">true</value>
         </positions>
@@ -89,7 +87,7 @@ Schlaf: 25%</description>
         </positions>
 
         <effect>
-            <damageFactor>1</damageFactor>
+            <damageFactor>0.7</damageFactor>
             <healSelf>1</healSelf>
         </effect>
 

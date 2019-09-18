@@ -13,7 +13,7 @@
         </positions>
 
         <effect>
-            <damageFactor>1.5</damageFactor>
+            <damageFactor>1.2</damageFactor>
         </effect>
 
         <description>*#ffa500 Fist of Revenge*
@@ -26,13 +26,12 @@ Markus letze Runde angegriffen haben
         <animation>nose_ram</animation>
         <effectAnimation>nose_ram</effectAnimation>
 
-        <howMany>1</howMany>
         <positions>
             <value id="4">true</value>
         </positions>
 
         <effect>
-            <damageFactor>0.3</damageFactor>
+            <damageFactor>0.1</damageFactor>
         </effect>
 
         <description>*#ffa500 Nasenrammbock*
@@ -55,7 +54,7 @@ Markus letze Runde angegriffen haben
         </positions>
 
         <effect target="enemy">
-            <damageFactor>0.5</damageFactor>
+            <damageFactor>0.4</damageFactor>
         </effect>
 		<effect target="friend">
 			<damageFactor>0.3</damageFactor>
@@ -81,7 +80,7 @@ Markus letze Runde angegriffen haben
         </positions>
 
         <effect>
-            <damageFactor>0.5</damageFactor>
+            <damageFactor>0.2</damageFactor>
             <buff>
                 <duration>3</duration>
                 <isPositive>false</isPositive>

@@ -2,6 +2,7 @@
 
 #include "GameStatus.hpp"
 #include "../Framework/Gui/Button.hpp"
+#include "AbilityTooltip.hpp"
 
 class SkillPanel
 {
@@ -45,6 +46,8 @@ private:
 	sf::Text chosenSkillName;
 	sf::Text chosenSkillPrice;
 
+	AbilityTooltip abilityTooltip;
+
 	CButton buttonNext;
 	CButton buttonPrevious;
 	CButton buttonClose;
@@ -53,6 +56,8 @@ private:
 	void RenderConnection(int connection, int parentSkill);
 	void RenderSkilledIndicators();
 	void ShowTooltip(int _skill);
+
+	void ShowAbilityTooltip(sf::IntRect &_abilityRect);
 
 	void UpdateChosenSkillName();
 	void UpdateAbilityNames();

@@ -16,6 +16,8 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 
 	closed = true;
 
+	abilityTooltip.Init(engine);
+
 	skillPanel.Load(g_pTextures->skillPanel);
 	skillPanel.SetPos(150, 70);
 
@@ -218,7 +220,6 @@ void SkillPanel::Update()
 			UpdateBuyButton();
 		}
 
-
 		for (int i = 0; i < 4; i++)
 		{
 			if (abilityPanelRect[i].contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) == Keystates::Pressed)
@@ -319,6 +320,8 @@ void SkillPanel::Render()
 		auto yPos = abilities[currentPlayer][currentAbility].GetGlobalRect().top;
 		abilities[currentPlayer][currentAbility].SetPos(abilityPlaceholders.GetGlobalRect().left + 378, abilityPlaceholders.GetGlobalRect().top + 12);
 		abilities[currentPlayer][currentAbility].Render(engine->GetWindow());
+
+		auto abilityRect = abilities[currentPlayer][currentAbility].GetGlobalRect();
 		abilities[currentPlayer][currentAbility].SetPos(xPos, yPos);
 		
 
@@ -350,6 +353,9 @@ void SkillPanel::Render()
 			if (skills[currentPlayer][currentAbility][i].GetGlobalRect().contains(engine->GetMousePos()))
 				ShowTooltip(i);
 		}
+
+		if (abilityRect.contains(engine->GetMousePos()))
+			ShowAbilityTooltip(abilityRect);
 	}
 }
 
@@ -400,6 +406,15 @@ void SkillPanel::ShowTooltip(int _skill)
 	engine->GetWindow().draw(tooltip);
 }
 
+
+
+void SkillPanel::ShowAbilityTooltip(sf::IntRect &_abilityRect)
+{
+	abilityTooltip.SetAbilityID(currentAbility);
+	abilityTooltip.SetPlayerID(currentPlayer);
+	abilityTooltip.ShowTooltip(_abilityRect.left + 135, _abilityRect.top - 10);
+	abilityTooltip.ShowPossibleTargets(_abilityRect.left - 305, _abilityRect.top - 10, true);
+}
 
 bool SkillPanel::SkillCanBeAcquired(int _player, int _ability, int _skill)
 {

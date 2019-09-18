@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GUI.hpp"
-#include "../Framework/Graphics/Sprite.hpp"
+#include "AbilityTooltip.hpp"
 #include "../Framework/Gui/Bar.hpp"
 #include "Resources\Resources.hpp"
 #include "CombatantAttributesPanel.hpp"
@@ -38,14 +38,9 @@ private:
 	Bar currentCombatantHealthBar;
 
 	sf::Text currentCombatantName;
-
-	CSprite possibleTargets[8];
-	sf::Text currentAbilityTargetsInformation;
+	
+	AbilityTooltip tooltip;
 
 	void ShowTooltip(int _ability);
 	void RenderCombatantInformation();
-	void GenerateTooltipString(std::string &_tooltip, int _ability);
-	void AppendTooltipStringForOneTarget(std::string &_tooltip, int _ability, bool _hostileAbility, bool _indent);
-
-	Ability &GetAbility(int _ability);
 };

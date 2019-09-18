@@ -5,7 +5,6 @@
         <animation>gummi_arm</animation>
         <effectAnimation>gummi_arm</effectAnimation>
 
-        <howMany>3</howMany>
         <positions>
             <value id="5">true</value>
             <value id="6">true</value>
@@ -13,7 +12,7 @@
         </positions>
 
         <effect>
-            <damageFactor>0.3</damageFactor>
+            <damageFactor>0.1</damageFactor>
         </effect>
 
         <description>*#ffa500 Gummiarm*
@@ -29,7 +28,7 @@
         </positions>
 
         <effect>
-            <damageFactor>1</damageFactor>
+            <damageFactor>0.8</damageFactor>
             <buff>
                 <duration>3</duration>
                 <isPositive>false</isPositive>
@@ -57,7 +56,7 @@ Für 3 Runden:
         </positions>
 
         <effect>
-            <damageFactor>0.6</damageFactor>
+            <damageFactor>0.3</damageFactor>
             <buff>
                 <duration>3</duration>
                 <isPositive>false</isPositive>
@@ -84,8 +83,8 @@ Für 3 Runden:
         </positions>
 
         <effect>
-            <damageFactor>0.5</damageFactor>
-            <putToSleepProbability>0.9</putToSleepProbability>
+            <damageFactor>0.2</damageFactor>
+            <putToSleepProbability>0.6</putToSleepProbability>
         </effect>
 
         <description>*#ffa500 Poetry Slam*

@@ -242,6 +242,7 @@
     <ClCompile Include="src\Framework\Time.cpp" />
     <ClCompile Include="src\Framework\Window.cpp" />
     <ClCompile Include="src\Game\Ability.cpp" />
+    <ClCompile Include="src\Game\AbilityTooltip.cpp" />
     <ClCompile Include="src\Game\AdventureGroup.cpp" />
     <ClCompile Include="src\Game\Anna.cpp" />
     <ClCompile Include="src\Game\ApacheKid.cpp" />
@@ -288,6 +289,7 @@
     <ClInclude Include="src\Framework\Patterns\Observer.hpp" />
     <ClInclude Include="src\Framework\Patterns\Subject.hpp" />
     <ClInclude Include="src\Game\Ability.hpp" />
+    <ClInclude Include="src\Game\AbilityTooltip.hpp" />
     <ClInclude Include="src\Game\ApacheKid.hpp" />
     <ClInclude Include="src\Game\CombatantID.hpp" />
     <ClInclude Include="src\Game\CombatantAttributesPanel.hpp" />
