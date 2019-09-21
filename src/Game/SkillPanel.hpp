@@ -12,7 +12,8 @@ public:
 	void Update();
 	void Render();
 
-	void Open();
+	void Open(int _player = 0);
+	bool IsOpen() { return !closed; }
 
 private:
 	bool closed;
@@ -59,10 +60,16 @@ private:
 
 	void ShowAbilityTooltip(sf::IntRect &_abilityRect);
 
+	void UpdateGUIForChosenSkill();
+	void UpdateGUIForChosenPlayer();
+
 	void UpdateChosenSkillName();
 	void UpdateAbilityNames();
 	void UpdateCurrentSkillFrame();
 	void UpdateBuyButton();
+
+	void CheckButtonsForPlayerChoosing();
+	void CheckBuyButton();
 
 	void RecolorSkills();
 

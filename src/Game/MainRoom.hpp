@@ -27,6 +27,8 @@ private:
 	SpriteWithText signs[3];
 	CSprite roots;
 
+	sf::IntRect playerHitbox[4];
+
 	SkillPanel skillPanel;
 
 	GameStatus gameStatus;
@@ -39,4 +41,6 @@ private:
 	void HandlePlayerAnimation();
 	void HandleDoors();
 	void UpdateLevelSigns();
+
+	void UpdatePlayerHitboxes();
 };

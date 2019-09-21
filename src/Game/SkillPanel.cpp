@@ -172,53 +172,23 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 }
 
 
-void SkillPanel::Open()
+void SkillPanel::Open(int _player)
 {
 	closed = false;
+	currentPlayer = _player;
+	UpdateGUIForChosenPlayer();
 }
+
 
 void SkillPanel::Update()
 {
 	if (!closed)
 	{
-		int lastCurrentPlayer = currentPlayer;
-
 		if (buttonClose.Update(*engine) == true)
 			closed = true;
 
-		if (buttonNext.Update(*engine) == true)
-			currentPlayer++;
-
-		if (buttonPrevious.Update(*engine) == true)
-			currentPlayer--;
-
-		if (buttonBuy.Update(*engine) == true && SkillCanBeAcquired(currentPlayer, currentAbility, currentSkill))
-		{
-			if (gameStatus->GetDiceAmount() >= skillCost[currentSkill])
-			{
-				gameStatus->RemoveDice(skillCost[currentSkill]);
-				gameStatus->AcquireSkill(currentPlayer, currentAbility, currentSkill);
-				RecolorSkills();
-				UpdateCurrentSkillFrame();
-			}
-		}
-
-		if (currentPlayer > 3)
-			currentPlayer = 0;
-		if (currentPlayer < 0)
-			currentPlayer = 3;
-
-		if (currentPlayer != lastCurrentPlayer)
-		{
-			currentPlayerName.setString(g_pStringContainer->combatantNames[currentPlayer]);
-			currentPlayerName.setPosition(skillPanel.GetGlobalRect().left + 52 + (162 - currentPlayerName.getLocalBounds().width) / 2, skillPanel.GetGlobalRect().top + 55);
-
-			UpdateAbilityNames();
-			UpdateChosenSkillName();
-			chosenSkillPrice.setString(std::to_string(skillCost[currentSkill]));
-			UpdateCurrentSkillFrame();
-			UpdateBuyButton();
-		}
+		CheckButtonsForPlayerChoosing();
+		CheckBuyButton();
 
 		for (int i = 0; i < 4; i++)
 		{
@@ -226,10 +196,7 @@ void SkillPanel::Update()
 			{
 				currentAbility = i;
 				bridgePiece.SetPos(skillPanel.GetGlobalRect().left + 525, abilityPanelRect[i].top);
-				UpdateChosenSkillName();
-				chosenSkillPrice.setString(std::to_string(skillCost[currentSkill]));
-				UpdateCurrentSkillFrame();
-				UpdateBuyButton();
+				UpdateGUIForChosenSkill();
 			}
 		}
 
@@ -239,14 +206,66 @@ void SkillPanel::Update()
 			{
 				currentSkill = i;
 				currentSkillFrame.SetPos(skills[currentPlayer][currentAbility][currentSkill].GetGlobalRect().left - 36, skills[currentPlayer][currentAbility][currentSkill].GetGlobalRect().top - 37);
-				UpdateChosenSkillName();
-				chosenSkillPrice.setString(std::to_string(skillCost[currentSkill]));
-				UpdateCurrentSkillFrame();
-				UpdateBuyButton();
+				UpdateGUIForChosenSkill();
 			}
 		}
 	}
 }
+
+void SkillPanel::UpdateGUIForChosenSkill()
+{
+	UpdateChosenSkillName();
+	chosenSkillPrice.setString(std::to_string(skillCost[currentSkill]));
+	UpdateCurrentSkillFrame();
+	UpdateBuyButton();
+}
+
+void SkillPanel::UpdateGUIForChosenPlayer()
+{
+	currentPlayerName.setString(g_pStringContainer->combatantNames[currentPlayer]);
+	currentPlayerName.setPosition(skillPanel.GetGlobalRect().left + 52 + (162 - currentPlayerName.getLocalBounds().width) / 2, skillPanel.GetGlobalRect().top + 55);
+
+	UpdateAbilityNames();
+	UpdateGUIForChosenSkill();
+}
+
+
+void SkillPanel::CheckButtonsForPlayerChoosing()
+{
+	int lastCurrentPlayer = currentPlayer;
+
+	if (buttonNext.Update(*engine) == true)
+		currentPlayer++;
+
+	if (buttonPrevious.Update(*engine) == true)
+		currentPlayer--;
+
+	if (currentPlayer > 3)
+		currentPlayer = 0;
+	if (currentPlayer < 0)
+		currentPlayer = 3;
+
+	if (currentPlayer != lastCurrentPlayer)
+	{
+		UpdateGUIForChosenPlayer();
+	}
+}
+
+
+void SkillPanel::CheckBuyButton()
+{
+	if (buttonBuy.Update(*engine) == true && SkillCanBeAcquired(currentPlayer, currentAbility, currentSkill))
+	{
+		if (gameStatus->GetDiceAmount() >= skillCost[currentSkill])
+		{
+			gameStatus->RemoveDice(skillCost[currentSkill]);
+			gameStatus->AcquireSkill(currentPlayer, currentAbility, currentSkill);
+			RecolorSkills();
+			UpdateCurrentSkillFrame();
+		}
+	}
+}
+
 
 
 void SkillPanel::UpdateBuyButton()

@@ -49,7 +49,10 @@ void MainRoom::Init(CGameEngine * _engine)
 		players[i]->setCurrentAnimation("idle");
 		players[i]->setPosition(SpriterEngine::point(g_pObjectProperties->mainRoomPlayerPositions[i].x, g_pObjectProperties->mainRoomPlayerPositions[i].y));
 		players[i]->setPlaybackSpeedRatio(0.5f);
+		players[i]->reprocessCurrentTime();
 	}
+
+	UpdatePlayerHitboxes();
 
 	roots.Load(g_pTextures->mainRoomRoots);
 	roots.SetPos(g_pObjectProperties->mainRoomRootsPosition.x, g_pObjectProperties->mainRoomRootsPosition.y);
@@ -64,6 +67,20 @@ void MainRoom::Init(CGameEngine * _engine)
 	xMovement = 0.0f;
 }
 
+
+void MainRoom::UpdatePlayerHitboxes()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		SpriterEngine::UniversalObjectInterface* hitboxObj;
+		hitboxObj = players[i]->objectIfExistsOnCurrentFrame("hitbox");
+		
+		playerHitbox[i].left = hitboxObj->getPosition().x;
+		playerHitbox[i].top = hitboxObj->getPosition().y;
+		playerHitbox[i].width = hitboxObj->getSize().x  * hitboxObj->getScale().x;
+		playerHitbox[i].height = hitboxObj->getSize().y * hitboxObj->getScale().y;
+	}
+}
 
 void MainRoom::Cleanup()
 {
@@ -103,11 +120,22 @@ void MainRoom::Update()
 	if (m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
 
-	if (m_pGameEngine->GetKeystates(KeyID::Space) == Keystates::Pressed)
-		skillPanel.Open();
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (playerHitbox[i].contains(m_pGameEngine->GetWorldMousePos()))
+		{
+			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
+
+			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released && !skillPanel.IsOpen())
+				skillPanel.Open(i);
+		}
+	}
+
 
 	CheckForMovement();
 	HandlePlayerAnimation();
+	UpdatePlayerHitboxes();
 	HandleDoors();
 }
 
