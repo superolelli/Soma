@@ -269,6 +269,7 @@
     <ClCompile Include="src\Game\Player.cpp" />
     <ClCompile Include="src\Game\Resources\FontManager.cpp" />
     <ClCompile Include="src\Game\Resources\ModelManager.cpp" />
+    <ClCompile Include="src\Game\Resources\MusicManager.cpp" />
     <ClCompile Include="src\Game\Resources\ObjectPropertiesManager.cpp" />
     <ClCompile Include="src\Game\Resources\SoundManager.cpp" />
     <ClCompile Include="src\Game\Resources\SpritePool.cpp" />
@@ -432,6 +433,7 @@
     <ClInclude Include="src\Game\Resources\BackgroundIDs.hpp" />
     <ClInclude Include="src\Game\Resources\FontManager.hpp" />
     <ClInclude Include="src\Game\Resources\ModelManager.hpp" />
+    <ClInclude Include="src\Game\Resources\MusicManager.hpp" />
     <ClInclude Include="src\Game\Resources\ObjectPropertiesManager.hpp" />
     <ClInclude Include="src\Game\Resources\Resources.hpp" />
     <ClInclude Include="src\Game\Resources\SoundManager.hpp" />

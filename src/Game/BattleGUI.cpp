@@ -144,5 +144,7 @@ void BattleGUI::SetAdventureGroup(AdventureGroup *_adventureGroup)
 void BattleGUI::SetCurrentPlayer(Combatant *_combatant)
 {
 	currentPlayer = _combatant;
-	tooltip.SetPlayerID(currentPlayer->GetID());
+
+	if(currentPlayer)
+		tooltip.SetPlayerID(currentPlayer->GetID());
 }

@@ -18,6 +18,9 @@ void Game::Init(CGameEngine * _engine)
 	currentBattle = nullptr;
 	inBattle = false;
 	levelFinished = false;
+
+	g_pMusic->SetCurrentEnvironment(MusicEnvironment::bangEnvironment);
+	g_pMusic->PlayMusic();
 }
 
 
@@ -76,11 +79,13 @@ void Game::Update()
 				gameStatus->AddCards(level->GetReward().cards);
 				gameStatus->bangLevel++;
 			}
+			g_pMusic->SetCurrentEnvironment(MusicEnvironment::mainRoomEnvironment);
 			m_pGameEngine->PopState();
 		}
 	}
 
 	g_pVideos->Update();
+	g_pMusic->Update();
 }
 
 
@@ -138,6 +143,8 @@ void Game::UpdateBattle()
 		SAFE_DELETE(currentGUI);
 		currentGUI = new LevelGUI;
 		currentGUI->Init(m_pGameEngine);
+
+		g_pMusic->SetBattleEnded();
 	}
 }
 

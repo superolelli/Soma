@@ -6,6 +6,8 @@
 
 void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss)
 {
+	g_pMusic->StopMusic();
+
 	players = _adventureGroup;
 	gui = _gui;
 	engine = _engine;
@@ -183,6 +185,7 @@ void Battle::HandleIntro()
 		else
 		{
 			isPlayingIntro = false;
+			g_pMusic->SetBattleStarted();
 			combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
 
 			if (isBossBattle)

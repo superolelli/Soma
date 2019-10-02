@@ -1,5 +1,5 @@
 #include "VideoManager.hpp"
-
+#include "MusicManager.hpp"
 
 void VideoManager::LoadVideos(CGameEngine *_engine)
 {
@@ -15,6 +15,7 @@ void VideoManager::Update()
 		videos[currentVideo].update();
 	else if (isPlaying == true)
 	{
+		g_pMusic->PlayMusic();
 		isPlaying = false;
 		engine->UseSimpleRenderLoop(false);
 		engine->GetWindow().setVerticalSyncEnabled(true);
@@ -29,6 +30,7 @@ void VideoManager::Render(sf::RenderTarget &_target)
 
 void VideoManager::PlayVideo(videoId _id)
 {
+	g_pMusic->StopMusic();
 	isPlaying = true;
 	engine->UseSimpleRenderLoop(true);
 	engine->GetWindow().setVerticalSyncEnabled(false);

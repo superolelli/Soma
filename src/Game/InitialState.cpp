@@ -12,6 +12,7 @@ void LoadAllData(std::atomic<bool> *_everythingLoaded, CGameEngine *_engine)
 	g_pStringContainer->LoadStrings();
 	g_pObjectProperties->LoadObjectProperties();
 	g_pVideos->LoadVideos(_engine);
+	g_pMusic->LoadMusic();
 	*_everythingLoaded = true;
 }
 

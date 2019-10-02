@@ -507,6 +507,9 @@
     <ClCompile Include="src\Game\AbilityTooltip.cpp">
       <Filter>Quelldateien\Game\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\Resources\MusicManager.cpp">
+      <Filter>Quelldateien\Game\Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -991,6 +994,9 @@
     </ClInclude>
     <ClInclude Include="src\Game\AbilityTooltip.hpp">
       <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Resources\MusicManager.hpp">
+      <Filter>Headerdateien\Game\Resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

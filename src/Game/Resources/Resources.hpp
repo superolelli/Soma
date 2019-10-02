@@ -10,3 +10,4 @@
 #include "EnemyAbilities.hpp"
 #include "ObjectPropertiesManager.hpp"
 #include "VideoManager.hpp"
+#include "MusicManager.hpp"
