@@ -237,6 +237,26 @@ namespace SpriterEngine
 		Settings::error("UniversalObjectInterface::setPanning - object does not contain this component - no action taken");
 	}
 
+	void UniversalObjectInterface::setSoundPosition(float _x, float _y)
+	{
+		Settings::error("UniversalObjectInterface::setSoundPosition - object does not contain this component - no action taken");
+	}
+
+	void UniversalObjectInterface::setSoundAttenuation(float _attenuation)
+	{
+		Settings::error("UniversalObjectInterface::setSoundAttenuation - object does not contain this component - no action taken");
+	}
+
+	void UniversalObjectInterface::setSoundMinDistance(float _distance)
+	{
+		Settings::error("UniversalObjectInterface::setSoundMinDistance - object does not contain this component - no action taken");
+	}
+
+	void UniversalObjectInterface::enableSpatialSounds()
+	{
+		Settings::error("UniversalObjectInterface::enableSpatialSounds - object does not contain this component - no action taken");
+	}
+
 	void UniversalObjectInterface::setSound(SoundFile *newSoundFile)
 	{
 		Settings::error("UniversalObjectInterface::setSound - object does not contain this component - no action taken");

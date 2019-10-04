@@ -365,6 +365,8 @@ namespace SpriterEngine
 				return;
 			}
 			soundNameMap[name] = (*sounds.insert(std::make_pair(id, soundFile->newSoundInfoReference())).first).second;
+		
+			//set volume somehow
 		}
 	}
 
@@ -380,6 +382,30 @@ namespace SpriterEngine
 			newTriggerObject = new TriggerObjectInfo();
 		}
 		triggerNameMap[name] = (*triggers.insert(std::make_pair(id, newTriggerObject)).first).second;
+	}
+
+	void EntityInstanceData::setSoundPosition(float _x, float _y)
+	{
+		for (auto &s : soundNameMap)
+			s.second->setSoundPosition(_x, _y);
+	}
+
+	void EntityInstanceData::setSoundAttenuation(float _attenuation)
+	{
+		for (auto &s : soundNameMap)
+			s.second->setSoundAttenuation(_attenuation);
+	}
+
+	void EntityInstanceData::setSoundMinDistance(float _distance)
+	{
+		for (auto &s : soundNameMap)
+			s.second->setSoundMinDistance(_distance);
+	}
+
+	void EntityInstanceData::enableSpatialSounds()
+	{
+		for (auto &s : soundNameMap)
+			s.second->enableSpatialSounds();
 	}
 
 	AnimationInstance * EntityInstanceData::getAnimation(int animationIndex)

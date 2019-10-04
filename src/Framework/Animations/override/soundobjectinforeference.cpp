@@ -44,6 +44,22 @@ namespace SpriterEngine
 		setPlaybackPanning();
 	}
 
+	void SoundObjectInfoReference::setSoundPosition(float _x, float _y)
+	{
+	}
+
+	void SoundObjectInfoReference::setSoundAttenuation(float _attenuation)
+	{
+	}
+
+	void SoundObjectInfoReference::setSoundMinDistance(float _distance)
+	{
+	}
+
+	void SoundObjectInfoReference::enableSpatialSounds()
+	{
+	}
+
 	void SoundObjectInfoReference::setPlaybackVolume()
 	{
 		// TODO: override and add code to adjust current playback volume using getVolume() here

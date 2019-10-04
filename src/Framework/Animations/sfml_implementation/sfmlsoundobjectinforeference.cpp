@@ -6,6 +6,7 @@ namespace SpriterEngine
 	SfmlSoundObjectInfoReference::SfmlSoundObjectInfoReference(sf::SoundBuffer &buffer)
 	{
 		sound.setBuffer(buffer);
+		sound.setRelativeToListener(true);
 	}
 
 	void SfmlSoundObjectInfoReference::playTrigger()
@@ -14,6 +15,26 @@ namespace SpriterEngine
 		{
 			sound.play();
 		}
+	}
+
+	void SfmlSoundObjectInfoReference::setSoundPosition(float _x, float _y)
+	{
+		sound.setPosition(_x, 0, _y);
+	}
+
+	void SfmlSoundObjectInfoReference::setSoundAttenuation(float _attenuation)
+	{
+		sound.setAttenuation(_attenuation);
+	}
+
+	void SfmlSoundObjectInfoReference::setSoundMinDistance(float _distance)
+	{
+		sound.setMinDistance(_distance);
+	}
+
+	void SfmlSoundObjectInfoReference::enableSpatialSounds()
+	{
+		sound.setRelativeToListener(false);
 	}
 
 	void SfmlSoundObjectInfoReference::setPlaybackVolume()

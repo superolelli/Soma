@@ -84,6 +84,13 @@ namespace SpriterEngine
 		virtual void setVolume(real newVolume);
 		virtual void setPanning(real newPanning);
 
+		/* MY CHANGES - START */
+		virtual void setSoundPosition(float _x, float _y);
+		virtual void setSoundAttenuation(float _attenuation);
+		virtual void setSoundMinDistance(float _distance);
+		virtual void enableSpatialSounds();
+		/* MY CHANGES -END */
+
 		virtual void setSound(SoundFile *newSoundFile);
 
 		virtual void setTagList(TagList *newTagList);

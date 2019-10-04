@@ -3,6 +3,11 @@
 
 void MusicManager::LoadMusic()
 {
+	mainRoomMusic.openFromFile("Data/Music/MainRoom.ogg");
+	mainRoomMusic.setVolume(20);
+	mainRoomMusic.setRelativeToListener(true);
+	mainRoomMusic.setLoop(true);
+
 	bangBackgroundMusic[0].openFromFile("Data/Music/Bang1.ogg");
 	bangBackgroundMusic[1].openFromFile("Data/Music/Bang2.ogg");
 	bangBackgroundMusic[2].openFromFile("Data/Music/Bang3.ogg");
@@ -23,10 +28,12 @@ void MusicManager::LoadMusic()
 	bangBattleMusic.setVolume(50);
 
 	currentEnvironment = MusicEnvironment::mainRoomEnvironment;
-	currentMusic = nullptr;
+	currentMusic = &mainRoomMusic;
 	currentBattleMusic = nullptr;
 
 	nextTracks = { 0, 1, 2, 3, 4, 5, 6 };
+
+	currentMusic->play();
 }
 
 
@@ -73,7 +80,8 @@ void MusicManager::SetCurrentEnvironment(MusicEnvironment _environmentID)
 	if (currentEnvironment == MusicEnvironment::mainRoomEnvironment)
 	{
 		nextTracks = { 0, 1, 2, 3, 4, 5, 6 };
-		currentMusic = nullptr;
+		currentMusic = &mainRoomMusic;
+		currentMusic->play();
 	}
 	else if (currentEnvironment == MusicEnvironment::bangEnvironment)
 	{
@@ -116,6 +124,8 @@ void MusicManager::PlayMusic()
 		switch (currentEnvironment)
 		{
 		case MusicEnvironment::mainRoomEnvironment:
+			currentMusic = &mainRoomMusic;
+			currentMusic->play();
 			break;
 		case MusicEnvironment::bangEnvironment:
 			currentMusic = &bangBackgroundMusic[GetNextTrack()];

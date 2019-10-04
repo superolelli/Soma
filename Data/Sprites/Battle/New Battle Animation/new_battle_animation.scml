@@ -404,17 +404,17 @@
             </timeline>
             <soundline id="-1" name="reload">
                 <key id="0" time="77">
-                    <object folder="1" file="0"/>
+                    <object folder="1" file="0" volume="0.226"/>
                 </key>
             </soundline>
             <soundline id="-1" name="shot">
                 <key id="0" time="1295">
-                    <object folder="1" file="1" volume="0.581"/>
+                    <object folder="1" file="1" volume="0.215"/>
                 </key>
             </soundline>
             <soundline id="-1" name="jingle">
                 <key id="0">
-                    <object folder="1" file="2" volume="0.269"/>
+                    <object folder="1" file="2" volume="0.118"/>
                 </key>
             </soundline>
         </animation>

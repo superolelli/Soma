@@ -26,6 +26,8 @@ private:
 	sf::Music bangBackgroundMusic[7];
 	sf::Music bangBattleMusic;
 
+	sf::Music mainRoomMusic;
+
 	MusicEnvironment currentEnvironment;
 
 	sf::Music *currentMusic;

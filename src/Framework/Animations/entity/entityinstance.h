@@ -96,6 +96,13 @@ namespace SpriterEngine
 		UniversalObjectInterface *getSoundObject(int soundId);
 		UniversalObjectInterface *getSoundObject(const std::string &soundName);
 
+		/* MY CHANGES - START */
+		void setSoundPosition(float _x, float _y) override;
+		void setSoundAttenuation(float _attenuation) override;
+		void setSoundMinDistance(float _distance) override;
+		void enableSpatialSounds() override;
+		/* MY CHANGES -END */
+
 
 		void setPosition(const point &newPosition) override;
 		void setAngle(real newAngle) override;

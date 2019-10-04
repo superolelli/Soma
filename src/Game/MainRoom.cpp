@@ -54,6 +54,14 @@ void MainRoom::Init(CGameEngine * _engine)
 
 	UpdatePlayerHitboxes();
 
+	for (int i = 0; i < 4; i++)
+	{
+		players[i]->enableSpatialSounds();
+		players[i]->setSoundAttenuation(5);
+		players[i]->setSoundMinDistance(900);
+		players[i]->setSoundPosition(playerHitbox[i].left + playerHitbox[i].width / 2, playerHitbox[i].top + playerHitbox[i].height / 2);
+	}
+
 	roots.Load(g_pTextures->mainRoomRoots);
 	roots.SetPos(g_pObjectProperties->mainRoomRootsPosition.x, g_pObjectProperties->mainRoomRootsPosition.y);
 
@@ -203,6 +211,7 @@ void MainRoom::Render(double _normalizedTimestep)
 	if (view.getCenter().x - m_pGameEngine->GetWindowSize().x / 2 + xMovement * _normalizedTimestep >= 0
 		&& view.getCenter().x + m_pGameEngine->GetWindowSize().x / 2 + xMovement * _normalizedTimestep < background[0].GetGlobalRect().width * 4) {
 		view.move(xMovement * _normalizedTimestep, 0);
+		sf::Listener::setPosition(sf::Vector3f(view.getCenter().x, view.getCenter().y, -5));
 	}
 
 	m_pGameEngine->ClearWindow(sf::Color::Black);

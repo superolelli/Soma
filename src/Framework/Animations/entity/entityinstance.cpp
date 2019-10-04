@@ -430,6 +430,26 @@ namespace SpriterEngine
 		return currentEntity->getSoundObject(soundName);
 	}
 
+	void EntityInstance::setSoundPosition(float _x, float _y)
+	{
+		currentEntity->setSoundPosition(_x, _y);
+	}
+
+	void EntityInstance::setSoundAttenuation(float _attenuation)
+	{
+		currentEntity->setSoundAttenuation(_attenuation);
+	}
+
+	void EntityInstance::setSoundMinDistance(float _distance)
+	{
+		currentEntity->setSoundMinDistance(_distance);
+	}
+
+	void EntityInstance::enableSpatialSounds()
+	{
+		currentEntity->enableSpatialSounds();
+	}
+
 	void EntityInstance::setPosition(const point &newPosition)
 	{
 		position = newPosition;

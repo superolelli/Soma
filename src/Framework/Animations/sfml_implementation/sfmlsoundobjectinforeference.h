@@ -16,6 +16,13 @@ namespace SpriterEngine
 
 		void playTrigger() override;
 
+		/* MY CHANGES - START */
+		void setSoundPosition(float _x, float _y) override;
+		void setSoundAttenuation(float _attenuation) override;
+		void setSoundMinDistance(float _distance) override;
+		void enableSpatialSounds() override;
+		/* MY CHANGES -END */
+
 	private:
 		void setPlaybackVolume() override;
 		void setPlaybackPanning() override;

@@ -25,7 +25,7 @@ void BattleGUI::Init(CGameEngine *_engine)
 	}
 
 	currentAbilityFrame.Load(g_pTextures->currentAbilityFrame);
-	currentAbilityFrame.SetPos(abilities[0][3].GetRect().left - 10, abilities[0][3].GetRect().top - 10);
+	currentAbilityFrame.SetPos(abilities[0][0].GetRect().left - 10, abilities[0][0].GetRect().top - 10);
 
 	combatantInformationPanel.Load(g_pTextures->combatantInformationPanel);
 	combatantInformationPanel.SetPos(820, 850);

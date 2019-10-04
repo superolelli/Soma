@@ -28,6 +28,9 @@
         <file id="15" name="simon_pupille.png" width="15" height="13" pivot_x="0" pivot_y="1"/>
         <file id="16" name="hammer.png" width="271" height="436" pivot_x="0.538745" pivot_y="0.456422"/>
     </folder>
+    <folder id="2" name="Sound">
+        <file id="0" name="Sound/hammer_hit.wav" type="sound"/>
+    </folder>
     <entity id="0" name="Simon">
         <obj_info name="bone_000" type="bone" w="214.747" h="10"/>
         <obj_info name="bone_001" type="bone" w="186.343" h="10"/>
@@ -164,7 +167,7 @@
             </timeline>
             <timeline id="15" obj="6" name="hitbox" object_type="box">
                 <key id="0" spin="0">
-                    <object x="110" y="587" pivot_x="0" pivot_y="1" scale_x="1.02338"/>
+                    <object x="110" y="587" pivot_x="0" pivot_y="1" angle="0" scale_x="1.02338"/>
                 </key>
             </timeline>
         </animation>
@@ -507,12 +510,23 @@
             </timeline>
             <timeline id="16" obj="6" name="hitbox" object_type="box">
                 <key id="0" spin="0">
-                    <object x="110" y="587" pivot_x="0" pivot_y="1" scale_x="1.02338"/>
+                    <object x="110" y="587" pivot_x="0" pivot_y="1" angle="0" scale_x="1.02338"/>
                 </key>
                 <key id="1" time="1000" spin="0">
-                    <object x="110" y="587" pivot_x="0" pivot_y="1" scale_x="1.02338"/>
+                    <object x="110" y="587" pivot_x="0" pivot_y="1" angle="0" scale_x="1.02338"/>
                 </key>
             </timeline>
+            <soundline id="-1" name="hammer_hit">
+                <key id="0" time="328">
+                    <object folder="2" file="0"/>
+                </key>
+                <key id="1" time="533">
+                    <object folder="2" file="0"/>
+                </key>
+                <key id="2" time="719">
+                    <object folder="2" file="0"/>
+                </key>
+            </soundline>
         </animation>
     </entity>
 </spriter_data>

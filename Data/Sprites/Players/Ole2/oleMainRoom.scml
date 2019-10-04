@@ -30,6 +30,9 @@
         <file id="21" name="computer2.png" width="225" height="385" pivot_x="0" pivot_y="1"/>
         <file id="22" name="auge_geschlossen.png" width="21" height="11" pivot_x="0" pivot_y="1"/>
     </folder>
+    <folder id="2" name="Sound">
+        <file id="0" name="Sound/keyboardMono2.wav" type="sound"/>
+    </folder>
     <entity id="0" name="Ole">
         <obj_info name="bone_000" type="bone" w="216.981" h="10"/>
         <obj_info name="bone_001" type="bone" w="209.914" h="10"/>
@@ -216,7 +219,7 @@
             </timeline>
             <timeline id="22" obj="4" name="hitbox" object_type="box">
                 <key id="0" spin="0">
-                    <object x="363" y="645" pivot_x="0" pivot_y="1" scale_x="1.036015"/>
+                    <object x="363" y="645" pivot_x="0" pivot_y="1" angle="0" scale_x="1.036015"/>
                 </key>
             </timeline>
         </animation>
@@ -699,18 +702,23 @@
             </timeline>
             <timeline id="21" obj="4" name="hitbox" object_type="box">
                 <key id="0" spin="0">
-                    <object x="363" y="645" pivot_x="0" pivot_y="1" scale_x="1.036015"/>
+                    <object x="363" y="645" pivot_x="0" pivot_y="1" angle="0" scale_x="1.036015"/>
                 </key>
                 <key id="1" time="292" spin="0">
-                    <object x="327" y="645" pivot_x="0" pivot_y="1" scale_x="1.036015"/>
+                    <object x="327" y="645" pivot_x="0" pivot_y="1" angle="0" scale_x="1.036015"/>
                 </key>
                 <key id="2" time="800" spin="0">
-                    <object x="327.867044" y="642" pivot_x="0" pivot_y="1" scale_x="1.036015"/>
+                    <object x="327.867044" y="642" pivot_x="0" pivot_y="1" angle="0" scale_x="1.036015"/>
                 </key>
                 <key id="3" time="999" spin="0">
-                    <object x="363" y="645" pivot_x="0" pivot_y="1" scale_x="1.036015"/>
+                    <object x="363" y="645" pivot_x="0" pivot_y="1" angle="0" scale_x="1.036015"/>
                 </key>
             </timeline>
+            <soundline id="-1" name="keyboardMono2">
+                <key id="0" time="248">
+                    <object folder="2" file="0"/>
+                </key>
+            </soundline>
         </animation>
     </entity>
 </spriter_data>

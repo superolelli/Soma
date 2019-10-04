@@ -86,6 +86,13 @@ namespace SpriterEngine
 		void setSoundInstance(int id, const std::string &name, FileReference * soundRef);
 		void setTriggerInstance(int id, const std::string &name, TriggerObjectInfo *newCustomTriggerObject = 0);
 
+		/* MY CHANGES - START */
+		void setSoundPosition(float _x, float _y) override;
+		void setSoundAttenuation(float _attenuation) override;
+		void setSoundMinDistance(float _distance) override;
+		void enableSpatialSounds() override;
+		/* MY CHANGES -END */
+
 		AnimationInstance *getAnimation(int animationIndex);
 		AnimationInstance *getAnimation(const std::string &animationName);
 

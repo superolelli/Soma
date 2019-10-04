@@ -11,6 +11,8 @@
 
 #include "mainlinekeyinstance.h"
 
+#include "../objectinfo/soundobjectinfo.h"
+
 namespace SpriterEngine
 {
 
@@ -84,7 +86,13 @@ namespace SpriterEngine
 		}
 		for (auto& it : soundTimelines)
 		{
-			timelineInstances->push_back(new SoundTimelineInstance(entityInstanceData, it, it->getObjectId()));
+			/** MY CHANGES - START **/
+			auto newVolume = dynamic_cast<SoundObjectInfo*>(it->getLastKey()->getObjectInfo())->getVolume();
+			SoundTimelineInstance *newInstance = new SoundTimelineInstance(entityInstanceData, it, it->getObjectId());
+			newInstance->getResultObject()->setVolume(newVolume);
+			/** MY CHANGES - END **/
+
+			timelineInstances->push_back(newInstance);
 		}
 		for (auto& it : triggerTimelines)
 		{

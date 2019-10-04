@@ -34,6 +34,10 @@
         <file id="2" name="MainRoom/bunny_ear.png" width="26" height="49" pivot_x="0" pivot_y="1"/>
         <file id="3" name="MainRoom/bunny_eye.png" width="5" height="4" pivot_x="0" pivot_y="1"/>
     </folder>
+    <folder id="2" name="Sound">
+        <file id="0" name="Sound/bunny.wav" type="sound"/>
+        <file id="1" name="Sound/stroke.wav" type="sound"/>
+    </folder>
     <entity id="0" name="Anna">
         <obj_info name="bone_000" type="bone" w="182.808" h="10"/>
         <obj_info name="bone_001" type="bone" w="70.1649" h="10"/>
@@ -352,9 +356,14 @@
             </timeline>
             <timeline id="37" obj="16" name="hitbox" object_type="box">
                 <key id="0" spin="0">
-                    <object x="-10" y="421" pivot_x="0" pivot_y="1" scale_x="0.971918" scale_y="0.967346"/>
+                    <object x="-10" y="421" pivot_x="0" pivot_y="1" angle="0" scale_x="0.971918" scale_y="0.967346"/>
                 </key>
             </timeline>
+            <soundline id="-1" name="bunny">
+                <key id="0" time="244">
+                    <object folder="2" file="0"/>
+                </key>
+            </soundline>
         </animation>
         <animation id="1" name="busy" length="1000" interval="100" looping="false">
             <mainline>
@@ -1078,18 +1087,26 @@
             </timeline>
             <timeline id="37" obj="16" name="hitbox" object_type="box">
                 <key id="0" spin="0">
-                    <object x="-10" y="421" pivot_x="0" pivot_y="1" scale_x="0.971918" scale_y="0.967346"/>
+                    <object x="-10" y="421" pivot_x="0" pivot_y="1" angle="0" scale_x="0.971918" scale_y="0.967346"/>
                 </key>
                 <key id="1" time="303" spin="0">
-                    <object x="48" y="414" pivot_x="0" pivot_y="1" scale_x="1.07024" scale_y="0.967346"/>
+                    <object x="48" y="414" pivot_x="0" pivot_y="1" angle="0" scale_x="1.07024" scale_y="0.967346"/>
                 </key>
                 <key id="2" time="753" spin="0">
-                    <object x="50.446043" y="418.532374" pivot_x="0" pivot_y="1" scale_x="1.056683" scale_y="0.992126"/>
+                    <object x="50.446043" y="418.532374" pivot_x="0" pivot_y="1" angle="0" scale_x="1.056683" scale_y="0.992126"/>
                 </key>
                 <key id="3" time="998" spin="0">
-                    <object x="-10" y="421" pivot_x="0" pivot_y="1" scale_x="0.971918" scale_y="0.967346"/>
+                    <object x="-10" y="421" pivot_x="0" pivot_y="1" angle="0" scale_x="0.971918" scale_y="0.967346"/>
                 </key>
             </timeline>
+            <soundline id="-1" name="stroke">
+                <key id="0" time="302">
+                    <object folder="2" file="1"/>
+                </key>
+                <key id="1" time="539">
+                    <object folder="2" file="1"/>
+                </key>
+            </soundline>
         </animation>
     </entity>
 </spriter_data>

@@ -124,14 +124,14 @@ void Game::UpdateBattle()
 		if (adventureGroup.IsDead())
 		{
 			levelFinished = true;
-			levelFinishedPanel.Init(m_pGameEngine, false);
+			levelFinishedPanel.Init(m_pGameEngine, true);
 			levelFinishedPanel.SetPos(m_pGameEngine->GetWindowSize().x / 2 - 458, 190);
 		}
 		else if (currentBattle->isBossBattle)
 		{
 			levelFinished = true;
 
-			levelFinishedPanel.Init(m_pGameEngine, true);
+			levelFinishedPanel.Init(m_pGameEngine, false);
 			levelFinishedPanel.SetReward(level->GetReward());
 			levelFinishedPanel.SetPos(m_pGameEngine->GetWindowSize().x / 2 - 458, 200);
 		}

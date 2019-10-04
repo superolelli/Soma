@@ -28,6 +28,8 @@ namespace SpriterEngine
 
 		virtual void blendCurrentTimelineKey(real newTime, real blendRatio);
 
+		UniversalObjectInterface *getResultObject() { return resultObject; }
+
 	protected:
 		TimelineKeyVector *timelineKeys;
 		TimelineKeyVectorIterator timelineKeyIterator;
