@@ -2754,7 +2754,7 @@
             </timeline>
             <soundline id="-1" name="Giggle">
                 <key id="0" time="642">
-                    <object folder="1" file="0"/>
+                    <object folder="1" file="0" volume="0.387"/>
                 </key>
             </soundline>
         </animation>

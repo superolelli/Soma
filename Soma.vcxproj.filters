@@ -67,6 +67,12 @@
     <Filter Include="Quelldateien\Framework\Patterns">
       <UniqueIdentifier>{c3f3bf45-5372-48e7-8406-a969427256b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Game\Enemies">
+      <UniqueIdentifier>{c3bc060b-c911-42f3-be33-6663c5d0fb95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\Enemies">
+      <UniqueIdentifier>{15201485-681e-4c3b-92d2-6d2a29465d2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -477,9 +483,6 @@
     <ClCompile Include="src\Game\CombatantAttributesPanel.cpp">
       <Filter>Quelldateien\Game\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\Greg.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\Resources\VideoManager.cpp">
       <Filter>Quelldateien\Game\Resources</Filter>
     </ClCompile>
@@ -498,9 +501,6 @@
     <ClCompile Include="src\Game\GameStatus.cpp">
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\ApacheKid.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\SkillPanel.cpp">
       <Filter>Quelldateien\Game\GUI</Filter>
     </ClCompile>
@@ -509,6 +509,18 @@
     </ClCompile>
     <ClCompile Include="src\Game\Resources\MusicManager.cpp">
       <Filter>Quelldateien\Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\ApacheKid.cpp">
+      <Filter>Quelldateien\Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Greg.cpp">
+      <Filter>Quelldateien\Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Abtruenniger.cpp">
+      <Filter>Quelldateien\Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Hilfssheriff.cpp">
+      <Filter>Quelldateien\Game\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -959,9 +971,6 @@
     <ClInclude Include="src\Game\CombatantAttributesPanel.hpp">
       <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\Greg.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\Resources\VideoManager.hpp">
       <Filter>Headerdateien\Game\Resources</Filter>
     </ClInclude>
@@ -986,9 +995,6 @@
     <ClInclude Include="src\Game\GameStatus.hpp">
       <Filter>Headerdateien\Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\ApacheKid.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\SkillPanel.hpp">
       <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
@@ -997,6 +1003,18 @@
     </ClInclude>
     <ClInclude Include="src\Game\Resources\MusicManager.hpp">
       <Filter>Headerdateien\Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Abtruenniger.hpp">
+      <Filter>Headerdateien\Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ApacheKid.hpp">
+      <Filter>Headerdateien\Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Greg.hpp">
+      <Filter>Headerdateien\Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Hilfssheriff.hpp">
+      <Filter>Headerdateien\Game\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

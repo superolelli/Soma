@@ -56,4 +56,6 @@ private:
 
 	int GetEmptyEnemyBattlePosition();
 	void RecalculateEnemyPositions();
+
+	Enemy *GetEnemy(int _enemyID);
 };

@@ -99,6 +99,7 @@ void MainRoom::Cleanup()
 
 	g_pModels->Quit();  //Muss in letztem Gamestate passieren
 	g_pSpritePool->FreeSprites();   //Muss in letztem Gamestate passieren
+	g_pSounds->Quit(); //Muss in letztem Gamestate passieren
 }
 
 
@@ -145,6 +146,7 @@ void MainRoom::Update()
 	HandlePlayerAnimation();
 	UpdatePlayerHitboxes();
 	HandleDoors();
+	g_pSounds->Update();
 }
 
 
@@ -191,12 +193,13 @@ void MainRoom::HandleDoors()
 {
 	for (auto &d : doors)
 	{
-		if (d.GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos())) 
+		if (d.GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos()) && !skillPanel.IsOpen()) 
 		{
 			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
 
 			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Pressed)
 			{
+				g_pSounds->PlaySound(soundID::DOOR);
 				auto newGame = new Game();
 				newGame->SetGameStatusPtr(&gameStatus);
 				m_pGameEngine->PushState(newGame);

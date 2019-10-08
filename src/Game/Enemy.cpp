@@ -49,14 +49,8 @@ void Enemy::ChooseAbility()
 	case CombatantID::Gesetzloser:
 		chosenAbility = enemyAbilities::springfield;
 		break;
-	case CombatantID::Abtruenniger:
-		chosenAbility = enemyAbilities::bang;
-		break;
 	case CombatantID::Indianer:
 		chosenAbility = enemyAbilities::tomahawk;
-		break;
-	case CombatantID::Hilfssheriff:
-		chosenAbility = enemyAbilities::bang;
 		break;
 	}
 }
@@ -119,6 +113,7 @@ void Enemy::ChooseRandomPlayer()
 				if (target == 0)
 				{
 					selectedTargets.push_back(c);
+					SelectAdditionalPlayers();
 					return;
 				}
 				target--;
@@ -131,6 +126,29 @@ void Enemy::ChooseRandomPlayer()
 	}
 }
 
+
+void Enemy::SelectAdditionalPlayers()
+{
+	int targetPosition = selectedTargets[0]->GetBattlePos();
+
+	for (Combatant* c : (*allCombatants))
+	{
+		if (g_pObjectProperties->enemyAbilities[chosenAbility].possibleAims.attackAll && this != c  && selectedTargets[0] != c || c->GetBattlePos() < targetPosition && c->GetBattlePos() > targetPosition - g_pObjectProperties->enemyAbilities[chosenAbility].possibleAims.howMany)
+			selectedTargets.push_back(c);
+	}
+}
+
+
+void Enemy::SelectAdditionalEnemies()
+{
+	int targetPosition = selectedTargets[0]->GetBattlePos();
+
+	for (Combatant* c : (*allCombatants))
+	{
+		if (g_pObjectProperties->enemyAbilities[chosenAbility].possibleAims.attackAll && this != c  && selectedTargets[0] != c || c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + g_pObjectProperties->enemyAbilities[chosenAbility].possibleAims.howMany)
+			selectedTargets.push_back(c);
+	}
+}
 
 void Enemy::ChooseRandomEnemy()
 {
@@ -146,6 +164,7 @@ void Enemy::ChooseRandomEnemy()
 				if (target == 0)
 				{
 					selectedTargets.push_back(c);
+					SelectAdditionalEnemies();
 					return;
 				}
 				target--;

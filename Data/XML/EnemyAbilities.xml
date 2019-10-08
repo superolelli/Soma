@@ -89,7 +89,9 @@
 	  </positions>
 
 	  <effect>
-		  <buff duration="3" isPositive="false">
+		  <buff>
+					<duration>3</duration>
+					<isPositive>false</isPositive>
           <dodge>-3</dodge>
           <damage>-3</damage>
       </buff>
@@ -120,10 +122,51 @@
 
 	  <effect>
 			<damageFactor>1</damageFactor>
-			<buff duration="3" isPositive="false">
+			<buff>
+				<duration>3</duration>
+				<isPositive>false</isPositive>
 				<precision>-3</precision>
-			</buf>
+			</buff>
 	  </effect>
   </ability>
+
+	<ability id="8" name="Fanning">
+		<animation>fanning</animation>
+		<effectAnimation>bang</effectAnimation>
+
+		<howMany>2</howMany>
+		<positions>
+		  <value id="1">true</value>
+		  <value id="2">true</value>
+		  <value id="3">true</value>
+		</positions>
+
+		<effect>
+			<damageFactor>0.4</damageFactor>
+		</effect>
+	</ability>
+
+
+	<ability id="9" name="Kopfgeld">
+		<animation>bounty</animation>
+		<effectAnimation>bounty</effectAnimation>
+
+		<positions>
+		  <value id="0">true</value>
+		  <value id="1">true</value>
+		  <value id="2">true</value>
+		  <value id="3">true</value>
+	  </positions>
+
+		<effect>
+			<mark>2</mark>
+			<buff>
+				<isPositive>false</isPositive>
+				<duration>2</duration>
+				<dodge>-5</dodge>
+				<armour>-10</armour>
+			</buff>
+		</effect>
+	</ability>
 
 </Abilities>

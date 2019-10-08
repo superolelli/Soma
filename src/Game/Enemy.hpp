@@ -41,6 +41,9 @@ protected:
 	void ChooseRandomPlayer();
     void ChooseRandomEnemy();
 
+	void SelectAdditionalPlayers();
+	void SelectAdditionalEnemies();
+
 	bool CanAimAtCombatant(Combatant *_combatant);
 
 	void AnnounceAndStartAbilityAnimation();

@@ -86,6 +86,7 @@ void Game::Update()
 
 	g_pVideos->Update();
 	g_pMusic->Update();
+	g_pSounds->Update();
 }
 
 

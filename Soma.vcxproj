@@ -243,6 +243,7 @@
     <ClCompile Include="src\Framework\Window.cpp" />
     <ClCompile Include="src\Game\Ability.cpp" />
     <ClCompile Include="src\Game\AbilityTooltip.cpp" />
+    <ClCompile Include="src\Game\Abtruenniger.cpp" />
     <ClCompile Include="src\Game\AdventureGroup.cpp" />
     <ClCompile Include="src\Game\Anna.cpp" />
     <ClCompile Include="src\Game\ApacheKid.cpp" />
@@ -258,6 +259,7 @@
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Game\Greg.cpp" />
     <ClCompile Include="src\Game\GUI.cpp" />
+    <ClCompile Include="src\Game\Hilfssheriff.cpp" />
     <ClCompile Include="src\Game\InitialState.cpp" />
     <ClCompile Include="src\Game\Level.cpp" />
     <ClCompile Include="src\Game\LevelBuilder.cpp" />
@@ -291,11 +293,13 @@
     <ClInclude Include="src\Framework\Patterns\Subject.hpp" />
     <ClInclude Include="src\Game\Ability.hpp" />
     <ClInclude Include="src\Game\AbilityTooltip.hpp" />
+    <ClInclude Include="src\Game\Abtruenniger.hpp" />
     <ClInclude Include="src\Game\ApacheKid.hpp" />
     <ClInclude Include="src\Game\CombatantID.hpp" />
     <ClInclude Include="src\Game\CombatantAttributesPanel.hpp" />
     <ClInclude Include="src\Game\CombatantStatusBar.hpp" />
     <ClInclude Include="src\Game\Greg.hpp" />
+    <ClInclude Include="src\Game\Hilfssheriff.hpp" />
     <ClInclude Include="src\Game\LevelBuilder.hpp" />
     <ClInclude Include="src\Game\LevelFinishedPanel.hpp" />
     <ClInclude Include="src\Game\LevelSpecs.hpp" />

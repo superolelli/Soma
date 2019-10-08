@@ -4,7 +4,6 @@
 
 CButton::CButton()
 {
-
 }
 
 
@@ -25,6 +24,11 @@ void CButton::SetEnabled()
 	m_ButtonSprite.SetColor(255, 255, 255);
 }
 
+
+void CButton::SetCallback(std::function<void()> _callback)
+{
+	m_Callback = _callback;
+}
 
 //Loads the texture, sets the position and type of the button
 void CButton::Load(sf::Texture const &_texture, Buttontypes _type, std::string const &_str)
@@ -111,7 +115,17 @@ void CButton::SetButtonstring(std::string const &_buttonstring)
 bool CButton::Update(CGameEngine &_engine)
 {
 	nextFrame = 0.0f;
+	bool buttonWasPressed = ButtonWasPressed(_engine);
 
+	if (buttonWasPressed && m_Callback)
+		m_Callback();
+
+	return buttonWasPressed;
+}
+
+
+bool CButton::ButtonWasPressed(CGameEngine &_engine)
+{
 	//if the mouse is at the button
 	if (isEnabled && m_ButtonSprite.GetRect().contains(_engine.GetMousePos()))
 	{
@@ -186,9 +200,6 @@ bool CButton::Update(CGameEngine &_engine)
 
 	return false;
 }
-
-
-
 
 void CButton::Render(CGameEngine &_engine)
 {

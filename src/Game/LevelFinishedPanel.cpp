@@ -1,17 +1,16 @@
 #include "LevelFinishedPanel.hpp"
-
+#include "Resources\SoundManager.hpp"
 
 void LevelFinishedPanel::Init(CGameEngine *_engine, bool _levelFailed)
 {
 	engine = _engine;
 	levelFailed = _levelFailed;
 
-	panel.Load(g_pTextures->bangLevelFinishedPanel);
-
 	continueButton.Load(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Weiter");
 	continueButton.SetButtontextCharactersize(30);
 	continueButton.SetButtontextColor(sf::Color::White);
 	continueButton.SetButtontextFont(g_pFonts->f_blackwoodCastle);
+	continueButton.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
 	levelFinishedText.setCharacterSize(40);
 	levelFinishedText.setFillColor(sf::Color::White);
@@ -19,10 +18,16 @@ void LevelFinishedPanel::Init(CGameEngine *_engine, bool _levelFailed)
 	levelFinishedText.setOutlineThickness(4);
 	levelFinishedText.setFont(g_pFonts->f_kingArthur);
 
-	if(_levelFailed)
+	if (_levelFailed)
+	{
+		panel.Load(g_pTextures->bangLevelFailedPanel);
 		levelFinishedText.setString("Versagt!");
+	}
 	else
+	{
+		panel.Load(g_pTextures->bangLevelFinishedPanel);
 		levelFinishedText.setString("Level beendet!");
+	}
 
 	rewardDiceText.setCharacterSize(20);
 	rewardDiceText.setFillColor(sf::Color::White);
@@ -79,7 +84,12 @@ void LevelFinishedPanel::SetReward(LevelReward &_reward)
 void LevelFinishedPanel::PositionComponentsRelativeToPanel()
 {
 	continueButton.SetPos(panel.GetGlobalRect().left + panel.GetGlobalRect().width / 2 - continueButton.GetRect().width / 2, panel.GetGlobalRect().top + 485);
-	levelFinishedText.setPosition(panel.GetGlobalRect().left + panel.GetGlobalRect().width / 2 - levelFinishedText.getGlobalBounds().width / 2, panel.GetGlobalRect().top + 175);
+
+	if(levelFailed)
+		levelFinishedText.setPosition(panel.GetGlobalRect().left + panel.GetGlobalRect().width / 2 - levelFinishedText.getGlobalBounds().width / 2, panel.GetGlobalRect().top + 250);
+	else
+		levelFinishedText.setPosition(panel.GetGlobalRect().left + panel.GetGlobalRect().width / 2 - levelFinishedText.getGlobalBounds().width / 2, panel.GetGlobalRect().top + 175);
+
 	rewardDiceText.setPosition(panel.GetGlobalRect().left + 335, panel.GetGlobalRect().top + 405);
 	rewardCardsText.setPosition(panel.GetGlobalRect().left + 545, panel.GetGlobalRect().top + 405);
 }

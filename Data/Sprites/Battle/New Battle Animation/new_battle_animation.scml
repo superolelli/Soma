@@ -414,7 +414,7 @@
             </soundline>
             <soundline id="-1" name="jingle">
                 <key id="0">
-                    <object folder="1" file="2" volume="0.118"/>
+                    <object folder="1" file="2" volume="0.215"/>
                 </key>
             </soundline>
         </animation>

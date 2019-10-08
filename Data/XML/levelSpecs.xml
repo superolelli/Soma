@@ -23,29 +23,18 @@
             <group>
                 <enemy>Indianer</enemy>
                 <enemy>Indianer</enemy>
-                <enemy>Indianer</enemy>
-                <enemy>Indianer</enemy>
-            </group>
-            <group>
-                <enemy>Indianer</enemy>
-                <enemy>Indianer</enemy>
             </group>
             <group>
                 <enemy>Abtrünniger</enemy>
                 <enemy>Abtrünniger</enemy>
-                <enemy>Gesetzloser</enemy>
+                <enemy>Abtrünniger</enemy>
+            </group>
+            <group>
+                <enemy>Abtrünniger</enemy>
                 <enemy>Gesetzloser</enemy>
             </group>
             <group>
-                <enemy>Abtrünniger</enemy>
-                <enemy>Abtrünniger</enemy>
-                <enemy>Abtrünniger</enemy>
-                <enemy>Abtrünniger</enemy>
-            </group>
-            <group>
                 <enemy>Indianer</enemy>
-                <enemy>Indianer</enemy>
-                <enemy>Abtrünniger</enemy>
                 <enemy>Abtrünniger</enemy>
             </group>
             <group>
@@ -53,17 +42,15 @@
                 <enemy>Gesetzloser</enemy>
             </group>
             <group>
-                <enemy>Hilfssheriff</enemy>
-                <enemy>Hilfssheriff</enemy>
                 <enemy>Hilfssheriff</enemy>
                 <enemy>Hilfssheriff</enemy>
             </group>
         </enemyGroups>
         <bossGroup>
             <enemy>Abtrünniger</enemy>
+            <enemy>Abtrünniger</enemy>
             <enemy>Gesetzloser</enemy>
             <enemy>Gesetzloser</enemy>
-            <enemy>Greg Digger</enem>
         </bossGroup>
     </level>
 
@@ -90,7 +77,6 @@
                 <enemy>Indianer</enemy>
                 <enemy>Indianer</enemy>
                 <enemy>Indianer</enemy>
-                <enemy>Indianer</enemy>
             </group>
             <group>
                 <enemy>Indianer</enemy>
@@ -101,6 +87,10 @@
                 <enemy>Abtrünniger</enemy>
                 <enemy>Gesetzloser</enemy>
                 <enemy>Gesetzloser</enemy>
+            </group>
+            <group>
+                <enemy>Abtrünniger</enemy>
+                <enemy>Abtrünniger</enemy>
             </group>
             <group>
                 <enemy>Abtrünniger</enemy>
@@ -121,15 +111,31 @@
             <group>
                 <enemy>Hilfssheriff</enemy>
                 <enemy>Hilfssheriff</enemy>
+            </group>
+            <group>
                 <enemy>Hilfssheriff</enemy>
                 <enemy>Hilfssheriff</enemy>
+                <enemy>Hilfssheriff</enemy>
+            </group>
+             <group>
+                <enemy>Abtrünniger</enemy>
+                <enemy>Abtrünniger</enemy>
+                <enemy>Abtrünniger</enemy>
+            </group>
+            <group>
+                <enemy>Abtrünniger</enemy>
+                <enemy>Gesetzloser</enemy>
+            </group>
+            <group>
+                <enemy>Indianer</enemy>
+                <enemy>Abtrünniger</enemy>
             </group>
         </enemyGroups>
         <bossGroup>
-            <enemy>Indianer</enemy>
-            <enemy>Indianer</enemy>
-            <enemy>Indianer</enemy>
-            <enemy>Apache Kid</enemy>
+            <enemy>Abtrünniger</enemy>
+            <enemy>Gesetzloser</enemy>
+            <enemy>Gesetzloser</enemy>
+            <enemy>Greg Digger</enemy>
         </bossGroup>
     </level>
 
@@ -165,6 +171,20 @@
             <group>
                 <enemy>Abtrünniger</enemy>
                 <enemy>Abtrünniger</enemy>
+                <enemy>Greg Digger</enemy>
+            </group>
+            <group>
+                <enemy>Abtrünniger</enemy>
+                <enemy>Gesetzloser</enemy>
+                <enemy>Greg Digger</enemy>
+            </group>
+            <group>
+                <enemy>Greg Digger</enemy>
+                <enemy>Greg Digger</enemy>
+            </group>
+            <group>
+                <enemy>Abtrünniger</enemy>
+                <enemy>Abtrünniger</enemy>
                 <enemy>Gesetzloser</enemy>
                 <enemy>Gesetzloser</enemy>
             </group>
@@ -192,10 +212,10 @@
             </group>
         </enemyGroups>
         <bossGroup>
-            <enemy>Abtrünniger</enemy>
-            <enemy>Gesetzloser</enemy>
-            <enemy>Gesetzloser</enemy>
-            <enemy>Greg Digger</enemy>
+            <enemy>Indianer</enemy>
+            <enemy>Indianer</enemy>
+            <enemy>Indianer</enemy>
+            <enemy>Apache Kid</enemy>
         </bossGroup>
     </level>
 

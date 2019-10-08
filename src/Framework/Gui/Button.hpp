@@ -4,6 +4,8 @@
 #include "../Gameengine.hpp"
 #include "../Graphics/Sprite.hpp"
 
+#include <functional>
+
 enum class Buttontypes{Up, Down, Motion_Up, Motion_Down};
 
 class CButton
@@ -30,6 +32,8 @@ public:
 	void SetDisabled();
 	void SetEnabled();
 
+	void SetCallback(std::function<void()> _callback);
+
 	//sets the buttonstring
 	void SetButtonstring(std::string const &_buttonstring);
 
@@ -53,8 +57,12 @@ private:
 
 	bool isEnabled;
 
+	std::function<void()> m_Callback;
+
 	void RenderButtontext(CGameEngine &_engine);
 
 	void SetDefaultButtontext();
+
+	bool ButtonWasPressed(CGameEngine &_engine);
 };
 

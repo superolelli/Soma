@@ -3,6 +3,7 @@
 #include "../Framework/Graphics/RichText.hpp"
 #include "../Framework/Graphics/RoundedRectangleShape.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
+#include "Resources\SoundManager.hpp"
 
 
 void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
@@ -137,18 +138,22 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 
 	buttonNext.Load(g_pTextures->skillPanelButtonNext, Buttontypes::Up);
 	buttonNext.SetPos(skillPanel.GetGlobalRect().left + 217, skillPanel.GetGlobalRect().top + 66);
+	buttonNext.SetCallback([](){g_pSounds->PlaySound(soundID::CLICK);});
 
 	buttonPrevious.Load(g_pTextures->skillPanelButtonPrevious, Buttontypes::Up);
 	buttonPrevious.SetPos(skillPanel.GetGlobalRect().left + 15, skillPanel.GetGlobalRect().top + 66);
+	buttonPrevious.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
 	buttonClose.Load(g_pTextures->skillPanelButtonClose, Buttontypes::Motion_Up);
 	buttonClose.SetPos(skillPanel.GetGlobalRect().left + 1475, skillPanel.GetGlobalRect().top + 66);
+	buttonClose.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
 	buttonBuy.Load(g_pTextures->bangGenericButton, Buttontypes::Motion_Up);
 	buttonBuy.SetButtonstring("Kaufen");
 	buttonBuy.SetButtontextFont(g_pFonts->f_trajan);
 	buttonBuy.SetButtontextCharactersize(30);
 	buttonBuy.SetPos(skillPanel.GetGlobalRect().left + 984, skillPanel.GetGlobalRect().top + 789);
+	buttonBuy.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
 	abilityPanelRect[0].left = skillPanel.GetGlobalRect().left + 51;
 	abilityPanelRect[0].top = skillPanel.GetGlobalRect().top + 176;
@@ -260,6 +265,7 @@ void SkillPanel::CheckBuyButton()
 		{
 			gameStatus->RemoveDice(skillCost[currentSkill]);
 			gameStatus->AcquireSkill(currentPlayer, currentAbility, currentSkill);
+			g_pSounds->PlaySound(soundID::SKILL_ACQUIRED);
 			RecolorSkills();
 			UpdateCurrentSkillFrame();
 		}
