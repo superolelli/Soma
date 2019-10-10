@@ -43,7 +43,9 @@ void Buff::ApplySkill(const Buff &_buff)
 	stats.attributes.speed += _buff.stats.attributes.speed;
 	stats.attributes.strength += _buff.stats.attributes.strength;
 
-	isPositive = _buff.isPositive;
+	if(duration <= 0)
+		isPositive = _buff.isPositive;
+
 	onSelf = _buff.onSelf;
 	duration += _buff.duration;
 }

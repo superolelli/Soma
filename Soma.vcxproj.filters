@@ -522,6 +522,9 @@
     <ClCompile Include="src\Game\Hilfssheriff.cpp">
       <Filter>Quelldateien\Game\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\Lootable.cpp">
+      <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -1015,6 +1018,9 @@
     </ClInclude>
     <ClInclude Include="src\Game\Hilfssheriff.hpp">
       <Filter>Headerdateien\Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Lootable.hpp">
+      <Filter>Headerdateien\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

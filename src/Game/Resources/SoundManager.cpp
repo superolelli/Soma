@@ -3,12 +3,26 @@
 
 void SoundManager::LoadSounds()
 {
-	door.loadFromFile("Data/Sound/door.ogg");
-	click.loadFromFile("Data/Sound/click.wav");
-	skillAcquired.loadFromFile("Data/Sound/skill_acquired.wav");
+	soundBuffers[DOOR].loadFromFile("Data/Sound/door.ogg");
+	soundBuffers[CLICK].loadFromFile("Data/Sound/click.wav");
+	soundBuffers[SKILL_ACQUIRED].loadFromFile("Data/Sound/skill_acquired.wav");
+	soundBuffers[BARREL].loadFromFile("Data/Sound/Lootables/barrel.ogg");
+	soundBuffers[CABINET].loadFromFile("Data/Sound/Lootables/cabinet.ogg");
+	soundBuffers[CHEST].loadFromFile("Data/Sound/Lootables/chest.wav");
+	soundBuffers[CUP].loadFromFile("Data/Sound/Lootables/cup.ogg");
+	soundBuffers[KEG].loadFromFile("Data/Sound/Lootables/keg.ogg");
+	soundBuffers[RUBBISH].loadFromFile("Data/Sound/Lootables/stonepile.ogg");
+	soundBuffers[SACK].loadFromFile("Data/Sound/Lootables/sack.ogg");
+	soundBuffers[SKELETON].loadFromFile("Data/Sound/Lootables/skeleton.ogg");
+	soundBuffers[STONEPILE].loadFromFile("Data/Sound/Lootables/stonepile.ogg");
+	soundBuffers[TABLE].loadFromFile("Data/Sound/Lootables/table.ogg");
+	soundBuffers[WAGON].loadFromFile("Data/Sound/Lootables/wagon.ogg");
 
 	for (int i = 0; i < 10; i++)
+	{
 		freeSoundObjects.push_back(new sf::Sound);
+		freeSoundObjects[i]->setRelativeToListener(true);
+	}
 }
 
 
@@ -20,6 +34,7 @@ void SoundManager::Quit()
 	for (auto &s : usedSoundObjects)
 		delete(s);
 }
+
 
 void SoundManager::Update()
 {
@@ -35,26 +50,14 @@ void SoundManager::Update()
 	}
 }
 
+
 void SoundManager::PlaySound(soundID _id)
 {
 	if (!freeSoundObjects.empty())
 	{
 		usedSoundObjects.push_back(freeSoundObjects.back());
 		freeSoundObjects.pop_back();
-
-		switch (_id)
-		{
-		case DOOR:
-			usedSoundObjects.back()->setBuffer(door);
-			break;
-		case CLICK:
-			usedSoundObjects.back()->setBuffer(click);
-			break;
-		case SKILL_ACQUIRED:
-			usedSoundObjects.back()->setBuffer(skillAcquired);
-			break;
-		}
-
+		usedSoundObjects.back()->setBuffer(soundBuffers[_id]);
 		usedSoundObjects.back()->play();
 	}
 }

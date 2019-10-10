@@ -5,7 +5,7 @@ void GameStatus::Init(CGameEngine * _engine)
 {
 	engine = _engine;
 
-	dice = 20;
+	dice = 0;
 	cards = 0;
 
 	statusBar.Load(g_pTextures->statusBar);

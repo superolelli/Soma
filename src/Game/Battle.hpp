@@ -8,7 +8,7 @@
 
 
 const int ENEMY_X_OFFSET = 20;
-const int ENEMY_Y_POS = 700;
+const int ENEMY_Y_POS = 750;
 const int ENEMY_SPACING = 40;
 
 class Battle : public CSubject

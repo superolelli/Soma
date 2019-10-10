@@ -197,7 +197,7 @@ void MainRoom::HandleDoors()
 		{
 			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
 
-			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Pressed)
+			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released)
 			{
 				g_pSounds->PlaySound(soundID::DOOR);
 				auto newGame = new Game();

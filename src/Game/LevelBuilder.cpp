@@ -9,6 +9,7 @@ Level *LevelBuilder::buildLevel(int _levelID)
 	int position = 0;
 	for (int i = 0; i < g_pObjectProperties->levelSpecs[_levelID - 1].numberOfRooms - 1; i++)
 	{
+		//battle
 		Room *newRoom = new Room;
 		newRoom->battle = rand() % 100 < g_pObjectProperties->levelSpecs[_levelID - 1].battleProbability * 100.0f;
 		if (newRoom->battle)
@@ -18,11 +19,23 @@ Level *LevelBuilder::buildLevel(int _levelID)
 				newRoom->enemyIds[j] = g_pObjectProperties->levelSpecs[_levelID - 1].possibleEnemyGroups[enemyGroup][j];
 		}
 
+		//background
 		auto backgroundID = rand() % g_pObjectProperties->levelSpecs[_levelID - 1].possibleBackgrounds.size();
 		newRoom->background.Load(g_pTextures->bangBackgrounds[g_pObjectProperties->levelSpecs[_levelID - 1].possibleBackgrounds[backgroundID]]);
 		newRoom->background.SetPos(position, 0);
 		newRoom->boss = false;
 		position += newRoom->background.GetRect().width;
+
+		//lootable
+		if (rand() % 100 < g_pObjectProperties->levelSpecs[_levelID - 1].lootableProbability * 100.0f)
+		{
+			LootableID lootableId = LootableID(rand() % numberOfLootables);
+			newRoom->lootable = new Lootable;
+			newRoom->lootable->Init(lootableId);
+			newRoom->lootable->SetPos(newRoom->background.GetGlobalRect().left + g_pObjectProperties->lootablePositions[lootableId].x, newRoom->background.GetGlobalRect().top + g_pObjectProperties->lootablePositions[lootableId].y);
+		}
+		else
+			newRoom->lootable = nullptr;
 
 		newLevel->AddRoom(newRoom);
 	}
@@ -33,6 +46,7 @@ Level *LevelBuilder::buildLevel(int _levelID)
 	newRoom->background.Load(g_pTextures->bangBackgrounds[g_pObjectProperties->levelSpecs[_levelID - 1].endBackground]);
 	newRoom->background.SetPos(position, 0);
 	newRoom->boss = true;
+	newRoom->lootable = nullptr;
 	for(int i = 0; i < 4; i++)
 		newRoom->enemyIds[i] = g_pObjectProperties->levelSpecs[_levelID - 1].bossGroup[i];
 	newLevel->AddRoom(newRoom);

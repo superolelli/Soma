@@ -103,7 +103,7 @@ void Game::UpdateLevel()
 	if(!level->IsAtEnd(view.getCenter().x))
 		view.move(xMove, 0);
 
-	level->Update(view.getCenter().x);
+	level->Update(view.getCenter().x, m_pGameEngine);
 
 	if (level->InBattle())
 	{

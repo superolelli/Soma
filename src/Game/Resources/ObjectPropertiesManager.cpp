@@ -13,6 +13,7 @@ void ObjectPropertiesManager::LoadObjectProperties()
 	LoadEnemyAttributes();
 	LoadLevelSpecs();
 	LoadMainRoomPositions();
+	LoadLootablesBoundingBoxes();
 }
 
 
@@ -198,4 +199,25 @@ void ObjectPropertiesManager::LoadMainRoomPositions()
 
 	mainRoomRootsPosition.x = doc.child("Positions").child("roots").attribute("x").as_int();
 	mainRoomRootsPosition.y = doc.child("Positions").child("roots").attribute("y").as_int();
+}
+
+
+void ObjectPropertiesManager::LoadLootablesBoundingBoxes()
+{
+	using namespace pugi;
+
+	xml_document doc;
+	doc.load_file("Data/XML/LootablesBoundingBoxes.xml");
+
+	for (xml_node &lootable : doc.child("Lootables").children())
+	{
+		int lootableID = lootable.attribute("id").as_int();
+		lootablesBoundingBoxes[lootableID].left = lootable.child("boundingBox").child("left").text().as_int();
+		lootablesBoundingBoxes[lootableID].top = lootable.child("boundingBox").child("top").text().as_int();
+		lootablesBoundingBoxes[lootableID].width = lootable.child("boundingBox").child("width").text().as_int();
+		lootablesBoundingBoxes[lootableID].height = lootable.child("boundingBox").child("height").text().as_int();
+
+		lootablePositions[lootableID].x = lootable.child("xPosition").text().as_int();
+		lootablePositions[lootableID].y = lootable.child("yPosition").text().as_int();
+	}
 }

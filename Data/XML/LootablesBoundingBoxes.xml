@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Lootables>
+    <lootable id="0" name="barrel">
+        <boundingBox>
+            <left>0</left>
+            <top>0</top>
+            <width>204</width>
+            <height>244</height>
+        </boundingBox>
+        <xPosition>937</xPosition>
+        <yPosition>460</yPosition>
+    </lootable>
+
+    <lootable id="1" name="cabinet">
+        <boundingBox>
+            <left>159</left>
+            <top>0</top>
+            <width>454</width>
+            <height>432</height>
+        </boundingBox>
+        <xPosition>630</xPosition>
+        <yPosition>269</yPosition>
+    </lootable>
+
+    <lootable id="2" name="chest">
+        <boundingBox>
+            <left>0</left>
+            <top>76</top>
+            <width>314</width>
+            <height>181</height>
+        </boundingBox>
+        <xPosition>820</xPosition>
+        <yPosition>430</yPosition>
+    </lootable>
+
+    <lootable id="3" name="cup">
+        <boundingBox>
+            <left>56</left>
+            <top>11</top>
+            <width>88</width>
+            <height>83</height>
+        </boundingBox>
+        <xPosition>892</xPosition>
+        <yPosition>613</yPosition>
+    </lootable>
+
+    <lootable id="4" name="keg">
+        <boundingBox>
+            <left>0</left>
+            <top>0</top>
+            <width>178</width>
+            <height>153</height>
+        </boundingBox>
+        <xPosition>900</xPosition>
+        <yPosition>580</yPosition>
+    </lootable>
+
+    <lootable id="5" name="rubbish">
+        <boundingBox>
+            <left>188</left>
+            <top>3</top>
+            <width>294</width>
+            <height>234</height>
+        </boundingBox>
+        <xPosition>675</xPosition>
+        <yPosition>450</yPosition>
+    </lootable>
+
+    <lootable id="6" name="sack">
+        <boundingBox>
+            <left>0</left>
+            <top>0</top>
+            <width>211</width>
+            <height>212</height>
+        </boundingBox>
+        <xPosition>891</xPosition>
+        <yPosition>488</yPosition>
+    </lootable>
+
+    <lootable id="7" name="skeleton">
+        <boundingBox>
+            <left>39</left>
+            <top>9</top>
+            <width>332</width>
+            <height>166</height>
+        </boundingBox>
+        <xPosition>765</xPosition>
+        <yPosition>597</yPosition>
+    </lootable>
+
+    <lootable id="8" name="stonepile">
+        <boundingBox>
+            <left>171</left>
+            <top>0</top>
+            <width>213</width>
+            <height>133</height>
+        </boundingBox>
+        <xPosition>764</xPosition>
+        <yPosition>560</yPosition>
+    </lootable>
+
+    <lootable id="9" name="table">
+        <boundingBox>
+            <left>40</left>
+            <top>38</top>
+            <width>348</width>
+            <height>244</height>
+        </boundingBox>
+        <xPosition>780</xPosition>
+        <yPosition>450</yPosition>
+    </lootable>
+
+    <lootable id="10" name="wagon">
+        <boundingBox>
+            <left>91</left>
+            <top>0</top>
+            <width>284</width>
+            <height>187</height>
+        </boundingBox>
+        <xPosition>806</xPosition>
+        <yPosition>550</yPosition>
+    </lootable>
+</Lootables>

@@ -42,11 +42,9 @@ void CGameEngine::Run()
 		//update the timer and calculate the lag
 		g_pTimer->Update();
 
-		//process events
-		m_pStates.back()->HandleEvents();
-
 		if (m_simpleRenderLoop)
 		{
+			m_pStates.back()->HandleEvents();
 			m_pStates.back()->Update();
 			m_CursorManager.Update();
 		}
@@ -56,6 +54,7 @@ void CGameEngine::Run()
 			//updates
 			while (lag >= MS_PER_UPDATE)
 			{
+				m_pStates.back()->HandleEvents();
 				m_pStates.back()->Update();
 				m_CursorManager.Update();
 				//checks if the current state needs to be popped

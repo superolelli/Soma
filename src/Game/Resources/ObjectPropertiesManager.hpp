@@ -2,6 +2,7 @@
 
 #include "../../Framework/Patterns/singleton.hpp"
 #include "../Util/XMLUtilities.hpp"
+#include <SFML\Graphics.hpp>
 
 #include "../Ability.hpp"
 #include "../LevelSpecs.hpp"
@@ -19,11 +20,14 @@ public:
 	CombatantStats playerStats[4];
 	std::map<int, CombatantStats> enemyStats;
 
-	Ability enemyAbilities[8];
+	Ability enemyAbilities[10];
 
 	Ability skills[4][4][8];
 
 	LevelSpecs levelSpecs[5];
+
+	sf::IntRect lootablesBoundingBoxes[11];
+	sf::Vector2i lootablePositions[11];
 
 	sf::Vector2i mainRoomDoorPositions[3];
 	sf::Vector2i mainRoomPlayerPositions[4];
@@ -42,5 +46,6 @@ private:
 	void LoadEnemyAttributes();
 	void LoadLevelSpecs();
 	void LoadMainRoomPositions();
+	void LoadLootablesBoundingBoxes();
 };
 

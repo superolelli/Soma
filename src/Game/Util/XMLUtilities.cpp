@@ -187,6 +187,7 @@ namespace pugi {
 	{
 		specs.level = levelSpecNode.attribute("id").as_int();
 		specs.battleProbability = levelSpecNode.child("battleProbability").text().as_float();
+		specs.lootableProbability = levelSpecNode.child("lootableProbability").text().as_float();
 		specs.numberOfRooms = levelSpecNode.child("numberOfRooms").text().as_int();
 		specs.endBackground = backgroundIdentifierMap[levelSpecNode.child("endBackground").text().as_string()];
 

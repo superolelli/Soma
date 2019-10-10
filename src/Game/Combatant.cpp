@@ -288,7 +288,7 @@ bool Combatant::CheckForDodging(Combatant *_attacker, int _precisionModificator)
 void Combatant::RenderAbilityTargetMarker()
 {
 	int xPos = GetRect().left + (GetRect().width - g_pSpritePool->abilityTargetMarker.GetRect().width) / 2;
-	int yPos = statusBar.GetRect().top + statusBar.GetRect().height + 20;
+	int yPos = statusBar.GetRect().top + statusBar.GetRect().height + 5;
 	g_pSpritePool->abilityTargetMarker.SetPos(xPos, yPos);
 	g_pSpritePool->abilityTargetMarker.Render(engine->GetWindow());
 }
@@ -296,7 +296,7 @@ void Combatant::RenderAbilityTargetMarker()
 void Combatant::RenderTurnMarker()
 {
 	int xPos = GetRect().left + (GetRect().width - g_pSpritePool->turnMarker.GetRect().width) / 2;
-	int yPos = statusBar.GetRect().top + statusBar.GetRect().height + 20;
+	int yPos = statusBar.GetRect().top + statusBar.GetRect().height + 5;
 	g_pSpritePool->turnMarker.SetPos(xPos, yPos);
 	g_pSpritePool->turnMarker.Render(engine->GetWindow());
 }

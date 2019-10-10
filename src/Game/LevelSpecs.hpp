@@ -13,6 +13,7 @@ struct LevelReward {
 struct LevelSpecs {
 	int level;
 	float battleProbability;
+	float lootableProbability;
 	int numberOfRooms;
 	std::vector<std::array<CombatantID, 4>> possibleEnemyGroups;
 	std::array<CombatantID, 4> bossGroup;

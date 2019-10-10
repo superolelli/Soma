@@ -2430,10 +2430,10 @@
             </timeline>
             <timeline id="2" name="attaching_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="194" y="120" angle="0"/>
+                    <object x="211" y="130" angle="0"/>
                 </key>
                 <key id="1" time="1563" spin="0">
-                    <object x="194" y="120" angle="0"/>
+                    <object x="211" y="130" angle="0"/>
                 </key>
             </timeline>
             <soundline id="-1" name="woosh_short">

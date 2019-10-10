@@ -32,6 +32,9 @@ public:
 	sf::Texture mainRoomSigns[3];
 	sf::Texture mainRoomRoots;
 
+	/** LOOTABLES **/
+	sf::Texture lootable[11];
+
 	/** SKILLING **/
 	sf::Texture skills[4][4][8];
 	sf::Texture skillPanelSelectedSkillFrame;

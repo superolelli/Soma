@@ -41,6 +41,18 @@ void CTextureManager::LoadTextures()
 
 	mainRoomRoots.loadFromFile("Data/Sprites/Backgrounds/Main Room/roots.png");
 
+	/** LOOTABLES **/
+	lootable[0].loadFromFile("Data/Sprites/Lootables/barrel.png");
+	lootable[1].loadFromFile("Data/Sprites/Lootables/cabinet.png");
+	lootable[2].loadFromFile("Data/Sprites/Lootables/chest.png");
+	lootable[3].loadFromFile("Data/Sprites/Lootables/cup.png");
+	lootable[4].loadFromFile("Data/Sprites/Lootables/keg.png");
+	lootable[5].loadFromFile("Data/Sprites/Lootables/rubbish.png");
+	lootable[6].loadFromFile("Data/Sprites/Lootables/sack.png");
+	lootable[7].loadFromFile("Data/Sprites/Lootables/skeleton.png");
+	lootable[8].loadFromFile("Data/Sprites/Lootables/stonepile.png");
+	lootable[9].loadFromFile("Data/Sprites/Lootables/table.png");
+	lootable[10].loadFromFile("Data/Sprites/Lootables/wagon.png");
 
 	/** SKILLING **/
 	LoadSkillTextures("Data/Sprites/Abilities/Simon/marshmallow_flash/marshmallow_flash_skill", 0, 0);

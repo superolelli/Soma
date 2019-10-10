@@ -141,7 +141,7 @@ void Player::SelectAdditionalTargets()
 
 bool Player::CurrentAbilityCanAimAtCombatant(Combatant* _combatant)
 {
-	bool canAim = g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].possibleAims.position[_combatant->GetBattlePos()];
+	bool canAim = g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].possibleAims.position[_combatant->GetBattlePos()] && !_combatant->IsDying();
 
 	if (dynamic_cast<PlayerMarkus*>(this) != nullptr && gui->GetCurrentAbility() == 0) { 
 		auto *markus = dynamic_cast<PlayerMarkus*>(this);

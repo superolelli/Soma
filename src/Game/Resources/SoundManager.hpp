@@ -3,7 +3,9 @@
 #include <SFML/Audio.hpp>
 #include "../../Framework/Patterns/singleton.hpp"
 
-enum soundID {DOOR, CLICK, SKILL_ACQUIRED};
+enum soundID {DOOR, CLICK, SKILL_ACQUIRED, BARREL, CABINET, CHEST, CUP, KEG, RUBBISH, SACK, SKELETON, STONEPILE, TABLE, WAGON, NUMBER_OF_SOUNDS};
+
+const int LOOTABLE_SOUNDS_START = 3;
 
 #define g_pSounds SoundManager::Get()
 class SoundManager : public TSingleton<SoundManager>
@@ -17,10 +19,7 @@ public:
 
 private:
 
-	sf::SoundBuffer door;
-	sf::SoundBuffer click;
-	sf::SoundBuffer skillAcquired;
-
+	sf::SoundBuffer soundBuffers[NUMBER_OF_SOUNDS];
 	std::vector<sf::Sound*> freeSoundObjects;
 	std::vector<sf::Sound*> usedSoundObjects;
 };

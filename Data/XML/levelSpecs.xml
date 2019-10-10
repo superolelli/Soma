@@ -18,7 +18,8 @@
             <dice>1</dice>
             <cards>25</cards>
         </reward>
-        <battleProbability>0.4</battleProbability>
+        <battleProbability>0.0</battleProbability>
+        <lootableProbability>1.0</lootableProbability>
         <enemyGroups>
             <group>
                 <enemy>Indianer</enemy>
@@ -72,6 +73,7 @@
             <cards>35</cards>
         </reward>
         <battleProbability>0.4</battleProbability>
+        <lootableProbability>0.4</lootableProbability>
         <enemyGroups>
             <group>
                 <enemy>Indianer</enemy>
@@ -157,6 +159,7 @@
             <cards>35</cards>
         </reward>
         <battleProbability>0.4</battleProbability>
+        <lootableProbability>0.4</lootableProbability>
         <enemyGroups>
             <group>
                 <enemy>Indianer</enemy>
@@ -237,6 +240,7 @@
             <cards>35</cards>
         </reward>
         <battleProbability>0.4</battleProbability>
+        <lootableProbability>0.4</lootableProbability>
         <enemyGroups>
             <group>
                 <enemy>Indianer</enemy>
@@ -303,6 +307,7 @@
             <cards>35</cards>
         </reward>
         <battleProbability>0.4</battleProbability>
+        <lootableProbability>0.4</lootableProbability>
         <enemyGroups>
             <group>
                 <enemy>Indianer</enemy>
