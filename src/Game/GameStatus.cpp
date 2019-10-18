@@ -7,6 +7,7 @@ void GameStatus::Init(CGameEngine * _engine)
 
 	dice = 0;
 	cards = 0;
+	items.clear();
 
 	statusBar.Load(g_pTextures->statusBar);
 	statusBar.SetPos(engine->GetWindowSize().x - statusBar.GetGlobalRect().width, 0);
@@ -66,6 +67,18 @@ void GameStatus::AcquireSkill(int player, int ability, int skill)
 		skillAcquired[player][ability][skill] = true;
 		g_pObjectProperties->playerAbilities[player][ability].applySkill(g_pObjectProperties->skills[player][ability][skill]);
 	}
+}
+
+void GameStatus::AddItem(Item &&_item)
+{
+	items.push_back(std::move(_item));
+	OnItemAddedCallback(items.back());
+}
+
+
+void GameStatus::SetOnItemAddedCallback(std::function<void(Item)> _callback)
+{
+	OnItemAddedCallback = _callback;
 }
 
 int GameStatus::GetDiceAmount()

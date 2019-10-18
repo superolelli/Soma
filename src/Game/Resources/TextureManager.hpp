@@ -35,6 +35,16 @@ public:
 	/** LOOTABLES **/
 	sf::Texture lootable[11];
 
+	/** ITEMS & INVENTORY**/
+	sf::Texture inventoryPanel;
+	sf::Texture inventoryDiamond;
+	sf::Texture inventoryConnection;
+	sf::Texture inventoryEquipmentField;
+	sf::Texture inventoryScrollBar;
+	sf::Texture lootablePanel;
+	sf::Texture lootablePanelButton;
+	sf::Texture item[2];
+
 	/** SKILLING **/
 	sf::Texture skills[4][4][8];
 	sf::Texture skillPanelSelectedSkillFrame;

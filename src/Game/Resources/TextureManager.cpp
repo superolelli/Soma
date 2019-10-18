@@ -54,6 +54,18 @@ void CTextureManager::LoadTextures()
 	lootable[9].loadFromFile("Data/Sprites/Lootables/table.png");
 	lootable[10].loadFromFile("Data/Sprites/Lootables/wagon.png");
 
+	/** ITEMS **/
+	inventoryPanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/inventory_panel.png");
+	inventoryDiamond.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/diamond.png");
+	inventoryConnection.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/equipment_connection.png");
+	inventoryEquipmentField.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/equipment_field.png");
+	inventoryScrollBar.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/scroll_bar.png");
+	lootablePanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/lootable_panel.png");
+	lootablePanelButton.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/take_all_button.png");
+
+	item[0].loadFromFile("Data/Sprites/Items/Bang/iron_plate.png");
+	item[1].loadFromFile("Data/Sprites/Items/Bang/sombrero.png");
+
 	/** SKILLING **/
 	LoadSkillTextures("Data/Sprites/Abilities/Simon/marshmallow_flash/marshmallow_flash_skill", 0, 0);
 	LoadSkillTextures("Data/Sprites/Abilities/Simon/mess_around/mess_around_skill", 0, 1);

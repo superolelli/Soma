@@ -14,6 +14,7 @@ void ObjectPropertiesManager::LoadObjectProperties()
 	LoadLevelSpecs();
 	LoadMainRoomPositions();
 	LoadLootablesBoundingBoxes();
+	LoadItemStats();
 }
 
 
@@ -219,5 +220,33 @@ void ObjectPropertiesManager::LoadLootablesBoundingBoxes()
 
 		lootablePositions[lootableID].x = lootable.child("xPosition").text().as_int();
 		lootablePositions[lootableID].y = lootable.child("yPosition").text().as_int();
+	}
+}
+
+
+void ObjectPropertiesManager::LoadItemStats()
+{
+	using namespace pugi;
+
+	xml_document doc;
+	doc.load_file("Data/XML/Items.xml");
+
+	//get default values
+	CombatantStats default;
+
+	loadAttributesFromXML(doc.child("Items").child("Default"), default);
+
+	//load item values
+	for (xml_node &item : doc.child("Items").children())
+	{
+		int itemID = item.attribute("id").as_int();
+
+		if (itemID >= 0)
+		{
+			itemStats[itemID].first = item.attribute("name").as_string();
+
+			itemStats[itemID].second = default;
+			loadAttributesFromXML(item, itemStats[itemID].second);
+		}
 	}
 }

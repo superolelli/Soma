@@ -64,6 +64,7 @@ public:
 	inline int const GetMouseWheelMovement() const { return m_Window.GetMouseWheelMovement(); }
 	inline sf::Vector2i const &GetMousePos() { return m_Window.GetMousePos(); }
 	inline sf::Vector2i const GetWorldMousePos() { return m_Window.GetWorldMousePos(); }
+	inline sf::Vector2f const &GetMouseMovement() { return m_Window.GetMouseMovement(); }
 
 	void SetCursor(sf::Cursor::Type _type) { m_CursorManager.SetCursor(_type); }
 

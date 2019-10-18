@@ -237,6 +237,7 @@
     <ClCompile Include="src\Framework\Graphics\SpriteWithText.cpp" />
     <ClCompile Include="src\Framework\Gui\Bar.cpp" />
     <ClCompile Include="src\Framework\Gui\Button.cpp" />
+    <ClCompile Include="src\Framework\Gui\Scrollbar.cpp" />
     <ClCompile Include="src\Framework\Gui\StringInput.cpp" />
     <ClCompile Include="src\Framework\Patterns\Subject.cpp" />
     <ClCompile Include="src\Framework\Time.cpp" />
@@ -261,6 +262,8 @@
     <ClCompile Include="src\Game\GUI.cpp" />
     <ClCompile Include="src\Game\Hilfssheriff.cpp" />
     <ClCompile Include="src\Game\InitialState.cpp" />
+    <ClCompile Include="src\Game\Inventory.cpp" />
+    <ClCompile Include="src\Game\ItemTooltip.cpp" />
     <ClCompile Include="src\Game\Level.cpp" />
     <ClCompile Include="src\Game\LevelBuilder.cpp" />
     <ClCompile Include="src\Game\LevelFinishedPanel.cpp" />
@@ -290,6 +293,7 @@
     <ClInclude Include="src\Framework\Graphics\NotificationRenderer.hpp" />
     <ClInclude Include="src\Framework\Graphics\RichText.hpp" />
     <ClInclude Include="src\Framework\Graphics\RoundedRectangleShape.hpp" />
+    <ClInclude Include="src\Framework\Gui\Scrollbar.hpp" />
     <ClInclude Include="src\Framework\Patterns\Observer.hpp" />
     <ClInclude Include="src\Framework\Patterns\Subject.hpp" />
     <ClInclude Include="src\Game\Ability.hpp" />
@@ -301,6 +305,8 @@
     <ClInclude Include="src\Game\CombatantStatusBar.hpp" />
     <ClInclude Include="src\Game\Greg.hpp" />
     <ClInclude Include="src\Game\Hilfssheriff.hpp" />
+    <ClInclude Include="src\Game\Inventory.hpp" />
+    <ClInclude Include="src\Game\ItemTooltip.hpp" />
     <ClInclude Include="src\Game\LevelBuilder.hpp" />
     <ClInclude Include="src\Game\LevelFinishedPanel.hpp" />
     <ClInclude Include="src\Game\LevelSpecs.hpp" />

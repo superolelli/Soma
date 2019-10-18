@@ -29,6 +29,8 @@ public:
 	sf::IntRect lootablesBoundingBoxes[11];
 	sf::Vector2i lootablePositions[11];
 
+	std::pair<std::string, CombatantStats> itemStats[2];
+
 	sf::Vector2i mainRoomDoorPositions[3];
 	sf::Vector2i mainRoomPlayerPositions[4];
 	sf::Vector2i mainRoomSignPositions[3];
@@ -47,5 +49,6 @@ private:
 	void LoadLevelSpecs();
 	void LoadMainRoomPositions();
 	void LoadLootablesBoundingBoxes();
+	void LoadItemStats();
 };
 

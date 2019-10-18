@@ -167,18 +167,41 @@ namespace pugi {
 
 	void loadAttributesFromXML(const xml_node & attributeNode, CombatantStats & stats)
 	{
-		stats.armour = attributeNode.attribute("armour").as_int();
+		if(attributeNode.attribute("armour"))
+			stats.armour = attributeNode.attribute("armour").as_int();
+
+		if (attributeNode.attribute("health"))
 		stats.maxHealth = attributeNode.attribute("health").as_int();
-		stats.damageMin = attributeNode.attribute("damageMin").as_int();
-		stats.damageMax = attributeNode.attribute("damageMax").as_int();
-		stats.initiative = attributeNode.attribute("initiative").as_int();
-		stats.criticalHit = attributeNode.attribute("criticalHit").as_int();
-		stats.dodge = attributeNode.attribute("dodge").as_int();
-		stats.precision = attributeNode.attribute("precision").as_int();
-		stats.attributes.dexterity = attributeNode.attribute("dexterity").as_int();
-		stats.attributes.speed = attributeNode.attribute("speed").as_int();
-		stats.attributes.strength = attributeNode.attribute("strength").as_int();
-		stats.attributes.constitution = attributeNode.attribute("constitution").as_int();
+
+		if (attributeNode.attribute("damageMin"))
+			stats.damageMin = attributeNode.attribute("damageMin").as_int();
+
+		if (attributeNode.attribute("damageMax"))
+			stats.damageMax = attributeNode.attribute("damageMax").as_int();
+
+		if (attributeNode.attribute("initiative"))
+			stats.initiative = attributeNode.attribute("initiative").as_int();
+
+		if (attributeNode.attribute("criticalHit"))
+			stats.criticalHit = attributeNode.attribute("criticalHit").as_int();
+
+		if (attributeNode.attribute("dodge"))
+			stats.dodge = attributeNode.attribute("dodge").as_int();
+
+		if (attributeNode.attribute("precision"))
+			stats.precision = attributeNode.attribute("precision").as_int();
+
+		if (attributeNode.attribute("dexterity"))
+			stats.attributes.dexterity = attributeNode.attribute("dexterity").as_int();
+
+		if (attributeNode.attribute("speed"))
+			stats.attributes.speed = attributeNode.attribute("speed").as_int();
+
+		if (attributeNode.attribute("strength"))
+			stats.attributes.strength = attributeNode.attribute("strength").as_int();
+
+		if (attributeNode.attribute("constitution"))
+			stats.attributes.constitution = attributeNode.attribute("constitution").as_int();
 		
 		stats.currentHealth = stats.maxHealth;
 	}

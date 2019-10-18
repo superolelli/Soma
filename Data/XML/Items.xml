@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Items>
+  <Default id="-1"
+		strength="0"
+		constitution="0"
+		dexterity="0"
+		speed="0"
+				 
+    armour ="0"
+    health ="0"
+    damageMin ="0"
+    damageMax = "0"
+    initiative ="0"
+		criticalHit="0"
+		dodge="0"
+		precision="0"
+  ></Default>
+
+
+  <IronPlate id="0" name="Eisenplatte"
+    armour="10"
+  ></IronPlate>
+
+  <Sombrero id="1" name="Sombrero"
+    dodge="5"
+  ></Sombrero>
+  
+</Items>

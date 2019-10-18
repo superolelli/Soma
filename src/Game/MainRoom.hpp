@@ -3,6 +3,7 @@
 #include "../Framework/Gamestate.hpp"
 #include "../Game/Resources/Resources.hpp"
 #include "SkillPanel.hpp"
+#include "Inventory.hpp"
 
 
 class MainRoom : public GameState
@@ -30,6 +31,7 @@ private:
 	sf::IntRect playerHitbox[4];
 
 	SkillPanel skillPanel;
+	Inventory inventory;
 
 	GameStatus gameStatus;
 

@@ -6,6 +6,16 @@
 #include "../Framework/Gameengine.hpp"
 #include "../Framework/Graphics/Sprite.hpp"
 
+#include <functional>
+
+enum ItemID {iron_plate, sombrero};
+
+struct Item
+{
+	ItemID id;
+	sf::Color color;
+};
+
 class GameStatus
 {
 public:
@@ -24,6 +34,10 @@ public:
 	bool IsSkillAcquired(int player, int ability, int skill);
 	void AcquireSkill(int player, int ability, int skill);
 
+	void AddItem(Item &&_item);
+	const std::vector<Item> &GetItems() { return items; }
+	void SetOnItemAddedCallback(std::function<void(Item)> _callback);
+
 	int bangLevel;
 	int kutschfahrtLevel;
 	int tichuLevel;
@@ -40,6 +54,8 @@ private:
 
 	bool skillAcquired[4][4][8];
 
-	void PositionComponentsRelativeToPanel();
+	std::vector<Item> items;
+	std::function<void(Item)> OnItemAddedCallback;
 
+	void PositionComponentsRelativeToPanel();
 };

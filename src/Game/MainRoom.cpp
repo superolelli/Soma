@@ -68,6 +68,7 @@ void MainRoom::Init(CGameEngine * _engine)
 	gameStatus.Init(m_pGameEngine);
 
 	skillPanel.Init(&gameStatus, m_pGameEngine);
+	inventory.Init(&gameStatus, m_pGameEngine);
 
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetWindow().setView(view);
@@ -123,24 +124,35 @@ void MainRoom::Update()
 {
 	UpdateLevelSigns();
 	skillPanel.Update();
+	inventory.Update();
 
 	m_pGameEngine->GetWindow().setView(view);
 
 	if (m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
 
+	if (m_pGameEngine->GetKeystates(KeyID::I) == Keystates::Released && !inventory.IsOpen())
+		inventory.Open();
 
-	for (int i = 0; i < 4; i++)
+	if (m_pGameEngine->GetKeystates(KeyID::O) == Keystates::Released)
+		gameStatus.AddItem({ ItemID::sombrero, sf::Color::Red });
+
+	if (m_pGameEngine->GetKeystates(KeyID::P) == Keystates::Released)
+		gameStatus.AddItem({ ItemID::iron_plate, sf::Color::Red });
+
+	if (!inventory.IsOpen())
 	{
-		if (playerHitbox[i].contains(m_pGameEngine->GetWorldMousePos()))
+		for (int i = 0; i < 4; i++)
 		{
-			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
+			if (playerHitbox[i].contains(m_pGameEngine->GetWorldMousePos()))
+			{
+				m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
 
-			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released && !skillPanel.IsOpen())
-				skillPanel.Open(i);
+				if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released && !skillPanel.IsOpen())
+					skillPanel.Open(i);
+			}
 		}
 	}
-
 
 	CheckForMovement();
 	HandlePlayerAnimation();
@@ -193,7 +205,7 @@ void MainRoom::HandleDoors()
 {
 	for (auto &d : doors)
 	{
-		if (d.GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos()) && !skillPanel.IsOpen()) 
+		if (d.GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos()) && !skillPanel.IsOpen() && !inventory.IsOpen()) 
 		{
 			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
 
@@ -256,6 +268,7 @@ void MainRoom::Render(double _normalizedTimestep)
 	// GUI
 	gameStatus.RenderStatusBar();
 	skillPanel.Render();
+	inventory.Render();
 
 	m_pGameEngine->FlipWindow();
 }

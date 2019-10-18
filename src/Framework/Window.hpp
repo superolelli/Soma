@@ -42,6 +42,7 @@ public:
 	inline int const GetMouseWheelMovement() const { return m_mouseWheelMovement; }
 	inline sf::Vector2i const &GetMousePos()  { return m_mousePosition; }
 	inline sf::Vector2i const GetWorldMousePos() { return (sf::Vector2i)m_pWindow->mapPixelToCoords(m_mousePosition); }
+	inline sf::Vector2f const &GetMouseMovement() { return m_mouseMovement; }
 
 	void SetMouseCursor(const sf::Cursor &_cursor) { m_pWindow->setMouseCursor(_cursor); }
 
@@ -53,6 +54,7 @@ private:
 	std::string m_textInput;
 	int m_mouseWheelMovement;
 	sf::Vector2i m_mousePosition;
+	sf::Vector2f m_mouseMovement;
 
 	//the window to render on
 	sf::RenderWindow *m_pWindow;

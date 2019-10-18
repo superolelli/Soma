@@ -47,9 +47,6 @@ void CWindow::ProcessEvents()
 	//clears all the keystates
 	ResetKeyStates();
 
-	//gets the current mouse position
-	m_mousePosition = sf::Mouse::getPosition(*m_pWindow);
-
 	//sets all keystates
 	while (m_pWindow->pollEvent(event))
 	{
@@ -86,8 +83,14 @@ void CWindow::ProcessEvents()
 		case sf::Event::MouseWheelMoved:
 			m_mouseWheelMovement = event.mouseWheel.delta;
 			break;
+
+		case sf::Event::MouseMoved:
+			m_mouseMovement = sf::Vector2f(event.mouseMove.x - m_mousePosition.x, event.mouseMove.y - m_mousePosition.y);
 		}
 	}
+
+	//gets the current mouse position
+	m_mousePosition = sf::Mouse::getPosition(*m_pWindow);
 }
 
 
@@ -113,6 +116,7 @@ void CWindow::ResetKeyStates()
 
 	m_textInput.clear();
 	m_mouseWheelMovement = 0;
+	m_mouseMovement = sf::Vector2f(0, 0);
 }
 
 
@@ -129,5 +133,5 @@ void CWindow::ClearKeyStates()
 
 	m_textInput.clear();
 	m_mouseWheelMovement = 0;
-	m_mousePosition = sf::Vector2i(0, 0);
+	m_mouseMovement = sf::Vector2f(0, 0);
 }
