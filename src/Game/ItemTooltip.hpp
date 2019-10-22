@@ -4,23 +4,19 @@
 #include "../Framework/Graphics/Sprite.hpp"
 #include "../Framework/Gameengine.hpp"
 #include "GameStatus.hpp"
+#include "Tooltip.hpp"
 
 
-class ItemTooltip
+class ItemTooltip : public Tooltip
 {
 public:
 
-	void Init(CGameEngine *_engine);
+	void Init(CGameEngine *_engine) override;
 
 	void SetItemID(ItemID _id);
-	void ShowTooltip(int _x, int _y);
 
 private:
-	CGameEngine *engine;
 	ItemID itemID;
 
-	sfe::RichText tooltipText;
-	sf::RoundedRectangleShape tooltipBackground;
-
-	void GenerateTooltipString(std::string &_tooltip);
+	void GenerateTooltipString(std::string &_tooltip) override;
 };

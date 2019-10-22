@@ -11,6 +11,8 @@ void Inventory::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	currentPlayer = 0;
 	currentUpperRow = 0;
 
+	currentDraggedItem = -1;
+
 	inventoryPanel.Load(g_pTextures->inventoryPanel);
 	inventoryPanel.SetPos(150, 70);
 
@@ -43,8 +45,19 @@ void Inventory::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	panelTitle.setPosition(inventoryPanel.GetGlobalRect().left + 850, inventoryPanel.GetGlobalRect().top + 70);
 
 	tooltip.Init(engine);
+	equipmentPanel.Init(engine, gameStatus, 300, 330);
+	equipmentPanel.SetInventoryRect(sf::IntRect(inventoryPanel.GetGlobalRect().left + 812, inventoryPanel.GetGlobalRect().top + 171, 700, 610));
 
 	closed = true;
+}
+
+
+void Inventory::Quit()
+{
+	for (auto &i : items)
+		SAFE_DELETE(i);
+
+	equipmentPanel.Quit();
 }
 
 
@@ -55,17 +68,87 @@ void Inventory::Update()
 		if (buttonClose.Update(*engine) == true)
 			closed = true;
 
-		scrollbar.Update(*engine);
-
-		if (scrollbar.GetCurrentStep() != currentUpperRow)
-		{
-			currentUpperRow = scrollbar.GetCurrentStep();
-			RecalculatePositionsOfItems();
-		}
-
+		UpdateScrollbar();
 		CheckButtonsForPlayerChoosing();
+		HandleDragAndDrop();
+		equipmentPanel.Update();
 	}
 }
+
+
+void Inventory::UpdateScrollbar()
+{
+	if (currentDraggedItem == -1)
+		scrollbar.Update(*engine);
+
+	if (scrollbar.GetCurrentStep() != currentUpperRow)
+	{
+		currentUpperRow = scrollbar.GetCurrentStep();
+		RecalculatePositionsOfItems();
+	}
+}
+
+
+void Inventory::HandleDragAndDrop()
+{
+	HandleStartedDrag();
+	HandleContinuedDrag();
+	HandleDrop();
+}
+
+
+void Inventory::HandleStartedDrag()
+{
+	int x = engine->GetMousePos().x - (inventoryPanel.GetGlobalRect().left + 832);
+	int y = engine->GetMousePos().y - (inventoryPanel.GetGlobalRect().top + 195);
+	int itemPointedTo = (y / 116 + currentUpperRow) * 5 + x / 116;
+
+	if (itemPointedTo >= 0 && items.size() > itemPointedTo && items[itemPointedTo] != nullptr)
+	{
+		if (items[itemPointedTo]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) == Pressed)
+		{
+			currentDraggedItemOldX = items[itemPointedTo]->GetGlobalBounds().left;
+			currentDraggedItemOldY = items[itemPointedTo]->GetGlobalBounds().top;
+			currentDraggedItem = itemPointedTo;
+		}
+	}
+}
+
+
+void Inventory::HandleContinuedDrag()
+{
+	if (engine->GetButtonstates(ButtonID::Left) == Held && currentDraggedItem != -1)
+	{
+		int xPos = engine->GetMousePos().x - items[currentDraggedItem]->GetGlobalBounds().width / 2;
+		int yPos = engine->GetMousePos().y - items[currentDraggedItem]->GetGlobalBounds().height / 2;
+		items[currentDraggedItem]->SetPos(xPos, yPos);
+	}
+}
+
+
+
+void Inventory::HandleDrop()
+{
+	if (engine->GetButtonstates(ButtonID::Left) == Released && currentDraggedItem != -1)
+	{
+		if (equipmentPanel.CanBePlaced(items[currentDraggedItem]->GetSprite()))
+		{
+			gameStatus->RemoveItem(items[currentDraggedItem]->GetItem());
+			items[currentDraggedItem] = equipmentPanel.PlaceItem(items[currentDraggedItem]);
+
+			if (items[currentDraggedItem] != nullptr)
+			{
+				items[currentDraggedItem]->SetPos(currentDraggedItemOldX, currentDraggedItemOldY);
+				gameStatus->AddItem(items[currentDraggedItem]->GetItem(), false);
+			}
+		}
+		else
+			items[currentDraggedItem]->SetPos(currentDraggedItemOldX, currentDraggedItemOldY);
+
+		currentDraggedItem = -1;
+	}
+}
+
 
 
 void Inventory::RecalculatePositionsOfItems()
@@ -77,7 +160,9 @@ void Inventory::RecalculatePositionsOfItems()
 		int xPos = inventoryPanel.GetGlobalRect().left + 832;
 		for (int x = 0; x < 5; x++)
 		{
-			items[(currentUpperRow + y) * 5 + x].second.SetPos(xPos, yPos);
+			if((currentUpperRow + y) * 5 + x < items.size() && items[(currentUpperRow + y) * 5 + x] != nullptr)
+				items[(currentUpperRow + y) * 5 + x]->SetPos(xPos, yPos);
+
 			xPos += 116;
 		}
 		yPos += 116;
@@ -109,6 +194,7 @@ void Inventory::CheckButtonsForPlayerChoosing()
 	if (currentPlayer != lastCurrentPlayer)
 	{
 		UpdateGUIForChosenPlayer();
+		equipmentPanel.SetCurrentPlayer(currentPlayer);
 	}
 }
 
@@ -117,6 +203,7 @@ void Inventory::Render()
 	if (!closed)
 	{
 		inventoryPanel.Render(engine->GetWindow());
+		equipmentPanel.Render();
 		scrollbar.Render(engine->GetWindow());
 
 		engine->GetWindow().draw(currentPlayerName);
@@ -129,13 +216,19 @@ void Inventory::Render()
 		int showTooltipForItem = -1;
 		for (int i = currentUpperRow * 5; i < currentUpperRow * 5 + 25 && i < items.size(); i++)
 		{
-			items[i].second.Render(engine->GetWindow());
-
-			if (items[i].second.GetGlobalRect().contains(engine->GetMousePos()))
+			if (items[i] != nullptr && i != currentDraggedItem)
 			{
-				showTooltipForItem = items[i].first.id;
+				items[i]->Render(engine->GetWindow());
+
+				if (items[i]->Contains(engine->GetMousePos()))
+				{
+					showTooltipForItem = items[i]->GetItem().id;
+				}
 			}
 		}
+
+		if(currentDraggedItem != -1)
+			items[currentDraggedItem]->Render(engine->GetWindow());
 
 		if (showTooltipForItem != -1)
 		{
@@ -156,13 +249,36 @@ void Inventory::Open(int _player)
 
 void Inventory::OnItemAdded(Item _item)
 {
-	int xPos = (items.size() % 5) * 116 + inventoryPanel.GetGlobalRect().left + 832;
-	int yPos = (items.size() / 5) * 116 + inventoryPanel.GetGlobalRect().top + 195;
+	InventoryItemWrapper *newItem = new InventoryItemWrapper;
 
 	CSprite newSprite;
 	newSprite.Load(g_pTextures->item[_item.id]);
-	newSprite.SetPos(xPos, yPos);
-	items.push_back(std::make_pair(_item, std::move(newSprite)));
+
+	newItem->Init(std::move(_item), std::move(newSprite));
+
+
+	bool foundFreeSlot = false;
+	for (int i = 0; i < items.size(); i++)
+	{
+		if (items[i] == nullptr)
+		{
+			items[i] = newItem;
+			int xPos = (i % 5) * 116 + inventoryPanel.GetGlobalRect().left + 832;
+			int yPos = (i / 5) * 116 + inventoryPanel.GetGlobalRect().top + 195;
+			items[i]->SetPos(xPos, yPos);
+			foundFreeSlot = true;
+			break;
+		}
+
+	}
+
+	if (!foundFreeSlot)
+	{
+		int xPos = (items.size() % 5) * 116 + inventoryPanel.GetGlobalRect().left + 832;
+		int yPos = (items.size() / 5) * 116 + inventoryPanel.GetGlobalRect().top + 195;
+		newItem->SetPos(xPos, yPos);
+		items.push_back(newItem);
+	}
 
 	scrollbar.SetNumberOfSteps(std::max(1, (int)(items.size() - 21) / 5 + 1));
 }

@@ -8,7 +8,7 @@
 
 #include <functional>
 
-enum ItemID {iron_plate, sombrero};
+enum ItemID {empty = -1, iron_plate, sombrero};
 
 struct Item
 {
@@ -34,9 +34,13 @@ public:
 	bool IsSkillAcquired(int player, int ability, int skill);
 	void AcquireSkill(int player, int ability, int skill);
 
-	void AddItem(Item &&_item);
+	void AddItem(Item _item, bool _triggerCallback = true);
+	void RemoveItem(Item &_item);
 	const std::vector<Item> &GetItems() { return items; }
 	void SetOnItemAddedCallback(std::function<void(Item)> _callback);
+
+	void AddEquipment(int _player, int _slot, Item _item);
+	void RemoveEquipment(int _player, int _slot);
 
 	int bangLevel;
 	int kutschfahrtLevel;
@@ -56,6 +60,8 @@ private:
 
 	std::vector<Item> items;
 	std::function<void(Item)> OnItemAddedCallback;
+
+	Item equipment[4][4];
 
 	void PositionComponentsRelativeToPanel();
 };

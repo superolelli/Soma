@@ -34,6 +34,8 @@ void GameStatus::Init(CGameEngine * _engine)
 		{
 			for (int a = 0; a < 8; a++)
 				skillAcquired[i][j][a] = false;
+
+			equipment[i][j].id = ItemID::empty;
 		}
 	}
 
@@ -69,16 +71,40 @@ void GameStatus::AcquireSkill(int player, int ability, int skill)
 	}
 }
 
-void GameStatus::AddItem(Item &&_item)
+void GameStatus::AddItem(Item _item, bool _triggerCallback)
 {
-	items.push_back(std::move(_item));
-	OnItemAddedCallback(items.back());
+	items.push_back(_item);
+
+	if(_triggerCallback)
+		OnItemAddedCallback(items.back());
 }
 
+
+void GameStatus::RemoveItem(Item &_item)
+{
+	for (auto it = items.begin(); it != items.end(); it++)
+	{
+		if (it->id == _item.id && it->color == _item.color)
+		{
+			items.erase(it);
+			return;
+		}
+	}
+}
 
 void GameStatus::SetOnItemAddedCallback(std::function<void(Item)> _callback)
 {
 	OnItemAddedCallback = _callback;
+}
+
+void GameStatus::AddEquipment(int _player, int _slot, Item _item)
+{
+	equipment[_player][_slot] = _item;
+}
+
+void GameStatus::RemoveEquipment(int _player, int _slot)
+{
+	equipment[_player][_slot].id = ItemID::empty;
 }
 
 int GameStatus::GetDiceAmount()

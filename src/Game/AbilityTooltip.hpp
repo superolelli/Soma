@@ -4,35 +4,29 @@
 #include "../Framework/Graphics/Sprite.hpp"
 #include "Ability.hpp"
 #include "../Framework/Gameengine.hpp"
+#include "Tooltip.hpp"
 
 
-class AbilityTooltip
+class AbilityTooltip : public Tooltip
 {
 public:
 
-	void Init(CGameEngine *_engine);
+	void Init(CGameEngine *_engine) override;
 
 	void SetPlayerID(int _player);
 	void SetAbilityID(int _ability);
-	void SetShowAboveY(bool _aboveY);
-	void ShowTooltip(int _x, int _y);
 	void ShowPossibleTargets(int _x, int _y, bool _showStacked = false);
 
 private:
-	CGameEngine *engine;
 	int playerID;
 	int abilityID;
 
-	bool showTooltipAboveY;
-
-	sfe::RichText tooltipText;
 	sf::Text targetsInformationText;
-	sf::RoundedRectangleShape tooltipBackground;
 	sf::RectangleShape targetsBackground;
 
 	CSprite possibleTargets[8];
 
-	void GenerateTooltipString(std::string &_tooltip);
+	void GenerateTooltipString(std::string &_tooltip) override;
 	void AppendTooltipStringForOneTarget(std::string & _tooltip, bool _hostileAbility, bool _indent);
 	Ability &GetCurrentAbility();
 };

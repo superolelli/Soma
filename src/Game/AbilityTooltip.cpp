@@ -5,20 +5,11 @@
 
 void AbilityTooltip::Init(CGameEngine *_engine)
 {
-	engine = _engine;
-
-	tooltipText.setCharacterSize(18);
-	tooltipText.setFont(g_pFonts->f_arial);
+	Tooltip::Init(_engine);
 
 	targetsInformationText.setCharacterSize(16);
 	targetsInformationText.setFont(g_pFonts->f_trajan);
 	targetsInformationText.setFillColor(sf::Color::White);
-
-	tooltipBackground.setFillColor(sf::Color(0, 0, 0, 220));
-	tooltipBackground.setOutlineThickness(2.0f);
-	tooltipBackground.setOutlineColor(sf::Color(40, 40, 40));
-	tooltipBackground.setCornerPointCount(20);
-	tooltipBackground.setCornersRadius(8);
 
 	targetsBackground.setFillColor(sf::Color(0, 0, 0, 220));
 	targetsBackground.setOutlineThickness(2.0f);
@@ -50,33 +41,6 @@ void AbilityTooltip::SetAbilityID(int _ability)
 {
 	abilityID = _ability;
 }
-
-void AbilityTooltip::SetShowAboveY(bool _aboveY)
-{
-	showTooltipAboveY = _aboveY;
-}
-
-
-void AbilityTooltip::ShowTooltip(int _x, int _y)
-{
-	std::string tooltipString("");
-	GenerateTooltipString(tooltipString);
-	tooltipText.setString(tooltipString);
-	
-	sf::FloatRect backgroundRect = tooltipText.getLocalBounds();
-	tooltipBackground.setSize(sf::Vector2f(backgroundRect.width + 20.0f, backgroundRect.height + 20.0f));
-
-	if(showTooltipAboveY)
-		tooltipBackground.setPosition(_x, _y - tooltipText.getLocalBounds().height);
-	else
-		tooltipBackground.setPosition(_x, _y);
-
-	tooltipText.setPosition(tooltipBackground.getGlobalBounds().left + 10, tooltipBackground.getGlobalBounds().top + 7);
-
-	engine->GetWindow().draw(tooltipBackground);
-	engine->GetWindow().draw(tooltipText);
-}
-
 
 
 void AbilityTooltip::GenerateTooltipString(std::string & _tooltip)

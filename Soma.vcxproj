@@ -257,12 +257,14 @@
     <ClCompile Include="src\Game\CombatantStatus.cpp" />
     <ClCompile Include="src\Game\CombatantStatusBar.cpp" />
     <ClCompile Include="src\Game\Enemy.cpp" />
+    <ClCompile Include="src\Game\EquipmentPanel.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Game\Greg.cpp" />
     <ClCompile Include="src\Game\GUI.cpp" />
     <ClCompile Include="src\Game\Hilfssheriff.cpp" />
     <ClCompile Include="src\Game\InitialState.cpp" />
     <ClCompile Include="src\Game\Inventory.cpp" />
+    <ClCompile Include="src\Game\InventoryItemWrapper.cpp" />
     <ClCompile Include="src\Game\ItemTooltip.cpp" />
     <ClCompile Include="src\Game\Level.cpp" />
     <ClCompile Include="src\Game\LevelBuilder.cpp" />
@@ -285,6 +287,7 @@
     <ClCompile Include="src\Game\Simon.cpp" />
     <ClCompile Include="src\Game\GameStatus.cpp" />
     <ClCompile Include="src\Game\SkillPanel.cpp" />
+    <ClCompile Include="src\Game\Tooltip.cpp" />
     <ClCompile Include="src\Game\Util\XMLUtilities.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
@@ -303,9 +306,11 @@
     <ClInclude Include="src\Game\CombatantID.hpp" />
     <ClInclude Include="src\Game\CombatantAttributesPanel.hpp" />
     <ClInclude Include="src\Game\CombatantStatusBar.hpp" />
+    <ClInclude Include="src\Game\EquipmentPanel.hpp" />
     <ClInclude Include="src\Game\Greg.hpp" />
     <ClInclude Include="src\Game\Hilfssheriff.hpp" />
     <ClInclude Include="src\Game\Inventory.hpp" />
+    <ClInclude Include="src\Game\InventoryItemWrapper.hpp" />
     <ClInclude Include="src\Game\ItemTooltip.hpp" />
     <ClInclude Include="src\Game\LevelBuilder.hpp" />
     <ClInclude Include="src\Game\LevelFinishedPanel.hpp" />
@@ -456,6 +461,7 @@
     <ClInclude Include="src\Game\Simon.hpp" />
     <ClInclude Include="src\Game\GameStatus.hpp" />
     <ClInclude Include="src\Game\SkillPanel.hpp" />
+    <ClInclude Include="src\Game\Tooltip.hpp" />
     <ClInclude Include="src\Game\Util\XMLUtilities.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

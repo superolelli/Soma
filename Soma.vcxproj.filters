@@ -534,6 +534,15 @@
     <ClCompile Include="src\Game\ItemTooltip.cpp">
       <Filter>Quelldateien\Game\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\Tooltip.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\EquipmentPanel.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\InventoryItemWrapper.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -1038,6 +1047,15 @@
       <Filter>Headerdateien\Framework\GUI</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\ItemTooltip.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Tooltip.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\EquipmentPanel.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\InventoryItemWrapper.hpp">
       <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
   </ItemGroup>

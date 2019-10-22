@@ -98,6 +98,8 @@ void MainRoom::Cleanup()
 	for(auto p : players)
 		SAFE_DELETE(p);
 
+	inventory.Quit();
+
 	g_pModels->Quit();  //Muss in letztem Gamestate passieren
 	g_pSpritePool->FreeSprites();   //Muss in letztem Gamestate passieren
 	g_pSounds->Quit(); //Muss in letztem Gamestate passieren
