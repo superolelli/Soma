@@ -28,7 +28,6 @@ private:
 	CSprite equipmentField[4];
 
 	InventoryItemWrapper *items[4][4];
-
 	ItemTooltip tooltip;
 
 	sf::IntRect inventoryRect;
@@ -38,4 +37,13 @@ private:
 	int currentDraggedItem;
 
 	int currentPlayer;
+
+	void HandleDragAndDrop();
+	void HandleDragStarted();
+	void HandleContinuedDrag();
+	void HandleDrop();
+
+	void PlaceCurrentDraggedItemIntoInventory();
+
+	void RenderItems();
 };

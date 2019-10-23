@@ -16,6 +16,11 @@ void InventoryItemWrapper::SetPos(int _x, int _y)
 	sprite.SetPos(_x, _y);
 }
 
+void InventoryItemWrapper::SetCenterPos(int _x, int _y)
+{
+	sprite.SetPos(_x - sprite.GetGlobalRect().width / 2, _y - sprite.GetGlobalRect().height / 2);
+}
+
 sf::IntRect & InventoryItemWrapper::GetGlobalBounds()
 {
 	return sprite.GetGlobalRect();

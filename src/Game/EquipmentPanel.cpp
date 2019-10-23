@@ -42,34 +42,48 @@ void EquipmentPanel::SetInventoryRect(sf::IntRect &_inventoryRect)
 
 void EquipmentPanel::Update()
 {
+	HandleDragAndDrop();
+}
+
+
+void EquipmentPanel::HandleDragAndDrop()
+{
+	HandleDragStarted();
+	HandleContinuedDrag();
+	HandleDrop();
+}
+
+
+void EquipmentPanel::HandleDragStarted()
+{
+	if (engine->GetButtonstates(ButtonID::Left) != Pressed)
+		return;
+
 	for (int i = 0; i < 4; i++)
 	{
-		if (items[currentPlayer][i] != nullptr)
+		if (items[currentPlayer][i] != nullptr && items[currentPlayer][i]->Contains(engine->GetMousePos()))
 		{
-			if (items[currentPlayer][i]->Contains(engine->GetMousePos()))
-			{
-				if (engine->GetButtonstates(ButtonID::Left) == Pressed)
-				{
-					currentDraggedItemOldX = items[currentPlayer][i]->GetGlobalBounds().left;
-					currentDraggedItemOldY = items[currentPlayer][i]->GetGlobalBounds().top;
-					currentDraggedItem = i;
-				}
-			}
+			currentDraggedItemOldX = items[currentPlayer][i]->GetGlobalBounds().left;
+			currentDraggedItemOldY = items[currentPlayer][i]->GetGlobalBounds().top;
+			currentDraggedItem = i;
 		}
 	}
+}
 
+
+void EquipmentPanel::HandleContinuedDrag()
+{
 	if (engine->GetButtonstates(ButtonID::Left) == Held && currentDraggedItem != -1)
-	{
-		items[currentPlayer][currentDraggedItem]->SetPos(engine->GetMousePos().x - items[currentPlayer][currentDraggedItem]->GetGlobalBounds().width / 2, engine->GetMousePos().y - items[currentPlayer][currentDraggedItem]->GetGlobalBounds().height / 2);
-	}
-	else if (engine->GetButtonstates(ButtonID::Left) == Released && currentDraggedItem != -1)
+		items[currentPlayer][currentDraggedItem]->SetCenterPos(engine->GetMousePos().x, engine->GetMousePos().y);
+}
+
+
+void EquipmentPanel::HandleDrop()
+{
+	if (engine->GetButtonstates(ButtonID::Left) == Released && currentDraggedItem != -1)
 	{
 		if (items[currentPlayer][currentDraggedItem]->GetGlobalBounds().intersects(inventoryRect))
-		{
-			gameStatus->RemoveEquipment(currentPlayer, currentDraggedItem);
-			gameStatus->AddItem(items[currentPlayer][currentDraggedItem]->GetItem());
-			SAFE_DELETE(items[currentPlayer][currentDraggedItem]);
-		}
+			PlaceCurrentDraggedItemIntoInventory();
 		else
 			items[currentPlayer][currentDraggedItem]->SetPos(currentDraggedItemOldX, currentDraggedItemOldY);
 
@@ -78,11 +92,25 @@ void EquipmentPanel::Update()
 }
 
 
+void EquipmentPanel::PlaceCurrentDraggedItemIntoInventory()
+{
+	gameStatus->RemoveEquipment(currentPlayer, currentDraggedItem);
+	gameStatus->AddItem(items[currentPlayer][currentDraggedItem]->GetItem());
+	SAFE_DELETE(items[currentPlayer][currentDraggedItem]);
+}
+
+
 void EquipmentPanel::Render()
 {
 	for (auto &e : equipmentField)
 		e.Render(engine->GetWindow());
 
+	RenderItems();
+}
+
+
+void EquipmentPanel::RenderItems()
+{
 	for (int i = 0; i < 4; i++)
 	{
 		if (items[currentPlayer][i] != nullptr && i != currentDraggedItem)
@@ -107,13 +135,13 @@ InventoryItemWrapper * EquipmentPanel::PlaceItem(InventoryItemWrapper *_item)
 	{
 		if (_item->GetGlobalBounds().intersects(equipmentField[i].GetGlobalRect()))
 		{
-			auto tempItem = items[currentPlayer][i];
+			auto oldItem = items[currentPlayer][i];
 			items[currentPlayer][i] = _item;
 			items[currentPlayer][i]->SetPos(equipmentField[i].GetGlobalRect().left + 10, equipmentField[i].GetGlobalRect().top + 10);
 
 			gameStatus->AddEquipment(currentPlayer, i, _item->GetItem());
 
-			return tempItem;
+			return oldItem;
 		}
 	}
 
@@ -131,6 +159,7 @@ bool EquipmentPanel::CanBePlaced(CSprite & _itemSprite)
 
 	return false;
 }
+
 
 void EquipmentPanel::SetCurrentPlayer(int _currentPlayer)
 {

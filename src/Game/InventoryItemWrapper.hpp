@@ -11,6 +11,7 @@ public:
 	void Render(sf::RenderTarget &_target);
 
 	void SetPos(int _x, int _y);
+	void SetCenterPos(int _x, int _y);
 
 	sf::IntRect &GetGlobalBounds();
 	Item &GetItem();

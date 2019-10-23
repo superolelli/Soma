@@ -22,29 +22,24 @@ public:
 	bool IsOpen() { return !closed; }
 
 private:
-	bool closed;
-
 	GameStatus *gameStatus;
 	CGameEngine *engine;
 
+	bool closed;
 	int currentPlayer;
 	int currentUpperRow;
 
 	CSprite inventoryPanel;
+	EquipmentPanel equipmentPanel;
 	VerticalScrollbar scrollbar;
-
 	sf::Text currentPlayerName;
 	sf::Text panelTitle;
-
 	CButton buttonNext;
 	CButton buttonPrevious;
 	CButton buttonClose;
 
 	std::vector<InventoryItemWrapper*> items;
-
 	ItemTooltip tooltip;
-
-	EquipmentPanel equipmentPanel;
 
 	int currentDraggedItemOldX;
 	int currentDraggedItemOldY;
@@ -52,7 +47,6 @@ private:
 
 	void CheckButtonsForPlayerChoosing();
 	void UpdateGUIForChosenPlayer();
-
 	void UpdateScrollbar();
 
 	void HandleDragAndDrop();
@@ -60,7 +54,10 @@ private:
 	void HandleContinuedDrag();
 	void HandleDrop();
 
+	void PlaceCurrentDraggedItemAsEquipment();
 	void OnItemAdded(Item _item);
-
+	void RenderItems();
 	void RecalculatePositionsOfItems();
+
+	int GetFirstFreeInventorySlot();
 };

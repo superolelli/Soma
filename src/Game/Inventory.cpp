@@ -99,13 +99,16 @@ void Inventory::HandleDragAndDrop()
 
 void Inventory::HandleStartedDrag()
 {
+	if (engine->GetButtonstates(ButtonID::Left) != Pressed)
+		return;
+
 	int x = engine->GetMousePos().x - (inventoryPanel.GetGlobalRect().left + 832);
 	int y = engine->GetMousePos().y - (inventoryPanel.GetGlobalRect().top + 195);
 	int itemPointedTo = (y / 116 + currentUpperRow) * 5 + x / 116;
 
 	if (itemPointedTo >= 0 && items.size() > itemPointedTo && items[itemPointedTo] != nullptr)
 	{
-		if (items[itemPointedTo]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) == Pressed)
+		if (items[itemPointedTo]->Contains(engine->GetMousePos()))
 		{
 			currentDraggedItemOldX = items[itemPointedTo]->GetGlobalBounds().left;
 			currentDraggedItemOldY = items[itemPointedTo]->GetGlobalBounds().top;
@@ -118,11 +121,7 @@ void Inventory::HandleStartedDrag()
 void Inventory::HandleContinuedDrag()
 {
 	if (engine->GetButtonstates(ButtonID::Left) == Held && currentDraggedItem != -1)
-	{
-		int xPos = engine->GetMousePos().x - items[currentDraggedItem]->GetGlobalBounds().width / 2;
-		int yPos = engine->GetMousePos().y - items[currentDraggedItem]->GetGlobalBounds().height / 2;
-		items[currentDraggedItem]->SetPos(xPos, yPos);
-	}
+		items[currentDraggedItem]->SetCenterPos(engine->GetMousePos().x, engine->GetMousePos().y);
 }
 
 
@@ -132,16 +131,7 @@ void Inventory::HandleDrop()
 	if (engine->GetButtonstates(ButtonID::Left) == Released && currentDraggedItem != -1)
 	{
 		if (equipmentPanel.CanBePlaced(items[currentDraggedItem]->GetSprite()))
-		{
-			gameStatus->RemoveItem(items[currentDraggedItem]->GetItem());
-			items[currentDraggedItem] = equipmentPanel.PlaceItem(items[currentDraggedItem]);
-
-			if (items[currentDraggedItem] != nullptr)
-			{
-				items[currentDraggedItem]->SetPos(currentDraggedItemOldX, currentDraggedItemOldY);
-				gameStatus->AddItem(items[currentDraggedItem]->GetItem(), false);
-			}
-		}
+			PlaceCurrentDraggedItemAsEquipment();
 		else
 			items[currentDraggedItem]->SetPos(currentDraggedItemOldX, currentDraggedItemOldY);
 
@@ -151,17 +141,32 @@ void Inventory::HandleDrop()
 
 
 
+void Inventory::PlaceCurrentDraggedItemAsEquipment()
+{
+	gameStatus->RemoveItem(items[currentDraggedItem]->GetItem());
+	items[currentDraggedItem] = equipmentPanel.PlaceItem(items[currentDraggedItem]);
+
+	if (items[currentDraggedItem] != nullptr)
+	{
+		items[currentDraggedItem]->SetPos(currentDraggedItemOldX, currentDraggedItemOldY);
+		gameStatus->AddItem(items[currentDraggedItem]->GetItem(), false);
+	}
+}
+
+
 void Inventory::RecalculatePositionsOfItems()
 {
 	int yPos = inventoryPanel.GetGlobalRect().top + 195;
+	int currentIndex = 0;
 
 	for (int y = 0; y < 5; y++)
 	{
 		int xPos = inventoryPanel.GetGlobalRect().left + 832;
 		for (int x = 0; x < 5; x++)
 		{
-			if((currentUpperRow + y) * 5 + x < items.size() && items[(currentUpperRow + y) * 5 + x] != nullptr)
-				items[(currentUpperRow + y) * 5 + x]->SetPos(xPos, yPos);
+			currentIndex = (currentUpperRow + y) * 5 + x;
+			if(currentIndex < items.size() && items[currentIndex] != nullptr)
+				items[currentIndex]->SetPos(xPos, yPos);
 
 			xPos += 116;
 		}
@@ -213,30 +218,36 @@ void Inventory::Render()
 		buttonPrevious.Render(*engine);
 		buttonClose.Render(*engine);
 
-		int showTooltipForItem = -1;
-		for (int i = currentUpperRow * 5; i < currentUpperRow * 5 + 25 && i < items.size(); i++)
-		{
-			if (items[i] != nullptr && i != currentDraggedItem)
-			{
-				items[i]->Render(engine->GetWindow());
-
-				if (items[i]->Contains(engine->GetMousePos()))
-				{
-					showTooltipForItem = items[i]->GetItem().id;
-				}
-			}
-		}
-
-		if(currentDraggedItem != -1)
-			items[currentDraggedItem]->Render(engine->GetWindow());
-
-		if (showTooltipForItem != -1)
-		{
-			tooltip.SetItemID(ItemID(showTooltipForItem));
-			tooltip.ShowTooltip(engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
-		}
+		RenderItems();
 	}
 }
+
+
+
+void Inventory::RenderItems()
+{
+	int showTooltipForItem = -1;
+	for (int i = currentUpperRow * 5; i < currentUpperRow * 5 + 25 && i < items.size(); i++)
+	{
+		if (items[i] != nullptr && i != currentDraggedItem)
+		{
+			items[i]->Render(engine->GetWindow());
+
+			if (items[i]->Contains(engine->GetMousePos()))
+				showTooltipForItem = items[i]->GetItem().id;
+		}
+	}
+
+	if (currentDraggedItem != -1)
+		items[currentDraggedItem]->Render(engine->GetWindow());
+
+	if (showTooltipForItem != -1)
+	{
+		tooltip.SetItemID(ItemID(showTooltipForItem));
+		tooltip.ShowTooltip(engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
+	}
+}
+
 
 
 void Inventory::Open(int _player)
@@ -253,32 +264,30 @@ void Inventory::OnItemAdded(Item _item)
 
 	CSprite newSprite;
 	newSprite.Load(g_pTextures->item[_item.id]);
-
 	newItem->Init(std::move(_item), std::move(newSprite));
 
+	int freeSlot = GetFirstFreeInventorySlot();
+	int xPos = (freeSlot % 5) * 116 + inventoryPanel.GetGlobalRect().left + 832;
+	int yPos = (freeSlot / 5) * 116 + inventoryPanel.GetGlobalRect().top + 195;
+	newItem->SetPos(xPos, yPos);
 
-	bool foundFreeSlot = false;
+	if (freeSlot < items.size())
+		items[freeSlot] = newItem;
+	else
+		items.push_back(newItem);
+
+	scrollbar.SetNumberOfSteps(std::max(1, (int)(items.size() - 21) / 5 + 1));
+}
+
+
+
+int Inventory::GetFirstFreeInventorySlot()
+{
 	for (int i = 0; i < items.size(); i++)
 	{
 		if (items[i] == nullptr)
-		{
-			items[i] = newItem;
-			int xPos = (i % 5) * 116 + inventoryPanel.GetGlobalRect().left + 832;
-			int yPos = (i / 5) * 116 + inventoryPanel.GetGlobalRect().top + 195;
-			items[i]->SetPos(xPos, yPos);
-			foundFreeSlot = true;
-			break;
-		}
-
+			return i;
 	}
 
-	if (!foundFreeSlot)
-	{
-		int xPos = (items.size() % 5) * 116 + inventoryPanel.GetGlobalRect().left + 832;
-		int yPos = (items.size() / 5) * 116 + inventoryPanel.GetGlobalRect().top + 195;
-		newItem->SetPos(xPos, yPos);
-		items.push_back(newItem);
-	}
-
-	scrollbar.SetNumberOfSteps(std::max(1, (int)(items.size() - 21) / 5 + 1));
+	return items.size();
 }
