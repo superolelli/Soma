@@ -19,6 +19,8 @@ public:
 	virtual bool IsPlayer() override { return true; }
 	virtual int GetID() override { return -3; }
 
+	void SetEquipment(CombatantStats &_equipmentStats);
+
 protected:
 
 	bool AimChosen();

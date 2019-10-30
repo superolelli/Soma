@@ -201,19 +201,19 @@ bool CButton::ButtonWasPressed(CGameEngine &_engine)
 	return false;
 }
 
-void CButton::Render(CGameEngine &_engine)
+void CButton::Render(sf::RenderTarget &_target)
 {
-	m_ButtonSprite.Render(_engine.GetWindow(), nextFrame);
-	RenderButtontext(_engine);
+	m_ButtonSprite.Render(_target, nextFrame);
+	RenderButtontext(_target);
 }
 
 
 
 
-void CButton::RenderButtontext(CGameEngine & _engine)
+void CButton::RenderButtontext(sf::RenderTarget &_target)
 {
 	if (m_Buttonstring != "")
-		_engine.GetWindow().draw(m_Buttontext);
+		_target.draw(m_Buttontext);
 }
 
 

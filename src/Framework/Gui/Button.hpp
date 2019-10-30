@@ -40,7 +40,7 @@ public:
 	bool Update(CGameEngine &_engine);
 
 	//renders the button, returns true if button was pressed
-	void Render(CGameEngine &_engine);
+	void Render(sf::RenderTarget &_target);
 
 	//Returns the rect
 	sf::IntRect const &GetRect() const {return m_ButtonSprite.GetRect();}
@@ -59,7 +59,7 @@ private:
 
 	std::function<void()> m_Callback;
 
-	void RenderButtontext(CGameEngine &_engine);
+	void RenderButtontext(sf::RenderTarget &_target);
 
 	void SetDefaultButtontext();
 

@@ -1,8 +1,13 @@
 #include "LevelBuilder.hpp"
+#include "LootableFactory.hpp"
 
 
-Level *LevelBuilder::buildLevel(int _levelID)
+Level *LevelBuilder::buildLevel(int _levelID, DialogManager *_dialogManager, GameStatus *_gameStatus)
 {
+	LootableFactory lootableFactory;
+	lootableFactory.Init(_dialogManager, _gameStatus);
+	lootableFactory.SetLevel(_levelID);
+
 	srand(time(0));
 	Level *newLevel = new Level;
 
@@ -28,12 +33,7 @@ Level *LevelBuilder::buildLevel(int _levelID)
 
 		//lootable
 		if (rand() % 100 < g_pObjectProperties->levelSpecs[_levelID - 1].lootableProbability * 100.0f)
-		{
-			LootableID lootableId = LootableID(rand() % numberOfLootables);
-			newRoom->lootable = new Lootable;
-			newRoom->lootable->Init(lootableId);
-			newRoom->lootable->SetPos(newRoom->background.GetGlobalRect().left + g_pObjectProperties->lootablePositions[lootableId].x, newRoom->background.GetGlobalRect().top + g_pObjectProperties->lootablePositions[lootableId].y);
-		}
+			newRoom->lootable = lootableFactory.CreateLootable(newRoom->background.GetGlobalRect().left, newRoom->background.GetGlobalRect().top);
 		else
 			newRoom->lootable = nullptr;
 

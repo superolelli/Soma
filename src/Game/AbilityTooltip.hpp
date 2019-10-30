@@ -11,11 +11,11 @@ class AbilityTooltip : public Tooltip
 {
 public:
 
-	void Init(CGameEngine *_engine) override;
+	void Init() override;
 
 	void SetPlayerID(int _player);
 	void SetAbilityID(int _ability);
-	void ShowPossibleTargets(int _x, int _y, bool _showStacked = false);
+	void ShowPossibleTargets(sf::RenderTarget &_target, int _x, int _y, bool _showStacked = false);
 
 private:
 	int playerID;

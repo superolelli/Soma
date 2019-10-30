@@ -43,7 +43,8 @@ public:
 	sf::Texture inventoryScrollBar;
 	sf::Texture lootablePanel;
 	sf::Texture lootablePanelButton;
-	sf::Texture item[2];
+	sf::Texture lootablePanelCloseButton;
+	sf::Texture item[4];
 
 	/** SKILLING **/
 	sf::Texture skills[4][4][8];

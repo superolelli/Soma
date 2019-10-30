@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Items>
-  <Default id="-1"
+  <Default id="-1" name="empty"
 		strength="0"
 		constitution="0"
 		dexterity="0"
@@ -15,14 +15,18 @@
 		criticalHit="0"
 		dodge="0"
 		precision="0"
-  ></Default>
+  >
+    <Level>1</Level>
+  </Default>
 
+  <Cards id="0" name="Karten"></Cards>
+  <Wuerfel id="1" name="Würfel"></Wuerfel>
 
-  <IronPlate id="0" name="Eisenplatte"
+  <IronPlate id="2" name="Eisenplatte"
     armour="10"
   ></IronPlate>
 
-  <Sombrero id="1" name="Sombrero"
+  <Sombrero id="3" name="Sombrero"
     dodge="5"
   ></Sombrero>
   

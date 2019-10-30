@@ -43,15 +43,23 @@ public:
 	virtual void Render() = 0;
 	virtual void Update();
 
-	void SetPos(int _x, int _y);
-	void Scale(float _x, float _y);
+	virtual int GetID() { return -2; }
+	virtual bool IsPlayer() { return false; }
 	sf::IntRect &GetRect() { return hitbox; }
-
 	sf::Vector2f GetLocalPosition();
 
-	virtual bool DoAbility(int _id, std::vector<Combatant*> &_targets) { return true; }
-	virtual int GetID() { return -2; }
+	CombatantStatus &Status() { return status; }
+	abilityPhase GetAbilityStatus() { return abilityStatus; }
 
+	bool FinishedTurn() { return abilityStatus == finished; }
+	bool IsDying() { return dying; }
+	bool AnimationFinished() { return !combatantObject->animationIsPlaying(); }
+
+
+	void SetPos(int _x, int _y);
+	void Scale(float _x, float _y);
+
+	virtual bool DoAbility(int _id, std::vector<Combatant*> &_targets) { return true; }
 	void GiveTurnTo(std::vector<Combatant*> *_targets, BattleGUI *_gui);
 
 	void StartAttackedAnimation();
@@ -60,32 +68,31 @@ public:
 	void StopAttackedAnimation();
 	void StartDeathAnimation();
 
-	bool FinishedTurn() { return abilityStatus == finished; }
-	bool IsDying() { return dying; }
-
-	bool AnimationFinished() { return !combatantObject->animationIsPlaying(); }
-
-	CombatantStatus &Status() { return status; }
-
 	int GetBattlePos() { return battlePosition; }
 	void SetBattlePos(int _pos) { battlePosition = _pos; }
-
-	abilityPhase GetAbilityStatus() { return abilityStatus; }
 
 	void RenderAbilityTargetMarker();
 	void RenderTurnMarker();
 
 	void ResetAbilityStatus() { abilityStatus = finished; }
 
-	virtual bool IsPlayer() { return false; }
-
 protected:
+
+	CGameEngine *engine;
+	BattleGUI *gui;
+	NotificationRenderer *notificationRenderer;
+
+	std::vector<Combatant*> *allCombatants;
+	std::vector<Combatant*> selectedTargets;
 
 	SpriterEngine::EntityInstance *combatantObject;
 	sf::IntRect hitbox;
 	SpriterEngine::point abilityEffectPoint;
 
 	CombatantStatus status;
+	abilityPhase abilityStatus;
+
+	CombatantStatusBar statusBar;
 
 	int battlePosition;
 	SpriterEngine::point lastPosition;
@@ -93,17 +100,6 @@ protected:
 	bool actsInConfusion;
 	bool dying;
 
-	CombatantStatusBar statusBar;
-
-	CGameEngine *engine;
-	BattleGUI *gui;
-	NotificationRenderer *notificationRenderer;
-
-	abilityPhase abilityStatus;
-
-	std::vector<Combatant*> *allCombatants;
-
-	std::vector<Combatant*> selectedTargets;
 
 	void RenderAbilityEffects();
 	void RenderShadow();

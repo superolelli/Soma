@@ -50,3 +50,21 @@ void CombatantStats::operator-=(const CombatantStats & _stats)
 	precision -= _stats.precision + _stats.attributes.dexterity * DEXTERITY_TO_PRECISION;
 	attributes -= _stats.attributes;
 }
+
+
+void CombatantStats::Reset()
+{
+	maxHealth = 0;
+	currentHealth = 0;
+	damageMin = 0;
+	damageMax = 0;
+	armour = 0;
+	criticalHit = 0;
+	dodge = 0;
+	initiative = 0;
+	precision = 0;
+	attributes.constitution = 0;
+	attributes.dexterity = 0;
+	attributes.speed = 0;
+	attributes.strength = 0;
+}

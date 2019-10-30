@@ -3,9 +3,9 @@
 #include <SFML/Audio.hpp>
 #include "../../Framework/Patterns/singleton.hpp"
 
-enum soundID {DOOR, CLICK, SKILL_ACQUIRED, BARREL, CABINET, CHEST, CUP, KEG, RUBBISH, SACK, SKELETON, STONEPILE, TABLE, WAGON, NUMBER_OF_SOUNDS};
+enum soundID {DOOR, CLICK, SKILL_ACQUIRED, INVENTORY_DROP, LOOTABLE_TAKE_ALL, BARREL, CABINET, CHEST, CUP, KEG, RUBBISH, SACK, SKELETON, STONEPILE, TABLE, WAGON, NUMBER_OF_SOUNDS};
 
-const int LOOTABLE_SOUNDS_START = 3;
+const int LOOTABLE_SOUNDS_START = 5;
 
 #define g_pSounds SoundManager::Get()
 class SoundManager : public TSingleton<SoundManager>

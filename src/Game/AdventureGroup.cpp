@@ -3,7 +3,7 @@
 
 
 
-void AdventureGroup::Init(CGameEngine *_engine, NotificationRenderer *_notificationRenderer)
+void AdventureGroup::Init(CGameEngine *_engine, NotificationRenderer *_notificationRenderer, GameStatus *_gameStatus)
 {
 	adventurer[CombatantID::Ole] = new PlayerOle(CombatantID::Ole, _engine, _notificationRenderer);
 	adventurer[CombatantID::Ole]->Init();
@@ -19,9 +19,10 @@ void AdventureGroup::Init(CGameEngine *_engine, NotificationRenderer *_notificat
 
 
 	int x = GROUP_OFFSET_LEFT;
-	for (auto a : adventurer)
+	for (int i = 0; i < 4; i++)
 	{
-		a->SetPos(x, GROUP_Y_POS);
+		adventurer[i]->SetPos(x, GROUP_Y_POS);
+		adventurer[i]->SetEquipment(_gameStatus->GetEquipmentStats(i));
 		x += PLAYER_SPACING;
 	}
 }

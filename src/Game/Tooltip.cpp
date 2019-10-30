@@ -1,10 +1,8 @@
 #include "Tooltip.hpp"
 #include "Resources\FontManager.hpp"
 
-void Tooltip::Init(CGameEngine * _engine)
+void Tooltip::Init()
 {
-	engine = _engine;
-
 	tooltipText.setCharacterSize(18);
 	tooltipText.setFont(g_pFonts->f_arial);
 
@@ -24,7 +22,7 @@ void Tooltip::SetShowAboveY(bool _aboveY)
 }
 
 
-void Tooltip::ShowTooltip(int _x, int _y)
+void Tooltip::ShowTooltip(sf::RenderTarget &_target, int _x, int _y)
 {
 	std::string tooltipString("");
 	GenerateTooltipString(tooltipString);
@@ -40,6 +38,6 @@ void Tooltip::ShowTooltip(int _x, int _y)
 
 	tooltipText.setPosition(tooltipBackground.getGlobalBounds().left + 10, tooltipBackground.getGlobalBounds().top + 7);
 
-	engine->GetWindow().draw(tooltipBackground);
-	engine->GetWindow().draw(tooltipText);
+	_target.draw(tooltipBackground);
+	_target.draw(tooltipText);
 }

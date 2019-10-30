@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Lootables>
-    <lootable id="0" name="barrel">
+    <default>
+        <boundingBox>
+            <left>0</left>
+            <top>0</top>
+            <width>100</width>
+            <height>100</height>
+        </boundingBox>
+        <xPosition>0</xPosition>
+        <yPosition>0</yPosition>
+        <loot></loot>
+    </default>
+
+    <lootable id="0" name="Fass">
         <boundingBox>
             <left>0</left>
             <top>0</top>
@@ -12,7 +24,7 @@
         <yPosition>460</yPosition>
     </lootable>
 
-    <lootable id="1" name="cabinet">
+    <lootable id="1" name="Schrank">
         <boundingBox>
             <left>159</left>
             <top>0</top>
@@ -23,7 +35,7 @@
         <yPosition>269</yPosition>
     </lootable>
 
-    <lootable id="2" name="chest">
+    <lootable id="2" name="Truhe">
         <boundingBox>
             <left>0</left>
             <top>76</top>
@@ -34,7 +46,7 @@
         <yPosition>430</yPosition>
     </lootable>
 
-    <lootable id="3" name="cup">
+    <lootable id="3" name="Tasse">
         <boundingBox>
             <left>56</left>
             <top>11</top>
@@ -43,9 +55,14 @@
         </boundingBox>
         <xPosition>892</xPosition>
         <yPosition>613</yPosition>
+
+        <loot>
+            <item>Karten</item>
+            <item>Würfel</item>
+        </loot>
     </lootable>
 
-    <lootable id="4" name="keg">
+    <lootable id="4" name="Fässchen">
         <boundingBox>
             <left>0</left>
             <top>0</top>
@@ -56,7 +73,7 @@
         <yPosition>580</yPosition>
     </lootable>
 
-    <lootable id="5" name="rubbish">
+    <lootable id="5" name="Müllhaufen">
         <boundingBox>
             <left>188</left>
             <top>3</top>
@@ -67,7 +84,7 @@
         <yPosition>450</yPosition>
     </lootable>
 
-    <lootable id="6" name="sack">
+    <lootable id="6" name="Sack">
         <boundingBox>
             <left>0</left>
             <top>0</top>
@@ -78,7 +95,7 @@
         <yPosition>488</yPosition>
     </lootable>
 
-    <lootable id="7" name="skeleton">
+    <lootable id="7" name="Skelett">
         <boundingBox>
             <left>39</left>
             <top>9</top>
@@ -89,7 +106,7 @@
         <yPosition>597</yPosition>
     </lootable>
 
-    <lootable id="8" name="stonepile">
+    <lootable id="8" name="Steinhaufen">
         <boundingBox>
             <left>171</left>
             <top>0</top>
@@ -100,7 +117,7 @@
         <yPosition>560</yPosition>
     </lootable>
 
-    <lootable id="9" name="table">
+    <lootable id="9" name="Tisch">
         <boundingBox>
             <left>40</left>
             <top>38</top>
@@ -111,7 +128,7 @@
         <yPosition>450</yPosition>
     </lootable>
 
-    <lootable id="10" name="wagon">
+    <lootable id="10" name="Minenwagen">
         <boundingBox>
             <left>91</left>
             <top>0</top>

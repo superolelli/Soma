@@ -5,6 +5,8 @@
 #include "Markus.hpp"
 #include "Simon.hpp"
 
+#include "GameStatus.hpp"
+
 const int PLAYER_SPACING = 160;
 const int GROUP_Y_POS = 750;
 const int GROUP_OFFSET_LEFT = 100;
@@ -14,7 +16,7 @@ class AdventureGroup
 {
 public:
 
-	void Init(CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
+	void Init(CGameEngine *_engine, NotificationRenderer *_notificationRenderer, GameStatus *_gameStatus);
 	void Quit();
 	void Update(int xMove);
 	void Render();

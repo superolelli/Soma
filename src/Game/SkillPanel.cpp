@@ -17,7 +17,7 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 
 	closed = true;
 
-	abilityTooltip.Init(engine);
+	abilityTooltip.Init();
 
 	skillPanel.Load(g_pTextures->skillPanel);
 	skillPanel.SetPos(150, 70);
@@ -366,12 +366,12 @@ void SkillPanel::Render()
 		{
 			diceSymbol.Render(engine->GetWindow());
 			engine->GetWindow().draw(chosenSkillPrice);
-			buttonBuy.Render(*engine);
+			buttonBuy.Render(engine->GetWindow());
 		}
 
-		buttonNext.Render(*engine);
-		buttonPrevious.Render(*engine);
-		buttonClose.Render(*engine);
+		buttonNext.Render(engine->GetWindow());
+		buttonPrevious.Render(engine->GetWindow());
+		buttonClose.Render(engine->GetWindow());
 
 		for (int i = 0; i < 8; i++)
 		{
@@ -437,8 +437,8 @@ void SkillPanel::ShowAbilityTooltip(sf::IntRect &_abilityRect)
 {
 	abilityTooltip.SetAbilityID(currentAbility);
 	abilityTooltip.SetPlayerID(currentPlayer);
-	abilityTooltip.ShowTooltip(_abilityRect.left + 135, _abilityRect.top - 10);
-	abilityTooltip.ShowPossibleTargets(_abilityRect.left - 305, _abilityRect.top - 10, true);
+	abilityTooltip.ShowTooltip(engine->GetWindow(), _abilityRect.left + 135, _abilityRect.top - 10);
+	abilityTooltip.ShowPossibleTargets(engine->GetWindow(), _abilityRect.left - 305, _abilityRect.top - 10, true);
 }
 
 bool SkillPanel::SkillCanBeAcquired(int _player, int _ability, int _skill)

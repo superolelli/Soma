@@ -3,9 +3,9 @@
 #include "Resources\TextureManager.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
 
-void AbilityTooltip::Init(CGameEngine *_engine)
+void AbilityTooltip::Init()
 {
-	Tooltip::Init(_engine);
+	Tooltip::Init();
 
 	targetsInformationText.setCharacterSize(16);
 	targetsInformationText.setFont(g_pFonts->f_trajan);
@@ -171,7 +171,7 @@ Ability &AbilityTooltip::GetCurrentAbility()
 
 
 
-void AbilityTooltip::ShowPossibleTargets(int _x, int _y, bool _showStacked)
+void AbilityTooltip::ShowPossibleTargets(sf::RenderTarget &_target, int _x, int _y, bool _showStacked)
 {
 	if (_showStacked)
 		targetsBackground.setSize(sf::Vector2f(265, 70));
@@ -214,8 +214,8 @@ void AbilityTooltip::ShowPossibleTargets(int _x, int _y, bool _showStacked)
 	else
 		targetsInformationText.setPosition(targetsBackground.getPosition().x + 10, targetsBackground.getPosition().y + 10);
 
-	engine->GetWindow().draw(targetsBackground);
-	engine->GetWindow().draw(targetsInformationText);
+	_target.draw(targetsBackground);
+	_target.draw(targetsInformationText);
 	for (int i = 0; i < 8; i++)
 	{
 		if (GetCurrentAbility().possibleAims.position[i])
@@ -228,6 +228,6 @@ void AbilityTooltip::ShowPossibleTargets(int _x, int _y, bool _showStacked)
 		else
 			possibleTargets[i].SetColor(60, 60, 60);
 
-		possibleTargets[i].Render(engine->GetWindow());
+		possibleTargets[i].Render(_target);
 	}
 }

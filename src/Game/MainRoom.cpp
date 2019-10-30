@@ -137,10 +137,10 @@ void MainRoom::Update()
 		inventory.Open();
 
 	if (m_pGameEngine->GetKeystates(KeyID::O) == Keystates::Released)
-		gameStatus.AddItem({ ItemID::sombrero, sf::Color::Red });
+		gameStatus.AddItem({ ItemID::sombrero, sf::Color(128, 0, 0) });
 
 	if (m_pGameEngine->GetKeystates(KeyID::P) == Keystates::Released)
-		gameStatus.AddItem({ ItemID::iron_plate, sf::Color::Red });
+		gameStatus.AddItem({ ItemID::iron_plate, sf::Color(0, 128, 0) });
 
 	if (!inventory.IsOpen())
 	{

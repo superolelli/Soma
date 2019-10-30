@@ -42,7 +42,7 @@ void BattleGUI::Init(CGameEngine *_engine)
 	currentCombatantName.setOutlineColor(sf::Color::Black);
 	currentCombatantName.setOutlineThickness(4.0);
 	
-	tooltip.Init(engine);
+	tooltip.Init();
 	tooltip.SetShowAboveY(true);
 
 	currentAbility = 0;
@@ -114,8 +114,8 @@ void BattleGUI::RenderCombatantInformation()
 void BattleGUI::ShowTooltip(int _ability)
 {
 	tooltip.SetAbilityID(_ability);
-	tooltip.ShowTooltip(abilities[combatantToDisplay->GetID()][_ability].GetRect().left, abilities[combatantToDisplay->GetID()][_ability].GetRect().top - 35.0f);
-	tooltip.ShowPossibleTargets(abilityPanel.GetGlobalRect().left + 65, abilityPanel.GetGlobalRect().top + abilityPanel.GetGlobalRect().height + 5);
+	tooltip.ShowTooltip(engine->GetWindow(), abilities[combatantToDisplay->GetID()][_ability].GetRect().left, abilities[combatantToDisplay->GetID()][_ability].GetRect().top - 35.0f);
+	tooltip.ShowPossibleTargets(engine->GetWindow(), abilityPanel.GetGlobalRect().left + 65, abilityPanel.GetGlobalRect().top + abilityPanel.GetGlobalRect().height + 5);
 }
 
 

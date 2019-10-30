@@ -57,7 +57,8 @@ public:
 	int *GetCurrentHealthPointer() { return &currentStats.currentHealth; }
 	int *GetMaxHealthPointer() { return &currentStats.maxHealth; }
 
-	void SetStats(CombatantStats _stats) { currentStats = _stats; }
+	void SetStats(CombatantStats &_stats) { currentStats = _stats; }
+	void AddStats(CombatantStats &_stats) { currentStats += _stats; }
 	void Reset();
 
 private:

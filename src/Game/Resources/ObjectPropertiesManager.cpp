@@ -13,8 +13,8 @@ void ObjectPropertiesManager::LoadObjectProperties()
 	LoadEnemyAttributes();
 	LoadLevelSpecs();
 	LoadMainRoomPositions();
-	LoadLootablesBoundingBoxes();
 	LoadItemStats();
+	LoadLootableProperties();
 }
 
 
@@ -203,23 +203,35 @@ void ObjectPropertiesManager::LoadMainRoomPositions()
 }
 
 
-void ObjectPropertiesManager::LoadLootablesBoundingBoxes()
+void ObjectPropertiesManager::LoadLootableProperties()
 {
 	using namespace pugi;
 
 	xml_document doc;
-	doc.load_file("Data/XML/LootablesBoundingBoxes.xml");
+	doc.load_file("Data/XML/Lootables.xml");
 
 	for (xml_node &lootable : doc.child("Lootables").children())
 	{
 		int lootableID = lootable.attribute("id").as_int();
-		lootablesBoundingBoxes[lootableID].left = lootable.child("boundingBox").child("left").text().as_int();
-		lootablesBoundingBoxes[lootableID].top = lootable.child("boundingBox").child("top").text().as_int();
-		lootablesBoundingBoxes[lootableID].width = lootable.child("boundingBox").child("width").text().as_int();
-		lootablesBoundingBoxes[lootableID].height = lootable.child("boundingBox").child("height").text().as_int();
 
-		lootablePositions[lootableID].x = lootable.child("xPosition").text().as_int();
-		lootablePositions[lootableID].y = lootable.child("yPosition").text().as_int();
+		std::string name = lootable.attribute("name").as_string();
+		lootableProperties[lootableID].name = sf::String::fromUtf8(name.begin(), name.end());
+
+		lootableProperties[lootableID].boundingBox.left = lootable.child("boundingBox").child("left").text().as_int();
+		lootableProperties[lootableID].boundingBox.top = lootable.child("boundingBox").child("top").text().as_int();
+		lootableProperties[lootableID].boundingBox.width = lootable.child("boundingBox").child("width").text().as_int();
+		lootableProperties[lootableID].boundingBox.height = lootable.child("boundingBox").child("height").text().as_int();
+
+		lootableProperties[lootableID].position.x = lootable.child("xPosition").text().as_int();
+		lootableProperties[lootableID].position.y = lootable.child("yPosition").text().as_int();
+
+		if (lootable.child("loot"))
+		{
+			for (xml_node &item : lootable.child("loot").children())
+			{
+				lootableProperties[lootableID].possibleItems.push_back(itemIdentifierMap[item.text().as_string()]);
+			}
+		}
 	}
 }
 
@@ -232,21 +244,31 @@ void ObjectPropertiesManager::LoadItemStats()
 	doc.load_file("Data/XML/Items.xml");
 
 	//get default values
-	CombatantStats default;
-
-	loadAttributesFromXML(doc.child("Items").child("Default"), default);
+	ItemProperties default;
+	loadAttributesFromXML(doc.child("Items").child("Default"), default.stats);
+	default.level = doc.child("Items").child("Default").child("Level").text().as_int();
+	default.name = "";
 
 	//load item values
 	for (xml_node &item : doc.child("Items").children())
 	{
-		int itemID = item.attribute("id").as_int();
+		ItemID itemID = ItemID(item.attribute("id").as_int());
 
 		if (itemID >= 0)
 		{
-			itemStats[itemID].first = item.attribute("name").as_string();
+			itemStats[itemID] = default;
 
-			itemStats[itemID].second = default;
-			loadAttributesFromXML(item, itemStats[itemID].second);
+			std::string name = item.attribute("name").as_string();
+			itemStats[itemID].name = sf::String::fromUtf8(name.begin(), name.end());
+
+			itemIdentifierMap[name] = ItemID(itemID);
+
+			loadAttributesFromXML(item, itemStats[itemID].stats);
+
+			if(item.child("Level"))
+				itemStats[itemID].level = item.child("Level").text().as_int();
+
+			itemsByLevel[itemStats[itemID].level-1].push_back(itemID);
 		}
 	}
 }

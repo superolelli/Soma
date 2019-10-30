@@ -9,8 +9,8 @@ void Game::Init(CGameEngine * _engine)
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetWindow().setView(view);
 
-	level = LevelBuilder::buildLevel(gameStatus->bangLevel);
-	adventureGroup.Init(_engine, &notificationRenderer);
+	level = LevelBuilder::buildLevel(gameStatus->bangLevel, &dialogManager, gameStatus);
+	adventureGroup.Init(_engine, &notificationRenderer, gameStatus);
 
 	currentGUI = new LevelGUI;
 	currentGUI->Init(m_pGameEngine);
@@ -27,6 +27,7 @@ void Game::Init(CGameEngine * _engine)
 void Game::Cleanup()
 {
 	adventureGroup.Quit();
+	dialogManager.Quit();
 	m_pGameEngine = nullptr;
 	SAFE_DELETE(currentGUI);
 	SAFE_DELETE(level);
@@ -55,6 +56,13 @@ void Game::Update()
 		m_pGameEngine->StopEngine();
 
 	m_pGameEngine->GetWindow().setView(view);
+
+	dialogManager.Update();
+	g_pMusic->Update();
+	g_pSounds->Update();
+
+	if (dialogManager.IsDialogOpen())
+		return;
 
 	if (!g_pVideos->IsPlayingVideo())
 	{
@@ -85,8 +93,6 @@ void Game::Update()
 	}
 
 	g_pVideos->Update();
-	g_pMusic->Update();
-	g_pSounds->Update();
 }
 
 
@@ -196,6 +202,8 @@ void Game::Render(double _normalizedTimestep)
 
 		 if (levelFinished)
 			levelFinishedPanel.Render();
+
+		 dialogManager.RenderDialogs();
 	}
 
 	m_pGameEngine->FlipWindow();

@@ -16,6 +16,12 @@ void Player::Init()
 }
 
 
+void Player::SetEquipment(CombatantStats &_equipmentStats)
+{
+	status.AddStats(_equipmentStats);
+}
+
+
 int Player::NumberOfTargetsForCurrentAbility()
 {
 	return g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].possibleAims.howMany;

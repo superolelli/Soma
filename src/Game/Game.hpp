@@ -13,6 +13,7 @@
 #include "../Framework/Graphics/NotificationRenderer.hpp"
 #include "LevelFinishedPanel.hpp"
 #include "GameStatus.hpp"
+#include "DialogManager.hpp"
 
 class Game : public GameState
 {
@@ -44,6 +45,7 @@ private:
 	Battle *currentBattle;
 
 	NotificationRenderer notificationRenderer;
+	DialogManager dialogManager;
 
 	bool inBattle;
 	bool levelFinished;

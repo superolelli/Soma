@@ -7,8 +7,24 @@
 #include "../Ability.hpp"
 #include "../LevelSpecs.hpp"
 
+#include "../Item.hpp"
+
 #include <map>
 
+struct LootableProperties
+{
+	sf::String name;
+	sf::IntRect boundingBox;
+	sf::Vector2i position;
+	std::vector<ItemID> possibleItems;
+};
+
+struct ItemProperties
+{
+	CombatantStats stats;
+	sf::String name;
+	int level;
+};
 
 #define g_pObjectProperties ObjectPropertiesManager::Get()
 class ObjectPropertiesManager : public TSingleton<ObjectPropertiesManager>
@@ -26,10 +42,11 @@ public:
 
 	LevelSpecs levelSpecs[5];
 
-	sf::IntRect lootablesBoundingBoxes[11];
-	sf::Vector2i lootablePositions[11];
+	LootableProperties lootableProperties[11];
 
-	std::pair<std::string, CombatantStats> itemStats[2];
+	ItemProperties itemStats[4];
+
+	std::vector<ItemID> itemsByLevel[10];
 
 	sf::Vector2i mainRoomDoorPositions[3];
 	sf::Vector2i mainRoomPlayerPositions[4];
@@ -48,7 +65,7 @@ private:
 	void LoadEnemyAttributes();
 	void LoadLevelSpecs();
 	void LoadMainRoomPositions();
-	void LoadLootablesBoundingBoxes();
+	void LoadLootableProperties();
 	void LoadItemStats();
 };
 

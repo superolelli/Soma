@@ -13,7 +13,7 @@ public:
 	void SetPos(int _x, int _y);
 	void SetCenterPos(int _x, int _y);
 
-	sf::IntRect &GetGlobalBounds();
+	sf::IntRect GetGlobalBounds();
 	Item &GetItem();
 	CSprite &GetSprite();
 
@@ -23,4 +23,7 @@ private:
 
 	Item item;
 	CSprite sprite;
+	sf::RectangleShape colorRectangle;
+
+	sf::Text numberText;
 };

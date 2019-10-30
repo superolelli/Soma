@@ -44,7 +44,7 @@ void Inventory::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	panelTitle.setString("Inventar");
 	panelTitle.setPosition(inventoryPanel.GetGlobalRect().left + 850, inventoryPanel.GetGlobalRect().top + 70);
 
-	tooltip.Init(engine);
+	tooltip.Init();
 	equipmentPanel.Init(engine, gameStatus, 300, 330);
 	equipmentPanel.SetInventoryRect(sf::IntRect(inventoryPanel.GetGlobalRect().left + 812, inventoryPanel.GetGlobalRect().top + 171, 700, 610));
 
@@ -143,6 +143,7 @@ void Inventory::HandleDrop()
 
 void Inventory::PlaceCurrentDraggedItemAsEquipment()
 {
+	g_pSounds->PlaySound(soundID::INVENTORY_DROP);
 	gameStatus->RemoveItem(items[currentDraggedItem]->GetItem());
 	items[currentDraggedItem] = equipmentPanel.PlaceItem(items[currentDraggedItem]);
 
@@ -214,9 +215,9 @@ void Inventory::Render()
 		engine->GetWindow().draw(currentPlayerName);
 		engine->GetWindow().draw(panelTitle);
 
-		buttonNext.Render(*engine);
-		buttonPrevious.Render(*engine);
-		buttonClose.Render(*engine);
+		buttonNext.Render(engine->GetWindow());
+		buttonPrevious.Render(engine->GetWindow());
+		buttonClose.Render(engine->GetWindow());
 
 		RenderItems();
 	}
@@ -244,7 +245,7 @@ void Inventory::RenderItems()
 	if (showTooltipForItem != -1)
 	{
 		tooltip.SetItemID(ItemID(showTooltipForItem));
-		tooltip.ShowTooltip(engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
+		tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 	}
 }
 

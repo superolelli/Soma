@@ -2,19 +2,13 @@
 
 #include "Resources\TextureManager.hpp"
 #include "Resources\FontManager.hpp"
+#include "CombatantStatus.hpp"
+#include "Item.hpp"
 
 #include "../Framework/Gameengine.hpp"
 #include "../Framework/Graphics/Sprite.hpp"
 
 #include <functional>
-
-enum ItemID {empty = -1, iron_plate, sombrero};
-
-struct Item
-{
-	ItemID id;
-	sf::Color color;
-};
 
 class GameStatus
 {
@@ -41,6 +35,7 @@ public:
 
 	void AddEquipment(int _player, int _slot, Item _item);
 	void RemoveEquipment(int _player, int _slot);
+	CombatantStats &GetEquipmentStats(int _player);
 
 	int bangLevel;
 	int kutschfahrtLevel;
@@ -62,6 +57,7 @@ private:
 	std::function<void(Item)> OnItemAddedCallback;
 
 	Item equipment[4][4];
+	CombatantStats equipmentStats[4];
 
 	void PositionComponentsRelativeToPanel();
 };

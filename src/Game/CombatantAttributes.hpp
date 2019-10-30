@@ -36,5 +36,7 @@ struct CombatantStats
 
 	void operator +=(const CombatantStats &_stats);
 	void operator -=(const CombatantStats &_stats);
+
+	void Reset();
 };
 

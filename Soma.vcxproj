@@ -256,6 +256,7 @@
     <ClCompile Include="src\Game\CombatantAttributesPanel.cpp" />
     <ClCompile Include="src\Game\CombatantStatus.cpp" />
     <ClCompile Include="src\Game\CombatantStatusBar.cpp" />
+    <ClCompile Include="src\Game\DialogManager.cpp" />
     <ClCompile Include="src\Game\Enemy.cpp" />
     <ClCompile Include="src\Game\EquipmentPanel.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
@@ -271,6 +272,8 @@
     <ClCompile Include="src\Game\LevelFinishedPanel.cpp" />
     <ClCompile Include="src\Game\LevelGUI.cpp" />
     <ClCompile Include="src\Game\Lootable.cpp" />
+    <ClCompile Include="src\Game\LootableDialog.cpp" />
+    <ClCompile Include="src\Game\LootableFactory.cpp" />
     <ClCompile Include="src\Game\MainRoom.cpp" />
     <ClCompile Include="src\Game\Markus.cpp" />
     <ClCompile Include="src\Game\Ole.cpp" />
@@ -306,16 +309,20 @@
     <ClInclude Include="src\Game\CombatantID.hpp" />
     <ClInclude Include="src\Game\CombatantAttributesPanel.hpp" />
     <ClInclude Include="src\Game\CombatantStatusBar.hpp" />
+    <ClInclude Include="src\Game\DialogManager.hpp" />
     <ClInclude Include="src\Game\EquipmentPanel.hpp" />
     <ClInclude Include="src\Game\Greg.hpp" />
     <ClInclude Include="src\Game\Hilfssheriff.hpp" />
     <ClInclude Include="src\Game\Inventory.hpp" />
     <ClInclude Include="src\Game\InventoryItemWrapper.hpp" />
+    <ClInclude Include="src\Game\Item.hpp" />
     <ClInclude Include="src\Game\ItemTooltip.hpp" />
     <ClInclude Include="src\Game\LevelBuilder.hpp" />
     <ClInclude Include="src\Game\LevelFinishedPanel.hpp" />
     <ClInclude Include="src\Game\LevelSpecs.hpp" />
     <ClInclude Include="src\Game\Lootable.hpp" />
+    <ClInclude Include="src\Game\LootableDialog.hpp" />
+    <ClInclude Include="src\Game\LootableFactory.hpp" />
     <ClInclude Include="src\Game\MainRoom.hpp" />
     <ClInclude Include="src\Game\ObserverNotificationBattle.h" />
     <ClInclude Include="src\Game\Resources\EnemyAbilities.hpp" />

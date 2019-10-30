@@ -37,6 +37,7 @@ void GameStatus::Init(CGameEngine * _engine)
 
 			equipment[i][j].id = ItemID::empty;
 		}
+		equipmentStats[i].Reset();
 	}
 
 	bangLevel = 1;
@@ -73,6 +74,18 @@ void GameStatus::AcquireSkill(int player, int ability, int skill)
 
 void GameStatus::AddItem(Item _item, bool _triggerCallback)
 {
+	if (_item.id == ItemID::cards)
+	{
+		AddCards(_item.number);
+		return;
+	}
+
+	if (_item.id == ItemID::dice)
+	{
+		AddDice(_item.number);
+		return;
+	}
+
 	items.push_back(_item);
 
 	if(_triggerCallback)
@@ -100,11 +113,18 @@ void GameStatus::SetOnItemAddedCallback(std::function<void(Item)> _callback)
 void GameStatus::AddEquipment(int _player, int _slot, Item _item)
 {
 	equipment[_player][_slot] = _item;
+	equipmentStats[_player] += g_pObjectProperties->itemStats[_item.id].stats;
 }
 
 void GameStatus::RemoveEquipment(int _player, int _slot)
 {
+	equipmentStats[_player] -= g_pObjectProperties->itemStats[equipment[_player][_slot].id].stats;
 	equipment[_player][_slot].id = ItemID::empty;
+}
+
+CombatantStats & GameStatus::GetEquipmentStats(int _player)
+{
+	return equipmentStats[_player];
 }
 
 int GameStatus::GetDiceAmount()

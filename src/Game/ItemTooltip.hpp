@@ -11,7 +11,7 @@ class ItemTooltip : public Tooltip
 {
 public:
 
-	void Init(CGameEngine *_engine) override;
+	void Init() override;
 
 	void SetItemID(ItemID _id);
 

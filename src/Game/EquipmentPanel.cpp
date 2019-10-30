@@ -1,5 +1,5 @@
 #include "EquipmentPanel.hpp"
-
+#include "Resources\SoundManager.hpp"
 
 
 void EquipmentPanel::Init(CGameEngine * _engine, GameStatus *_gameStatus, int _xPos, int _yPos)
@@ -15,7 +15,7 @@ void EquipmentPanel::Init(CGameEngine * _engine, GameStatus *_gameStatus, int _x
 	equipmentField[2].SetPos(_xPos, _yPos + 300);
 	equipmentField[3].SetPos(_xPos + 365, _yPos + 300);
 
-	tooltip.Init(engine);
+	tooltip.Init();
 
 	currentPlayer = 0;
 	currentDraggedItem = -1;
@@ -94,6 +94,7 @@ void EquipmentPanel::HandleDrop()
 
 void EquipmentPanel::PlaceCurrentDraggedItemIntoInventory()
 {
+	g_pSounds->PlaySound(soundID::INVENTORY_DROP);
 	gameStatus->RemoveEquipment(currentPlayer, currentDraggedItem);
 	gameStatus->AddItem(items[currentPlayer][currentDraggedItem]->GetItem());
 	SAFE_DELETE(items[currentPlayer][currentDraggedItem]);
@@ -119,7 +120,7 @@ void EquipmentPanel::RenderItems()
 			if (items[currentPlayer][i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
 			{
 				tooltip.SetItemID(items[currentPlayer][i]->GetItem().id);
-				tooltip.ShowTooltip(engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
+				tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 			}
 		}
 	}

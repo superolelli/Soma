@@ -8,14 +8,12 @@ class Tooltip
 {
 public:
 
-	virtual void Init(CGameEngine *_engine);
+	virtual void Init();
 
 	void SetShowAboveY(bool _aboveY);
-	void ShowTooltip(int _x, int _y);
+	void ShowTooltip(sf::RenderTarget &_target, int _x, int _y);
 
 protected:
-	CGameEngine *engine;
-
 	bool showTooltipAboveY;
 
 	sfe::RichText tooltipText;

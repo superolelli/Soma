@@ -65,7 +65,7 @@ void LevelFinishedPanel::Render()
 		engine->GetWindow().draw(rewardCardsText);
 	}
 
-	continueButton.Render(*engine);
+	continueButton.Render(engine->GetWindow());
 }
 
 void LevelFinishedPanel::SetPos(int _x, int _y)
