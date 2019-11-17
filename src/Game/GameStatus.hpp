@@ -37,6 +37,9 @@ public:
 	void RemoveEquipment(int _player, int _slot);
 	CombatantStats &GetEquipmentStats(int _player);
 
+	void SetDiamondStats(int _player, CombatantStats &_stats);
+	CombatantStats &GetDiamondStats(int _player);
+
 	int bangLevel;
 	int kutschfahrtLevel;
 	int tichuLevel;
@@ -58,6 +61,8 @@ private:
 
 	Item equipment[4][4];
 	CombatantStats equipmentStats[4];
+
+	CombatantStats diamondStats[4];
 
 	void PositionComponentsRelativeToPanel();
 };

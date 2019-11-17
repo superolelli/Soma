@@ -38,6 +38,7 @@ void GameStatus::Init(CGameEngine * _engine)
 			equipment[i][j].id = ItemID::empty;
 		}
 		equipmentStats[i].Reset();
+		diamondStats[i].Reset();
 	}
 
 	bangLevel = 1;
@@ -125,6 +126,16 @@ void GameStatus::RemoveEquipment(int _player, int _slot)
 CombatantStats & GameStatus::GetEquipmentStats(int _player)
 {
 	return equipmentStats[_player];
+}
+
+void GameStatus::SetDiamondStats(int _player, CombatantStats & _stats)
+{
+	diamondStats[_player] = _stats;
+}
+
+CombatantStats & GameStatus::GetDiamondStats(int _player)
+{
+	return diamondStats[_player];
 }
 
 int GameStatus::GetDiceAmount()
