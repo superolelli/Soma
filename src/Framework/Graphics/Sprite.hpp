@@ -49,6 +49,8 @@ public:
 	//sets the sprite's colour
 	void SetColor(int _r, int _g, int _b, int _a = 255);
 
+	const sf::Color &GetColor();
+
 	//Renders a normal sprite
 	void Render(sf::RenderTarget &_target, sf::IntRect *clip = nullptr);
 

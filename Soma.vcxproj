@@ -69,13 +69,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\SFML-2.5.1\include;$(SolutionDir)Dependencies\boost_1_61_0;$(SolutionDir)\Dependencies\sfe-movie\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.5.1\lib;$(SolutionDir)Dependencies\boost_1_61_0\libs;$(SolutionDir)\Dependencies\sfe-movie\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\SFML-2.5.1\include;$(SolutionDir)Dependencies\boost_1_61_0;$(SolutionDir)\Dependencies\sfe-movie\include;F:\Soma\Dependencies\glew-2.1.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.5.1\lib;$(SolutionDir)Dependencies\boost_1_61_0\libs;$(SolutionDir)\Dependencies\sfe-movie\lib;F:\Soma\Dependencies\glew-2.1.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
     <IntDir>$(Configuration)\temps\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\SFML-2.5.1\include;$(SolutionDir)Dependencies\boost_1_61_0;$(SolutionDir)\Dependencies\sfe-movie\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.5.1\lib;$(SolutionDir)Dependencies\boost_1_61_0\libs;$(SolutionDir)\Dependencies\sfe-movie\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\SFML-2.5.1\include;$(SolutionDir)Dependencies\boost_1_61_0;$(SolutionDir)\Dependencies\sfe-movie\include;F:\Soma\Dependencies\glew-2.1.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.5.1\lib;$(SolutionDir)Dependencies\boost_1_61_0\libs;$(SolutionDir)\Dependencies\sfe-movie\lib;F:\Soma\Dependencies\glew-2.1.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
     <IntDir>$(Configuration)\temps\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -91,7 +91,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfeMovie-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfeMovie-d.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -116,7 +116,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-audio.lib;sfeMovie.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-audio.lib;sfeMovie.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -258,6 +258,7 @@
     <ClCompile Include="src\Game\CombatantStatusBar.cpp" />
     <ClCompile Include="src\Game\DialogManager.cpp" />
     <ClCompile Include="src\Game\Enemy.cpp" />
+    <ClCompile Include="src\Game\EquipmentConnections.cpp" />
     <ClCompile Include="src\Game\EquipmentPanel.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Game\Greg.cpp" />
@@ -310,6 +311,7 @@
     <ClInclude Include="src\Game\CombatantAttributesPanel.hpp" />
     <ClInclude Include="src\Game\CombatantStatusBar.hpp" />
     <ClInclude Include="src\Game\DialogManager.hpp" />
+    <ClInclude Include="src\Game\EquipmentConnections.hpp" />
     <ClInclude Include="src\Game\EquipmentPanel.hpp" />
     <ClInclude Include="src\Game\Greg.hpp" />
     <ClInclude Include="src\Game\Hilfssheriff.hpp" />

@@ -57,7 +57,12 @@ void CTextureManager::LoadTextures()
 	/** ITEMS **/
 	inventoryPanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/inventory_panel.png");
 	inventoryDiamond.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/diamond.png");
-	inventoryConnection.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/equipment_connection.png");
+	inventoryConnections.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/equipment_connections.png");
+	inventoryConnection[2].loadFromFile("Data/Sprites/Panels & Buttons/Inventory/connection_upper.png");
+	inventoryConnection[1].loadFromFile("Data/Sprites/Panels & Buttons/Inventory/connection_right.png");
+	inventoryConnection[0].loadFromFile("Data/Sprites/Panels & Buttons/Inventory/connection_lower.png");
+	inventoryConnection[3].loadFromFile("Data/Sprites/Panels & Buttons/Inventory/connection_left.png");
+	inventoryConnectionsBackground.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/equipment_connection_background.png");
 	inventoryEquipmentField.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/equipment_field.png");
 	inventoryScrollBar.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/scroll_bar.png");
 	lootablePanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/lootable_panel.png");

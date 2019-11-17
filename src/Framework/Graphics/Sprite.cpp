@@ -184,7 +184,10 @@ void CSprite::SetColor(int _r, int _g, int _b, int _a)
 	m_Sprite.setColor(sf::Color(_r, _g, _b, _a));
 }
 
-
+const sf::Color &CSprite::GetColor()
+{
+	return m_Sprite.getColor();
+}
 
 sf::IntRect CSprite::GetGlobalRect() const
 {

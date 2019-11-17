@@ -552,6 +552,9 @@
     <ClCompile Include="src\Game\LootableFactory.cpp">
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\EquipmentConnections.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -1078,6 +1081,9 @@
     </ClInclude>
     <ClInclude Include="src\Game\LootableFactory.hpp">
       <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\EquipmentConnections.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

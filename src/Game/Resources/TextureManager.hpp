@@ -38,7 +38,9 @@ public:
 	/** ITEMS & INVENTORY**/
 	sf::Texture inventoryPanel;
 	sf::Texture inventoryDiamond;
-	sf::Texture inventoryConnection;
+	sf::Texture inventoryConnections;
+	sf::Texture inventoryConnection[4];
+	sf::Texture inventoryConnectionsBackground;
 	sf::Texture inventoryEquipmentField;
 	sf::Texture inventoryScrollBar;
 	sf::Texture lootablePanel;

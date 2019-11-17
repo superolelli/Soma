@@ -4,6 +4,7 @@
 #include "../Framework/Gameengine.hpp"
 #include "GameStatus.hpp"
 #include "InventoryItemWrapper.hpp"
+#include "EquipmentConnections.hpp"
 
 class EquipmentPanel
 {
@@ -26,17 +27,26 @@ private:
 	GameStatus *gameStatus;
 
 	CSprite equipmentField[4];
+	CSprite connectionsBackground;
+	CSprite diamond;
+
+	EquipmentConnections connections[4];
 
 	InventoryItemWrapper *items[4][4];
 	ItemTooltip tooltip;
 
 	sf::IntRect inventoryRect;
 
+	sf::Color oldDiamondColor;
+	sf::Color newDiamondColor;
+
 	int currentDraggedItemOldX;
 	int currentDraggedItemOldY;
 	int currentDraggedItem;
 
 	int currentPlayer;
+
+	float diamondUpdateTime;
 
 	void HandleDragAndDrop();
 	void HandleDragStarted();
@@ -46,4 +56,12 @@ private:
 	void PlaceCurrentDraggedItemIntoInventory();
 
 	void RenderItems();
+
+	void CheckConnections(int _slot);
+
+	int LeftNeighbourSlot(int _slot);
+	int RightNeighbourSlot(int _slot);
+
+	void UpdateDiamond();
+	void RecolorDiamond();
 };
