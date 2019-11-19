@@ -23,6 +23,7 @@ void AdventureGroup::Init(CGameEngine *_engine, NotificationRenderer *_notificat
 	{
 		adventurer[i]->SetPos(x, GROUP_Y_POS);
 		adventurer[i]->SetEquipment(_gameStatus->GetEquipmentStats(i));
+		adventurer[i]->SetEquipment(_gameStatus->GetDiamondStats(i));
 		x += PLAYER_SPACING;
 	}
 }

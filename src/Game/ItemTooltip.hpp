@@ -5,6 +5,7 @@
 #include "../Framework/Gameengine.hpp"
 #include "GameStatus.hpp"
 #include "Tooltip.hpp"
+#include "Resources\ObjectPropertiesManager.hpp"
 
 
 class ItemTooltip : public Tooltip
@@ -13,10 +14,10 @@ public:
 
 	void Init() override;
 
-	void SetItemID(ItemID _id);
+	void SetItem(ItemProperties *_itemProperties);
 
 private:
-	ItemID itemID;
+	ItemProperties *itemProperties;
 
 	void GenerateTooltipString(std::string &_tooltip) override;
 };

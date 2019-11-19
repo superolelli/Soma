@@ -18,23 +18,20 @@ void EquipmentPanel::Init(CGameEngine * _engine, GameStatus *_gameStatus, int _x
 	connectionsBackground.Load(g_pTextures->inventoryConnectionsBackground);
 	connectionsBackground.SetPos(_xPos + 45, _yPos + 30);
 
-	diamond.Load(g_pTextures->inventoryDiamond);
-	diamond.SetPos(_xPos + 185, _yPos + 158);
-	diamond.SetColor(0, 0, 0);
+	for(auto &d : diamond)
+		d.Init(engine, _xPos + 185, _yPos + 158);
 
-	diamondUpdateTime = 0.0f;
-
-	connections[0].Init(0);
-	connections[0].SetPos(_xPos + 104, _yPos + 36);
-
-	connections[1].Init(1);
-	connections[1].SetPos(_xPos + 285, _yPos + 78);
-
-	connections[2].Init(2);
-	connections[2].SetPos(_xPos + 104, _yPos + 252);
-
-	connections[3].Init(3);
-	connections[3].SetPos(_xPos + 50, _yPos + 79);
+	for (auto &c : connections)
+	{
+		c[0].Init(0);
+		c[0].SetPos(_xPos + 104, _yPos + 36);
+		c[1].Init(1);
+		c[1].SetPos(_xPos + 285, _yPos + 78);
+		c[2].Init(2);
+		c[2].SetPos(_xPos + 104, _yPos + 252);
+		c[3].Init(3);
+		c[3].SetPos(_xPos + 50, _yPos + 79);
+	}
 
 	tooltip.Init();
 
@@ -65,10 +62,10 @@ void EquipmentPanel::Update()
 {
 	HandleDragAndDrop();
 
-	for (auto &c : connections)
+	for (auto &c : connections[currentPlayer])
 		c.Update();
 
-	UpdateDiamond();
+	diamond[currentPlayer].Update();
 }
 
 
@@ -112,11 +109,11 @@ void EquipmentPanel::HandleDrop()
 		{
 			PlaceCurrentDraggedItemIntoInventory();
 			
-			connections[currentDraggedItem].DeactivateConnection(0);
-			connections[LeftNeighbourSlot(currentDraggedItem)].DeactivateConnection(1);
+			connections[currentPlayer][currentDraggedItem].DeactivateConnection(0);
+			connections[currentPlayer][LeftNeighbourSlot(currentDraggedItem)].DeactivateConnection(1);
 
-			diamondUpdateTime = 4.0f;
-			RecolorDiamond();
+			diamond[currentPlayer].RecolorDiamond(connections[currentPlayer]);
+			gameStatus->SetDiamondStats(currentPlayer, diamond[currentPlayer].GetStats());
 		}
 		else
 			items[currentPlayer][currentDraggedItem]->SetPos(currentDraggedItemOldX, currentDraggedItemOldY);
@@ -139,10 +136,10 @@ void EquipmentPanel::Render()
 {
 	connectionsBackground.Render(engine->GetWindow());
 
-	for(auto &c : connections)
+	for(auto &c : connections[currentPlayer])
 		c.Render(engine->GetWindow());
 
-	diamond.Render(engine->GetWindow());
+	diamond[currentPlayer].Render();
 
 	for (auto &e : equipmentField)
 		e.Render(engine->GetWindow());
@@ -160,7 +157,7 @@ void EquipmentPanel::RenderItems()
 			items[currentPlayer][i]->Render(engine->GetWindow());
 			if (items[currentPlayer][i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
 			{
-				tooltip.SetItemID(items[currentPlayer][i]->GetItem().id);
+				tooltip.SetItem(&g_pObjectProperties->itemStats[items[currentPlayer][i]->GetItem().id]);
 				tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 			}
 		}
@@ -184,8 +181,8 @@ InventoryItemWrapper * EquipmentPanel::PlaceItem(InventoryItemWrapper *_item)
 			gameStatus->AddEquipment(currentPlayer, i, _item->GetItem());
 
 			CheckConnections(i);
-			diamondUpdateTime = 4.0f;
-			RecolorDiamond();
+			diamond[currentPlayer].RecolorDiamond(connections[currentPlayer]);
+			gameStatus->SetDiamondStats(currentPlayer, diamond[currentPlayer].GetStats());
 
 			return oldItem;
 		}
@@ -200,49 +197,16 @@ void EquipmentPanel::CheckConnections(int _slot)
 	auto itemColor = items[currentPlayer][_slot]->GetItem().color;
 
 	if (items[currentPlayer][LeftNeighbourSlot(_slot)] && itemColor == items[currentPlayer][LeftNeighbourSlot(_slot)]->GetItem().color)
-		connections[LeftNeighbourSlot(_slot)].ActivateConnection(itemColor);
+		connections[currentPlayer][LeftNeighbourSlot(_slot)].ActivateConnection(itemColor);
 	else
-		connections[LeftNeighbourSlot(_slot)].DeactivateConnection(1);
+		connections[currentPlayer][LeftNeighbourSlot(_slot)].DeactivateConnection(1);
 
 	if (items[currentPlayer][RightNeighbourSlot(_slot)] && itemColor == items[currentPlayer][RightNeighbourSlot(_slot)]->GetItem().color)
-		connections[_slot].ActivateConnection(itemColor);
+		connections[currentPlayer][_slot].ActivateConnection(itemColor);
 	else
-		connections[_slot].DeactivateConnection(0);
+		connections[currentPlayer][_slot].DeactivateConnection(0);
 }
 
-
-void EquipmentPanel::UpdateDiamond()
-{
-	if (diamondUpdateTime > 0.0f)
-	{
-		float t = (4.0f - diamondUpdateTime)/4.0f;
-		diamondUpdateTime -= g_pTimer->GetElapsedTime().asSeconds();
-
-		//lerp
-		int r = (1.0f - t) * oldDiamondColor.r + t * newDiamondColor.r;
-		int g = (1.0f - t) * oldDiamondColor.g + t * newDiamondColor.g;
-		int b = (1.0f - t) * oldDiamondColor.b + t * newDiamondColor.b;
-
-		diamond.SetColor(r, g, b);
-	}
-}
-
-void EquipmentPanel::RecolorDiamond()
-{
-	int r = 0;
-	int g = 0;
-	int b = 0;
-
-	for (auto &c : connections)
-	{
-		r = std::min(255, r + c.GetColor().r / 2);
-		g = std::min(255, g + c.GetColor().g / 2);
-		b = std::min(255, b + c.GetColor().b / 2);
-	}
-
-	oldDiamondColor = diamond.GetColor();
-	newDiamondColor = sf::Color(r, g, b);
-}
 
 int EquipmentPanel::RightNeighbourSlot(int _slot)
 {

@@ -77,7 +77,16 @@ ItemID LootableFactory::GetRandomItemID(LootableID _lootableID)
 
 sf::Color LootableFactory::GetRandomColor()
 {
-	return sf::Color(128, 0, 0);
+	int randomNumber = rand() % 4;
+
+	if (randomNumber == 0)
+		return sf::Color(128, 0, 0);
+	else if (randomNumber == 1)
+		return sf::Color(0, 128, 0);
+	else if (randomNumber == 2)
+		return sf::Color(0, 0, 128);
+	else if (randomNumber == 3)
+		return sf::Color(128, 128, 0);
 }
 
 

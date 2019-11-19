@@ -136,12 +136,6 @@ void MainRoom::Update()
 	if (m_pGameEngine->GetKeystates(KeyID::I) == Keystates::Released && !inventory.IsOpen())
 		inventory.Open();
 
-	if (m_pGameEngine->GetKeystates(KeyID::O) == Keystates::Released)
-		gameStatus.AddItem({ ItemID::sombrero, sf::Color(rand()%2 * 128, rand()%2 * 128, 0) });
-
-	if (m_pGameEngine->GetKeystates(KeyID::P) == Keystates::Released)
-		gameStatus.AddItem({ ItemID::iron_plate, sf::Color(0, rand()% 2 * 128, rand() % 2 * 128) });
-
 	if (!inventory.IsOpen())
 	{
 		for (int i = 0; i < 4; i++)

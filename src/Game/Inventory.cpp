@@ -244,7 +244,7 @@ void Inventory::RenderItems()
 
 	if (showTooltipForItem != -1)
 	{
-		tooltip.SetItemID(ItemID(showTooltipForItem));
+		tooltip.SetItem(&g_pObjectProperties->itemStats[showTooltipForItem]);
 		tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 	}
 }
