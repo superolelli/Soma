@@ -44,7 +44,7 @@ public:
 
 	LootableProperties lootableProperties[11];
 
-	ItemProperties itemStats[4];
+	ItemProperties itemStats[numberOfItems];
 
 	std::vector<ItemID> itemsByLevel[10];
 

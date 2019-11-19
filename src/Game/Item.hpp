@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 
-enum ItemID { empty = -1, cards, dice, iron_plate, sombrero };
+enum ItemID { empty = -1, cards, dice, iron_plate, sombrero, binocular, numberOfItems };
 
 const int EQUIPMENT_ITEMS_START = 2;
 

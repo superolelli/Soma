@@ -29,5 +29,9 @@
   <Sombrero id="3" name="Sombrero"
     dodge="5"
   ></Sombrero>
+
+  <Binocular id="4" name="Fernglas"
+    precision="5"
+  ></Binocular>
   
 </Items>

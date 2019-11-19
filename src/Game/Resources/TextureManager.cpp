@@ -72,6 +72,7 @@ void CTextureManager::LoadTextures()
 	item[1].loadFromFile("Data/Sprites/Items/Bang/dice.png");
 	item[2].loadFromFile("Data/Sprites/Items/Bang/iron_plate.png");
 	item[3].loadFromFile("Data/Sprites/Items/Bang/sombrero.png");
+	item[4].loadFromFile("Data/Sprites/Items/Bang/binocular.png");
 
 	/** SKILLING **/
 	LoadSkillTextures("Data/Sprites/Abilities/Simon/marshmallow_flash/marshmallow_flash_skill", 0, 0);
