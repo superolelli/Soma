@@ -85,7 +85,7 @@ sf::Color LootableFactory::GetRandomColor()
 		return sf::Color(0, 128, 0);
 	else if (randomNumber == 2)
 		return sf::Color(0, 0, 128);
-	else if (randomNumber == 3)
+	else
 		return sf::Color(128, 128, 0);
 }
 
