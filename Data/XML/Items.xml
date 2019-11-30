@@ -27,11 +27,24 @@
   ></IronPlate>
 
   <Sombrero id="3" name="Sombrero"
-    dodge="5"
+    dodge="7"
   ></Sombrero>
 
   <Binocular id="4" name="Fernglas"
     precision="5"
   ></Binocular>
+
+    <Bible id="5" name="Bibel"
+        armour="5"
+        health="5"
+    ></Bible>
+
+    <Cowboyhat id="6" name="Cowboyhut"
+        dodge="5"
+    ></Cowboyhat>
+
+    <Lasso id="7" name="Lasso"
+        initiative="2"
+    ></Lasso>
   
 </Items>
