@@ -136,6 +136,14 @@ void MainRoom::Update()
 	if (m_pGameEngine->GetKeystates(KeyID::I) == Keystates::Released && !inventory.IsOpen())
 		inventory.Open();
 
+	/*if (m_pGameEngine->GetKeystates(KeyID::O) == Keystates::Released)
+	{
+		Item newItem;
+		newItem.color = sf::Color(128, 128, 0);
+		newItem.id = ItemID(rand() % ItemID::numberOfItems);
+		gameStatus.AddItem(newItem);
+	}*/
+
 	if (!inventory.IsOpen())
 	{
 		for (int i = 0; i < 4; i++)

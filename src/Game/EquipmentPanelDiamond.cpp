@@ -91,12 +91,12 @@ void EquipmentPanelDiamond::UpdateStats(EquipmentConnections _connections[4])
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			if (_connections[i].GetColor() == sf::Color(64, 64, 0))
+			if (_connections[i].GetColor() == sf::Color(128, 128, 0))
 			{
 				stats.attributes.dexterity = 1;
 				break;
 			}
-			else if (_connections[i].GetColor() == sf::Color(64, 0, 0))
+			else if (_connections[i].GetColor() == sf::Color(128, 0, 0))
 			{
 				stats.attributes.strength = 1;
 				stats.attributes.constitution = 1;

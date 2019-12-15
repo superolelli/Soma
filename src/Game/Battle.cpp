@@ -159,7 +159,7 @@ void Battle::Update()
 		if (IsOneGroupDead() == true)
 			isBattleFinished = true;
 
-		if (combatants[currentCombatant]->FinishedTurn())
+		if (combatants[currentCombatant]->FinishedTurn() && !IsOneGroupDying())
 		{
 			do {
 				ChooseNextCombatant();
@@ -273,6 +273,26 @@ bool Battle::IsOneGroupDead()
 	return PlayersAlive == 0 || EnemiesAlive == 0;
 }
 
+
+bool Battle::IsOneGroupDying()
+{
+	int PlayersAlive = 0;
+	int EnemiesAlive = 0;
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (players->GetPlayer(i)->Status().GetCurrentHealth() > 0)
+			PlayersAlive++;
+	}
+
+	for (Enemy *e : enemies)
+	{
+		if (e != nullptr && e->Status().GetCurrentHealth() > 0)
+			EnemiesAlive++;
+	}
+
+	return PlayersAlive == 0 || EnemiesAlive == 0;
+}
 
 
 void Battle::ChooseNextCombatant()

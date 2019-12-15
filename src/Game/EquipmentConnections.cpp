@@ -86,6 +86,7 @@ void EquipmentConnections::Init(int _id)
 	frame = 0;
 
 	deactivationTime = 0.0f;
+	color = sf::Color::Black;
 }
 
 

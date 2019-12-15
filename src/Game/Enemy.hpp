@@ -21,7 +21,7 @@ public:
 
 	virtual void Render() override;
 
-	sf::String GetChosenAbilityName() { return g_pObjectProperties->enemyAbilities[chosenAbility].name; }
+	sf::String GetChosenAbilityName() { return g_pObjectProperties->enemyAbilities[int(chosenAbility)].name; }
 
 protected:
 

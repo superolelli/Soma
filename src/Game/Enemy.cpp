@@ -94,7 +94,7 @@ void Enemy::CheckForMarkedPlayers()
 
 bool Enemy::CanAimAtCombatant(Combatant *_combatant)
 {
-	return g_pObjectProperties->enemyAbilities[chosenAbility].possibleAims.position[_combatant->GetBattlePos()] && !_combatant->IsDying();
+	return g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.position[_combatant->GetBattlePos()] && !_combatant->IsDying();
 }
 
 
@@ -133,7 +133,7 @@ void Enemy::SelectAdditionalPlayers()
 
 	for (Combatant* c : (*allCombatants))
 	{
-		if (g_pObjectProperties->enemyAbilities[chosenAbility].possibleAims.attackAll && this != c  && selectedTargets[0] != c || c->GetBattlePos() < targetPosition && c->GetBattlePos() > targetPosition - g_pObjectProperties->enemyAbilities[chosenAbility].possibleAims.howMany)
+		if (g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAll && this != c  && selectedTargets[0] != c || c->GetBattlePos() < targetPosition && c->GetBattlePos() > targetPosition - g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.howMany)
 			selectedTargets.push_back(c);
 	}
 }
@@ -145,14 +145,14 @@ void Enemy::SelectAdditionalEnemies()
 
 	for (Combatant* c : (*allCombatants))
 	{
-		if (g_pObjectProperties->enemyAbilities[chosenAbility].possibleAims.attackAll && this != c  && selectedTargets[0] != c || c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + g_pObjectProperties->enemyAbilities[chosenAbility].possibleAims.howMany)
+		if (g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAll && this != c  && selectedTargets[0] != c || c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.howMany)
 			selectedTargets.push_back(c);
 	}
 }
 
 void Enemy::ChooseRandomEnemy()
 {
-	int numberOfEnemies = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), 0, [&](int sum, Combatant *c) {if (!c->IsPlayer() && !c->IsDying())return sum + 1; else return sum; });
+	int numberOfEnemies = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), 0, [&](int sum, Combatant *c) {if (!c->IsPlayer() && c->Status().GetCurrentHealth() > 0)return sum + 1; else return sum; });
 
     if (numberOfEnemies > 0)
     {
@@ -180,7 +180,7 @@ void Enemy::ChooseRandomEnemy()
 
 bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
-	auto &ability = g_pObjectProperties->enemyAbilities[chosenAbility];
+	auto &ability = g_pObjectProperties->enemyAbilities[int(chosenAbility)];
 	for (Combatant *t : selectedTargets)
 	{
 		if (!t->IsPlayer() || actsInConfusion)
@@ -254,8 +254,8 @@ void Enemy::AnnounceAndStartAbilityAnimation()
 
 	if (abilityAnnouncementTime <= 0.0f)
 	{
-		StartAbilityAnimation(chosenAbility);
-		StartTargetsAttackedAnimation(g_pObjectProperties->playerAbilities[GetID()][chosenAbility].precisionModificator);
+		StartAbilityAnimation(int(chosenAbility));
+		StartTargetsAttackedAnimation(g_pObjectProperties->playerAbilities[GetID()][int(chosenAbility)].precisionModificator);
 		abilityStatus = executing;
 	}
 }

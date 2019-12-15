@@ -53,6 +53,7 @@ private:
 	void SetCombatantToDisplayForGUI();
 
 	bool IsOneGroupDead();
+	bool IsOneGroupDying();
 
 	int GetEmptyEnemyBattlePosition();
 	void RecalculateEnemyPositions();

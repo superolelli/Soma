@@ -34,17 +34,31 @@
     precision="5"
   ></Binocular>
 
-    <Bible id="5" name="Bibel"
-        armour="5"
-        health="5"
-    ></Bible>
+  <Bible id="5" name="Bibel"
+      armour="5"
+      health="5"
+  ></Bible>
 
-    <Cowboyhat id="6" name="Cowboyhut"
-        dodge="5"
-    ></Cowboyhat>
+  <Cowboyhat id="6" name="Cowboyhut"
+      dodge="5"
+  ></Cowboyhat>
 
-    <Lasso id="7" name="Lasso"
-        initiative="2"
-    ></Lasso>
+  <Lasso id="7" name="Lasso"
+      initiative="2"
+  ></Lasso>
+
+  <Ammo id="8" name="Patronen"
+    criticalHit="2"
+  ></Ammo>
+
+  <Knife id="9" name="Messer"
+    damageMin="1"
+    damageMax="1"
+  ></Knife>
+  
+  <Tomahawk id="10" name="Tomahawk"
+    damageMin="2"
+    damageMax="2"
+  ></Tomahawk>
   
 </Items>

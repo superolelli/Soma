@@ -46,7 +46,7 @@ public:
 	sf::Texture lootablePanel;
 	sf::Texture lootablePanelButton;
 	sf::Texture lootablePanelCloseButton;
-	sf::Texture item[8];
+	sf::Texture item[11];
 
 	/** SKILLING **/
 	sf::Texture skills[4][4][8];

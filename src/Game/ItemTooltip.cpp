@@ -57,5 +57,6 @@ void ItemTooltip::GenerateTooltipString(std::string & _tooltip)
 	if (itemProperties->stats.attributes.speed != 0)
 		_tooltip.append(std::to_string(itemProperties->stats.attributes.speed) + " Geschwindigkeit\n");
 
-	_tooltip.pop_back();
+	if(_tooltip.back() == '\n')
+		_tooltip.pop_back();
 }
