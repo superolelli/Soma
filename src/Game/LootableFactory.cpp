@@ -54,7 +54,7 @@ ItemID LootableFactory::GetRandomItemID(LootableID _lootableID)
 		do {
 			itemID = rand() % g_pObjectProperties->lootableProperties[_lootableID].possibleItems.size();
 			itemID = g_pObjectProperties->lootableProperties[_lootableID].possibleItems[itemID];
-		} while (g_pObjectProperties->itemStats[itemID].level > level);
+		} while (g_pObjectProperties->getItemStats(ItemID(itemID)).level > level);
 
 		return ItemID(itemID);
 	}
@@ -62,7 +62,8 @@ ItemID LootableFactory::GetRandomItemID(LootableID _lootableID)
 	{
 		int itemID = rand() % numberOfPossibleItems;
 
-		for (int i = 0; i < level; i++)
+		int i;
+		for (i = 0; i < level; i++)
 		{
 			if (itemID >= g_pObjectProperties->itemsByLevel[i].size())
 				itemID -= g_pObjectProperties->itemsByLevel[i].size();
@@ -70,7 +71,7 @@ ItemID LootableFactory::GetRandomItemID(LootableID _lootableID)
 				break;
 		}
 
-		return ItemID(itemID);
+		return g_pObjectProperties->itemsByLevel[i][itemID];
 	}
 }
 

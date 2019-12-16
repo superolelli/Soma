@@ -256,6 +256,7 @@
     <ClCompile Include="src\Game\CombatantAttributesPanel.cpp" />
     <ClCompile Include="src\Game\CombatantStatus.cpp" />
     <ClCompile Include="src\Game\CombatantStatusBar.cpp" />
+    <ClCompile Include="src\Game\ConsumablePanel.cpp" />
     <ClCompile Include="src\Game\DialogManager.cpp" />
     <ClCompile Include="src\Game\Enemy.cpp" />
     <ClCompile Include="src\Game\EquipmentConnections.cpp" />
@@ -311,6 +312,7 @@
     <ClInclude Include="src\Game\CombatantID.hpp" />
     <ClInclude Include="src\Game\CombatantAttributesPanel.hpp" />
     <ClInclude Include="src\Game\CombatantStatusBar.hpp" />
+    <ClInclude Include="src\Game\ConsumablePanel.hpp" />
     <ClInclude Include="src\Game\DialogManager.hpp" />
     <ClInclude Include="src\Game\EquipmentConnections.hpp" />
     <ClInclude Include="src\Game\EquipmentPanel.hpp" />

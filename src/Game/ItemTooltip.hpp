@@ -14,10 +14,16 @@ public:
 
 	void Init() override;
 
-	void SetItem(ItemProperties *_itemProperties);
+	void SetItem(ItemID _id);
+
+	void SetEquipmentStats(EquipmentProperties *_equipmentStats);
 
 private:
-	ItemProperties *itemProperties;
+	ItemID itemId;
+	EquipmentProperties *equipmentStats;
 
 	void GenerateTooltipString(std::string &_tooltip) override;
+
+	void GenerateTooltipStringEquipment(std::string &_tooltip);
+	void GenerateTooltipStringConsumable(std::string &_tooltip);
 };

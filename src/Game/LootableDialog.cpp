@@ -106,7 +106,7 @@ void LootableDialog::Render()
 
 			if (i->Contains(engine->GetMousePos()))
 			{
-				tooltip.SetItem(&g_pObjectProperties->itemStats[i->GetItem().id]);
+				tooltip.SetItem(i->GetItem().id);
 				tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 				break;
 			}

@@ -21,7 +21,7 @@ void InventoryItemWrapper::Render(sf::RenderTarget & _target)
 	_target.draw(colorRectangle);
 	sprite.Render(_target);
 
-	if (item.id < EQUIPMENT_ITEMS_START)
+	if (item.id < EQUIPMENT_ITEMS_START || item.id >= CONSUMABLE_ITEMS_START)
 		_target.draw(numberText);
 }
 
@@ -52,6 +52,12 @@ Item & InventoryItemWrapper::GetItem()
 CSprite & InventoryItemWrapper::GetSprite()
 {
 	return sprite;
+}
+
+void InventoryItemWrapper::SetItemAmount(int _amount)
+{
+	item.number = _amount;
+	numberText.setString(std::to_string(item.number));
 }
 
 bool InventoryItemWrapper::Contains(const sf::Vector2i &_point)

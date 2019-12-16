@@ -3,60 +3,103 @@
 void ItemTooltip::Init()
 {
 	Tooltip::Init();
-	itemProperties = nullptr;
+
+	itemId = ItemID::empty;
+	equipmentStats = nullptr;
 }
 
-void ItemTooltip::SetItem(ItemProperties *_itemProperties)
+void ItemTooltip::SetItem(ItemID _id)
 {
-	itemProperties = _itemProperties;
+	itemId = _id;
+}
+
+
+void ItemTooltip::SetEquipmentStats(EquipmentProperties *_equipmentStats)
+{
+	equipmentStats = _equipmentStats;
 }
 
 
 void ItemTooltip::GenerateTooltipString(std::string & _tooltip)
 {
-	if (itemProperties == nullptr)
+	if (itemId < CONSUMABLE_ITEMS_START || itemId == ItemID::empty && equipmentStats != nullptr)
+		GenerateTooltipStringEquipment(_tooltip);
+	else
+		GenerateTooltipStringConsumable(_tooltip);
+}
+
+
+void ItemTooltip::GenerateTooltipStringEquipment(std::string & _tooltip)
+{
+	if (itemId == ItemID::empty && equipmentStats == nullptr)
 		return;
 
-	_tooltip.append("*#ffa500 " + itemProperties->name + "*");
+	EquipmentProperties itemProperties;
+	if (equipmentStats != nullptr)
+		itemProperties = *equipmentStats;
+	else
+		itemProperties = g_pObjectProperties->equipmentStats[itemId];
 
-	if (itemProperties->name == "Karten" || itemProperties->name == "Würfel")
+	_tooltip.append("*#ffa500 " + itemProperties.name + "*");
+
+	if (itemProperties.name == "Karten" || itemProperties.name == "Würfel")
 		return;
 
 	_tooltip.append("\n#white ");
 
-	if (itemProperties->stats.initiative != 0)
-		_tooltip.append(std::to_string(itemProperties->stats.initiative) + " Initiative\n");
+	if (itemProperties.stats.initiative != 0)
+		_tooltip.append(std::to_string(itemProperties.stats.initiative) + " Initiative\n");
 
-	if (itemProperties->stats.armour != 0)
-		_tooltip.append(std::to_string(itemProperties->stats.armour) + " Rüstung\n");
+	if (itemProperties.stats.armour != 0)
+		_tooltip.append(std::to_string(itemProperties.stats.armour) + " Rüstung\n");
 
-	if (itemProperties->stats.damageMax != 0)
-		_tooltip.append(std::to_string(itemProperties->stats.damageMax) + " Schaden\n");
+	if (itemProperties.stats.damageMax != 0)
+		_tooltip.append(std::to_string(itemProperties.stats.damageMax) + " Schaden\n");
 
-	if (itemProperties->stats.criticalHit != 0)
-		_tooltip.append(std::to_string(itemProperties->stats.criticalHit) + " Kritische Trefferchance\n");
+	if (itemProperties.stats.criticalHit != 0)
+		_tooltip.append(std::to_string(itemProperties.stats.criticalHit) + " Kritische Trefferchance\n");
 
-	if (itemProperties->stats.dodge != 0)
-		_tooltip.append(std::to_string(itemProperties->stats.dodge) + " Ausweichen\n");
+	if (itemProperties.stats.dodge != 0)
+		_tooltip.append(std::to_string(itemProperties.stats.dodge) + " Ausweichen\n");
 
-	if (itemProperties->stats.precision != 0)
-		_tooltip.append(std::to_string(itemProperties->stats.precision) + " Präzision\n");
+	if (itemProperties.stats.precision != 0)
+		_tooltip.append(std::to_string(itemProperties.stats.precision) + " Präzision\n");
 
-	if (itemProperties->stats.maxHealth != 0)
-		_tooltip.append(std::to_string(itemProperties->stats.maxHealth) + " Maximales Leben\n");
+	if (itemProperties.stats.maxHealth != 0)
+		_tooltip.append(std::to_string(itemProperties.stats.maxHealth) + " Maximales Leben\n");
 
-	if (itemProperties->stats.attributes.constitution != 0)
-		_tooltip.append(std::to_string(itemProperties->stats.attributes.constitution) + " Konstitution\n");
+	if (itemProperties.stats.attributes.constitution != 0)
+		_tooltip.append(std::to_string(itemProperties.stats.attributes.constitution) + " Konstitution\n");
 
-	if (itemProperties->stats.attributes.dexterity != 0)
-		_tooltip.append(std::to_string(itemProperties->stats.attributes.dexterity) + " Geschicklichkeit\n");
+	if (itemProperties.stats.attributes.dexterity != 0)
+		_tooltip.append(std::to_string(itemProperties.stats.attributes.dexterity) + " Geschicklichkeit\n");
 
-	if (itemProperties->stats.attributes.strength != 0)
-		_tooltip.append(std::to_string(itemProperties->stats.attributes.strength) + " Stärke\n");
+	if (itemProperties.stats.attributes.strength != 0)
+		_tooltip.append(std::to_string(itemProperties.stats.attributes.strength) + " Stärke\n");
 
-	if (itemProperties->stats.attributes.speed != 0)
-		_tooltip.append(std::to_string(itemProperties->stats.attributes.speed) + " Geschwindigkeit\n");
+	if (itemProperties.stats.attributes.speed != 0)
+		_tooltip.append(std::to_string(itemProperties.stats.attributes.speed) + " Geschwindigkeit\n");
 
-	if(_tooltip.back() == '\n')
+	if (_tooltip.back() == '\n')
+		_tooltip.pop_back();
+}
+
+
+
+void ItemTooltip::GenerateTooltipStringConsumable(std::string & _tooltip)
+{
+	if (itemId == ItemID::empty)
+		return;
+
+	auto itemProperties = g_pObjectProperties->consumableStats[itemId - CONSUMABLE_ITEMS_START];
+
+	_tooltip.append("*#ffa500 " + itemProperties.name + "*");
+
+	_tooltip.append("\n#white ");
+
+	if (itemProperties.health != 0)
+		_tooltip.append("Heilt " + std::to_string(itemProperties.health) + " Leben\n");
+
+	if (_tooltip.back() == '\n')
 		_tooltip.pop_back();
 }

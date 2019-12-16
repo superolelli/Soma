@@ -13,11 +13,21 @@ void ObjectPropertiesManager::LoadObjectProperties()
 	LoadEnemyAttributes();
 	LoadLevelSpecs();
 	LoadMainRoomPositions();
-	LoadItemStats();
+	LoadEquipmentItemStats();
+	LoadConsumableItemStats();
 	LoadLootableProperties();
 }
 
 
+
+
+ItemProperties ObjectPropertiesManager::getItemStats(ItemID _id)
+{
+	if (_id < CONSUMABLE_ITEMS_START)
+		return equipmentStats[_id];
+	else
+		return consumableStats[_id - CONSUMABLE_ITEMS_START];
+}
 
 
 void ObjectPropertiesManager::LoadPlayerAbilities()
@@ -236,15 +246,15 @@ void ObjectPropertiesManager::LoadLootableProperties()
 }
 
 
-void ObjectPropertiesManager::LoadItemStats()
+void ObjectPropertiesManager::LoadEquipmentItemStats()
 {
 	using namespace pugi;
 
 	xml_document doc;
-	doc.load_file("Data/XML/Items.xml");
+	doc.load_file("Data/XML/EquipmentItems.xml");
 
 	//get default values
-	ItemProperties default;
+	EquipmentProperties default;
 	loadAttributesFromXML(doc.child("Items").child("Default"), default.stats);
 	default.level = doc.child("Items").child("Default").child("Level").text().as_int();
 	default.name = "";
@@ -256,19 +266,58 @@ void ObjectPropertiesManager::LoadItemStats()
 
 		if (itemID >= 0)
 		{
-			itemStats[itemID] = default;
+			equipmentStats[itemID] = default;
 
 			std::string name = item.attribute("name").as_string();
-			itemStats[itemID].name = sf::String::fromUtf8(name.begin(), name.end());
+			equipmentStats[itemID].name = sf::String::fromUtf8(name.begin(), name.end());
 
 			itemIdentifierMap[name] = ItemID(itemID);
 
-			loadAttributesFromXML(item, itemStats[itemID].stats);
+			loadAttributesFromXML(item, equipmentStats[itemID].stats);
 
 			if(item.child("Level"))
-				itemStats[itemID].level = item.child("Level").text().as_int();
+				equipmentStats[itemID].level = item.child("Level").text().as_int();
 
-			itemsByLevel[itemStats[itemID].level-1].push_back(itemID);
+			itemsByLevel[equipmentStats[itemID].level-1].push_back(itemID);
+		}
+	}
+}
+
+
+void ObjectPropertiesManager::LoadConsumableItemStats()
+{
+	using namespace pugi;
+
+	xml_document doc;
+	doc.load_file("Data/XML/ConsumableItems.xml");
+
+	//get default values
+	ConsumableProperties default;
+	default.health = doc.child("Items").child("Default").attribute("health").as_int();
+	default.level = doc.child("Items").child("Default").child("Level").text().as_int();
+	default.name = "";
+
+	//load item values
+	for (xml_node &item : doc.child("Items").children())
+	{
+		ItemID itemID = ItemID(item.attribute("id").as_int());
+
+		if (itemID >= 0)
+		{
+			consumableStats[itemID] = default;
+
+			std::string name = item.attribute("name").as_string();
+			consumableStats[itemID].name = sf::String::fromUtf8(name.begin(), name.end());
+
+			itemIdentifierMap[name] = ItemID(itemID + CONSUMABLE_ITEMS_START);
+
+			if(item.attribute("health"))
+				consumableStats[itemID].health = item.attribute("health").as_int();
+
+			if (item.child("Level"))
+				consumableStats[itemID].level = item.child("Level").text().as_int();
+
+			itemsByLevel[consumableStats[itemID].level - 1].push_back(ItemID(itemID + CONSUMABLE_ITEMS_START));
 		}
 	}
 }

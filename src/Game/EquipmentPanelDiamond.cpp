@@ -14,7 +14,7 @@ void EquipmentPanelDiamond::Init(CGameEngine *_engine, int _xPos, int _yPos)
 	diamondStats.name = "Edelstein der Macht  ";
 
 	tooltip.Init();
-	tooltip.SetItem(&diamondStats);
+	tooltip.SetEquipmentStats(&diamondStats);
 }
 
 void EquipmentPanelDiamond::Update()

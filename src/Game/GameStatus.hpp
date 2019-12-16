@@ -10,6 +10,8 @@
 
 #include <functional>
 
+const int CONSUMABLE_ITEMS_LIMIT = 5;
+
 class GameStatus
 {
 public:
@@ -32,6 +34,7 @@ public:
 	void RemoveItem(Item &_item);
 	const std::vector<Item> &GetItems() { return items; }
 	void SetOnItemAddedCallback(std::function<void(Item)> _callback);
+	void SetOnConsumableAddedCallback(std::function<void(Item, bool)> _callback);
 
 	void AddEquipment(int _player, int _slot, Item _item);
 	void RemoveEquipment(int _player, int _slot);
@@ -57,7 +60,10 @@ private:
 	bool skillAcquired[4][4][8];
 
 	std::vector<Item> items;
+	std::vector<Item> consumables;
+
 	std::function<void(Item)> OnItemAddedCallback;
+	std::function<void(Item, bool)> OnConsumableAddedCallback;
 
 	Item equipment[4][4];
 	CombatantStats equipmentStats[4];

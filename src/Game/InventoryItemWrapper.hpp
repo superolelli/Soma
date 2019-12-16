@@ -17,6 +17,8 @@ public:
 	Item &GetItem();
 	CSprite &GetSprite();
 
+	void SetItemAmount(int _amount);
+
 	bool Contains(const sf::Vector2i &_point);
 
 private:

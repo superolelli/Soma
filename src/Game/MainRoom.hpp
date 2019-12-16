@@ -4,6 +4,7 @@
 #include "../Game/Resources/Resources.hpp"
 #include "SkillPanel.hpp"
 #include "Inventory.hpp"
+#include "ConsumablePanel.hpp"
 
 
 class MainRoom : public GameState
@@ -32,6 +33,7 @@ private:
 
 	SkillPanel skillPanel;
 	Inventory inventory;
+	ConsumablePanel consumablePanel;
 
 	GameStatus gameStatus;
 

@@ -68,6 +68,7 @@ void CTextureManager::LoadTextures()
 	lootablePanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/lootable_panel.png");
 	lootablePanelButton.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/take_all_button.png");
 	lootablePanelCloseButton.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/lootable_panel_close_button.png");
+	consumablePanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/consumables_panel.png");
 	item[0].loadFromFile("Data/Sprites/Items/Bang/cards.png");
 	item[1].loadFromFile("Data/Sprites/Items/Bang/dice.png");
 	item[2].loadFromFile("Data/Sprites/Items/Bang/iron_plate.png");
@@ -79,6 +80,8 @@ void CTextureManager::LoadTextures()
 	item[8].loadFromFile("Data/Sprites/Items/Bang/ammo.png");
 	item[9].loadFromFile("Data/Sprites/Items/Bang/knife.png");
 	item[10].loadFromFile("Data/Sprites/Items/Bang/tomahawk.png");
+	item[11].loadFromFile("Data/Sprites/Items/Bang/beer.png");
+	item[12].loadFromFile("Data/Sprites/Items/Bang/tequila.png");
 
 	/** SKILLING **/
 	LoadSkillTextures("Data/Sprites/Abilities/Simon/marshmallow_flash/marshmallow_flash_skill", 0, 0);

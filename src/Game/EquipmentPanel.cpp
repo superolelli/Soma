@@ -157,7 +157,7 @@ void EquipmentPanel::RenderItems()
 			items[currentPlayer][i]->Render(engine->GetWindow());
 			if (items[currentPlayer][i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
 			{
-				tooltip.SetItem(&g_pObjectProperties->itemStats[items[currentPlayer][i]->GetItem().id]);
+				tooltip.SetItem(items[currentPlayer][i]->GetItem().id);
 				tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 			}
 		}

@@ -21,9 +21,18 @@ struct LootableProperties
 
 struct ItemProperties
 {
-	CombatantStats stats;
 	sf::String name;
 	int level;
+};
+
+struct EquipmentProperties : public ItemProperties
+{
+	CombatantStats stats;
+};
+
+struct ConsumableProperties : public ItemProperties
+{
+	int health;
 };
 
 #define g_pObjectProperties ObjectPropertiesManager::Get()
@@ -44,9 +53,12 @@ public:
 
 	LootableProperties lootableProperties[11];
 
-	ItemProperties itemStats[numberOfItems];
+	EquipmentProperties equipmentStats[NUMBER_OF_EQUIPMENT_ITEMS];
+	ConsumableProperties consumableStats[NUMBER_OF_CONSUMABLE_ITEMS];
 
 	std::vector<ItemID> itemsByLevel[10];
+
+	ItemProperties getItemStats(ItemID _id);
 
 	sf::Vector2i mainRoomDoorPositions[3];
 	sf::Vector2i mainRoomPlayerPositions[4];
@@ -66,6 +78,7 @@ private:
 	void LoadLevelSpecs();
 	void LoadMainRoomPositions();
 	void LoadLootableProperties();
-	void LoadItemStats();
+	void LoadEquipmentItemStats();
+	void LoadConsumableItemStats();
 };
 

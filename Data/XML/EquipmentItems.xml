@@ -59,6 +59,8 @@
   <Tomahawk id="10" name="Tomahawk"
     damageMin="2"
     damageMax="2"
-  ></Tomahawk>
+  >
+    <Level>2</Level>
+  </Tomahawk>
   
 </Items>

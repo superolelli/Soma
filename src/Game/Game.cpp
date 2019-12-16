@@ -69,7 +69,10 @@ void Game::Update()
 		if (inBattle)
 			UpdateBattle();
 		else
+		{
 			UpdateLevel();
+			consumablePanel->Update();
+		}
 
 		notificationRenderer.Update();
 
@@ -196,6 +199,8 @@ void Game::Render(double _normalizedTimestep)
 
 		if (currentBattle != nullptr)
 			currentBattle->RenderAbilityAnimations();
+		else
+			consumablePanel->Render();
 
 		currentGUI->Render();
 		gameStatus->RenderStatusBar();

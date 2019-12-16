@@ -558,6 +558,9 @@
     <ClCompile Include="src\Game\EquipmentPanelDiamond.cpp">
       <Filter>Quelldateien\Game\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\ConsumablePanel.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -1089,6 +1092,9 @@
       <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\EquipmentPanelDiamond.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ConsumablePanel.hpp">
       <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
   </ItemGroup>

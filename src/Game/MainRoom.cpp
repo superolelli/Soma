@@ -69,6 +69,7 @@ void MainRoom::Init(CGameEngine * _engine)
 
 	skillPanel.Init(&gameStatus, m_pGameEngine);
 	inventory.Init(&gameStatus, m_pGameEngine);
+	consumablePanel.Init(m_pGameEngine, &gameStatus);
 
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetWindow().setView(view);
@@ -99,6 +100,7 @@ void MainRoom::Cleanup()
 		SAFE_DELETE(p);
 
 	inventory.Quit();
+	consumablePanel.Quit();
 
 	g_pModels->Quit();  //Muss in letztem Gamestate passieren
 	g_pSpritePool->FreeSprites();   //Muss in letztem Gamestate passieren
@@ -127,6 +129,7 @@ void MainRoom::Update()
 	UpdateLevelSigns();
 	skillPanel.Update();
 	inventory.Update();
+	consumablePanel.Update();
 
 	m_pGameEngine->GetWindow().setView(view);
 
@@ -136,13 +139,13 @@ void MainRoom::Update()
 	if (m_pGameEngine->GetKeystates(KeyID::I) == Keystates::Released && !inventory.IsOpen())
 		inventory.Open();
 
-	/*if (m_pGameEngine->GetKeystates(KeyID::O) == Keystates::Released)
-	{
-		Item newItem;
-		newItem.color = sf::Color(128, 128, 0);
-		newItem.id = ItemID(rand() % ItemID::numberOfItems);
-		gameStatus.AddItem(newItem);
-	}*/
+	//if (m_pGameEngine->GetKeystates(KeyID::O) == Keystates::Released)
+	//{
+	//	Item newItem;
+	//	newItem.color = sf::Color(128, 128, 0);
+	//	newItem.id = ItemID(rand() % ItemID::numberOfItems);
+	//	gameStatus.AddItem(newItem);
+	//}
 
 	if (!inventory.IsOpen())
 	{
@@ -218,6 +221,7 @@ void MainRoom::HandleDoors()
 				g_pSounds->PlaySound(soundID::DOOR);
 				auto newGame = new Game();
 				newGame->SetGameStatusPtr(&gameStatus);
+				newGame->SetConsumablePanelPtr(&consumablePanel);
 				m_pGameEngine->PushState(newGame);
 			}
 		}
@@ -273,6 +277,7 @@ void MainRoom::Render(double _normalizedTimestep)
 	gameStatus.RenderStatusBar();
 	skillPanel.Render();
 	inventory.Render();
+	consumablePanel.Render();
 
 	m_pGameEngine->FlipWindow();
 }

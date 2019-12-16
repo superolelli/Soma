@@ -22,7 +22,7 @@ private:
 	sf::Color oldColor;
 	sf::Color newColor;
 
-	ItemProperties diamondStats;
+	EquipmentProperties diamondStats;
 	ItemTooltip tooltip;
 
 	void UpdateStats(EquipmentConnections _connections[4]);

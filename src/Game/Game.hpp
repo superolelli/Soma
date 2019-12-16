@@ -14,12 +14,14 @@
 #include "LevelFinishedPanel.hpp"
 #include "GameStatus.hpp"
 #include "DialogManager.hpp"
+#include "ConsumablePanel.hpp"
 
 class Game : public GameState
 {
 public:
 
 	void SetGameStatusPtr(GameStatus *_statusPtr) { gameStatus = _statusPtr; } //has to be called before Game::Init()
+	void SetConsumablePanelPtr(ConsumablePanel *_consumablePanelPtr) { consumablePanel = _consumablePanelPtr; }
 
 	void Init(CGameEngine *_engine) override;
 	void Cleanup() override;
@@ -37,6 +39,7 @@ private:
 	Level *level;
 	AdventureGroup adventureGroup;
 	GUI *currentGUI;
+	ConsumablePanel *consumablePanel;
 
 	GameStatus *gameStatus;
 

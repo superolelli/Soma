@@ -8,6 +8,7 @@ void GameStatus::Init(CGameEngine * _engine)
 	dice = 0;
 	cards = 0;
 	items.clear();
+	consumables.clear();
 
 	statusBar.Load(g_pTextures->statusBar);
 	statusBar.SetPos(engine->GetWindowSize().x - statusBar.GetGlobalRect().width, 0);
@@ -87,21 +88,57 @@ void GameStatus::AddItem(Item _item, bool _triggerCallback)
 		return;
 	}
 
-	items.push_back(_item);
+	if (_item.id >= CONSUMABLE_ITEMS_START)
+	{
+		for (auto &c : consumables)
+		{
+			if (c.id == _item.id)
+			{
+				c.number += _item.number;
+				if (_triggerCallback)
+					OnConsumableAddedCallback(c, true);
+				return;
+			}
 
-	if(_triggerCallback)
-		OnItemAddedCallback(items.back());
+		}
+
+		if (consumables.size() < CONSUMABLE_ITEMS_LIMIT)
+		{
+			consumables.push_back(_item);
+			if (_triggerCallback)
+				OnConsumableAddedCallback(_item, false);
+		}
+	}
+	else {
+		items.push_back(_item);
+
+		if (_triggerCallback)
+			OnItemAddedCallback(items.back());
+	}
 }
 
 
 void GameStatus::RemoveItem(Item &_item)
 {
-	for (auto it = items.begin(); it != items.end(); it++)
+	if (_item.id < CONSUMABLE_ITEMS_START)
 	{
-		if (it->id == _item.id && it->color == _item.color)
+		for (auto it = items.begin(); it != items.end(); it++)
 		{
-			items.erase(it);
-			return;
+			if (it->id == _item.id && it->color == _item.color)
+			{
+				items.erase(it);
+				return;
+			}
+		}
+	}
+	else {
+		for (auto it = consumables.begin(); it != consumables.end(); it++)
+		{
+			if (it->id == _item.id && it->color == _item.color)
+			{
+				consumables.erase(it);
+				return;
+			}
 		}
 	}
 }
@@ -111,15 +148,20 @@ void GameStatus::SetOnItemAddedCallback(std::function<void(Item)> _callback)
 	OnItemAddedCallback = _callback;
 }
 
+void GameStatus::SetOnConsumableAddedCallback(std::function<void(Item, bool)> _callback)
+{
+	OnConsumableAddedCallback = _callback;
+}
+
 void GameStatus::AddEquipment(int _player, int _slot, Item _item)
 {
 	equipment[_player][_slot] = _item;
-	equipmentStats[_player] += g_pObjectProperties->itemStats[_item.id].stats;
+	equipmentStats[_player] += g_pObjectProperties->equipmentStats[_item.id].stats;
 }
 
 void GameStatus::RemoveEquipment(int _player, int _slot)
 {
-	equipmentStats[_player] -= g_pObjectProperties->itemStats[equipment[_player][_slot].id].stats;
+	equipmentStats[_player] -= g_pObjectProperties->equipmentStats[equipment[_player][_slot].id].stats;
 	equipment[_player][_slot].id = ItemID::empty;
 }
 

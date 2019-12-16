@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Items>
+  <Default id="-1" name="empty"
+		health="0"
+  >
+    <Level>1</Level>
+  </Default>
+
+  <Beer id="0" name="Bier"
+    health="5"
+  ></Beer>
+  
+  <Tequila id="1" name="Tequila"
+    health="10"
+  >
+    <Level>2</Level>
+  </Tequila>
+  
+</Items>
