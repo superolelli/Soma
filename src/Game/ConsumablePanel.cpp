@@ -2,19 +2,24 @@
 #include "Resources\SoundManager.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
 
-void ConsumablePanel::Init(CGameEngine *_engine, GameStatus * _gameStatus)
+void ConsumablePanel::Init(CGameEngine *_engine, GameStatus * _gameStatus, AdventureGroup *_adventureGroup)
 {
 	engine = _engine;
 	gameStatus = _gameStatus;
+	adventureGroup = _adventureGroup;
 
 	gameStatus->SetOnConsumableAddedCallback([&](Item _item, bool _onlyAmountChanged) {OnItemAdded(_item, _onlyAmountChanged); });
 
 	consumablePanel.Load(g_pTextures->consumablePanel);
-	consumablePanel.SetPos(1200, 878);
+	consumablePanel.SetPos(1200, 855);
 
 	tooltip.Init();
 
 	isOpen = true;
+
+	currentDraggedItem = -1;
+	currentDraggedItemOldX = 0;
+	currentDraggedItemOldY = 0;
 }
 
 
@@ -34,22 +39,65 @@ void ConsumablePanel::Update()
 {
 	if (isOpen)
 	{
-		if (engine->GetButtonstates(ButtonID::Left) == Released)
-		{
-			for (int i = 0; i < 5; i++)
-			{
-				if (items[i] == nullptr)
-					continue;
+		HandleStartedDrag();
+		HandleContinuedDrag();
+		HandleDrop();
+	}
+}
 
-				if (items[i]->Contains(engine->GetMousePos()))
-				{
-					//TODO: Start Drag
-				}
-			}
+
+void ConsumablePanel::HandleStartedDrag()
+{
+	if (engine->GetButtonstates(ButtonID::Left) != Pressed)
+		return;
+
+	for (int i = 0; i < 5; i++)
+	{
+		if (items[i] == nullptr)
+			continue;
+
+		if (items[i]->Contains(engine->GetMousePos()))
+		{
+			currentDraggedItem = i;
+			currentDraggedItemOldX = items[i]->GetGlobalBounds().left;
+			currentDraggedItemOldY = items[i]->GetGlobalBounds().top;
 		}
 	}
 }
 
+void ConsumablePanel::HandleContinuedDrag()
+{
+	if (engine->GetButtonstates(ButtonID::Left) == Held && currentDraggedItem != -1)
+		items[currentDraggedItem]->SetCenterPos(engine->GetMousePos().x, engine->GetMousePos().y);
+}
+
+void ConsumablePanel::HandleDrop()
+{
+	if (engine->GetButtonstates(ButtonID::Left) == Released && currentDraggedItem != -1)
+	{
+		if (adventureGroup != nullptr)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				auto rect = adventureGroup->GetPlayer(i)->GetRect();
+				rect.left -= engine->GetViewPosition().x;
+				if (items[currentDraggedItem]->GetGlobalBounds().intersects(rect))
+				{
+					auto health = g_pObjectProperties->consumableStats[items[currentDraggedItem]->GetItem().id - CONSUMABLE_ITEMS_START].health;
+					adventureGroup->GetPlayer(i)->Status().GainHealth(health);
+					g_pSounds->PlaySound(soundID::DRINK);
+					items[currentDraggedItem]->GetItem().number--;
+					break;
+				}
+			}
+		}
+
+		items[currentDraggedItem]->SetPos(currentDraggedItemOldX, currentDraggedItemOldY);
+		if (items[currentDraggedItem]->GetItem().number <= 0)
+			SAFE_DELETE(items[currentDraggedItem]);
+		currentDraggedItem = -1;
+	}
+}
 
 void ConsumablePanel::Render()
 {
@@ -68,13 +116,14 @@ void ConsumablePanel::Render()
 			if (i == nullptr)
 				continue;
 
-			if (i->Contains(engine->GetMousePos()))
+			if (i->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
 			{
 				tooltip.SetItem(i->GetItem().id);
 				tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 				break;
 			}
 		}
+
 	}
 }
 

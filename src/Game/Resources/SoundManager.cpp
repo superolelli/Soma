@@ -8,6 +8,7 @@ void SoundManager::LoadSounds()
 	soundBuffers[SKILL_ACQUIRED].loadFromFile("Data/Sound/skill_acquired.wav");
 	soundBuffers[INVENTORY_DROP].loadFromFile("Data/Sound/inventory_drop.wav");
 	soundBuffers[LOOTABLE_TAKE_ALL].loadFromFile("Data/Sound/lootable_take_all.wav");
+	soundBuffers[DRINK].loadFromFile("Data/Sound/drink.wav");
 	soundBuffers[BARREL].loadFromFile("Data/Sound/Lootables/barrel.ogg");
 	soundBuffers[CABINET].loadFromFile("Data/Sound/Lootables/cabinet.ogg");
 	soundBuffers[CHEST].loadFromFile("Data/Sound/Lootables/chest.wav");

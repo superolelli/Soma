@@ -12,6 +12,8 @@ void Game::Init(CGameEngine * _engine)
 	level = LevelBuilder::buildLevel(gameStatus->bangLevel, &dialogManager, gameStatus);
 	adventureGroup.Init(_engine, &notificationRenderer, gameStatus);
 
+	consumablePanel->SetAdventureGroup(&adventureGroup);
+
 	currentGUI = new LevelGUI;
 	currentGUI->Init(m_pGameEngine);
 
@@ -26,6 +28,7 @@ void Game::Init(CGameEngine * _engine)
 
 void Game::Cleanup()
 {
+	consumablePanel->SetAdventureGroup(nullptr);
 	adventureGroup.Quit();
 	dialogManager.Quit();
 	m_pGameEngine = nullptr;

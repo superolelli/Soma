@@ -152,11 +152,13 @@ void Enemy::SelectAdditionalEnemies()
 
 void Enemy::ChooseRandomEnemy()
 {
-	int numberOfEnemies = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), 0, [&](int sum, Combatant *c) {if (!c->IsPlayer() && c->Status().GetCurrentHealth() > 0)return sum + 1; else return sum; });
+	int numberOfEnemies = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), 0, [&](int sum, Combatant *c) {if (!c->IsPlayer() && !c->IsDying())return sum + 1; else return sum; });
 
-    if (numberOfEnemies > 0)
+    if (numberOfEnemies > 1)
     {
 		int target = rand() % (numberOfEnemies-1);
+		if (numberOfEnemies == 2)
+			target = 0;
 		for (Combatant *c : (*allCombatants))
 		{
 			if (!c->IsPlayer() && c != this && !c->IsDying())

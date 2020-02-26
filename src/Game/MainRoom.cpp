@@ -69,7 +69,7 @@ void MainRoom::Init(CGameEngine * _engine)
 
 	skillPanel.Init(&gameStatus, m_pGameEngine);
 	inventory.Init(&gameStatus, m_pGameEngine);
-	consumablePanel.Init(m_pGameEngine, &gameStatus);
+	consumablePanel.Init(m_pGameEngine, &gameStatus, nullptr);
 
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetWindow().setView(view);
@@ -129,7 +129,7 @@ void MainRoom::Update()
 	UpdateLevelSigns();
 	skillPanel.Update();
 	inventory.Update();
-	consumablePanel.Update();
+	//consumablePanel.Update();
 
 	m_pGameEngine->GetWindow().setView(view);
 
@@ -277,7 +277,7 @@ void MainRoom::Render(double _normalizedTimestep)
 	gameStatus.RenderStatusBar();
 	skillPanel.Render();
 	inventory.Render();
-	consumablePanel.Render();
+	//consumablePanel.Render();
 
 	m_pGameEngine->FlipWindow();
 }
