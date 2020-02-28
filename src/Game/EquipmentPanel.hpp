@@ -14,6 +14,7 @@ public:
 	void Init(CGameEngine *_engine, GameStatus *_gameStatus, int _xPos, int _yPos);
 	void Update();
 	void Render();
+	void RenderCurrentDraggedItem();
 	void Quit();
 
 	void SetCurrentPlayer(int _currentPlayer);

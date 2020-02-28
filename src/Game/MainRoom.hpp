@@ -5,6 +5,7 @@
 #include "SkillPanel.hpp"
 #include "Inventory.hpp"
 #include "ConsumablePanel.hpp"
+#include "VendingMachinePanel.hpp"
 
 
 class MainRoom : public GameState
@@ -28,12 +29,14 @@ private:
 	CSprite doors[3];
 	SpriteWithText signs[3];
 	CSprite roots;
+	CSprite vendingMachine;
 
 	sf::IntRect playerHitbox[4];
 
 	SkillPanel skillPanel;
 	Inventory inventory;
 	ConsumablePanel consumablePanel;
+	VendingMachinePanel vendingMachinePanel;
 
 	GameStatus gameStatus;
 

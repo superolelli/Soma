@@ -162,7 +162,11 @@ void EquipmentPanel::RenderItems()
 			}
 		}
 	}
+}
 
+
+void EquipmentPanel::RenderCurrentDraggedItem()
+{
 	if (currentDraggedItem != -1)
 		items[currentPlayer][currentDraggedItem]->Render(engine->GetWindow());
 }

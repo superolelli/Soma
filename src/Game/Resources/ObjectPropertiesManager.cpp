@@ -210,6 +210,9 @@ void ObjectPropertiesManager::LoadMainRoomPositions()
 
 	mainRoomRootsPosition.x = doc.child("Positions").child("roots").attribute("x").as_int();
 	mainRoomRootsPosition.y = doc.child("Positions").child("roots").attribute("y").as_int();
+
+	mainRoomVendingMachinePosition.x = doc.child("Positions").child("vendingMachine").attribute("x").as_int();
+	mainRoomVendingMachinePosition.y = doc.child("Positions").child("vendingMachine").attribute("y").as_int();
 }
 
 

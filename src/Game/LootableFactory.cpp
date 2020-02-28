@@ -97,6 +97,8 @@ int LootableFactory::GetRandomItemNumber(ItemID _id)
 		return rand() % 4 * std::ceil((float)level / 2.0) + 1;
 	else if (_id == ItemID::dice)
 		return rand() % 2 * std::ceil((float)level / 2.0) + 1;
+	else if (_id >= CONSUMABLE_ITEMS_START)
+		return rand() % 3 + 1;
 
 	return 1;
 }

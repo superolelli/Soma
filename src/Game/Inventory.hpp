@@ -2,10 +2,10 @@
 
 #include "GameStatus.hpp"
 #include "../Framework/Gui/Button.hpp"
-#include "../Framework/Gui/Scrollbar.hpp"
-#include "ItemTooltip.hpp"
 #include "EquipmentPanel.hpp"
 #include "InventoryItemWrapper.hpp"
+
+#include "ScrollableItemPanel.hpp"
 
 
 
@@ -27,37 +27,21 @@ private:
 
 	bool closed;
 	int currentPlayer;
-	int currentUpperRow;
 
 	CSprite inventoryPanel;
 	EquipmentPanel equipmentPanel;
-	VerticalScrollbar scrollbar;
+	ScrollableItemPanel scrollableItemPanel;
 	sf::Text currentPlayerName;
 	sf::Text panelTitle;
 	CButton buttonNext;
 	CButton buttonPrevious;
 	CButton buttonClose;
 
-	std::vector<InventoryItemWrapper*> items;
-	ItemTooltip tooltip;
-
-	int currentDraggedItemOldX;
-	int currentDraggedItemOldY;
-	int currentDraggedItem;
 
 	void CheckButtonsForPlayerChoosing();
 	void UpdateGUIForChosenPlayer();
-	void UpdateScrollbar();
 
-	void HandleDragAndDrop();
-	void HandleStartedDrag();
-	void HandleContinuedDrag();
-	void HandleDrop();
-
-	void PlaceCurrentDraggedItemAsEquipment();
 	void OnItemAdded(Item _item);
-	void RenderItems();
-	void RecalculatePositionsOfItems();
 
-	int GetFirstFreeInventorySlot();
+	InventoryItemWrapper* OnItemFromItemPanelReceived(InventoryItemWrapper* _receivedItem);
 };

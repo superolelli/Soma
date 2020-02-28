@@ -31,12 +31,14 @@ public:
 	sf::Texture mainRoomDoors[3];
 	sf::Texture mainRoomSigns[3];
 	sf::Texture mainRoomRoots;
+	sf::Texture mainRoomVendingMachine;
 
 	/** LOOTABLES **/
 	sf::Texture lootable[11];
 
-	/** ITEMS & INVENTORY**/
+	/** ITEMS & INVENTORY **/
 	sf::Texture inventoryPanel;
+	sf::Texture scrollableItemPanel;
 	sf::Texture inventoryDiamond;
 	sf::Texture inventoryConnections;
 	sf::Texture inventoryConnection[4];
@@ -48,6 +50,9 @@ public:
 	sf::Texture lootablePanelCloseButton;
 	sf::Texture consumablePanel;
 	sf::Texture item[13];
+
+	/** VENDING MACHINE **/
+	sf::Texture vendingMachinePanel;
 
 	/** SKILLING **/
 	sf::Texture skills[4][4][8];

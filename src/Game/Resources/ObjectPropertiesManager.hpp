@@ -64,6 +64,7 @@ public:
 	sf::Vector2i mainRoomPlayerPositions[4];
 	sf::Vector2i mainRoomSignPositions[3];
 	sf::Vector2i mainRoomRootsPosition;
+	sf::Vector2i mainRoomVendingMachinePosition;
 
 private:
 	void LoadPlayerAbilities();

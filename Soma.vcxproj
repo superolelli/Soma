@@ -290,11 +290,13 @@
     <ClCompile Include="src\Game\Resources\StringManager.cpp" />
     <ClCompile Include="src\Game\Resources\TextureManager.cpp" />
     <ClCompile Include="src\Game\Resources\VideoManager.cpp" />
+    <ClCompile Include="src\Game\ScrollableItemPanel.cpp" />
     <ClCompile Include="src\Game\Simon.cpp" />
     <ClCompile Include="src\Game\GameStatus.cpp" />
     <ClCompile Include="src\Game\SkillPanel.cpp" />
     <ClCompile Include="src\Game\Tooltip.cpp" />
     <ClCompile Include="src\Game\Util\XMLUtilities.cpp" />
+    <ClCompile Include="src\Game\VendingMachinePanel.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -471,11 +473,13 @@
     <ClInclude Include="src\Game\Resources\StringManager.hpp" />
     <ClInclude Include="src\Game\Resources\TextureManager.hpp" />
     <ClInclude Include="src\Game\Resources\VideoManager.hpp" />
+    <ClInclude Include="src\Game\ScrollableItemPanel.hpp" />
     <ClInclude Include="src\Game\Simon.hpp" />
     <ClInclude Include="src\Game\GameStatus.hpp" />
     <ClInclude Include="src\Game\SkillPanel.hpp" />
     <ClInclude Include="src\Game\Tooltip.hpp" />
     <ClInclude Include="src\Game\Util\XMLUtilities.hpp" />
+    <ClInclude Include="src\Game\VendingMachinePanel.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

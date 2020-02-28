@@ -65,11 +65,15 @@ void MainRoom::Init(CGameEngine * _engine)
 	roots.Load(g_pTextures->mainRoomRoots);
 	roots.SetPos(g_pObjectProperties->mainRoomRootsPosition.x, g_pObjectProperties->mainRoomRootsPosition.y);
 
+	vendingMachine.Load(g_pTextures->mainRoomVendingMachine);
+	vendingMachine.SetPos(g_pObjectProperties->mainRoomVendingMachinePosition.x, g_pObjectProperties->mainRoomVendingMachinePosition.y);
+
 	gameStatus.Init(m_pGameEngine);
 
 	skillPanel.Init(&gameStatus, m_pGameEngine);
 	inventory.Init(&gameStatus, m_pGameEngine);
 	consumablePanel.Init(m_pGameEngine, &gameStatus, nullptr);
+	vendingMachinePanel.Init(&gameStatus, m_pGameEngine);
 
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetWindow().setView(view);
@@ -101,6 +105,7 @@ void MainRoom::Cleanup()
 
 	inventory.Quit();
 	consumablePanel.Quit();
+	vendingMachinePanel.Quit();
 
 	g_pModels->Quit();  //Muss in letztem Gamestate passieren
 	g_pSpritePool->FreeSprites();   //Muss in letztem Gamestate passieren
@@ -130,6 +135,7 @@ void MainRoom::Update()
 	skillPanel.Update();
 	inventory.Update();
 	//consumablePanel.Update();
+	vendingMachinePanel.Update();
 
 	m_pGameEngine->GetWindow().setView(view);
 
@@ -139,15 +145,15 @@ void MainRoom::Update()
 	if (m_pGameEngine->GetKeystates(KeyID::I) == Keystates::Released && !inventory.IsOpen())
 		inventory.Open();
 
-	//if (m_pGameEngine->GetKeystates(KeyID::O) == Keystates::Released)
-	//{
-	//	Item newItem;
-	//	newItem.color = sf::Color(128, 128, 0);
-	//	newItem.id = ItemID(rand() % ItemID::numberOfItems);
-	//	gameStatus.AddItem(newItem);
-	//}
+	if (m_pGameEngine->GetKeystates(KeyID::O) == Keystates::Released)
+	{
+		Item newItem;
+		newItem.color = sf::Color(128, 128, 0);
+		newItem.id = ItemID(rand() % CONSUMABLE_ITEMS_START);
+		gameStatus.AddItem(newItem);
+	}
 
-	if (!inventory.IsOpen())
+	if (!inventory.IsOpen() && !vendingMachinePanel.IsOpen())
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -158,6 +164,16 @@ void MainRoom::Update()
 				if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released && !skillPanel.IsOpen())
 					skillPanel.Open(i);
 			}
+		}
+	}
+
+	if (!inventory.IsOpen() && !skillPanel.IsOpen())
+	{
+		if (vendingMachine.GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos()))
+		{
+			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
+			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released && !vendingMachinePanel.IsOpen())
+				vendingMachinePanel.Open();
 		}
 	}
 
@@ -271,6 +287,8 @@ void MainRoom::Render(double _normalizedTimestep)
 		p->playSoundTriggers();
 	}
 
+	vendingMachine.Render(m_pGameEngine->GetWindow());
+
 	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
 
 	// GUI
@@ -278,6 +296,7 @@ void MainRoom::Render(double _normalizedTimestep)
 	skillPanel.Render();
 	inventory.Render();
 	//consumablePanel.Render();
+	vendingMachinePanel.Render();
 
 	m_pGameEngine->FlipWindow();
 }

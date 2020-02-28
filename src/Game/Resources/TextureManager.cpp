@@ -40,6 +40,7 @@ void CTextureManager::LoadTextures()
 	mainRoomSigns[2].loadFromFile("Data/Sprites/Backgrounds/Main Room/level_sign_3.png");
 
 	mainRoomRoots.loadFromFile("Data/Sprites/Backgrounds/Main Room/roots.png");
+	mainRoomVendingMachine.loadFromFile("Data/Sprites/Backgrounds/Main Room/vending_machine.png");
 
 	/** LOOTABLES **/
 	lootable[0].loadFromFile("Data/Sprites/Lootables/barrel.png");
@@ -55,7 +56,8 @@ void CTextureManager::LoadTextures()
 	lootable[10].loadFromFile("Data/Sprites/Lootables/wagon.png");
 
 	/** ITEMS **/
-	inventoryPanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/inventory_panel.png");
+	inventoryPanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/inventory_panel2.png");
+	scrollableItemPanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/scrollable_item_panel.png");
 	inventoryDiamond.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/diamond.png");
 	inventoryConnections.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/equipment_connections.png");
 	inventoryConnection[2].loadFromFile("Data/Sprites/Panels & Buttons/Inventory/connection_upper.png");
@@ -82,6 +84,9 @@ void CTextureManager::LoadTextures()
 	item[10].loadFromFile("Data/Sprites/Items/Bang/tomahawk.png");
 	item[11].loadFromFile("Data/Sprites/Items/Bang/beer.png");
 	item[12].loadFromFile("Data/Sprites/Items/Bang/tequila.png");
+
+	/** VENDING MACHINE **/
+	vendingMachinePanel.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/vending_machine_panel.png");
 
 	/** SKILLING **/
 	LoadSkillTextures("Data/Sprites/Abilities/Simon/marshmallow_flash/marshmallow_flash_skill", 0, 0);
