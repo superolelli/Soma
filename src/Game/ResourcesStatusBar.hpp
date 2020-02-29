@@ -1,0 +1,26 @@
+#pragma once
+
+#include "../Framework/Graphics/Sprite.hpp"
+#include "../Framework/Gameengine.hpp"
+
+class ResourcesStatusBar
+{
+public:
+
+	void Init(CGameEngine *_engine);
+	void Update(int _cards, int _dice);
+	void Render();
+	void Quit();
+
+	void SetPos(int _x, int _y);
+
+private:
+
+	CGameEngine *engine;
+
+	CSprite statusBar;
+	sf::Text diceAmountText;
+	sf::Text cardsAmountText;
+
+	void PositionComponentsRelativeToPanel();
+};

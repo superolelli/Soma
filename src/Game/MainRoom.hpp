@@ -6,6 +6,7 @@
 #include "Inventory.hpp"
 #include "ConsumablePanel.hpp"
 #include "VendingMachinePanel.hpp"
+#include "ResourcesStatusBar.hpp"
 
 
 class MainRoom : public GameState
@@ -35,9 +36,9 @@ private:
 
 	SkillPanel skillPanel;
 	Inventory inventory;
-	ConsumablePanel consumablePanel;
 	VendingMachinePanel vendingMachinePanel;
 
+	ResourcesStatusBar resourcesStatusBar;
 	GameStatus gameStatus;
 
 	sf::View view;

@@ -152,6 +152,10 @@ void Inventory::Open(int _player)
 	closed = false;
 	currentPlayer = _player;
 	UpdateGUIForChosenPlayer();
+
+	scrollableItemPanel.Quit();
+	for (auto &i : gameStatus->GetItems())
+		scrollableItemPanel.AddItem(i);
 }
 
 

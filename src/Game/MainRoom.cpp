@@ -68,11 +68,12 @@ void MainRoom::Init(CGameEngine * _engine)
 	vendingMachine.Load(g_pTextures->mainRoomVendingMachine);
 	vendingMachine.SetPos(g_pObjectProperties->mainRoomVendingMachinePosition.x, g_pObjectProperties->mainRoomVendingMachinePosition.y);
 
-	gameStatus.Init(m_pGameEngine);
+	gameStatus.Init();
+
+	resourcesStatusBar.Init(m_pGameEngine);
 
 	skillPanel.Init(&gameStatus, m_pGameEngine);
 	inventory.Init(&gameStatus, m_pGameEngine);
-	consumablePanel.Init(m_pGameEngine, &gameStatus, nullptr);
 	vendingMachinePanel.Init(&gameStatus, m_pGameEngine);
 
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
@@ -103,8 +104,8 @@ void MainRoom::Cleanup()
 	for(auto p : players)
 		SAFE_DELETE(p);
 
+	resourcesStatusBar.Quit();
 	inventory.Quit();
-	consumablePanel.Quit();
 	vendingMachinePanel.Quit();
 
 	g_pModels->Quit();  //Muss in letztem Gamestate passieren
@@ -134,8 +135,8 @@ void MainRoom::Update()
 	UpdateLevelSigns();
 	skillPanel.Update();
 	inventory.Update();
-	//consumablePanel.Update();
 	vendingMachinePanel.Update();
+	resourcesStatusBar.Update(gameStatus.GetCardsAmount(), gameStatus.GetDiceAmount());
 
 	m_pGameEngine->GetWindow().setView(view);
 
@@ -238,7 +239,6 @@ void MainRoom::HandleDoors()
 				g_pSounds->PlaySound(soundID::DOOR);
 				auto newGame = new Game();
 				newGame->SetGameStatusPtr(&gameStatus);
-				newGame->SetConsumablePanelPtr(&consumablePanel);
 				m_pGameEngine->PushState(newGame);
 			}
 		}
@@ -293,10 +293,9 @@ void MainRoom::Render(double _normalizedTimestep)
 	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
 
 	// GUI
-	gameStatus.RenderStatusBar();
+	resourcesStatusBar.Render();
 	skillPanel.Render();
 	inventory.Render();
-	//consumablePanel.Render();
 	vendingMachinePanel.Render();
 
 	m_pGameEngine->FlipWindow();

@@ -15,8 +15,6 @@ void ConsumablePanel::Init(CGameEngine *_engine, GameStatus * _gameStatus, Adven
 
 	itemRowPanel.Init(engine, [&](InventoryItemWrapper* _item) {return OnItemFromItemPanelReceived(_item); });
 	itemRowPanel.SetPos(consumablePanel.GetRect().left + 49, consumablePanel.GetRect().top + 44);
-
-	isOpen = true;
 }
 
 
@@ -34,21 +32,15 @@ void ConsumablePanel::SetPos(int _x, int _y)
 
 void ConsumablePanel::Update()
 {
-	if (isOpen)
-	{
-		itemRowPanel.Update();
-	}
+	itemRowPanel.Update();
 }
 
 
 void ConsumablePanel::Render()
 {
-	if (isOpen)
-	{
-		consumablePanel.Render(engine->GetWindow());
-		itemRowPanel.Render();
-		itemRowPanel.RenderCurrentlyDraggedItem();
-	}
+	consumablePanel.Render(engine->GetWindow());
+	itemRowPanel.Render();
+	itemRowPanel.RenderCurrentlyDraggedItem();
 }
 
 

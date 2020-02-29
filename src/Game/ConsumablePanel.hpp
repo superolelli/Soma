@@ -15,16 +15,11 @@ public:
 	void Quit();
 
 	void SetPos(int _x, int _y);
-	void SetAdventureGroup(AdventureGroup *_adventureGroup) { adventureGroup = _adventureGroup; }
-
-	bool IsOpen() { return isOpen; }
 
 private:
 	CGameEngine *engine;
 	GameStatus *gameStatus;
 	AdventureGroup *adventureGroup;
-
-	bool isOpen;
 
 	CSprite consumablePanel;
 	ItemRowPanel itemRowPanel;

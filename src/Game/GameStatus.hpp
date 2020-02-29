@@ -16,10 +16,8 @@ class GameStatus
 {
 public:
 
-	void Init(CGameEngine *_engine);
-	void RenderStatusBar();
+	void Init();
 
-	void SetPos(int _x, int _y);
 	int GetDiceAmount();
 	int GetCardsAmount();
 	void AddDice(int _amount);
@@ -49,12 +47,6 @@ public:
 	int tichuLevel;
 
 private:
-	CGameEngine *engine;
-
-	CSprite statusBar;
-	sf::Text diceAmountText;
-	sf::Text cardsAmountText;
-
 	int dice;
 	int cards;
 
@@ -70,6 +62,4 @@ private:
 	CombatantStats equipmentStats[4];
 
 	CombatantStats diamondStats[4];
-
-	void PositionComponentsRelativeToPanel();
 };

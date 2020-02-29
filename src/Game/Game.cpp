@@ -12,7 +12,9 @@ void Game::Init(CGameEngine * _engine)
 	level = LevelBuilder::buildLevel(gameStatus->bangLevel, &dialogManager, gameStatus);
 	adventureGroup.Init(_engine, &notificationRenderer, gameStatus);
 
-	consumablePanel->SetAdventureGroup(&adventureGroup);
+	consumablePanel.Init(m_pGameEngine, gameStatus, &adventureGroup);
+
+	resourcesStatusBar.Init(m_pGameEngine);
 
 	currentGUI = new LevelGUI;
 	currentGUI->Init(m_pGameEngine);
@@ -28,7 +30,8 @@ void Game::Init(CGameEngine * _engine)
 
 void Game::Cleanup()
 {
-	consumablePanel->SetAdventureGroup(nullptr);
+	resourcesStatusBar.Quit();
+	consumablePanel.Quit();
 	adventureGroup.Quit();
 	dialogManager.Quit();
 	m_pGameEngine = nullptr;
@@ -74,12 +77,13 @@ void Game::Update()
 		else
 		{
 			UpdateLevel();
-			consumablePanel->Update();
+			consumablePanel.Update();
 		}
 
 		notificationRenderer.Update();
 
 		currentGUI->Update();
+		resourcesStatusBar.Update(gameStatus->GetCardsAmount(), gameStatus->GetDiceAmount());
 	}
 
 	if (levelFinished)
@@ -203,10 +207,10 @@ void Game::Render(double _normalizedTimestep)
 		if (currentBattle != nullptr)
 			currentBattle->RenderAbilityAnimations();
 		else
-			consumablePanel->Render();
+			consumablePanel.Render();
 
 		currentGUI->Render();
-		gameStatus->RenderStatusBar();
+		resourcesStatusBar.Render();
 
 		 if (levelFinished)
 			levelFinishedPanel.Render();
