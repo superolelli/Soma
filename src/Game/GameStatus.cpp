@@ -118,7 +118,7 @@ void GameStatus::AddItem(Item _item, bool _triggerCallback)
 }
 
 
-void GameStatus::RemoveItem(Item &_item)
+void GameStatus::RemoveItem(Item &_item, bool _removeOne)
 {
 	if (_item.id < CONSUMABLE_ITEMS_START)
 	{
@@ -136,7 +136,9 @@ void GameStatus::RemoveItem(Item &_item)
 		{
 			if (it->id == _item.id && it->color == _item.color)
 			{
-				consumables.erase(it);
+				it->number--;
+				if(it->number <= 0 || !_removeOne)
+					consumables.erase(it);
 				return;
 			}
 		}

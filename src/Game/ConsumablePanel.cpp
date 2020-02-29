@@ -13,152 +13,75 @@ void ConsumablePanel::Init(CGameEngine *_engine, GameStatus * _gameStatus, Adven
 	consumablePanel.Load(g_pTextures->consumablePanel);
 	consumablePanel.SetPos(1200, 855);
 
-	tooltip.Init();
+	itemRowPanel.Init(engine, [&](InventoryItemWrapper* _item) {return OnItemFromItemPanelReceived(_item); });
+	itemRowPanel.SetPos(consumablePanel.GetRect().left + 49, consumablePanel.GetRect().top + 44);
 
 	isOpen = true;
-
-	currentDraggedItem = -1;
-	currentDraggedItemOldX = 0;
-	currentDraggedItemOldY = 0;
 }
 
 
 void ConsumablePanel::Quit()
 {
-	for (int i = 0; i < 5; i++)
-		SAFE_DELETE(items[i]);
+	itemRowPanel.Quit();
 }
 
 
 void ConsumablePanel::SetPos(int _x, int _y)
 {
 	consumablePanel.SetPos(_x, _y);
+	itemRowPanel.SetPos(_x + 49, _y + 44);
 }
 
 void ConsumablePanel::Update()
 {
 	if (isOpen)
 	{
-		HandleStartedDrag();
-		HandleContinuedDrag();
-		HandleDrop();
+		itemRowPanel.Update();
 	}
 }
 
-
-void ConsumablePanel::HandleStartedDrag()
-{
-	if (engine->GetButtonstates(ButtonID::Left) != Pressed)
-		return;
-
-	for (int i = 0; i < 5; i++)
-	{
-		if (items[i] == nullptr)
-			continue;
-
-		if (items[i]->Contains(engine->GetMousePos()))
-		{
-			currentDraggedItem = i;
-			currentDraggedItemOldX = items[i]->GetGlobalBounds().left;
-			currentDraggedItemOldY = items[i]->GetGlobalBounds().top;
-		}
-	}
-}
-
-void ConsumablePanel::HandleContinuedDrag()
-{
-	if (engine->GetButtonstates(ButtonID::Left) == Held && currentDraggedItem != -1)
-		items[currentDraggedItem]->SetCenterPos(engine->GetMousePos().x, engine->GetMousePos().y);
-}
-
-void ConsumablePanel::HandleDrop()
-{
-	if (engine->GetButtonstates(ButtonID::Left) == Released && currentDraggedItem != -1)
-	{
-		if (adventureGroup != nullptr)
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				auto rect = adventureGroup->GetPlayer(i)->GetRect();
-				rect.left -= engine->GetViewPosition().x;
-				if (items[currentDraggedItem]->GetGlobalBounds().intersects(rect))
-				{
-					auto health = g_pObjectProperties->consumableStats[items[currentDraggedItem]->GetItem().id - CONSUMABLE_ITEMS_START].health;
-					adventureGroup->GetPlayer(i)->Status().GainHealth(health);
-					g_pSounds->PlaySound(soundID::DRINK);
-					items[currentDraggedItem]->GetItem().number--;
-					break;
-				}
-			}
-		}
-
-		items[currentDraggedItem]->SetPos(currentDraggedItemOldX, currentDraggedItemOldY);
-		if (items[currentDraggedItem]->GetItem().number <= 0)
-			SAFE_DELETE(items[currentDraggedItem]);
-		currentDraggedItem = -1;
-	}
-}
 
 void ConsumablePanel::Render()
 {
 	if (isOpen)
 	{
 		consumablePanel.Render(engine->GetWindow());
+		itemRowPanel.Render();
+		itemRowPanel.RenderCurrentlyDraggedItem();
+	}
+}
 
-		for (auto i : items)
+
+InventoryItemWrapper * ConsumablePanel::OnItemFromItemPanelReceived(InventoryItemWrapper * _receivedItem)
+{
+	if (adventureGroup != nullptr)
+	{
+		for (int i = 0; i < 4; i++)
 		{
-			if (i != nullptr)
-				i->Render(engine->GetWindow());
-		}
-
-		for (auto i : items)
-		{
-			if (i == nullptr)
-				continue;
-
-			if (i->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
+			auto rect = adventureGroup->GetPlayer(i)->GetRect();
+			rect.left -= engine->GetViewPosition().x;
+			if (_receivedItem->GetGlobalBounds().intersects(rect))
 			{
-				tooltip.SetItem(i->GetItem().id);
-				tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
+				auto health = g_pObjectProperties->consumableStats[_receivedItem->GetItem().id - CONSUMABLE_ITEMS_START].health;
+				adventureGroup->GetPlayer(i)->Status().GainHealth(health);
+				g_pSounds->PlaySound(soundID::DRINK);
+				_receivedItem->SetItemAmount(_receivedItem->GetItem().number-1);
+				gameStatus->RemoveItem(_receivedItem->GetItem());
 				break;
 			}
 		}
-
 	}
+
+	if (_receivedItem->GetItem().number <= 0)
+	{
+		SAFE_DELETE(_receivedItem);
+	}
+
+	return _receivedItem;
 }
 
 
 void ConsumablePanel::OnItemAdded(Item _item, bool _onlyAmountChanged)
 {
-	if (_onlyAmountChanged)
-	{
-		for (auto c : items)
-			c->SetItemAmount(_item.number);
-		return;
-	}
-
-	InventoryItemWrapper *newItem = new InventoryItemWrapper;
-
-	CSprite newSprite;
-	newSprite.Load(g_pTextures->item[_item.id]);
-	newItem->Init(std::move(_item), std::move(newSprite));
-
-	int freeSlot = GetFirstFreeSlot();
-	int xPos = freeSlot * 116 + consumablePanel.GetGlobalRect().left + 60;
-	int yPos = consumablePanel.GetGlobalRect().top + 54;
-	newItem->SetPos(xPos, yPos);
-
-	items[freeSlot] = newItem;
-}
-
-
-
-int ConsumablePanel::GetFirstFreeSlot()
-{
-	for (int i = 0; i < 5; i++)
-	{
-		if (items[i] == nullptr)
-			return i;
-	}
-	return -1;
+	itemRowPanel.AddItem(_item, _onlyAmountChanged);
 }

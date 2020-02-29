@@ -269,6 +269,7 @@
     <ClCompile Include="src\Game\InitialState.cpp" />
     <ClCompile Include="src\Game\Inventory.cpp" />
     <ClCompile Include="src\Game\InventoryItemWrapper.cpp" />
+    <ClCompile Include="src\Game\ItemRowPanel.cpp" />
     <ClCompile Include="src\Game\ItemTooltip.cpp" />
     <ClCompile Include="src\Game\Level.cpp" />
     <ClCompile Include="src\Game\LevelBuilder.cpp" />
@@ -324,6 +325,7 @@
     <ClInclude Include="src\Game\Inventory.hpp" />
     <ClInclude Include="src\Game\InventoryItemWrapper.hpp" />
     <ClInclude Include="src\Game\Item.hpp" />
+    <ClInclude Include="src\Game\ItemRowPanel.hpp" />
     <ClInclude Include="src\Game\ItemTooltip.hpp" />
     <ClInclude Include="src\Game\LevelBuilder.hpp" />
     <ClInclude Include="src\Game\LevelFinishedPanel.hpp" />

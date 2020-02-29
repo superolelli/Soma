@@ -9,6 +9,12 @@ void VendingMachinePanel::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	vendingMachinePanel.Load(g_pTextures->vendingMachinePanel);
 	vendingMachinePanel.SetPos(150, 70);
 
+	scrollableItemPanel.Init(engine, [&](InventoryItemWrapper* _item) {return OnItemFromItemPanelReceived(_item); });
+	scrollableItemPanel.SetPos(vendingMachinePanel.GetRect().left + 75, vendingMachinePanel.GetRect().top + 60);
+
+	itemRowPanel.Init(engine, [&](InventoryItemWrapper* _item) {return OnItemFromConsumablePanelReceived(_item); });
+	itemRowPanel.SetPos(vendingMachinePanel.GetRect().left + 100, vendingMachinePanel.GetRect().top + 700);
+
 	buttonClose.Load(g_pTextures->lootablePanelCloseButton, Buttontypes::Motion_Up);
 	buttonClose.SetPos(vendingMachinePanel.GetGlobalRect().left + 1472, vendingMachinePanel.GetGlobalRect().top + 26);
 	buttonClose.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
@@ -18,6 +24,8 @@ void VendingMachinePanel::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 
 void VendingMachinePanel::Quit()
 {
+	scrollableItemPanel.Quit();
+	itemRowPanel.Quit();
 }
 
 void VendingMachinePanel::Update()
@@ -26,6 +34,9 @@ void VendingMachinePanel::Update()
 	{
 		if (buttonClose.Update(*engine) == true)
 			closed = true;
+
+		scrollableItemPanel.Update();
+		itemRowPanel.Update();
 	}
 }
 
@@ -35,6 +46,11 @@ void VendingMachinePanel::Render()
 	{
 		vendingMachinePanel.Render(engine->GetWindow());
 		buttonClose.Render(engine->GetWindow());
+
+		scrollableItemPanel.Render();
+		itemRowPanel.Render();
+		scrollableItemPanel.RenderCurrentlyDraggedItem();
+		itemRowPanel.RenderCurrentlyDraggedItem();
 	}
 }
 
@@ -42,4 +58,22 @@ void VendingMachinePanel::Render()
 void VendingMachinePanel::Open()
 {
 	closed = false;
+
+	scrollableItemPanel.Quit();
+	for (auto &i : gameStatus->GetItems())
+		scrollableItemPanel.AddItem(i);
+
+	itemRowPanel.Quit();
+	for (auto &c : gameStatus->GetConsumables())
+		itemRowPanel.AddItem(c, false);
+}
+
+InventoryItemWrapper* VendingMachinePanel::OnItemFromItemPanelReceived(InventoryItemWrapper* _receivedItem)
+{
+	return _receivedItem;
+}
+
+InventoryItemWrapper * VendingMachinePanel::OnItemFromConsumablePanelReceived(InventoryItemWrapper * _receivedItem)
+{
+	return _receivedItem;
 }

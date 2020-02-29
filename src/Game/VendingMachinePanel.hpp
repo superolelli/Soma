@@ -2,7 +2,8 @@
 
 #include "GameStatus.hpp"
 #include "../Framework/Gui/Button.hpp"
-#include "InventoryItemWrapper.hpp"
+#include "ScrollableItemPanel.hpp"
+#include "ItemRowPanel.hpp"
 
 
 
@@ -23,7 +24,12 @@ private:
 	CGameEngine *engine;
 
 	CSprite vendingMachinePanel;
+	ScrollableItemPanel scrollableItemPanel;
+	ItemRowPanel itemRowPanel;
 	CButton buttonClose;
 
 	bool closed;
+
+	InventoryItemWrapper* OnItemFromItemPanelReceived(InventoryItemWrapper* _receivedItem);
+	InventoryItemWrapper* OnItemFromConsumablePanelReceived(InventoryItemWrapper* _receivedItem);
 };

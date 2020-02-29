@@ -176,6 +176,7 @@ void Enemy::ChooseRandomEnemy()
 	else
 	{
 		abilityStatus = finished;
+		actsInConfusion = false;
 	}
 }
 
@@ -214,12 +215,12 @@ void Enemy::Update()
 		{
 			if (status.IsConfused() && rand() % 10 < 5)
 			{
+				actsInConfusion = true;
 				selectedTargets.clear();
 				ChooseAbility();
 				ChooseRandomEnemy();
 				notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left - GetRect().width/2.0f, GetRect().top - 20.0f), 1.0f);
 				abilityAnnouncementTime = 2.0f;
-				actsInConfusion = true;
 			}
 
 			confusionChecked = true;

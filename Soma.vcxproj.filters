@@ -567,6 +567,9 @@
     <ClCompile Include="src\Game\ScrollableItemPanel.cpp">
       <Filter>Quelldateien\Game\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\ItemRowPanel.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -1107,6 +1110,9 @@
       <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\ScrollableItemPanel.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ItemRowPanel.hpp">
       <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
   </ItemGroup>

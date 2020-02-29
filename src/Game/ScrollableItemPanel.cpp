@@ -13,7 +13,7 @@ void ScrollableItemPanel::Init(CGameEngine * _engine, std::function<InventoryIte
 
 	scrollableItemPanel.Load(g_pTextures->scrollableItemPanel);
 
-	scrollbar.Init(35, 563);
+	scrollbar.Init(35, 566);
 	scrollbar.SetColor(sf::Color(28, 28, 28));
 
 	tooltip.Init();

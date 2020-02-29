@@ -3,6 +3,7 @@
 #include "InventoryItemWrapper.hpp"
 #include "GameStatus.hpp"
 #include "AdventureGroup.hpp"
+#include "ItemRowPanel.hpp"
 
 class ConsumablePanel
 {
@@ -26,17 +27,8 @@ private:
 	bool isOpen;
 
 	CSprite consumablePanel;
-	InventoryItemWrapper *items[5];
-	ItemTooltip tooltip;
+	ItemRowPanel itemRowPanel;
 
-	int currentDraggedItem;
-	int currentDraggedItemOldX;
-	int currentDraggedItemOldY;
-
+	InventoryItemWrapper* OnItemFromItemPanelReceived(InventoryItemWrapper* _receivedItem);
 	void OnItemAdded(Item _item, bool _onlyAmountChanged);
-	int GetFirstFreeSlot();
-
-	void HandleStartedDrag();
-	void HandleContinuedDrag();
-	void HandleDrop();
 };

@@ -49,6 +49,7 @@ public:
 	sf::Texture lootablePanelButton;
 	sf::Texture lootablePanelCloseButton;
 	sf::Texture consumablePanel;
+	sf::Texture itemRowPanel;
 	sf::Texture item[13];
 
 	/** VENDING MACHINE **/

@@ -31,8 +31,9 @@ public:
 	void AcquireSkill(int player, int ability, int skill);
 
 	void AddItem(Item _item, bool _triggerCallback = true);
-	void RemoveItem(Item &_item);
+	void RemoveItem(Item &_item, bool _removeOne = true);
 	const std::vector<Item> &GetItems() { return items; }
+	const std::vector<Item> &GetConsumables() { return consumables; }
 	void SetOnItemAddedCallback(std::function<void(Item)> _callback);
 	void SetOnConsumableAddedCallback(std::function<void(Item, bool)> _callback);
 

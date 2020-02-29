@@ -149,7 +149,8 @@ void MainRoom::Update()
 	{
 		Item newItem;
 		newItem.color = sf::Color(128, 128, 0);
-		newItem.id = ItemID(rand() % CONSUMABLE_ITEMS_START);
+		newItem.id = ItemID(rand() % numberOfItems);
+		newItem.number = 1;
 		gameStatus.AddItem(newItem);
 	}
 
