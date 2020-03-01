@@ -15,6 +15,9 @@ void VendingMachinePanel::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	itemRowPanel.Init(engine, [&](InventoryItemWrapper* _item) {return OnItemFromConsumablePanelReceived(_item); });
 	itemRowPanel.SetPos(vendingMachinePanel.GetRect().left + 100, vendingMachinePanel.GetRect().top + 700);
 
+	shopPanel.Init(engine, gameStatus->GetConsumablesAvailability());
+	shopPanel.SetPos(vendingMachinePanel.GetRect().left + 840, vendingMachinePanel.GetRect().top + 145);
+
 	buttonClose.Load(g_pTextures->lootablePanelCloseButton, Buttontypes::Motion_Up);
 	buttonClose.SetPos(vendingMachinePanel.GetGlobalRect().left + 1472, vendingMachinePanel.GetGlobalRect().top + 26);
 	buttonClose.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
@@ -26,6 +29,8 @@ void VendingMachinePanel::Quit()
 {
 	scrollableItemPanel.Quit();
 	itemRowPanel.Quit();
+	shopPanel.Quit();
+
 }
 
 void VendingMachinePanel::Update()
@@ -37,6 +42,7 @@ void VendingMachinePanel::Update()
 
 		scrollableItemPanel.Update();
 		itemRowPanel.Update();
+		shopPanel.Update();
 	}
 }
 
@@ -46,6 +52,8 @@ void VendingMachinePanel::Render()
 	{
 		vendingMachinePanel.Render(engine->GetWindow());
 		buttonClose.Render(engine->GetWindow());
+
+		shopPanel.Render();
 
 		scrollableItemPanel.Render();
 		itemRowPanel.Render();
@@ -66,6 +74,8 @@ void VendingMachinePanel::Open()
 	itemRowPanel.Quit();
 	for (auto &c : gameStatus->GetConsumables())
 		itemRowPanel.AddItem(c, false);
+
+	shopPanel.ChooseNewRandomItems(1);
 }
 
 InventoryItemWrapper* VendingMachinePanel::OnItemFromItemPanelReceived(InventoryItemWrapper* _receivedItem)

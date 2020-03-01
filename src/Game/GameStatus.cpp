@@ -24,6 +24,11 @@ void GameStatus::Init()
 	bangLevel = 1;
 	kutschfahrtLevel = 1;
 	tichuLevel = 1;
+
+	for (int i = CONSUMABLE_ITEMS_START; i < ItemID::numberOfItems; i++)
+		consumablesAvailability[static_cast<ItemID>(i)] = true;
+
+	consumablesAvailability[ItemID::tequila] = false;
 }
 
 

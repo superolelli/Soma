@@ -42,6 +42,8 @@ public:
 	void SetDiamondStats(int _player, CombatantStats &_stats);
 	CombatantStats &GetDiamondStats(int _player);
 
+	std::unordered_map<ItemID, bool> &GetConsumablesAvailability() { return consumablesAvailability; }
+
 	int bangLevel;
 	int kutschfahrtLevel;
 	int tichuLevel;
@@ -62,4 +64,6 @@ private:
 	CombatantStats equipmentStats[4];
 
 	CombatantStats diamondStats[4];
+
+	std::unordered_map<ItemID, bool> consumablesAvailability;
 };

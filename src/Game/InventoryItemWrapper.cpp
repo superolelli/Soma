@@ -21,7 +21,7 @@ void InventoryItemWrapper::Render(sf::RenderTarget & _target)
 	_target.draw(colorRectangle);
 	sprite.Render(_target);
 
-	if (item.id < EQUIPMENT_ITEMS_START || item.id >= CONSUMABLE_ITEMS_START)
+	if ((item.id < EQUIPMENT_ITEMS_START || item.id >= CONSUMABLE_ITEMS_START) && item.number > 0)
 		_target.draw(numberText);
 }
 

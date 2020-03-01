@@ -293,6 +293,7 @@
     <ClCompile Include="src\Game\Resources\TextureManager.cpp" />
     <ClCompile Include="src\Game\Resources\VideoManager.cpp" />
     <ClCompile Include="src\Game\ScrollableItemPanel.cpp" />
+    <ClCompile Include="src\Game\ShopPanel.cpp" />
     <ClCompile Include="src\Game\Simon.cpp" />
     <ClCompile Include="src\Game\GameStatus.cpp" />
     <ClCompile Include="src\Game\SkillPanel.cpp" />
@@ -478,6 +479,7 @@
     <ClInclude Include="src\Game\Resources\TextureManager.hpp" />
     <ClInclude Include="src\Game\Resources\VideoManager.hpp" />
     <ClInclude Include="src\Game\ScrollableItemPanel.hpp" />
+    <ClInclude Include="src\Game\ShopPanel.hpp" />
     <ClInclude Include="src\Game\Simon.hpp" />
     <ClInclude Include="src\Game\GameStatus.hpp" />
     <ClInclude Include="src\Game\SkillPanel.hpp" />

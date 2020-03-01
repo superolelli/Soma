@@ -54,6 +54,8 @@ public:
 
 	/** VENDING MACHINE **/
 	sf::Texture vendingMachinePanel;
+	sf::Texture shopPanel;
+	sf::Texture selectedItemFrame;
 
 	/** SKILLING **/
 	sf::Texture skills[4][4][8];

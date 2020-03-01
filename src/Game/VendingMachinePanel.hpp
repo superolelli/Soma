@@ -4,6 +4,7 @@
 #include "../Framework/Gui/Button.hpp"
 #include "ScrollableItemPanel.hpp"
 #include "ItemRowPanel.hpp"
+#include "ShopPanel.hpp"
 
 
 
@@ -26,6 +27,7 @@ private:
 	CSprite vendingMachinePanel;
 	ScrollableItemPanel scrollableItemPanel;
 	ItemRowPanel itemRowPanel;
+	ShopPanel shopPanel;
 	CButton buttonClose;
 
 	bool closed;
