@@ -1,6 +1,7 @@
 #include "ConsumablePanel.hpp"
 #include "Resources\SoundManager.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
+#include "../Framework/Patterns/Subject.hpp"
 
 void ConsumablePanel::Init(CGameEngine *_engine, GameStatus * _gameStatus, AdventureGroup *_adventureGroup)
 {
@@ -8,13 +9,16 @@ void ConsumablePanel::Init(CGameEngine *_engine, GameStatus * _gameStatus, Adven
 	gameStatus = _gameStatus;
 	adventureGroup = _adventureGroup;
 
-	gameStatus->SetOnConsumableAddedCallback([&](Item _item, bool _onlyAmountChanged) {OnItemAdded(_item, _onlyAmountChanged); });
-
 	consumablePanel.Load(g_pTextures->consumablePanel);
 	consumablePanel.SetPos(1200, 855);
 
 	itemRowPanel.Init(engine, [&](InventoryItemWrapper* _item) {return OnItemFromItemPanelReceived(_item); });
 	itemRowPanel.SetPos(consumablePanel.GetRect().left + 49, consumablePanel.GetRect().top + 44);
+
+	for (auto &c : gameStatus->GetConsumables())
+		AddItem(c);
+
+	gameStatus->AddObserver(this);
 }
 
 
@@ -73,7 +77,15 @@ InventoryItemWrapper * ConsumablePanel::OnItemFromItemPanelReceived(InventoryIte
 }
 
 
-void ConsumablePanel::OnItemAdded(Item _item, bool _onlyAmountChanged)
+void ConsumablePanel::OnNotify(ObserverNotification &_notification)
 {
-	itemRowPanel.AddItem(_item, _onlyAmountChanged);
+	auto notification = dynamic_cast<ObserverNotificationGameStatus*>(&_notification);
+
+	if (notification->event == gameStatusEvents::consumableAdded)
+		AddItem(notification->item);
+}
+
+void ConsumablePanel::AddItem(Item _item)
+{
+	itemRowPanel.AddItem(_item);
 }

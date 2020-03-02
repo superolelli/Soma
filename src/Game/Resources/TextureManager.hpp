@@ -56,6 +56,7 @@ public:
 	sf::Texture vendingMachinePanel;
 	sf::Texture shopPanel;
 	sf::Texture selectedItemFrame;
+	sf::Texture priceSign;
 
 	/** SKILLING **/
 	sf::Texture skills[4][4][8];

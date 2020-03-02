@@ -2,6 +2,7 @@
 
 #include "InventoryItemWrapper.hpp"
 #include "ItemTooltip.hpp"
+#include "../Framework/Graphics/SpriteWithText.hpp"
 #include <unordered_map>
 
 class ShopPanel
@@ -17,11 +18,15 @@ public:
 
 	void ChooseNewRandomItems(int _level);
 
+	Item RetrieveCurrentlySelectedItem();
+	bool IsItemSelected();
+
 private:
 	CGameEngine *engine;
 
 	CSprite shopPanel;
 	CSprite selectedItemFrame;
+	SpriteWithText priceSign;
 
 	InventoryItemWrapper *items[15];
 

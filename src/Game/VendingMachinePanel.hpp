@@ -28,7 +28,11 @@ private:
 	ScrollableItemPanel scrollableItemPanel;
 	ItemRowPanel itemRowPanel;
 	ShopPanel shopPanel;
+
+	CButton buttonBuy;
 	CButton buttonClose;
+
+	sf::Text title;
 
 	bool closed;
 

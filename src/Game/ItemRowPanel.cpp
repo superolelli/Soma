@@ -109,17 +109,14 @@ void ItemRowPanel::RenderCurrentlyDraggedItem()
 		items[currentDraggedItem]->Render(engine->GetWindow());
 }
 
-void ItemRowPanel::AddItem(Item _item, bool _onlyAmountChanged)
+void ItemRowPanel::AddItem(Item _item)
 {
-	if (_onlyAmountChanged)
+	for (auto c : items)
 	{
-		for (auto c : items)
+		if (c != nullptr && c->GetItem().id == _item.id)
 		{
-			if (c != nullptr && c->GetItem().id == _item.id)
-			{
-				c->SetItemAmount(_item.number);
-				return;
-			}
+			c->SetItemAmount(c->GetItem().number + _item.number);
+			return;
 		}
 	}
 

@@ -152,7 +152,7 @@ void MainRoom::Update()
 		newItem.color = sf::Color(128, 128, 0);
 		newItem.id = ItemID(rand() % numberOfItems);
 		newItem.number = 1;
-		gameStatus.AddItem(newItem, false);
+		gameStatus.AddItem(newItem);
 	}
 
 	if (!inventory.IsOpen() && !vendingMachinePanel.IsOpen())

@@ -5,7 +5,6 @@
 void Inventory::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 {
 	gameStatus = _gameStatus;
-	gameStatus->SetOnItemAddedCallback([&](Item _item) {OnItemAdded(_item); });
 	engine = _engine;
 
 	currentPlayer = 0;
@@ -79,7 +78,7 @@ InventoryItemWrapper * Inventory::OnItemFromItemPanelReceived(InventoryItemWrapp
 
 		if (returnItem != nullptr)
 		{
-			gameStatus->AddItem(returnItem->GetItem(), false);
+			gameStatus->AddItem(returnItem->GetItem());
 			return returnItem;
 		}
 

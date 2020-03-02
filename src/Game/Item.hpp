@@ -14,6 +14,8 @@ const int NUMBER_OF_CONSUMABLE_ITEMS = numberOfItems - CONSUMABLE_ITEMS_START;
 
 static std::unordered_map<std::string, ItemID> itemIdentifierMap; //is filled in ObjectPropertiesManager
 
+const int EQUIPMENT_PRICE_PER_LEVEL = 40;
+
 struct Item
 {
 	ItemID id;

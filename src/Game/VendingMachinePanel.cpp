@@ -22,6 +22,19 @@ void VendingMachinePanel::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	buttonClose.SetPos(vendingMachinePanel.GetGlobalRect().left + 1472, vendingMachinePanel.GetGlobalRect().top + 26);
 	buttonClose.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
+	buttonBuy.Load(g_pTextures->bangGenericButton, Buttontypes::Motion_Up);
+	buttonBuy.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
+	buttonBuy.SetButtonstring("Kaufen");
+	buttonBuy.SetButtontextFont(g_pFonts->f_trajan);
+	buttonBuy.SetButtontextCharactersize(25);
+	buttonBuy.SetPos(vendingMachinePanel.GetRect().left + 1050, vendingMachinePanel.GetRect().top + 740);
+
+	title.setCharacterSize(50);
+	title.setFont(g_pFonts->f_kingArthur);
+	title.setFillColor(sf::Color::Black);
+	title.setString("Shop");
+	title.setPosition(vendingMachinePanel.GetRect().left + 1050, vendingMachinePanel.GetRect().top + 40);
+
 	closed = true;
 }
 
@@ -30,7 +43,6 @@ void VendingMachinePanel::Quit()
 	scrollableItemPanel.Quit();
 	itemRowPanel.Quit();
 	shopPanel.Quit();
-
 }
 
 void VendingMachinePanel::Update()
@@ -39,6 +51,26 @@ void VendingMachinePanel::Update()
 	{
 		if (buttonClose.Update(*engine) == true)
 			closed = true;
+
+		if (buttonBuy.Update(*engine) == true)
+		{
+			auto item = shopPanel.RetrieveCurrentlySelectedItem();
+
+			if (item.id != ItemID::empty)
+			{
+				gameStatus->AddItem(item);
+
+				if (item.id < CONSUMABLE_ITEMS_START)
+					scrollableItemPanel.AddItem(item);
+				else
+					itemRowPanel.AddItem(item);
+			}
+		}
+
+		if (shopPanel.IsItemSelected())
+			buttonBuy.SetEnabled();
+		else
+			buttonBuy.SetDisabled();
 
 		scrollableItemPanel.Update();
 		itemRowPanel.Update();
@@ -52,6 +84,9 @@ void VendingMachinePanel::Render()
 	{
 		vendingMachinePanel.Render(engine->GetWindow());
 		buttonClose.Render(engine->GetWindow());
+		buttonBuy.Render(engine->GetWindow());
+
+		engine->GetWindow().draw(title);
 
 		shopPanel.Render();
 
@@ -73,7 +108,7 @@ void VendingMachinePanel::Open()
 
 	itemRowPanel.Quit();
 	for (auto &c : gameStatus->GetConsumables())
-		itemRowPanel.AddItem(c, false);
+		itemRowPanel.AddItem(c);
 
 	shopPanel.ChooseNewRandomItems(1);
 }

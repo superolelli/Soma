@@ -1127,5 +1127,8 @@
     <ClInclude Include="src\Game\ShopPanel.hpp">
       <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="src\Game\ObserverNotificationGameStatus.h">
+      <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

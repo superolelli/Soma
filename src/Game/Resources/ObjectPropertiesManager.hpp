@@ -23,6 +23,7 @@ struct ItemProperties
 {
 	sf::String name;
 	int level;
+	int price;
 };
 
 struct EquipmentProperties : public ItemProperties

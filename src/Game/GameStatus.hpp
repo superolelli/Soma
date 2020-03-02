@@ -8,11 +8,14 @@
 #include "../Framework/Gameengine.hpp"
 #include "../Framework/Graphics/Sprite.hpp"
 
+#include "../Framework/Patterns/Subject.hpp"
+#include "ObserverNotificationGameStatus.h"
+
 #include <functional>
 
 const int CONSUMABLE_ITEMS_LIMIT = 5;
 
-class GameStatus
+class GameStatus : public CSubject
 {
 public:
 
@@ -28,12 +31,10 @@ public:
 	bool IsSkillAcquired(int player, int ability, int skill);
 	void AcquireSkill(int player, int ability, int skill);
 
-	void AddItem(Item _item, bool _triggerCallback = true);
+	void AddItem(Item _item);
 	void RemoveItem(Item &_item, bool _removeOne = true);
 	const std::vector<Item> &GetItems() { return items; }
 	const std::vector<Item> &GetConsumables() { return consumables; }
-	void SetOnItemAddedCallback(std::function<void(Item)> _callback);
-	void SetOnConsumableAddedCallback(std::function<void(Item, bool)> _callback);
 
 	void AddEquipment(int _player, int _slot, Item _item);
 	void RemoveEquipment(int _player, int _slot);
@@ -56,9 +57,6 @@ private:
 
 	std::vector<Item> items;
 	std::vector<Item> consumables;
-
-	std::function<void(Item)> OnItemAddedCallback;
-	std::function<void(Item, bool)> OnConsumableAddedCallback;
 
 	Item equipment[4][4];
 	CombatantStats equipmentStats[4];

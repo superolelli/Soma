@@ -337,6 +337,7 @@
     <ClInclude Include="src\Game\LootableFactory.hpp" />
     <ClInclude Include="src\Game\MainRoom.hpp" />
     <ClInclude Include="src\Game\ObserverNotificationBattle.h" />
+    <ClInclude Include="src\Game\ObserverNotificationGameStatus.h" />
     <ClInclude Include="src\Game\ResourcesStatusBar.hpp" />
     <ClInclude Include="src\Game\Resources\EnemyAbilities.hpp" />
     <ClInclude Include="src\Framework\Animations\animation\animation.h" />

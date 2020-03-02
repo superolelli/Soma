@@ -281,6 +281,8 @@ void ObjectPropertiesManager::LoadEquipmentItemStats()
 			if(item.child("Level"))
 				equipmentStats[itemID].level = item.child("Level").text().as_int();
 
+			equipmentStats[itemID].price = equipmentStats[itemID].level * EQUIPMENT_PRICE_PER_LEVEL;
+
 			itemsByLevel[equipmentStats[itemID].level-1].push_back(itemID);
 		}
 	}
@@ -299,6 +301,7 @@ void ObjectPropertiesManager::LoadConsumableItemStats()
 	default.health = doc.child("Items").child("Default").attribute("health").as_int();
 	default.level = doc.child("Items").child("Default").child("Level").text().as_int();
 	default.name = "";
+	default.price = doc.child("Items").child("Default").child("Price").text().as_int();
 
 	//load item values
 	for (xml_node &item : doc.child("Items").children())
@@ -319,6 +322,9 @@ void ObjectPropertiesManager::LoadConsumableItemStats()
 
 			if (item.child("Level"))
 				consumableStats[itemID].level = item.child("Level").text().as_int();
+
+			if(item.child("Price"))
+				consumableStats[itemID].price = item.child("Price").text().as_int();
 
 			itemsByLevel[consumableStats[itemID].level - 1].push_back(ItemID(itemID + CONSUMABLE_ITEMS_START));
 		}

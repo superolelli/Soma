@@ -46,7 +46,7 @@ void GameStatus::AcquireSkill(int player, int ability, int skill)
 	}
 }
 
-void GameStatus::AddItem(Item _item, bool _triggerCallback)
+void GameStatus::AddItem(Item _item)
 {
 	if (_item.id == ItemID::cards)
 	{
@@ -67,25 +67,20 @@ void GameStatus::AddItem(Item _item, bool _triggerCallback)
 			if (c.id == _item.id)
 			{
 				c.number += _item.number;
-				if (_triggerCallback)
-					OnConsumableAddedCallback(c, true);
+				Notify(ObserverNotificationGameStatus{ gameStatusEvents::consumableAdded, _item });
 				return;
 			}
-
 		}
 
 		if (consumables.size() < CONSUMABLE_ITEMS_LIMIT)
 		{
 			consumables.push_back(_item);
-			if (_triggerCallback)
-				OnConsumableAddedCallback(_item, false);
+			Notify(ObserverNotificationGameStatus{ gameStatusEvents::consumableAdded, _item });
 		}
 	}
 	else {
 		items.push_back(_item);
-
-		if (_triggerCallback)
-			OnItemAddedCallback(items.back());
+		Notify(ObserverNotificationGameStatus{ gameStatusEvents::equipmentAdded, _item });
 	}
 }
 
@@ -115,16 +110,6 @@ void GameStatus::RemoveItem(Item &_item, bool _removeOne)
 			}
 		}
 	}
-}
-
-void GameStatus::SetOnItemAddedCallback(std::function<void(Item)> _callback)
-{
-	OnItemAddedCallback = _callback;
-}
-
-void GameStatus::SetOnConsumableAddedCallback(std::function<void(Item, bool)> _callback)
-{
-	OnConsumableAddedCallback = _callback;
 }
 
 void GameStatus::AddEquipment(int _player, int _slot, Item _item)

@@ -16,6 +16,12 @@ void ShopPanel::Init(CGameEngine *_engine, std::unordered_map<ItemID, bool> &_co
 	title.setFillColor(sf::Color::Black);
 	title.setString("Nur für kurze Zeit!");
 
+	priceSign.Load(g_pTextures->priceSign);
+	priceSign.AddText("");
+	priceSign.SetTextCharacterSize(0, 14);
+	priceSign.SetTextFont(0, g_pFonts->f_kingArthur);
+	priceSign.SetTextColor(0, sf::Color::White);
+
 	for (auto i : items)
 		i = nullptr;
 
@@ -39,7 +45,7 @@ void ShopPanel::Init(CGameEngine *_engine, std::unordered_map<ItemID, bool> &_co
 			newItem->Init(std::move(rawItem), std::move(newSprite));
 
 			int xPos = ((i-5) % 5) * 116 + shopPanel.GetGlobalRect().left + 33;
-			int yPos = shopPanel.GetGlobalRect().top + 288 + 147 * ((i-5) / 5);
+			int yPos = shopPanel.GetGlobalRect().top + 297 + 144 * ((i-5) / 5);
 			newItem->SetPos(xPos, yPos);
 
 			items[i] = newItem;
@@ -85,6 +91,15 @@ void ShopPanel::Render()
 		if (items[i] != nullptr)
 		{
 			items[i]->Render(engine->GetWindow());
+
+			if(currentlySelectedItem == i)
+				selectedItemFrame.Render(engine->GetWindow());
+
+			priceSign.ChangeString(0, std::to_string(g_pObjectProperties->getItemStats(items[i]->GetItem().id).price));
+			priceSign.SetPos(items[i]->GetGlobalBounds().left + 18, items[i]->GetGlobalBounds().top + 90);
+			priceSign.SetTextPosCentered(0);
+			priceSign.Render(engine->GetWindow());
+
 			if (items[i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
 			{
 				if(i < 5 || consumablesAvailability.at(items[i]->GetItem().id))
@@ -92,9 +107,6 @@ void ShopPanel::Render()
 			}
 		}
 	}
-
-	if (currentlySelectedItem != -1)
-		selectedItemFrame.Render(engine->GetWindow());
 
 	if (showTooltipForItem != -1)
 	{
@@ -114,14 +126,14 @@ void ShopPanel::Quit()
 void ShopPanel::SetPos(int _x, int _y)
 {
 	shopPanel.SetPos(_x, _y);
-	title.setPosition(shopPanel.GetGlobalRect().left + 140, shopPanel.GetGlobalRect().top + 23);
+	title.setPosition(shopPanel.GetGlobalRect().left + 140, shopPanel.GetGlobalRect().top + 25);
 
 	for (int i = 0; i < 5; i++)
 	{
 		if (items[i] != nullptr)
 		{
 			int xPos = i * 116 + shopPanel.GetGlobalRect().left + 33;
-			int yPos = shopPanel.GetGlobalRect().top + 108;
+			int yPos = shopPanel.GetGlobalRect().top + 114;
 			items[i]->SetPos(xPos, yPos);
 		}
 	}
@@ -131,7 +143,7 @@ void ShopPanel::SetPos(int _x, int _y)
 		if (items[i] != nullptr)
 		{
 			int xPos = ((i - 5) % 5) * 116 + shopPanel.GetGlobalRect().left + 33;
-			int yPos = shopPanel.GetGlobalRect().top + 288 + 147 * ((i - 5) / 5);
+			int yPos = shopPanel.GetGlobalRect().top + 297 + 144 * ((i - 5) / 5);
 			items[i]->SetPos(xPos, yPos);
 		}
 	}
@@ -154,7 +166,7 @@ void ShopPanel::ChooseNewRandomItems(int _level)
 		newItem->Init(std::move(rawItem), std::move(newSprite));
 
 		int xPos = i * 116 + shopPanel.GetGlobalRect().left + 33;
-		int yPos = shopPanel.GetGlobalRect().top + 108;
+		int yPos = shopPanel.GetGlobalRect().top + 114;
 		newItem->SetPos(xPos, yPos);
 
 		items[i] = newItem;
@@ -198,4 +210,40 @@ ItemID ShopPanel::GetRandomItemID(int _level)
 	} while (itemID <= ItemID::dice || itemID >= CONSUMABLE_ITEMS_START);
 	
 	return itemID;
+}
+
+
+Item ShopPanel::RetrieveCurrentlySelectedItem()
+{
+	if (currentlySelectedItem != -1)
+	{
+		if (items[currentlySelectedItem]->GetItem().id < CONSUMABLE_ITEMS_START || consumablesAvailability.at(items[currentlySelectedItem]->GetItem().id))
+		{
+			auto item = items[currentlySelectedItem]->GetItem();
+
+			if (currentlySelectedItem < 5)
+			{
+				SAFE_DELETE(items[currentlySelectedItem]);
+				currentlySelectedItem = -1;
+			}
+
+			item.number = 1;
+			return item;
+		}
+	}
+
+	Item item;
+	item.id = ItemID::empty;
+	return item;
+}
+
+
+bool ShopPanel::IsItemSelected()
+{
+	if (currentlySelectedItem != -1)
+	{
+		if (items[currentlySelectedItem]->GetItem().id < CONSUMABLE_ITEMS_START || consumablesAvailability.at(items[currentlySelectedItem]->GetItem().id))
+			return true;
+	}
+	return false;
 }

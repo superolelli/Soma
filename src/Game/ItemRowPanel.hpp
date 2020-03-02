@@ -12,7 +12,7 @@ public:
 	void Render();
 	void RenderCurrentlyDraggedItem();
 	void Quit();
-	void AddItem(Item _item, bool _onlyAmountChanged);
+	void AddItem(Item _item);
 
 	void SetPos(int _x, int _y);
 

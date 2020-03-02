@@ -5,16 +5,20 @@
 		health="0"
   >
     <Level>1</Level>
+	<Price>1</Price>
   </Default>
 
   <Beer id="0" name="Bier"
     health="5"
-  ></Beer>
+  >
+	<Price>10</Price>
+  </Beer>
   
   <Tequila id="1" name="Tequila"
     health="10"
   >
     <Level>2</Level>
+	<Price>25</Price>
   </Tequila>
   
 </Items>

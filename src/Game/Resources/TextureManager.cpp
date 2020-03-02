@@ -90,6 +90,7 @@ void CTextureManager::LoadTextures()
 	vendingMachinePanel.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/vending_machine_panel.png");
 	shopPanel.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/shop_panel.png");
 	selectedItemFrame.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/selected_item_frame.png");
+	priceSign.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/price_sign.png");
 
 	/** SKILLING **/
 	LoadSkillTextures("Data/Sprites/Abilities/Simon/marshmallow_flash/marshmallow_flash_skill", 0, 0);

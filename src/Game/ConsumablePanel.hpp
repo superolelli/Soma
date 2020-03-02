@@ -5,7 +5,9 @@
 #include "AdventureGroup.hpp"
 #include "ItemRowPanel.hpp"
 
-class ConsumablePanel
+#include "../Framework/Patterns/Observer.hpp"
+
+class ConsumablePanel : CObserver
 {
 public:
 
@@ -14,7 +16,11 @@ public:
 	void Render();
 	void Quit();
 
+	void AddItem(Item _item);
+
 	void SetPos(int _x, int _y);
+
+	void OnNotify(ObserverNotification &_notification);
 
 private:
 	CGameEngine *engine;
@@ -25,5 +31,4 @@ private:
 	ItemRowPanel itemRowPanel;
 
 	InventoryItemWrapper* OnItemFromItemPanelReceived(InventoryItemWrapper* _receivedItem);
-	void OnItemAdded(Item _item, bool _onlyAmountChanged);
 };
