@@ -4,7 +4,7 @@
 void GameStatus::Init()
 {
 	dice = 0;
-	cards = 0;
+	cards = 80;
 	items.clear();
 	consumables.clear();
 
@@ -26,9 +26,9 @@ void GameStatus::Init()
 	tichuLevel = 1;
 
 	for (int i = CONSUMABLE_ITEMS_START; i < ItemID::numberOfItems; i++)
-		consumablesAvailability[static_cast<ItemID>(i)] = true;
+		consumablesAvailability[static_cast<ItemID>(i)] = false;
 
-	consumablesAvailability[ItemID::tequila] = false;
+	consumablesAvailability[ItemID::beer] = true;
 }
 
 
@@ -75,6 +75,7 @@ void GameStatus::AddItem(Item _item)
 		if (consumables.size() < CONSUMABLE_ITEMS_LIMIT)
 		{
 			consumables.push_back(_item);
+			consumablesAvailability[_item.id] = true;
 			Notify(ObserverNotificationGameStatus{ gameStatusEvents::consumableAdded, _item });
 		}
 	}
@@ -103,8 +104,12 @@ void GameStatus::RemoveItem(Item &_item, bool _removeOne)
 		{
 			if (it->id == _item.id && it->color == _item.color)
 			{
-				it->number--;
-				if(it->number <= 0 || !_removeOne)
+				if (_removeOne)
+					it->number--;
+				else
+					it->number -= _item.number;
+
+				if(it->number <= 0)
 					consumables.erase(it);
 				return;
 			}

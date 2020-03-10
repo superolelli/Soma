@@ -12,7 +12,8 @@ void Inventory::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	inventoryPanel.Load(g_pTextures->inventoryPanel);
 	inventoryPanel.SetPos(150, 70);
 
-	scrollableItemPanel.Init(engine, [&](InventoryItemWrapper* _item) {return OnItemFromItemPanelReceived(_item); });
+	scrollableItemPanel.Init(engine);
+	scrollableItemPanel.SetOnItemDroppedCallback([&](InventoryItemWrapper* _item) {return OnItemFromItemPanelReceived(_item); });
 	scrollableItemPanel.SetPos(inventoryPanel.GetRect().left + 822, inventoryPanel.GetRect().top + 185);
 
 	buttonNext.Load(g_pTextures->skillPanelButtonNext, Buttontypes::Up);

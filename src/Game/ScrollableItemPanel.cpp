@@ -2,14 +2,11 @@
 #include "Resources\SoundManager.hpp"
 #include "Resources\StringManager.hpp"
 
-void ScrollableItemPanel::Init(CGameEngine * _engine, std::function<InventoryItemWrapper*(InventoryItemWrapper*)> _onItemDropped)
+void ScrollableItemPanel::Init(CGameEngine * _engine)
 {
 	engine = _engine;
-	OnItemDropped = _onItemDropped;
 
 	currentUpperRow = 0;
-
-	currentDraggedItem = -1;
 
 	scrollableItemPanel.Load(g_pTextures->scrollableItemPanel);
 
@@ -36,14 +33,12 @@ void ScrollableItemPanel::Quit()
 void ScrollableItemPanel::Update()
 {
 	UpdateScrollbar();
-	HandleDragAndDrop();
 }
 
 
 void ScrollableItemPanel::UpdateScrollbar()
 {
-	if (currentDraggedItem == -1)
-		scrollbar.Update(*engine);
+	scrollbar.Update(*engine);
 
 	if (scrollbar.GetCurrentStep() != currentUpperRow)
 	{
@@ -51,58 +46,6 @@ void ScrollableItemPanel::UpdateScrollbar()
 		RecalculatePositionsOfItems();
 	}
 }
-
-
-void ScrollableItemPanel::HandleDragAndDrop()
-{
-	HandleStartedDrag();
-	HandleContinuedDrag();
-	HandleDrop();
-}
-
-
-void ScrollableItemPanel::HandleStartedDrag()
-{
-	if (engine->GetButtonstates(ButtonID::Left) != Pressed)
-		return;
-
-	int x = engine->GetMousePos().x - (scrollableItemPanel.GetGlobalRect().left + 11);
-	int y = engine->GetMousePos().y - (scrollableItemPanel.GetGlobalRect().top + 11);
-	int itemPointedTo = (y / 116 + currentUpperRow) * 5 + x / 116;
-
-	if (itemPointedTo >= 0 && items.size() > itemPointedTo && items[itemPointedTo] != nullptr)
-	{
-		if (items[itemPointedTo]->Contains(engine->GetMousePos()))
-		{
-			currentDraggedItemOldX = items[itemPointedTo]->GetGlobalBounds().left;
-			currentDraggedItemOldY = items[itemPointedTo]->GetGlobalBounds().top;
-			currentDraggedItem = itemPointedTo;
-		}
-	}
-}
-
-
-void ScrollableItemPanel::HandleContinuedDrag()
-{
-	if (engine->GetButtonstates(ButtonID::Left) == Held && currentDraggedItem != -1)
-		items[currentDraggedItem]->SetCenterPos(engine->GetMousePos().x, engine->GetMousePos().y);
-}
-
-
-
-void ScrollableItemPanel::HandleDrop()
-{
-	if (engine->GetButtonstates(ButtonID::Left) == Released && currentDraggedItem != -1)
-	{
-		items[currentDraggedItem] = OnItemDropped(items[currentDraggedItem]);
-
-		if(items[currentDraggedItem] != nullptr)
-			items[currentDraggedItem]->SetPos(currentDraggedItemOldX, currentDraggedItemOldY);
-
-		currentDraggedItem = -1;
-	}
-}
-
 
 
 void ScrollableItemPanel::RecalculatePositionsOfItems()
@@ -140,7 +83,7 @@ void ScrollableItemPanel::RenderItems()
 	int showTooltipForItem = -1;
 	for (int i = currentUpperRow * 5; i < currentUpperRow * 5 + 25 && i < items.size(); i++)
 	{
-		if (items[i] != nullptr && i != currentDraggedItem)
+		if (items[i] != nullptr)
 		{
 			items[i]->Render(engine->GetWindow());
 
@@ -148,19 +91,19 @@ void ScrollableItemPanel::RenderItems()
 				showTooltipForItem = items[i]->GetItem().id;
 		}
 	}
+	ShowTooltipForItem(ItemID(showTooltipForItem));
+}
 
-	if (showTooltipForItem != -1)
+
+void ScrollableItemPanel::ShowTooltipForItem(ItemID _itemID)
+{
+	if (_itemID != -1)
 	{
-		tooltip.SetItem(ItemID(showTooltipForItem));
+		tooltip.SetItem(_itemID);
 		tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 	}
 }
 
-void ScrollableItemPanel::RenderCurrentlyDraggedItem()
-{
-	if (currentDraggedItem != -1)
-		items[currentDraggedItem]->Render(engine->GetWindow());
-}
 
 void ScrollableItemPanel::AddItem(Item _item)
 {

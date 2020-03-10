@@ -12,7 +12,8 @@ void ConsumablePanel::Init(CGameEngine *_engine, GameStatus * _gameStatus, Adven
 	consumablePanel.Load(g_pTextures->consumablePanel);
 	consumablePanel.SetPos(1200, 855);
 
-	itemRowPanel.Init(engine, [&](InventoryItemWrapper* _item) {return OnItemFromItemPanelReceived(_item); });
+	itemRowPanel.Init(engine);
+	itemRowPanel.SetOnItemDroppedCallback([&](InventoryItemWrapper* _item) {return OnItemFromItemPanelReceived(_item); });
 	itemRowPanel.SetPos(consumablePanel.GetRect().left + 49, consumablePanel.GetRect().top + 44);
 
 	for (auto &c : gameStatus->GetConsumables())

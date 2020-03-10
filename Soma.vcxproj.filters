@@ -576,6 +576,27 @@
     <ClCompile Include="src\Game\ShopPanel.cpp">
       <Filter>Quelldateien\Game\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\ItemRowPanelDragAndDrop.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\ItemRowPanelSelect.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\ScrollableItemPanelDragAndDrop.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\ScrollableItemPanelSelect.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\SellMultipleDialog.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Gui\Slider.cpp">
+      <Filter>Quelldateien\Framework\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\MainRoomGui.cpp">
+      <Filter>Quelldateien\Game\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -1129,6 +1150,27 @@
     </ClInclude>
     <ClInclude Include="src\Game\ObserverNotificationGameStatus.h">
       <Filter>Headerdateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ItemRowPanelDragAndDrop.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ItemRowPanelSelect.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ScrollableItemPanelDragAndDrop.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ScrollableItemPanelSelect.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\SellMultipleDialog.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Gui\Slider.hpp">
+      <Filter>Headerdateien\Framework\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\MainRoomGui.hpp">
+      <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

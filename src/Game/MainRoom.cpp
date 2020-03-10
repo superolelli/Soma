@@ -70,11 +70,7 @@ void MainRoom::Init(CGameEngine * _engine)
 
 	gameStatus.Init();
 
-	resourcesStatusBar.Init(m_pGameEngine);
-
-	skillPanel.Init(&gameStatus, m_pGameEngine);
-	inventory.Init(&gameStatus, m_pGameEngine);
-	vendingMachinePanel.Init(&gameStatus, m_pGameEngine);
+	gui.Init(m_pGameEngine, &gameStatus);
 
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetWindow().setView(view);
@@ -104,9 +100,7 @@ void MainRoom::Cleanup()
 	for(auto p : players)
 		SAFE_DELETE(p);
 
-	resourcesStatusBar.Quit();
-	inventory.Quit();
-	vendingMachinePanel.Quit();
+	gui.Quit();
 
 	g_pModels->Quit();  //Muss in letztem Gamestate passieren
 	g_pSpritePool->FreeSprites();   //Muss in letztem Gamestate passieren
@@ -133,52 +127,22 @@ void MainRoom::HandleEvents()
 void MainRoom::Update()
 {
 	UpdateLevelSigns();
-	skillPanel.Update();
-	inventory.Update();
-	vendingMachinePanel.Update();
-	resourcesStatusBar.Update(gameStatus.GetCardsAmount(), gameStatus.GetDiceAmount());
 
 	m_pGameEngine->GetWindow().setView(view);
 
 	if (m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
 
-	if (m_pGameEngine->GetKeystates(KeyID::I) == Keystates::Released && !inventory.IsOpen())
-		inventory.Open();
-
-	if (m_pGameEngine->GetKeystates(KeyID::O) == Keystates::Released)
+	/*if (m_pGameEngine->GetKeystates(KeyID::O) == Keystates::Released)
 	{
 		Item newItem;
 		newItem.color = sf::Color(128, 128, 0);
 		newItem.id = ItemID(rand() % numberOfItems);
 		newItem.number = 1;
 		gameStatus.AddItem(newItem);
-	}
+	}*/
 
-	if (!inventory.IsOpen() && !vendingMachinePanel.IsOpen())
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			if (playerHitbox[i].contains(m_pGameEngine->GetWorldMousePos()))
-			{
-				m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
-
-				if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released && !skillPanel.IsOpen())
-					skillPanel.Open(i);
-			}
-		}
-	}
-
-	if (!inventory.IsOpen() && !skillPanel.IsOpen())
-	{
-		if (vendingMachine.GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos()))
-		{
-			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
-			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released && !vendingMachinePanel.IsOpen())
-				vendingMachinePanel.Open();
-		}
-	}
-
+	HandleGUI();
 	CheckForMovement();
 	HandlePlayerAnimation();
 	UpdatePlayerHitboxes();
@@ -186,6 +150,35 @@ void MainRoom::Update()
 	g_pSounds->Update();
 }
 
+
+
+void MainRoom::HandleGUI()
+{
+	if (!gui.IsPanelOpen())
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (playerHitbox[i].contains(m_pGameEngine->GetWorldMousePos()))
+			{
+				m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
+
+				if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released)
+					gui.PlayerClicked(i);
+			}
+		}
+
+		if (vendingMachine.GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos()))
+		{
+			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
+			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released)
+				gui.VendingMachineClicked();
+		}
+	}
+
+	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
+	gui.Update();
+	m_pGameEngine->GetWindow().setView(view);
+}
 
 
 void MainRoom::UpdateLevelSigns()
@@ -230,7 +223,7 @@ void MainRoom::HandleDoors()
 {
 	for (auto &d : doors)
 	{
-		if (d.GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos()) && !skillPanel.IsOpen() && !inventory.IsOpen()) 
+		if (d.GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos()) && !gui.IsPanelOpen()) 
 		{
 			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
 
@@ -292,11 +285,7 @@ void MainRoom::Render(double _normalizedTimestep)
 
 	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
 
-	// GUI
-	resourcesStatusBar.Render();
-	skillPanel.Render();
-	inventory.Render();
-	vendingMachinePanel.Render();
+	gui.Render();
 
 	m_pGameEngine->FlipWindow();
 }

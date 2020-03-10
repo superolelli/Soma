@@ -16,8 +16,9 @@ void Game::Init(CGameEngine * _engine)
 
 	resourcesStatusBar.Init(m_pGameEngine);
 
-	currentGUI = new LevelGUI;
-	currentGUI->Init(m_pGameEngine);
+	LevelGUI *newGui = new LevelGUI;
+	newGui->Init(m_pGameEngine);
+	currentGUI = newGui;
 
 	currentBattle = nullptr;
 	inBattle = false;
@@ -158,8 +159,9 @@ void Game::UpdateBattle()
 		SAFE_DELETE(currentBattle);
 
 		SAFE_DELETE(currentGUI);
-		currentGUI = new LevelGUI;
-		currentGUI->Init(m_pGameEngine);
+		LevelGUI *newGui = new LevelGUI;
+		newGui->Init(m_pGameEngine);
+		currentGUI = newGui;
 
 		g_pMusic->SetBattleEnded();
 	}

@@ -57,6 +57,10 @@ public:
 	sf::Texture shopPanel;
 	sf::Texture selectedItemFrame;
 	sf::Texture priceSign;
+	sf::Texture cardsSymbol;
+	sf::Texture sellMultiplePanel;
+	sf::Texture sellMultipleSlider;
+	sf::Texture sellMultipleKnob;
 
 	/** SKILLING **/
 	sf::Texture skills[4][4][8];

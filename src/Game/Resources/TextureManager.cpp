@@ -91,6 +91,10 @@ void CTextureManager::LoadTextures()
 	shopPanel.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/shop_panel.png");
 	selectedItemFrame.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/selected_item_frame.png");
 	priceSign.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/price_sign.png");
+	cardsSymbol.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/cards_symbol.png");
+	sellMultiplePanel.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/sell_multiple_dialog.png");
+	sellMultipleSlider.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/slider_bar.png");
+	sellMultipleKnob.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/slider_knob.png");
 
 	/** SKILLING **/
 	LoadSkillTextures("Data/Sprites/Abilities/Simon/marshmallow_flash/marshmallow_flash_skill", 0, 0);

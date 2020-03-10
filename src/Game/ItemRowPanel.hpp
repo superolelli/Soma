@@ -7,31 +7,23 @@ class ItemRowPanel
 {
 public:
 
-	void Init(CGameEngine *_engine, std::function<InventoryItemWrapper*(InventoryItemWrapper*)> _onItemDropped);
-	void Update();
-	void Render();
-	void RenderCurrentlyDraggedItem();
+	virtual void Init(CGameEngine *_engine);
+	virtual void Update();
+	virtual void Render();
 	void Quit();
 	void AddItem(Item _item);
 
 	void SetPos(int _x, int _y);
 
-private:
+protected:
 	CGameEngine *engine;
 
 	CSprite itemRowPanel;
 	InventoryItemWrapper *items[5];
 	ItemTooltip tooltip;
 
-	int currentDraggedItem;
-	int currentDraggedItemOldX;
-	int currentDraggedItemOldY;
-
-	std::function<InventoryItemWrapper*(InventoryItemWrapper*)> OnItemDropped;
-
 	int GetFirstFreeSlot();
 
-	void HandleStartedDrag();
-	void HandleContinuedDrag();
-	void HandleDrop();
+	virtual void RenderItems();
+	void ShowTooltipForItem(int _itemID);
 };

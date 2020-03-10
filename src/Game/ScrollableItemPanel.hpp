@@ -11,43 +11,32 @@ class ScrollableItemPanel
 {
 public:
 
-	void Init(CGameEngine *_engine, std::function<InventoryItemWrapper*(InventoryItemWrapper*)> _onItemDropped);
-	void Update();
+	virtual void Init(CGameEngine *_engine);
+	virtual void Update();
 	void Render();
-	void RenderCurrentlyDraggedItem();
 	void Quit();
 
 	void SetPos(int _x, int _y);
 
 	void AddItem(Item _item);
 
-private:
+protected:
 	CGameEngine *engine;
 
 	int currentUpperRow;
 
 	CSprite scrollableItemPanel;
 	VerticalScrollbar scrollbar;
-
 	std::vector<InventoryItemWrapper*> items;
 	ItemTooltip tooltip;
 
-	std::function<InventoryItemWrapper*(InventoryItemWrapper*)> OnItemDropped;
-
-	int currentDraggedItemOldX;
-	int currentDraggedItemOldY;
-	int currentDraggedItem;
-
 	void UpdateScrollbar();
 
-	void HandleDragAndDrop();
-	void HandleStartedDrag();
-	void HandleContinuedDrag();
-	void HandleDrop();
-
-	void RenderItems();
+	virtual void RenderItems();
 
 	void RecalculatePositionsOfItems();
 
 	int GetFirstFreeItemSlot();
+
+	void ShowTooltipForItem(ItemID _itemID);
 };

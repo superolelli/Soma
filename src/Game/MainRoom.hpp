@@ -2,11 +2,8 @@
 
 #include "../Framework/Gamestate.hpp"
 #include "../Game/Resources/Resources.hpp"
-#include "SkillPanel.hpp"
-#include "Inventory.hpp"
-#include "ConsumablePanel.hpp"
-#include "VendingMachinePanel.hpp"
-#include "ResourcesStatusBar.hpp"
+
+#include "MainRoomGui.hpp"
 
 
 class MainRoom : public GameState
@@ -34,11 +31,7 @@ private:
 
 	sf::IntRect playerHitbox[4];
 
-	SkillPanel skillPanel;
-	Inventory inventory;
-	VendingMachinePanel vendingMachinePanel;
-
-	ResourcesStatusBar resourcesStatusBar;
+	MainRoomGUI gui;
 	GameStatus gameStatus;
 
 	sf::View view;
@@ -51,4 +44,5 @@ private:
 	void UpdateLevelSigns();
 
 	void UpdatePlayerHitboxes();
+	void HandleGUI();
 };

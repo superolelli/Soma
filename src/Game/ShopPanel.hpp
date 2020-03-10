@@ -14,12 +14,18 @@ public:
 	void Render();
 	void Quit();
 
+	void SetOnItemSelectedCallback(std::function<void(Item &)> _onItemSelected);
+
 	void SetPos(int _x, int _y);
+	sf::IntRect GetRect() { return shopPanel.GetGlobalRect(); }
+
+	void UnselectSelectedItem() { currentlySelectedItem = -1; }
+	bool IsItemSelected();
 
 	void ChooseNewRandomItems(int _level);
 
 	Item RetrieveCurrentlySelectedItem();
-	bool IsItemSelected();
+	int CurrentItemPrice();
 
 private:
 	CGameEngine *engine;
@@ -37,6 +43,8 @@ private:
 	int currentlySelectedItem;
 
 	std::unordered_map<ItemID, bool> consumablesAvailability;
+
+	std::function<void(Item &)> OnItemSelected;
 
 	sf::Color GetRandomItemColor();
 	ItemID GetRandomItemID(int _level);

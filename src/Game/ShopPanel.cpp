@@ -60,18 +60,22 @@ void ShopPanel::Init(CGameEngine *_engine, std::unordered_map<ItemID, bool> &_co
 
 void ShopPanel::Update()
 {
-	for (int i = 0; i < 15; i++)
+	if (engine->GetButtonstates(ButtonID::Left) == Pressed)
 	{
-		if (items[i] != nullptr)
+		for (int i = 0; i < 15; i++)
 		{
-			if (items[i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) == Pressed)
+			if (items[i] != nullptr)
 			{
-				if (currentlySelectedItem == i)
-					currentlySelectedItem = -1;
-				else
+				if (items[i]->Contains(engine->GetMousePos()))
 				{
-					currentlySelectedItem = i;
-					selectedItemFrame.SetPos(items[i]->GetGlobalBounds().left - 7, items[i]->GetGlobalBounds().top - 7);
+					if (currentlySelectedItem == i)
+						currentlySelectedItem = -1;
+					else
+					{
+						currentlySelectedItem = i;
+						selectedItemFrame.SetPos(items[i]->GetGlobalBounds().left - 7, items[i]->GetGlobalBounds().top - 7);
+						OnItemSelected(items[currentlySelectedItem]->GetItem());
+					}
 				}
 			}
 		}
@@ -120,6 +124,11 @@ void ShopPanel::Quit()
 {
 	for (auto i : items)
 		SAFE_DELETE(i);
+}
+
+void ShopPanel::SetOnItemSelectedCallback(std::function<void(Item&)> _onItemSelected)
+{
+	OnItemSelected = _onItemSelected;
 }
 
 
@@ -246,4 +255,12 @@ bool ShopPanel::IsItemSelected()
 			return true;
 	}
 	return false;
+}
+
+int ShopPanel::CurrentItemPrice()
+{
+	if (currentlySelectedItem != -1)
+		return g_pObjectProperties->getItemStats(items[currentlySelectedItem]->GetItem().id).price;
+	else
+		return 0;
 }

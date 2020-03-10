@@ -2,18 +2,11 @@
 #include "Resources\SoundManager.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
 
-void ItemRowPanel::Init(CGameEngine *_engine, std::function<InventoryItemWrapper*(InventoryItemWrapper*)> _onItemDropped)
+void ItemRowPanel::Init(CGameEngine *_engine)
 {
 	engine = _engine;
-	OnItemDropped = _onItemDropped;
-
 	itemRowPanel.Load(g_pTextures->itemRowPanel);
-
 	tooltip.Init();
-
-	currentDraggedItem = -1;
-	currentDraggedItemOldX = 0;
-	currentDraggedItemOldY = 0;
 }
 
 
@@ -37,58 +30,22 @@ void ItemRowPanel::SetPos(int _x, int _y)
 
 void ItemRowPanel::Update()
 {
-	HandleStartedDrag();
-	HandleContinuedDrag();
-	HandleDrop();
-}
-
-
-void ItemRowPanel::HandleStartedDrag()
-{
-	if (engine->GetButtonstates(ButtonID::Left) != Pressed)
-		return;
-
-	for (int i = 0; i < 5; i++)
-	{
-		if (items[i] == nullptr)
-			continue;
-
-		if (items[i]->Contains(engine->GetMousePos()))
-		{
-			currentDraggedItem = i;
-			currentDraggedItemOldX = items[i]->GetGlobalBounds().left;
-			currentDraggedItemOldY = items[i]->GetGlobalBounds().top;
-		}
-	}
-}
-
-void ItemRowPanel::HandleContinuedDrag()
-{
-	if (engine->GetButtonstates(ButtonID::Left) == Held && currentDraggedItem != -1)
-		items[currentDraggedItem]->SetCenterPos(engine->GetMousePos().x, engine->GetMousePos().y);
-}
-
-void ItemRowPanel::HandleDrop()
-{
-	if (engine->GetButtonstates(ButtonID::Left) == Released && currentDraggedItem != -1)
-	{
-		items[currentDraggedItem] = OnItemDropped(items[currentDraggedItem]);
-
-		if(items[currentDraggedItem] != nullptr)
-			items[currentDraggedItem]->SetPos(currentDraggedItemOldX, currentDraggedItemOldY);
-		currentDraggedItem = -1;
-	}
 }
 
 
 void ItemRowPanel::Render()
 {
 	itemRowPanel.Render(engine->GetWindow());
+	RenderItems();
+}
 
+
+void ItemRowPanel::RenderItems()
+{
 	int showTooltipForItem = -1;
 	for (int i = 0; i < 5; i++)
 	{
-		if (items[i] != nullptr && currentDraggedItem != i)
+		if (items[i] != nullptr)
 		{
 			items[i]->Render(engine->GetWindow());
 			if (items[i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
@@ -96,18 +53,19 @@ void ItemRowPanel::Render()
 		}
 	}
 
-	if (showTooltipForItem != -1)
+	ShowTooltipForItem(showTooltipForItem);
+}
+
+
+void ItemRowPanel::ShowTooltipForItem(int _itemID)
+{
+	if (_itemID != -1)
 	{
-		tooltip.SetItem(items[showTooltipForItem]->GetItem().id);
+		tooltip.SetItem(items[_itemID]->GetItem().id);
 		tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 	}
 }
 
-void ItemRowPanel::RenderCurrentlyDraggedItem()
-{
-	if (currentDraggedItem != -1)
-		items[currentDraggedItem]->Render(engine->GetWindow());
-}
 
 void ItemRowPanel::AddItem(Item _item)
 {

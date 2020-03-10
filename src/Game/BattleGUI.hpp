@@ -13,7 +13,7 @@ class BattleGUI : public GUI
 {
 public:
 
-	virtual void Init(CGameEngine *_engine) override;
+	virtual void Init(CGameEngine *_engine);
 	virtual void Update() override;
 	virtual void Render() override;
 
@@ -23,6 +23,7 @@ public:
 	void SetAdventureGroup(AdventureGroup *_adventureGroup);
 
 private:
+	CGameEngine *engine;
 
 	int currentAbility;
 	Combatant *combatantToDisplay;
