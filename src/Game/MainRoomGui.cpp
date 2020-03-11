@@ -42,7 +42,7 @@ void MainRoomGUI::Update()
 	vendingMachinePanel.Update();
 	resourcesStatusBar.Update(gameStatus->GetCardsAmount(), gameStatus->GetDiceAmount());
 
-	if (engine->GetKeystates(KeyID::I) == Keystates::Released && IsPanelOpen())
+	if (engine->GetKeystates(KeyID::I) == Keystates::Released && !IsPanelOpen())
 		inventory.Open();
 }
 

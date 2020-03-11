@@ -13,13 +13,17 @@ void VendingMachinePanel::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 
 	cardsSymbol.Load(g_pTextures->cardsSymbol);
 
-	scrollableItemPanel.Init(engine);
+	ScrollableItemPanel *newScrollablePanel = new ScrollableItemPanel;
+	newScrollablePanel->Init(engine);
+	newScrollablePanel->SetPos(vendingMachinePanel.GetRect().left + 75, vendingMachinePanel.GetRect().top + 60);
+	scrollableItemPanel.Init(engine, newScrollablePanel);
 	scrollableItemPanel.SetOnItemSelectedCallback([&](Item &_item) {return OnItemOfScrollablePanelSelected(_item); });
-	scrollableItemPanel.SetPos(vendingMachinePanel.GetRect().left + 75, vendingMachinePanel.GetRect().top + 60);
 
-	itemRowPanel.Init(engine);
+	ItemRowPanel *newItemRowPanel = new ItemRowPanel;
+	newItemRowPanel->Init(engine);
+	newItemRowPanel->SetPos(vendingMachinePanel.GetRect().left + 100, vendingMachinePanel.GetRect().top + 700);
+	itemRowPanel.Init(engine, newItemRowPanel);
 	itemRowPanel.SetOnItemSelectedCallback([&](Item &_item) {return OnItemOfRowPanelSelected(_item); });
-	itemRowPanel.SetPos(vendingMachinePanel.GetRect().left + 100, vendingMachinePanel.GetRect().top + 700);
 
 	shopPanel.Init(engine, gameStatus->GetConsumablesAvailability());
 	shopPanel.SetOnItemSelectedCallback([&](Item &_item) {return OnItemOfShopPanelSelected(_item); });
@@ -35,6 +39,7 @@ void VendingMachinePanel::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	buttonBuy.SetButtontextFont(g_pFonts->f_trajan);
 	buttonBuy.SetButtontextCharactersize(25);
 	buttonBuy.SetPos(vendingMachinePanel.GetRect().left + 1050, vendingMachinePanel.GetRect().top + 725);
+	buttonBuy.SetDisabled();
 
 	title.setCharacterSize(50);
 	title.setFont(g_pFonts->f_kingArthur);
@@ -171,11 +176,11 @@ void VendingMachinePanel::Open()
 {
 	closed = false;
 
-	scrollableItemPanel.Quit();
+	scrollableItemPanel.Clear();
 	for (auto &i : gameStatus->GetItems())
 		scrollableItemPanel.AddItem(i);
 
-	itemRowPanel.Quit();
+	itemRowPanel.Clear();
 	for (auto &c : gameStatus->GetConsumables())
 		itemRowPanel.AddItem(c);
 

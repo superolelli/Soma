@@ -5,7 +5,8 @@
 #include "EquipmentPanel.hpp"
 #include "InventoryItemWrapper.hpp"
 
-#include "ScrollableItemPanelDragAndDrop.hpp"
+#include "ScrollableItemPanel.hpp"
+#include "ItemPanelDragAndDropDecorator.hpp"
 
 
 
@@ -30,7 +31,7 @@ private:
 
 	CSprite inventoryPanel;
 	EquipmentPanel equipmentPanel;
-	ScrollableItemPanelDragAndDrop scrollableItemPanel;
+	ItemPanelDragAndDropDecorator scrollableItemPanel;
 	sf::Text currentPlayerName;
 	sf::Text panelTitle;
 	CButton buttonNext;
@@ -44,4 +45,5 @@ private:
 	void OnItemAdded(Item _item);
 
 	InventoryItemWrapper* OnItemFromItemPanelReceived(InventoryItemWrapper* _receivedItem);
+	InventoryItemWrapper* OnItemFromEquipmentPanelReceived(InventoryItemWrapper *_receivedItem, int _currentPlayer, int _equipmentId);
 };

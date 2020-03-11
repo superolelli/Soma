@@ -1,42 +1,24 @@
 #pragma once
 
-#include "GameStatus.hpp"
+#include "ItemPanel.hpp"
 #include "../Framework/Gui/Button.hpp"
 #include "../Framework/Gui/Scrollbar.hpp"
 #include "ItemTooltip.hpp"
-#include "InventoryItemWrapper.hpp"
 
 
-class ScrollableItemPanel
+class ScrollableItemPanel : public ItemPanel
 {
 public:
+	void Init(CGameEngine *_engine) override;
+	void Update() override;
+	void Render(int _excludeItemNumber = -1) override;
+	void SetPos(int _x, int _y) override;
+	void AddItem(Item _item) override;
 
-	virtual void Init(CGameEngine *_engine);
-	virtual void Update();
-	void Render();
-	void Quit();
-
-	void SetPos(int _x, int _y);
-
-	void AddItem(Item _item);
-
-protected:
-	CGameEngine *engine;
-
+private:
 	int currentUpperRow;
-
-	CSprite scrollableItemPanel;
 	VerticalScrollbar scrollbar;
-	std::vector<InventoryItemWrapper*> items;
-	ItemTooltip tooltip;
 
 	void UpdateScrollbar();
-
-	virtual void RenderItems();
-
 	void RecalculatePositionsOfItems();
-
-	int GetFirstFreeItemSlot();
-
-	void ShowTooltipForItem(ItemID _itemID);
 };

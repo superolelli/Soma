@@ -1,29 +1,15 @@
 #pragma once
 
-#include "InventoryItemWrapper.hpp"
-#include "GameStatus.hpp"
+#include "ItemPanel.hpp"
 
-class ItemRowPanel
+class ItemRowPanel : public ItemPanel
 {
 public:
 
-	virtual void Init(CGameEngine *_engine);
-	virtual void Update();
-	virtual void Render();
-	void Quit();
-	void AddItem(Item _item);
-
-	void SetPos(int _x, int _y);
-
-protected:
-	CGameEngine *engine;
-
-	CSprite itemRowPanel;
-	InventoryItemWrapper *items[5];
-	ItemTooltip tooltip;
-
-	int GetFirstFreeSlot();
-
-	virtual void RenderItems();
-	void ShowTooltipForItem(int _itemID);
+	void Init(CGameEngine *_engine) override;
+	void Update() override;
+	void Render(int _excludeItemNumber = -1) override;
+	void AddItem(Item _item) override;
+	void SetPos(int _x, int _y) override;
+	void Clear() override;
 };

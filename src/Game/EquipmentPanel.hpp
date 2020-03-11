@@ -17,8 +17,9 @@ public:
 	void RenderCurrentDraggedItem();
 	void Quit();
 
+	void SetOnItemDroppedCallback(std::function<InventoryItemWrapper*(InventoryItemWrapper*, int, int)> _onItemDropped);
+
 	void SetCurrentPlayer(int _currentPlayer);
-	void SetInventoryRect(sf::IntRect &_inventoryRect);
 
 	InventoryItemWrapper *PlaceItem(InventoryItemWrapper *_item);
 	bool CanBePlaced(CSprite &_itemSprite);
@@ -37,20 +38,18 @@ private:
 	InventoryItemWrapper *items[4][4];
 	ItemTooltip tooltip;
 
-	sf::IntRect inventoryRect;
-
 	int currentDraggedItemOldX;
 	int currentDraggedItemOldY;
 	int currentDraggedItem;
 
 	int currentPlayer;
 
+	std::function<InventoryItemWrapper*(InventoryItemWrapper*, int, int)> OnItemDropped;
+
 	void HandleDragAndDrop();
 	void HandleDragStarted();
 	void HandleContinuedDrag();
 	void HandleDrop();
-
-	void PlaceCurrentDraggedItemIntoInventory();
 
 	void RenderItems();
 

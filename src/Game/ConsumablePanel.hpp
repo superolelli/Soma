@@ -3,7 +3,8 @@
 #include "InventoryItemWrapper.hpp"
 #include "GameStatus.hpp"
 #include "AdventureGroup.hpp"
-#include "ItemRowPanelDragAndDrop.hpp"
+#include "ItemRowPanel.hpp"
+#include "ItemPanelDragAndDropDecorator.hpp"
 
 #include "../Framework/Patterns/Observer.hpp"
 
@@ -28,7 +29,7 @@ private:
 	AdventureGroup *adventureGroup;
 
 	CSprite consumablePanel;
-	ItemRowPanelDragAndDrop itemRowPanel;
+	ItemPanelDragAndDropDecorator itemRowPanel;
 
 	InventoryItemWrapper* OnItemFromItemPanelReceived(InventoryItemWrapper* _receivedItem);
 };

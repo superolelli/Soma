@@ -52,12 +52,6 @@
     <Filter Include="Quelldateien\Game\Resources">
       <UniqueIdentifier>{14c87864-4e59-4b30-ab9d-b3870b1368ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\Game\GUI">
-      <UniqueIdentifier>{5de3d48e-1c75-495b-b91a-cf30371d65fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Game\GUI">
-      <UniqueIdentifier>{bbf8decc-88f3-40e0-b284-f5cdc55b1cc4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headerdateien\Game\Util">
       <UniqueIdentifier>{6389deed-c44d-4db2-a100-e025a155c190}</UniqueIdentifier>
     </Filter>
@@ -67,11 +61,83 @@
     <Filter Include="Quelldateien\Framework\Patterns">
       <UniqueIdentifier>{c3f3bf45-5372-48e7-8406-a969427256b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\Game\Enemies">
+    <Filter Include="Headerdateien\Game\MainRoom">
+      <UniqueIdentifier>{7593758c-82b5-45a5-9702-ede5e5a85090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Game\MainRoom\GUI">
+      <UniqueIdentifier>{5e8a2bc0-a228-45f0-b29a-56047d36668a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Game\CommonGUI">
+      <UniqueIdentifier>{5de3d48e-1c75-495b-b91a-cf30371d65fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Game\Level">
+      <UniqueIdentifier>{d8b314d1-6a13-4ee2-b84c-83e79a8b325b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Game\Level\Enemies">
       <UniqueIdentifier>{c3bc060b-c911-42f3-be33-6663c5d0fb95}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Game\Enemies">
+    <Filter Include="Headerdateien\Game\Level\Players">
+      <UniqueIdentifier>{0b06c2cf-527d-401d-b537-6d5aa96c4007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Game\Level\Loot">
+      <UniqueIdentifier>{a6891595-7f60-456c-9c24-422fb1259dd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Game\Level\Battle">
+      <UniqueIdentifier>{ec36d145-a454-41f7-b8e4-cb6a4513b53e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Game\Level\Battle\GUI">
+      <UniqueIdentifier>{dcb9300e-1b02-449c-9102-200eb925c2f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Game\Level\Loot\GUI">
+      <UniqueIdentifier>{78e1354f-a17c-4013-84fb-07c4844142bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Game\Level\GUI">
+      <UniqueIdentifier>{9f8a0c8d-c329-43fe-9376-cfbf1bdc8d49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Game\CommonGUI\Tooltips">
+      <UniqueIdentifier>{5d4b1fdd-7d4b-4b5f-ab2e-1931b037a198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Game\CommonGUI\Items">
+      <UniqueIdentifier>{3642c34b-7669-4bd6-8326-3d32b4496af8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\MainRoom">
+      <UniqueIdentifier>{b2676e2c-e719-4f64-a2bc-97466bb19a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\CommonGUI">
+      <UniqueIdentifier>{bbf8decc-88f3-40e0-b284-f5cdc55b1cc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\Level">
+      <UniqueIdentifier>{46969c90-f9e6-4216-9477-16080bf3fdf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\CommonGUI\Items">
+      <UniqueIdentifier>{350d2c8f-3441-413e-9a2e-867849aff192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\CommonGUI\Tooltips">
+      <UniqueIdentifier>{3fce8a7c-4ba0-4565-8e45-da77f1582ac5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\MainRoom\GUI">
+      <UniqueIdentifier>{47ba9bab-74d1-44cd-99be-0a1c430e5c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\Level\Battle">
+      <UniqueIdentifier>{67de6e19-cbf3-4ff3-93de-c79b5f86f6ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\Level\Players">
+      <UniqueIdentifier>{05e3c294-9a4d-48f4-b89a-63033c06d4cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\Level\Enemies">
       <UniqueIdentifier>{15201485-681e-4c3b-92d2-6d2a29465d2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\Level\Loot">
+      <UniqueIdentifier>{1c6115d1-7272-4797-9c1a-0c9cf35309b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\Level\GUI">
+      <UniqueIdentifier>{f91615b8-4df0-4919-88fe-23b15a07e8bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\Level\Battle\GUI">
+      <UniqueIdentifier>{befcc58a-96a1-4c7d-b161-432cd075a708}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\Level\Loot\GUI">
+      <UniqueIdentifier>{e48f7eda-4c0b-4455-84d6-20565b364aa4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -399,62 +465,17 @@
     <ClCompile Include="src\Framework\Gui\StringInput.cpp">
       <Filter>Quelldateien\Framework\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\Level.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Player.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\Resources\ModelManager.cpp">
       <Filter>Quelldateien\Game\Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\Game.cpp">
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\AdventureGroup.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Battle.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\GUI.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\BattleGUI.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\LevelGUI.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Combatant.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Enemy.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Anna.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Markus.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Ole.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Simon.cpp">
-      <Filter>Quelldateien\Game</Filter>
+      <Filter>Quelldateien\Game\CommonGUI</Filter>
     </ClCompile>
     <ClCompile Include="src\Framework\Gui\Bar.cpp">
       <Filter>Quelldateien\Framework\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\CombatantStatus.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Buff.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\CombatantAttributes.cpp">
-      <Filter>Quelldateien\Game</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\Resources\SpritePool.cpp">
       <Filter>Quelldateien\Game\Resources</Filter>
@@ -465,23 +486,14 @@
     <ClCompile Include="src\Framework\Graphics\NotificationRenderer.cpp">
       <Filter>Quelldateien\Framework\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\Ability.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
     <ClCompile Include="src\Framework\Graphics\RichText.cpp">
       <Filter>Quelldateien\Framework\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\Framework\Graphics\RoundedRectangleShape.cpp">
       <Filter>Quelldateien\Framework\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\CombatantStatusBar.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\LevelBuilder.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\CombatantAttributesPanel.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
+      <Filter>Quelldateien\Game\CommonGUI</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\Resources\VideoManager.cpp">
       <Filter>Quelldateien\Game\Resources</Filter>
@@ -489,113 +501,167 @@
     <ClCompile Include="src\Framework\Patterns\Subject.cpp">
       <Filter>Quelldateien\Framework\Patterns</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\MainRoom.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
     <ClCompile Include="src\Framework\CursorManager.cpp">
       <Filter>Quelldateien\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\LevelFinishedPanel.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\GameStatus.cpp">
       <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\SkillPanel.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\AbilityTooltip.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\Resources\MusicManager.cpp">
       <Filter>Quelldateien\Game\Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\ApacheKid.cpp">
-      <Filter>Quelldateien\Game\Enemies</Filter>
+      <Filter>Quelldateien\Game\Level\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\Greg.cpp">
-      <Filter>Quelldateien\Game\Enemies</Filter>
+      <Filter>Quelldateien\Game\Level\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\Abtruenniger.cpp">
-      <Filter>Quelldateien\Game\Enemies</Filter>
+      <Filter>Quelldateien\Game\Level\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\Hilfssheriff.cpp">
-      <Filter>Quelldateien\Game\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Lootable.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Inventory.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
+      <Filter>Quelldateien\Game\Level\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="src\Framework\Gui\Scrollbar.cpp">
       <Filter>Quelldateien\Framework\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\ItemTooltip.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Tooltip.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\EquipmentPanel.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\InventoryItemWrapper.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\LootableDialog.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\DialogManager.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\LootableFactory.cpp">
-      <Filter>Quelldateien\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\EquipmentConnections.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\EquipmentPanelDiamond.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\ConsumablePanel.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\VendingMachinePanel.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\ScrollableItemPanel.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\ItemRowPanel.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
+      <Filter>Quelldateien\Game\CommonGUI</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\ResourcesStatusBar.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\ShopPanel.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\ItemRowPanelDragAndDrop.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\ItemRowPanelSelect.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\ScrollableItemPanelDragAndDrop.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\ScrollableItemPanelSelect.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\SellMultipleDialog.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
+      <Filter>Quelldateien\Game\CommonGUI</Filter>
     </ClCompile>
     <ClCompile Include="src\Framework\Gui\Slider.cpp">
       <Filter>Quelldateien\Framework\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\AbilityTooltip.cpp">
+      <Filter>Quelldateien\Game\CommonGUI\Tooltips</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\ItemTooltip.cpp">
+      <Filter>Quelldateien\Game\CommonGUI\Tooltips</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\InventoryItemWrapper.cpp">
+      <Filter>Quelldateien\Game\CommonGUI\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\ItemRowPanel.cpp">
+      <Filter>Quelldateien\Game\CommonGUI\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\ScrollableItemPanel.cpp">
+      <Filter>Quelldateien\Game\CommonGUI\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Tooltip.cpp">
+      <Filter>Quelldateien\Game\CommonGUI\Tooltips</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\EquipmentConnections.cpp">
+      <Filter>Quelldateien\Game\MainRoom\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\EquipmentPanel.cpp">
+      <Filter>Quelldateien\Game\MainRoom\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\EquipmentPanelDiamond.cpp">
+      <Filter>Quelldateien\Game\MainRoom\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Inventory.cpp">
+      <Filter>Quelldateien\Game\MainRoom\GUI</Filter>
+    </ClCompile>
     <ClCompile Include="src\Game\MainRoomGui.cpp">
-      <Filter>Quelldateien\Game\GUI</Filter>
+      <Filter>Quelldateien\Game\MainRoom\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\SellMultipleDialog.cpp">
+      <Filter>Quelldateien\Game\MainRoom\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\ShopPanel.cpp">
+      <Filter>Quelldateien\Game\MainRoom\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\SkillPanel.cpp">
+      <Filter>Quelldateien\Game\MainRoom\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\VendingMachinePanel.cpp">
+      <Filter>Quelldateien\Game\MainRoom\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\MainRoom.cpp">
+      <Filter>Quelldateien\Game\MainRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Battle.cpp">
+      <Filter>Quelldateien\Game\Level\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\BattleGUI.cpp">
+      <Filter>Quelldateien\Game\Level\Battle\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\LevelFinishedPanel.cpp">
+      <Filter>Quelldateien\Game\Level\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\LevelGUI.cpp">
+      <Filter>Quelldateien\Game\Level\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\LootableDialog.cpp">
+      <Filter>Quelldateien\Game\Level\Loot\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\ConsumablePanel.cpp">
+      <Filter>Quelldateien\Game\Level\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Enemy.cpp">
+      <Filter>Quelldateien\Game\Level\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Anna.cpp">
+      <Filter>Quelldateien\Game\Level\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\AdventureGroup.cpp">
+      <Filter>Quelldateien\Game\Level\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Ability.cpp">
+      <Filter>Quelldateien\Game\Level\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Buff.cpp">
+      <Filter>Quelldateien\Game\Level\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Combatant.cpp">
+      <Filter>Quelldateien\Game\Level\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\CombatantAttributes.cpp">
+      <Filter>Quelldateien\Game\Level\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\CombatantStatus.cpp">
+      <Filter>Quelldateien\Game\Level\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\CombatantStatusBar.cpp">
+      <Filter>Quelldateien\Game\Level\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Level.cpp">
+      <Filter>Quelldateien\Game\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\LevelBuilder.cpp">
+      <Filter>Quelldateien\Game\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Lootable.cpp">
+      <Filter>Quelldateien\Game\Level\Loot</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\LootableFactory.cpp">
+      <Filter>Quelldateien\Game\Level\Loot</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Markus.cpp">
+      <Filter>Quelldateien\Game\Level\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Ole.cpp">
+      <Filter>Quelldateien\Game\Level\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Player.cpp">
+      <Filter>Quelldateien\Game\Level\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Simon.cpp">
+      <Filter>Quelldateien\Game\Level\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\ItemPanel.cpp">
+      <Filter>Quelldateien\Game\CommonGUI\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\ItemPanelDecorator.cpp">
+      <Filter>Quelldateien\Game\CommonGUI\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\ItemPanelSelectDecorator.cpp">
+      <Filter>Quelldateien\Game\CommonGUI\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\ItemPanelDragAndDropDecorator.cpp">
+      <Filter>Quelldateien\Game\CommonGUI\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -950,65 +1016,17 @@
     <ClInclude Include="src\Game\Resources\TextureManager.hpp">
       <Filter>Headerdateien\Game\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\Level.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\Resources\BackgroundIDs.hpp">
       <Filter>Headerdateien\Game\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Player.hpp">
-      <Filter>Headerdateien\Game</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\Resources\ModelManager.hpp">
       <Filter>Headerdateien\Game\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\AdventureGroup.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Game.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Battle.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\BattleGUI.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\GUI.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\LevelGUI.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Combatant.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Enemy.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Simon.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Anna.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Markus.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Ole.hpp">
-      <Filter>Headerdateien\Game</Filter>
+      <Filter>Headerdateien\Game\CommonGUI</Filter>
     </ClInclude>
     <ClInclude Include="src\Framework\Gui\Bar.hpp">
       <Filter>Headerdateien\Framework\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\CombatantStatus.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Buff.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\CombatantAttributes.hpp">
-      <Filter>Headerdateien\Game</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\Resources\SpritePool.hpp">
       <Filter>Headerdateien\Game\Resources</Filter>
@@ -1019,9 +1037,6 @@
     <ClInclude Include="src\Game\Util\XMLUtilities.hpp">
       <Filter>Headerdateien\Game\Util</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\Ability.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
     <ClInclude Include="src\Framework\Graphics\NotificationRenderer.hpp">
       <Filter>Headerdateien\Framework\Graphics</Filter>
     </ClInclude>
@@ -1031,20 +1046,8 @@
     <ClInclude Include="src\Framework\Graphics\RoundedRectangleShape.hpp">
       <Filter>Headerdateien\Framework\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\CombatantStatusBar.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\CombatantID.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\LevelSpecs.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\LevelBuilder.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\CombatantAttributesPanel.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
+      <Filter>Headerdateien\Game\CommonGUI</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\Resources\VideoManager.hpp">
       <Filter>Headerdateien\Game\Resources</Filter>
@@ -1055,122 +1058,185 @@
     <ClInclude Include="src\Framework\Patterns\Subject.hpp">
       <Filter>Headerdateien\Framework\Patterns</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\ObserverNotificationBattle.h">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\MainRoom.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
     <ClInclude Include="src\Framework\CursorManager.hpp">
       <Filter>Headerdateien\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\LevelFinishedPanel.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\GameStatus.hpp">
       <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\SkillPanel.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\AbilityTooltip.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\Resources\MusicManager.hpp">
       <Filter>Headerdateien\Game\Resources</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\Abtruenniger.hpp">
-      <Filter>Headerdateien\Game\Enemies</Filter>
+      <Filter>Headerdateien\Game\Level\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\ApacheKid.hpp">
-      <Filter>Headerdateien\Game\Enemies</Filter>
+      <Filter>Headerdateien\Game\Level\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\Greg.hpp">
-      <Filter>Headerdateien\Game\Enemies</Filter>
+      <Filter>Headerdateien\Game\Level\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\Hilfssheriff.hpp">
-      <Filter>Headerdateien\Game\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Lootable.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Inventory.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
+      <Filter>Headerdateien\Game\Level\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\Framework\Gui\Scrollbar.hpp">
       <Filter>Headerdateien\Framework\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\ItemTooltip.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Tooltip.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\EquipmentPanel.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\InventoryItemWrapper.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\LootableDialog.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\DialogManager.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
+      <Filter>Headerdateien\Game\CommonGUI</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\Item.hpp">
       <Filter>Headerdateien\Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\LootableFactory.hpp">
-      <Filter>Headerdateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\EquipmentConnections.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\EquipmentPanelDiamond.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\ConsumablePanel.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\VendingMachinePanel.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\ScrollableItemPanel.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\ItemRowPanel.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\ResourcesStatusBar.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\ShopPanel.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
+      <Filter>Headerdateien\Game\CommonGUI</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\ObserverNotificationGameStatus.h">
       <Filter>Headerdateien\Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\ItemRowPanelDragAndDrop.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\ItemRowPanelSelect.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\ScrollableItemPanelDragAndDrop.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\ScrollableItemPanelSelect.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\SellMultipleDialog.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="src\Framework\Gui\Slider.hpp">
       <Filter>Headerdateien\Framework\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="src\Game\MainRoom.hpp">
+      <Filter>Headerdateien\Game\MainRoom</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\EquipmentPanel.hpp">
+      <Filter>Headerdateien\Game\MainRoom\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\EquipmentPanelDiamond.hpp">
+      <Filter>Headerdateien\Game\MainRoom\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\EquipmentConnections.hpp">
+      <Filter>Headerdateien\Game\MainRoom\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Inventory.hpp">
+      <Filter>Headerdateien\Game\MainRoom\GUI</Filter>
+    </ClInclude>
     <ClInclude Include="src\Game\MainRoomGui.hpp">
-      <Filter>Headerdateien\Game\GUI</Filter>
+      <Filter>Headerdateien\Game\MainRoom\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\SellMultipleDialog.hpp">
+      <Filter>Headerdateien\Game\MainRoom\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ShopPanel.hpp">
+      <Filter>Headerdateien\Game\MainRoom\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\SkillPanel.hpp">
+      <Filter>Headerdateien\Game\MainRoom\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\VendingMachinePanel.hpp">
+      <Filter>Headerdateien\Game\MainRoom\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Game.hpp">
+      <Filter>Headerdateien\Game\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Level.hpp">
+      <Filter>Headerdateien\Game\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\LevelBuilder.hpp">
+      <Filter>Headerdateien\Game\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\LevelSpecs.hpp">
+      <Filter>Headerdateien\Game\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Anna.hpp">
+      <Filter>Headerdateien\Game\Level\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Enemy.hpp">
+      <Filter>Headerdateien\Game\Level\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Markus.hpp">
+      <Filter>Headerdateien\Game\Level\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Simon.hpp">
+      <Filter>Headerdateien\Game\Level\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Ole.hpp">
+      <Filter>Headerdateien\Game\Level\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Player.hpp">
+      <Filter>Headerdateien\Game\Level\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Lootable.hpp">
+      <Filter>Headerdateien\Game\Level\Loot</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\LootableFactory.hpp">
+      <Filter>Headerdateien\Game\Level\Loot</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Battle.hpp">
+      <Filter>Headerdateien\Game\Level\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Combatant.hpp">
+      <Filter>Headerdateien\Game\Level\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\CombatantAttributes.hpp">
+      <Filter>Headerdateien\Game\Level\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\CombatantID.hpp">
+      <Filter>Headerdateien\Game\Level\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\CombatantStatus.hpp">
+      <Filter>Headerdateien\Game\Level\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\CombatantStatusBar.hpp">
+      <Filter>Headerdateien\Game\Level\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\AdventureGroup.hpp">
+      <Filter>Headerdateien\Game\Level\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Ability.hpp">
+      <Filter>Headerdateien\Game\Level\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ObserverNotificationBattle.h">
+      <Filter>Headerdateien\Game\Level\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Buff.hpp">
+      <Filter>Headerdateien\Game\Level\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\BattleGUI.hpp">
+      <Filter>Headerdateien\Game\Level\Battle\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\LootableDialog.hpp">
+      <Filter>Headerdateien\Game\Level\Loot\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\LevelGUI.hpp">
+      <Filter>Headerdateien\Game\Level\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\LevelFinishedPanel.hpp">
+      <Filter>Headerdateien\Game\Level\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ConsumablePanel.hpp">
+      <Filter>Headerdateien\Game\Level\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\AbilityTooltip.hpp">
+      <Filter>Headerdateien\Game\CommonGUI\Tooltips</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ItemTooltip.hpp">
+      <Filter>Headerdateien\Game\CommonGUI\Tooltips</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Tooltip.hpp">
+      <Filter>Headerdateien\Game\CommonGUI\Tooltips</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\InventoryItemWrapper.hpp">
+      <Filter>Headerdateien\Game\CommonGUI\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ItemRowPanel.hpp">
+      <Filter>Headerdateien\Game\CommonGUI\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ScrollableItemPanel.hpp">
+      <Filter>Headerdateien\Game\CommonGUI\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ItemPanel.hpp">
+      <Filter>Headerdateien\Game\CommonGUI\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ItemPanelDecorator.hpp">
+      <Filter>Headerdateien\Game\CommonGUI\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ItemPanelSelectDecorator.hpp">
+      <Filter>Headerdateien\Game\CommonGUI\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ItemPanelDragAndDropDecorator.hpp">
+      <Filter>Headerdateien\Game\CommonGUI\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

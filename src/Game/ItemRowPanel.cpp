@@ -4,24 +4,22 @@
 
 void ItemRowPanel::Init(CGameEngine *_engine)
 {
-	engine = _engine;
-	itemRowPanel.Load(g_pTextures->itemRowPanel);
-	tooltip.Init();
+	ItemPanel::Init(_engine);
+	itemPanel.Load(g_pTextures->itemRowPanel);
+	items.resize(5);
 }
 
-
-void ItemRowPanel::Quit()
+void ItemRowPanel::Clear()
 {
-	for (int i = 0; i < 5; i++)
-		SAFE_DELETE(items[i]);
+	ItemPanel::Clear();
+	items.resize(5);
 }
-
 
 void ItemRowPanel::SetPos(int _x, int _y)
 {
-	itemRowPanel.SetPos(_x, _y);
+	itemPanel.SetPos(_x, _y);
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < items.size(); i++)
 	{
 		if (items[i] != nullptr)
 			items[i]->SetPos(_x + 10 + 116 * i, _y + 10);
@@ -33,37 +31,10 @@ void ItemRowPanel::Update()
 }
 
 
-void ItemRowPanel::Render()
+void ItemRowPanel::Render(int _excludeItemNumber)
 {
-	itemRowPanel.Render(engine->GetWindow());
-	RenderItems();
-}
-
-
-void ItemRowPanel::RenderItems()
-{
-	int showTooltipForItem = -1;
-	for (int i = 0; i < 5; i++)
-	{
-		if (items[i] != nullptr)
-		{
-			items[i]->Render(engine->GetWindow());
-			if (items[i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
-				showTooltipForItem = i;
-		}
-	}
-
-	ShowTooltipForItem(showTooltipForItem);
-}
-
-
-void ItemRowPanel::ShowTooltipForItem(int _itemID)
-{
-	if (_itemID != -1)
-	{
-		tooltip.SetItem(items[_itemID]->GetItem().id);
-		tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
-	}
+	itemPanel.Render(engine->GetWindow());
+	RenderItems(0, 5, _excludeItemNumber);
 }
 
 
@@ -85,21 +56,9 @@ void ItemRowPanel::AddItem(Item _item)
 	newItem->Init(std::move(_item), std::move(newSprite));
 
 	int freeSlot = GetFirstFreeSlot();
-	int xPos = freeSlot * 116 + itemRowPanel.GetGlobalRect().left + 10;
-	int yPos = itemRowPanel.GetGlobalRect().top + 10;
+	int xPos = freeSlot * 116 + itemPanel.GetGlobalRect().left + 10;
+	int yPos = itemPanel.GetGlobalRect().top + 10;
 	newItem->SetPos(xPos, yPos);
 
 	items[freeSlot] = newItem;
-}
-
-
-
-int ItemRowPanel::GetFirstFreeSlot()
-{
-	for (int i = 0; i < 5; i++)
-	{
-		if (items[i] == nullptr)
-			return i;
-	}
-	return -1;
 }

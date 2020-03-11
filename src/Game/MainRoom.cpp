@@ -133,14 +133,14 @@ void MainRoom::Update()
 	if (m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
 
-	/*if (m_pGameEngine->GetKeystates(KeyID::O) == Keystates::Released)
+	if (m_pGameEngine->GetKeystates(KeyID::O) == Keystates::Released)
 	{
 		Item newItem;
 		newItem.color = sf::Color(128, 128, 0);
 		newItem.id = ItemID(rand() % numberOfItems);
 		newItem.number = 1;
 		gameStatus.AddItem(newItem);
-	}*/
+	}
 
 	HandleGUI();
 	CheckForMovement();

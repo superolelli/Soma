@@ -12,7 +12,9 @@ void Inventory::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	inventoryPanel.Load(g_pTextures->inventoryPanel);
 	inventoryPanel.SetPos(150, 70);
 
-	scrollableItemPanel.Init(engine);
+	ScrollableItemPanel *newScrollableItemPanel = new ScrollableItemPanel;
+	newScrollableItemPanel->Init(engine);
+	scrollableItemPanel.Init(engine, newScrollableItemPanel);
 	scrollableItemPanel.SetOnItemDroppedCallback([&](InventoryItemWrapper* _item) {return OnItemFromItemPanelReceived(_item); });
 	scrollableItemPanel.SetPos(inventoryPanel.GetRect().left + 822, inventoryPanel.GetRect().top + 185);
 
@@ -41,7 +43,7 @@ void Inventory::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	panelTitle.setPosition(inventoryPanel.GetGlobalRect().left + 850, inventoryPanel.GetGlobalRect().top + 70);
 
 	equipmentPanel.Init(engine, gameStatus, 300, 330);
-	equipmentPanel.SetInventoryRect(sf::IntRect(inventoryPanel.GetGlobalRect().left + 812, inventoryPanel.GetGlobalRect().top + 171, 700, 610));
+	equipmentPanel.SetOnItemDroppedCallback([&](InventoryItemWrapper* _item, int _currentPlayer, int _equipmentId) {return OnItemFromEquipmentPanelReceived(_item, _currentPlayer, _equipmentId); });
 
 	closed = true;
 }
@@ -86,6 +88,19 @@ InventoryItemWrapper * Inventory::OnItemFromItemPanelReceived(InventoryItemWrapp
 		return nullptr;
 	}
 
+	return _receivedItem;
+}
+
+InventoryItemWrapper * Inventory::OnItemFromEquipmentPanelReceived(InventoryItemWrapper * _receivedItem, int _currentPlayer, int _equipmentId)
+{
+	if (_receivedItem->GetGlobalBounds().intersects(scrollableItemPanel.GetRect()))
+	{
+		g_pSounds->PlaySound(soundID::INVENTORY_DROP);
+		gameStatus->RemoveEquipment(_currentPlayer, _equipmentId);
+		gameStatus->AddItem(_receivedItem->GetItem());
+		scrollableItemPanel.AddItem(_receivedItem->GetItem());
+		SAFE_DELETE(_receivedItem);
+	}
 	return _receivedItem;
 }
 
@@ -153,7 +168,7 @@ void Inventory::Open(int _player)
 	currentPlayer = _player;
 	UpdateGUIForChosenPlayer();
 
-	scrollableItemPanel.Quit();
+	scrollableItemPanel.Clear();
 	for (auto &i : gameStatus->GetItems())
 		scrollableItemPanel.AddItem(i);
 }

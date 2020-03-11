@@ -2,8 +2,9 @@
 
 #include "GameStatus.hpp"
 #include "../Framework/Gui/Button.hpp"
-#include "ScrollableItemPanelSelect.hpp"
-#include "ItemRowPanelSelect.hpp"
+#include "ScrollableItemPanel.hpp"
+#include "ItemRowPanel.hpp"
+#include "ItemPanelSelectDecorator.hpp"
 #include "ShopPanel.hpp"
 #include "SellMultipleDialog.hpp"
 
@@ -25,8 +26,8 @@ private:
 	CGameEngine *engine;
 
 	CSprite vendingMachinePanel;
-	ScrollableItemPanelSelect scrollableItemPanel;
-	ItemRowPanelSelect itemRowPanel;
+	ItemPanelSelectDecorator scrollableItemPanel;
+	ItemPanelSelectDecorator itemRowPanel;
 	ShopPanel shopPanel;
 
 	SellMultipleDialog *dialog;

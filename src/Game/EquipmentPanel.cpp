@@ -51,10 +51,9 @@ void EquipmentPanel::Quit()
 	}
 }
 
-
-void EquipmentPanel::SetInventoryRect(sf::IntRect &_inventoryRect)
+void EquipmentPanel::SetOnItemDroppedCallback(std::function<InventoryItemWrapper*(InventoryItemWrapper*, int, int)> _onItemDropped)
 {
-	inventoryRect = _inventoryRect;
+	OnItemDropped = _onItemDropped;
 }
 
 
@@ -105,10 +104,9 @@ void EquipmentPanel::HandleDrop()
 {
 	if (engine->GetButtonstates(ButtonID::Left) == Released && currentDraggedItem != -1)
 	{
-		if (items[currentPlayer][currentDraggedItem]->GetGlobalBounds().intersects(inventoryRect))
+		items[currentPlayer][currentDraggedItem] = OnItemDropped(items[currentPlayer][currentDraggedItem], currentPlayer, currentDraggedItem);
+		if (items[currentPlayer][currentDraggedItem] == nullptr)
 		{
-			PlaceCurrentDraggedItemIntoInventory();
-			
 			connections[currentPlayer][currentDraggedItem].DeactivateConnection(0);
 			connections[currentPlayer][LeftNeighbourSlot(currentDraggedItem)].DeactivateConnection(1);
 
@@ -120,15 +118,6 @@ void EquipmentPanel::HandleDrop()
 
 		currentDraggedItem = -1;
 	}
-}
-
-
-void EquipmentPanel::PlaceCurrentDraggedItemIntoInventory()
-{
-	g_pSounds->PlaySound(soundID::INVENTORY_DROP);
-	gameStatus->RemoveEquipment(currentPlayer, currentDraggedItem);
-	gameStatus->AddItem(items[currentPlayer][currentDraggedItem]->GetItem());
-	SAFE_DELETE(items[currentPlayer][currentDraggedItem]);
 }
 
 
