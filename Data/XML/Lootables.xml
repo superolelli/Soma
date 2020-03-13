@@ -60,6 +60,8 @@
             <item>Karten</item>
             <item>Würfel</item>
             <item>Bier</item>
+			<item>Tequila</item>
+			<item>Whisky</item>
         </loot>
     </lootable>
 

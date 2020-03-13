@@ -276,7 +276,7 @@ void SkillPanel::CheckBuyButton()
 
 void SkillPanel::UpdateBuyButton()
 {
-	if (SkillCanBeAcquired(currentPlayer, currentAbility, currentSkill))
+	if (SkillCanBeAcquired(currentPlayer, currentAbility, currentSkill) && skillCost[currentSkill] <= gameStatus->GetDiceAmount())
 		buttonBuy.SetEnabled();
 	else
 		buttonBuy.SetDisabled();

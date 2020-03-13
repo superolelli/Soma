@@ -29,4 +29,10 @@ private:
 	VendingMachinePanel vendingMachinePanel;
 	ResourcesStatusBar resourcesStatusBar;
 
+	CButton inventoryButton;
+	CButton skillpanelButton;
+	CButton shopButton;
+
+	void CloseAllPanels();
+
 };

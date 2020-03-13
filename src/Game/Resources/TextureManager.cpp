@@ -42,6 +42,11 @@ void CTextureManager::LoadTextures()
 	mainRoomRoots.loadFromFile("Data/Sprites/Backgrounds/Main Room/roots.png");
 	mainRoomVendingMachine.loadFromFile("Data/Sprites/Backgrounds/Main Room/vending_machine.png");
 
+	/** MAIN ROOM BUTTONS **/
+	mainRoomButtonInventory.loadFromFile("Data/Sprites/Panels & Buttons/inventory_button.png");
+	mainRoomButtonSkillPanel.loadFromFile("Data/Sprites/Panels & Buttons/skillpanel_button.png");
+	mainRoomButtonShop.loadFromFile("Data/Sprites/Panels & Buttons/shop_button.png");
+
 	/** LOOTABLES **/
 	lootable[0].loadFromFile("Data/Sprites/Lootables/barrel.png");
 	lootable[1].loadFromFile("Data/Sprites/Lootables/cabinet.png");
@@ -83,8 +88,13 @@ void CTextureManager::LoadTextures()
 	item[8].loadFromFile("Data/Sprites/Items/Bang/ammo.png");
 	item[9].loadFromFile("Data/Sprites/Items/Bang/knife.png");
 	item[10].loadFromFile("Data/Sprites/Items/Bang/tomahawk.png");
-	item[11].loadFromFile("Data/Sprites/Items/Bang/beer.png");
-	item[12].loadFromFile("Data/Sprites/Items/Bang/tequila.png");
+	item[11].loadFromFile("Data/Sprites/Items/Bang/sherrif_star.png");
+	item[12].loadFromFile("Data/Sprites/Items/Bang/boot.png");
+	item[13].loadFromFile("Data/Sprites/Items/Bang/horseshoe.png");
+	item[14].loadFromFile("Data/Sprites/Items/Bang/canteen.png");
+	item[15].loadFromFile("Data/Sprites/Items/Bang/beer.png");
+	item[16].loadFromFile("Data/Sprites/Items/Bang/tequila.png");
+	item[17].loadFromFile("Data/Sprites/Items/Bang/whisky.png");
 
 	/** VENDING MACHINE **/
 	vendingMachinePanel.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/vending_machine_panel.png");

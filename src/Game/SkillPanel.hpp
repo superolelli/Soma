@@ -13,6 +13,7 @@ public:
 	void Render();
 
 	void Open(int _player = 0);
+	void Close() { closed = true; }
 	bool IsOpen() { return !closed; }
 
 private:

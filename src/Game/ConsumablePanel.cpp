@@ -28,6 +28,7 @@ void ConsumablePanel::Init(CGameEngine *_engine, GameStatus * _gameStatus, Adven
 void ConsumablePanel::Quit()
 {
 	itemRowPanel.Quit();
+	gameStatus->RemoveObserver(this);
 }
 
 

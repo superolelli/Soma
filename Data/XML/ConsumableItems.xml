@@ -20,5 +20,11 @@
     <Level>2</Level>
 	<Price>25</Price>
   </Tequila>
+
+   <Whisky id="2" name="Whisky"
+			health="20">
+		<Level>3</Level>
+		<Price>50</Price>
+   </Whisky>
   
 </Items>

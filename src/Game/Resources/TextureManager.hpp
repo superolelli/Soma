@@ -33,6 +33,11 @@ public:
 	sf::Texture mainRoomRoots;
 	sf::Texture mainRoomVendingMachine;
 
+	/** MAIN ROOM BUTTONS **/
+	sf::Texture mainRoomButtonInventory;
+	sf::Texture mainRoomButtonSkillPanel;
+	sf::Texture mainRoomButtonShop;
+
 	/** LOOTABLES **/
 	sf::Texture lootable[11];
 
@@ -50,7 +55,7 @@ public:
 	sf::Texture lootablePanelCloseButton;
 	sf::Texture consumablePanel;
 	sf::Texture itemRowPanel;
-	sf::Texture item[13];
+	sf::Texture item[18];
 
 	/** VENDING MACHINE **/
 	sf::Texture vendingMachinePanel;

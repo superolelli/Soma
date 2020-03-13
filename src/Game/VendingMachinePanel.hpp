@@ -19,6 +19,7 @@ public:
 	void Quit();
 
 	void Open();
+	void Close() { closed = true; }
 	bool IsOpen() { return !closed; }
 
 private:

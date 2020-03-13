@@ -24,11 +24,15 @@
 
   <IronPlate id="2" name="Eisenplatte"
     armour="10"
-  ></IronPlate>
+  >
+	  <Level>2</Level>
+  </IronPlate>
 
   <Sombrero id="3" name="Sombrero"
     dodge="7"
-  ></Sombrero>
+  >
+	  <Level>2</Level>
+  </Sombrero>
 
   <Binocular id="4" name="Fernglas"
     precision="5"
@@ -62,5 +66,26 @@
   >
     <Level>2</Level>
   </Tomahawk>
+
+  <SherrifStar id="11" name="Sherrifstern"
+	initiative="2"
+    health="5"
+  >
+	  <Level>2</Level>
+  </SherrifStar>
+
+   <Boot id="12" name="Stiefel"
+	   armour="5"
+   ></Boot>
+
+   <Horseshoe id="13" name="Hufeisen"
+		criticalHit="5">
+	   <Level>2</Level>
+   </Horseshoe>
+
+   <Canteen id="14" name="Feldflasche"
+	  health="10">
+	   <Level>2</Level>
+   </Canteen>
   
 </Items>

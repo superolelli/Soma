@@ -4,7 +4,7 @@
 void GameStatus::Init()
 {
 	dice = 0;
-	cards = 80;
+	cards = 0;
 	items.clear();
 	consumables.clear();
 
@@ -28,7 +28,7 @@ void GameStatus::Init()
 	for (int i = CONSUMABLE_ITEMS_START; i < ItemID::numberOfItems; i++)
 		consumablesAvailability[static_cast<ItemID>(i)] = false;
 
-	consumablesAvailability[ItemID::beer] = true;
+	//consumablesAvailability[ItemID::beer] = true;
 }
 
 
