@@ -61,4 +61,6 @@ private:
 	void UpdateLevel();
 	void UpdateBattle();
 	void InitNewBattle();
+
+	void HandleFinishedLevel();
 };

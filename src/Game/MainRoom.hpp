@@ -38,6 +38,9 @@ private:
 
 	float xMovement;
 
+	void InitDoors();
+	void InitPlayers();
+
 	void CheckForMovement();
 	void HandlePlayerAnimation();
 	void HandleDoors();
@@ -45,4 +48,8 @@ private:
 
 	void UpdatePlayerHitboxes();
 	void HandleGUI();
+	void CheckForClickedPlayer();
+	void CheckForClickedVendingMachine();
+
+	void RenderMainRoom();
 };

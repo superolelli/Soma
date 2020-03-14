@@ -93,9 +93,10 @@ void CTextureManager::LoadTextures()
 	item[13].loadFromFile("Data/Sprites/Items/Bang/horseshoe.png");
 	item[14].loadFromFile("Data/Sprites/Items/Bang/canteen.png");
 	item[15].loadFromFile("Data/Sprites/Items/Bang/pepperbox.png");
-	item[16].loadFromFile("Data/Sprites/Items/Bang/beer.png");
-	item[17].loadFromFile("Data/Sprites/Items/Bang/tequila.png");
-	item[18].loadFromFile("Data/Sprites/Items/Bang/whisky.png");
+	item[16].loadFromFile("Data/Sprites/Items/Bang/scope.png");
+	item[17].loadFromFile("Data/Sprites/Items/Bang/beer.png");
+	item[18].loadFromFile("Data/Sprites/Items/Bang/tequila.png");
+	item[19].loadFromFile("Data/Sprites/Items/Bang/whisky.png");
 
 	/** VENDING MACHINE **/
 	vendingMachinePanel.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/vending_machine_panel.png");

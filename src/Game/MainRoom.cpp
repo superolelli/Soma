@@ -15,6 +15,25 @@ void MainRoom::Init(CGameEngine * _engine)
 		xPos += background[i].GetGlobalRect().width;
 	}
 
+	InitDoors();
+	InitPlayers();
+
+	vendingMachine.Load(g_pTextures->mainRoomVendingMachine);
+	vendingMachine.SetPos(g_pObjectProperties->mainRoomVendingMachinePosition.x, g_pObjectProperties->mainRoomVendingMachinePosition.y);
+
+	gameStatus.Init();
+
+	gui.Init(m_pGameEngine, &gameStatus);
+
+	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
+	m_pGameEngine->GetWindow().setView(view);
+
+	xMovement = 0.0f;
+}
+
+
+void MainRoom::InitDoors()
+{
 	for (int i = 0; i < 3; i++)
 	{
 		doors[i].Load(g_pTextures->mainRoomDoors[i]);
@@ -40,6 +59,13 @@ void MainRoom::Init(CGameEngine * _engine)
 	signs[2].SetTextPosCentered(0);
 	signs[2].MoveText(0, -55, -40);
 
+	roots.Load(g_pTextures->mainRoomRoots);
+	roots.SetPos(g_pObjectProperties->mainRoomRootsPosition.x, g_pObjectProperties->mainRoomRootsPosition.y);
+}
+
+
+void MainRoom::InitPlayers()
+{
 	players[0] = g_pModels->modelSimonMainRoom->getNewEntityInstance("Simon");
 	players[1] = g_pModels->modelOleMainRoom->getNewEntityInstance("Ole");
 	players[2] = g_pModels->modelAnnaMainRoom->getNewEntityInstance("Anna");
@@ -61,21 +87,6 @@ void MainRoom::Init(CGameEngine * _engine)
 		players[i]->setSoundMinDistance(900);
 		players[i]->setSoundPosition(playerHitbox[i].left + playerHitbox[i].width / 2, playerHitbox[i].top + playerHitbox[i].height / 2);
 	}
-
-	roots.Load(g_pTextures->mainRoomRoots);
-	roots.SetPos(g_pObjectProperties->mainRoomRootsPosition.x, g_pObjectProperties->mainRoomRootsPosition.y);
-
-	vendingMachine.Load(g_pTextures->mainRoomVendingMachine);
-	vendingMachine.SetPos(g_pObjectProperties->mainRoomVendingMachinePosition.x, g_pObjectProperties->mainRoomVendingMachinePosition.y);
-
-	gameStatus.Init();
-
-	gui.Init(m_pGameEngine, &gameStatus);
-
-	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
-	m_pGameEngine->GetWindow().setView(view);
-
-	xMovement = 0.0f;
 }
 
 
@@ -133,15 +144,6 @@ void MainRoom::Update()
 	if (m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
 
-	if (m_pGameEngine->GetKeystates(KeyID::O) == Keystates::Released)
-	{
-		Item newItem;
-		newItem.color = sf::Color(128, 128, 0);
-		newItem.id = ItemID(rand() % numberOfItems);
-		newItem.number = 1;
-		gameStatus.AddItem(newItem);
-	}
-
 	HandleGUI();
 	CheckForMovement();
 	HandlePlayerAnimation();
@@ -156,28 +158,38 @@ void MainRoom::HandleGUI()
 {
 	if (!gui.IsPanelOpen())
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			if (playerHitbox[i].contains(m_pGameEngine->GetWorldMousePos()))
-			{
-				m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
-
-				if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released)
-					gui.PlayerClicked(i);
-			}
-		}
-
-		if (vendingMachine.GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos()))
-		{
-			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
-			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released)
-				gui.VendingMachineClicked();
-		}
+		CheckForClickedPlayer();
+		CheckForClickedVendingMachine();
 	}
 
 	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
 	gui.Update();
 	m_pGameEngine->GetWindow().setView(view);
+}
+
+
+void MainRoom::CheckForClickedPlayer()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (playerHitbox[i].contains(m_pGameEngine->GetWorldMousePos()))
+		{
+			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
+
+			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released)
+				gui.PlayerClicked(i);
+		}
+	}
+}
+
+void MainRoom::CheckForClickedVendingMachine()
+{
+	if (vendingMachine.GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos()))
+	{
+		m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
+		if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released)
+			gui.VendingMachineClicked();
+	}
 }
 
 
@@ -252,11 +264,22 @@ void MainRoom::Render(double _normalizedTimestep)
 
 	m_pGameEngine->GetWindow().setView(view);
 
+	RenderMainRoom();
+
+	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
+	gui.Render();
+
+	m_pGameEngine->FlipWindow();
+}
+
+
+void MainRoom::RenderMainRoom()
+{
 	sf::IntRect viewRect = {
 		(int)(view.getCenter().x - view.getSize().x / 2),
-		(int)(view.getCenter().y - view.getSize().y /2),
+		(int)(view.getCenter().y - view.getSize().y / 2),
 		(int)view.getSize().x,
-		(int)view.getSize().y};
+		(int)view.getSize().y };
 
 	for (auto &b : background) {
 		if (b.GetGlobalRect().intersects(viewRect))
@@ -283,11 +306,4 @@ void MainRoom::Render(double _normalizedTimestep)
 	}
 
 	vendingMachine.Render(m_pGameEngine->GetWindow());
-
-	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
-
-	gui.Render();
-
-	m_pGameEngine->FlipWindow();
 }
-

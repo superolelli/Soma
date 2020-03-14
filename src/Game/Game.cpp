@@ -88,23 +88,28 @@ void Game::Update()
 	}
 
 	if (levelFinished)
-	{
-		levelFinishedPanel.Update();
-		if (levelFinishedPanel.ContinueButtonClicked())
-		{
-			if (!adventureGroup.IsDead())
-			{
-				gameStatus->AddDice(level->GetReward().dice);
-				gameStatus->AddCards(level->GetReward().cards);
-				gameStatus->bangLevel++;
-			}
-			OnGameFinished();
-			g_pMusic->SetCurrentEnvironment(MusicEnvironment::mainRoomEnvironment);
-			m_pGameEngine->PopState();
-		}
-	}
+		HandleFinishedLevel();
 
 	g_pVideos->Update();
+}
+
+
+
+void Game::HandleFinishedLevel()
+{
+	levelFinishedPanel.Update();
+	if (levelFinishedPanel.ContinueButtonClicked())
+	{
+		if (!adventureGroup.IsDead())
+		{
+			gameStatus->AddDice(level->GetReward().dice);
+			gameStatus->AddCards(level->GetReward().cards);
+			gameStatus->bangLevel++;
+		}
+		OnGameFinished();
+		g_pMusic->SetCurrentEnvironment(MusicEnvironment::mainRoomEnvironment);
+		m_pGameEngine->PopState();
+	}
 }
 
 

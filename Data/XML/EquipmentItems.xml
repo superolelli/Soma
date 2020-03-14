@@ -94,5 +94,10 @@
    initiative="-2">
 		<Level>2</Level>
 	</Pepperbox>
+	
+   <Scope id="16" name="Zielfernrohr"
+		  precision="10">
+	   <Level>2</Level>
+   </Scope>
   
 </Items>
