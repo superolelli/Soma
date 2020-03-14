@@ -22,7 +22,7 @@ public:
 	void UnselectSelectedItem() { currentlySelectedItem = -1; }
 	bool IsItemSelected();
 
-	void ChooseNewRandomItems(int _level);
+	void ChooseNewRandomItems(int _bangLevel, int _kutschfahrtLevel, int _tichuLevel);
 
 	Item RetrieveCurrentlySelectedItem();
 	int CurrentItemPrice();
@@ -45,7 +45,4 @@ private:
 	std::unordered_map<ItemID, bool> consumablesAvailability;
 
 	std::function<void(Item &)> OnItemSelected;
-
-	sf::Color GetRandomItemColor();
-	ItemID GetRandomItemID(int _level);
 };

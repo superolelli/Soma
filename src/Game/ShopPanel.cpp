@@ -1,4 +1,5 @@
 #include "ShopPanel.hpp"
+#include "ItemFactory.hpp"
 
 void ShopPanel::Init(CGameEngine *_engine, std::unordered_map<ItemID, bool> &_consumablesAvailability)
 {
@@ -53,8 +54,6 @@ void ShopPanel::Init(CGameEngine *_engine, std::unordered_map<ItemID, bool> &_co
 	}
 
 	currentlySelectedItem = -1;
-
-	ChooseNewRandomItems(1);
 }
 
 
@@ -159,15 +158,13 @@ void ShopPanel::SetPos(int _x, int _y)
 }
 
 
-void ShopPanel::ChooseNewRandomItems(int _level)
+void ShopPanel::ChooseNewRandomItems(int _bangLevel, int _kutschfahrtLevel, int _tichuLevel)
 {
 	for (int i = 0; i < 5; i++)
 	{
 		InventoryItemWrapper *newItem = new InventoryItemWrapper;
 
-		Item rawItem;
-		rawItem.id = GetRandomItemID(_level);
-		rawItem.color = GetRandomItemColor();
+		Item rawItem = ItemFactory::CreateShopItem(_bangLevel);
 
 		CSprite newSprite;
 		newSprite.Load(g_pTextures->item[rawItem.id]);
@@ -180,45 +177,17 @@ void ShopPanel::ChooseNewRandomItems(int _level)
 
 		items[i] = newItem;
 	}
-}
 
-
-sf::Color ShopPanel::GetRandomItemColor()
-{
-	int randomNumber = rand() % 4;
-
-	if (randomNumber == 0)
-		return sf::Color(128, 0, 0);
-	else if (randomNumber == 1)
-		return sf::Color(0, 128, 0);
-	else if (randomNumber == 2)
-		return sf::Color(0, 0, 128);
-	else
-		return sf::Color(128, 128, 0);
-}
-
-ItemID ShopPanel::GetRandomItemID(int _level)
-{
-	int numberOfPossibleItems = 0;
-	for (int i = 0; i < _level; i++)
-		numberOfPossibleItems += g_pObjectProperties->itemsByLevel[i].size();
-
-	ItemID itemID;
-	do {
-		int randomNumber = rand() % numberOfPossibleItems;
-
-		int i;
-		for (i = 0; i < _level; i++)
+	for (int i = 5; i < 15; i++)
+	{
+		if (items[i] != nullptr)
 		{
-			if (randomNumber >= g_pObjectProperties->itemsByLevel[i].size())
-				randomNumber -= g_pObjectProperties->itemsByLevel[i].size();
+			if (consumablesAvailability.at(items[i]->GetItem().id) == true)
+				items[i]->GetSprite().SetColor(255, 255, 255);
 			else
-				break;
+				items[i]->GetSprite().SetColor(40, 40, 40);
 		}
-		itemID = g_pObjectProperties->itemsByLevel[i][randomNumber];
-	} while (itemID <= ItemID::dice || itemID >= CONSUMABLE_ITEMS_START);
-	
-	return itemID;
+	}
 }
 
 

@@ -20,6 +20,8 @@ public:
 
 	bool IsPanelOpen();
 
+	void ChooseNewShopItems() { vendingMachinePanel.ChooseNewShopItems(); }
+
 private:
 	CGameEngine *engine;
 	GameStatus *gameStatus;

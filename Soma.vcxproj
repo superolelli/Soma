@@ -270,6 +270,7 @@
     <ClCompile Include="src\Game\InitialState.cpp" />
     <ClCompile Include="src\Game\Inventory.cpp" />
     <ClCompile Include="src\Game\InventoryItemWrapper.cpp" />
+    <ClCompile Include="src\Game\ItemFactory.cpp" />
     <ClCompile Include="src\Game\ItemPanel.cpp" />
     <ClCompile Include="src\Game\ItemPanelDecorator.cpp" />
     <ClCompile Include="src\Game\ItemPanelDragAndDropDecorator.cpp" />
@@ -335,6 +336,7 @@
     <ClInclude Include="src\Game\Inventory.hpp" />
     <ClInclude Include="src\Game\InventoryItemWrapper.hpp" />
     <ClInclude Include="src\Game\Item.hpp" />
+    <ClInclude Include="src\Game\ItemFactory.hpp" />
     <ClInclude Include="src\Game\ItemPanel.hpp" />
     <ClInclude Include="src\Game\ItemPanelDecorator.hpp" />
     <ClInclude Include="src\Game\ItemPanelDragAndDropDecorator.hpp" />

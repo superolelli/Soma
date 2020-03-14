@@ -55,7 +55,7 @@ public:
 	sf::Texture lootablePanelCloseButton;
 	sf::Texture consumablePanel;
 	sf::Texture itemRowPanel;
-	sf::Texture item[18];
+	sf::Texture item[19];
 
 	/** VENDING MACHINE **/
 	sf::Texture vendingMachinePanel;

@@ -33,6 +33,8 @@ public:
 	void Update() override;
 	void Render(double _normalizedTimestep) override;
 
+	void SetOnGameFinishedCallback(std::function<void(void)> _onGameFinished);
+
 private:
 
 	sf::View view;
@@ -53,6 +55,8 @@ private:
 
 	bool inBattle;
 	bool levelFinished;
+
+	std::function<void(void)> OnGameFinished;
 
 	void UpdateLevel();
 	void UpdateBattle();

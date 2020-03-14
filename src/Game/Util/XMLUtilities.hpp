@@ -4,6 +4,7 @@
 
 #include "../Ability.hpp"
 #include "../LevelSpecs.hpp"
+#include "../Item.hpp"
 
 
 namespace pugi {
@@ -19,4 +20,6 @@ namespace pugi {
 	void loadLevelSpecsFromXML(const xml_node& levelSpecNode, LevelSpecs &specs);
 
 	void loadEnemyGroupFromXML(const xml_node& enemyGroupNode, std::array<CombatantID, 4> &newGroup);
+
+	void loadPossibleLootFromXML(const xml_node& enemyNode, std::vector<ItemID> &loot);
 }

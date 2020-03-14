@@ -4,6 +4,7 @@
 #include "ApacheKid.hpp"
 #include "Abtruenniger.hpp"
 #include "Hilfssheriff.hpp"
+#include "ItemFactory.hpp"
 
 
 void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss)
@@ -87,6 +88,7 @@ void Battle::AddEnemy(int enemyID)
 	}
 }
 
+
 Enemy *Battle::GetEnemy(int _enemyID)
 {
 	Enemy *enemy;
@@ -116,8 +118,6 @@ Enemy *Battle::GetEnemy(int _enemyID)
 
 int Battle::GetEmptyEnemyBattlePosition()
 {
-	int battlePosition;
-
 	for (int i = 0; i < 4; i++)
 	{
 		if (enemies[i] == nullptr)
@@ -144,6 +144,7 @@ void Battle::RecalculateEnemyPositions()
 	}
 }
 
+
 void Battle::Update()
 {
 	for (int i = 0; i < 4; i++)
@@ -160,23 +161,29 @@ void Battle::Update()
 			isBattleFinished = true;
 
 		if (combatants[currentCombatant]->FinishedTurn() && !IsOneGroupDying())
-		{
-			do {
-				ChooseNextCombatant();
-			} while (combatants[currentCombatant]->Status().GetCurrentHealth() <= 0);
-
-			combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
-			if (combatants[currentCombatant]->IsPlayer())
-				gui->SetCurrentPlayer(combatants[currentCombatant]);
-			else
-				gui->SetCurrentPlayer(nullptr);
-		}
+			GiveTurnToNextCombatant();
 
 		SetCombatantToDisplayForGUI();
 	}
 	else
 		HandleIntro();
 }
+
+
+
+void Battle::GiveTurnToNextCombatant()
+{
+	do {
+		ChooseNextCombatant();
+	} while (combatants[currentCombatant]->Status().GetCurrentHealth() <= 0);
+
+	combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
+	if (combatants[currentCombatant]->IsPlayer())
+		gui->SetCurrentPlayer(combatants[currentCombatant]);
+	else
+		gui->SetCurrentPlayer(nullptr);
+}
+
 
 void Battle::HandleIntro()
 {
@@ -234,6 +241,9 @@ void Battle::HandleDeaths()
 				{
 					Notify(ObserverNotificationBattle{battleEvents::enemyDied});
 				}
+
+				if (dynamic_cast<GregDigger*>(*i))
+					RemoveObserver(*i);
 			}
 			else if ((*i)->AnimationFinished())
 			{
@@ -341,7 +351,6 @@ void Battle::Render()
 }
 
 
-
 void Battle::RenderAbilityAnimations()
 {
 	for (Combatant* c : combatants)
@@ -351,3 +360,14 @@ void Battle::RenderAbilityAnimations()
 	}
 }
 
+
+void Battle::FillLootableDialog(int _level, LootableDialog *_dialog)
+{
+	for (int i = 0; i < 9; i++)
+	{
+		_dialog->AddItem(ItemFactory::CreateBattleRewardItem(_level, enemies));
+
+		if (rand() % 5 != 0)
+			break;
+	}
+}

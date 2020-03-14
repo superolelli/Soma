@@ -17,9 +17,4 @@ private:
 	GameStatus *gameStatus;
 
 	int level;
-	int numberOfPossibleItems;
-
-	ItemID GetRandomItemID(LootableID _lootableID);
-	sf::Color GetRandomColor();
-	int GetRandomItemNumber(ItemID _id);
 };

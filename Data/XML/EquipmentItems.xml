@@ -87,5 +87,12 @@
 	  health="10">
 	   <Level>2</Level>
    </Canteen>
+
+	<Pepperbox id="15" name="Pepperbox"
+   damageMin="3"
+   damageMax="3"
+   initiative="-2">
+		<Level>2</Level>
+	</Pepperbox>
   
 </Items>

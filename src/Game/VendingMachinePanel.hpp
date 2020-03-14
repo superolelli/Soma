@@ -22,6 +22,8 @@ public:
 	void Close() { closed = true; }
 	bool IsOpen() { return !closed; }
 
+	void ChooseNewShopItems();
+
 private:
 	GameStatus *gameStatus;
 	CGameEngine *engine;

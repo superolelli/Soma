@@ -98,6 +98,7 @@ void Game::Update()
 				gameStatus->AddCards(level->GetReward().cards);
 				gameStatus->bangLevel++;
 			}
+			OnGameFinished();
 			g_pMusic->SetCurrentEnvironment(MusicEnvironment::mainRoomEnvironment);
 			m_pGameEngine->PopState();
 		}
@@ -152,6 +153,15 @@ void Game::UpdateBattle()
 			levelFinishedPanel.Init(m_pGameEngine, false);
 			levelFinishedPanel.SetReward(level->GetReward());
 			levelFinishedPanel.SetPos(m_pGameEngine->GetWindowSize().x / 2 - 458, 200);
+		}
+		else
+		{
+			//Reward Dialog
+			LootableDialog *dialog = new LootableDialog;
+			dialog->Init(m_pGameEngine, gameStatus, 0);
+			dialog->SetTitle(std::string("Kampf gewonnen!"));
+			currentBattle->FillLootableDialog(gameStatus->bangLevel, dialog);
+			dialogManager.AddLootableDialog(dialog);
 		}
 
 		inBattle = false;
@@ -221,5 +231,10 @@ void Game::Render(double _normalizedTimestep)
 	}
 
 	m_pGameEngine->FlipWindow();
+}
+
+void Game::SetOnGameFinishedCallback(std::function<void(void)> _onGameFinished)
+{
+	OnGameFinished = _onGameFinished;
 }
 

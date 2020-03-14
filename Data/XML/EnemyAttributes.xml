@@ -15,7 +15,11 @@
 	  criticalHit="5"
 	  dodge="3"
 	  precision="5"
-  ></Gesetzloser>
+  >
+	  <Loot>
+		  <Item>Patronen</Item>
+	  </Loot>
+  </Gesetzloser>
 
   <Abtruenniger id="5"
     strength="4"
@@ -31,7 +35,14 @@
 	  criticalHit="5"
 	  dodge="3"
 	  precision="5"
-  ></Abtruenniger>
+  >
+	  <Loot>
+		  <Item>Cowboyhut</Item>
+		  <Item>Pepperbox</Item>
+		  <Item>Stiefel</Item>
+		  <Item>Patronen</Item>
+	  </Loot>
+  </Abtruenniger>
 
   <Indianer id="6"
     strength="4"
@@ -47,7 +58,11 @@
 	  criticalHit="5"
 	  dodge="6"
 	  precision="5"
-  ></Indianer>
+  >
+	  <Loot>
+		  <Item>Tomahawk</Item>
+	  </Loot>
+  </Indianer>
 
   <Hilfssheriff id="7"
     strength="4"
@@ -63,7 +78,13 @@
 	  criticalHit="5"
 	  dodge="3"
 	  precision="5"
-  ></Hilfssheriff>
+  >
+	  <Loot>
+		  <Item>Sherrifstern</Item>
+		  <Item>Stiefel</Item>
+		  <Item>Patronen</Item>
+	  </Loot>
+  </Hilfssheriff>
 
   <Greg id="8"
     strength="5"
@@ -79,7 +100,10 @@
 	  criticalHit="10"
 	  dodge="15"
 	  precision="10"
-  ></Greg>
+  >
+	  <Loot>
+	  </Loot>
+  </Greg>
 
     <ApacheKid id="9"
     strength="6"
@@ -95,6 +119,11 @@
 	  criticalHit="9"
 	  dodge="24"
 	  precision="9"
-  ></ApacheKid>
+  >
+		<Loot>
+			<Item>Messer</Item>
+			<Item>Tomahawk</Item>
+		</Loot>
+	</ApacheKid>
   
 </EnemyAttributes>

@@ -5,7 +5,7 @@
 #include "Enemy.hpp"
 #include "../Framework/Graphics/NotificationRenderer.hpp"
 #include "../Framework/Patterns/Subject.hpp"
-
+#include "LootableDialog.hpp"
 
 const int ENEMY_X_OFFSET = 20;
 const int ENEMY_Y_POS = 750;
@@ -25,6 +25,8 @@ public:
 
 	bool isFinished() { return isBattleFinished; }
 	bool isBossBattle;
+
+	void FillLootableDialog(int _level, LootableDialog *_dialog);
 
 private:
 
@@ -49,6 +51,7 @@ private:
 	void CalculateTurnOrder();
 	void HandleDeaths();
 	void ChooseNextCombatant();
+	void GiveTurnToNextCombatant();
 
 	void SetCombatantToDisplayForGUI();
 

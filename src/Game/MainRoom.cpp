@@ -232,6 +232,7 @@ void MainRoom::HandleDoors()
 				g_pSounds->PlaySound(soundID::DOOR);
 				auto newGame = new Game();
 				newGame->SetGameStatusPtr(&gameStatus);
+				newGame->SetOnGameFinishedCallback([&]() {gui.ChooseNewShopItems(); });
 				m_pGameEngine->PushState(newGame);
 			}
 		}

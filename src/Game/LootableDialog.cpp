@@ -41,6 +41,7 @@ void LootableDialog::Quit()
 void LootableDialog::SetTitle(std::string &_str)
 {
 	lootableNameText.setString(_str);
+	lootableNameText.setPosition(lootablePanel.GetGlobalRect().left + 467 - lootableNameText.getGlobalBounds().width / 2, lootablePanel.GetGlobalRect().top + 15);
 }
 
 void LootableDialog::SetPos(int _x, int _y)

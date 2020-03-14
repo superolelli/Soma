@@ -206,6 +206,16 @@ namespace pugi {
 		stats.currentHealth = stats.maxHealth;
 	}
 
+
+	void loadPossibleLootFromXML(const xml_node& enemyNode, std::vector<ItemID> &loot)
+	{
+		for (auto &c : enemyNode.child("Loot").children())
+		{
+			loot.push_back(itemIdentifierMap[c.text().as_string()]);
+		}
+	}
+
+
 	void loadLevelSpecsFromXML(const xml_node & levelSpecNode, LevelSpecs & specs)
 	{
 		specs.level = levelSpecNode.attribute("id").as_int();

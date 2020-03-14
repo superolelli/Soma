@@ -6,6 +6,9 @@
 
 void ObjectPropertiesManager::LoadObjectProperties()
 {
+	LoadEquipmentItemStats();
+	LoadConsumableItemStats();
+	LoadLootableProperties();
 	LoadPlayerAbilities();
 	LoadPlayerAttributes();
 	LoadSkills();
@@ -13,9 +16,6 @@ void ObjectPropertiesManager::LoadObjectProperties()
 	LoadEnemyAttributes();
 	LoadLevelSpecs();
 	LoadMainRoomPositions();
-	LoadEquipmentItemStats();
-	LoadConsumableItemStats();
-	LoadLootableProperties();
 }
 
 
@@ -161,6 +161,7 @@ void ObjectPropertiesManager::LoadEnemyAttributes()
 		int enemyID = enemy.attribute("id").as_int();
 
 		loadAttributesFromXML(enemy, enemyStats[enemyID]);
+		loadPossibleLootFromXML(enemy, enemyLoot[enemyID]);
 	}
 }
 
