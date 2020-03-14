@@ -38,11 +38,6 @@ public:
 	Buff &GetBuff();
 	Buff &GetDebuff();
 
-	int GetStrength();
-	int GetDexterity();
-	int GetConstitution();
-	int GetSpeed();
-
 	int GetMaxHealth();
 	int GetCurrentHealth();
 	int GetDamage();
@@ -57,13 +52,13 @@ public:
 	int *GetCurrentHealthPointer() { return &currentStats.currentHealth; }
 	int *GetMaxHealthPointer() { return &currentStats.maxHealth; }
 
-	void SetStats(CombatantStats &_stats) { currentStats = _stats; }
-	void AddStats(CombatantStats &_stats) { currentStats += _stats; }
+	void SetStats(CombatantAttributes &_stats) { currentStats = _stats; }
+	void AddStats(CombatantAttributes &_stats) { currentStats += _stats; }
 	void Reset();
 
 private:
 
-	CombatantStats currentStats;
+	CombatantAttributes currentStats;
 	Combatant *combatant;
 	NotificationRenderer *notificationRenderer;
 

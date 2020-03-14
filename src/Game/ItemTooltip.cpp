@@ -68,18 +68,6 @@ void ItemTooltip::GenerateTooltipStringEquipment(std::string & _tooltip)
 	if (itemProperties.stats.maxHealth != 0)
 		_tooltip.append(std::to_string(itemProperties.stats.maxHealth) + " Maximales Leben\n");
 
-	if (itemProperties.stats.attributes.constitution != 0)
-		_tooltip.append(std::to_string(itemProperties.stats.attributes.constitution) + " Konstitution\n");
-
-	if (itemProperties.stats.attributes.dexterity != 0)
-		_tooltip.append(std::to_string(itemProperties.stats.attributes.dexterity) + " Geschicklichkeit\n");
-
-	if (itemProperties.stats.attributes.strength != 0)
-		_tooltip.append(std::to_string(itemProperties.stats.attributes.strength) + " Stärke\n");
-
-	if (itemProperties.stats.attributes.speed != 0)
-		_tooltip.append(std::to_string(itemProperties.stats.attributes.speed) + " Geschwindigkeit\n");
-
 	if (_tooltip.back() == '\n')
 		_tooltip.pop_back();
 }

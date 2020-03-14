@@ -89,9 +89,9 @@
 	  </positions>
 
 	  <effect>
-		  <buff>
-					<duration>3</duration>
-					<isPositive>false</isPositive>
+	   <buff>
+		  <duration>3</duration>
+		  <isPositive>false</isPositive>
           <dodge>-3</dodge>
           <damage>-3</damage>
       </buff>

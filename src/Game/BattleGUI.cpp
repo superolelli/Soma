@@ -41,6 +41,13 @@ void BattleGUI::Init(CGameEngine *_engine)
 	currentCombatantName.setFillColor(sf::Color::White);
 	currentCombatantName.setOutlineColor(sf::Color::Black);
 	currentCombatantName.setOutlineThickness(4.0);
+
+	abilityInformationText.setCharacterSize(16);
+	abilityInformationText.setStyle(sf::Text::Bold);
+	abilityInformationText.setFont(g_pFonts->f_trajan);
+	abilityInformationText.setFillColor(sf::Color(200, 200, 130));
+	//abilityInformationText.setOutlineColor(sf::Color::Black);
+	//abilityInformationText.setOutlineThickness(2.0);
 	
 	tooltip.Init();
 	tooltip.SetShowAboveY(true);
@@ -62,6 +69,8 @@ void BattleGUI::Update()
 
 	currentCombatantHealthBar.Update(g_pTimer->GetElapsedTime().asSeconds());
 
+	abilityInformationText.setString("");
+
 	if (currentPlayer != nullptr)
 	{
 		if (engine->GetButtonstates(ButtonID::Left) == Keystates::Pressed)
@@ -75,7 +84,29 @@ void BattleGUI::Update()
 				}
 			}
 		}
+
+		if (!combatantToDisplay->IsPlayer() && dynamic_cast<Player*>(currentPlayer)->CurrentAbilityCanAimAtCombatant(combatantToDisplay))
+			UpdateAbilityInformationText();
 	}
+}
+
+
+void BattleGUI::UpdateAbilityInformationText()
+{
+	float additionalDamageFactor = dynamic_cast<Player*>(currentPlayer)->GetAdditionalDamageForCurrentlyAimedCombatant();
+	int hitProbability = 100 - (combatantToDisplay->Status().GetDodge() - (currentPlayer->Status().GetPrecision() + g_pObjectProperties->playerAbilities[currentPlayer->GetID()][currentAbility].precisionModificator)) * 2;
+	hitProbability = std::max(0, std::min(100, hitProbability));
+	int maxDamage = currentPlayer->Status().GetDamageMax() * (g_pObjectProperties->playerAbilities[currentPlayer->GetID()][currentAbility].effectHostile.damageFactor + additionalDamageFactor);
+	maxDamage -= std::round(((float)combatantToDisplay->Status().GetArmour() / 100.0f * maxDamage));
+	int minDamage = currentPlayer->Status().GetDamageMin() * (g_pObjectProperties->playerAbilities[currentPlayer->GetID()][currentAbility].effectHostile.damageFactor + additionalDamageFactor);
+	minDamage -= std::round(((float)combatantToDisplay->Status().GetArmour() / 100.0f * minDamage));
+
+	std::string abilityInformation = "";
+	abilityInformation.append("Treffer: " + std::to_string(hitProbability) + "% | ");
+	abilityInformation.append("Schaden: " + std::to_string(minDamage) + "-" + std::to_string(maxDamage));
+	abilityInformationText.setString(abilityInformation);
+	abilityInformationText.setPosition(currentCombatantHealthBar.GetRect().left + currentCombatantHealthBar.GetRect().width / 2 - abilityInformationText.getLocalBounds().width / 2, combatantAttributesPanel.GetRect().top + 145);
+
 }
 
 
@@ -99,6 +130,8 @@ void BattleGUI::Render()
 	}
 
 	RenderCombatantInformation();	
+
+	engine->GetWindow().draw(abilityInformationText);
 }
 
 

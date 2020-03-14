@@ -22,12 +22,9 @@ private:
 	void InitDescriptionTexts();
 	void InitValueTexts();
 
-	void SetValueTextColor(sf::Text &text, int buffValue, int debuffValue, bool _attribute);
+	void SetValueTextColor(sf::Text &text, int buffValue, int debuffValue);
 
-	sf::Text attributeText;
 	sf::Text statsText;
-
-	sf::Text attributeValueText[4];
 	sf::Text statValueText[6];
 
 	sf::RoundedRectangleShape background;

@@ -129,17 +129,17 @@ void GameStatus::RemoveEquipment(int _player, int _slot)
 	equipment[_player][_slot].id = ItemID::empty;
 }
 
-CombatantStats & GameStatus::GetEquipmentStats(int _player)
+CombatantAttributes & GameStatus::GetEquipmentStats(int _player)
 {
 	return equipmentStats[_player];
 }
 
-void GameStatus::SetDiamondStats(int _player, CombatantStats & _stats)
+void GameStatus::SetDiamondStats(int _player, CombatantAttributes & _stats)
 {
 	diamondStats[_player] = _stats;
 }
 
-CombatantStats & GameStatus::GetDiamondStats(int _player)
+CombatantAttributes & GameStatus::GetDiamondStats(int _player)
 {
 	return diamondStats[_player];
 }

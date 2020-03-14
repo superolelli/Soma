@@ -15,10 +15,6 @@ void Buff::SetStandardValues()
 	stats.precision = 0;
 	stats.dodge = 0;
 	stats.initiative = 0;
-	stats.attributes.constitution = 0;
-	stats.attributes.dexterity = 0;
-	stats.attributes.speed = 0;
-	stats.attributes.strength = 0;
 
 	isPositive = true;
 	onSelf = false;
@@ -38,10 +34,6 @@ void Buff::ApplySkill(const Buff &_buff)
 	stats.precision += _buff.stats.precision;
 	stats.dodge += _buff.stats.dodge;
 	stats.initiative += _buff.stats.initiative;
-	stats.attributes.constitution += _buff.stats.attributes.constitution;
-	stats.attributes.dexterity += _buff.stats.attributes.dexterity;
-	stats.attributes.speed += _buff.stats.attributes.speed;
-	stats.attributes.strength += _buff.stats.attributes.strength;
 
 	if(duration <= 0)
 		isPositive = _buff.isPositive;

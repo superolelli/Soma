@@ -15,7 +15,7 @@ namespace pugi {
 
 	void loadAbilityFromXML(const xml_node& abilityNode, Ability &ability);
 
-	void loadAttributesFromXML(const xml_node& attributeNode, CombatantStats &stats);
+	void loadAttributesFromXML(const xml_node& attributeNode, CombatantAttributes &stats);
 
 	void loadLevelSpecsFromXML(const xml_node& levelSpecNode, LevelSpecs &specs);
 

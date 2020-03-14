@@ -12,7 +12,7 @@ public:
 	void Render();
 
 	void RecolorDiamond(EquipmentConnections _connections[4]);
-	CombatantStats &GetStats() { return diamondStats.stats; }
+	CombatantAttributes &GetStats() { return diamondStats.stats; }
 
 private:
 	CGameEngine *engine;

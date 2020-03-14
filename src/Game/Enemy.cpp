@@ -258,7 +258,7 @@ void Enemy::AnnounceAndStartAbilityAnimation()
 	if (abilityAnnouncementTime <= 0.0f)
 	{
 		StartAbilityAnimation(int(chosenAbility));
-		StartTargetsAttackedAnimation(g_pObjectProperties->playerAbilities[GetID()][int(chosenAbility)].precisionModificator);
+		StartTargetsAttackedAnimation(g_pObjectProperties->enemyAbilities[int(chosenAbility)].precisionModificator);
 		abilityStatus = executing;
 	}
 }

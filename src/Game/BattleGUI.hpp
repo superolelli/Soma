@@ -39,9 +39,12 @@ private:
 	Bar currentCombatantHealthBar;
 
 	sf::Text currentCombatantName;
+
+	sf::Text abilityInformationText;
 	
 	AbilityTooltip tooltip;
 
 	void ShowTooltip(int _ability);
 	void RenderCombatantInformation();
+	void UpdateAbilityInformationText();
 };

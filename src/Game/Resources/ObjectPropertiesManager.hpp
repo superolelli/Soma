@@ -28,7 +28,7 @@ struct ItemProperties
 
 struct EquipmentProperties : public ItemProperties
 {
-	CombatantStats stats;
+	CombatantAttributes stats;
 };
 
 struct ConsumableProperties : public ItemProperties
@@ -43,8 +43,8 @@ public:
 	void LoadObjectProperties();
 
 	Ability playerAbilities[4][4];
-	CombatantStats playerStats[4];
-	std::map<int, CombatantStats> enemyStats;
+	CombatantAttributes playerStats[4];
+	std::map<int, CombatantAttributes> enemyStats;
 	std::unordered_map<int, std::vector<ItemID>> enemyLoot;
 
 	Ability enemyAbilities[10];

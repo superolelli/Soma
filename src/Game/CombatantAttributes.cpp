@@ -4,55 +4,36 @@
 
 
 
-void CombatantAttributes::operator+=(const CombatantAttributes & _attributes)
+
+void CombatantAttributes::operator+=(const CombatantAttributes & _stats)
 {
-	strength += _attributes.strength;
-	constitution += _attributes.constitution;
-	dexterity += _attributes.dexterity;
-	speed += _attributes.speed;
-}
-
-
-void CombatantAttributes::operator-=(const CombatantAttributes & _attributes)
-{
-	strength -= _attributes.strength;
-	constitution -= _attributes.constitution;
-	dexterity -= _attributes.dexterity;
-	speed -= _attributes.speed;
-}
-
-
-void CombatantStats::operator+=(const CombatantStats & _stats)
-{
-	maxHealth += _stats.maxHealth + _stats.attributes.constitution * CONSTITUTION_TO_HEALTH;
-	currentHealth += _stats.currentHealth + _stats.attributes.constitution * CONSTITUTION_TO_HEALTH;
-	damageMin += _stats.damageMin + _stats.attributes.strength * STRENGTH_TO_DAMAGE;
-	damageMax += _stats.damageMax + _stats.attributes.strength * STRENGTH_TO_DAMAGE;
+	maxHealth += _stats.maxHealth;
+	currentHealth += _stats.currentHealth;
+	damageMin += _stats.damageMin;
+	damageMax += _stats.damageMax;
 	armour += _stats.armour;
-	criticalHit += _stats.criticalHit + _stats.attributes.dexterity * DEXTERITY_TO_CRITICAL;
-	dodge += _stats.dodge + _stats.attributes.speed * SPEED_TO_DODGE;
-	initiative += _stats.initiative + _stats.attributes.speed * SPEED_TO_INITIATIVE;
-	precision += _stats.precision + _stats.attributes.dexterity * DEXTERITY_TO_PRECISION;
-	attributes += _stats.attributes;
+	criticalHit += _stats.criticalHit;
+	dodge += _stats.dodge;
+	initiative += _stats.initiative;
+	precision += _stats.precision;
 }
 
 
-void CombatantStats::operator-=(const CombatantStats & _stats)
+void CombatantAttributes::operator-=(const CombatantAttributes & _stats)
 {
-	maxHealth -= _stats.maxHealth + _stats.attributes.constitution * CONSTITUTION_TO_HEALTH;
-	currentHealth -= _stats.currentHealth + _stats.attributes.constitution * CONSTITUTION_TO_HEALTH;
-	damageMin -= _stats.damageMin + _stats.attributes.strength * STRENGTH_TO_DAMAGE;
-	damageMax -= _stats.damageMax + _stats.attributes.strength * STRENGTH_TO_DAMAGE;
+	maxHealth -= _stats.maxHealth;
+	currentHealth -= _stats.currentHealth;
+	damageMin -= _stats.damageMin;
+	damageMax -= _stats.damageMax;
 	armour -= _stats.armour;
-	criticalHit -= _stats.criticalHit + _stats.attributes.dexterity * DEXTERITY_TO_CRITICAL;
-	dodge -= _stats.dodge + _stats.attributes.speed * SPEED_TO_DODGE;
-	initiative -= _stats.initiative + _stats.attributes.speed * SPEED_TO_INITIATIVE;
-	precision -= _stats.precision + _stats.attributes.dexterity * DEXTERITY_TO_PRECISION;
-	attributes -= _stats.attributes;
+	criticalHit -= _stats.criticalHit;
+	dodge -= _stats.dodge;
+	initiative -= _stats.initiative;
+	precision -= _stats.precision;
 }
 
 
-void CombatantStats::Reset()
+void CombatantAttributes::Reset()
 {
 	maxHealth = 0;
 	currentHealth = 0;
@@ -63,8 +44,4 @@ void CombatantStats::Reset()
 	dodge = 0;
 	initiative = 0;
 	precision = 0;
-	attributes.constitution = 0;
-	attributes.dexterity = 0;
-	attributes.speed = 0;
-	attributes.strength = 0;
 }

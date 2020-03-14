@@ -109,10 +109,10 @@ void CGameEngine::ChangeStateImmediately(GameState * _state)
 void CGameEngine::ClearStates()
 {
 	//delete every state on the stack
-	for (auto state : m_pStates)
+	for (auto it = m_pStates.rbegin(); it != m_pStates.rend(); it++)
 	{
-		state->Cleanup();
-		SAFE_DELETE(state);
+		(*it)->Cleanup();
+		SAFE_DELETE(*it);
 	}
 
 	m_pStates.clear();

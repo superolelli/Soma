@@ -123,14 +123,6 @@ void CombatantStatusBar::RenderBuffTooltip(Buff &_buff, bool _positive)
 	else
 		tooltip.append(std::to_string(_buff.duration) + " Runde:\n#aaaadd ");
 
-	if (_buff.stats.attributes.strength != 0)
-		tooltip.append(prefix + std::to_string(_buff.stats.attributes.strength) + " Stärke\n");
-	if (_buff.stats.attributes.constitution != 0)
-		tooltip.append(prefix + std::to_string(_buff.stats.attributes.constitution) + " Konstitution\n");
-	if (_buff.stats.attributes.dexterity != 0)
-		tooltip.append(prefix + std::to_string(_buff.stats.attributes.dexterity) + " Geschicklichkeit\n");
-	if (_buff.stats.attributes.speed != 0)
-		tooltip.append(prefix + std::to_string(_buff.stats.attributes.speed) + " Geschwindigkeit\n");
 	if (_buff.stats.armour != 0)
 		tooltip.append(prefix + std::to_string(_buff.stats.armour) + " Rüstung\n");
 	if (_buff.stats.maxHealth != 0)

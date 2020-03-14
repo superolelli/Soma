@@ -1,12 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Items>
-  <Default id="-1" name="empty"
-		strength="0"
-		constitution="0"
-		dexterity="0"
-		speed="0"
-				 
+  <Default id="-1" name="empty"	 
     armour ="0"
     health ="0"
     damageMin ="0"

@@ -41,19 +41,6 @@ namespace pugi {
 
 		if (buffNode.child("dodge"))
 			buff.stats.dodge = buffNode.child("dodge").text().as_int();
-
-		if (buffNode.child("dexterity"))
-			buff.stats.attributes.dexterity = buffNode.child("dexterity").text().as_int();
-
-		if (buffNode.child("strength"))
-			buff.stats.attributes.strength = buffNode.child("strength").text().as_int();
-
-		if (buffNode.child("constitution"))
-			buff.stats.attributes.constitution = buffNode.child("constitution").text().as_int();
-
-		if (buffNode.child("speed"))
-			buff.stats.attributes.speed = buffNode.child("speed").text().as_int();
-
     }
 
 
@@ -165,7 +152,7 @@ namespace pugi {
 		}
 	}
 
-	void loadAttributesFromXML(const xml_node & attributeNode, CombatantStats & stats)
+	void loadAttributesFromXML(const xml_node & attributeNode, CombatantAttributes & stats)
 	{
 		if(attributeNode.attribute("armour"))
 			stats.armour = attributeNode.attribute("armour").as_int();
@@ -190,18 +177,6 @@ namespace pugi {
 
 		if (attributeNode.attribute("precision"))
 			stats.precision = attributeNode.attribute("precision").as_int();
-
-		if (attributeNode.attribute("dexterity"))
-			stats.attributes.dexterity = attributeNode.attribute("dexterity").as_int();
-
-		if (attributeNode.attribute("speed"))
-			stats.attributes.speed = attributeNode.attribute("speed").as_int();
-
-		if (attributeNode.attribute("strength"))
-			stats.attributes.strength = attributeNode.attribute("strength").as_int();
-
-		if (attributeNode.attribute("constitution"))
-			stats.attributes.constitution = attributeNode.attribute("constitution").as_int();
 		
 		stats.currentHealth = stats.maxHealth;
 	}

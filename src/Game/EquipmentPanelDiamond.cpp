@@ -66,72 +66,118 @@ void EquipmentPanelDiamond::RecolorDiamond(EquipmentConnections _connections[4])
 
 void EquipmentPanelDiamond::UpdateStats(EquipmentConnections _connections[4])
 {
-	CombatantStats stats;
+	CombatantAttributes stats;
 	stats.Reset();
 
 	if (newColor == sf::Color(64, 0, 0))
-		stats.attributes.strength = 1;
+	{
+		stats.damageMax = 2;
+		stats.damageMin = 2;
+	}
 	else if (newColor == sf::Color(128, 0, 0))
-		stats.attributes.strength = 4;
+	{
+		stats.damageMax = 8;
+		stats.damageMin = 8;
+	}
 	else if (newColor == sf::Color(255, 0, 0))
-		stats.attributes.strength = 8;
+	{
+		stats.damageMax = 16;
+		stats.damageMin = 16;
+	}
 	else if (newColor == sf::Color(0, 64, 0))
-		stats.attributes.constitution = 1;
+	{
+		stats.maxHealth = 5;
+		stats.currentHealth = 5;
+	}
 	else if (newColor == sf::Color(0, 128, 0))
-		stats.attributes.constitution = 3;
+	{
+		stats.maxHealth = 15;
+		stats.currentHealth = 15;
+	}
 	else if (newColor == sf::Color(0, 255, 0))
-		stats.attributes.constitution = 6;
+	{
+		stats.maxHealth = 30;
+		stats.currentHealth = 30;
+	}
 	else if (newColor == sf::Color(0, 0, 64))
-		stats.attributes.speed = 1;
+	{
+		stats.dodge = 3;
+		stats.initiative = 1;
+	}
 	else if (newColor == sf::Color(0, 0, 128))
-		stats.attributes.speed = 3;
+	{
+		stats.dodge = 9;
+		stats.initiative = 3;
+	}
 	else if (newColor == sf::Color(0, 0, 255))
-		stats.attributes.speed = 6;
+	{
+		stats.dodge = 18;
+		stats.initiative = 6;
+	}
 	else if (newColor == sf::Color(64, 64, 0))
 	{
 		for (int i = 0; i < 4; i++)
 		{
 			if (_connections[i].GetColor() == sf::Color(128, 128, 0))
 			{
-				stats.attributes.dexterity = 1;
+				stats.precision = 1;
+				stats.criticalHit = 1;
 				break;
 			}
 			else if (_connections[i].GetColor() == sf::Color(128, 0, 0))
 			{
-				stats.attributes.strength = 1;
-				stats.attributes.constitution = 1;
+				stats.damageMax = 2;
+				stats.damageMin = 2;
+				stats.maxHealth = 5;
+				stats.currentHealth = 5;
 				break;
 			}
 		}
 	}
 	else if (newColor == sf::Color(128, 128, 0))
-		stats.attributes.dexterity = 4;
+	{
+		stats.criticalHit = 4;
+		stats.precision = 4;
+	}
 	else if (newColor == sf::Color(255, 255, 0))
-		stats.attributes.dexterity = 8;
+	{
+		stats.criticalHit = 8;
+		stats.precision = 8;
+	}
 	else if (newColor == sf::Color(64, 0, 64))
 	{
-		stats.attributes.strength = 1;
-		stats.attributes.speed = 1;
+		stats.damageMax = 2;
+		stats.damageMin = 2;
+		stats.initiative = 1;
+		stats.dodge = 3;
 	}
 	else if (newColor == sf::Color(128, 64, 0))
 	{
-		stats.attributes.strength = 1;
-		stats.attributes.dexterity = 1;
+		stats.damageMax = 2;
+		stats.damageMin = 2;
+		stats.initiative = 1;
+		stats.dodge = 3;
 	}
 	else if (newColor == sf::Color(0, 64, 64))
 	{
-		stats.attributes.constitution = 1;
-		stats.attributes.speed = 1;
+		stats.maxHealth = 5;
+		stats.currentHealth = 5;
+		stats.initiative = 1;
+		stats.dodge = 3;
 	}
 	else if (newColor == sf::Color(64, 128, 0))
 	{
-		stats.attributes.dexterity = 1;
-		stats.attributes.constitution = 1;
+		stats.precision = 1;
+		stats.criticalHit = 1;
+		stats.maxHealth = 5;
+		stats.currentHealth = 5;
 	}
 	else if (newColor == sf::Color(64, 64, 64))
 	{
-		stats.attributes.dexterity = 1;
-		stats.attributes.speed = 1;
+		stats.precision = 1;
+		stats.criticalHit = 1;
+		stats.initiative = 1;
+		stats.dodge = 3;
 	}
 
 	diamondStats.stats = stats;

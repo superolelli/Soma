@@ -116,25 +116,6 @@ Buff & CombatantStatus::GetDebuff()
 	return returnBuff;
 }
 
-int CombatantStatus::GetStrength()
-{
-	return currentStats.attributes.strength < 0 ? 0 : currentStats.attributes.strength;
-}
-
-int CombatantStatus::GetDexterity()
-{
-	return currentStats.attributes.dexterity < 0 ? 0 : currentStats.attributes.dexterity;
-}
-
-int CombatantStatus::GetConstitution()
-{
-	return currentStats.attributes.constitution< 0 ? 0 : currentStats.attributes.constitution;
-}
-
-int CombatantStatus::GetSpeed()
-{
-	return currentStats.attributes.speed < 0 ? 0 : currentStats.attributes.speed;
-}
 
 void CombatantStatus::RemoveAllBuffs()
 {

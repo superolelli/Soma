@@ -19,7 +19,11 @@ public:
 	virtual bool IsPlayer() override { return true; }
 	virtual int GetID() override { return -3; }
 
-	void SetEquipment(CombatantStats &_equipmentStats);
+	void SetEquipment(CombatantAttributes &_equipmentStats);
+
+	float GetAdditionalDamageForCurrentlyAimedCombatant();
+	bool CurrentAbilityCanAimAtCombatant(Combatant* _combatant);
+
 
 protected:
 
@@ -27,7 +31,6 @@ protected:
 
 	void DoCurrentAbility();
 	bool CombatantClicked(Combatant* _combatant);
-	bool CurrentAbilityCanAimAtCombatant(Combatant* _combatant);
 
 	void HandleConfusion();
 

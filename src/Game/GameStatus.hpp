@@ -38,10 +38,10 @@ public:
 
 	void AddEquipment(int _player, int _slot, Item _item);
 	void RemoveEquipment(int _player, int _slot);
-	CombatantStats &GetEquipmentStats(int _player);
+	CombatantAttributes &GetEquipmentStats(int _player);
 
-	void SetDiamondStats(int _player, CombatantStats &_stats);
-	CombatantStats &GetDiamondStats(int _player);
+	void SetDiamondStats(int _player, CombatantAttributes &_stats);
+	CombatantAttributes &GetDiamondStats(int _player);
 
 	std::unordered_map<ItemID, bool> &GetConsumablesAvailability() { return consumablesAvailability; }
 
@@ -59,9 +59,9 @@ private:
 	std::vector<Item> consumables;
 
 	Item equipment[4][4];
-	CombatantStats equipmentStats[4];
+	CombatantAttributes equipmentStats[4];
 
-	CombatantStats diamondStats[4];
+	CombatantAttributes diamondStats[4];
 
 	std::unordered_map<ItemID, bool> consumablesAvailability;
 };

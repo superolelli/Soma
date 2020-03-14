@@ -147,18 +147,6 @@ void AbilityTooltip::AppendTooltipStringForOneTarget(std::string & _tooltip, boo
 
 		if (effect->buff.stats.maxHealth != 0)
 			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.maxHealth) + " Maximales Leben\n");
-
-		if (effect->buff.stats.attributes.constitution != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.attributes.constitution) + " Konstitution\n");
-
-		if (effect->buff.stats.attributes.dexterity != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.attributes.dexterity) + " Geschicklichkeit\n");
-
-		if (effect->buff.stats.attributes.strength != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.attributes.strength) + " Stärke\n");
-
-		if (effect->buff.stats.attributes.speed != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.attributes.speed) + " Geschwindigkeit\n");
 	}
 }
 

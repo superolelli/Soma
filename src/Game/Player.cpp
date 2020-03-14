@@ -16,9 +16,32 @@ void Player::Init()
 }
 
 
-void Player::SetEquipment(CombatantStats &_equipmentStats)
+void Player::SetEquipment(CombatantAttributes &_equipmentStats)
 {
 	status.AddStats(_equipmentStats);
+}
+
+float Player::GetAdditionalDamageForCurrentlyAimedCombatant()
+{
+	int numberOfCombatants = 0;
+	for (Combatant *c : (*allCombatants))
+	{
+		if (c->GetRect().contains(engine->GetWorldMousePos()) && CurrentAbilityCanAimAtCombatant(c))
+		{
+			int targetPosition = c->GetBattlePos();
+
+			for (Combatant* c : (*allCombatants))
+			{
+				if (CurrentAbilityAttacksAll() && this != c || c->GetBattlePos() >= targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
+					numberOfCombatants++;
+			}
+
+			break;
+		}
+	}
+
+	float additionalDamage = g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].effectHostile.lessTargetsMoreDamage * (NumberOfTargetsForCurrentAbility() - numberOfCombatants);
+	return additionalDamage;
 }
 
 
