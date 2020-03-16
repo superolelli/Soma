@@ -26,7 +26,7 @@ public:
 	bool isFinished() { return isBattleFinished; }
 	bool isBossBattle;
 
-	void FillLootableDialog(int _level, LootableDialog *_dialog);
+	std::array<Enemy*, 4> &GetEnemies() {return enemies;}
 
 private:
 
@@ -36,7 +36,7 @@ private:
 	NotificationRenderer *notificationRenderer;
 
 
-	Enemy *enemies[4];
+	std::array<Enemy*, 4> enemies;
 	std::vector<Combatant*> combatants;
 
 	int currentCombatant;

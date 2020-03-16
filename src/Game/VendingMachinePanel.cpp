@@ -25,7 +25,7 @@ void VendingMachinePanel::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	itemRowPanel.Init(engine, newItemRowPanel);
 	itemRowPanel.SetOnItemSelectedCallback([&](Item &_item) {return OnItemOfRowPanelSelected(_item); });
 
-	shopPanel.Init(engine, gameStatus->GetConsumablesAvailability());
+	shopPanel.Init(engine, &gameStatus->GetConsumablesAvailability());
 	shopPanel.SetOnItemSelectedCallback([&](Item &_item) {return OnItemOfShopPanelSelected(_item); });
 	shopPanel.SetPos(vendingMachinePanel.GetRect().left + 840, vendingMachinePanel.GetRect().top + 130);
 

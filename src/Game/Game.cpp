@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "LevelBuilder.hpp"
+#include "ItemFactory.hpp"
 
 
 void Game::Init(CGameEngine * _engine)
@@ -12,13 +13,7 @@ void Game::Init(CGameEngine * _engine)
 	level = LevelBuilder::buildLevel(gameStatus->bangLevel, &dialogManager, gameStatus);
 	adventureGroup.Init(_engine, &notificationRenderer, gameStatus);
 
-	consumablePanel.Init(m_pGameEngine, gameStatus, &adventureGroup);
-
-	resourcesStatusBar.Init(m_pGameEngine);
-
-	LevelGUI *newGui = new LevelGUI;
-	newGui->Init(m_pGameEngine);
-	currentGUI = newGui;
+	InitLevelGUI();
 
 	currentBattle = nullptr;
 	inBattle = false;
@@ -29,10 +24,17 @@ void Game::Init(CGameEngine * _engine)
 }
 
 
+void Game::InitLevelGUI()
+{
+	LevelGUI *newGui = new LevelGUI;
+	newGui->Init(m_pGameEngine, gameStatus, &adventureGroup);
+	newGui->SetOnLevelExitedCallback([&]() {HandleFinishedLevel(); });
+	currentGUI = newGui;
+}
+
+
 void Game::Cleanup()
 {
-	resourcesStatusBar.Quit();
-	consumablePanel.Quit();
 	adventureGroup.Quit();
 	dialogManager.Quit();
 	m_pGameEngine = nullptr;
@@ -76,19 +78,11 @@ void Game::Update()
 		if (inBattle)
 			UpdateBattle();
 		else
-		{
 			UpdateLevel();
-			consumablePanel.Update();
-		}
 
 		notificationRenderer.Update();
-
 		currentGUI->Update();
-		resourcesStatusBar.Update(gameStatus->GetCardsAmount(), gameStatus->GetDiceAmount());
 	}
-
-	if (levelFinished)
-		HandleFinishedLevel();
 
 	g_pVideos->Update();
 }
@@ -97,19 +91,15 @@ void Game::Update()
 
 void Game::HandleFinishedLevel()
 {
-	levelFinishedPanel.Update();
-	if (levelFinishedPanel.ContinueButtonClicked())
+	if (!adventureGroup.IsDead())
 	{
-		if (!adventureGroup.IsDead())
-		{
-			gameStatus->AddDice(level->GetReward().dice);
-			gameStatus->AddCards(level->GetReward().cards);
-			gameStatus->bangLevel++;
-		}
-		OnGameFinished();
-		g_pMusic->SetCurrentEnvironment(MusicEnvironment::mainRoomEnvironment);
-		m_pGameEngine->PopState();
+		gameStatus->AddDice(level->GetReward().dice);
+		gameStatus->AddCards(level->GetReward().cards);
+		gameStatus->bangLevel++;
 	}
+	OnGameFinished();
+	g_pMusic->SetCurrentEnvironment(MusicEnvironment::mainRoomEnvironment);
+	m_pGameEngine->PopState();
 }
 
 
@@ -145,41 +135,46 @@ void Game::UpdateBattle()
 
 	if (currentBattle->isFinished())
 	{
+		SAFE_DELETE(currentGUI);
+		InitLevelGUI();
+
 		if (adventureGroup.IsDead())
 		{
 			levelFinished = true;
-			levelFinishedPanel.Init(m_pGameEngine, true);
-			levelFinishedPanel.SetPos(m_pGameEngine->GetWindowSize().x / 2 - 458, 190);
+			dynamic_cast<LevelGUI*>(currentGUI)->OpenLevelFailedPanel();
 		}
 		else if (currentBattle->isBossBattle)
 		{
 			levelFinished = true;
-
-			levelFinishedPanel.Init(m_pGameEngine, false);
-			levelFinishedPanel.SetReward(level->GetReward());
-			levelFinishedPanel.SetPos(m_pGameEngine->GetWindowSize().x / 2 - 458, 200);
+			dynamic_cast<LevelGUI*>(currentGUI)->OpenLevelFinishedPanel(level->GetReward());
 		}
 		else
-		{
-			//Reward Dialog
-			LootableDialog *dialog = new LootableDialog;
-			dialog->Init(m_pGameEngine, gameStatus, 0);
-			dialog->SetTitle(std::string("Kampf gewonnen!"));
-			currentBattle->FillLootableDialog(gameStatus->bangLevel, dialog);
-			dialogManager.AddLootableDialog(dialog);
-		}
+			OpenBattleRewardDialog();
 
 		inBattle = false;
 		currentBattle->Quit();
 		SAFE_DELETE(currentBattle);
 
-		SAFE_DELETE(currentGUI);
-		LevelGUI *newGui = new LevelGUI;
-		newGui->Init(m_pGameEngine);
-		currentGUI = newGui;
-
 		g_pMusic->SetBattleEnded();
 	}
+}
+
+
+void Game::OpenBattleRewardDialog()
+{
+	LootableDialog *dialog = new LootableDialog;
+	dialog->Init(m_pGameEngine, gameStatus, 0);
+	dialog->SetTitle(std::string("Kampf gewonnen!"));
+
+	for (int i = 0; i < 9; i++)
+	{
+		dialog->AddItem(ItemFactory::CreateBattleRewardItem(gameStatus->bangLevel, currentBattle->GetEnemies()));
+
+		if (rand() % 5 != 0)
+			break;
+	}
+
+	dialogManager.AddLootableDialog(dialog);
 }
 
 
@@ -194,7 +189,6 @@ void Game::InitNewBattle()
 	currentBattle = new Battle;
 	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer, level->GetEnemyIDs(), level->IsBossBattle());
 }
-
 
 
 
@@ -223,20 +217,14 @@ void Game::Render(double _normalizedTimestep)
 
 		if (currentBattle != nullptr)
 			currentBattle->RenderAbilityAnimations();
-		else
-			consumablePanel.Render();
 
 		currentGUI->Render();
-		resourcesStatusBar.Render();
-
-		 if (levelFinished)
-			levelFinishedPanel.Render();
-
-		 dialogManager.RenderDialogs();
+		dialogManager.RenderDialogs();
 	}
 
 	m_pGameEngine->FlipWindow();
 }
+
 
 void Game::SetOnGameFinishedCallback(std::function<void(void)> _onGameFinished)
 {

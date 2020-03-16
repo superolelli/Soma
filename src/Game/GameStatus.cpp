@@ -102,7 +102,7 @@ void GameStatus::RemoveItem(Item &_item, bool _removeOne)
 	else {
 		for (auto it = consumables.begin(); it != consumables.end(); it++)
 		{
-			if (it->id == _item.id && it->color == _item.color)
+			if (it->id == _item.id)
 			{
 				if (_removeOne)
 					it->number--;

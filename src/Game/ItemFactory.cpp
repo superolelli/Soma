@@ -11,7 +11,7 @@ Item ItemFactory::CreateItemForLootable(int _level, LootableID _lootableID)
 	return item;
 }
 
-Item ItemFactory::CreateBattleRewardItem(int _level, Enemy* _enemies[4])
+Item ItemFactory::CreateBattleRewardItem(int _level, std::array<Enemy*, 4> &_enemies)
 {
 	Item item;
 	item.color = GetRandomColor();
@@ -42,7 +42,7 @@ ItemID ItemFactory::GetRandomItemIDForShop(int _level)
 }
 
 
-ItemID ItemFactory::GetRandomItemIDForBattleReward(Enemy* _enemies[4], int _level)
+ItemID ItemFactory::GetRandomItemIDForBattleReward(std::array<Enemy*, 4> &_enemies, int _level)
 {
 	std::vector<ItemID> possibleItems;
 

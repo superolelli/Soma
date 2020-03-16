@@ -11,11 +11,8 @@
 #include "BattleGUI.hpp"
 #include "LevelGUI.hpp"
 #include "../Framework/Graphics/NotificationRenderer.hpp"
-#include "LevelFinishedPanel.hpp"
 #include "GameStatus.hpp"
 #include "DialogManager.hpp"
-#include "ConsumablePanel.hpp"
-#include "ResourcesStatusBar.hpp"
 
 class Game : public GameState
 {
@@ -41,12 +38,7 @@ private:
 	Level *level;
 	AdventureGroup adventureGroup;
 	GUI *currentGUI;
-	ConsumablePanel consumablePanel;
-
-	ResourcesStatusBar resourcesStatusBar;
 	GameStatus *gameStatus;
-
-	LevelFinishedPanel levelFinishedPanel;
 
 	Battle *currentBattle;
 
@@ -61,6 +53,8 @@ private:
 	void UpdateLevel();
 	void UpdateBattle();
 	void InitNewBattle();
+	void InitLevelGUI();
 
 	void HandleFinishedLevel();
+	void OpenBattleRewardDialog();
 };

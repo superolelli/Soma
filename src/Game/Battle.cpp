@@ -4,7 +4,6 @@
 #include "ApacheKid.hpp"
 #include "Abtruenniger.hpp"
 #include "Hilfssheriff.hpp"
-#include "ItemFactory.hpp"
 
 
 void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss)
@@ -357,17 +356,5 @@ void Battle::RenderAbilityAnimations()
 	{
 		if(c->GetAbilityStatus() == executing || c->GetAbilityStatus() == attacked || c->GetAbilityStatus() == dodging)
 			c->Render();
-	}
-}
-
-
-void Battle::FillLootableDialog(int _level, LootableDialog *_dialog)
-{
-	for (int i = 0; i < 9; i++)
-	{
-		_dialog->AddItem(ItemFactory::CreateBattleRewardItem(_level, enemies));
-
-		if (rand() % 5 != 0)
-			break;
 	}
 }

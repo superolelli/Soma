@@ -54,6 +54,11 @@ CSprite & InventoryItemWrapper::GetSprite()
 	return sprite;
 }
 
+void InventoryItemWrapper::SetSpriteColor(int r, int g, int b)
+{
+	sprite.SetColor(r, g, b);
+}
+
 void InventoryItemWrapper::SetItemAmount(int _amount)
 {
 	item.number = _amount;

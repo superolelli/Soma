@@ -9,7 +9,7 @@ class ShopPanel
 {
 public:
 
-	void Init(CGameEngine *_engine, std::unordered_map<ItemID, bool> &_consumablesAvailability);
+	void Init(CGameEngine *_engine, std::unordered_map<ItemID, bool> *_consumablesAvailability);
 	void Update();
 	void Render();
 	void Quit();
@@ -42,7 +42,7 @@ private:
 
 	int currentlySelectedItem;
 
-	std::unordered_map<ItemID, bool> consumablesAvailability;
+	std::unordered_map<ItemID, bool> *consumablesAvailability;
 
 	std::function<void(Item &)> OnItemSelected;
 };
