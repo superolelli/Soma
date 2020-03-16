@@ -41,6 +41,7 @@ protected:
 
 	int NumberOfTargetsForCurrentAbility();
 	bool CurrentAbilityAttacksAll();
+	bool CurrentAbilityAttacksAllPlayers();
 
 	bool is_walking;
 };

@@ -13,10 +13,17 @@
 
         <effect>
             <damageFactor>0.1</damageFactor>
+			<buff>
+				<duration>3</duration>
+				<isPositive>false</isPositive>
+				<initiative>-2</initiative>
+			</buff>
         </effect>
 
         <description>*#ffa500 Gummiarm*
-#white Schadensfaktor: 30%</description>
+#white Schadensfaktor: 10%
+Für 3 Runden:
+    #aaaadd -2 Initiative</description>
     </ability>
 
     <ability id="1" name="Ganzkörpertritt">
@@ -28,20 +35,17 @@
         </positions>
 
         <effect>
-            <damageFactor>0.8</damageFactor>
-            <buff>
-                <duration>3</duration>
-                <isPositive>false</isPositive>
-                <initiative>-1</initiative>
-                <damage>-1</damage>
-            </buff>
+            <damageFactor>0.7</damageFactor>
+			<damageOverTime>
+				<rounds>3</rounds>
+				<damage>1</damage>
+			</damageOverTime>
         </effect>
 
         <description>*#ffa500 Ganzkörpertritt*
-#white Schadensfaktor: 100%
+#white Schadensfaktor: 70%
 Für 3 Runden:
-    #aaaadd -1 Inititative
-    -1 Schaden</description>
+    #aaaadd 1 Schaden pro Runde</description>
     </ability>
 
     <ability id="2" name="Ins System hacken">

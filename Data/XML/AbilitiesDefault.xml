@@ -7,6 +7,7 @@
 
     <howMany>1</howMany>
 	<attackAll>false</attackAll>
+	<attackAllPlayers>false</attackAllPlayers>
     <positions>
       <value id="0">false</value>
       <value id="1">false</value>
@@ -32,6 +33,10 @@
         </confusion>
         <mark>0</mark>
         <putToSleepProbability>0</putToSleepProbability>
+		<damageOverTime>
+			<damage>0</damage>
+			<rounds>0</rounds>
+		</damageOverTime>
         <removeDebuffs>false</removeDebuffs>
         <removeBuffs>false</removeBuffs>
         <buff>

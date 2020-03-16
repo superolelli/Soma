@@ -14,12 +14,13 @@ public:
 
 	void HandleStatusChanges();
 
-	void LooseHealth(int _damage, bool _critical);
+	void LooseHealth(int _damage, bool _critical, bool _useArmour = true);
 	void GainHealth(int _health);
 
 	void Mark(int _rounds) { marked += _rounds; }
 	void Confuse(int _rounds) { confused += _rounds; }
 	void PutToSleep() { sleeping = true; }
+	void DoDamageOverTime(int _rounds, int _damage);
 	void AddBuff(Buff _buff);
 	void AddDebuff(Buff _buff);
 
@@ -34,6 +35,9 @@ public:
 
 	int RoundsConfused() { return confused; }
 	int RoundsMarked() { return marked; }
+
+	int RoundsDamageOverTime();
+	int DamageOverTime();
 
 	Buff &GetBuff();
 	Buff &GetDebuff();
@@ -65,10 +69,12 @@ private:
 	int confused;
 	bool sleeping;
 	int marked;
+	std::vector<std::pair<int, int>> damageOverTime;
 	std::vector<Buff> buffs;
 	std::vector<Buff> debuffs;
 
 	Buff returnBuff;
 
 	void HandleBuffDurations(std::vector<Buff> &_buffs);
+	void HandleDamageOverTime();
 };

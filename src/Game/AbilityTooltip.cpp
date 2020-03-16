@@ -61,7 +61,11 @@ void AbilityTooltip::GenerateTooltipString(std::string & _tooltip)
 
 	if (currentAbility.canTargetEnemiesOrFriends)
 	{
-		_tooltip.append("#888888 Auf Freund\n");
+		if (currentAbility.possibleAims.attackAllPlayers)
+			_tooltip.append("#888888 Auf Heldengruppe\n");
+		else
+			_tooltip.append("#888888 Auf Freund\n");
+
 		AppendTooltipStringForOneTarget(_tooltip, false, true);
 		_tooltip.append("#888888 Auf Gegner\n");
 		AppendTooltipStringForOneTarget(_tooltip, true, true);
@@ -97,6 +101,9 @@ void AbilityTooltip::AppendTooltipStringForOneTarget(std::string & _tooltip, boo
 	if (effect->lessTargetsMoreDamage != 0)
 		_tooltip.append("#aa5000 Werden weniger als " + std::to_string(currentAbility.possibleAims.howMany) + " Gegner attackiert,\n"
 			+ "steigt der Schadensfaktor pro fehlendem\nGegner um " + std::to_string(static_cast<int>(effect->lessTargetsMoreDamage * 100)) + " Prozentpunkte\n");
+
+	if (effect->damageOverTimeRounds != 0)
+		_tooltip.append(indentation + "#white Für " + std::to_string(effect->damageOverTimeRounds) + " Runden:\n\t#aa0000 " + std::to_string(effect->damageOverTime) + " Schaden pro Runde\n");
 
 	if (effect->confusion != 0)
 		_tooltip.append(indentation + "#bb77bb Verwirrung (" + std::to_string(effect->confusion) + " Runden): " + std::to_string(static_cast<int>(effect->confusionProbability * 100)) + "%\n");
@@ -192,6 +199,8 @@ void AbilityTooltip::ShowPossibleTargets(sf::RenderTarget &_target, int _x, int 
 	int numberOfTargets = GetCurrentAbility().possibleAims.howMany;
 	if (GetCurrentAbility().possibleAims.attackAll)
 		targetsInformationText.setString("Die Fähigkeit trifft ALLE.");
+	else if (GetCurrentAbility().possibleAims.attackAllPlayers && GetCurrentAbility().possibleAims.howMany == 1)
+		targetsInformationText.setString("Trifft 1 Ziel/alle Helden.");
 	else if (numberOfTargets > 1)
 		targetsInformationText.setString("Die Fähigkeit trifft " + std::to_string(numberOfTargets) + " Ziele.");
 	else

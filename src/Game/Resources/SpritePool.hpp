@@ -22,6 +22,7 @@ public:
 	CSprite confused;
 	CSprite marked;
 	CSprite sleeping;
+	CSprite damageOverTime;
 
 	SpriteWithText abilityAnnouncementBanner;
 

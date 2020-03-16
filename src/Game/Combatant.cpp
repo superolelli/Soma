@@ -328,6 +328,9 @@ void Combatant::ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & 
 			_target->Status().Confuse(_effect.confusion);
 	}
 
+	if (_effect.damageOverTimeRounds != 0)
+		_target->Status().DoDamageOverTime(_effect.damageOverTimeRounds, _effect.damageOverTime);
+
 	if (_effect.mark != 0)
 		_target->Status().Mark(_effect.mark);
 

@@ -98,6 +98,7 @@ public:
 	sf::Texture confused;
 	sf::Texture marked;
 	sf::Texture sleeping;
+	sf::Texture damageOverTime;
 
 	sf::Texture abilityAnnouncementBanner;
 	sf::Texture abilityTargetMarker;

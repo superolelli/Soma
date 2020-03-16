@@ -19,7 +19,7 @@
         <description>*#ffa500 Fist of Revenge*
 #aa5000 Geht nur auf Gegner, die 
 Markus letze Runde angegriffen haben
-#white Schadensfaktor: 150%</description>
+#white Schadensfaktor: 120%</description>
     </ability>
 
     <ability id="1" name="Nasenrammbock">
@@ -35,7 +35,7 @@ Markus letze Runde angegriffen haben
         </effect>
 
         <description>*#ffa500 Nasenrammbock*
-#white Schadensfaktor: 40%</description>
+#white Schadensfaktor: 10%</description>
     </ability>
 
     <ability id="2" name="Harte Zerstörung">
@@ -65,7 +65,7 @@ Markus letze Runde angegriffen haben
 #888888 Auf Freund
     #white Schadensfaktor: 30%
 #888888 Auf Gegner
-    #white Schadensfaktor: 50%</description>
+    #white Schadensfaktor: 40%</description>
     </ability>
 
     <ability id="3" name="Fürchterliches Grinsen">
@@ -90,7 +90,7 @@ Markus letze Runde angegriffen haben
         </effect>
 
         <description>*#ffa500 Fürchterliches Grinsen*    
-#white Schadensfaktor: 50%
+#white Schadensfaktor: 20%
 Für 3 Runden:
     #aaaadd -2 Schaden
     -3 Präzision</description>

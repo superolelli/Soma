@@ -22,6 +22,7 @@ void CombatantStatus::HandleStatusChanges()
 
 	HandleBuffDurations(buffs);
 	HandleBuffDurations(debuffs);
+	HandleDamageOverTime();
 }
 
 
@@ -45,10 +46,34 @@ void CombatantStatus::HandleBuffDurations(std::vector<Buff> &_buffs)
 	}
 }
 
-
-void CombatantStatus::LooseHealth(int _damage, bool _critical)
+void CombatantStatus::HandleDamageOverTime()
 {
-	int damage = _damage - std::round(((float)currentStats.armour / 100.0f * _damage));
+	std::vector<std::pair<int, int>>::iterator i;
+	for (i = damageOverTime.begin(); i != damageOverTime.end();)
+	{
+		if (i->first > 0)
+		{
+			i->first--;
+			LooseHealth(i->second, false, false);
+		}
+
+		if (i->first <= 0)
+		{
+			i = damageOverTime.erase(i);
+		}
+		else
+			i++;
+	}
+}
+
+
+void CombatantStatus::LooseHealth(int _damage, bool _critical, bool _useArmour)
+{
+	int damage = _damage;
+
+	if(_useArmour)
+		damage -= std::round(((float)currentStats.armour / 100.0f * _damage));
+
 	currentStats.currentHealth -= damage;
 
 	if (currentStats.currentHealth < 0)
@@ -75,6 +100,11 @@ void CombatantStatus::GainHealth(int _health)
 }
 
 
+void CombatantStatus::DoDamageOverTime(int _rounds, int _damage)
+{
+	damageOverTime.push_back(std::pair<int, int>(_rounds, _damage));
+}
+
 void CombatantStatus::AddBuff(Buff _buff)
 {
 	currentStats += _buff.stats;
@@ -86,6 +116,28 @@ void CombatantStatus::AddDebuff(Buff _buff)
 {
 	currentStats += _buff.stats;
 	debuffs.push_back(_buff);
+}
+
+int CombatantStatus::RoundsDamageOverTime()
+{
+	int maxRounds = 0;
+	for (auto &d : damageOverTime)
+	{
+		if (d.first > maxRounds)
+			maxRounds = d.first;
+	}
+	return maxRounds;
+}
+
+
+int CombatantStatus::DamageOverTime()
+{
+	int damage = 0;
+
+	for (auto &d : damageOverTime)
+		damage += d.second;
+
+	return damage;
 }
 
 Buff & CombatantStatus::GetBuff()
@@ -195,6 +247,7 @@ void CombatantStatus::Reset()
 	confused = 0;
 	sleeping = false;
 	marked = 0;
+	damageOverTime.clear();
 	buffs.clear();
 	debuffs.clear();
 }

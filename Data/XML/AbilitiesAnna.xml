@@ -9,6 +9,7 @@
         <positions>
             <value id="0">true</value>
             <value id="1">true</value>
+			<value id="2">true</value>
             <value id="3">true</value>
             <value id="4">true</value>
             <value id="5">true</value>
@@ -16,15 +17,12 @@
             <value id="7">true</value>
         </positions>
 
+		<attackAllPlayers>true</attackAllPlayers>
+		
         <effect target="friend">
-            <buff>
-                <duration>3</duration>
-                <damage>5</damage>
-                <initiative>2</initiative>
-            </buff>
+			<heal>1</heal>
         </effect>
         <effect target="enemy">
-            <healSelf>3</healSelf>
             <confusion>
                 <probability>0.3</probability>
                 <rounds>3</rounds>
@@ -32,12 +30,9 @@
         </effect>
 
         <description>*#ffa500 Unbezwingbare Fröhlichkeit    *
-#888888 Auf Freund
-    #white Für 3 Runden:
-        #aaaadd +5 Schaden
-        +2 Initiative
+#888888 Auf Heldengruppe
+    #00aa00 Heilung: 1
 #888888 Auf Gegner
-    #00aa00 Heilung (selbst): 3
     #bb77bb Verwirrung (3 Runden): 30%</description>
     </ability>
 
@@ -69,11 +64,15 @@ Schlaf: 25%</description>
         </positions>
 
         <effect>
-            <damageFactor>0.4</damageFactor>
+			<damageOverTime>
+				<rounds>3</rounds>
+				<damage>2</damage>
+			</damageOverTime>
         </effect>
 
         <description>*#ffa500 Nasenflügelschlag*
-#white Schadensfaktor: 40%</description>
+#white Für 3 Runden
+    #aaaadd 2 Schaden pro Runde</description>
     </ability>
 
     <ability id="3" name="Todesumarmung">
@@ -92,7 +91,7 @@ Schlaf: 25%</description>
         </effect>
 
         <description>*#ffa500 Todesumarmung*
-#white Schadensfaktor: 100%
+#white Schadensfaktor: 70%
 #00aa00 Heilung (selbst): 1</description>
     </ability>   
 </Abilities>

@@ -77,6 +77,15 @@ namespace pugi {
 		if (effectNode.child("putToSleepProbability"))
 			effect.putToSleepProbability = effectNode.child("putToSleepProbability").text().as_float();
 
+		if (effectNode.child("damageOverTime"))
+		{
+			if (effectNode.child("damageOverTime").child("damage"))
+				effect.damageOverTime = effectNode.child("damageOverTime").child("damage").text().as_int();
+
+			if (effectNode.child("damageOverTime").child("rounds"))
+				effect.damageOverTimeRounds = effectNode.child("damageOverTime").child("rounds").text().as_int();
+		}
+
 		if (effectNode.child("removeBuffs"))
 			effect.removeBuffs = effectNode.child("removeBuffs").text().as_bool();
 
@@ -125,6 +134,9 @@ namespace pugi {
 
 		if (abilityNode.child("attackAll"))
 			ability.possibleAims.attackAll = abilityNode.child("attackAll").text().as_bool();
+
+		if (abilityNode.child("attackAllPlayers"))
+			ability.possibleAims.attackAllPlayers = abilityNode.child("attackAllPlayers").text().as_bool();
 
 		for (xml_node &pos : abilityNode.child("positions").children())
 		{

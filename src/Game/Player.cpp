@@ -55,6 +55,11 @@ bool Player::CurrentAbilityAttacksAll()
 	return g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].possibleAims.attackAll;
 }
 
+bool Player::CurrentAbilityAttacksAllPlayers()
+{
+	return g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].possibleAims.attackAllPlayers;
+}
+
 
 void Player::Update(int _xMove, bool _is_walking)
 {
@@ -122,10 +127,16 @@ void Player::RenderAbilityTargetMarker()
 		{
 			int targetPosition = c->GetBattlePos();
 
-			for (Combatant* c : (*allCombatants))
+			for (Combatant* com : (*allCombatants))
 			{
-				if (CurrentAbilityAttacksAll() && this != c || c->GetBattlePos() >= targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
-					c->RenderAbilityTargetMarker();				
+				if (CurrentAbilityAttacksAllPlayers())
+				{
+					if (c->IsPlayer() && com->IsPlayer() || !c->IsPlayer() && com->GetBattlePos() >= targetPosition && com->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
+						com->RenderAbilityTargetMarker();
+				}
+				else if (CurrentAbilityAttacksAll() && this != com 
+					|| com->GetBattlePos() >= targetPosition && com->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
+					com->RenderAbilityTargetMarker();				
 			}
 
 			return;
@@ -161,7 +172,13 @@ void Player::SelectAdditionalTargets()
 
 	for (Combatant* c : (*allCombatants))
 	{
-		if (CurrentAbilityAttacksAll() && this != c  && selectedTargets[0] != c || c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
+		if (CurrentAbilityAttacksAllPlayers() && selectedTargets[0]->IsPlayer())
+		{
+			if (selectedTargets[0] != c && c->IsPlayer())
+				selectedTargets.push_back(c);
+		}
+		else if (CurrentAbilityAttacksAll() && this != c  && selectedTargets[0] != c 
+			|| c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
 			selectedTargets.push_back(c);
 	}
 }

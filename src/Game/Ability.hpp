@@ -11,6 +11,7 @@ struct PossibleAims
 {
     bool position[8];
 	bool attackAll;
+	bool attackAllPlayers;
     int howMany;
 
 	void applySkill(const PossibleAims &_aims);
@@ -27,6 +28,8 @@ struct AbilityEffect
     int healSelf;
     int confusion;
 	float confusionProbability;
+	int damageOverTime;
+	int damageOverTimeRounds;
     int mark;
 	float putToSleepProbability;
     bool removeBuffs;

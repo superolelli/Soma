@@ -189,6 +189,7 @@ void CTextureManager::LoadTextures()
 	confused.loadFromFile("Data/Sprites/Battle/confused.png");
 	marked.loadFromFile("Data/Sprites/Battle/marked.png");
 	sleeping.loadFromFile("Data/Sprites/Battle/sleeping.png");
+	damageOverTime.loadFromFile("Data/Sprites/Battle/damage_over_time.png");
 
 	abilityAnnouncementBanner.loadFromFile("Data/Sprites/Battle/ability_announcement.png");
 

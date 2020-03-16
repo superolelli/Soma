@@ -4,35 +4,29 @@
     <indomitable_happiness abilityID="0">
         <skill id="1" name="Inspirierende Fröhlichkeit I">
             <effect target="friend">
-                <buff>
-                    <damage>3</damage>
-                </buff>
+				<heal>1</heal>
             </effect>
-                <description>*#ffa500 Inspirierende Fröhlichkeit I*
-#white Wenn das Ziel ein Freund ist,
-wird dessen Schaden um 3 erhöht.</description>
+                <description>*#ffa500 Inspirierende Fröhlichkeit I*      
+#white Erhöht die Gruppenheilung
+der Heldengruppe um 1.</description>
         </skill>
 
-        <skill id="2" name="Anhaltende Fröhlichkeit">
+        <skill id="2" name="Inspirierende Fröhlichkeit II">
             <effect target="friend">
-                <buff>
-                    <duration>2</duration>
-                </buff>
+				<heal>2</heal>
             </effect>
-                <description>*#ffa500 Anhaltende Fröhlichkeit*
-#white Verlängert die Dauer des 
-Buffs bzw. Debuffs um 2 Runden.</description>
+                <description>*#ffa500 Inspirierende Fröhlichkeit II*      
+#white Erhöht die Gruppenheilung
+der Heldengruppe um 2.</description>
         </skill>
 
-        <skill id="3" name="Inspirierenden Fröhlichkeit II">
+        <skill id="3" name="Inspirierenden Fröhlichkeit III">
             <effect target="friend">
-                <buff>
-                    <damage>5</damage>
-                </buff>
+				<heal>3</heal>
             </effect>
-                <description>*#ffa500 Inspirierende Fröhlichkeit II*
-#white Wenn das Ziel ein Freund ist,
-wird dessen Schaden um 5 erhöht.</description>
+                <description>*#ffa500 Inspirierende Fröhlichkeit III*      
+#white Erhöht die Gruppenheilung
+der Heldengruppe um 3.</description>
         </skill>
 
         <skill id="4" name="Verwirrende Fröhlichkeit I">
@@ -46,22 +40,24 @@ wird dessen Schaden um 5 erhöht.</description>
 steigt um 10%.</description>
         </skill>
 
-        <skill id="5" name="Heilsame Fröhlichkeit">
+        <skill id="5" name="Verwirrende Fröhlichkeit II">
             <effect target="enemy">
-                <healSelf>3</healSelf>
+				<confusion>
+					<probability>0.1</probability>
+				</confusion>
             </effect>
-                <description>*#ffa500 Heilsame Fröhlichkeit*
-#white Heilt Anna um 3 Leben mehr, wenn 
-sie einen Gegner trifft.</description>
+                <description>*#ffa500 Verwirrende Fröhlichkeit II*
+#white Die Chance einen Gegner zu verwirren
+steigt um 10%.</description>
         </skill>
 
-        <skill id="6" name="Verwirrende Fröhlichkeit II">
+        <skill id="6" name="Verwirrende Fröhlichkeit III">
             <effect target="enemy">
                 <confusion>
                     <probability>0.1</probability>
                 </confusion>
             </effect>
-                <description>*#ffa500 Verwirrende Fröhlichkeit II*
+                <description>*#ffa500 Verwirrende Fröhlichkeit III*
 #white Die Chance einen Gegner zu verwirren
 steigt um 10%.</description>
         </skill>
@@ -184,26 +180,30 @@ als Ziel gewählt werden.</description>
 
         <skill id="4" name="Schadenserhöhung I">
             <effect>
-                <damageFactor>0.1</damageFactor>
+				<damageOverTime>
+					<damage>1</damage>
+				</damageOverTime>
             </effect>
                 <description>*#ffa500 Schadenserhöhung I*
-#white Erhöht den Schadensfaktor um 10%.</description>
+#white Erhöht den Schaden pro Runde um 1.</description>
         </skill>
 
         <skill id="5" name="Schadenserhöhung II">
             <effect>
-                <damageFactor>0.1</damageFactor>
+				<damageOverTime>
+					<damage>1</damage>
+				</damageOverTime>
             </effect>
                 <description>*#ffa500 Schadenserhöhung II*
-#white Erhöht den Schadensfaktor um 10%.</description>
+#white Erhöht den Schaden pro Runde um 1.</description>
         </skill>
 
         <skill id="6" name="Schadenserhöhung III">
-            <effect>
-                <damageFactor>0.1</damageFactor>
-            </effect>
+			<damageOverTime>
+				<damage>2</damage>
+			</damageOverTime>
                 <description>*#ffa500 Schadenserhöhung III*
-#white Erhöht den Schadensfaktor um 10%.</description>
+#white Erhöht den Schaden pro Runde um 2.</description>
         </skill>
 
         <skill id="7" name="Große Nasenflügel">

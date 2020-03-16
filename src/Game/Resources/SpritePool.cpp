@@ -10,6 +10,7 @@ void SpritePool::LoadSprites()
 	confused.Load(g_pTextures->confused);
 	marked.Load(g_pTextures->marked);
 	sleeping.Load(g_pTextures->sleeping);
+	damageOverTime.Load(g_pTextures->damageOverTime);
 
 	abilityAnnouncementBanner.Load(g_pTextures->abilityAnnouncementBanner);
 	abilityAnnouncementBanner.AddText("Keine Fähigkeit");
