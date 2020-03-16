@@ -42,11 +42,8 @@ private:
 	int currentCombatant;
 
 	bool isBattleFinished;
-	bool isPlayingIntro;
-	int finishedCycles;
-	float afterIntroWaitingTime;
 
-	void HandleIntro();
+	void InitCombatants(int _xView, int enemyIDs[4]);
 	
 	void CalculateTurnOrder();
 	void HandleDeaths();
@@ -61,5 +58,5 @@ private:
 	int GetEmptyEnemyBattlePosition();
 	void RecalculateEnemyPositions();
 
-	Enemy *GetEnemy(int _enemyID);
+	Enemy *CreateEnemy(int _enemyID);
 };

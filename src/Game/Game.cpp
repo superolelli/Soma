@@ -17,6 +17,8 @@ void Game::Init(CGameEngine * _engine)
 
 	currentBattle = nullptr;
 	inBattle = false;
+	isPlayingBattleIntro = false;
+	afterIntroWaitingTime = 2.0f;
 	levelFinished = false;
 
 	g_pMusic->SetCurrentEnvironment(MusicEnvironment::bangEnvironment);
@@ -76,7 +78,15 @@ void Game::Update()
 	if (!g_pVideos->IsPlayingVideo())
 	{
 		if (inBattle)
-			UpdateBattle();
+		{
+			if (isPlayingBattleIntro)
+			{
+				adventureGroup.Update(0);
+				HandleBattleIntro();
+			}
+			else
+				UpdateBattle();
+		}
 		else
 			UpdateLevel();
 
@@ -85,6 +95,29 @@ void Game::Update()
 	}
 
 	g_pVideos->Update();
+}
+
+
+void Game::HandleBattleIntro()
+{
+	if (g_pSpritePool->newBattleAnimation->animationIsPlaying() == false)
+	{
+		if (afterIntroWaitingTime > 0.0f)
+			afterIntroWaitingTime -= g_pTimer->GetElapsedTime().asSeconds();
+		else
+		{
+			isPlayingBattleIntro = false;
+			g_pMusic->SetBattleStarted();
+
+			if (currentBattle->isBossBattle)
+			{
+				if (currentBattle->GetEnemies()[3]->GetID() == CombatantID::Greg)
+					g_pVideos->PlayVideo(videoId::introGreg);
+				else if (currentBattle->GetEnemies()[3]->GetID() == CombatantID::Apachekid)
+					g_pVideos->PlayVideo(videoId::introApacheKid);
+			}
+		}
+	}
 }
 
 
@@ -188,6 +221,13 @@ void Game::InitNewBattle()
 
 	currentBattle = new Battle;
 	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer, level->GetEnemyIDs(), level->IsBossBattle());
+
+	isPlayingBattleIntro = true;
+	afterIntroWaitingTime = 2.0f;
+	g_pSpritePool->newBattleAnimation->setCurrentAnimation("new_battle");
+	g_pSpritePool->newBattleAnimation->setCurrentTime(0);
+	g_pSpritePool->newBattleAnimation->reprocessCurrentTime();
+	g_pSpritePool->newBattleAnimation->setPosition(SpriterEngine::point(view.getCenter().x - 300, m_pGameEngine->GetWindowSize().y / 2 - 30));
 }
 
 
@@ -209,7 +249,16 @@ void Game::Render(double _normalizedTimestep)
 		if (currentBattle == nullptr)
 			adventureGroup.Render();
 		else
+		{
 			currentBattle->Render();
+
+			if (isPlayingBattleIntro)
+			{
+				g_pSpritePool->newBattleAnimation->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
+				g_pSpritePool->newBattleAnimation->render();
+				g_pSpritePool->newBattleAnimation->playSoundTriggers();
+			}
+		}
 
 		notificationRenderer.Render(m_pGameEngine->GetWindow());
 

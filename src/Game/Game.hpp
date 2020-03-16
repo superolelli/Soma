@@ -46,6 +46,8 @@ private:
 	DialogManager dialogManager;
 
 	bool inBattle;
+	bool isPlayingBattleIntro;
+	float afterIntroWaitingTime;
 	bool levelFinished;
 
 	std::function<void(void)> OnGameFinished;
@@ -54,6 +56,8 @@ private:
 	void UpdateBattle();
 	void InitNewBattle();
 	void InitLevelGUI();
+
+	void HandleBattleIntro();
 
 	void HandleFinishedLevel();
 	void OpenBattleRewardDialog();
