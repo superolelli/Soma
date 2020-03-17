@@ -24,6 +24,14 @@ void SpritePool::LoadSprites()
 
 	abilityTargetMarker.Load(g_pTextures->abilityTargetMarker);
 	turnMarker.Load(g_pTextures->turnMarker);
+
+	bangBackgroundSecondLayers[0].Load(g_pTextures->bangSecondLayerBackgrounds[0]);
+	bangBackgroundSecondLayers[1].Load(g_pTextures->bangSecondLayerBackgrounds[1]);
+
+	bangBackgroundThirdLayers[0].Load(g_pTextures->bangThirdLayerBackgrounds[0]);
+	bangBackgroundThirdLayers[1].Load(g_pTextures->bangThirdLayerBackgrounds[1]);
+
+	bangBackgroundFourthLayer.Load(g_pTextures->bangFourthLayerBackground);
 }
 
 

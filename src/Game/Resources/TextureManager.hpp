@@ -24,7 +24,10 @@ public:
 	sf::Texture bangGenericButton;
 
 	/** BACKGROUNDS **/
-	sf::Texture bangBackgrounds[12];
+	sf::Texture bangFirstLayerBackgrounds[12];
+	sf::Texture bangSecondLayerBackgrounds[2];
+	sf::Texture bangThirdLayerBackgrounds[2];
+	sf::Texture bangFourthLayerBackground;
 	sf::Texture bangDoor;
 
 	sf::Texture mainRoomBackgrounds[4];

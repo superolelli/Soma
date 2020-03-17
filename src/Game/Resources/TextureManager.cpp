@@ -11,18 +11,24 @@ void CTextureManager::LoadTextures()
 	bangGenericButton.loadFromFile("Data/Sprites/Panels & Buttons/Bang/generic_button.png");
 
 	/** BACKGROUNDS **/
-	bangBackgrounds[room_1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_raum1.png");
-	bangBackgrounds[corridor_1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_1.png");
-	bangBackgrounds[corridor_2].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_2.png");
-	bangBackgrounds[corridor_3].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_3.png");
-	bangBackgrounds[corridor_4].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_4.png");
-	bangBackgrounds[corridor_5].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_5.png");
-	bangBackgrounds[corridor_6].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_6.png");
-	bangBackgrounds[corridor_7].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_7.png");
-	bangBackgrounds[corridor_8].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_8.png");
-	bangBackgrounds[door_1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_tür_1.png");
-	bangBackgrounds[door_2].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_tür_2.png");
-	bangBackgrounds[end].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_ende.png");
+	bangFirstLayerBackgrounds[room_1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_raum1.png");
+	bangFirstLayerBackgrounds[corridor_1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_1.png");
+	bangFirstLayerBackgrounds[corridor_2].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_2.png");
+	bangFirstLayerBackgrounds[corridor_3].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_3.png");
+	bangFirstLayerBackgrounds[corridor_4].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_4.png");
+	bangFirstLayerBackgrounds[corridor_5].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_5.png");
+	bangFirstLayerBackgrounds[corridor_6].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_6.png");
+	bangFirstLayerBackgrounds[corridor_7].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_7.png");
+	bangFirstLayerBackgrounds[corridor_8].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_8.png");
+	bangFirstLayerBackgrounds[door_1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_tür_1.png");
+	bangFirstLayerBackgrounds[door_2].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_tür_2.png");
+	bangFirstLayerBackgrounds[end].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_ende.png");
+
+	bangSecondLayerBackgrounds[0].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_second_layer_1.png");
+	bangSecondLayerBackgrounds[1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_second_layer_2.png");
+	bangThirdLayerBackgrounds[0].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_third_layer_1.png");
+	bangThirdLayerBackgrounds[1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_third_layer_2.png");
+	bangFourthLayerBackground.loadFromFile("Data/Sprites/Backgrounds/Bang/bang_fourth_layer.png");
 
 	bangDoor.loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_tür.png");
 

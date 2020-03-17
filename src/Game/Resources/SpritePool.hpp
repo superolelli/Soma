@@ -32,4 +32,8 @@ public:
 
 	CSprite abilityTargetMarker;
 	CSprite turnMarker;
+
+	CSprite bangBackgroundSecondLayers[2];
+	CSprite bangBackgroundThirdLayers[2];
+	CSprite bangBackgroundFourthLayer;
 };

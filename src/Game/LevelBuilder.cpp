@@ -26,7 +26,7 @@ Level *LevelBuilder::buildLevel(int _levelID, DialogManager *_dialogManager, Gam
 
 		//background
 		auto backgroundID = rand() % g_pObjectProperties->levelSpecs[_levelID - 1].possibleBackgrounds.size();
-		newRoom->background.Load(g_pTextures->bangBackgrounds[g_pObjectProperties->levelSpecs[_levelID - 1].possibleBackgrounds[backgroundID]]);
+		newRoom->background.Load(g_pTextures->bangFirstLayerBackgrounds[g_pObjectProperties->levelSpecs[_levelID - 1].possibleBackgrounds[backgroundID]]);
 		newRoom->background.SetPos(position, 0);
 		newRoom->boss = false;
 		position += newRoom->background.GetRect().width;
@@ -43,7 +43,7 @@ Level *LevelBuilder::buildLevel(int _levelID, DialogManager *_dialogManager, Gam
 	//add end room
 	Room *newRoom = new Room;
 	newRoom->battle = true;
-	newRoom->background.Load(g_pTextures->bangBackgrounds[g_pObjectProperties->levelSpecs[_levelID - 1].endBackground]);
+	newRoom->background.Load(g_pTextures->bangFirstLayerBackgrounds[g_pObjectProperties->levelSpecs[_levelID - 1].endBackground]);
 	newRoom->background.SetPos(position, 0);
 	newRoom->boss = true;
 	newRoom->lootable = nullptr;
