@@ -209,6 +209,18 @@ void Enemy::Update()
 {
 	Combatant::Update();
 
+	if (abilityStatus == handlingStatus)
+	{
+		Status().ExecuteStatusChanges();
+		if (!Status().IsExecutingStatusChanges())
+		{
+			if (Status().SkipRound())
+				abilityStatus = finished;
+			else
+				abilityStatus = ready;
+		}
+	}
+
 	if (abilityStatus == ready)
 	{
 		if (confusionChecked == false)
@@ -247,7 +259,7 @@ void Enemy::PrepareAbility()
 {
 	ChooseAbility();
 	ChooseTarget();
-	abilityAnnouncementTime = 2.0f;
+	abilityAnnouncementTime = 1.5f;
 }
 
 
@@ -286,16 +298,14 @@ void Enemy::Render()
 	combatantObject->render();
 	combatantObject->playSoundTriggers();
 
-	if (abilityAnnouncementTime > 0.0f && abilityAnnouncementTime < 1.0f && !actsInConfusion)
+	if (abilityAnnouncementTime > 0.0f && !actsInConfusion)
 		RenderAbilityAnnouncement();
 
-	if (abilityStatus == ready)
-	{
+	if (abilityStatus == ready || abilityStatus == handlingStatus)
 		RenderTurnMarker();
 
-		if(abilityAnnouncementTime >= 0.0f)
-			RenderAbilityTargetMarker();
-	}
+	if (abilityStatus == ready && abilityAnnouncementTime >= 0.0f)
+		RenderAbilityTargetMarker();
 
 	if (abilityStatus == attacked || abilityStatus == dodging)
 		RenderAbilityEffects();

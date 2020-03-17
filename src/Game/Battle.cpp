@@ -154,7 +154,10 @@ void Battle::Update()
 	HandleDeaths();
 
 	if (IsOneGroupDead() == true)
+	{
 		isBattleFinished = true;
+		return;
+	}
 
 	if (combatants[currentCombatant]->FinishedTurn() && !IsOneGroupDying())
 		GiveTurnToNextCombatant();

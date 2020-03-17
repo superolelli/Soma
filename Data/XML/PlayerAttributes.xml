@@ -18,9 +18,9 @@
     damageMin ="5"
     damageMax = "8"
     initiative ="2"
-		criticalHit="6"
-		dodge="6"
-		precision="6"
+	criticalHit="6"
+	dodge="6"
+	precision="6"
   ></Ole>
 
   <Anna id="2"
@@ -29,9 +29,9 @@
     damageMin ="5"
     damageMax = "8"
     initiative ="3"
-		criticalHit="5"
-		dodge="9"
-		precision="5"
+	criticalHit="5"
+	dodge="9"
+	precision="5"
   ></Anna>
 
   <Markus id="3"

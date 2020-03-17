@@ -34,4 +34,6 @@ private:
 	sf::Music *currentBattleMusic;
 
 	std::vector<int> nextTracks;
+
+	float blendInAfterBattleTime;
 };

@@ -80,6 +80,18 @@ void Player::Update(int _xMove, bool _is_walking)
 		}
 	}
 
+	if (abilityStatus == handlingStatus)
+	{
+		Status().ExecuteStatusChanges();
+		if (!Status().IsExecutingStatusChanges())
+		{
+			if (Status().SkipRound())
+				abilityStatus = finished;
+			else
+				abilityStatus = ready;
+		}
+
+	}
 
 	if (abilityStatus == ready && AimChosen())
 	{
@@ -88,7 +100,6 @@ void Player::Update(int _xMove, bool _is_walking)
 		StartTargetsAttackedAnimation(g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()].precisionModificator);
 	}
 	
-
 	if (abilityStatus == executing)
 		DoCurrentAbility();
 }
@@ -107,11 +118,11 @@ void Player::Render()
 	if (abilityStatus == attacked || abilityStatus == dodging)
 		RenderAbilityEffects();
 
-	if (abilityStatus == ready)
-	{
+	if (abilityStatus == ready || abilityStatus == handlingStatus)
 		RenderTurnMarker();
+	
+	if(abilityStatus == ready)
 		RenderAbilityTargetMarker();
-	}
 
 	if (abilityStatus != executing && abilityStatus != attacked && abilityStatus != dodging && !IsDying())
 		statusBar.Render();

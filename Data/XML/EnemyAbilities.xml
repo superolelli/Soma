@@ -122,11 +122,10 @@
 
 	  <effect>
 			<damageFactor>1</damageFactor>
-			<buff>
-				<duration>3</duration>
-				<isPositive>false</isPositive>
-				<precision>-3</precision>
-			</buff>
+		  <damageOverTime>
+			  <rounds>3</rounds>
+			  <damage>1</damage>
+		  </damageOverTime>
 	  </effect>
   </ability>
 

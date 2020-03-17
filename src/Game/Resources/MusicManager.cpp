@@ -1,5 +1,5 @@
 #include "MusicManager.hpp"
-
+#include "../../Framework/Time.hpp"
 
 void MusicManager::LoadMusic()
 {
@@ -31,6 +31,8 @@ void MusicManager::LoadMusic()
 	currentMusic = &mainRoomMusic;
 	currentBattleMusic = nullptr;
 
+	blendInAfterBattleTime = 0.0f;
+
 	nextTracks = { 0, 1, 2, 3, 4, 5, 6 };
 
 	currentMusic->play();
@@ -46,6 +48,19 @@ void MusicManager::Update()
 	{
 		currentMusic = &bangBackgroundMusic[GetNextTrack()];
 		currentMusic->play();
+	}
+
+	if (blendInAfterBattleTime > 0.0f)
+	{
+		blendInAfterBattleTime -= g_pTimer->GetElapsedTime().asSeconds();
+		currentMusic->setVolume(50.0 * (4.0 - blendInAfterBattleTime) / 4.0f);
+		currentBattleMusic->setVolume(50.0f * (blendInAfterBattleTime / 4.0f));
+
+		if (blendInAfterBattleTime <= 0.0f)
+		{
+			currentBattleMusic->stop();
+			currentBattleMusic = nullptr;
+		}
 	}
 }
 
@@ -97,6 +112,7 @@ void MusicManager::SetBattleStarted()
 	{
 		currentMusic->pause();
 		currentBattleMusic = &bangBattleMusic;
+		currentBattleMusic->setVolume(50.0f);
 		currentBattleMusic->play();
 	}
 }
@@ -106,8 +122,7 @@ void MusicManager::SetBattleEnded()
 {
 	if (currentEnvironment == MusicEnvironment::bangEnvironment)
 	{
-		currentBattleMusic->stop();
-		currentBattleMusic = nullptr;
+		blendInAfterBattleTime = 4.0f;
 		currentMusic->play();
 	}
 }

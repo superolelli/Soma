@@ -94,7 +94,13 @@ void CombatantStatusBar::RenderStatusSymbolsTooltips()
 		RenderTooltip("Schläft", g_pSpritePool->sleeping.GetRect().left, g_pSpritePool->sleeping.GetRect().top);
 
 	if (status->RoundsDamageOverTime() > 0 && g_pSpritePool->damageOverTime.GetRect().contains(engine->GetWorldMousePos()))
-		RenderTooltip("#white " + std::to_string(status->RoundsDamageOverTime()) + " Runden lang:\n\ #dd3333 " + std::to_string(status->DamageOverTime()) + " Schaden pro Runde", g_pSpritePool->damageOverTime.GetRect().left, g_pSpritePool->damageOverTime.GetRect().top);
+	{
+		if(status->RoundsDamageOverTime() > 1)
+			RenderTooltip("#dd3333 " + std::to_string(status->DamageOverTime()) + " Schaden (" + std::to_string(status->RoundsDamageOverTime()) + " Runden)", g_pSpritePool->damageOverTime.GetRect().left, g_pSpritePool->damageOverTime.GetRect().top);
+		else
+			RenderTooltip("#dd3333 " + std::to_string(status->DamageOverTime()) + " Schaden (1 Runde)", g_pSpritePool->damageOverTime.GetRect().left, g_pSpritePool->damageOverTime.GetRect().top);
+	}
+
 
 	if (status->IsConfused() && g_pSpritePool->confused.GetRect().contains(engine->GetWorldMousePos()))
 	{

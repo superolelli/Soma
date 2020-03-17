@@ -11,18 +11,55 @@ void CombatantStatus::Init(Combatant *_combatant, NotificationRenderer *_notific
 }
 
 
-void CombatantStatus::HandleStatusChanges()
+void CombatantStatus::UpdateStatusForNewTurn(float _initialWaitingTime)
 {
+	sleepChecked = false;
+	damageOverTimeChecked = false;
+	skipRound = false;
+	statusAnnouncementTime = _initialWaitingTime;
+
 	if (marked > 0)
 		marked--;
+
 	if (confused > 0)
 		confused--;
-	if (sleeping = true)
-		sleeping = false;
 
 	HandleBuffDurations(buffs);
 	HandleBuffDurations(debuffs);
-	HandleDamageOverTime();
+}
+
+
+void CombatantStatus::ExecuteStatusChanges()
+{
+	if (statusAnnouncementTime > 0.0)
+	{
+		statusAnnouncementTime -= g_pTimer->GetElapsedTime().asSeconds();
+		return;
+	}
+
+	if (!damageOverTimeChecked)
+	{
+		HandleDamageOverTime();
+		damageOverTimeChecked = true;
+	}
+	else if (!sleepChecked)
+	{
+		sleepChecked = true;
+		if (sleeping == true)
+		{
+			sleeping = false;
+			skipRound = true;
+			combatant->SetAnimation("idle", IDLE_ANIMATION_SPEED);
+			statusAnnouncementTime = 2.0f;
+			notificationRenderer->AddNotification("Aufgewacht!", g_pFonts->f_kingArthur, sf::Vector2f(combatant->GetRect().left - combatant->GetRect().width / 2.0f, combatant->GetRect().top - 20.0f), 1.0f);
+		}
+	}
+
+}
+
+bool CombatantStatus::IsExecutingStatusChanges()
+{
+	return !sleepChecked || !damageOverTimeChecked || statusAnnouncementTime > 0;
 }
 
 
@@ -48,21 +85,30 @@ void CombatantStatus::HandleBuffDurations(std::vector<Buff> &_buffs)
 
 void CombatantStatus::HandleDamageOverTime()
 {
+	int damage = 0;
 	std::vector<std::pair<int, int>>::iterator i;
 	for (i = damageOverTime.begin(); i != damageOverTime.end();)
 	{
 		if (i->first > 0)
 		{
 			i->first--;
-			LooseHealth(i->second, false, false);
+			damage += i->second;
 		}
 
 		if (i->first <= 0)
-		{
 			i = damageOverTime.erase(i);
-		}
 		else
 			i++;
+	}
+
+	if (damage > 0)
+	{
+		LooseHealth(damage, false, false);
+		statusAnnouncementTime = 2.0f;
+		g_pSounds->PlaySound(DAMAGE_OVER_TIME);
+
+		if (GetCurrentHealth() <= 0)
+			skipRound = true;
 	}
 }
 

@@ -22,7 +22,7 @@
 #include "BattleGUI.hpp"
 
 
-enum abilityPhase { ready, executing, finished, attacked, dodging };
+enum abilityPhase { ready, executing, finished, attacked, dodging, handlingStatus };
 
 const float IDLE_ANIMATION_SPEED = 0.7f;
 const float ABILITY_ANIMATION_SPEED = 1.0f;
@@ -30,6 +30,8 @@ const float ABILITY_EFFECT_ANIMATION_SPEED = 0.9f;
 
 const float COMBATANT_NORMAL_SCALE = 0.6f;
 const float COMBATANT_ABILITY_SCALE = 0.8f;
+
+const float TURN_MARKER_ANIMATION_SCALE = 1.2f;
 
 class Combatant : public CObserver
 {
@@ -75,6 +77,7 @@ public:
 	void RenderTurnMarker();
 
 	void ResetAbilityStatus() { abilityStatus = finished; }
+	void SetAnimation(std::string _animation, float _speed);
 
 protected:
 
@@ -100,6 +103,7 @@ protected:
 	bool actsInConfusion;
 	bool dying;
 
+	float turnMarkerScale;
 
 	void RenderAbilityEffects();
 	void RenderShadow();
@@ -111,8 +115,6 @@ protected:
 
 	void ScaleForAbilityAnimation();
 	void ReverseScaleForAbilityAnimation();
-
-	void SetAnimation(std::string _animation, float _speed);
 
 	void ReloadHitbox();
 	void ReloadAbilityEffectPoint();

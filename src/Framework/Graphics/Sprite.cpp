@@ -129,11 +129,10 @@ void CSprite::ResetRotation()
 
 void CSprite::SetScale(float _x, float _y)
 {
-
-	m_Rect.width = static_cast<int>(m_Rect.width * _x);
-	m_Rect.height = static_cast<int>(m_Rect.height * _y);
-
 	m_Sprite.setScale(_x, _y);
+
+	m_Rect.width = m_Sprite.getLocalBounds().width;
+	m_Rect.height = m_Sprite.getLocalBounds().height;
 }
 
 //render "normal" sprites

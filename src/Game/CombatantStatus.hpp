@@ -12,7 +12,10 @@ public:
 
 	void Init(Combatant *_combatant, NotificationRenderer *_notificationRenderer);
 
-	void HandleStatusChanges();
+	void UpdateStatusForNewTurn(float _initialWaitingTime = 0.0f);
+	void ExecuteStatusChanges();
+
+	bool IsExecutingStatusChanges();
 
 	void LooseHealth(int _damage, bool _critical, bool _useArmour = true);
 	void GainHealth(int _health);
@@ -28,6 +31,7 @@ public:
 	void RemoveAllDebuffs();
 
 	bool IsAsleep() { return sleeping; }
+	bool SkipRound() { return skipRound; }
 	bool IsMarked() { return marked > 0; }
 	bool IsConfused() { return confused > 0; }
 	bool IsBuffed() { return buffs.size() > 0; }
@@ -77,4 +81,9 @@ private:
 
 	void HandleBuffDurations(std::vector<Buff> &_buffs);
 	void HandleDamageOverTime();
+
+	float statusAnnouncementTime;
+	bool sleepChecked;
+	bool damageOverTimeChecked;
+	bool skipRound;
 };

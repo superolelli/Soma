@@ -18,6 +18,8 @@ Combatant::Combatant(int _id, CGameEngine * _engine, NotificationRenderer * _not
 	actsInConfusion = false;
 	dying = false;
 
+	turnMarkerScale = 1.0f;
+
 	abilityStatus = finished;
 }
 
@@ -196,17 +198,14 @@ void Combatant::GiveTurnTo(std::vector<Combatant*>* _targets, BattleGUI *_gui)
 	allCombatants = _targets;
 	gui = _gui;
 
-	abilityStatus = ready;
+	abilityStatus = handlingStatus;
 
-	if (status.IsAsleep())
-	{
-		status.HandleStatusChanges();
-		SetAnimation("idle", IDLE_ANIMATION_SPEED);
-		abilityStatus = finished;
-		return;
-	}
+	if (IsPlayer())
+		status.UpdateStatusForNewTurn();
+	else
+		status.UpdateStatusForNewTurn(1.5f);
 
-	status.HandleStatusChanges();
+	turnMarkerScale = TURN_MARKER_ANIMATION_SCALE;
 }
 
 
@@ -225,6 +224,7 @@ void Combatant::StartDodgingAnimation()
 	notificationRenderer->AddNotification("Ausgewichen!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width/2.0f, GetRect().top), 1.0f);
 
 	abilityStatus = dodging;
+	g_pSounds->PlaySound(DODGED);
 }
 
 void Combatant::StartFriendlyAttackedAnimation()
@@ -295,10 +295,19 @@ void Combatant::RenderAbilityTargetMarker()
 
 void Combatant::RenderTurnMarker()
 {
+	g_pSpritePool->turnMarker.SetScale(turnMarkerScale, turnMarkerScale);
 	int xPos = GetRect().left + (GetRect().width - g_pSpritePool->turnMarker.GetRect().width) / 2;
 	int yPos = statusBar.GetRect().top + statusBar.GetRect().height + 5;
 	g_pSpritePool->turnMarker.SetPos(xPos, yPos);
 	g_pSpritePool->turnMarker.Render(engine->GetWindow());
+
+	if (turnMarkerScale > 1.0)
+	{
+		turnMarkerScale -= g_pTimer->GetElapsedTime().asSeconds() * 5.0f * (TURN_MARKER_ANIMATION_SCALE - 1.0f);
+
+		if (turnMarkerScale < 1.0)
+			turnMarkerScale = 1.0;
+	}
 }
 
 
@@ -310,6 +319,7 @@ void Combatant::ApplyAbilityEffectToTarget(Combatant * _target, AbilityEffect & 
 		auto damage = status.GetDamage() * (_effect.damageFactor + _additionalDamageFactor);
 		if (rand() % 100 < status.GetCriticalHit() + _effect.criticalHitModificator)
 		{
+			g_pSounds->PlaySound(CRITICAL_HIT);
 			_target->Status().LooseHealth(damage * 2, true);
 		}
 		else
