@@ -146,8 +146,11 @@ void Game::UpdateLevel()
 	if (m_pGameEngine->GetKeystates(KeyID::Right) == Keystates::Held)
 		xMove = 2;
 
-	if(!level->IsAtEnd(view.getCenter().x))
-		view.move(xMove, 0);
+
+	if (level->IsAtEnd(view.getCenter().x) || view.getCenter().x - view.getSize().x / 2 + xMove <= 0)
+		xMove = 0;
+
+	view.move(xMove, 0);
 
 	level->Update(view.getCenter().x, m_pGameEngine);
 

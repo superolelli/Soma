@@ -26,8 +26,13 @@ void CTextureManager::LoadTextures()
 
 	bangSecondLayerBackgrounds[0].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_second_layer_1.png");
 	bangSecondLayerBackgrounds[1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_second_layer_2.png");
+	bangSecondLayerBackgrounds[2].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_second_layer_3.png");
+	bangSecondLayerBackgrounds[3].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_second_layer_4.png");
+	bangSecondLayerBackgrounds[4].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_second_layer_5.png");
+	bangSecondLayerBackgrounds[5].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_second_layer_6.png");
 	bangThirdLayerBackgrounds[0].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_third_layer_1.png");
 	bangThirdLayerBackgrounds[1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_third_layer_2.png");
+	bangThirdLayerBackgrounds[2].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_third_layer_3.png");
 	bangFourthLayerBackground.loadFromFile("Data/Sprites/Backgrounds/Bang/bang_fourth_layer.png");
 
 	bangDoor.loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_tür.png");

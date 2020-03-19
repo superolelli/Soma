@@ -48,8 +48,10 @@ private:
 
 	int currentRoomNumber;
 
-	int currentThirdLayer;
-	int currentSecondLayer;
+	int currentThirdLayer1;
+	int currentThirdLayer2;
+	int currentSecondLayer1;
+	int currentSecondLayer2;
 
 	LevelReward reward;
 };
