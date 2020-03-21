@@ -29,6 +29,7 @@ void ConsumablePanel::Quit()
 {
 	itemRowPanel.Quit();
 	gameStatus->RemoveObserver(this);
+	std::cout << "Consumable Panel removed" << std::endl;
 }
 
 

@@ -30,6 +30,9 @@ void Enemy::Init()
 	case CombatantID::Apachekid:
 		combatantObject = g_pModels->modelApacheKid->getNewEntityInstance("ApacheKid");
 		break;
+	case CombatantID::BigSpencer:
+		combatantObject = g_pModels->modelBigSpencer->getNewEntityInstance("BigSpencer");
+		break;
 	}
 	
 	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);
@@ -51,6 +54,13 @@ void Enemy::ChooseAbility()
 		break;
 	case CombatantID::Indianer:
 		chosenAbility = enemyAbilities::tomahawk;
+		break;
+	case CombatantID::BigSpencer:
+
+		if (rand() % 2 == 0)
+			chosenAbility = enemyAbilities::punch;
+		else
+			chosenAbility = enemyAbilities::brawl;
 		break;
 	}
 }
@@ -133,7 +143,13 @@ void Enemy::SelectAdditionalPlayers()
 
 	for (Combatant* c : (*allCombatants))
 	{
-		if (g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAll && this != c  && selectedTargets[0] != c || c->GetBattlePos() < targetPosition && c->GetBattlePos() > targetPosition - g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.howMany)
+		if (g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAllPlayers)
+		{
+			if (selectedTargets[0] != c && c->IsPlayer())
+				selectedTargets.push_back(c);
+		}
+		else if (g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAll && this != c  && selectedTargets[0] != c 
+			|| c->GetBattlePos() < targetPosition && c->GetBattlePos() > targetPosition - g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.howMany)
 			selectedTargets.push_back(c);
 	}
 }
@@ -145,7 +161,15 @@ void Enemy::SelectAdditionalEnemies()
 
 	for (Combatant* c : (*allCombatants))
 	{
-		if (g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAll && this != c  && selectedTargets[0] != c || c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.howMany)
+		if (c == this)
+			continue;
+
+		if (actsInConfusion && g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAllPlayers)
+		{
+			if (selectedTargets[0] != c && !c->IsPlayer())
+				selectedTargets.push_back(c);
+		}
+		else if (g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAll && this != c  && selectedTargets[0] != c || c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.howMany)
 			selectedTargets.push_back(c);
 	}
 }
@@ -176,7 +200,7 @@ void Enemy::ChooseRandomEnemy()
 	else
 	{
 		abilityStatus = finished;
-		actsInConfusion = false;
+		abilityAnnouncementTime = 0.0f;
 	}
 }
 
@@ -211,6 +235,10 @@ void Enemy::Update()
 
 	if (abilityStatus == handlingStatus)
 	{
+		actsInConfusion = false;
+		confusionChecked = false;
+		selectedTargets.clear();
+		abilityAnnouncementTime = 0.0f;
 		Status().ExecuteStatusChanges();
 		if (!Status().IsExecutingStatusChanges())
 		{
@@ -227,12 +255,12 @@ void Enemy::Update()
 		{
 			if (status.IsConfused() && rand() % 10 < 5)
 			{
+				abilityAnnouncementTime = 1.5f;
 				actsInConfusion = true;
 				selectedTargets.clear();
 				ChooseAbility();
 				ChooseRandomEnemy();
 				notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left - GetRect().width/2.0f, GetRect().top - 20.0f), 1.0f);
-				abilityAnnouncementTime = 2.0f;
 			}
 
 			confusionChecked = true;
@@ -284,8 +312,6 @@ void Enemy::ExecuteAbility()
 	ReverseScaleForAbilityAnimation();
 	StopTargetsAttackedAnimation();
 	abilityStatus = finished;
-	confusionChecked = false;
-	actsInConfusion = false;
 }
 
 
@@ -298,7 +324,7 @@ void Enemy::Render()
 	combatantObject->render();
 	combatantObject->playSoundTriggers();
 
-	if (abilityAnnouncementTime > 0.0f && !actsInConfusion)
+	if (abilityAnnouncementTime > 0.0f)
 		RenderAbilityAnnouncement();
 
 	if (abilityStatus == ready || abilityStatus == handlingStatus)

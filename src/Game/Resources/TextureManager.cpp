@@ -12,6 +12,8 @@ void CTextureManager::LoadTextures()
 
 	/** BACKGROUNDS **/
 	bangFirstLayerBackgrounds[room_1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_raum1.png");
+	bangFirstLayerBackgrounds[room_2].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_raum2.png");
+	bangFirstLayerBackgrounds[room_3].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_raum3.png");
 	bangFirstLayerBackgrounds[corridor_1].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_1.png");
 	bangFirstLayerBackgrounds[corridor_2].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_2.png");
 	bangFirstLayerBackgrounds[corridor_3].loadFromFile("Data/Sprites/Backgrounds/Bang/bang_gang_3.png");

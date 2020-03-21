@@ -36,6 +36,7 @@ public:
 	SpriterEngine::SpriterModel *modelHilfssheriff;
 	SpriterEngine::SpriterModel *modelGreg;
 	SpriterEngine::SpriterModel *modelApacheKid;
+	SpriterEngine::SpriterModel *modelBigSpencer;
 
 	SpriterEngine::SpriterModel *modelAbilityEffects;
 	SpriterEngine::SpriterModel *modelNewBattleAnimation;

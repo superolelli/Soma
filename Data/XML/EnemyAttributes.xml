@@ -95,5 +95,20 @@
 			<Item>Tomahawk</Item>
 		</Loot>
 	</ApacheKid>
+	
+   <BigSpencer id="10" 
+    armour ="10"
+    health ="100"
+    damageMin ="9"
+    damageMax ="12"
+    initiative ="3"
+	criticalHit="5"
+	dodge="0"
+	precision="5"
+  >
+		<Loot>
+			<Item>Bier</Item>
+		</Loot>
+	</BigSpencer>
   
 </EnemyAttributes>

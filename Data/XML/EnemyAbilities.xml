@@ -168,4 +168,38 @@
 		</effect>
 	</ability>
 
+	<ability id="10" name="Hieb">
+		<animation>punch</animation>
+		<effectAnimation>punch</effectAnimation>
+
+		<positions>
+			<value id="0">true</value>
+			<value id="1">true</value>
+			<value id="2">true</value>
+			<value id="3">true</value>
+		</positions>
+
+		<effect>
+			<damageFactor>1</damageFactor>
+		</effect>
+	</ability>
+
+	<ability id="11" name="Schlägerei">
+		<animation>brawl</animation>
+		<effectAnimation>brawl</effectAnimation>
+
+		<attackAllPlayers>true</attackAllPlayers>
+		<positions>
+			<value id="0">true</value>
+			<value id="1">true</value>
+			<value id="2">true</value>
+			<value id="3">true</value>
+		</positions>
+
+		<effect>
+			<damageFactor>0.2</damageFactor>
+			<removeBuffs>true</removeBuffs>
+		</effect>
+	</ability>
+
 </Abilities>
