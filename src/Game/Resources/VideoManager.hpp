@@ -4,7 +4,7 @@
 #include <sfeMovie\Movie.hpp>
 #include "../../Framework/Gameengine.hpp"
 
-enum videoId { introGreg, introApacheKid };
+enum videoId { introGreg, introApacheKid, introBigSpencer };
 
 
 #define g_pVideos VideoManager::Get()
@@ -21,7 +21,7 @@ public:
 
 private:
 
-	sfe::Movie videos[2];
+	sfe::Movie videos[3];
 
 
 	videoId currentVideo;

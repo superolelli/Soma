@@ -7,6 +7,7 @@ void VideoManager::LoadVideos(CGameEngine *_engine)
 	engine = _engine;
 	videos[videoId::introGreg].openFromFile("Data/Videos/Greg.mp4");
 	videos[videoId::introApacheKid].openFromFile("Data/Videos/ApacheKid.mp4");
+	videos[videoId::introBigSpencer].openFromFile("Data/Videos/BigSpencer.mp4");
 }
 
 void VideoManager::Update()

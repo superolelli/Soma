@@ -115,6 +115,8 @@ void Game::HandleBattleIntro()
 					g_pVideos->PlayVideo(videoId::introGreg);
 				else if (currentBattle->GetEnemies()[3]->GetID() == CombatantID::Apachekid)
 					g_pVideos->PlayVideo(videoId::introApacheKid);
+				else if (currentBattle->GetEnemies()[3]->GetID() == CombatantID::BigSpencer)
+					g_pVideos->PlayVideo(videoId::introBigSpencer);
 			}
 		}
 	}
