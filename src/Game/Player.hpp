@@ -32,8 +32,6 @@ protected:
 	void DoCurrentAbility();
 	bool CombatantClicked(Combatant* _combatant);
 
-	void HandleConfusion();
-
 	void RenderAbilityTargetMarker();
 	void StartAbilityAnimation(int _ability);
 
@@ -42,6 +40,10 @@ protected:
 	int NumberOfTargetsForCurrentAbility();
 	bool CurrentAbilityAttacksAll();
 	bool CurrentAbilityAttacksAllPlayers();
+
+	void ChooseCombatantsForConfusionAttack(Combatant *_originallyAttackedCombatant);
+	void SelectAdditionalPlayers();
+	void SelectAdditionalEnemies();
 
 	bool is_walking;
 };

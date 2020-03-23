@@ -2,6 +2,7 @@
 #include "Markus.hpp"
 #include "../Framework/Graphics/RichText.hpp"
 #include "../Framework/Graphics/RoundedRectangleShape.hpp"
+#include <numeric>
 
 bool Combatant::setElapsedTimeForAbilityEffect;
 
@@ -286,6 +287,73 @@ bool Combatant::CheckForDodging(Combatant *_attacker, int _precisionModificator)
 
 	return false;
 }
+
+bool Combatant::IsAlly(Combatant *c)
+{
+	return IsPlayer() == c->IsPlayer();
+}
+
+
+void Combatant::HandleConfusion()
+{
+	if (status.IsConfused())
+	{
+		if (rand() % 10 < 5)
+		{
+			notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left - GetRect().width / 2.0f, GetRect().top - 20.0f), 1.0f);
+			actsInConfusion = true;
+		}
+	}
+}
+
+void Combatant::ChooseRandomAlly()
+{
+	int numberOfAllies = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), 0, [&](int sum, Combatant *c) {if (IsAlly(c) && !c->IsDying())return sum + 1; else return sum; });
+
+	if (numberOfAllies <= 1)
+		return;
+
+	int target = rand() % (numberOfAllies - 1);
+
+	if (numberOfAllies == 2)
+		target = 0;
+
+	for (Combatant *c : (*allCombatants))
+	{
+		if (IsAlly(c) && c != this && !c->IsDying())
+		{
+			if (target == 0)
+			{
+				selectedTargets.push_back(c);
+				return;
+			}
+			target--;
+		}
+	}
+}
+
+void Combatant::ChooseRandomOpponent()
+{
+	int numberOfOpponents = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), 0, [&](int sum, Combatant* c) {if (!IsAlly(c) && !c->IsDying()) return sum + 1; else return sum; });
+
+	if (numberOfOpponents < 1)
+		return;
+
+	int target = rand() % numberOfOpponents;
+	for (Combatant* c : (*allCombatants))
+	{
+		if (!IsAlly(c) && !c->IsDying())
+		{
+			if (target == 0)
+			{
+				selectedTargets.push_back(c);
+				return;
+			}
+			target--;
+		}
+	}
+}
+
 
 void Combatant::RenderAbilityTargetMarker()
 {

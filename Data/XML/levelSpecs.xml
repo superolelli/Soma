@@ -67,7 +67,7 @@
             <background>bang_gang_7</background>
             <background>bang_gang_8</background>
         </backgrounds>
-        <endBackground>bang_gang_ende</endBackground>
+        <endBackground>bang_raum_1</endBackground>
         <reward>
             <dice>2</dice>
             <cards>35</cards>
@@ -142,7 +142,7 @@
     </level>
 
     <level id="3">
-        <numberOfRooms>6</numberOfRooms>
+        <numberOfRooms>7</numberOfRooms>
         <backgrounds>
             <background>bang_gang_1</background>
             <background>bang_gang_2</background>
@@ -155,8 +155,8 @@
         </backgrounds>
         <endBackground>bang_gang_ende</endBackground>
         <reward>
-            <dice>2</dice>
-            <cards>35</cards>
+            <dice>3</dice>
+            <cards>45</cards>
         </reward>
         <battleProbability>0.4</battleProbability>
         <lootableProbability>0.4</lootableProbability>
@@ -223,7 +223,7 @@
     </level>
 
     <level id="4">
-        <numberOfRooms>6</numberOfRooms>
+        <numberOfRooms>8</numberOfRooms>
         <backgrounds>
             <background>bang_gang_1</background>
             <background>bang_gang_2</background>
@@ -236,56 +236,79 @@
         </backgrounds>
         <endBackground>bang_gang_ende</endBackground>
         <reward>
-            <dice>2</dice>
-            <cards>35</cards>
+            <dice>4</dice>
+            <cards>55</cards>
         </reward>
         <battleProbability>0.4</battleProbability>
         <lootableProbability>0.4</lootableProbability>
         <enemyGroups>
-            <group>
-                <enemy>Indianer</enemy>
-                <enemy>Indianer</enemy>
-                <enemy>Indianer</enemy>
-                <enemy>Indianer</enemy>
-            </group>
-            <group>
-                <enemy>Indianer</enemy>
-                <enemy>Indianer</enemy>
-            </group>
-            <group>
-                <enemy>Abtrünniger</enemy>
-                <enemy>Abtrünniger</enemy>
-                <enemy>Gesetzloser</enemy>
-                <enemy>Gesetzloser</enemy>
-            </group>
-            <group>
-                <enemy>Abtrünniger</enemy>
-                <enemy>Abtrünniger</enemy>
-                <enemy>Abtrünniger</enemy>
-                <enemy>Abtrünniger</enemy>
-            </group>
-            <group>
-                <enemy>Indianer</enemy>
-                <enemy>Indianer</enemy>
-                <enemy>Abtrünniger</enemy>
-                <enemy>Abtrünniger</enemy>
-            </group>
-            <group>
-                <enemy>Gesetzloser</enemy>
-                <enemy>Gesetzloser</enemy>
-            </group>
-            <group>
-                <enemy>Hilfssheriff</enemy>
-                <enemy>Hilfssheriff</enemy>
-                <enemy>Hilfssheriff</enemy>
-                <enemy>Hilfssheriff</enemy>
-            </group>
+			<group>
+				<enemy>Indianer</enemy>
+				<enemy>Indianer</enemy>
+				<enemy>Indianer</enemy>
+				<enemy>Indianer</enemy>
+			</group>
+			<group>
+				<enemy>Indianer</enemy>
+				<enemy>Indianer</enemy>
+			</group>
+			<group>
+				<enemy>Abtrünniger</enemy>
+				<enemy>Abtrünniger</enemy>
+				<enemy>Greg Digger</enemy>
+			</group>
+			<group>
+				<enemy>Abtrünniger</enemy>
+				<enemy>Gesetzloser</enemy>
+				<enemy>Greg Digger</enemy>
+			</group>
+			<group>
+				<enemy>Greg Digger</enemy>
+				<enemy>Greg Digger</enemy>
+			</group>
+			<group>
+				<enemy>Abtrünniger</enemy>
+				<enemy>Abtrünniger</enemy>
+				<enemy>Gesetzloser</enemy>
+				<enemy>Gesetzloser</enemy>
+			</group>
+			<group>
+				<enemy>Abtrünniger</enemy>
+				<enemy>Abtrünniger</enemy>
+				<enemy>Abtrünniger</enemy>
+				<enemy>Abtrünniger</enemy>
+			</group>
+			<group>
+				<enemy>Indianer</enemy>
+				<enemy>Indianer</enemy>
+				<enemy>Abtrünniger</enemy>
+				<enemy>Abtrünniger</enemy>
+			</group>
+			<group>
+				<enemy>Gesetzloser</enemy>
+				<enemy>Gesetzloser</enemy>
+			</group>
+			<group>
+				<enemy>Hilfssheriff</enemy>
+				<enemy>Hilfssheriff</enemy>
+				<enemy>Hilfssheriff</enemy>
+				<enemy>Hilfssheriff</enemy>
+			</group>
+			<group>
+				<enemy>Indianer</enemy>
+				<enemy>Indianer</enemy>
+				<enemy>Apache Kid</enemy>
+			</group>
+			<group>
+				<enemy>Greg Digger</enemy>
+				<enemy>Apache Kid</enemy>
+			</group>
         </enemyGroups>
         <bossGroup>
             <enemy>Abtrünniger</enemy>
-            <enemy>Gesetzloser</enemy>
-            <enemy>Gesetzloser</enemy>
-            <enemy>Greg Digger</enemy>
+            <enemy>Abtrünniger</enemy>
+            <enemy>Abtrünniger</enemy>
+            <enemy>Big Spencer</enemy>
         </bossGroup>
     </level>
 

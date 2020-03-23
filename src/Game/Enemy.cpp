@@ -174,36 +174,6 @@ void Enemy::SelectAdditionalEnemies()
 	}
 }
 
-void Enemy::ChooseRandomEnemy()
-{
-	int numberOfEnemies = std::accumulate((*allCombatants).begin(), (*allCombatants).end(), 0, [&](int sum, Combatant *c) {if (!c->IsPlayer() && !c->IsDying())return sum + 1; else return sum; });
-
-    if (numberOfEnemies > 1)
-    {
-		int target = rand() % (numberOfEnemies-1);
-		if (numberOfEnemies == 2)
-			target = 0;
-		for (Combatant *c : (*allCombatants))
-		{
-			if (!c->IsPlayer() && c != this && !c->IsDying())
-			{
-				if (target == 0)
-				{
-					selectedTargets.push_back(c);
-					SelectAdditionalEnemies();
-					return;
-				}
-				target--;
-			}
-		}
-    }
-	else
-	{
-		abilityStatus = finished;
-		abilityAnnouncementTime = 0.0f;
-	}
-}
-
 
 bool Enemy::DoAbility(int _id, std::vector<Combatant*> &_targets)
 {
@@ -253,14 +223,21 @@ void Enemy::Update()
 	{
 		if (confusionChecked == false)
 		{
-			if (status.IsConfused() && rand() % 10 < 5)
+			HandleConfusion();
+			if(actsInConfusion)
 			{
 				abilityAnnouncementTime = 1.5f;
-				actsInConfusion = true;
 				selectedTargets.clear();
 				ChooseAbility();
-				ChooseRandomEnemy();
-				notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left - GetRect().width/2.0f, GetRect().top - 20.0f), 1.0f);
+				ChooseRandomAlly();
+
+				if (selectedTargets.empty())
+				{
+					abilityStatus = finished;
+					abilityAnnouncementTime = 0.0f;
+				}
+				else
+					SelectAdditionalEnemies();
 			}
 
 			confusionChecked = true;

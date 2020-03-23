@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include "Markus.hpp"
+#include <numeric>
 
 Player::Player(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
 	: Combatant(_id, _engine, _notificationRenderer)
@@ -82,6 +83,7 @@ void Player::Update(int _xMove, bool _is_walking)
 
 	if (abilityStatus == handlingStatus)
 	{
+		actsInConfusion = false;
 		Status().ExecuteStatusChanges();
 		if (!Status().IsExecutingStatusChanges())
 		{
@@ -164,8 +166,23 @@ bool Player::AimChosen()
 		{
 			if (CurrentAbilityCanAimAtCombatant(c) && CombatantClicked(c))
 			{
-				selectedTargets.push_back(c);
-				SelectAdditionalTargets();
+				HandleConfusion();
+
+				if (actsInConfusion)
+				{
+					ChooseCombatantsForConfusionAttack(c);
+
+					if (selectedTargets.empty())
+					{
+						return false;
+						abilityStatus = finished;
+					}
+				}
+				else
+				{
+					selectedTargets.push_back(c);
+					SelectAdditionalTargets();
+				}
 
 				return true;
 			}
@@ -221,13 +238,11 @@ void Player::DoCurrentAbility()
 {
 	if (!combatantObject->animationIsPlaying() && !AbilityEffectIsPlaying())
 	{
-		HandleConfusion();
-
 		auto &ability = g_pObjectProperties->playerAbilities[GetID()][gui->GetCurrentAbility()];
 
 		for (Combatant *t : selectedTargets)
 		{
-			if (t->IsPlayer() && !actsInConfusion)
+			if (t->IsPlayer() && !actsInConfusion || !t->IsPlayer() && actsInConfusion)
 			{
 				float additionalDamage = ability.effectFriendly.lessTargetsMoreDamage * (ability.possibleAims.howMany - selectedTargets.size());
 				ApplyAbilityEffectToTarget(t, ability.effectFriendly, additionalDamage);
@@ -253,16 +268,54 @@ void Player::DoCurrentAbility()
 
 
 
-void Player::HandleConfusion()
+void Player::ChooseCombatantsForConfusionAttack(Combatant *_originallyAttackedCombatant)
 {
-	if (status.IsConfused())
+	if (_originallyAttackedCombatant->IsPlayer())
+		ChooseRandomOpponent();
+	else
+		ChooseRandomAlly();
+
+	if (!selectedTargets.empty())
 	{
-		if (rand() % 4 == 0)
-			status.LooseHealth(1, false);
+		if (_originallyAttackedCombatant->IsPlayer())
+			SelectAdditionalEnemies();
+		else
+			SelectAdditionalPlayers();
 	}
 }
 
 
+void Player::SelectAdditionalPlayers()
+{
+	int targetPosition = selectedTargets[0]->GetBattlePos();
+
+	for (Combatant* c : (*allCombatants))
+	{
+		if (c == this)
+			continue;
+
+		if (CurrentAbilityAttacksAll() && this != c  && selectedTargets[0] != c 
+			|| c->GetBattlePos() < targetPosition && c->GetBattlePos() > targetPosition - NumberOfTargetsForCurrentAbility())
+			selectedTargets.push_back(c);
+	}
+}
+
+void Player::SelectAdditionalEnemies()
+{
+	int targetPosition = selectedTargets[0]->GetBattlePos();
+
+	for (Combatant* c : (*allCombatants))
+	{
+		if (CurrentAbilityAttacksAllPlayers())
+		{
+			if (selectedTargets[0] != c && !c->IsPlayer())
+				selectedTargets.push_back(c);
+		}
+		else if (CurrentAbilityAttacksAll() && this != c  && selectedTargets[0] != c
+			|| c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
+			selectedTargets.push_back(c);
+	}
+}
 
 void Player::StartAbilityAnimation(int _ability)
 {
@@ -270,7 +323,7 @@ void Player::StartAbilityAnimation(int _ability)
 
 	SetAnimation(g_pObjectProperties->playerAbilities[GetID()][_ability].animation, ABILITY_ANIMATION_SPEED);
 
-	if (selectedTargets[0]->IsPlayer())
+	if (selectedTargets[0]->IsPlayer() && !actsInConfusion || !selectedTargets[0]->IsPlayer() && actsInConfusion)
 		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation(g_pObjectProperties->playerAbilities[GetID()][_ability].effectAnimationFriendly);
 	else
 		g_pSpritePool->abilityEffectsAnimation->setCurrentAnimation(g_pObjectProperties->playerAbilities[GetID()][_ability].effectAnimationHostile);

@@ -39,7 +39,6 @@ protected:
 	void ChooseTarget();
 	void CheckForMarkedPlayers();
 	void ChooseRandomPlayer();
-    void ChooseRandomEnemy();
 
 	void SelectAdditionalPlayers();
 	void SelectAdditionalEnemies();

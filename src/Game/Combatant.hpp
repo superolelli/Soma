@@ -121,4 +121,11 @@ protected:
 
 	bool AbilityEffectIsPlaying();
 	bool CheckForDodging(Combatant *_attacker, int _precisionModificator);
+
+	void ChooseRandomAlly();
+	void ChooseRandomOpponent();
+
+	void HandleConfusion();
+
+	bool IsAlly(Combatant *c);
 };
