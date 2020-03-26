@@ -21,6 +21,8 @@
 
 #include "BattleGUI.hpp"
 
+class CombatantState;
+
 
 enum abilityPhase { ready, executing, finished, attacked, dodging, handlingStatus };
 
@@ -35,6 +37,12 @@ const float TURN_MARKER_ANIMATION_SCALE = 1.2f;
 
 class Combatant : public CObserver
 {
+	friend class CombatantStateAttacked;
+	friend class CombatantStateDodging;
+	friend class CombatantStateUpdateStatus;
+	friend class CombatantStateIdle;
+	//friend class CombatantStateExecutingAbility;
+
 public:
 	static bool setElapsedTimeForAbilityEffect;
 
@@ -45,15 +53,17 @@ public:
 	virtual void Render() = 0;
 	virtual void Update();
 
+	void ChangeState(CombatantState *_state);
+
 	virtual int GetID() { return -2; }
 	virtual bool IsPlayer() { return false; }
 	sf::IntRect &GetRect() { return hitbox; }
 	sf::Vector2f GetLocalPosition();
 
 	CombatantStatus &Status() { return status; }
-	abilityPhase GetAbilityStatus() { return abilityStatus; }
+	virtual abilityPhase GetAbilityStatus();
 
-	bool FinishedTurn() { return abilityStatus == finished; }
+	bool FinishedTurn() { return GetAbilityStatus() == finished; }
 	bool IsDying() { return dying; }
 	bool AnimationFinished() { return !combatantObject->animationIsPlaying(); }
 
@@ -76,10 +86,13 @@ public:
 	void RenderAbilityTargetMarker();
 	void RenderTurnMarker();
 
-	void ResetAbilityStatus() { abilityStatus = finished; }
+	void ResetAbilityStatus() { SetAbilityStatus(finished); }
+	virtual void SetAbilityStatus(abilityPhase _status) = 0;
 	void SetAnimation(std::string _animation, float _speed);
 
 protected:
+
+	CombatantState *currentState;
 
 	CGameEngine *engine;
 	BattleGUI *gui;

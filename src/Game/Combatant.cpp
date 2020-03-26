@@ -3,6 +3,7 @@
 #include "../Framework/Graphics/RichText.hpp"
 #include "../Framework/Graphics/RoundedRectangleShape.hpp"
 #include <numeric>
+#include "CombatantStateIdle.hpp"
 
 bool Combatant::setElapsedTimeForAbilityEffect;
 
@@ -20,19 +21,18 @@ Combatant::Combatant(int _id, CGameEngine * _engine, NotificationRenderer * _not
 	dying = false;
 
 	turnMarkerScale = 1.0f;
-
-	abilityStatus = finished;
 }
 
 void Combatant::Init()
 {
-	SetAnimation("idle", IDLE_ANIMATION_SPEED);
 	Scale(COMBATANT_NORMAL_SCALE, COMBATANT_NORMAL_SCALE);
 	combatantObject->reprocessCurrentTime();
 
 	ReloadHitbox();
 
 	statusBar.Init(&status, engine);
+
+	currentState = new CombatantStateIdle(this);
 }
 
 void Combatant::SetPos(int _x, int _y)
@@ -60,6 +60,11 @@ void Combatant::Scale(float _x, float _y)
 sf::Vector2f Combatant::GetLocalPosition() 
 {
 	return sf::Vector2f(combatantObject->getObjectInstance("bounding_box")->getPosition().x - combatantObject->getPosition().x, combatantObject->getPosition().y);
+}
+
+abilityPhase Combatant::GetAbilityStatus()
+{
+	return currentState->GetStateID();
 }
 
 
@@ -201,7 +206,7 @@ void Combatant::GiveTurnTo(std::vector<Combatant*>* _targets, BattleGUI *_gui)
 	allCombatants = _targets;
 	gui = _gui;
 
-	abilityStatus = handlingStatus;
+	SetAbilityStatus(handlingStatus);
 
 	if (IsPlayer())
 		status.UpdateStatusForNewTurn();
@@ -217,7 +222,7 @@ void Combatant::StartAttackedAnimation()
 {
 	ScaleForAbilityAnimation();
 	SetAnimation("attacked", ABILITY_ANIMATION_SPEED);
-	abilityStatus = attacked;
+	SetAbilityStatus(attacked);
 }
 
 void Combatant::StartDodgingAnimation()
@@ -226,7 +231,7 @@ void Combatant::StartDodgingAnimation()
 	SetAnimation("attacked", ABILITY_ANIMATION_SPEED);
 	notificationRenderer->AddNotification("Ausgewichen!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width/2.0f, GetRect().top), 1.0f);
 
-	abilityStatus = dodging;
+	SetAbilityStatus(dodging);
 	g_pSounds->PlaySound(DODGED);
 }
 
@@ -234,19 +239,20 @@ void Combatant::StartFriendlyAttackedAnimation()
 {
 	ScaleForAbilityAnimation();
 	SetAnimation("attacked_friendly", ABILITY_ANIMATION_SPEED);
-	abilityStatus = attacked;
+	SetAbilityStatus(attacked);
 }
 
 
 void Combatant::StopAttackedAnimation()
 {
+	SetAbilityStatus(finished);
+
 	if(status.IsAsleep())
 		SetAnimation("sleeping", IDLE_ANIMATION_SPEED);
 	else
 		SetAnimation("idle", IDLE_ANIMATION_SPEED);
 
 	ReverseScaleForAbilityAnimation();
-	abilityStatus = finished;
 }
 
 
@@ -267,6 +273,13 @@ void Combatant::Update()
 	combatantObject->reprocessCurrentTime();
 	ReloadHitbox();
 	statusBar.Update(GetRect());
+	currentState->Update();
+}
+
+void Combatant::ChangeState(CombatantState * _state)
+{
+	SAFE_DELETE(currentState);
+	currentState = _state;
 }
 
 
@@ -300,7 +313,6 @@ void Combatant::HandleConfusion()
 	{
 		if (rand() % 10 < 5)
 		{
-			notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left - GetRect().width / 2.0f, GetRect().top - 20.0f), 1.0f);
 			actsInConfusion = true;
 		}
 	}

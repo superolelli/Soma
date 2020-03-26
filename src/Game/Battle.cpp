@@ -1,9 +1,4 @@
 #include "Battle.hpp"
-#include "Greg.hpp"
-#include "ObserverNotificationBattle.h"
-#include "ApacheKid.hpp"
-#include "Abtruenniger.hpp"
-#include "Hilfssheriff.hpp"
 
 
 void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss)
@@ -16,6 +11,7 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 	notificationRenderer = _notificationRenderer;
 	currentCombatant = 0;
 	isBattleFinished = false;
+	turnsSinceLastEnemyDied = -1;
 	isBossBattle = _boss;
 
 	InitCombatants(_xView, enemyIDs);
@@ -90,25 +86,7 @@ void Battle::AddEnemy(int enemyID)
 Enemy *Battle::CreateEnemy(int _enemyID)
 {
 	Enemy *enemy;
-	if (_enemyID == CombatantID::Greg) {
-		enemy = new GregDigger(_enemyID, engine, notificationRenderer);
-		AddObserver(enemy);
-	}
-	else if (_enemyID == CombatantID::Apachekid) {
-		enemy = new ApacheKid(_enemyID, engine, notificationRenderer);
-		dynamic_cast<ApacheKid*>(enemy)->SetCallbackForAddingEnemy([&](int id) {AddEnemy(id); });
-	}
-	else if (_enemyID == CombatantID::Hilfssheriff)
-	{
-		enemy = new class Hilfssheriff(_enemyID, engine, notificationRenderer);
-	}
-	else if (_enemyID == CombatantID::Abtruenniger)
-	{
-		enemy = new class Abtruenniger(_enemyID, engine, notificationRenderer);
-	}
-	else
-		enemy = new Enemy(_enemyID, engine, notificationRenderer);
-
+	enemy = new Enemy(_enemyID, engine, notificationRenderer, this);
 	enemy->Init();
 	return enemy;
 }
@@ -211,10 +189,7 @@ void Battle::HandleDeaths()
 			{
 				(*i)->StartDeathAnimation();
 				if (!(*i)->IsPlayer())
-					Notify(ObserverNotificationBattle{battleEvents::enemyDied});
-
-				if (dynamic_cast<GregDigger*>(*i))
-					RemoveObserver(*i);
+					turnsSinceLastEnemyDied = 0;
 			}
 			else if ((*i)->AnimationFinished())
 			{
@@ -237,6 +212,11 @@ void Battle::HandleDeaths()
 	}
 }
 
+
+bool Battle::EnemyDiedLastRound()
+{
+	return turnsSinceLastEnemyDied >= 0 && turnsSinceLastEnemyDied <= 1;
+}
 
 bool Battle::IsOneGroupDead()
 {
@@ -282,6 +262,8 @@ void Battle::ChooseNextCombatant()
 
 	if (currentCombatant >= combatants.size())
 	{
+		if(turnsSinceLastEnemyDied >= 0)
+			turnsSinceLastEnemyDied++;
 		CalculateTurnOrder();
 		currentCombatant = 0;
 	}

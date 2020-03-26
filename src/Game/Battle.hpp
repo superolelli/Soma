@@ -4,14 +4,13 @@
 #include "BattleGUI.hpp"
 #include "Enemy.hpp"
 #include "../Framework/Graphics/NotificationRenderer.hpp"
-#include "../Framework/Patterns/Subject.hpp"
 #include "LootableDialog.hpp"
 
 const int ENEMY_X_OFFSET = 20;
 const int ENEMY_Y_POS = 750;
 const int ENEMY_SPACING = 40;
 
-class Battle : public CSubject
+class Battle
 {
 public:
 
@@ -22,6 +21,8 @@ public:
 	void Quit();
 
 	void AddEnemy(int enemyID);
+
+	bool EnemyDiedLastRound();
 
 	bool isFinished() { return isBattleFinished; }
 	bool isBossBattle;
@@ -40,6 +41,8 @@ private:
 	std::vector<Combatant*> combatants;
 
 	int currentCombatant;
+
+	int turnsSinceLastEnemyDied;
 
 	bool isBattleFinished;
 

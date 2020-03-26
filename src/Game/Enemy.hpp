@@ -5,51 +5,30 @@
 
 #include <numeric>
 
+class Battle;
+
 class Enemy : public Combatant
 {
-public:
+	friend class EnemyStatePrepareAbility;
+	friend class EnemyStateExecutingAbility;
 
-	Enemy(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
+public:
+	Enemy(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, Battle *_battle);
 
 	virtual void Init() override;
 
 	virtual int GetID() override { return enemyID; }
 
-	virtual bool DoAbility(int _id, std::vector<Combatant*> &_targets);
-
 	void Update() override;
 
 	virtual void Render() override;
 
-	sf::String GetChosenAbilityName() { return g_pObjectProperties->enemyAbilities[int(chosenAbility)].name; }
+	abilityPhase GetAbilityStatus() override;
+
+	void SetAbilityStatus(abilityPhase _status) override;
 
 protected:
+	Battle *battle;
 
 	int enemyID;
-
-	enemyAbilities chosenAbility;
-
-	float abilityAnnouncementTime;
-
-	bool confusionChecked;
-
-	void PrepareAbility();
-	virtual void ChooseAbility();
-
-	void ChooseTarget();
-	void CheckForMarkedPlayers();
-	void ChooseRandomPlayer();
-
-	void SelectAdditionalPlayers();
-	void SelectAdditionalEnemies();
-
-	bool CanAimAtCombatant(Combatant *_combatant);
-
-	void AnnounceAndStartAbilityAnimation();
-	void StartAbilityAnimation(int _ability);
-
-	void ExecuteAbility();
-
-	void RenderAbilityAnnouncement();
-	void RenderAbilityTargetMarker();
 };

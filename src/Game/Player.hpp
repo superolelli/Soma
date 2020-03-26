@@ -9,6 +9,8 @@ const float WALKING_ANIMATION_SPEED = 0.85f;
 
 class Player : public Combatant
 {
+	friend class PlayerStatePrepareAbility;
+	friend class PlayerStateExecutingAbility;
 public:
 	Player(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
 
@@ -22,28 +24,13 @@ public:
 	void SetEquipment(CombatantAttributes &_equipmentStats);
 
 	float GetAdditionalDamageForCurrentlyAimedCombatant();
-	bool CurrentAbilityCanAimAtCombatant(Combatant* _combatant);
+
+	void SetAbilityStatus(abilityPhase _status) override;
+
+	bool CurrentAbilityCanAimAtCombatant(Combatant *_combatant);
 
 
 protected:
-
-	bool AimChosen();
-
-	void DoCurrentAbility();
-	bool CombatantClicked(Combatant* _combatant);
-
-	void RenderAbilityTargetMarker();
-	void StartAbilityAnimation(int _ability);
-
-	void SelectAdditionalTargets();
-
-	int NumberOfTargetsForCurrentAbility();
-	bool CurrentAbilityAttacksAll();
-	bool CurrentAbilityAttacksAllPlayers();
-
-	void ChooseCombatantsForConfusionAttack(Combatant *_originallyAttackedCombatant);
-	void SelectAdditionalPlayers();
-	void SelectAdditionalEnemies();
 
 	bool is_walking;
 };
