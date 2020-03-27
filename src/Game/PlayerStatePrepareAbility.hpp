@@ -1,14 +1,14 @@
 #pragma once
 
 
-#include "PlayerState.hpp"
+#include "CombatantStatePrepareAbility.hpp"
 
-class PlayerStatePrepareAbility : public PlayerState
+class Player;
+
+class PlayerStatePrepareAbility : public CombatantStatePrepareAbility
 {
 public:
 	PlayerStatePrepareAbility(Player *_context);
-
-	abilityPhase GetStateID() override { return ready; };
 
 	void Update() override;
 	void Render() override;
@@ -17,15 +17,16 @@ public:
 	bool CurrentAbilityCanAimAtCombatant(Combatant* _combatant);
 
 private:
+	Player *playerContext;
 
-	void PrepareTargets(Combatant *_target);
-	bool CombatantClicked(Combatant* _combatant);
-	void ChooseCombatantsForConfusionAttack(Combatant *_originallyAttackedCombatant);
-	void SelectAdditionalPlayers();
-	void SelectAdditionalEnemies();
-	void SelectAdditionalTargets();
+	void HandleConfusion();
+	bool PlayerShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition);
+	bool EnemyShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition);
+	void SelectAdditionalTargets(bool _selectPlayers);
 	int NumberOfTargetsForCurrentAbility();
 	bool CurrentAbilityAttacksAll();
 	bool CurrentAbilityAttacksAllPlayers();
 	void RenderAbilityTargetMarker();
+
+	void UpdateSelectedTargets();
 };

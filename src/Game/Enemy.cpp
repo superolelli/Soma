@@ -2,16 +2,15 @@
 #include "CombatantStateIdle.hpp"
 #include "EnemyStatePrepareAbility.hpp"
 #include "CombatantStateUpdateStatus.hpp"
-#include "CombatantStateDodging.hpp"
 #include "CombatantStateAttacked.hpp"
+#include "CombatantStateDying.hpp"
 #include "Battle.hpp"
 
 
-Enemy::Enemy(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer, Battle *_battle)
+Enemy::Enemy(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
 	: Combatant(_id, _engine, _notificationRenderer)
 {
 	enemyID = _id;
-	battle = _battle;
 }
 
 void Enemy::Init()
@@ -73,10 +72,10 @@ void Enemy::SetAbilityStatus(abilityPhase _status)
 		currentState = new CombatantStateIdle(this);
 		break;
 	case dodging:
-		currentState = new CombatantStateDodging(this);
+		currentState = new CombatantStateAttacked(this, true);
 		break;
 	case attacked:
-		currentState = new CombatantStateAttacked(this);
+		currentState = new CombatantStateAttacked(this, false);
 		break;
 	case ready:
 		currentState = new EnemyStatePrepareAbility(this);
@@ -84,6 +83,8 @@ void Enemy::SetAbilityStatus(abilityPhase _status)
 	case handlingStatus:
 		currentState = new CombatantStateUpdateStatus(this);
 		break;
+	case dying:
+		currentState = new CombatantStateDying(this);
 	}
 }
 

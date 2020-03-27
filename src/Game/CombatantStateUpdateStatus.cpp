@@ -2,6 +2,8 @@
 #include "CombatantStateIdle.hpp"
 #include "EnemyStatePrepareAbility.hpp"
 #include "PlayerStatePrepareAbility.hpp"
+#include "Enemy.hpp"
+#include "Player.hpp"
 
 CombatantStateUpdateStatus::CombatantStateUpdateStatus(Combatant *_context)
 	:CombatantState(_context) {}
@@ -23,7 +25,7 @@ void CombatantStateUpdateStatus::Update()
 		}
 		else
 		{
-			context->HandleConfusion();
+			CheckForConfusion();
 
 			if (context->IsPlayer())
 			{
@@ -37,6 +39,16 @@ void CombatantStateUpdateStatus::Update()
 			}
 		}
 
+	}
+}
+
+
+void CombatantStateUpdateStatus::CheckForConfusion()
+{
+	if (context->status.IsConfused())
+	{
+		if (rand() % 10 < 5)
+			context->actsInConfusion = true;
 	}
 }
 

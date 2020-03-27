@@ -1,50 +1,22 @@
 #include "PlayerStatePrepareAbility.hpp"
 #include "CombatantStateIdle.hpp"
-#include "PlayerStateExecutingAbility.hpp"
+#include "CombatantStateExecutingAbility.hpp"
 #include "Markus.hpp"
 
 PlayerStatePrepareAbility::PlayerStatePrepareAbility(Player * _context)
-	:PlayerState(_context){}
+	:CombatantStatePrepareAbility(_context)
+{
+	playerContext = _context;
+}
+
 
 void PlayerStatePrepareAbility::Update()
 {
-	if (playerContext->engine->GetButtonstates(ButtonID::Left) == Keystates::Released)
+	UpdateSelectedTargets();
+
+	if (playerContext->engine->GetButtonstates(ButtonID::Left) == Keystates::Released && !playerContext->selectedTargets.empty())
 	{
-		for (Combatant* c : (*playerContext->allCombatants))
-		{
-			if (CurrentAbilityCanAimAtCombatant(c) && CombatantClicked(c))
-			{		
-				PrepareTargets(c);
-				return;
-			}
-		}
-	}
-}
-
-bool PlayerStatePrepareAbility::CurrentAbilityCanAimAtCombatant(Combatant* _combatant)
-{
-	bool canAim = g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()].possibleAims.position[_combatant->GetBattlePos()] && !_combatant->IsDying();
-
-	if (dynamic_cast<PlayerMarkus*>(this) != nullptr && playerContext->gui->GetCurrentAbility() == 0) {
-		auto *markus = dynamic_cast<PlayerMarkus*>(this);
-		return (canAim && markus->CanAimFistOfRevengeAt(_combatant->GetBattlePos()));
-	}
-
-	return canAim;
-}
-
-
-bool PlayerStatePrepareAbility::CombatantClicked(Combatant* _combatant)
-{
-	return _combatant->GetRect().contains(playerContext->engine->GetWorldMousePos());
-}
-
-void PlayerStatePrepareAbility::PrepareTargets(Combatant *_target)
-{
-	if (playerContext->actsInConfusion)
-	{
-		playerContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(playerContext->GetRect().left - playerContext->GetRect().width / 2.0f, playerContext->GetRect().top - 20.0f), 1.0f);
-		ChooseCombatantsForConfusionAttack(_target);
+		HandleConfusion();
 
 		if (playerContext->selectedTargets.empty())
 		{
@@ -52,35 +24,25 @@ void PlayerStatePrepareAbility::PrepareTargets(Combatant *_target)
 			context->ChangeState(newState);
 			return;
 		}
-	}
-	else
-	{
-		playerContext->selectedTargets.push_back(_target);
-		SelectAdditionalTargets();
-	}
 
-	PlayerStateExecutingAbility *newState = new PlayerStateExecutingAbility(playerContext);
-	context->ChangeState(newState);
+		CombatantStateExecutingAbility *newState = new CombatantStateExecutingAbility(playerContext, &g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()]);
+		context->ChangeState(newState);
+		return;
+	}
 }
 
-
-
-void PlayerStatePrepareAbility::SelectAdditionalTargets()
+bool PlayerStatePrepareAbility::CurrentAbilityCanAimAtCombatant(Combatant* _combatant)
 {
-	int targetPosition = playerContext->selectedTargets[0]->GetBattlePos();
+	bool canAim = g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()].possibleAims.position[_combatant->GetBattlePos()] && !_combatant->IsDying();
 
-	for (Combatant* c : (*playerContext->allCombatants))
-	{
-		if (CurrentAbilityAttacksAllPlayers() && playerContext->selectedTargets[0]->IsPlayer())
-		{
-			if (playerContext->selectedTargets[0] != c && c->IsPlayer())
-				playerContext->selectedTargets.push_back(c);
-		}
-		else if (CurrentAbilityAttacksAll() && playerContext != c  && playerContext->selectedTargets[0] != c
-			|| c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
-			playerContext->selectedTargets.push_back(c);
+	if (dynamic_cast<PlayerMarkus*>(playerContext) != nullptr && playerContext->gui->GetCurrentAbility() == 0) {
+		auto *markus = dynamic_cast<PlayerMarkus*>(playerContext);
+		return (canAim && markus->CanAimFistOfRevengeAt(_combatant->GetBattlePos()));
 	}
+
+	return canAim;
 }
+
 
 int PlayerStatePrepareAbility::NumberOfTargetsForCurrentAbility()
 {
@@ -97,53 +59,59 @@ bool PlayerStatePrepareAbility::CurrentAbilityAttacksAllPlayers()
 	return g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()].possibleAims.attackAllPlayers;
 }
 
-void PlayerStatePrepareAbility::ChooseCombatantsForConfusionAttack(Combatant *_originallyAttackedCombatant)
+void PlayerStatePrepareAbility::HandleConfusion()
 {
-	if (_originallyAttackedCombatant->IsPlayer())
-		playerContext->ChooseRandomOpponent();
-	else
-		playerContext->ChooseRandomAlly();
-
-	if (!playerContext->selectedTargets.empty())
+	if (playerContext->actsInConfusion)
 	{
-		if (_originallyAttackedCombatant->IsPlayer())
-			SelectAdditionalEnemies();
+		bool originallyAttackedPlayer = playerContext->selectedTargets[0]->IsPlayer();
+		playerContext->selectedTargets.clear();
+		playerContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(playerContext->GetRect().left - playerContext->GetRect().width / 2.0f, playerContext->GetRect().top - 20.0f), 1.0f);
+		
+		if (originallyAttackedPlayer)
+			ChooseRandomOpponent();
 		else
-			SelectAdditionalPlayers();
+			ChooseRandomAlly();
+
+		SelectAdditionalTargets(!originallyAttackedPlayer);
 	}
 }
 
-void PlayerStatePrepareAbility::SelectAdditionalPlayers()
+
+
+bool PlayerStatePrepareAbility::PlayerShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition)
 {
+	if (!_combatant->IsPlayer() || _combatant == playerContext)
+		return false;
+
+	return CurrentAbilityAttacksAll() && playerContext != _combatant  && playerContext->selectedTargets[0] != _combatant
+		|| _combatant->GetBattlePos() < _targetPosition && _combatant->GetBattlePos() > _targetPosition - NumberOfTargetsForCurrentAbility();
+}
+
+bool PlayerStatePrepareAbility::EnemyShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition)
+{
+	if (_combatant->IsPlayer())
+		return false;
+	
+	return CurrentAbilityAttacksAllPlayers() && playerContext->selectedTargets[0] != _combatant
+		|| CurrentAbilityAttacksAll() && playerContext != _combatant  && playerContext->selectedTargets[0] != _combatant
+		|| _combatant->GetBattlePos() > _targetPosition && _combatant->GetBattlePos() < _targetPosition + NumberOfTargetsForCurrentAbility();
+}
+
+
+void PlayerStatePrepareAbility::SelectAdditionalTargets(bool _selectPlayers)
+{
+	if (playerContext->selectedTargets.empty())
+		return;
+
 	int targetPosition = playerContext->selectedTargets[0]->GetBattlePos();
 
 	for (Combatant* c : (*playerContext->allCombatants))
 	{
-		if (c == playerContext)
-			continue;
-
-		if (CurrentAbilityAttacksAll() && playerContext != c  && playerContext->selectedTargets[0] != c
-			|| c->GetBattlePos() < targetPosition && c->GetBattlePos() > targetPosition - NumberOfTargetsForCurrentAbility())
+		if (_selectPlayers && PlayerShouldBeAddedAsTarget(c, targetPosition) || !_selectPlayers && !EnemyShouldBeAddedAsTarget(c, targetPosition))
 			playerContext->selectedTargets.push_back(c);
 	}
 }
 
-void PlayerStatePrepareAbility::SelectAdditionalEnemies()
-{
-	int targetPosition = playerContext->selectedTargets[0]->GetBattlePos();
-
-	for (Combatant* c : (*playerContext->allCombatants))
-	{
-		if (CurrentAbilityAttacksAllPlayers())
-		{
-			if (playerContext->selectedTargets[0] != c && !c->IsPlayer())
-				playerContext->selectedTargets.push_back(c);
-		}
-		else if (CurrentAbilityAttacksAll() && playerContext != c  && playerContext->selectedTargets[0] != c
-			|| c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
-			playerContext->selectedTargets.push_back(c);
-	}
-}
 
 
 void PlayerStatePrepareAbility::Render()
@@ -163,6 +131,13 @@ void PlayerStatePrepareAbility::Render()
 
 void PlayerStatePrepareAbility::RenderAbilityTargetMarker()
 {
+	for (Combatant *c : playerContext->selectedTargets)
+		c->RenderAbilityTargetMarker();
+}
+
+void PlayerStatePrepareAbility::UpdateSelectedTargets()
+{
+	playerContext->selectedTargets.clear();
 	for (Combatant *c : (*playerContext->allCombatants))
 	{
 		if (c->GetRect().contains(playerContext->engine->GetWorldMousePos()) && CurrentAbilityCanAimAtCombatant(c))
@@ -171,14 +146,10 @@ void PlayerStatePrepareAbility::RenderAbilityTargetMarker()
 
 			for (Combatant* com : (*playerContext->allCombatants))
 			{
-				if (CurrentAbilityAttacksAllPlayers())
-				{
-					if (c->IsPlayer() && com->IsPlayer() || !c->IsPlayer() && com->GetBattlePos() >= targetPosition && com->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
-						com->RenderAbilityTargetMarker();
-				}
-				else if (CurrentAbilityAttacksAll() && playerContext != com
+				if (CurrentAbilityAttacksAllPlayers() && c->IsPlayer() && com->IsPlayer()
+					|| CurrentAbilityAttacksAll() && playerContext != com
 					|| com->GetBattlePos() >= targetPosition && com->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
-					com->RenderAbilityTargetMarker();
+						playerContext->selectedTargets.push_back(com);
 			}
 
 			return;
@@ -189,23 +160,7 @@ void PlayerStatePrepareAbility::RenderAbilityTargetMarker()
 
 float PlayerStatePrepareAbility::GetAdditionalDamageForCurrentlyAimedCombatant()
 {
-	int numberOfCombatants = 0;
-	for (Combatant *c : (*playerContext->allCombatants))
-	{
-		if (c->GetRect().contains(playerContext->engine->GetWorldMousePos()) && CurrentAbilityCanAimAtCombatant(c))
-		{
-			int targetPosition = c->GetBattlePos();
-
-			for (Combatant* c : (*playerContext->allCombatants))
-			{
-				if (CurrentAbilityAttacksAll() && playerContext != c || c->GetBattlePos() >= targetPosition && c->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
-					numberOfCombatants++;
-			}
-
-			break;
-		}
-	}
-
+	int numberOfCombatants = playerContext->selectedTargets.size();
 	float additionalDamage = g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()].effectHostile.lessTargetsMoreDamage * (NumberOfTargetsForCurrentAbility() - numberOfCombatants);
 	return additionalDamage;
 }

@@ -3,6 +3,7 @@
 
 #include "CombatantState.hpp"
 
+
 class CombatantStateUpdateStatus : public CombatantState
 {
 public:
@@ -15,4 +16,5 @@ public:
 	void Render() override;
 
 private:
+	void CheckForConfusion();
 };

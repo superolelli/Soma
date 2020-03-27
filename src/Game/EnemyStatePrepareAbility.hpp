@@ -1,21 +1,28 @@
 #pragma once
 
 
-#include "EnemyState.hpp"
+#include "CombatantStatePrepareAbility.hpp"
 
-class EnemyStatePrepareAbility : public EnemyState
+class Enemy;
+
+class EnemyStatePrepareAbility : public CombatantStatePrepareAbility
 {
 public:
 	EnemyStatePrepareAbility(Enemy *_context);
-
-	abilityPhase GetStateID() override { return ready; };
 
 	void Update() override;
 	void Render() override;
 
 private:
 
+	Enemy *enemyContext;
+
 	enemyAbilities chosenAbility;
+
+	bool EnemyShouldBeAddedAsTarget(Combatant * _combatant, int _targetPosition);
+	bool PlayerShouldBeAddedAsTarget(Combatant * _combatant, int _targetPosition);
+	void SelectAdditionalTargets(bool _selectPlayers);
+	bool ChosenAbilityHitsPlayer();
 
 	void ChooseAbility();
 	void ChooseAbilityGreg();
@@ -25,11 +32,11 @@ private:
 	void ChooseAbilityBigSpencer();
 
 	void ChooseTarget();
-	void SelectAdditionalEnemies();
-	void SelectAdditionalPlayers();
 	void ChooseRandomPlayer();
 	void CheckForMarkedPlayers();
 	bool CanAimAtCombatant(Combatant *_combatant);
+
+	void HandleConfusion();
 
 
 	void RenderAbilityAnnouncement();

@@ -22,9 +22,9 @@
 #include "BattleGUI.hpp"
 
 class CombatantState;
+class Battle;
 
-
-enum abilityPhase { ready, executing, finished, attacked, dodging, handlingStatus };
+enum abilityPhase { ready, executing, finished, attacked, dodging, handlingStatus, dying };
 
 const float IDLE_ANIMATION_SPEED = 0.7f;
 const float ABILITY_ANIMATION_SPEED = 1.0f;
@@ -38,10 +38,13 @@ const float TURN_MARKER_ANIMATION_SCALE = 1.2f;
 class Combatant : public CObserver
 {
 	friend class CombatantStateAttacked;
-	friend class CombatantStateDodging;
 	friend class CombatantStateUpdateStatus;
 	friend class CombatantStateIdle;
-	//friend class CombatantStateExecutingAbility;
+	friend class CombatantStateExecutingAbility;
+	friend class EnemyStatePrepareAbility;
+	friend class PlayerStatePrepareAbility;
+	friend class CombatantStatePrepareAbility;
+	friend class CombatantStateDying;
 
 public:
 	static bool setElapsedTimeForAbilityEffect;
@@ -50,28 +53,36 @@ public:
 
 	virtual void Init();
 	void Quit();
-	virtual void Render() = 0;
 	virtual void Update();
 
-	void ChangeState(CombatantState *_state);
+	virtual void Render() = 0;
+	virtual int GetID() = 0;
+	virtual bool IsPlayer() = 0;
+	virtual void SetAbilityStatus(abilityPhase _status) = 0;
 
-	virtual int GetID() { return -2; }
-	virtual bool IsPlayer() { return false; }
+	void ChangeState(CombatantState *_state);
+	void SetBattlePtr(Battle *_battle);
+
 	sf::IntRect &GetRect() { return hitbox; }
 	sf::Vector2f GetLocalPosition();
 
 	CombatantStatus &Status() { return status; }
 	virtual abilityPhase GetAbilityStatus();
 
-	bool FinishedTurn() { return GetAbilityStatus() == finished; }
-	bool IsDying() { return dying; }
+	bool FinishedTurn() { return GetAbilityStatus() == finished || GetAbilityStatus() == dying; }
+	bool IsDying() { return GetAbilityStatus() == dying; }
 	bool AnimationFinished() { return !combatantObject->animationIsPlaying(); }
 
 
 	void SetPos(int _x, int _y);
 	void Scale(float _x, float _y);
 
-	virtual bool DoAbility(int _id, std::vector<Combatant*> &_targets) { return true; }
+	int GetBattlePos() { return battlePosition; }
+	void SetBattlePos(int _pos) { battlePosition = _pos; }
+
+	void SetAnimation(const std::string &_animation, float _speed);
+	void ResetAbilityStatus() { SetAbilityStatus(finished); }
+
 	void GiveTurnTo(std::vector<Combatant*> *_targets, BattleGUI *_gui);
 
 	void StartAttackedAnimation();
@@ -80,65 +91,39 @@ public:
 	void StopAttackedAnimation();
 	void StartDeathAnimation();
 
-	int GetBattlePos() { return battlePosition; }
-	void SetBattlePos(int _pos) { battlePosition = _pos; }
-
-	void RenderAbilityTargetMarker();
-	void RenderTurnMarker();
-
-	void ResetAbilityStatus() { SetAbilityStatus(finished); }
-	virtual void SetAbilityStatus(abilityPhase _status) = 0;
-	void SetAnimation(std::string _animation, float _speed);
 
 protected:
 
 	CombatantState *currentState;
+	CombatantStatus status;
+	CombatantStatusBar statusBar;
+	SpriterEngine::EntityInstance *combatantObject;
+	sf::IntRect hitbox;
 
 	CGameEngine *engine;
 	BattleGUI *gui;
 	NotificationRenderer *notificationRenderer;
+	Battle *battle;
 
 	std::vector<Combatant*> *allCombatants;
 	std::vector<Combatant*> selectedTargets;
-
-	SpriterEngine::EntityInstance *combatantObject;
-	sf::IntRect hitbox;
-	SpriterEngine::point abilityEffectPoint;
-
-	CombatantStatus status;
-	abilityPhase abilityStatus;
-
-	CombatantStatusBar statusBar;
 
 	int battlePosition;
 	SpriterEngine::point lastPosition;
 
 	bool actsInConfusion;
-	bool dying;
-
 	float turnMarkerScale;
 
-	void RenderAbilityEffects();
 	void RenderShadow();
+	void RenderAbilityTargetMarker();
+	void RenderTurnMarker();
 
-	virtual void ApplyAbilityEffectToTarget(Combatant *_target, AbilityEffect &_effect, float _additionalDamageFactor = 0.0f);
-
-	void StartTargetsAttackedAnimation(int _abilityPrecision);
-	void StopTargetsAttackedAnimation();
+	void ApplyAbilityEffect(Combatant *_attacker, AbilityEffect &_effect, float _additionalDamageFactor = 0.0f);
 
 	void ScaleForAbilityAnimation();
 	void ReverseScaleForAbilityAnimation();
 
 	void ReloadHitbox();
-	void ReloadAbilityEffectPoint();
-
-	bool AbilityEffectIsPlaying();
-	bool CheckForDodging(Combatant *_attacker, int _precisionModificator);
-
-	void ChooseRandomAlly();
-	void ChooseRandomOpponent();
-
-	void HandleConfusion();
 
 	bool IsAlly(Combatant *c);
 };

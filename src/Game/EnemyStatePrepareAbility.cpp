@@ -1,39 +1,86 @@
 #include "EnemyStatePrepareAbility.hpp"
-#include "EnemyStateExecutingAbility.hpp"
+#include "CombatantStateExecutingAbility.hpp"
 #include "CombatantStateIdle.hpp"
 #include "Battle.hpp"
 
 
 EnemyStatePrepareAbility::EnemyStatePrepareAbility(Enemy *_context)
-	:EnemyState(_context)
+	:CombatantStatePrepareAbility(_context)
 {
+	enemyContext = _context;
 	abilityAnnouncementTime = 1.5f;
 
 	ChooseAbility();
 
-	if (enemyContext->actsInConfusion)
-	{
-		enemyContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(enemyContext->GetRect().left - enemyContext->GetRect().width / 2.0f, enemyContext->GetRect().top - 20.0f), 1.0f);
-		enemyContext->ChooseRandomAlly();
-
-		if (enemyContext->selectedTargets.empty())
-		{
-			CombatantStateIdle *newState = new CombatantStateIdle(enemyContext);
-			enemyContext->ChangeState(newState);
-		}
-		else
-			SelectAdditionalEnemies();
-	}
+	if(enemyContext->actsInConfusion)
+		HandleConfusion();
 	else
-	{
 		ChooseTarget();
+}
+
+
+void EnemyStatePrepareAbility::HandleConfusion()
+{
+	enemyContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(enemyContext->GetRect().left - enemyContext->GetRect().width / 2.0f, enemyContext->GetRect().top - 20.0f), 1.0f);
+
+	bool originallyAttackedPlayer = true;  //Has to be changed as soon as there exist enemy abilities that target other enemies
+
+	if (originallyAttackedPlayer)
+		ChooseRandomAlly();
+	else
+		ChooseRandomOpponent();
+
+	SelectAdditionalTargets(!originallyAttackedPlayer);
+}
+
+
+void EnemyStatePrepareAbility::SelectAdditionalTargets(bool _selectPlayers)
+{
+	if (enemyContext->selectedTargets.empty())
+		return;
+
+	int targetPosition = enemyContext->selectedTargets[0]->GetBattlePos();
+
+	for (Combatant* c : (*enemyContext->allCombatants))
+	{
+		if (_selectPlayers && PlayerShouldBeAddedAsTarget(c, targetPosition) || !_selectPlayers && EnemyShouldBeAddedAsTarget(c, targetPosition))
+			enemyContext->selectedTargets.push_back(c);
 	}
+}
+
+bool EnemyStatePrepareAbility::ChosenAbilityHitsPlayer()
+{
+	return true;
+}
+
+bool EnemyStatePrepareAbility::PlayerShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition)
+{
+	if (!_combatant->IsPlayer() || _combatant == enemyContext->selectedTargets[0])
+		return false;
+
+	if (!enemyContext->actsInConfusion && g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAllPlayers)
+		return true;
+
+	return g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAll && enemyContext != _combatant
+		|| _combatant->GetBattlePos() < _targetPosition && _combatant->GetBattlePos() > _targetPosition - g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.howMany;
+}
+
+bool EnemyStatePrepareAbility::EnemyShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition)
+{
+	if (_combatant->IsPlayer() || _combatant == enemyContext || _combatant == enemyContext->selectedTargets[0])
+		return false;
+
+	if (enemyContext->actsInConfusion && g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAllPlayers)
+		return true;
+
+	return g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAll && enemyContext != _combatant
+		|| _combatant->GetBattlePos() >= _targetPosition && _combatant->GetBattlePos() < _targetPosition + g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.howMany;
 }
 
 
 void EnemyStatePrepareAbility::ChooseAbility()
 {
-	switch (enemyContext->enemyID)
+	switch (enemyContext->GetID())
 	{
 	case CombatantID::Gesetzloser:
 		chosenAbility = enemyAbilities::springfield;
@@ -121,8 +168,6 @@ bool EnemyStatePrepareAbility::OnlyOneCompanionLeft()
 
 void EnemyStatePrepareAbility::ChooseTarget()
 {
-	enemyContext->selectedTargets.clear();
-
 	if (chosenAbility == enemyAbilities::bury_the_dead || chosenAbility == enemyAbilities::indians)
 		enemyContext->selectedTargets.push_back(enemyContext);
 	else {
@@ -144,6 +189,7 @@ void EnemyStatePrepareAbility::CheckForMarkedPlayers()
 			if (rand() % 10 < 8)
 			{
 				enemyContext->selectedTargets.push_back(c);
+				SelectAdditionalTargets(true);
 				return;
 			}
 		}
@@ -155,7 +201,6 @@ bool EnemyStatePrepareAbility::CanAimAtCombatant(Combatant *_combatant)
 {
 	return g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.position[_combatant->GetBattlePos()] && !_combatant->IsDying();
 }
-
 
 
 void EnemyStatePrepareAbility::ChooseRandomPlayer()
@@ -172,7 +217,7 @@ void EnemyStatePrepareAbility::ChooseRandomPlayer()
 				if (target == 0)
 				{
 					enemyContext->selectedTargets.push_back(c);
-					SelectAdditionalPlayers();
+					SelectAdditionalTargets(ChosenAbilityHitsPlayer());
 					return;
 				}
 				target--;
@@ -187,52 +232,21 @@ void EnemyStatePrepareAbility::ChooseRandomPlayer()
 }
 
 
-void EnemyStatePrepareAbility::SelectAdditionalPlayers()
-{
-	int targetPosition = enemyContext->selectedTargets[0]->GetBattlePos();
-
-	for (Combatant* c : (*enemyContext->allCombatants))
-	{
-		if (g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAllPlayers)
-		{
-			if (enemyContext->selectedTargets[0] != c && c->IsPlayer())
-				enemyContext->selectedTargets.push_back(c);
-		}
-		else if (g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAll && enemyContext != c  && enemyContext->selectedTargets[0] != c
-			|| c->GetBattlePos() < targetPosition && c->GetBattlePos() > targetPosition - g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.howMany)
-			enemyContext->selectedTargets.push_back(c);
-	}
-}
-
-
-void EnemyStatePrepareAbility::SelectAdditionalEnemies()
-{
-	int targetPosition = enemyContext->selectedTargets[0]->GetBattlePos();
-
-	for (Combatant* c : (*enemyContext->allCombatants))
-	{
-		if (c == enemyContext)
-			continue;
-
-		if (enemyContext->actsInConfusion && g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAllPlayers)
-		{
-			if (enemyContext->selectedTargets[0] != c && !c->IsPlayer())
-				enemyContext->selectedTargets.push_back(c);
-		}
-		else if (g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAll && enemyContext != c  && enemyContext->selectedTargets[0] != c || c->GetBattlePos() > targetPosition && c->GetBattlePos() < targetPosition + g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.howMany)
-			enemyContext->selectedTargets.push_back(c);
-	}
-}
-
-
 
 void EnemyStatePrepareAbility::Update()
 {
+	//Cannot be done in constructor since it does a state change
+	if (enemyContext->selectedTargets.empty())
+	{
+		CombatantStateIdle *newState = new CombatantStateIdle(enemyContext);
+		enemyContext->ChangeState(newState);
+	}
+
 	abilityAnnouncementTime -= g_pTimer->GetElapsedTime().asSeconds();
 
 	if (abilityAnnouncementTime <= 0.0f)
 	{
-		EnemyStateExecutingAbility *newState = new EnemyStateExecutingAbility(enemyContext, chosenAbility);
+		CombatantStateExecutingAbility *newState = new CombatantStateExecutingAbility(enemyContext, &g_pObjectProperties->enemyAbilities[int(chosenAbility)]);
 		enemyContext->ChangeState(newState);
 	}
 }

@@ -2,9 +2,9 @@
 #include "Markus.hpp"
 #include <numeric>
 #include "CombatantStateAttacked.hpp"
-#include "CombatantStateDodging.hpp"
 #include "CombatantStateIdle.hpp"
 #include "CombatantStateUpdateStatus.hpp"
+#include "CombatantStateDying.hpp"
 #include "PlayerStatePrepareAbility.hpp"
 
 Player::Player(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
@@ -73,10 +73,10 @@ void Player::SetAbilityStatus(abilityPhase _status)
 		currentState = new CombatantStateIdle(this);
 		break;
 	case dodging:
-		currentState = new CombatantStateDodging(this);
+		currentState = new CombatantStateAttacked(this, true);
 		break;
 	case attacked:
-		currentState = new CombatantStateAttacked(this);
+		currentState = new CombatantStateAttacked(this, false);
 		break;
 	case ready:
 		currentState = new PlayerStatePrepareAbility(this);
@@ -84,6 +84,8 @@ void Player::SetAbilityStatus(abilityPhase _status)
 	case handlingStatus:
 		currentState = new CombatantStateUpdateStatus(this);
 		break;
+	case dying:
+		currentState = new CombatantStateDying(this);
 	}
 }
 

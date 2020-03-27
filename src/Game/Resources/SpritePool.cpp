@@ -35,10 +35,17 @@ void SpritePool::LoadSprites()
 }
 
 
-
-
 void SpritePool::FreeSprites()
 {
 	SAFE_DELETE(abilityEffectsAnimation);
 	SAFE_DELETE(newBattleAnimation);
+}
+
+
+bool SpritePool::AbilityEffectIsPlaying()
+{
+	if (abilityEffectsAnimation->currentAnimationName() == "empty")
+		return false;
+	else
+		return abilityEffectsAnimation->animationIsPlaying();
 }

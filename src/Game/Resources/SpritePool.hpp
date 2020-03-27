@@ -17,6 +17,8 @@ public:
 	void LoadSprites();
 	void FreeSprites();
 
+	bool AbilityEffectIsPlaying();
+
 	CSprite buff;
 	CSprite debuff;
 	CSprite confused;

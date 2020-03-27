@@ -9,8 +9,6 @@ const float WALKING_ANIMATION_SPEED = 0.85f;
 
 class Player : public Combatant
 {
-	friend class PlayerStatePrepareAbility;
-	friend class PlayerStateExecutingAbility;
 public:
 	Player(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
 

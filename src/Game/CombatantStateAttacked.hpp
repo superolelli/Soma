@@ -6,12 +6,18 @@ class CombatantStateAttacked : public CombatantState
 {
 public:
 
-	CombatantStateAttacked(Combatant *_context);
+	CombatantStateAttacked(Combatant *_context, bool _dodge);
 
-	abilityPhase GetStateID() override { return attacked; };
+	abilityPhase GetStateID() override;
 
 	void Update() override;
 	void Render() override;
 
 private:
+
+	bool dodged;
+	SpriterEngine::point abilityEffectPoint;
+
+	void RenderAbilityEffects();
+	void ReloadAbilityEffectPoint();
 };

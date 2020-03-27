@@ -35,6 +35,7 @@ void Battle::InitCombatants(int _xView, int enemyIDs[4])
 		{
 			combatants.push_back(players->GetPlayer(i));
 			combatants.back()->SetBattlePos(i);
+			combatants.back()->SetBattlePtr(this);
 		}
 	}
 
@@ -49,6 +50,7 @@ void Battle::InitCombatants(int _xView, int enemyIDs[4])
 			enemies[i]->SetBattlePos(i + 4);
 			enemies[i]->Update();
 			combatants.push_back(enemies[i]);
+			combatants.back()->SetBattlePtr(this);
 		}
 	}
 }
@@ -59,6 +61,7 @@ void Battle::Quit()
 	for (Combatant *c : combatants)
 	{
 		c->ResetAbilityStatus();
+		c->SetBattlePtr(nullptr);
 
 		if (!c->IsPlayer()) {
 			c->Quit();
@@ -86,7 +89,7 @@ void Battle::AddEnemy(int enemyID)
 Enemy *Battle::CreateEnemy(int _enemyID)
 {
 	Enemy *enemy;
-	enemy = new Enemy(_enemyID, engine, notificationRenderer, this);
+	enemy = new Enemy(_enemyID, engine, notificationRenderer);
 	enemy->Init();
 	return enemy;
 }
@@ -187,7 +190,7 @@ void Battle::HandleDeaths()
 		{
 			if (!(*i)->IsDying()) 
 			{
-				(*i)->StartDeathAnimation();
+				(*i)->SetAbilityStatus(dying);
 				if (!(*i)->IsPlayer())
 					turnsSinceLastEnemyDied = 0;
 			}

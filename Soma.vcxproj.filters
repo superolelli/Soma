@@ -672,25 +672,13 @@
     <ClCompile Include="src\Game\ItemFactory.cpp">
       <Filter>Quelldateien\Game\Items</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\EnemyState.cpp">
-      <Filter>Quelldateien\Game\Level\Enemies\States</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\EnemyStatePrepareAbility.cpp">
       <Filter>Quelldateien\Game\Level\Enemies\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\EnemyStateExecutingAbility.cpp">
-      <Filter>Quelldateien\Game\Level\Enemies\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\PlayerState.cpp">
-      <Filter>Quelldateien\Game\Level\Players</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\CombatantState.cpp">
       <Filter>Quelldateien\Game\Level\Battle\CombatantStates</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\CombatantStateAttacked.cpp">
-      <Filter>Quelldateien\Game\Level\Battle\CombatantStates</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\CombatantStateDodging.cpp">
       <Filter>Quelldateien\Game\Level\Battle\CombatantStates</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\CombatantStateIdle.cpp">
@@ -702,8 +690,14 @@
     <ClCompile Include="src\Game\PlayerStatePrepareAbility.cpp">
       <Filter>Quelldateien\Game\Level\Players</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\PlayerStateExecutingAbility.cpp">
-      <Filter>Quelldateien\Game\Level\Players</Filter>
+    <ClCompile Include="src\Game\CombatantStateExecutingAbility.cpp">
+      <Filter>Quelldateien\Game\Level\Battle\CombatantStates</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\CombatantStatePrepareAbility.cpp">
+      <Filter>Quelldateien\Game\Level\Battle\CombatantStates</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\CombatantStateDying.cpp">
+      <Filter>Quelldateien\Game\Level\Battle\CombatantStates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1268,20 +1262,11 @@
     <ClInclude Include="src\Game\ItemFactory.hpp">
       <Filter>Headerdateien\Game\Items</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\EnemyState.hpp">
-      <Filter>Headerdateien\Game\Level\Enemies\States</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\EnemyStatePrepareAbility.hpp">
       <Filter>Headerdateien\Game\Level\Enemies\States</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\PlayerState.hpp">
-      <Filter>Headerdateien\Game\Level\Players</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\PlayerStatePrepareAbility.hpp">
       <Filter>Headerdateien\Game\Level\Players</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\EnemyStateExecutingAbility.hpp">
-      <Filter>Headerdateien\Game\Level\Enemies\States</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\CombatantState.hpp">
       <Filter>Headerdateien\Game\Level\Battle\CombatantStates</Filter>
@@ -1292,14 +1277,17 @@
     <ClInclude Include="src\Game\CombatantStateIdle.hpp">
       <Filter>Headerdateien\Game\Level\Battle\CombatantStates</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\CombatantStateDodging.hpp">
-      <Filter>Headerdateien\Game\Level\Battle\CombatantStates</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\CombatantStateAttacked.hpp">
       <Filter>Headerdateien\Game\Level\Battle\CombatantStates</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\PlayerStateExecutingAbility.hpp">
-      <Filter>Headerdateien\Game\Level\Players</Filter>
+    <ClInclude Include="src\Game\CombatantStateExecutingAbility.hpp">
+      <Filter>Headerdateien\Game\Level\Battle\CombatantStates</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\CombatantStatePrepareAbility.hpp">
+      <Filter>Headerdateien\Game\Level\Battle\CombatantStates</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\CombatantStateDying.hpp">
+      <Filter>Headerdateien\Game\Level\Battle\CombatantStates</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
