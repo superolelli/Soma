@@ -222,6 +222,8 @@ void CombatantStatus::RemoveAllBuffs()
 		currentStats -= i->stats;
 
 	buffs.clear();
+
+	notificationRenderer->AddNotification("Buffs entfernt!", g_pFonts->f_kingArthur, sf::Vector2f(combatant->GetRect().left - combatant->GetRect().width / 2.0f, combatant->GetRect().top - 20.0f), 1.0f);
 }
 
 
@@ -232,6 +234,8 @@ void CombatantStatus::RemoveAllDebuffs()
 		currentStats -= i->stats;
 
 	debuffs.clear();
+
+	notificationRenderer->AddNotification("Debuffs entfernt!", g_pFonts->f_kingArthur, sf::Vector2f(combatant->GetRect().left - combatant->GetRect().width / 2.0f, combatant->GetRect().top - 20.0f), 1.0f);
 }
 
 

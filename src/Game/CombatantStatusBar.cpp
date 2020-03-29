@@ -13,6 +13,12 @@ void CombatantStatusBar::Init(CombatantStatus *_status, CGameEngine *_engine)
 	status = _status;
 	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, status->GetCurrentHealthPointer(), status->GetMaxHealthPointer());
 	healthBar.SetSmoothTransformationTime(0.7f);
+
+	for (auto &s : statusRemoveTime)
+		s = -1.0f;
+
+	for (auto &s : statusAddTime)
+		s = -1.0f;
 }
 
 
@@ -42,49 +48,52 @@ void CombatantStatusBar::RenderStatusSymbols()
 	int x = healthBar.GetRect().left;
 	int y = healthBar.GetRect().top + healthBar.GetRect().height;
 
-	if (status->IsAsleep())
-	{
-		g_pSpritePool->sleeping.SetPos(x, y);
-		g_pSpritePool->sleeping.Render(engine->GetWindow());
-		x += 20;
-	}
-
-
-	if (status->RoundsDamageOverTime() > 0)
-	{
-		g_pSpritePool->damageOverTime.SetPos(x, y);
-		g_pSpritePool->damageOverTime.Render(engine->GetWindow());
-		x += 20;
-	}
-
-	if (status->IsConfused())
-	{
-		g_pSpritePool->confused.SetPos(x, y);
-		g_pSpritePool->confused.Render(engine->GetWindow());
-		x += 20;
-	}
-
-	if (status->IsBuffed())
-	{
-		g_pSpritePool->buff.SetPos(x, y);
-		g_pSpritePool->buff.Render(engine->GetWindow());
-		x += 20;
-	}
-
-	if (status->IsDebuffed())
-	{
-		g_pSpritePool->debuff.SetPos(x, y);
-		g_pSpritePool->debuff.Render(engine->GetWindow());
-		x += 20;
-	}
-
-	if (status->IsMarked())
-	{
-		g_pSpritePool->marked.SetPos(x, y);
-		g_pSpritePool->marked.Render(engine->GetWindow());
-	}
+	RenderStatusSymbol(status->IsAsleep(), sleeping, g_pSpritePool->sleeping, x);
+	RenderStatusSymbol(status->DamageOverTime() > 0.0f, damageOverTime, g_pSpritePool->damageOverTime, x);
+	RenderStatusSymbol(status->IsConfused(), confused, g_pSpritePool->confused, x);
+	RenderStatusSymbol(status->IsBuffed(), buffed, g_pSpritePool->buff, x);
+	RenderStatusSymbol(status->IsDebuffed(), debuffed, g_pSpritePool->debuff, x);
+	RenderStatusSymbol(status->IsMarked(), marked, g_pSpritePool->marked, x);
 
 	RenderStatusSymbolsTooltips();
+}
+
+void CombatantStatusBar::RenderStatusSymbol(bool _isActive, statusType _type, CSprite & _sprite, int & _x)
+{
+	int y = healthBar.GetRect().top + healthBar.GetRect().height;
+
+	if (_isActive && statusAddTime[_type] == -1.0f)
+	{
+		statusAddTime[_type] = 0.5f;
+		statusRemoveTime[_type] = 0.0f;
+	}
+	else if (!_isActive && statusAddTime[_type] > -1.0f)
+	{
+		statusRemoveTime[_type] = 0.5f;
+		statusAddTime[_type] = -1.0f;
+	}
+
+	_sprite.SetScale(1.0f, 1.0f);
+	if (statusAddTime[_type] > 0.0f)
+	{
+		float t = 1.0 - statusAddTime[_type] * 2.0;
+		float scaleFactor = std::pow((1.0 - t), 3) * 1.5 + 3.0 * t*std::pow((1.0 - t), 2) * 0.64 + 3.0 * t*t* (1.0 - t)*0.635 + t*t*t; //cubic bezier for popping in
+		_sprite.SetScale(scaleFactor, scaleFactor);
+		statusAddTime[_type] -= g_pTimer->GetElapsedTime().asSeconds();
+	}
+	else if (statusRemoveTime[_type] > 0.0f)
+	{
+		float scaleFactor = -2.4 * std::pow(1.0 - (2.0 * statusRemoveTime[_type]), 2.0) + 1.4 * (1.0 - (2.0 * statusRemoveTime[_type])) + 1.0; //quadratic curve for popping out
+		_sprite.SetScale(scaleFactor, scaleFactor);
+		statusRemoveTime[_type] -= g_pTimer->GetElapsedTime().asSeconds();
+	}
+
+	if (_isActive || statusRemoveTime[_type] > 0.0f)
+	{
+		_sprite.SetPos(_x, y);
+		_sprite.Render(engine->GetWindow());
+		_x += 20;
+	}
 }
 
 

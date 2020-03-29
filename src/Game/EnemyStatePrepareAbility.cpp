@@ -235,7 +235,7 @@ void EnemyStatePrepareAbility::ChooseRandomPlayer()
 
 void EnemyStatePrepareAbility::Update()
 {
-	//Cannot be done in constructor since it does a state change
+	//Cannot be done in constructor since it does a state change8
 	if (enemyContext->selectedTargets.empty())
 	{
 		CombatantStateIdle *newState = new CombatantStateIdle(enemyContext);

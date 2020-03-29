@@ -17,6 +17,4 @@ void CombatantStateDying::Render()
 	context->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
 	context->combatantObject->render();
 	context->combatantObject->playSoundTriggers();
-
-	context->statusBar.Render();
 }
