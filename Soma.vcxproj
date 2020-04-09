@@ -293,6 +293,7 @@
     <ClCompile Include="src\Game\Markus.cpp" />
     <ClCompile Include="src\Game\Ole.cpp" />
     <ClCompile Include="src\Game\Player.cpp" />
+    <ClCompile Include="src\Game\PlayerAttributesText.cpp" />
     <ClCompile Include="src\Game\PlayerStatePrepareAbility.cpp" />
     <ClCompile Include="src\Game\ResourcesStatusBar.cpp" />
     <ClCompile Include="src\Game\Resources\FontManager.cpp" />
@@ -361,6 +362,7 @@
     <ClInclude Include="src\Game\MainRoom.hpp" />
     <ClInclude Include="src\Game\MainRoomGui.hpp" />
     <ClInclude Include="src\Game\ObserverNotificationGameStatus.h" />
+    <ClInclude Include="src\Game\PlayerAttributesText.hpp" />
     <ClInclude Include="src\Game\PlayerStatePrepareAbility.hpp" />
     <ClInclude Include="src\Game\ResourcesStatusBar.hpp" />
     <ClInclude Include="src\Game\Resources\EnemyAbilities.hpp" />

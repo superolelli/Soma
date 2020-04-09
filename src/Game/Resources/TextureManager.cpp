@@ -74,7 +74,7 @@ void CTextureManager::LoadTextures()
 	lootable[10].loadFromFile("Data/Sprites/Lootables/wagon.png");
 
 	/** ITEMS **/
-	inventoryPanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/inventory_panel2.png");
+	inventoryPanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/inventory_panel.png");
 	scrollableItemPanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/scrollable_item_panel.png");
 	inventoryDiamond.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/diamond.png");
 	inventoryConnections.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/equipment_connections.png");

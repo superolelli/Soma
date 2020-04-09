@@ -699,6 +699,9 @@
     <ClCompile Include="src\Game\CombatantStateDying.cpp">
       <Filter>Quelldateien\Game\Level\Battle\CombatantStates</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\PlayerAttributesText.cpp">
+      <Filter>Quelldateien\Game\MainRoom\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -1288,6 +1291,9 @@
     </ClInclude>
     <ClInclude Include="src\Game\CombatantStateDying.hpp">
       <Filter>Headerdateien\Game\Level\Battle\CombatantStates</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\PlayerAttributesText.hpp">
+      <Filter>Headerdateien\Game\MainRoom\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

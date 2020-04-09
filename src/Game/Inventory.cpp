@@ -10,13 +10,13 @@ void Inventory::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	currentPlayer = 0;
 
 	inventoryPanel.Load(g_pTextures->inventoryPanel);
-	inventoryPanel.SetPos(150, 70);
+	inventoryPanel.SetPos(143, 69);
 
 	ScrollableItemPanel *newScrollableItemPanel = new ScrollableItemPanel;
 	newScrollableItemPanel->Init(engine);
 	scrollableItemPanel.Init(engine, newScrollableItemPanel);
 	scrollableItemPanel.SetOnItemDroppedCallback([&](InventoryItemWrapper* _item) {return OnItemFromItemPanelReceived(_item); });
-	scrollableItemPanel.SetPos(inventoryPanel.GetRect().left + 822, inventoryPanel.GetRect().top + 185);
+	scrollableItemPanel.SetPos(inventoryPanel.GetRect().left + 850, inventoryPanel.GetRect().top + 212);
 
 	buttonNext.Load(g_pTextures->skillPanelButtonNext, Buttontypes::Up);
 	buttonNext.SetPos(inventoryPanel.GetGlobalRect().left + 217, inventoryPanel.GetGlobalRect().top + 66);
@@ -42,8 +42,10 @@ void Inventory::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	panelTitle.setString("Inventar");
 	panelTitle.setPosition(inventoryPanel.GetGlobalRect().left + 850, inventoryPanel.GetGlobalRect().top + 70);
 
-	equipmentPanel.Init(engine, gameStatus, 300, 330);
+	equipmentPanel.Init(engine, gameStatus, inventoryPanel.GetRect().left + 315, inventoryPanel.GetRect().top + 287);
 	equipmentPanel.SetOnItemDroppedCallback([&](InventoryItemWrapper* _item, int _currentPlayer, int _equipmentId) {return OnItemFromEquipmentPanelReceived(_item, _currentPlayer, _equipmentId); });
+
+	playerAttributesText.SetPos(inventoryPanel.GetRect().left + 85, inventoryPanel.GetRect().top + 408);
 
 	closed = true;
 }
@@ -67,6 +69,8 @@ void Inventory::Update()
 		equipmentPanel.Update();
 
 		scrollableItemPanel.Update();
+
+		playerAttributesText.Update(gameStatus->GetEquipmentStats(currentPlayer) + g_pObjectProperties->playerStats[currentPlayer]);
 	}
 }
 
@@ -110,6 +114,7 @@ void Inventory::UpdateGUIForChosenPlayer()
 {
 	currentPlayerName.setString(g_pStringContainer->combatantNames[currentPlayer]);
 	currentPlayerName.setPosition(inventoryPanel.GetGlobalRect().left + 52 + (162 - currentPlayerName.getLocalBounds().width) / 2, inventoryPanel.GetGlobalRect().top + 55);
+	equipmentPanel.SetCurrentPlayer(currentPlayer);
 }
 
 
@@ -151,6 +156,8 @@ void Inventory::Render()
 		equipmentPanel.Render();
 		scrollableItemPanel.RenderCurrentlyDraggedItem();
 		equipmentPanel.RenderCurrentDraggedItem();
+
+		playerAttributesText.Render(engine->GetWindow());
 
 		engine->GetWindow().draw(currentPlayerName);
 		engine->GetWindow().draw(panelTitle);

@@ -14,6 +14,7 @@ struct CombatantAttributes
 	int initiative;
 
 	void operator +=(const CombatantAttributes &_stats);
+	friend CombatantAttributes operator+(CombatantAttributes _lhs, const CombatantAttributes& _rhs);
 	void operator -=(const CombatantAttributes &_stats);
 
 	void Reset();

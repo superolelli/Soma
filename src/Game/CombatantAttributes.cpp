@@ -45,3 +45,9 @@ void CombatantAttributes::Reset()
 	initiative = 0;
 	precision = 0;
 }
+
+CombatantAttributes operator+(CombatantAttributes _lhs, const CombatantAttributes & _rhs)
+{
+	_lhs += _rhs;
+	return _lhs;
+}

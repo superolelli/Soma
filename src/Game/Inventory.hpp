@@ -7,6 +7,7 @@
 
 #include "ScrollableItemPanel.hpp"
 #include "ItemPanelDragAndDropDecorator.hpp"
+#include "PlayerAttributesText.hpp"
 
 
 
@@ -33,6 +34,7 @@ private:
 	CSprite inventoryPanel;
 	EquipmentPanel equipmentPanel;
 	ItemPanelDragAndDropDecorator scrollableItemPanel;
+	PlayerAttributesText playerAttributesText;
 	sf::Text currentPlayerName;
 	sf::Text panelTitle;
 	CButton buttonNext;
