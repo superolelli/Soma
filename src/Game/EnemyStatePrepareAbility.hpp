@@ -24,6 +24,8 @@ private:
 	void SelectAdditionalTargets(bool _selectPlayers);
 	bool ChosenAbilityHitsPlayer();
 
+    bool ChosenAbilityHitsSelf();
+
 	void ChooseAbility();
 	void ChooseAbilityGreg();
 	void ChooseAbilityAbtruenniger();
@@ -33,7 +35,8 @@ private:
 	void ChooseAbilityBigSpencer();
 
 	void ChooseTarget();
-	void ChooseRandomPlayer();
+    void ChooseRandomEnemy();
+    void ChooseRandomPlayer();
 	void CheckForMarkedPlayers();
 	bool CanAimAtCombatant(Combatant *_combatant);
 
