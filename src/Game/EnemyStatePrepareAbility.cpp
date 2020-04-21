@@ -103,6 +103,9 @@ void EnemyStatePrepareAbility::ChooseAbility()
 	case CombatantID::BigSpencer:
 		ChooseAbilityBigSpencer();
 		break;
+	case CombatantID::TequilaJoe:
+		ChooseAbilityTequilaJoe();
+		break;
 	}
 }
 
@@ -160,6 +163,31 @@ void EnemyStatePrepareAbility::ChooseAbilityHilfssherrif()
 }
 
 
+void EnemyStatePrepareAbility::ChooseAbilityTequilaJoe()
+{
+	if (enemyContext->status.GetCurrentHealth() <= enemyContext->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::beer)].effectFriendly.healSelf)
+	{
+		chosenAbility = enemyAbilities::beer;
+		return;
+	}
+
+	for (auto *c : *enemyContext->allCombatants)
+	{
+		if (!c->IsPlayer() && c->status.GetCurrentHealth() <= c->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::spend_a_round)].effectFriendly.heal)
+		{
+			if (rand() % 2 == 0)
+				chosenAbility = enemyAbilities::jabbering;
+			else
+				chosenAbility = enemyAbilities::spend_a_round;
+
+			return;
+		}
+	}
+
+	chosenAbility = enemyAbilities::jabbering;
+}
+
+
 bool EnemyStatePrepareAbility::OnlyOneCompanionLeft()
 {
 	return std::count_if(enemyContext->allCombatants->begin(), enemyContext->allCombatants->end(), [&](Combatant *c) {return !c->IsPlayer(); }) <= 2;
@@ -168,8 +196,10 @@ bool EnemyStatePrepareAbility::OnlyOneCompanionLeft()
 
 void EnemyStatePrepareAbility::ChooseTarget()
 {
-	if (chosenAbility == enemyAbilities::bury_the_dead || chosenAbility == enemyAbilities::indians)
+	if (g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.position[enemyContext->battlePosition] == true)
 		enemyContext->selectedTargets.push_back(enemyContext);
+	else if (g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.position -> EnemyPosition)
+		ChooseRandomEnemy();
 	else {
 		CheckForMarkedPlayers();
 

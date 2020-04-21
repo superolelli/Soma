@@ -2277,10 +2277,10 @@
             </timeline>
             <timeline id="38" name="ability_effect_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="-40.811957" y="37.63167" angle="155.125846"/>
+                    <object x="-75.133324" y="44.813598" angle="155.125846"/>
                 </key>
                 <key id="1" time="2497" spin="0">
-                    <object x="-40.811957" y="37.63167" angle="155.125846"/>
+                    <object x="-75.133324" y="44.813598" angle="155.125846"/>
                 </key>
             </timeline>
         </animation>
@@ -2675,10 +2675,10 @@
             </timeline>
             <timeline id="38" name="ability_effect_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="205.555556" y="248.888889" angle="359.236102"/>
+                    <object x="233.54819" y="260.306937" angle="359.236102"/>
                 </key>
                 <key id="1" time="499" spin="0">
-                    <object x="205.555556" y="248.888889" angle="359.236102"/>
+                    <object x="233.54819" y="260.306937" angle="359.236102"/>
                 </key>
             </timeline>
         </animation>

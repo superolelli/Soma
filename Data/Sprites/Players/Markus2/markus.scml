@@ -1223,8 +1223,8 @@
                 </key>
             </timeline>
             <timeline id="22" obj="7" name="bone_007" object_type="bone">
-                <key id="0" spin="0">
-                    <bone x="82.55814" y="-1.162791" angle="0"/>
+                <key id="0">
+                    <bone x="82.55814" y="-1.162791"/>
                 </key>
                 <key id="1" time="595" spin="0">
                     <bone x="82.55814" y="-1.162791" angle="0"/>
@@ -1232,7 +1232,7 @@
                 <key id="2" time="1189" spin="0">
                     <bone x="82.55814" y="-1.162791" angle="0"/>
                 </key>
-                <key id="3" time="2496" spin="0">
+                <key id="3" time="2496">
                     <bone x="82.55814" y="-1.162791" angle="0"/>
                 </key>
             </timeline>
@@ -1294,10 +1294,10 @@
             </timeline>
             <timeline id="27" name="ability_effect_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="215" y="223" angle="0"/>
+                    <object x="174.541985" y="241.320611" angle="0"/>
                 </key>
                 <key id="1" time="2496" spin="0">
-                    <object x="215" y="223" angle="0"/>
+                    <object x="174.541985" y="241.320611" angle="0"/>
                 </key>
             </timeline>
         </animation>
@@ -2316,7 +2316,7 @@
             </timeline>
             <timeline id="7" obj="7" name="bone_007" object_type="bone">
                 <key id="0" spin="0">
-                    <bone x="82.55814" y="-1.162791"/>
+                    <bone x="82.55814" y="-1.162791" angle="0"/>
                 </key>
             </timeline>
             <timeline id="8" obj="8" name="bone_008" object_type="bone">
@@ -2440,7 +2440,7 @@
             </timeline>
             <timeline id="30" name="shadow_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="180.208333" y="5.208333"/>
+                    <object x="180.208333" y="5.208333" angle="0"/>
                 </key>
             </timeline>
         </animation>
@@ -2905,10 +2905,10 @@
                 </key>
             </timeline>
             <timeline id="7" obj="7" name="bone_007" object_type="bone">
-                <key id="0" spin="0">
-                    <bone x="82.55814" y="-1.162791" angle="0"/>
+                <key id="0">
+                    <bone x="82.55814" y="-1.162791"/>
                 </key>
-                <key id="1" time="499" spin="0">
+                <key id="1" time="499">
                     <bone x="82.55814" y="-1.162791" angle="0"/>
                 </key>
             </timeline>
@@ -3066,10 +3066,10 @@
             </timeline>
             <timeline id="27" name="ability_effect_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="215.60215" y="223.383856" angle="352.874984"/>
+                    <object x="175.450635" y="246.868704" angle="352.874984"/>
                 </key>
                 <key id="1" time="499" spin="0">
-                    <object x="215.60215" y="223.383856" angle="352.874984"/>
+                    <object x="175.450635" y="246.868704" angle="352.874984"/>
                 </key>
             </timeline>
         </animation>

@@ -110,5 +110,21 @@
 			<Item>Bier</Item>
 		</Loot>
 	</BigSpencer>
+
+  <TequilaJoe id="11" 
+    armour ="5"
+    health ="40"
+    damageMin ="3"
+    damageMax ="6"
+    initiative ="1"
+	  criticalHit="5"
+	  dodge="10"
+	  precision="5"
+  >
+		<Loot>
+			<Item>Bier</Item>
+      <Item>Tequila</Item>
+		</Loot>
+	</TequilaJoe>
   
 </EnemyAttributes>

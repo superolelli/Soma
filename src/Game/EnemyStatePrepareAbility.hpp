@@ -29,6 +29,7 @@ private:
 	void ChooseAbilityAbtruenniger();
 	void ChooseAbilityApacheKid();
 	void ChooseAbilityHilfssherrif();
+	void ChooseAbilityTequilaJoe();
 	void ChooseAbilityBigSpencer();
 
 	void ChooseTarget();

@@ -962,19 +962,19 @@
             </timeline>
             <timeline id="33" name="strich_000">
                 <key id="0" time="411" spin="0">
-                    <object folder="0" file="22" x="-94" y="7" angle="1.548158" scale_y="1"/>
+                    <object folder="0" file="22" x="-94" y="7" angle="1.548158"/>
                 </key>
                 <key id="1" time="418" spin="0">
-                    <object folder="0" file="22" x="-94" y="7" angle="1.548158" scale_y="1"/>
+                    <object folder="0" file="22" x="-94" y="7" angle="1.548158"/>
                 </key>
                 <key id="2" time="441" spin="0">
-                    <object folder="0" file="22" x="-94" y="7" angle="1.548158" scale_y="1"/>
+                    <object folder="0" file="22" x="-94" y="7" angle="1.548158"/>
                 </key>
                 <key id="3" time="1046" spin="0">
-                    <object folder="0" file="22" x="-94" y="7" angle="1.548158" scale_y="1"/>
+                    <object folder="0" file="22" x="-94" y="7" angle="1.548158"/>
                 </key>
                 <key id="4" time="1498" spin="0">
-                    <object folder="0" file="22" x="-94" y="7" angle="1.548158" scale_y="1"/>
+                    <object folder="0" file="22" x="-94" y="7" angle="1.548158"/>
                 </key>
             </timeline>
             <soundline id="-1" name="shovel_ground">
@@ -3561,10 +3561,10 @@
             </timeline>
             <timeline id="32" name="ability_effect_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="184" y="288" angle="1.123303"/>
+                    <object x="212.785839" y="298.69076" angle="1.123303"/>
                 </key>
                 <key id="1" time="501" spin="0">
-                    <object x="184" y="288" angle="1.123303"/>
+                    <object x="212.785839" y="298.69076" angle="1.123303"/>
                 </key>
             </timeline>
         </animation>

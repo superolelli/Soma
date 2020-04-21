@@ -14,7 +14,8 @@ enum CombatantID {
 	Hilfssheriff,
 	Greg,
 	Apachekid,
-	BigSpencer
+	BigSpencer,
+	TequilaJoe
 };
 
 
@@ -29,5 +30,6 @@ static std::unordered_map<std::string, CombatantID> combatantIdentifierMap = {
 	{ "Hilfssheriff", CombatantID::Hilfssheriff },
 	{ "Greg Digger", CombatantID::Greg},
 	{ "Apache Kid", CombatantID::Apachekid},
-	{ "Big Spencer", CombatantID::BigSpencer}
+	{ "Big Spencer", CombatantID::BigSpencer},
+	{ "Tequila Joe", CombatantID::TequilaJoe}
 };

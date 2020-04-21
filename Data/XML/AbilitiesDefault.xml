@@ -8,6 +8,7 @@
     <howMany>1</howMany>
 	<attackAll>false</attackAll>
 	<attackAllPlayers>false</attackAllPlayers>
+    <attackAllEnemies>false</attackAllEnemies>
     <positions>
       <value id="0">false</value>
       <value id="1">false</value>

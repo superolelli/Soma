@@ -1304,10 +1304,10 @@
             </timeline>
             <timeline id="28" name="ability_effect_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="175" y="350" angle="0"/>
+                    <object x="134.848485" y="372.727273" angle="0"/>
                 </key>
                 <key id="1" time="2498" spin="0">
-                    <object x="175" y="350" angle="0"/>
+                    <object x="134.848485" y="372.727273" angle="0"/>
                 </key>
             </timeline>
         </animation>
@@ -2846,7 +2846,7 @@
             </timeline>
             <timeline id="31" name="shadow_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="161.797753" y="4.494382"/>
+                    <object x="161.797753" y="4.494382" angle="0"/>
                 </key>
             </timeline>
         </animation>
@@ -4294,10 +4294,10 @@
             </timeline>
             <timeline id="28" name="ability_effect_point" object_type="point">
                 <key id="0" spin="0">
-                    <object x="175.23077" y="350.92308" angle="9.246113"/>
+                    <object x="137.944262" y="376.614142" angle="9.246113"/>
                 </key>
                 <key id="1" time="501" spin="0">
-                    <object x="175.23077" y="350.92308" angle="9.246113"/>
+                    <object x="137.944262" y="376.614142" angle="9.246113"/>
                 </key>
             </timeline>
         </animation>

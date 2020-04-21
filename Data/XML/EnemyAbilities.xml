@@ -202,4 +202,65 @@
 		</effect>
 	</ability>
 
+	<ability id="12" name="Bier">
+		<animation>beer</animation>
+		<effectAnimation>empty</effectAnimation>
+
+		<positions>
+			<value id="7">true</value>
+		</positions>
+
+		<effect>
+			<healSelf>8</healSelf>
+			<buff>
+				<duration>3</duration>
+				<isPositive>true</isPositive>
+				<onSelf>true</onSelf>
+				<armour>5</armour>
+				<damage>2</damage>
+        	</buff>
+		</effect>
+	</ability>
+
+	
+	<ability id="13" name="Eine Runde ausgeben">
+		<animation>spend_a_round</animation>
+		<effectAnimation>spend_a_round</effectAnimation>
+		<attackAllEnemies>true</attackAllEnemies>
+		<positions>
+			<value id="4">true</value>
+			<value id="5">true</value>
+			<value id="6">true</value>
+		</positions>
+
+		<effect>
+			<heal>3</heal>
+			<buff>
+				<duration>3</duration>
+				<isPositive>true</isPositive>
+				<armour>3</armour>
+				<damage>2</damage>
+        	</buff>
+		</effect>
+	</ability>
+
+	<ability id="14" name="Geplapper">
+		<animation>jabbering</animation>
+		<effectAnimation>jabbering</effectAnimation>
+		<positions>
+			<value id="0">true</value>
+			<value id="1">true</value>
+			<value id="2">true</value>
+			<value id="3">true</value>
+		</positions>
+
+		<effect>
+			<damageFactor>1.0</damageFactor>
+ 			<confusion>
+				<probability>0.9</probability>
+				<rounds>3</rounds>
+        	</confusion>
+		</effect>
+	</ability>
+
 </Abilities>
