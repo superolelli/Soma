@@ -113,7 +113,7 @@
 
   <TequilaJoe id="11" 
     armour ="5"
-    health ="40"
+    health ="30"
     damageMin ="3"
     damageMax ="6"
     initiative ="1"

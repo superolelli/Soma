@@ -2585,13 +2585,13 @@
                 </key>
             </soundline>
             <soundline id="-1" name="laughter">
-                <key id="0">
+                <key id="0" time="2">
                     <object folder="1" file="3"/>
                 </key>
             </soundline>
             <soundline id="-1" name="bass">
                 <key id="0" time="2">
-                    <object folder="1" file="4" volume="0.269"/>
+                    <object folder="1" file="4" volume="0.183"/>
                 </key>
             </soundline>
         </animation>

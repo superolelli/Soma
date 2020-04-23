@@ -277,8 +277,22 @@ void Battle::ChooseNextCombatant()
 void Battle::CalculateTurnOrder()
 {
 	std::sort(combatants.begin(), combatants.end(), [](Combatant *c1, Combatant *c2) {
-			return c1->Status().GetInitiative() > c2->Status().GetInitiative();
+		return c1->Status().GetInitiative() > c2->Status().GetInitiative();
 	});
+
+	auto startIt = combatants.begin();
+	auto endIt = combatants.begin();
+
+
+	do
+	{
+		while ((*startIt)->Status().GetInitiative() == (*endIt)->Status().GetInitiative())
+			endIt++;
+
+		std::random_shuffle(startIt, endIt);
+
+		//set start new
+	}while(endIt != combatants.end())
 }
 
 

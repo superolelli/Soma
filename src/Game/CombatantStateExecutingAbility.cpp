@@ -97,7 +97,7 @@ void CombatantStateExecutingAbility::AttackTargets()
 
 void CombatantStateExecutingAbility::StartAttackedAnimation(Combatant *_combatant)
 {
-	if (context->IsAlly(_combatant) && !context->actsInConfusion)
+	if (context->IsAlly(_combatant) && !context->actsInConfusion || !context->IsAlly(_combatant) && context->actsInConfusion)
 		_combatant->StartFriendlyAttackedAnimation();
 	else
 	{

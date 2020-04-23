@@ -7,28 +7,45 @@ PlayerStatePrepareAbility::PlayerStatePrepareAbility(Player * _context)
 	:CombatantStatePrepareAbility(_context)
 {
 	playerContext = _context;
+	notificationWaitingTime = 0.0f;
 }
 
 
 void PlayerStatePrepareAbility::Update()
 {
-	UpdateSelectedTargets();
-
-	if (playerContext->engine->GetButtonstates(ButtonID::Left) == Keystates::Released && !playerContext->selectedTargets.empty())
+	if (notificationWaitingTime > 0.0f)
 	{
-		HandleConfusion();
+		notificationWaitingTime -= g_pTimer->GetElapsedTime().asSeconds();
 
-		if (playerContext->selectedTargets.empty())
+		if (notificationWaitingTime <= 0.0f)
+			ChangeState();
+	}
+	else
+	{
+		UpdateSelectedTargets();
+
+		if (playerContext->engine->GetButtonstates(ButtonID::Left) == Keystates::Released && !playerContext->selectedTargets.empty())
 		{
-			CombatantStateIdle *newState = new CombatantStateIdle(context);
-			context->ChangeState(newState);
-			return;
+			if (playerContext->actsInConfusion)
+				HandleConfusion();
+			else
+				ChangeState();
 		}
+	}
+}
 
-		CombatantStateExecutingAbility *newState = new CombatantStateExecutingAbility(playerContext, &g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()]);
+
+void PlayerStatePrepareAbility::ChangeState()
+{
+	if (playerContext->selectedTargets.empty())
+	{
+		CombatantStateIdle *newState = new CombatantStateIdle(context);
 		context->ChangeState(newState);
 		return;
 	}
+
+	CombatantStateExecutingAbility *newState = new CombatantStateExecutingAbility(playerContext, &g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()]);
+	context->ChangeState(newState);
 }
 
 bool PlayerStatePrepareAbility::CurrentAbilityCanAimAtCombatant(Combatant* _combatant)
@@ -61,19 +78,18 @@ bool PlayerStatePrepareAbility::CurrentAbilityAttacksAllPlayers()
 
 void PlayerStatePrepareAbility::HandleConfusion()
 {
-	if (playerContext->actsInConfusion)
-	{
-		bool originallyAttackedPlayer = playerContext->selectedTargets[0]->IsPlayer();
-		playerContext->selectedTargets.clear();
-		playerContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(playerContext->GetRect().left - playerContext->GetRect().width / 2.0f, playerContext->GetRect().top - 20.0f), 1.0f);
-		
-		if (originallyAttackedPlayer)
-			ChooseRandomOpponent();
-		else
-			ChooseRandomAlly();
+	bool originallyAttackedPlayer = playerContext->selectedTargets[0]->IsPlayer();
+	playerContext->selectedTargets.clear();
+	playerContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(playerContext->GetRect().left - playerContext->GetRect().width / 2.0f, playerContext->GetRect().top - 20.0f), 1.0f);
+	
+	if (originallyAttackedPlayer)
+		ChooseRandomOpponent();
+	else
+		ChooseRandomAlly();
 
-		SelectAdditionalTargets(!originallyAttackedPlayer);
-	}
+	SelectAdditionalTargets(!originallyAttackedPlayer);
+
+	notificationWaitingTime = 1.5f;
 }
 
 

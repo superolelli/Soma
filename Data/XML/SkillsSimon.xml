@@ -34,7 +34,7 @@
 
         <skill id="4" name="Verbesserte Heilung I">
             <effect>
-                <healSelf>2</healSelf>
+                <heal>2</heal>
             </effect>
                 <description>*#ffa500 Verbesserte Heilung I*
 #white Heilt Simon um 2 Leben mehr.</description>
@@ -42,7 +42,7 @@
 
         <skill id="5" name="Verbesserte Heilung II">
             <effect>
-                <healSelf>3</healSelf>
+                <heal>3</heal>
             </effect>
                 <description>*#ffa500 Verbesserte Heilung II*
 #white Heilt Simon um 3 Leben mehr.</description>
@@ -50,7 +50,7 @@
 
         <skill id="6" name="Verbesserte Heilung III">
             <effect>
-                <healSelf>4</healSelf>
+                <heal>4</heal>
             </effect>
                 <description>*#ffa500 Verbesserte Heilung III*
 #white Heilt Simon um 4 Leben mehr.</description>

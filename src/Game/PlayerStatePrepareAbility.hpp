@@ -19,6 +19,9 @@ public:
 private:
 	Player *playerContext;
 
+	float notificationWaitingTime;
+
+	void ChangeState();
 	void HandleConfusion();
 	bool PlayerShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition);
 	bool EnemyShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition);

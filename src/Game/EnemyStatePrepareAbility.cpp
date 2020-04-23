@@ -61,7 +61,7 @@ bool EnemyStatePrepareAbility::ChosenAbilityHitsSelf()
 
 bool EnemyStatePrepareAbility::PlayerShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition)
 {
-	if (!_combatant->IsPlayer() || _combatant == enemyContext->selectedTargets[0])
+	if (!_combatant->IsPlayer() || _combatant == enemyContext->selectedTargets[0] || _combatant->IsDying())
 		return false;
 
 	if (!enemyContext->actsInConfusion && g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAllPlayers)
@@ -76,7 +76,7 @@ bool EnemyStatePrepareAbility::PlayerShouldBeAddedAsTarget(Combatant *_combatant
 
 bool EnemyStatePrepareAbility::EnemyShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition)
 {
-	if (_combatant->IsPlayer() || _combatant == enemyContext || _combatant == enemyContext->selectedTargets[0])
+	if (_combatant->IsPlayer() || _combatant == enemyContext || _combatant == enemyContext->selectedTargets[0] || _combatant->IsDying())
 		return false;
 
 	if (enemyContext->actsInConfusion && g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAllPlayers)
@@ -177,26 +177,44 @@ void EnemyStatePrepareAbility::ChooseAbilityHilfssherrif()
 
 void EnemyStatePrepareAbility::ChooseAbilityTequilaJoe()
 {
-	if (enemyContext->status.GetCurrentHealth() <= enemyContext->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::beer)].effectFriendly.healSelf)
-	{
-		chosenAbility = enemyAbilities::beer;
-		return;
-	}
+	bool selfWounded = enemyContext->status.GetCurrentHealth() <= enemyContext->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::beer)].effectFriendly.heal;
 
+	bool allyWounded = false;
 	for (auto *c : *enemyContext->allCombatants)
 	{
 		if (!c->IsPlayer() && c->status.GetCurrentHealth() <= c->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::spend_a_round)].effectFriendly.heal)
 		{
-			if (rand() % 2 == 0)
-				chosenAbility = enemyAbilities::jabbering;
-			else
-				chosenAbility = enemyAbilities::spend_a_round;
-
-			return;
+			allyWounded = true;
+			break;
 		}
 	}
 
-	chosenAbility = enemyAbilities::jabbering;
+	if (selfWounded && allyWounded)
+	{
+		auto randomNumber = rand() % 3;
+		if (randomNumber == 0)
+			chosenAbility = enemyAbilities::jabbering;
+		else if (randomNumber == 1)
+			chosenAbility = enemyAbilities::beer;
+		else
+			chosenAbility = enemyAbilities::spend_a_round;
+	}
+	else if (selfWounded)
+	{
+		if (rand() % 2 == 0)
+			chosenAbility = enemyAbilities::jabbering;
+		else
+			chosenAbility = enemyAbilities::beer;
+	}
+	else if (allyWounded)
+	{
+		if (rand() % 2 == 0)
+			chosenAbility = enemyAbilities::jabbering;
+		else
+			chosenAbility = enemyAbilities::spend_a_round;
+	}
+	else
+		chosenAbility = enemyAbilities::jabbering;
 }
 
 

@@ -37,13 +37,7 @@ void CombatantStateAttacked::RenderAbilityEffects()
 	g_pSpritePool->abilityEffectsAnimation->reprocessCurrentTime();
 	SpriterEngine::UniversalObjectInterface* pointObj = g_pSpritePool->abilityEffectsAnimation->getObjectInstance("attaching_point");
 
-	//auto pointObjPlayer = g_pSpritePool->abilityEffectsAnimation->objectIfExistsOnCurrentFrame("attaching_point_player");
-
-	//if (pointObjPlayer != nullptr && context->IsPlayer())
-	//	g_pSpritePool->abilityEffectsAnimation->setPosition(SpriterEngine::point(abilityEffectPoint.x - pointObjPlayer->getPosition().x, abilityEffectPoint.y - pointObjPlayer->getPosition().y));
-	//else
-		g_pSpritePool->abilityEffectsAnimation->setPosition(SpriterEngine::point(abilityEffectPoint.x - pointObj->getPosition().x, abilityEffectPoint.y - pointObj->getPosition().y));
-
+	g_pSpritePool->abilityEffectsAnimation->setPosition(SpriterEngine::point(abilityEffectPoint.x - pointObj->getPosition().x, abilityEffectPoint.y - pointObj->getPosition().y));
 
 	if (Combatant::setElapsedTimeForAbilityEffect == false)
 	{

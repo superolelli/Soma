@@ -9,7 +9,7 @@
         </positions>
 
         <effect>
-            <healSelf>5</healSelf>
+            <heal>5</heal>
             <buff>
                 <duration>3</duration>
                 <isPositive>true</isPositive>
