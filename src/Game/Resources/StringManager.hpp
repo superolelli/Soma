@@ -3,9 +3,6 @@
 #include "../../Framework/Patterns/singleton.hpp"
 #include <map>
 
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
-
 #include <SFML\System.hpp>
 
 

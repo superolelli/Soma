@@ -1,8 +1,6 @@
 #pragma once
 
 
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
 #include "../../Framework/Patterns/singleton.hpp"
 
 #include "../../Framework/Animations/spriterengine.h"
