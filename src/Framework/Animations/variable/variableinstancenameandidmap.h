@@ -2,6 +2,7 @@
 #define VARIABLEINSTANCENAMEANDIDMAP_H
 
 #include <vector>
+#include <string>
 #include <map>
 
 namespace SpriterEngine

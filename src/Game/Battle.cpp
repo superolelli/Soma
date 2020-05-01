@@ -283,16 +283,15 @@ void Battle::CalculateTurnOrder()
 	auto startIt = combatants.begin();
 	auto endIt = combatants.begin();
 
-
 	do
 	{
-		while ((*startIt)->Status().GetInitiative() == (*endIt)->Status().GetInitiative())
+		while (endIt != combatants.end() && (*startIt)->Status().GetInitiative() == (*endIt)->Status().GetInitiative())
 			endIt++;
 
 		std::random_shuffle(startIt, endIt);
 
-		//set start new
-	}while(endIt != combatants.end())
+		startIt = endIt;
+	} while (endIt != combatants.end());
 }
 
 

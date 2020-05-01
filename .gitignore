@@ -24,6 +24,9 @@ $RECYCLE.BIN/
 /Debug/*
 /Release/*
 
+#VS config files
+/.vs/*
+
 # =========================
 # Operating System Files
 # =========================
