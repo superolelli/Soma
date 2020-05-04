@@ -48,6 +48,7 @@ private:
 
 	void InitCombatants(int _xView, int enemyIDs[4]);
 	
+	void InitNewRound();
 	void CalculateTurnOrder();
 	void HandleDeaths();
 	void ChooseNextCombatant();

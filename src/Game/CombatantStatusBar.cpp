@@ -19,6 +19,8 @@ void CombatantStatusBar::Init(CombatantStatus *_status, CGameEngine *_engine)
 
 	for (auto &s : statusAddTime)
 		s = -1.0f;
+
+	isTurnPending = false;
 }
 
 
@@ -35,11 +37,22 @@ void CombatantStatusBar::Update(sf::IntRect &_combatantRect)
 	healthBar.Update(g_pTimer->GetElapsedTime().asSeconds());
 }
 
+void CombatantStatusBar::SetTurnPending(bool _turnPending)
+{
+	isTurnPending = _turnPending;
+}
+
 
 void CombatantStatusBar::Render()
 {
 	healthBar.Render(engine->GetWindow());
 	RenderStatusSymbols();
+
+	if (isTurnPending)
+	{
+		g_pSpritePool->turnPendingMarker.SetPos(healthBar.GetRect().left + healthBar.GetRect().width / 2 - g_pSpritePool->turnPendingMarker.GetRect().width / 2, healthBar.GetRect().top - g_pSpritePool->turnPendingMarker.GetRect().height - 2);
+		g_pSpritePool->turnPendingMarker.Render(engine->GetWindow());
+	}
 }
 
 

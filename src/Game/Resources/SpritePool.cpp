@@ -24,6 +24,7 @@ void SpritePool::LoadSprites()
 
 	abilityTargetMarker.Load(g_pTextures->abilityTargetMarker);
 	turnMarker.Load(g_pTextures->turnMarker);
+	turnPendingMarker.Load(g_pTextures->turnPendingMarker);
 
 	for(int i = 0; i < NUMBER_OF_SECOND_LAYER_BACKGROUNDS; i++)
 		bangBackgroundSecondLayers[i].Load(g_pTextures->bangSecondLayerBackgrounds[i]);

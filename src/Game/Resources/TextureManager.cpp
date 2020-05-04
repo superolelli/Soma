@@ -208,6 +208,7 @@ void CTextureManager::LoadTextures()
 
 	abilityTargetMarker.loadFromFile("Data/Sprites/Battle/battle_marker.png");
 	turnMarker.loadFromFile("Data/Sprites/Battle/turn_marker.png");
+	turnPendingMarker.loadFromFile("Data/Sprites/Battle/pending_turn_marker.png");
 
 	possibleTargetSimon.loadFromFile("Data/Sprites/Abilities/PossibleTargets/target_simon.png");
 	possibleTargetOle.loadFromFile("Data/Sprites/Abilities/PossibleTargets/target_ole.png");

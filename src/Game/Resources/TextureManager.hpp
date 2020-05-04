@@ -107,6 +107,7 @@ public:
 	sf::Texture abilityAnnouncementBanner;
 	sf::Texture abilityTargetMarker;
 	sf::Texture turnMarker;
+	sf::Texture turnPendingMarker;
 
 	/** POSSIBLE TARGETS **/
 	sf::Texture possibleTargetSimon;

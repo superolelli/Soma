@@ -34,6 +34,7 @@ public:
 
 	CSprite abilityTargetMarker;
 	CSprite turnMarker;
+	CSprite turnPendingMarker;
 
 	CSprite bangBackgroundSecondLayers[NUMBER_OF_SECOND_LAYER_BACKGROUNDS];
 	CSprite bangBackgroundThirdLayers[NUMBER_OF_THIRD_LAYER_BACKGROUNDS];

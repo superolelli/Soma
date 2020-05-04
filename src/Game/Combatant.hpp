@@ -84,6 +84,7 @@ public:
 	void ResetAbilityStatus() { SetAbilityStatus(finished); }
 
 	void GiveTurnTo(std::vector<Combatant*> *_targets, BattleGUI *_gui);
+	void SetTurnPending(bool _pending);
 
 	void StartAttackedAnimation();
 	void StartDodgingAnimation();

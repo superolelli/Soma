@@ -12,6 +12,8 @@ public:
 	void Render();
 	void Update(sf::IntRect &_combatantRect);
 
+	void SetTurnPending(bool _turnPending);
+
 	const sf::IntRect &GetRect();
 
 private:
@@ -21,6 +23,8 @@ private:
 	CGameEngine *engine;
 	CombatantStatus *status;
 	Bar healthBar;
+
+	bool isTurnPending;
 
 	void RenderStatusSymbols();
 	void RenderStatusSymbol(bool _isActive, statusType _type, CSprite &_sprite, int &_x);

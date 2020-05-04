@@ -229,6 +229,8 @@ void Combatant::GiveTurnTo(std::vector<Combatant*>* _targets, BattleGUI *_gui)
 	allCombatants = _targets;
 	gui = _gui;
 
+	statusBar.SetTurnPending(false);
+
 	SetAbilityStatus(handlingStatus);
 
 	if (IsPlayer())
@@ -237,6 +239,11 @@ void Combatant::GiveTurnTo(std::vector<Combatant*>* _targets, BattleGUI *_gui)
 		status.UpdateStatusForNewTurn(1.5f);
 
 	turnMarkerScale = TURN_MARKER_ANIMATION_SCALE;
+}
+
+void Combatant::SetTurnPending(bool _pending)
+{
+	statusBar.SetTurnPending(_pending);
 }
 
 

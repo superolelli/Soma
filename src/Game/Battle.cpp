@@ -9,13 +9,13 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 	gui = _gui;
 	engine = _engine;
 	notificationRenderer = _notificationRenderer;
-	currentCombatant = 0;
 	isBattleFinished = false;
 	turnsSinceLastEnemyDied = -1;
 	isBossBattle = _boss;
 
 	InitCombatants(_xView, enemyIDs);
-	CalculateTurnOrder();
+
+	InitNewRound();
 
 	gui->SetCombatantToDisplay(combatants[currentCombatant]);
 
@@ -61,6 +61,7 @@ void Battle::Quit()
 	for (Combatant *c : combatants)
 	{
 		c->ResetAbilityStatus();
+		c->SetTurnPending(false);
 		c->SetBattlePtr(nullptr);
 
 		if (!c->IsPlayer()) {
@@ -267,12 +268,18 @@ void Battle::ChooseNextCombatant()
 	{
 		if(turnsSinceLastEnemyDied >= 0)
 			turnsSinceLastEnemyDied++;
-		CalculateTurnOrder();
-		currentCombatant = 0;
+		InitNewRound();
 	}
 }
 
+void Battle::InitNewRound()
+{
+	CalculateTurnOrder();
+	currentCombatant = 0;
 
+	for (auto c : combatants)
+		c->SetTurnPending(true);
+}
 
 void Battle::CalculateTurnOrder()
 {
