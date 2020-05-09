@@ -158,12 +158,13 @@ void Combatant::RenderTurnMarker()
 }
 
 
-void Combatant::ScaleForAbilityAnimation()
+void Combatant::ScaleForAbilityAnimation(int _xPos, int _yPos)
 {
 	lastPosition = combatantObject->getPosition();
 
 	Scale(COMBATANT_ABILITY_SCALE, COMBATANT_ABILITY_SCALE);
-	SetPos(lastPosition.x - engine->GetViewPosition().x, 800);
+	//SetPos(lastPosition.x - engine->GetViewPosition().x, 800);
+	SetPos(_xPos, _yPos);
 }
 
 
@@ -180,16 +181,16 @@ void Combatant::SetAnimation(const std::string &_animation, float _speed)
 	combatantObject->setCurrentTime(0);
 }
 
-void Combatant::StartAttackedAnimation()
+void Combatant::StartAttackedAnimation(int _xPos, int _yPos)
 {
-	ScaleForAbilityAnimation();
+	ScaleForAbilityAnimation(_xPos, _yPos);
 	SetAnimation("attacked", ABILITY_ANIMATION_SPEED);
 	SetAbilityStatus(attacked);
 }
 
-void Combatant::StartDodgingAnimation()
+void Combatant::StartDodgingAnimation(int _xPos, int _yPos)
 {
-	ScaleForAbilityAnimation();
+	ScaleForAbilityAnimation(_xPos, _yPos);
 	SetAnimation("attacked", ABILITY_ANIMATION_SPEED);
 	notificationRenderer->AddNotification("Ausgewichen!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top), 1.0f);
 
@@ -197,9 +198,9 @@ void Combatant::StartDodgingAnimation()
 	g_pSounds->PlaySound(DODGED);
 }
 
-void Combatant::StartFriendlyAttackedAnimation()
+void Combatant::StartFriendlyAttackedAnimation(int _xPos, int _yPos)
 {
-	ScaleForAbilityAnimation();
+	ScaleForAbilityAnimation(_xPos, _yPos);
 	SetAnimation("attacked_friendly", ABILITY_ANIMATION_SPEED);
 	SetAbilityStatus(attacked);
 }

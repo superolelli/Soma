@@ -7,8 +7,64 @@ CombatantStateExecutingAbility::CombatantStateExecutingAbility(Combatant * _cont
 	:CombatantState(_context)
 {
 	ability = _ability;
+	CalculateCombatantAnimationPositions();
 	StartAbilityAnimation();
 	AttackTargets();
+}
+
+void CombatantStateExecutingAbility::CalculateCombatantAnimationPositions()
+{
+	std::sort(context->selectedTargets.begin(), context->selectedTargets.end(), [&](Combatant* c1, Combatant* c2) {return c1->GetBattlePos() < c2->GetBattlePos();});
+	int padding = 50;
+
+	if (context->selectedTargets[0] == context && context->selectedTargets.size() == 1)
+	{
+		combatantAnimationPositions[context->GetBattlePos()] = sf::Vector2i(context->engine->GetWindowSize().x / 2 - context->GetRect().width * COMBATANT_SCALE / 2, 800);
+	}
+	else if (ability->possibleAims.attackAll)
+	{
+		for (int i = 0; i < context->allCombatants->size(); i++)
+			combatantAnimationPositions[context->allCombatants->at(i)->GetBattlePos()] = sf::Vector2i(context->allCombatants->at(i)->GetRect().left - context->engine->GetViewPosition().x, 800);
+	}
+	else if (context->IsPlayer() && ability->possibleAims.attackAllPlayers || !context->IsPlayer() && ability->possibleAims.attackAllEnemies)
+	{
+		CalculateSelectedTargetsPositions(context->engine->GetWindowSize().x / 2 - CalculateSelectedTargetsTotalWidth(padding) / 2, padding);
+	}
+	else
+	{
+		int attackerPosition = context->engine->GetWindowSize().x / 4;
+		int attackedPosition = attackerPosition * 2.5;
+
+		if (!context->IsPlayer())
+		{
+			attackedPosition = context->engine->GetWindowSize().x / 4;
+			attackerPosition = attackedPosition * 2.5;
+		}
+
+		combatantAnimationPositions[context->GetBattlePos()] = sf::Vector2i(attackerPosition - context->GetRect().width * COMBATANT_SCALE / 2, 800);
+		CalculateSelectedTargetsPositions(attackedPosition - CalculateSelectedTargetsTotalWidth(padding) / 2, padding);
+	}
+}
+
+
+int CombatantStateExecutingAbility::CalculateSelectedTargetsTotalWidth(int _padding)
+{
+	int width = 0;
+	for (auto* c : context->selectedTargets)
+		width += c->GetRect().width * COMBATANT_SCALE + _padding;
+	width -= _padding;
+
+	return width;
+}
+
+void CombatantStateExecutingAbility::CalculateSelectedTargetsPositions(int _startingPosition, int _padding)
+{
+	int xPos = _startingPosition;
+	for (auto* c : context->selectedTargets)
+	{
+		combatantAnimationPositions[c->GetBattlePos()] = sf::Vector2i(xPos, 800);
+		xPos += c->GetRect().width * COMBATANT_SCALE + _padding;
+	}
 }
 
 
@@ -68,7 +124,7 @@ void CombatantStateExecutingAbility::ApplyAbilityEffect()
 
 void CombatantStateExecutingAbility::StartAbilityAnimation()
 {
-	context->ScaleForAbilityAnimation();
+	context->ScaleForAbilityAnimation(combatantAnimationPositions[context->GetBattlePos()].x, combatantAnimationPositions[context->GetBattlePos()].y);
 	context->SetAnimation(ability->animation, ABILITY_ANIMATION_SPEED);
 
 	if (context->IsAlly(context->selectedTargets[0]) && !context->actsInConfusion || !context->IsAlly(context->selectedTargets[0]) && context->actsInConfusion)
@@ -82,29 +138,29 @@ void CombatantStateExecutingAbility::StartAbilityAnimation()
 
 void CombatantStateExecutingAbility::AttackTargets()
 {
-	for (Combatant *c : context->selectedTargets)
+	for (int i = 0; i < context->selectedTargets.size(); i++)
 	{
-		if (c == context)
+		if (context->selectedTargets[i] == context)
 			continue;
 
-		if (dynamic_cast<PlayerMarkus*>(c) != nullptr)
-			dynamic_cast<PlayerMarkus*>(c)->AttackedBy(context->battlePosition);
+		if (dynamic_cast<PlayerMarkus*>(context->selectedTargets[i]) != nullptr)
+			dynamic_cast<PlayerMarkus*>(context->selectedTargets[i])->AttackedBy(context->battlePosition);
 
-		StartAttackedAnimation(c);
+		StartAttackedAnimation(context->selectedTargets[i], combatantAnimationPositions[context->selectedTargets[i]->GetBattlePos()]);
 	}
 }
 
 
-void CombatantStateExecutingAbility::StartAttackedAnimation(Combatant *_combatant)
+void CombatantStateExecutingAbility::StartAttackedAnimation(Combatant *_combatant, sf::Vector2i _position)
 {
 	if (context->IsAlly(_combatant) && !context->actsInConfusion || !context->IsAlly(_combatant) && context->actsInConfusion)
-		_combatant->StartFriendlyAttackedAnimation();
+		_combatant->StartFriendlyAttackedAnimation(_position.x, _position.y);
 	else
 	{
 		if (CheckForDodging(context, _combatant))
-			_combatant->StartDodgingAnimation();
+			_combatant->StartDodgingAnimation(_position.x, _position.y);
 		else
-			_combatant->StartAttackedAnimation();
+			_combatant->StartAttackedAnimation(_position.x, _position.y);
 	}	
 }
 

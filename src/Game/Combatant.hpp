@@ -86,9 +86,9 @@ public:
 	void GiveTurnTo(std::vector<Combatant*> *_targets, BattleGUI *_gui);
 	void SetTurnPending(bool _pending);
 
-	void StartAttackedAnimation();
-	void StartDodgingAnimation();
-	void StartFriendlyAttackedAnimation();
+	void StartAttackedAnimation(int _xPos, int _yPos);
+	void StartDodgingAnimation(int _xPos, int _yPos);
+	void StartFriendlyAttackedAnimation(int _xPos, int _yPos);
 	void StopAttackedAnimation();
 	void StartDeathAnimation();
 
@@ -121,7 +121,7 @@ protected:
 
 	void ApplyAbilityEffect(Combatant *_attacker, AbilityEffect &_effect, float _additionalDamageFactor = 0.0f);
 
-	void ScaleForAbilityAnimation();
+	void ScaleForAbilityAnimation(int _xPos, int _yPos);
 	void ReverseScaleForAbilityAnimation();
 
 	void ReloadHitbox();
