@@ -151,11 +151,11 @@ void VendingMachinePanel::Render()
 {
 	if (!closed)
 	{
-		vendingMachinePanel.Render(engine->GetWindow());
-		buttonClose.Render(engine->GetWindow());
-		buttonBuy.Render(engine->GetWindow());
+		vendingMachinePanel.Render(engine->GetRenderTarget());
+		buttonClose.Render(engine->GetRenderTarget());
+		buttonBuy.Render(engine->GetRenderTarget());
 
-		engine->GetWindow().draw(title);
+		engine->GetRenderTarget().draw(title);
 
 		shopPanel.Render();
 
@@ -164,8 +164,8 @@ void VendingMachinePanel::Render()
 
 		if (shopPanel.IsItemSelected() || scrollableItemPanel.IsItemSelected() || itemRowPanel.IsItemSelected())
 		{
-			engine->GetWindow().draw(priceText);
-			cardsSymbol.Render(engine->GetWindow());
+			engine->GetRenderTarget().draw(priceText);
+			cardsSymbol.Render(engine->GetRenderTarget());
 		}
 
 		if(dialog != nullptr)

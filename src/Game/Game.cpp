@@ -8,12 +8,18 @@ void Game::Init(CGameEngine * _engine)
 	m_pGameEngine = _engine;
 
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
-	m_pGameEngine->GetWindow().setView(view);
+	m_pGameEngine->GetRenderTarget().setView(view);
 
 	level = LevelBuilder::buildLevel(gameStatus->bangLevel, &dialogManager, gameStatus);
 	adventureGroup.Init(_engine, &notificationRenderer, gameStatus);
 
 	InitLevelGUI();
+
+	blurShader.loadFromFile("Data/Shader/blur.frag", sf::Shader::Fragment);
+	blurShader.setUniform("u_ImageSize", sf::Glsl::Vec2(m_pGameEngine->GetWindowSize().x, m_pGameEngine->GetWindowSize().y));
+	blurShader.setUniform("u_texture", sf::Shader::CurrentTexture);
+	blurShader.setUniform("u_kernelSize", 5.0f);
+	blurShader.setUniform("u_blurringRect", sf::Glsl::Vec4(0.0f, 243.0f, m_pGameEngine->GetWindowSize().x, 785.0f));
 
 	currentBattle = nullptr;
 	inBattle = false;
@@ -66,7 +72,7 @@ void Game::Update()
 	if(m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
 
-	m_pGameEngine->GetWindow().setView(view);
+	m_pGameEngine->GetRenderTarget().setView(view);
 
 	dialogManager.Update();
 	g_pMusic->Update();
@@ -242,16 +248,17 @@ void Game::InitNewBattle()
 void Game::Render(double _normalizedTimestep)
 {
 	m_pGameEngine->ClearWindow(sf::Color::Black);
+	m_pGameEngine->ClearRenderTarget(sf::Color::Black);
 
 	if (g_pVideos->IsPlayingVideo())
 	{
-		m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
+		//m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());
 		g_pVideos->Render(m_pGameEngine->GetWindow());
 	}
 	else 
 	{
-		m_pGameEngine->GetWindow().setView(view);
-		level->Render(m_pGameEngine->GetWindow(), view.getCenter().x - view.getSize().x / 2);
+		m_pGameEngine->GetRenderTarget().setView(view);
+		level->Render(m_pGameEngine->GetRenderTarget(), view.getCenter().x - view.getSize().x / 2);
 
 		if (currentBattle == nullptr)
 			adventureGroup.Render();
@@ -267,17 +274,24 @@ void Game::Render(double _normalizedTimestep)
 			}
 		}
 
-		notificationRenderer.Render(m_pGameEngine->GetWindow());
+		notificationRenderer.Render(m_pGameEngine->GetRenderTarget());
 
-		m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
-
-		if (currentBattle != nullptr)
-			currentBattle->RenderAbilityAnimations();
+		m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());
 
 		currentGUI->Render();
 		dialogManager.RenderDialogs();
+
+		if (currentBattle != nullptr && currentBattle->CurrentlyExecutingAbility())
+		{
+			blurShader.setUniform("u_horizontalPass", 0.0f);
+			m_pGameEngine->ApplyShaderToRenderTarget(&blurShader);
+			blurShader.setUniform("u_horizontalPass", 1.0f);
+			m_pGameEngine->ApplyShaderToRenderTarget(&blurShader);
+			currentBattle->RenderAbilityAnimations();
+		}
 	}
 
+	m_pGameEngine->FlushRenderTarget();
 	m_pGameEngine->FlipWindow();
 }
 

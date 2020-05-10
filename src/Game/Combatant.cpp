@@ -129,7 +129,7 @@ void Combatant::RenderShadow()
 		shadow.setFillColor(sf::Color(0, 0, 0, 100));
 
 	shadow.setPosition(pointObj->getPosition().x - shadow.getLocalBounds().width / 2, pointObj->getPosition().y- shadow.getGlobalBounds().height / 2);
-	engine->GetWindow().draw(shadow);
+	engine->GetRenderTarget().draw(shadow);
 }
 
 void Combatant::RenderAbilityTargetMarker()
@@ -137,7 +137,7 @@ void Combatant::RenderAbilityTargetMarker()
 	int xPos = GetRect().left + (GetRect().width - g_pSpritePool->abilityTargetMarker.GetRect().width) / 2;
 	int yPos = statusBar.GetRect().top + statusBar.GetRect().height + 5;
 	g_pSpritePool->abilityTargetMarker.SetPos(xPos, yPos);
-	g_pSpritePool->abilityTargetMarker.Render(engine->GetWindow());
+	g_pSpritePool->abilityTargetMarker.Render(engine->GetRenderTarget());
 }
 
 void Combatant::RenderTurnMarker()
@@ -146,7 +146,7 @@ void Combatant::RenderTurnMarker()
 	int xPos = GetRect().left + (GetRect().width - g_pSpritePool->turnMarker.GetRect().width) / 2;
 	int yPos = statusBar.GetRect().top + statusBar.GetRect().height + 5;
 	g_pSpritePool->turnMarker.SetPos(xPos, yPos);
-	g_pSpritePool->turnMarker.Render(engine->GetWindow());
+	g_pSpritePool->turnMarker.Render(engine->GetRenderTarget());
 
 	if (turnMarkerScale > 1.0)
 	{

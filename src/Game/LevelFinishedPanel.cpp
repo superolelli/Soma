@@ -56,16 +56,16 @@ void LevelFinishedPanel::Update()
 
 void LevelFinishedPanel::Render()
 {
-	panel.Render(engine->GetWindow());
-	engine->GetWindow().draw(levelFinishedText);
+	panel.Render(engine->GetRenderTarget());
+	engine->GetRenderTarget().draw(levelFinishedText);
 
 	if (!levelFailed) 
 	{
-		engine->GetWindow().draw(rewardDiceText);
-		engine->GetWindow().draw(rewardCardsText);
+		engine->GetRenderTarget().draw(rewardDiceText);
+		engine->GetRenderTarget().draw(rewardCardsText);
 	}
 
-	continueButton.Render(engine->GetWindow());
+	continueButton.Render(engine->GetRenderTarget());
 }
 
 void LevelFinishedPanel::SetPos(int _x, int _y)

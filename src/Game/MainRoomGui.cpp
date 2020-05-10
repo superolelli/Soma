@@ -80,9 +80,9 @@ void MainRoomGUI::Render()
 	inventory.Render();
 	vendingMachinePanel.Render();
 
-	inventoryButton.Render(engine->GetWindow());
-	skillpanelButton.Render(engine->GetWindow());
-	shopButton.Render(engine->GetWindow());
+	inventoryButton.Render(engine->GetRenderTarget());
+	skillpanelButton.Render(engine->GetRenderTarget());
+	shopButton.Render(engine->GetRenderTarget());
 }
 
 

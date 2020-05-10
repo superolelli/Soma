@@ -7,7 +7,7 @@
 namespace SpriterEngine
 {
 
-	SfmlImageFile::SfmlImageFile(std::string initialFilePath, point initialDefaultPivot, sf::RenderWindow *validRenderWindow) :
+	SfmlImageFile::SfmlImageFile(std::string initialFilePath, point initialDefaultPivot, sf::RenderTarget *validRenderWindow) :
 		ImageFile(initialFilePath,initialDefaultPivot),
 		renderWindow(validRenderWindow)
 	{

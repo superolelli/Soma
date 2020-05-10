@@ -110,7 +110,7 @@ int Battle::GetEmptyEnemyBattlePosition()
 
 void Battle::RecalculateEnemyPositions()
 {
-	int xPos = engine->GetWindow().getView().getCenter().x + ENEMY_X_OFFSET;
+	int xPos = engine->GetRenderTarget().getView().getCenter().x + ENEMY_X_OFFSET;
 	int width = 100;
 	for (auto e : enemies)
 	{
@@ -321,4 +321,15 @@ void Battle::RenderAbilityAnimations()
 		if(c->GetAbilityStatus() == executing || c->GetAbilityStatus() == attacked || c->GetAbilityStatus() == dodging)
 			c->Render();
 	}
+}
+
+bool Battle::CurrentlyExecutingAbility()
+{
+	for (Combatant* c : combatants)
+	{
+		if (c->GetAbilityStatus() == executing || c->GetAbilityStatus() == attacked || c->GetAbilityStatus() == dodging)
+			return true;
+	}
+
+	return false;
 }

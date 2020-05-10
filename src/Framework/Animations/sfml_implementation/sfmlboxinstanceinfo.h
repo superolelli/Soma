@@ -13,12 +13,12 @@ namespace SpriterEngine
 	class SfmlBoxInstanceInfo : public BoxInstanceInfo
 	{
 	public:
-		SfmlBoxInstanceInfo(point initialSize, sf::RenderWindow *validRenderWindow);
+		SfmlBoxInstanceInfo(point initialSize, sf::RenderTarget *validRenderWindow);
 
 		void render() override;
 
 	private:
-		sf::RenderWindow *renderWindow;
+		sf::RenderTarget *renderWindow;
 
 		sf::RectangleShape rectangle;
 	};

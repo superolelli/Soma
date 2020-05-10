@@ -5,7 +5,7 @@
 namespace SpriterEngine
 {
 
-	SfmlPointInstanceInfo::SfmlPointInstanceInfo(sf::RenderWindow *validRenderWindow) :
+	SfmlPointInstanceInfo::SfmlPointInstanceInfo(sf::RenderTarget *validRenderWindow) :
 		renderWindow(validRenderWindow),
 		circle(10)
 	{

@@ -31,9 +31,9 @@ void ResourcesStatusBar::Update(int _cards, int _dice)
 
 void ResourcesStatusBar::Render()
 {
-	statusBar.Render(engine->GetWindow());
-	engine->GetWindow().draw(diceAmountText);
-	engine->GetWindow().draw(cardsAmountText);
+	statusBar.Render(engine->GetRenderTarget());
+	engine->GetRenderTarget().draw(diceAmountText);
+	engine->GetRenderTarget().draw(cardsAmountText);
 }
 
 void ResourcesStatusBar::SetPos(int _x, int _y)

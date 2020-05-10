@@ -45,13 +45,13 @@ void CombatantStatusBar::SetTurnPending(bool _turnPending)
 
 void CombatantStatusBar::Render()
 {
-	healthBar.Render(engine->GetWindow());
+	healthBar.Render(engine->GetRenderTarget());
 	RenderStatusSymbols();
 
 	if (isTurnPending)
 	{
 		g_pSpritePool->turnPendingMarker.SetPos(healthBar.GetRect().left + healthBar.GetRect().width / 2 - g_pSpritePool->turnPendingMarker.GetRect().width / 2, healthBar.GetRect().top - g_pSpritePool->turnPendingMarker.GetRect().height - 2);
-		g_pSpritePool->turnPendingMarker.Render(engine->GetWindow());
+		g_pSpritePool->turnPendingMarker.Render(engine->GetRenderTarget());
 	}
 }
 
@@ -104,7 +104,7 @@ void CombatantStatusBar::RenderStatusSymbol(bool _isActive, statusType _type, CS
 	if (_isActive || statusRemoveTime[_type] > 0.0f)
 	{
 		_sprite.SetPos(_x, y);
-		_sprite.Render(engine->GetWindow());
+		_sprite.Render(engine->GetRenderTarget());
 		_x += 20;
 	}
 }
@@ -202,6 +202,6 @@ void CombatantStatusBar::RenderTooltip(const std::string &_tooltip, float _x, fl
 	background.setOutlineColor(sf::Color(60, 60, 60));
 	background.setPosition(tooltip.getPosition() + sf::Vector2f(-5.0f, -4.0f));
 
-	engine->GetWindow().draw(background);
-	engine->GetWindow().draw(tooltip);
+	engine->GetRenderTarget().draw(background);
+	engine->GetRenderTarget().draw(tooltip);
 }

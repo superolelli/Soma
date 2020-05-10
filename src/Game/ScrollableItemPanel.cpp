@@ -61,8 +61,8 @@ void ScrollableItemPanel::RecalculatePositionsOfItems()
 
 void ScrollableItemPanel::Render(int _excludeItemNumber)
 {
-	itemPanel.Render(engine->GetWindow());
-	scrollbar.Render(engine->GetWindow());
+	itemPanel.Render(engine->GetRenderTarget());
+	scrollbar.Render(engine->GetRenderTarget());
 	RenderItems(currentUpperRow * 5, currentUpperRow * 5 + 25, _excludeItemNumber);
 }
 

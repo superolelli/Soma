@@ -45,6 +45,8 @@ private:
 	NotificationRenderer notificationRenderer;
 	DialogManager dialogManager;
 
+	sf::Shader blurShader;
+
 	bool inBattle;
 	bool isPlayingBattleIntro;
 	float afterIntroWaitingTime;

@@ -18,7 +18,7 @@
 namespace SpriterEngine
 {
 
-	ExampleFileFactory::ExampleFileFactory(sf::RenderWindow *validRenderWindow) :
+	ExampleFileFactory::ExampleFileFactory(sf::RenderTarget *validRenderWindow) :
 		renderWindow(validRenderWindow)
 	{
 	}

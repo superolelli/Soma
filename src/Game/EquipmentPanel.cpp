@@ -123,15 +123,15 @@ void EquipmentPanel::HandleDrop()
 
 void EquipmentPanel::Render()
 {
-	connectionsBackground.Render(engine->GetWindow());
+	connectionsBackground.Render(engine->GetRenderTarget());
 
 	for(auto &c : connections[currentPlayer])
-		c.Render(engine->GetWindow());
+		c.Render(engine->GetRenderTarget());
 
 	diamond[currentPlayer].Render();
 
 	for (auto &e : equipmentField)
-		e.Render(engine->GetWindow());
+		e.Render(engine->GetRenderTarget());
 
 	RenderItems();
 }
@@ -143,11 +143,11 @@ void EquipmentPanel::RenderItems()
 	{
 		if (items[currentPlayer][i] != nullptr && i != currentDraggedItem)
 		{
-			items[currentPlayer][i]->Render(engine->GetWindow());
+			items[currentPlayer][i]->Render(engine->GetRenderTarget());
 			if (items[currentPlayer][i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
 			{
 				tooltip.SetItem(items[currentPlayer][i]->GetItem().id);
-				tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
+				tooltip.ShowTooltip(engine->GetRenderTarget(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 			}
 		}
 	}
@@ -157,7 +157,7 @@ void EquipmentPanel::RenderItems()
 void EquipmentPanel::RenderCurrentDraggedItem()
 {
 	if (currentDraggedItem != -1)
-		items[currentPlayer][currentDraggedItem]->Render(engine->GetWindow());
+		items[currentPlayer][currentDraggedItem]->Render(engine->GetRenderTarget());
 }
 
 

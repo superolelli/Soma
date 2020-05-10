@@ -323,10 +323,10 @@ void SkillPanel::Render()
 {
 	if (!closed)
 	{
-		skillPanel.Render(engine->GetWindow());
-		bridgePiece.Render(engine->GetWindow());
+		skillPanel.Render(engine->GetRenderTarget());
+		bridgePiece.Render(engine->GetRenderTarget());
 
-		connectionsSkilled[0].Render(engine->GetWindow());
+		connectionsSkilled[0].Render(engine->GetRenderTarget());
 
 		RenderConnection(1, 0);
 		RenderConnection(2, 1);
@@ -334,44 +334,44 @@ void SkillPanel::Render()
 		RenderConnection(4, 4);
 		RenderConnection(5, 6);
 
-		abilityPlaceholders.Render(engine->GetWindow());
+		abilityPlaceholders.Render(engine->GetRenderTarget());
 
 		RenderSkilledIndicators();
 
 		for (auto &a : abilities[currentPlayer])
-			a.Render(engine->GetWindow());
+			a.Render(engine->GetRenderTarget());
 
 		auto xPos = abilities[currentPlayer][currentAbility].GetGlobalRect().left;
 		auto yPos = abilities[currentPlayer][currentAbility].GetGlobalRect().top;
 		abilities[currentPlayer][currentAbility].SetPos(abilityPlaceholders.GetGlobalRect().left + 378, abilityPlaceholders.GetGlobalRect().top + 12);
-		abilities[currentPlayer][currentAbility].Render(engine->GetWindow());
+		abilities[currentPlayer][currentAbility].Render(engine->GetRenderTarget());
 
 		auto abilityRect = abilities[currentPlayer][currentAbility].GetGlobalRect();
 		abilities[currentPlayer][currentAbility].SetPos(xPos, yPos);
 		
 
 		for (auto &s : skills[currentPlayer][currentAbility])
-			s.Render(engine->GetWindow());
+			s.Render(engine->GetRenderTarget());
 
-		currentSkillFrame.Render(engine->GetWindow());
+		currentSkillFrame.Render(engine->GetRenderTarget());
 
-		engine->GetWindow().draw(currentPlayerName);
-		engine->GetWindow().draw(panelTitle);
-		engine->GetWindow().draw(chosenSkillName);
+		engine->GetRenderTarget().draw(currentPlayerName);
+		engine->GetRenderTarget().draw(panelTitle);
+		engine->GetRenderTarget().draw(chosenSkillName);
 
 		for(auto &n : abilityName)
-			engine->GetWindow().draw(n);
+			engine->GetRenderTarget().draw(n);
 
 		if (!gameStatus->IsSkillAcquired(currentPlayer, currentAbility, currentSkill))
 		{
-			diceSymbol.Render(engine->GetWindow());
-			engine->GetWindow().draw(chosenSkillPrice);
-			buttonBuy.Render(engine->GetWindow());
+			diceSymbol.Render(engine->GetRenderTarget());
+			engine->GetRenderTarget().draw(chosenSkillPrice);
+			buttonBuy.Render(engine->GetRenderTarget());
 		}
 
-		buttonNext.Render(engine->GetWindow());
-		buttonPrevious.Render(engine->GetWindow());
-		buttonClose.Render(engine->GetWindow());
+		buttonNext.Render(engine->GetRenderTarget());
+		buttonPrevious.Render(engine->GetRenderTarget());
+		buttonClose.Render(engine->GetRenderTarget());
 
 		for (int i = 0; i < 8; i++)
 		{
@@ -389,9 +389,9 @@ void SkillPanel::Render()
 void SkillPanel::RenderConnection(int connection, int parentSkill)
 {
 	if (gameStatus->IsSkillAcquired(currentPlayer, currentAbility, parentSkill))
-		connectionsSkilled[connection].Render(engine->GetWindow());
+		connectionsSkilled[connection].Render(engine->GetRenderTarget());
 	else
-		connectionsNotSkilled[connection].Render(engine->GetWindow());
+		connectionsNotSkilled[connection].Render(engine->GetRenderTarget());
 }
 
 
@@ -399,14 +399,14 @@ void SkillPanel::RenderConnection(int connection, int parentSkill)
 void SkillPanel::RenderSkilledIndicators()
 {
 	skilledIndicator.SetPos(abilityPlaceholders.GetGlobalRect().left + 368, abilityPlaceholders.GetGlobalRect().top + 3);
-	skilledIndicator.Render(engine->GetWindow());
+	skilledIndicator.Render(engine->GetRenderTarget());
 
 	for (int i = 0; i < 8; i++)
 	{
 		if (gameStatus->IsSkillAcquired(currentPlayer, currentAbility, i))
 		{
 			skilledIndicator.SetPos(skills[currentPlayer][currentAbility][i].GetGlobalRect().left - 9, skills[currentPlayer][currentAbility][i].GetGlobalRect().top - 9);
-			skilledIndicator.Render(engine->GetWindow());
+			skilledIndicator.Render(engine->GetRenderTarget());
 		}
 	}
 }
@@ -427,8 +427,8 @@ void SkillPanel::ShowTooltip(int _skill)
 	background.setOutlineColor(sf::Color(40, 40, 40));
 	background.setPosition(tooltip.getPosition() + sf::Vector2f(-10.0f, -7.0f));
 
-	engine->GetWindow().draw(background);
-	engine->GetWindow().draw(tooltip);
+	engine->GetRenderTarget().draw(background);
+	engine->GetRenderTarget().draw(tooltip);
 }
 
 
@@ -437,8 +437,8 @@ void SkillPanel::ShowAbilityTooltip(sf::IntRect &_abilityRect)
 {
 	abilityTooltip.SetAbilityID(currentAbility);
 	abilityTooltip.SetPlayerID(currentPlayer);
-	abilityTooltip.ShowTooltip(engine->GetWindow(), _abilityRect.left + 135, _abilityRect.top - 10);
-	abilityTooltip.ShowPossibleTargets(engine->GetWindow(), _abilityRect.left - 305, _abilityRect.top - 10, true);
+	abilityTooltip.ShowTooltip(engine->GetRenderTarget(), _abilityRect.left + 135, _abilityRect.top - 10);
+	abilityTooltip.ShowPossibleTargets(engine->GetRenderTarget(), _abilityRect.left - 305, _abilityRect.top - 10, true);
 }
 
 bool SkillPanel::SkillCanBeAcquired(int _player, int _ability, int _skill)

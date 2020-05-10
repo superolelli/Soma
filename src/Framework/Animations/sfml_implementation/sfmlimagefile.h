@@ -10,7 +10,7 @@ namespace SpriterEngine
 	class SfmlImageFile : public ImageFile
 	{
 	public:
-		SfmlImageFile(std::string initialFilePath, point initialDefaultPivot, sf::RenderWindow *validRenderWindow);
+		SfmlImageFile(std::string initialFilePath, point initialDefaultPivot, sf::RenderTarget *validRenderWindow);
 
 		void renderSprite(UniversalObjectInterface *spriteInfo) override;
 
@@ -18,7 +18,7 @@ namespace SpriterEngine
 		sf::Texture texture;
 		sf::Sprite sprite;
 
-		sf::RenderWindow *renderWindow;
+		sf::RenderTarget *renderWindow;
 
 		void initializeFile();
 	};

@@ -42,11 +42,19 @@ public:
 	//Returns the render window
 	sf::RenderWindow &GetWindow() { return *m_Window.GetRenderWindow();}
 
+	sf::RenderTarget& GetRenderTarget() { return m_RenderTextures[currentRenderTexture]; }
+
+	void FlushRenderTarget(sf::Shader *_shader = nullptr);
+
+	void ApplyShaderToRenderTarget(sf::Shader* _shader);
+
+	void ClearRenderTarget(sf::Color const& _color) { m_RenderTextures[currentRenderTexture].clear(_color); }
+
 	//Returns the size of the render window
 	sf::Vector2u &GetWindowSize() { return m_Window.GetRenderWindow()->getSize(); }
 
 	//Returns the position of the upper left corner of the view
-	sf::Vector2f GetViewPosition() { return GetWindow().getView().getCenter() - GetWindow().getView().getSize() / 2.0f; }
+	sf::Vector2f GetViewPosition() { return GetRenderTarget().getView().getCenter() - GetRenderTarget().getView().getSize() / 2.0f; }
 
 	//clears the window
 	void ClearWindow(sf::Color const &_color) { m_Window.Clear(_color); }
@@ -63,7 +71,7 @@ public:
 	inline std::string &GetTextInput() { return m_Window.GetTextInput(); }
 	inline int const GetMouseWheelMovement() const { return m_Window.GetMouseWheelMovement(); }
 	inline sf::Vector2i const &GetMousePos() { return m_Window.GetMousePos(); }
-	inline sf::Vector2i const GetWorldMousePos() { return m_Window.GetWorldMousePos(); }
+	inline sf::Vector2i const GetWorldMousePos() { return (sf::Vector2i)m_RenderTextures[currentRenderTexture].mapPixelToCoords(m_Window.GetMousePos()); }
 	inline sf::Vector2f const &GetMouseMovement() { return m_Window.GetMouseMovement(); }
 
 	void SetCursor(sf::Cursor::Type _type) { m_CursorManager.SetCursor(_type); }
@@ -75,6 +83,8 @@ private:
 
 	//the window
 	CWindow m_Window;
+	sf::RenderTexture m_RenderTextures[2];
+	int currentRenderTexture;
 
 	CursorManager m_CursorManager;
 

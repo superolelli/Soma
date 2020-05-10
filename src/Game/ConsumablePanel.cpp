@@ -46,7 +46,7 @@ void ConsumablePanel::Update()
 
 void ConsumablePanel::Render()
 {
-	consumablePanel.Render(engine->GetWindow());
+	consumablePanel.Render(engine->GetRenderTarget());
 	itemRowPanel.Render();
 	itemRowPanel.RenderCurrentlyDraggedItem();
 }

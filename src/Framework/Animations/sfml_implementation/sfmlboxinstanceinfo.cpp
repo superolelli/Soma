@@ -5,7 +5,7 @@
 namespace SpriterEngine
 {
 
-	SfmlBoxInstanceInfo::SfmlBoxInstanceInfo(point initialSize, sf::RenderWindow *validRenderWindow) :
+	SfmlBoxInstanceInfo::SfmlBoxInstanceInfo(point initialSize, sf::RenderTarget *validRenderWindow) :
 		BoxInstanceInfo(initialSize),
 		renderWindow(validRenderWindow),
 		rectangle(sf::Vector2f(initialSize.x, initialSize.y))

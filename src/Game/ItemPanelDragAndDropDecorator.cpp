@@ -75,5 +75,5 @@ void ItemPanelDragAndDropDecorator::Render()
 void ItemPanelDragAndDropDecorator::RenderCurrentlyDraggedItem()
 {
 	if (currentDraggedItem != -1)
-		itemPanel->items[currentDraggedItem]->Render(engine->GetWindow());
+		itemPanel->items[currentDraggedItem]->Render(engine->GetRenderTarget());
 }

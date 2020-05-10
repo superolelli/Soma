@@ -84,24 +84,24 @@ void ShopPanel::Update()
 
 void ShopPanel::Render()
 {
-	shopPanel.Render(engine->GetWindow());
+	shopPanel.Render(engine->GetRenderTarget());
 
-	engine->GetWindow().draw(title);
+	engine->GetRenderTarget().draw(title);
 
 	int showTooltipForItem = -1;
 	for (int i = 0; i < 15; i++)
 	{
 		if (items[i] != nullptr)
 		{
-			items[i]->Render(engine->GetWindow());
+			items[i]->Render(engine->GetRenderTarget());
 
 			if(currentlySelectedItem == i)
-				selectedItemFrame.Render(engine->GetWindow());
+				selectedItemFrame.Render(engine->GetRenderTarget());
 
 			priceSign.ChangeString(0, std::to_string(g_pObjectProperties->getItemStats(items[i]->GetItem().id).price));
 			priceSign.SetPos(items[i]->GetGlobalBounds().left + 18, items[i]->GetGlobalBounds().top + 90);
 			priceSign.SetTextPosCentered(0);
-			priceSign.Render(engine->GetWindow());
+			priceSign.Render(engine->GetRenderTarget());
 
 			if (items[i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
 			{
@@ -114,7 +114,7 @@ void ShopPanel::Render()
 	if (showTooltipForItem != -1)
 	{
 		tooltip.SetItem(items[showTooltipForItem]->GetItem().id);
-		tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
+		tooltip.ShowTooltip(engine->GetRenderTarget(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 	}
 }
 

@@ -53,10 +53,10 @@ void SellMultipleDialog::Render()
 {
 	if (isOpen)
 	{
-		sellMultiplePanel.Render(engine->GetWindow());
-		slider.Render(engine->GetWindow());
-		buttonSell.Render(engine->GetWindow());
-		buttonCancel.Render(engine->GetWindow());
+		sellMultiplePanel.Render(engine->GetRenderTarget());
+		slider.Render(engine->GetRenderTarget());
+		buttonSell.Render(engine->GetRenderTarget());
+		buttonCancel.Render(engine->GetRenderTarget());
 	}
 }
 

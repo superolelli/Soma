@@ -13,12 +13,12 @@ namespace SpriterEngine
 	class SfmlBoneInstanceInfo : public BoneInstanceInfo
 	{
 	public:
-		SfmlBoneInstanceInfo(point initialSize, sf::RenderWindow *validRenderWindow);
+		SfmlBoneInstanceInfo(point initialSize, sf::RenderTarget *validRenderWindow);
 
 		void render() override;
 
 	private:
-		sf::RenderWindow *renderWindow;
+		sf::RenderTarget *renderWindow;
 
 		sf::ConvexShape boneShape;
 	};

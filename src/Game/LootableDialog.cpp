@@ -87,18 +87,18 @@ void LootableDialog::Render()
 {
 	if (isOpen)
 	{
-		lootablePanel.Render(engine->GetWindow());
+		lootablePanel.Render(engine->GetRenderTarget());
 
 		for (auto i : items)
 		{
 			if(i != nullptr)
-				i->Render(engine->GetWindow());
+				i->Render(engine->GetRenderTarget());
 		}
 
-		buttonClose.Render(engine->GetWindow());
-		buttonTakeAll.Render(engine->GetWindow());
+		buttonClose.Render(engine->GetRenderTarget());
+		buttonTakeAll.Render(engine->GetRenderTarget());
 
-		engine->GetWindow().draw(lootableNameText);
+		engine->GetRenderTarget().draw(lootableNameText);
 
 		for (auto i : items)
 		{
@@ -108,7 +108,7 @@ void LootableDialog::Render()
 			if (i->Contains(engine->GetMousePos()))
 			{
 				tooltip.SetItem(i->GetItem().id);
-				tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
+				tooltip.ShowTooltip(engine->GetRenderTarget(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 				break;
 			}
 		}

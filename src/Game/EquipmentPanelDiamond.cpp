@@ -35,9 +35,9 @@ void EquipmentPanelDiamond::Update()
 
 void EquipmentPanelDiamond::Render()
 {
-	diamond.Render(engine->GetWindow());
+	diamond.Render(engine->GetRenderTarget());
 	if (diamond.GetGlobalRect().contains(engine->GetMousePos()))
-		tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
+		tooltip.ShowTooltip(engine->GetRenderTarget(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 }
 
 

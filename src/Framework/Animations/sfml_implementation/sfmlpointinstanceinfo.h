@@ -13,12 +13,12 @@ namespace SpriterEngine
 	class SfmlPointInstanceInfo : public PointInstanceInfo
 	{
 	public:
-		SfmlPointInstanceInfo(sf::RenderWindow *validRenderWindow);
+		SfmlPointInstanceInfo(sf::RenderTarget *validRenderWindow);
 
 		void render() override;
 
 	private:
-		sf::RenderWindow *renderWindow;
+		sf::RenderTarget *renderWindow;
 
 		sf::CircleShape circle;
 	};

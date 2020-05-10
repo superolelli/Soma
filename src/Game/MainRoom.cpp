@@ -26,7 +26,7 @@ void MainRoom::Init(CGameEngine * _engine)
 	gui.Init(m_pGameEngine, &gameStatus);
 
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
-	m_pGameEngine->GetWindow().setView(view);
+	m_pGameEngine->GetRenderTarget().setView(view);
 
 	xMovement = 0.0f;
 }
@@ -139,7 +139,7 @@ void MainRoom::Update()
 {
 	UpdateLevelSigns();
 
-	m_pGameEngine->GetWindow().setView(view);
+	m_pGameEngine->GetRenderTarget().setView(view);
 
 	if (m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
@@ -162,9 +162,9 @@ void MainRoom::HandleGUI()
 		CheckForClickedVendingMachine();
 	}
 
-	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
+	m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());
 	gui.Update();
-	m_pGameEngine->GetWindow().setView(view);
+	m_pGameEngine->GetRenderTarget().setView(view);
 }
 
 
@@ -260,15 +260,16 @@ void MainRoom::Render(double _normalizedTimestep)
 		sf::Listener::setPosition(sf::Vector3f(view.getCenter().x, view.getCenter().y, -5));
 	}
 
-	m_pGameEngine->ClearWindow(sf::Color::Black);
 
-	m_pGameEngine->GetWindow().setView(view);
+	m_pGameEngine->ClearRenderTarget(sf::Color::Black);
+	m_pGameEngine->GetRenderTarget().setView(view);
 
 	RenderMainRoom();
 
-	m_pGameEngine->GetWindow().setView(m_pGameEngine->GetWindow().getDefaultView());
+	m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());
 	gui.Render();
 
+	m_pGameEngine->FlushRenderTarget();
 	m_pGameEngine->FlipWindow();
 }
 
@@ -283,20 +284,20 @@ void MainRoom::RenderMainRoom()
 
 	for (auto &b : background) {
 		if (b.GetGlobalRect().intersects(viewRect))
-			b.Render(m_pGameEngine->GetWindow());
+			b.Render(m_pGameEngine->GetRenderTarget());
 	}
 
 	for (auto &d : doors) {
 		if (d.GetGlobalRect().intersects(viewRect))
-			d.Render(m_pGameEngine->GetWindow());
+			d.Render(m_pGameEngine->GetRenderTarget());
 	}
 
 	if (roots.GetGlobalRect().intersects(viewRect))
-		roots.Render(m_pGameEngine->GetWindow());
+		roots.Render(m_pGameEngine->GetRenderTarget());
 
 	for (auto &s : signs) {
 		if (s.GetRect().intersects(viewRect))
-			s.Render(m_pGameEngine->GetWindow());
+			s.Render(m_pGameEngine->GetRenderTarget());
 	}
 
 	for (auto p : players) {
@@ -305,5 +306,5 @@ void MainRoom::RenderMainRoom()
 		p->playSoundTriggers();
 	}
 
-	vendingMachine.Render(m_pGameEngine->GetWindow());
+	vendingMachine.Render(m_pGameEngine->GetRenderTarget());
 }

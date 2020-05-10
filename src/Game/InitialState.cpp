@@ -23,7 +23,7 @@ void CInitialState::Init(CGameEngine *_engine)
 
 	_engine->UseSimpleRenderLoop(true);
 
-	modelLoadingScreen = new SpriterEngine::SpriterModel("./Data/Sprites/LoadingScreen/loadingScreen.scml", new SpriterEngine::ExampleFileFactory(&_engine->GetWindow()), new SpriterEngine::ExampleObjectFactory(&_engine->GetWindow()));
+	modelLoadingScreen = new SpriterEngine::SpriterModel("./Data/Sprites/LoadingScreen/loadingScreen.scml", new SpriterEngine::ExampleFileFactory(&_engine->GetRenderTarget()), new SpriterEngine::ExampleObjectFactory(&_engine->GetRenderTarget()));
 	loadingScreen = modelLoadingScreen->getNewEntityInstance("LoadingScreen");
 	loadingScreen->setCurrentAnimation("loading");
 	loadingScreen->setPlaybackSpeedRatio(0.65);
@@ -85,10 +85,12 @@ void CInitialState::Render(double _normalizedTimestep)
 	using namespace std::chrono_literals;
 
 	m_pGameEngine->ClearWindow(sf::Color::Black);
+	m_pGameEngine->ClearRenderTarget(sf::Color::Black);
 
 	loadingScreen->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
 	loadingScreen->render();
 
+	m_pGameEngine->FlushRenderTarget();
 	m_pGameEngine->FlipWindow();
 
 	std::this_thread::sleep_for(20ms);

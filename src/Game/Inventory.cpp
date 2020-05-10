@@ -150,21 +150,21 @@ void Inventory::Render()
 {
 	if (!closed)
 	{
-		inventoryPanel.Render(engine->GetWindow());
+		inventoryPanel.Render(engine->GetRenderTarget());
 
 		scrollableItemPanel.Render();
 		equipmentPanel.Render();
 		scrollableItemPanel.RenderCurrentlyDraggedItem();
 		equipmentPanel.RenderCurrentDraggedItem();
 
-		playerAttributesText.Render(engine->GetWindow());
+		playerAttributesText.Render(engine->GetRenderTarget());
 
-		engine->GetWindow().draw(currentPlayerName);
-		engine->GetWindow().draw(panelTitle);
+		engine->GetRenderTarget().draw(currentPlayerName);
+		engine->GetRenderTarget().draw(panelTitle);
 
-		buttonNext.Render(engine->GetWindow());
-		buttonPrevious.Render(engine->GetWindow());
-		buttonClose.Render(engine->GetWindow());
+		buttonNext.Render(engine->GetRenderTarget());
+		buttonPrevious.Render(engine->GetRenderTarget());
+		buttonClose.Render(engine->GetRenderTarget());
 	}
 }
 

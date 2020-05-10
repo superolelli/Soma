@@ -24,7 +24,7 @@ void ItemPanel::RenderItems(int _start, int _end, int _excludeItemNumber)
 	{
 		if (items[i] != nullptr && i != _excludeItemNumber)
 		{
-			items[i]->Render(engine->GetWindow());
+			items[i]->Render(engine->GetRenderTarget());
 			if (items[i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
 				showTooltipForItem = i;
 		}
@@ -39,7 +39,7 @@ void ItemPanel::ShowTooltipForItem(int _itemID)
 	if (_itemID != -1)
 	{
 		tooltip.SetItem(items[_itemID]->GetItem().id);
-		tooltip.ShowTooltip(engine->GetWindow(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
+		tooltip.ShowTooltip(engine->GetRenderTarget(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 	}
 }
 

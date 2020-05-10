@@ -114,11 +114,11 @@ void BattleGUI::Render()
 {
 	if (currentPlayer != nullptr)
 	{
-		abilityPanel.Render(engine->GetWindow());
-		currentAbilityFrame.Render(engine->GetWindow());
+		abilityPanel.Render(engine->GetRenderTarget());
+		currentAbilityFrame.Render(engine->GetRenderTarget());
 
 		for (CSprite &a : abilities[currentPlayer->GetID()])
-			a.Render(engine->GetWindow());
+			a.Render(engine->GetRenderTarget());
 
 		for (int i = 0; i < 4; i++)
 		{
@@ -131,24 +131,24 @@ void BattleGUI::Render()
 
 	RenderCombatantInformation();	
 
-	engine->GetWindow().draw(abilityInformationText);
+	engine->GetRenderTarget().draw(abilityInformationText);
 }
 
 
 void BattleGUI::RenderCombatantInformation()
 {
-	combatantInformationPanel.Render(engine->GetWindow());
-	combatantAttributesPanel.Render(engine->GetWindow());
-	currentCombatantHealthBar.Render(engine->GetWindow(), true);
-	engine->GetWindow().draw(currentCombatantName);
+	combatantInformationPanel.Render(engine->GetRenderTarget());
+	combatantAttributesPanel.Render(engine->GetRenderTarget());
+	currentCombatantHealthBar.Render(engine->GetRenderTarget(), true);
+	engine->GetRenderTarget().draw(currentCombatantName);
 }
 
 
 void BattleGUI::ShowTooltip(int _ability)
 {
 	tooltip.SetAbilityID(_ability);
-	tooltip.ShowTooltip(engine->GetWindow(), abilities[combatantToDisplay->GetID()][_ability].GetRect().left, abilities[combatantToDisplay->GetID()][_ability].GetRect().top - 35.0f);
-	tooltip.ShowPossibleTargets(engine->GetWindow(), abilityPanel.GetGlobalRect().left + 65, abilityPanel.GetGlobalRect().top + abilityPanel.GetGlobalRect().height + 5);
+	tooltip.ShowTooltip(engine->GetRenderTarget(), abilities[combatantToDisplay->GetID()][_ability].GetRect().left, abilities[combatantToDisplay->GetID()][_ability].GetRect().top - 35.0f);
+	tooltip.ShowPossibleTargets(engine->GetRenderTarget(), abilityPanel.GetGlobalRect().left + 65, abilityPanel.GetGlobalRect().top + abilityPanel.GetGlobalRect().height + 5);
 }
 
 

@@ -11,7 +11,7 @@ namespace SpriterEngine
 	class ExampleFileFactory : public FileFactory
 	{
 	public:
-		ExampleFileFactory(sf::RenderWindow *validRenderWindow);
+		ExampleFileFactory(sf::RenderTarget *validRenderWindow);
 		
 		ImageFile *newImageFile(const std::string &initialFilePath, point initialDefaultPivot, atlasdata atlasData) override;
 
@@ -22,7 +22,7 @@ namespace SpriterEngine
 		SpriterFileDocumentWrapper *newSconDocumentWrapper() override;
 
 	private:
-		sf::RenderWindow *renderWindow;
+		sf::RenderTarget *renderWindow;
 	};
 
 }

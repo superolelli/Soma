@@ -11,7 +11,7 @@ namespace SpriterEngine
 	class ExampleObjectFactory : public ObjectFactory
 	{
 	public:
-		ExampleObjectFactory(sf::RenderWindow *validRenderWindow);
+		ExampleObjectFactory(sf::RenderTarget *validRenderWindow);
 		
 		PointInstanceInfo *newPointInstanceInfo() override;
 
@@ -20,7 +20,7 @@ namespace SpriterEngine
 		BoneInstanceInfo *newBoneInstanceInfo(point size) override;
 
 	private:
-		sf::RenderWindow *renderWindow;
+		sf::RenderTarget *renderWindow;
 	};
 
 }

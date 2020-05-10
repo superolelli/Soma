@@ -5,7 +5,7 @@
 namespace SpriterEngine
 {
 
-	SfmlBoneInstanceInfo::SfmlBoneInstanceInfo(point initialSize, sf::RenderWindow *validRenderWindow) :
+	SfmlBoneInstanceInfo::SfmlBoneInstanceInfo(point initialSize, sf::RenderTarget *validRenderWindow) :
 		BoneInstanceInfo(initialSize),
 		renderWindow(validRenderWindow)
 	{

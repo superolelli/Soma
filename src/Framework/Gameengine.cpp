@@ -5,6 +5,10 @@
 void CGameEngine::Init(std::string const &_name)
 {
 	m_Window.Init(_name);
+	m_RenderTextures[0].create(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height);
+	m_RenderTextures[1].create(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height);
+
+	currentRenderTexture = 0;
 
 	m_CursorManager.Init(&m_Window);
 
@@ -87,6 +91,23 @@ void CGameEngine::PushStateImmediately(GameState * _state)
 void CGameEngine::PopState()
 {
 	nextAction = action::pop;
+}
+
+void CGameEngine::FlushRenderTarget(sf::Shader *_shader)
+{
+	m_RenderTextures[currentRenderTexture].display();
+	sf::Sprite sprite;
+	sprite.setTexture(m_RenderTextures[currentRenderTexture].getTexture());
+	m_Window.GetRenderWindow()->draw(sprite, _shader);
+}
+
+void CGameEngine::ApplyShaderToRenderTarget(sf::Shader* _shader)
+{
+	m_RenderTextures[currentRenderTexture].display();
+	sf::Sprite sprite;
+	sprite.setTexture(m_RenderTextures[currentRenderTexture].getTexture());
+	currentRenderTexture = !currentRenderTexture;
+	m_RenderTextures[currentRenderTexture].draw(sprite, _shader);
 }
 
 

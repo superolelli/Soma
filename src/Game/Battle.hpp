@@ -18,6 +18,7 @@ public:
 	void Update();
 	void Render();
 	void RenderAbilityAnimations();
+	bool CurrentlyExecutingAbility();
 	void Quit();
 
 	void AddEnemy(int enemyID);

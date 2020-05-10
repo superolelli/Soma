@@ -90,5 +90,5 @@ void ItemPanelSelectDecorator::Render()
 {
 	itemPanel->Render();
 	if (currentlySelectedItem != -1)
-		selectedItemFrame.Render(engine->GetWindow());
+		selectedItemFrame.Render(engine->GetRenderTarget());
 }

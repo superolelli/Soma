@@ -33,7 +33,7 @@ void ItemRowPanel::Update()
 
 void ItemRowPanel::Render(int _excludeItemNumber)
 {
-	itemPanel.Render(engine->GetWindow());
+	itemPanel.Render(engine->GetRenderTarget());
 	RenderItems(0, 5, _excludeItemNumber);
 }
 
