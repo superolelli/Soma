@@ -192,6 +192,7 @@ void Combatant::StartDodgingAnimation(int _xPos, int _yPos)
 {
 	ScaleForAbilityAnimation(_xPos, _yPos);
 	SetAnimation("attacked", ABILITY_ANIMATION_SPEED);
+	ReloadHitbox();
 	notificationRenderer->AddNotification("Ausgewichen!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top), 1.0f);
 
 	SetAbilityStatus(dodging);

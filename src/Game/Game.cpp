@@ -252,7 +252,6 @@ void Game::Render(double _normalizedTimestep)
 
 	if (g_pVideos->IsPlayingVideo())
 	{
-		//m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());
 		g_pVideos->Render(m_pGameEngine->GetWindow());
 	}
 	else 
@@ -274,12 +273,7 @@ void Game::Render(double _normalizedTimestep)
 			}
 		}
 
-		notificationRenderer.Render(m_pGameEngine->GetRenderTarget());
-
 		m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());
-
-		currentGUI->Render();
-		dialogManager.RenderDialogs();
 
 		if (currentBattle != nullptr && currentBattle->CurrentlyExecutingAbility())
 		{
@@ -289,9 +283,16 @@ void Game::Render(double _normalizedTimestep)
 			m_pGameEngine->ApplyShaderToRenderTarget(&blurShader);
 			currentBattle->RenderAbilityAnimations();
 		}
+
+		currentGUI->Render();
+		dialogManager.RenderDialogs();
+
+		m_pGameEngine->GetRenderTarget().setView(view);
+		notificationRenderer.Render(m_pGameEngine->GetRenderTarget());
+		m_pGameEngine->FlushRenderTarget();
 	}
 
-	m_pGameEngine->FlushRenderTarget();
+
 	m_pGameEngine->FlipWindow();
 }
 

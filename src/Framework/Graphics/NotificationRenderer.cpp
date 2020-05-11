@@ -29,10 +29,10 @@ void NotificationRenderer::AddNotification(std::string _notification, sf::Font &
 	newNotification.text.setFont(_font);
 	newNotification.text.setCharacterSize(_characterSize);
 	newNotification.text.setString(_notification);
-	newNotification.text.setPosition(_position);
 	newNotification.text.setFillColor(_fillColor);
 	newNotification.text.setOutlineThickness(3);
 	newNotification.text.setOutlineColor(_outlineColor);
+	newNotification.text.setPosition(_position - sf::Vector2f(newNotification.text.getLocalBounds().width / 2, 0.0));
 	newNotification.duration = _duration;
 
 	notifications.push_back(newNotification);

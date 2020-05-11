@@ -76,7 +76,7 @@ bool EnemyStatePrepareAbility::PlayerShouldBeAddedAsTarget(Combatant *_combatant
 
 bool EnemyStatePrepareAbility::EnemyShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition)
 {
-	if (_combatant->IsPlayer() || _combatant == enemyContext || _combatant == enemyContext->selectedTargets[0] || _combatant->IsDying())
+	if (_combatant->IsPlayer() || _combatant == enemyContext->selectedTargets[0] || _combatant->IsDying())
 		return false;
 
 	if (enemyContext->actsInConfusion && g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAllPlayers)
@@ -85,8 +85,8 @@ bool EnemyStatePrepareAbility::EnemyShouldBeAddedAsTarget(Combatant *_combatant,
     if (!enemyContext->actsInConfusion && g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAllEnemies)
         return true;
 
-	return g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAll && enemyContext != _combatant
-		|| _combatant->GetBattlePos() >= _targetPosition && _combatant->GetBattlePos() < _targetPosition + g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.howMany;
+	return enemyContext != _combatant && (g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackAll
+		|| _combatant->GetBattlePos() >= _targetPosition && _combatant->GetBattlePos() < _targetPosition + g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.howMany);
 }
 
 
