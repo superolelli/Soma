@@ -91,3 +91,27 @@ void ScrollableItemPanel::AddItem(Item _item)
 
 	scrollbar.SetNumberOfSteps(std::max(1, (int)(items.size() - 21) / 5 + 1));
 }
+
+
+void ScrollableItemPanel::SortItemsAccordingToNames()
+{
+	items.erase(std::remove_if(items.begin(), items.end(), [](InventoryItemWrapper* item) {return item == nullptr;}), items.end());
+
+	std::sort(items.begin(), items.end(), [&](InventoryItemWrapper* item1, InventoryItemWrapper* item2) {
+		return g_pObjectProperties->getItemStats(item1->GetItem().id).name < g_pObjectProperties->getItemStats(item2->GetItem().id).name;});
+
+	currentUpperRow = 0;
+	RecalculatePositionsOfItems();
+}
+
+
+void ScrollableItemPanel::SortItemsAccordingToColor()
+{
+	items.erase(std::remove_if(items.begin(), items.end(), [](InventoryItemWrapper* item) {return item == nullptr;}), items.end());
+
+	std::sort(items.begin(), items.end(), [](InventoryItemWrapper* item1, InventoryItemWrapper* item2) {
+		return item1->GetItem().color.toInteger() < item2->GetItem().color.toInteger();});
+
+	currentUpperRow = 0;
+	RecalculatePositionsOfItems();
+}

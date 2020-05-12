@@ -16,6 +16,9 @@ public:
 
 	sf::IntRect const &GetRect();
 
+	void SortItemsAccordingToColor();
+	void SortItemsAccordingToNames();
+
 protected:
 	CGameEngine *engine;
 	ItemPanel *itemPanel;

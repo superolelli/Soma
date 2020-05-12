@@ -35,6 +35,8 @@ private:
 
 	SellMultipleDialog *dialog;
 
+	CButton buttonSortNames;
+	CButton buttonSortColors;
 	CButton buttonBuy;
 	CButton buttonClose;
 

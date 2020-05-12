@@ -29,6 +29,14 @@ void VendingMachinePanel::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	shopPanel.SetOnItemSelectedCallback([&](Item &_item) {return OnItemOfShopPanelSelected(_item); });
 	shopPanel.SetPos(vendingMachinePanel.GetRect().left + 840, vendingMachinePanel.GetRect().top + 130);
 
+	buttonSortNames.Load(g_pTextures->sortNamesButton, Buttontypes::Up);
+	buttonSortNames.SetPos(scrollableItemPanel.GetRect().left + scrollableItemPanel.GetRect().width + 25, scrollableItemPanel.GetRect().top - 21);
+	buttonSortNames.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
+
+	buttonSortColors.Load(g_pTextures->sortColorButton, Buttontypes::Up);
+	buttonSortColors.SetPos(scrollableItemPanel.GetRect().left + scrollableItemPanel.GetRect().width + 25, buttonSortNames.GetRect().top + buttonSortNames.GetRect().height - 2);
+	buttonSortColors.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
+
 	buttonClose.Load(g_pTextures->lootablePanelCloseButton, Buttontypes::Motion_Up);
 	buttonClose.SetPos(vendingMachinePanel.GetGlobalRect().left + 1472, vendingMachinePanel.GetGlobalRect().top + 26);
 	buttonClose.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
@@ -77,6 +85,12 @@ void VendingMachinePanel::Update()
 
 		if (buttonClose.Update(*engine) == true)
 			closed = true;
+
+		if (buttonSortColors.Update(*engine) == true)
+			scrollableItemPanel.SortItemsAccordingToColor();
+
+		if (buttonSortNames.Update(*engine) == true)
+			scrollableItemPanel.SortItemsAccordingToNames();
 
 		if (buttonBuy.Update(*engine) == true)
 		{
@@ -158,6 +172,9 @@ void VendingMachinePanel::Render()
 		engine->GetRenderTarget().draw(title);
 
 		shopPanel.Render();
+
+		buttonSortColors.Render(engine->GetRenderTarget());
+		buttonSortNames.Render(engine->GetRenderTarget());
 
 		scrollableItemPanel.Render();
 		itemRowPanel.Render();

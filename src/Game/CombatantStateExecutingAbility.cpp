@@ -26,7 +26,7 @@ void CombatantStateExecutingAbility::CalculateCombatantAnimationPositions()
 		for (int i = 0; i < context->allCombatants->size(); i++)
 			combatantAnimationPositions[context->allCombatants->at(i)->GetBattlePos()] = sf::Vector2i(context->allCombatants->at(i)->GetRect().left - context->engine->GetViewPosition().x, 800);
 	}
-	else if (context->IsPlayer() && ability->possibleAims.attackAllPlayers || !context->IsPlayer() && ability->possibleAims.attackAllEnemies)
+	else if (context->IsPlayer() && ability->possibleAims.attackAllPlayers && context->selectedTargets[0]->IsPlayer() || !context->IsPlayer() && ability->possibleAims.attackAllEnemies && !context->selectedTargets[0]->IsPlayer())
 	{
 		CalculateSelectedTargetsPositions(context->engine->GetWindowSize().x / 2 - CalculateSelectedTargetsTotalWidth(padding) / 2, padding);
 	}

@@ -16,6 +16,16 @@ void ItemPanel::Clear()
 	items.clear();
 }
 
+void ItemPanel::SortItemsAccordingToColor()
+{
+	std::cout << "Sorting not implemented for this item panel" << std::endl;
+}
+
+void ItemPanel::SortItemsAccordingToNames()
+{
+	std::cout << "Sorting not implemented for this item panel" << std::endl;
+}
+
 
 void ItemPanel::RenderItems(int _start, int _end, int _excludeItemNumber)
 {

@@ -90,6 +90,8 @@ void CTextureManager::LoadTextures()
 	lootablePanelCloseButton.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/lootable_panel_close_button.png");
 	consumablePanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/consumables_panel.png");
 	itemRowPanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/item_row_panel.png");
+	sortColorButton.loadFromFile("Data/Sprites/Panels & Buttons/sort_color_button.png");
+	sortNamesButton.loadFromFile("Data/Sprites/Panels & Buttons/sort_names_button.png");
 	item[0].loadFromFile("Data/Sprites/Items/Bang/cards.png");
 	item[1].loadFromFile("Data/Sprites/Items/Bang/dice.png");
 	item[2].loadFromFile("Data/Sprites/Items/Bang/iron_plate.png");

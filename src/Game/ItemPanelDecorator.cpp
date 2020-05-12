@@ -23,6 +23,15 @@ sf::IntRect const &ItemPanelDecorator::GetRect()
 	return itemPanel->GetRect(); 
 }
 
+void ItemPanelDecorator::SortItemsAccordingToNames()
+{
+	itemPanel->SortItemsAccordingToNames();
+}
+
+void ItemPanelDecorator::SortItemsAccordingToColor()
+{
+	itemPanel->SortItemsAccordingToColor();
+}
 
 void ItemPanelDecorator::AddItem(Item _item) 
 { 

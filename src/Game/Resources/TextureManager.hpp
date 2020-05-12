@@ -59,6 +59,8 @@ public:
 	sf::Texture lootablePanelCloseButton;
 	sf::Texture consumablePanel;
 	sf::Texture itemRowPanel;
+	sf::Texture sortColorButton;
+	sf::Texture sortNamesButton;
 	sf::Texture item[20];
 
 	/** VENDING MACHINE **/

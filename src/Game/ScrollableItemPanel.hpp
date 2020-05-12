@@ -15,6 +15,9 @@ public:
 	void SetPos(int _x, int _y) override;
 	void AddItem(Item _item) override;
 
+	void SortItemsAccordingToColor() override;
+	void SortItemsAccordingToNames() override;
+
 private:
 	int currentUpperRow;
 	VerticalScrollbar scrollbar;

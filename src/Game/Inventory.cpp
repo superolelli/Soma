@@ -16,7 +16,15 @@ void Inventory::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	newScrollableItemPanel->Init(engine);
 	scrollableItemPanel.Init(engine, newScrollableItemPanel);
 	scrollableItemPanel.SetOnItemDroppedCallback([&](InventoryItemWrapper* _item) {return OnItemFromItemPanelReceived(_item); });
-	scrollableItemPanel.SetPos(inventoryPanel.GetRect().left + 850, inventoryPanel.GetRect().top + 212);
+	scrollableItemPanel.SetPos(inventoryPanel.GetRect().left + 843, inventoryPanel.GetRect().top + 212);
+
+	buttonSortNames.Load(g_pTextures->sortNamesButton, Buttontypes::Up);
+	buttonSortNames.SetPos(scrollableItemPanel.GetRect().left + scrollableItemPanel.GetRect().width + 11, scrollableItemPanel.GetRect().top - 14);
+	buttonSortNames.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
+
+	buttonSortColors.Load(g_pTextures->sortColorButton, Buttontypes::Up);
+	buttonSortColors.SetPos(scrollableItemPanel.GetRect().left + scrollableItemPanel.GetRect().width + 11, buttonSortNames.GetRect().top + buttonSortNames.GetRect().height - 2);
+	buttonSortColors.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
 	buttonNext.Load(g_pTextures->skillPanelButtonNext, Buttontypes::Up);
 	buttonNext.SetPos(inventoryPanel.GetGlobalRect().left + 217, inventoryPanel.GetGlobalRect().top + 66);
@@ -42,7 +50,7 @@ void Inventory::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	panelTitle.setString("Inventar");
 	panelTitle.setPosition(inventoryPanel.GetGlobalRect().left + 850, inventoryPanel.GetGlobalRect().top + 70);
 
-	equipmentPanel.Init(engine, gameStatus, inventoryPanel.GetRect().left + 315, inventoryPanel.GetRect().top + 287);
+	equipmentPanel.Init(engine, gameStatus, inventoryPanel.GetRect().left + 309, inventoryPanel.GetRect().top + 287);
 	equipmentPanel.SetOnItemDroppedCallback([&](InventoryItemWrapper* _item, int _currentPlayer, int _equipmentId) {return OnItemFromEquipmentPanelReceived(_item, _currentPlayer, _equipmentId); });
 
 	playerAttributesText.SetPos(inventoryPanel.GetRect().left + 85, inventoryPanel.GetRect().top + 408);
@@ -64,6 +72,12 @@ void Inventory::Update()
 	{
 		if (buttonClose.Update(*engine) == true)
 			closed = true;
+
+		if (buttonSortColors.Update(*engine) == true)
+			scrollableItemPanel.SortItemsAccordingToColor();
+
+		if (buttonSortNames.Update(*engine) == true)
+			scrollableItemPanel.SortItemsAccordingToNames();
 
 		CheckButtonsForPlayerChoosing();
 		equipmentPanel.Update();
@@ -151,6 +165,9 @@ void Inventory::Render()
 	if (!closed)
 	{
 		inventoryPanel.Render(engine->GetRenderTarget());
+
+		buttonSortColors.Render(engine->GetRenderTarget());
+		buttonSortNames.Render(engine->GetRenderTarget());
 
 		scrollableItemPanel.Render();
 		equipmentPanel.Render();

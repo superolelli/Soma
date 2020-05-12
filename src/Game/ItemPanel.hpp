@@ -17,6 +17,9 @@ public:
 	virtual void SetPos(int _x, int _y) = 0;
 	virtual void Clear();
 
+	virtual void SortItemsAccordingToColor();
+	virtual void SortItemsAccordingToNames();
+
 	sf::IntRect const &GetRect() { return itemPanel.GetRect(); }
 
 protected:

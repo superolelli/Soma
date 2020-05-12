@@ -37,6 +37,8 @@ private:
 	PlayerAttributesText playerAttributesText;
 	sf::Text currentPlayerName;
 	sf::Text panelTitle;
+	CButton buttonSortColors;
+	CButton buttonSortNames;
 	CButton buttonNext;
 	CButton buttonPrevious;
 	CButton buttonClose;
