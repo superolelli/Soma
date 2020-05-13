@@ -4,7 +4,7 @@
 #include "ConsumablePanel.hpp"
 #include "ResourcesStatusBar.hpp"
 #include "LevelFinishedPanel.hpp"
-
+#include "LevelGUICommon.hpp"
 
 class LevelGUI : public GUI
 {
@@ -25,8 +25,9 @@ private:
 	CGameEngine *engine;
 	GameStatus *gameStatus;
 
+	LevelGUICommon commonGUIParts;
+
 	ConsumablePanel consumablePanel;
-	ResourcesStatusBar resourcesStatusBar;
 	LevelFinishedPanel *levelFinishedPanel;
 
 	std::function<void(void)> OnLevelExitedCallback;

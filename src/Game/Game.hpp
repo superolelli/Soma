@@ -8,8 +8,6 @@
 #include "AdventureGroup.hpp"
 #include "Battle.hpp"
 #include "GUI.hpp"
-#include "BattleGUI.hpp"
-#include "LevelGUI.hpp"
 #include "../Framework/Graphics/NotificationRenderer.hpp"
 #include "GameStatus.hpp"
 #include "DialogManager.hpp"

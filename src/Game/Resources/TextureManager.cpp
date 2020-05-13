@@ -196,6 +196,10 @@ void CTextureManager::LoadTextures()
 
 	combatantInformationPanel.loadFromFile("Data/Sprites/Battle/combatant_information_panel.png");
 
+	/** LEVEL GUI **/
+	fatigueBar.loadFromFile("Data/Sprites/Panels & Buttons/fatigue_bar.png");
+	fatigueBarFrame.loadFromFile("Data/Sprites/Panels & Buttons/fatigue_bar_frame.png");
+
 	/** BATTLE **/
 	healthBarFrame.loadFromFile("Data/Sprites/Battle/health_bar_frame.png");
 	healthBar.loadFromFile("Data/Sprites/Battle/health_bar.png");

@@ -5,15 +5,17 @@
 #include "../Framework/Gui/Bar.hpp"
 #include "Resources\Resources.hpp"
 #include "CombatantAttributesPanel.hpp"
+#include "LevelGUICommon.hpp"
 
 class AdventureGroup;
 class Combatant;
+class GameStatus;
 
 class BattleGUI : public GUI
 {
 public:
 
-	virtual void Init(CGameEngine *_engine);
+	virtual void Init(CGameEngine *_engine, GameStatus *_gameStatus, AdventureGroup *_adventureGroup);
 	virtual void Update() override;
 	virtual void Render() override;
 
@@ -24,6 +26,8 @@ public:
 
 private:
 	CGameEngine *engine;
+
+	LevelGUICommon commonGUIParts;
 
 	int currentAbility;
 	Combatant *combatantToDisplay;
@@ -41,7 +45,6 @@ private:
 	sf::Text currentCombatantName;
 
 	sf::Text abilityInformationText;
-	
 	AbilityTooltip tooltip;
 
 	void ShowTooltip(int _ability);

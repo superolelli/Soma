@@ -2,17 +2,19 @@
 #include "../Framework/Graphics/RichText.hpp"
 #include "../Framework/Graphics/RoundedRectangleShape.hpp"
 #include "AdventureGroup.hpp"
-#include "Combatant.hpp"
+#include "GameStatus.hpp"
 
 
-void BattleGUI::Init(CGameEngine *_engine)
+void BattleGUI::Init(CGameEngine *_engine, GameStatus *_gameStatus, AdventureGroup *_adventureGroup)
 {
 	engine = _engine;
-	int x = 0;
+
+	commonGUIParts.Init(_engine, _gameStatus, _adventureGroup);
 
 	abilityPanel.Load(g_pTextures->abilityPanel);
 	abilityPanel.SetPos(130, 860);
 
+	int x = 0;
 	for (int j = 0; j < 4; j++)
 	{
 		 x = abilityPanel.GetGlobalRect().left + 40;
@@ -67,6 +69,8 @@ void BattleGUI::Update()
 	combatantAttributesPanel.Update(combatantToDisplay->Status());
 	combatantAttributesPanel.SetPos(xPos, yPos);
 
+	commonGUIParts.Update();
+
 	currentCombatantHealthBar.Update(g_pTimer->GetElapsedTime().asSeconds());
 
 	abilityInformationText.setString("");
@@ -116,6 +120,8 @@ void BattleGUI::Render()
 	{
 		abilityPanel.Render(engine->GetRenderTarget());
 		currentAbilityFrame.Render(engine->GetRenderTarget());
+
+		commonGUIParts.Render();
 
 		for (CSprite &a : abilities[currentPlayer->GetID()])
 			a.Render(engine->GetRenderTarget());

@@ -7,8 +7,9 @@ void LevelGUI::Init(CGameEngine * _engine, GameStatus *_gameStatus, AdventureGro
 	engine = _engine;
 	gameStatus = _gameStatus;
 
+	commonGUIParts.Init(_engine, _gameStatus, _adventureGroup);
 	consumablePanel.Init(engine, _gameStatus, _adventureGroup);
-	resourcesStatusBar.Init(engine);
+
 	levelFinishedPanel = nullptr;
 }
 
@@ -16,7 +17,6 @@ void LevelGUI::Init(CGameEngine * _engine, GameStatus *_gameStatus, AdventureGro
 LevelGUI::~LevelGUI()
 {
 	consumablePanel.Quit();
-	resourcesStatusBar.Quit();
 	SAFE_DELETE(levelFinishedPanel);
 }
 
@@ -24,7 +24,7 @@ LevelGUI::~LevelGUI()
 void LevelGUI::Update()
 {
 	consumablePanel.Update();
-	resourcesStatusBar.Update(gameStatus->GetCardsAmount(), gameStatus->GetDiceAmount());
+	commonGUIParts.Update();
 
 	if (levelFinishedPanel != nullptr)
 	{
@@ -39,7 +39,7 @@ void LevelGUI::Update()
 void LevelGUI::Render()
 {
 	consumablePanel.Render();
-	resourcesStatusBar.Render();
+	commonGUIParts.Render();
 
 	if (levelFinishedPanel != nullptr)
 		levelFinishedPanel->Render();

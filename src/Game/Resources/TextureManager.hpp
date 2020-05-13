@@ -96,6 +96,10 @@ public:
 	sf::Texture healthBarBigFrame;
 	sf::Texture healthBarBig;
 
+	/** LEVEL GUI **/
+	sf::Texture fatigueBar;
+	sf::Texture fatigueBarFrame;
+
 	/** BATTLE **/
 	sf::Texture healthBarFrame;
 	sf::Texture healthBar;

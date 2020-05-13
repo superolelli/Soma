@@ -1,6 +1,8 @@
 #include "Game.hpp"
 #include "LevelBuilder.hpp"
 #include "ItemFactory.hpp"
+#include "BattleGUI.hpp"
+#include "LevelGUI.hpp"
 
 
 void Game::Init(CGameEngine * _engine)
@@ -228,7 +230,7 @@ void Game::InitNewBattle()
 {
 	SAFE_DELETE(currentGUI);
 	BattleGUI *newGui = new BattleGUI;
-	newGui->Init(m_pGameEngine);
+	newGui->Init(m_pGameEngine, gameStatus, &adventureGroup);
 	newGui->SetAdventureGroup(&adventureGroup);
 	currentGUI = newGui;
 

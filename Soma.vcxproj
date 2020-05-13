@@ -285,6 +285,7 @@
     <ClCompile Include="src\Game\LevelBuilder.cpp" />
     <ClCompile Include="src\Game\LevelFinishedPanel.cpp" />
     <ClCompile Include="src\Game\LevelGUI.cpp" />
+    <ClCompile Include="src\Game\LevelGUICommon.cpp" />
     <ClCompile Include="src\Game\Lootable.cpp" />
     <ClCompile Include="src\Game\LootableDialog.cpp" />
     <ClCompile Include="src\Game\LootableFactory.cpp" />
@@ -355,6 +356,7 @@
     <ClInclude Include="src\Game\ItemTooltip.hpp" />
     <ClInclude Include="src\Game\LevelBuilder.hpp" />
     <ClInclude Include="src\Game\LevelFinishedPanel.hpp" />
+    <ClInclude Include="src\Game\LevelGUICommon.hpp" />
     <ClInclude Include="src\Game\LevelSpecs.hpp" />
     <ClInclude Include="src\Game\Lootable.hpp" />
     <ClInclude Include="src\Game\LootableDialog.hpp" />
