@@ -31,7 +31,7 @@ void MusicManager::LoadMusic()
 	currentMusic = &mainRoomMusic;
 	currentBattleMusic = nullptr;
 
-	blendInAfterBattleTime = 0.0f;
+	blendInAfterBattleTime = 0.0;
 
 	nextTracks = { 0, 1, 2, 3, 4, 5, 6 };
 
@@ -50,13 +50,13 @@ void MusicManager::Update()
 		currentMusic->play();
 	}
 
-	if (blendInAfterBattleTime > 0.0f)
+	if (blendInAfterBattleTime > 0.0)
 	{
-		blendInAfterBattleTime -= g_pTimer->GetElapsedTime().asSeconds();
-		currentMusic->setVolume(50.0 * (4.0 - blendInAfterBattleTime) / 4.0f);
-		currentBattleMusic->setVolume(50.0f * (blendInAfterBattleTime / 4.0f));
+		blendInAfterBattleTime -= g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds();
+		currentMusic->setVolume(50.0 * (4.0 - blendInAfterBattleTime) / 4.0);
+		currentBattleMusic->setVolume(50.0 * (blendInAfterBattleTime / 4.0));
 
-		if (blendInAfterBattleTime <= 0.0f)
+		if (blendInAfterBattleTime <= 0.0)
 		{
 			currentBattleMusic->stop();
 			currentBattleMusic = nullptr;
@@ -122,7 +122,7 @@ void MusicManager::SetBattleEnded()
 {
 	if (currentEnvironment == MusicEnvironment::bangEnvironment)
 	{
-		blendInAfterBattleTime = 4.0f;
+		blendInAfterBattleTime = 4.0;
 		currentMusic->play();
 	}
 }

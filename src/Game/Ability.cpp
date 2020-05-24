@@ -44,6 +44,7 @@ void AbilityEffect::applySkill(const AbilityEffect &_effect)
 void Ability::applySkill(const Ability & _ability)
 {
 	precisionModificator += _ability.precisionModificator;
+	fatigue += _ability.fatigue;
 
 	possibleAims.applySkill(_ability.possibleAims);
 	effectFriendly.applySkill(_ability.effectFriendly);
@@ -64,6 +65,7 @@ void Ability::clear()
 	canTargetEnemiesOrFriends = false;
 
 	precisionModificator = 0;
+	fatigue = 0;
 }
 
 void PossibleAims::applySkill(const PossibleAims & _aims)

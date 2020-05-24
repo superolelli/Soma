@@ -55,6 +55,8 @@ struct Ability
 
 	bool canTargetEnemiesOrFriends;
 
+    int fatigue;
+
 	int precisionModificator;
 
 	void applySkill (const Ability &_ability);

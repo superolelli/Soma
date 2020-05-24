@@ -8,7 +8,7 @@ EnemyStatePrepareAbility::EnemyStatePrepareAbility(Enemy *_context)
 	:CombatantStatePrepareAbility(_context)
 {
 	enemyContext = _context;
-	abilityAnnouncementTime = 1.5f;
+	abilityAnnouncementTime = 1.5;
 
 	ChooseAbility();
 
@@ -312,9 +312,9 @@ void EnemyStatePrepareAbility::Update()
 		enemyContext->ChangeState(newState);
 	}
 
-	abilityAnnouncementTime -= g_pTimer->GetElapsedTime().asSeconds();
+	abilityAnnouncementTime -= g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds();
 
-	if (abilityAnnouncementTime <= 0.0f)
+	if (abilityAnnouncementTime <= 0.0)
 	{
 		CombatantStateExecutingAbility *newState = new CombatantStateExecutingAbility(enemyContext, &g_pObjectProperties->enemyAbilities[int(chosenAbility)]);
 		enemyContext->ChangeState(newState);
@@ -326,16 +326,16 @@ void EnemyStatePrepareAbility::Render()
 {
 	enemyContext->RenderShadow();
 
-	enemyContext->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
+	enemyContext->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds());
 	enemyContext->combatantObject->render();
 	enemyContext->combatantObject->playSoundTriggers();
 
-	if (abilityAnnouncementTime > 0.0f)
+	if (abilityAnnouncementTime > 0.0)
 		RenderAbilityAnnouncement();
 
 	enemyContext->RenderTurnMarker();
 
-	if (abilityAnnouncementTime >= 0.0f)
+	if (abilityAnnouncementTime >= 0.0)
 		RenderAbilityTargetMarker();
 
 	enemyContext->statusBar.Render();

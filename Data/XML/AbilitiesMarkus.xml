@@ -12,6 +12,7 @@
             <value id="7">true</value>
         </positions>
 
+        <fatigue>3</fatigue>
         <effect>
             <damageFactor>1.2</damageFactor>
         </effect>
@@ -30,6 +31,7 @@ Markus letze Runde angegriffen haben
             <value id="4">true</value>
         </positions>
 
+        <fatigue>1</fatigue>
         <effect>
             <damageFactor>0.1</damageFactor>
         </effect>

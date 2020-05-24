@@ -11,7 +11,7 @@ void CombatantStatus::Init(Combatant *_combatant, NotificationRenderer *_notific
 }
 
 
-void CombatantStatus::UpdateStatusForNewTurn(float _initialWaitingTime)
+void CombatantStatus::UpdateStatusForNewTurn(double _initialWaitingTime)
 {
 	sleepChecked = false;
 	damageOverTimeChecked = false;
@@ -33,7 +33,7 @@ void CombatantStatus::ExecuteStatusChanges()
 {
 	if (statusAnnouncementTime > 0.0)
 	{
-		statusAnnouncementTime -= g_pTimer->GetElapsedTime().asSeconds();
+		statusAnnouncementTime -= g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds();
 		return;
 	}
 
@@ -50,7 +50,7 @@ void CombatantStatus::ExecuteStatusChanges()
 			sleeping = false;
 			skipRound = true;
 			combatant->SetAnimation("idle", IDLE_ANIMATION_SPEED);
-			statusAnnouncementTime = 2.0f;
+			statusAnnouncementTime = 2.0;
 			notificationRenderer->AddNotification("Aufgewacht!", g_pFonts->f_kingArthur, sf::Vector2f(combatant->GetRect().left - combatant->GetRect().width / 2.0f, combatant->GetRect().top - 20.0f), 1.0f);
 		}
 	}
@@ -59,7 +59,7 @@ void CombatantStatus::ExecuteStatusChanges()
 
 bool CombatantStatus::IsExecutingStatusChanges()
 {
-	return !sleepChecked || !damageOverTimeChecked || statusAnnouncementTime > 0;
+	return !sleepChecked || !damageOverTimeChecked || statusAnnouncementTime > 0.0;
 }
 
 
@@ -104,7 +104,7 @@ void CombatantStatus::HandleDamageOverTime()
 	if (damage > 0)
 	{
 		LooseHealth(damage, false, false);
-		statusAnnouncementTime = 2.0f;
+		statusAnnouncementTime = 2.0;
 		g_pSounds->PlaySound(DAMAGE_OVER_TIME);
 
 		if (GetCurrentHealth() <= 0)

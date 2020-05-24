@@ -7,7 +7,7 @@ void CWindow::Init(std::string const &_title)
 
 	//make a new window
 	m_pWindow = new RenderWindow;
-	m_pWindow->create(VideoMode::getDesktopMode(), _title, Style::None | Style::Fullscreen);
+	m_pWindow->create(VideoMode::getDesktopMode(), _title, Style::None | Style::Fullscreen, sf::ContextSettings(0U, 0U, 0U, 3U, 3U));
 
 	ClearKeyStates();
 

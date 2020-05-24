@@ -1,7 +1,7 @@
 #include "Battle.hpp"
 
 
-void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss)
+void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss, GameStatus *_gameStatus)
 {
 	g_pMusic->StopMusic();
 
@@ -12,6 +12,7 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 	isBattleFinished = false;
 	turnsSinceLastEnemyDied = -1;
 	isBossBattle = _boss;
+	gameStatus = _gameStatus;
 
 	InitCombatants(_xView, enemyIDs);
 

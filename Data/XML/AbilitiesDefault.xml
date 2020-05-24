@@ -21,6 +21,7 @@
     </positions>
 
     <precision>0</precision>
+    <fatigue>0</fatigue>
 
     <effect>
 		<criticalHit>0</criticalHit>

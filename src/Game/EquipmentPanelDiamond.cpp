@@ -8,7 +8,7 @@ void EquipmentPanelDiamond::Init(CGameEngine *_engine, int _xPos, int _yPos)
 	diamond.SetPos(_xPos, _yPos);
 	diamond.SetColor(0, 0, 0);
 
-	recolorTime = 0.0f;
+	recolorTime = 0.0;
 	diamondStats.stats.Reset();
 	diamondStats.level = 0;
 	diamondStats.name = "Edelstein der Macht  ";
@@ -19,15 +19,15 @@ void EquipmentPanelDiamond::Init(CGameEngine *_engine, int _xPos, int _yPos)
 
 void EquipmentPanelDiamond::Update()
 {
-	if (recolorTime > 0.0f)
+	if (recolorTime > 0.0)
 	{
-		float t = (4.0f - recolorTime) / 4.0f;
-		recolorTime -= g_pTimer->GetElapsedTime().asSeconds();
+		double t = (4.0 - recolorTime) / 4.0;
+		recolorTime -= g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds();
 
 		//lerp
-		int r = (1.0f - t) * oldColor.r + t * newColor.r;
-		int g = (1.0f - t) * oldColor.g + t * newColor.g;
-		int b = (1.0f - t) * oldColor.b + t * newColor.b;
+		int r = (1.0 - t) * oldColor.r + t * newColor.r;
+		int g = (1.0 - t) * oldColor.g + t * newColor.g;
+		int b = (1.0 - t) * oldColor.b + t * newColor.b;
 
 		diamond.SetColor(r, g, b);
 	}
@@ -43,7 +43,7 @@ void EquipmentPanelDiamond::Render()
 
 void EquipmentPanelDiamond::RecolorDiamond(EquipmentConnections _connections[4])
 {
-	recolorTime = 4.0f;
+	recolorTime = 4.0;
 
 	int r = 0;
 	int g = 0;

@@ -18,7 +18,7 @@ private:
 	CGameEngine *engine;
 	CSprite diamond;
 
-	float recolorTime;
+	double recolorTime;
 	sf::Color oldColor;
 	sf::Color newColor;
 

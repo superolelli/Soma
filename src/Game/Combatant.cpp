@@ -19,7 +19,7 @@ Combatant::Combatant(int _id, CGameEngine * _engine, NotificationRenderer * _not
 	status.Reset();
 
 	actsInConfusion = false;
-	turnMarkerScale = 1.0f;
+	turnMarkerScale = 1.0;
 	battle = nullptr;
 }
 
@@ -150,7 +150,7 @@ void Combatant::RenderTurnMarker()
 
 	if (turnMarkerScale > 1.0)
 	{
-		turnMarkerScale -= g_pTimer->GetElapsedTime().asSeconds() * 5.0f * (TURN_MARKER_ANIMATION_SCALE - 1.0f);
+		turnMarkerScale -= g_pTimer->GetElapsedTimeAsSeconds() * 5.0 * (TURN_MARKER_ANIMATION_SCALE - 1.0);
 
 		if (turnMarkerScale < 1.0)
 			turnMarkerScale = 1.0;
@@ -238,7 +238,7 @@ void Combatant::GiveTurnTo(std::vector<Combatant*>* _targets, BattleGUI *_gui)
 	if (IsPlayer())
 		status.UpdateStatusForNewTurn();
 	else
-		status.UpdateStatusForNewTurn(1.5f);
+		status.UpdateStatusForNewTurn(1.5);
 
 	turnMarkerScale = TURN_MARKER_ANIMATION_SCALE;
 }

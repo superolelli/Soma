@@ -87,7 +87,7 @@ void CInitialState::Render(double _normalizedTimestep)
 	m_pGameEngine->ClearWindow(sf::Color::Black);
 	m_pGameEngine->ClearRenderTarget(sf::Color::Black);
 
-	loadingScreen->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
+	loadingScreen->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds());
 	loadingScreen->render();
 
 	m_pGameEngine->FlushRenderTarget();

@@ -26,8 +26,8 @@ void Bar::Load(sf::Texture const &_beamTexture, sf::Texture const &_frameTexture
 	m_text.setCharacterSize(12);
 	m_text.setFillColor(sf::Color::Black);
 
-	baseAnimationTime = 0.0f;
-	currentAnimationTime = 0.0f;
+	baseAnimationTime = 0.0;
+	currentAnimationTime = 0.0;
 
 	smoothAnimationBaseValue = 0;
 
@@ -75,9 +75,9 @@ void Bar::SetPos(float _x, float _y)
 
 
 
-void Bar::Update(float _elapsedTime)
+void Bar::Update(double _elapsedTime)
 {
-	if (baseAnimationTime > 0.0f)
+	if (baseAnimationTime > 0.0)
 	{
 		if (lastValue != *m_pValue)
 			StartAnimation();
@@ -91,18 +91,18 @@ void Bar::Update(float _elapsedTime)
 
 void Bar::StartAnimation()
 {
-	currentAnimationTime = 0.0f;
+	currentAnimationTime = 0.0;
 	smoothAnimationBaseValue = lastValue;
 	lastValue = *m_pValue;
 }
 
 
-void Bar::HandleAnimation(float _elapsedTime)
+void Bar::HandleAnimation(double _elapsedTime)
 {
 	if (currentAnimationTime < baseAnimationTime)
 	{
 		currentAnimationTime += _elapsedTime;
-		valueToRender = (float)smoothAnimationBaseValue + (currentAnimationTime / baseAnimationTime) * (float)(*m_pValue - smoothAnimationBaseValue);
+		valueToRender = (double)smoothAnimationBaseValue + (currentAnimationTime / baseAnimationTime) * (double)(*m_pValue - smoothAnimationBaseValue);
 	}
 	else
 		valueToRender = (float)*m_pValue;

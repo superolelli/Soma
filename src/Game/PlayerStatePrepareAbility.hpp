@@ -19,7 +19,7 @@ public:
 private:
 	Player *playerContext;
 
-	float notificationWaitingTime;
+	double notificationWaitingTime;
 
 	void ChangeState();
 	void HandleConfusion();

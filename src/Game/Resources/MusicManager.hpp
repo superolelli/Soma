@@ -35,5 +35,5 @@ private:
 
 	std::vector<int> nextTracks;
 
-	float blendInAfterBattleTime;
+	double blendInAfterBattleTime;
 };

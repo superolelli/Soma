@@ -26,7 +26,7 @@ void Game::Init(CGameEngine * _engine)
 	currentBattle = nullptr;
 	inBattle = false;
 	isPlayingBattleIntro = false;
-	afterIntroWaitingTime = 2.0f;
+	afterIntroWaitingTime = 2.0;
 	levelFinished = false;
 
 	g_pMusic->SetCurrentEnvironment(MusicEnvironment::bangEnvironment);
@@ -110,8 +110,8 @@ void Game::HandleBattleIntro()
 {
 	if (g_pSpritePool->newBattleAnimation->animationIsPlaying() == false)
 	{
-		if (afterIntroWaitingTime > 0.0f)
-			afterIntroWaitingTime -= g_pTimer->GetElapsedTime().asSeconds();
+		if (afterIntroWaitingTime > 0.0)
+			afterIntroWaitingTime -= g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds();
 		else
 		{
 			isPlayingBattleIntro = false;
@@ -230,15 +230,14 @@ void Game::InitNewBattle()
 {
 	SAFE_DELETE(currentGUI);
 	BattleGUI *newGui = new BattleGUI;
-	newGui->Init(m_pGameEngine, gameStatus, &adventureGroup);
-	newGui->SetAdventureGroup(&adventureGroup);
+	newGui->Init(m_pGameEngine, gameStatus);
 	currentGUI = newGui;
 
 	currentBattle = new Battle;
-	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer, level->GetEnemyIDs(), level->IsBossBattle());
+	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer, level->GetEnemyIDs(), level->IsBossBattle(), gameStatus);
 
 	isPlayingBattleIntro = true;
-	afterIntroWaitingTime = 2.0f;
+	afterIntroWaitingTime = 2.0;
 	g_pSpritePool->newBattleAnimation->setCurrentAnimation("new_battle");
 	g_pSpritePool->newBattleAnimation->setCurrentTime(0);
 	g_pSpritePool->newBattleAnimation->reprocessCurrentTime();
@@ -269,7 +268,7 @@ void Game::Render(double _normalizedTimestep)
 
 			if (isPlayingBattleIntro)
 			{
-				g_pSpritePool->newBattleAnimation->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
+				g_pSpritePool->newBattleAnimation->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds());
 				g_pSpritePool->newBattleAnimation->render();
 				g_pSpritePool->newBattleAnimation->playSoundTriggers();
 			}

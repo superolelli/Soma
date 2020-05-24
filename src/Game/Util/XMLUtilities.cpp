@@ -149,6 +149,9 @@ namespace pugi {
 		if (abilityNode.child("precision"))
 			ability.precisionModificator = abilityNode.child("precision").text().as_int();
 
+		if (abilityNode.child("fatigue"))
+			ability.fatigue = abilityNode.child("fatigue").text().as_int();
+
 		for (auto &effect : abilityNode.children("effect"))
 		{
 			if (!effect.attribute("target"))

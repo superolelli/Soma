@@ -8,6 +8,7 @@
             <value id="0">true</value>
         </positions>
 
+        <fatigue>-1</fatigue>
         <effect>
             <heal>5</heal>
             <buff>
@@ -40,6 +41,7 @@ Für 3 Runden:
             <value id="7">true</value>
         </positions>
 
+        <fatigue>1</fatigue>
         <effect>
             <damageFactor>0.5</damageFactor>
             <confusion>
@@ -93,6 +95,7 @@ Für 3 Runden:
             <value id="3">true</value>
         </positions>
 
+        <fatigue>1</fatigue>
         <effect>
             <mark>2</mark>
             <buff>

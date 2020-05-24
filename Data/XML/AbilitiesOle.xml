@@ -34,6 +34,7 @@ Für 3 Runden:
             <value id="4">true</value>
         </positions>
 
+        <fatigue>1</fatigue>
         <effect>
             <damageFactor>0.7</damageFactor>
 			<damageOverTime>
@@ -86,6 +87,7 @@ Für 3 Runden:
             <value id="7">true</value>
         </positions>
 
+        <fatigue>1</fatigue>
         <effect>
             <damageFactor>0.2</damageFactor>
             <putToSleepProbability>0.6</putToSleepProbability>

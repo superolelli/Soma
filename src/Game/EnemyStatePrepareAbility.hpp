@@ -49,5 +49,5 @@ private:
 
 	bool OnlyOneCompanionLeft();
 
-	float abilityAnnouncementTime;
+	double abilityAnnouncementTime;
 };

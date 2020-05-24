@@ -77,7 +77,7 @@ void CombatantStateExecutingAbility::Update()
 
 void CombatantStateExecutingAbility::Render()
 {
-	context->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
+	context->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds());
 	context->combatantObject->render();
 	context->combatantObject->playSoundTriggers();
 }
@@ -106,6 +106,7 @@ void CombatantStateExecutingAbility::ExecuteAbility()
 
 void CombatantStateExecutingAbility::ApplyAbilityEffect()
 {
+	context->battle->GetGameStatus()->AddFatigue(ability->fatigue);
 	for (Combatant *t : context->selectedTargets)
 	{
 		if (context->IsAlly(t) && !context->actsInConfusion || !context->IsAlly(t) && context->actsInConfusion)

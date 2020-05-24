@@ -21,7 +21,7 @@ void CombatantStateAttacked::Update()
 
 void CombatantStateAttacked::Render()
 {
-	context->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
+	context->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds());
 	context->combatantObject->render();
 	context->combatantObject->playSoundTriggers();
 
@@ -41,7 +41,7 @@ void CombatantStateAttacked::RenderAbilityEffects()
 
 	if (Combatant::setElapsedTimeForAbilityEffect == false)
 	{
-		g_pSpritePool->abilityEffectsAnimation->setTimeElapsed((float)g_pTimer->GetElapsedTime().asMilliseconds() * ABILITY_EFFECT_ANIMATION_SPEED);
+		g_pSpritePool->abilityEffectsAnimation->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds() * ABILITY_EFFECT_ANIMATION_SPEED);
 		Combatant::setElapsedTimeForAbilityEffect = true;
 	}
 	else

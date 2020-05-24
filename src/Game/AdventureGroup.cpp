@@ -26,9 +26,6 @@ void AdventureGroup::Init(CGameEngine *_engine, NotificationRenderer *_notificat
 		adventurer[i]->SetEquipment(_gameStatus->GetDiamondStats(i));
 		x += PLAYER_SPACING;
 	}
-
-	fatigue = 0;
-	maxFatigue = MAX_FATIGUE_VALUE;
 }
 
 
@@ -70,14 +67,4 @@ bool AdventureGroup::IsDead()
 	}
 
 	return true;
-}
-
-void AdventureGroup::AddFatigue(int _fatigue)
-{
-	fatigue = std::min(fatigue + _fatigue, maxFatigue);
-}
-
-void AdventureGroup::RemoveFatigue(int _fatigue)
-{
-	fatigue = std::max(0, fatigue - _fatigue);
 }

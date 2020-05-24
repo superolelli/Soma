@@ -11,7 +11,7 @@ class LevelGUICommon
 {
 public:
 
-	void Init(CGameEngine* _engine, GameStatus *_gameStatus, AdventureGroup* _adventureGroup);
+	void Init(CGameEngine* _engine, GameStatus *_gameStatus);
 	void Update();
 	void Render();
 

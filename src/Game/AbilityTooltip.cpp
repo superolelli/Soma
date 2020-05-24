@@ -56,6 +56,9 @@ void AbilityTooltip::GenerateTooltipString(std::string & _tooltip)
 	if (abilityID == 0 && playerID == CombatantID::Markus)
 		_tooltip.append("#aa5000 Geht nur auf Gegner, die\nMarkus letze Runde angegriffen haben\n");
 
+	if (currentAbility.fatigue != 0)
+		_tooltip.append("#503380 Müdigkeit: " + std::to_string(currentAbility.fatigue) + "\n");
+
 	if (currentAbility.precisionModificator != 0)
 		_tooltip.append("#white Präzision: " + std::to_string(currentAbility.precisionModificator) + "\n");
 

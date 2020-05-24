@@ -5,11 +5,11 @@
 #include "GameStatus.hpp"
 
 
-void BattleGUI::Init(CGameEngine *_engine, GameStatus *_gameStatus, AdventureGroup *_adventureGroup)
+void BattleGUI::Init(CGameEngine *_engine, GameStatus *_gameStatus)
 {
 	engine = _engine;
 
-	commonGUIParts.Init(_engine, _gameStatus, _adventureGroup);
+	commonGUIParts.Init(_engine, _gameStatus);
 
 	abilityPanel.Load(g_pTextures->abilityPanel);
 	abilityPanel.SetPos(130, 860);
@@ -71,7 +71,7 @@ void BattleGUI::Update()
 
 	commonGUIParts.Update();
 
-	currentCombatantHealthBar.Update(g_pTimer->GetElapsedTime().asSeconds());
+	currentCombatantHealthBar.Update(g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds());
 
 	abilityInformationText.setString("");
 
@@ -121,8 +121,6 @@ void BattleGUI::Render()
 		abilityPanel.Render(engine->GetRenderTarget());
 		currentAbilityFrame.Render(engine->GetRenderTarget());
 
-		commonGUIParts.Render();
-
 		for (CSprite &a : abilities[currentPlayer->GetID()])
 			a.Render(engine->GetRenderTarget());
 
@@ -134,6 +132,8 @@ void BattleGUI::Render()
 			}
 		}
 	}
+
+	commonGUIParts.Render();
 
 	RenderCombatantInformation();	
 
@@ -172,11 +172,6 @@ void BattleGUI::SetCombatantToDisplay(Combatant *_combatant)
 		currentCombatantName.setPosition(nameXPos, currentCombatantHealthBar.GetRect().top - currentCombatantName.getLocalBounds().height - 10);
 	}
 
-}
-
-void BattleGUI::SetAdventureGroup(AdventureGroup *_adventureGroup)
-{
-	players = _adventureGroup;
 }
 
 

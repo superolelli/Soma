@@ -82,10 +82,10 @@ void EquipmentConnections::Init(int _id)
 	//velocityPassTexture.clear();
 	//colorPassTexture.clear();
 
-	elapsedTime = 0.0f;
+	elapsedTime = 0.0;
 	frame = 0;
 
-	deactivationTime = 0.0f;
+	deactivationTime = 0.0;
 	color = sf::Color::Black;
 }
 
@@ -93,12 +93,12 @@ void EquipmentConnections::Init(int _id)
 
 void EquipmentConnections::Update()
 {
-	if (deactivationTime >= 0.0f)
+	if (deactivationTime >= 0.0)
 	{
 		connection.setPosition(0, 0);
-		deactivationShader.setUniform("u_time", 3.0f - deactivationTime);
+		deactivationShader.setUniform("u_time", 3.0f - static_cast<float>(deactivationTime));
 		deactivationShader.setUniform("u_lastTexture", colorPassTexture.getTexture());
-		deactivationTime -= g_pTimer->GetElapsedTime().asSeconds();
+		deactivationTime -= g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds();
 
 		colorPassTexture.draw(connection, &deactivationShader);
 		colorPassTexture.display();
@@ -106,16 +106,16 @@ void EquipmentConnections::Update()
 	}
 
 
-	if (elapsedTime >= 5.0f)
+	if (elapsedTime >= 5.0)
 		return;
 
 	sf::Glsl::Vec4 emitterColor = sf::Glsl::Vec4(color.r / 5.0f, color.g / 5.0f, color.b / 5.0f, 1.0);
 
 	connection.setPosition(0, 0);
 
-	elapsedTime += g_pTimer->GetElapsedTime().asSeconds();
+	elapsedTime += g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds();
 
-	velocityPassShader.setUniform("u_time", elapsedTime);
+	velocityPassShader.setUniform("u_time", static_cast<float>(elapsedTime));
 	velocityPassShader.setUniform("u_frame", frame);
 	velocityPassShader.setUniform("u_lastTexture", velocityPassTexture.getTexture());
 
@@ -131,7 +131,7 @@ void EquipmentConnections::Update()
 	velocityPassTexture.display();
 
 
-	colorPassShader.setUniform("u_time", elapsedTime);
+	colorPassShader.setUniform("u_time", static_cast<float>(elapsedTime));
 	colorPassShader.setUniform("u_textureVelo", velocityPassTexture.getTexture());
 	colorPassShader.setUniform("u_textureColor", colorPassTexture.getTexture());
 	colorPassShader.setUniform("u_frame", frame);
@@ -177,7 +177,7 @@ void EquipmentConnections::DeactivateConnection(int _deactivatedEmitter)
 		return;
 
 	color = sf::Color::Black;
-	deactivationTime = 3.0f;
+	deactivationTime = 3.0;
 	deactivationShader.setUniform("u_emitter", emitter[!_deactivatedEmitter]);
 	//Restart();
 }
@@ -186,5 +186,5 @@ void EquipmentConnections::DeactivateConnection(int _deactivatedEmitter)
 void EquipmentConnections::Restart()
 {
 	frame = 0;
-	elapsedTime = 0.0f;
+	elapsedTime = 0.0;
 }

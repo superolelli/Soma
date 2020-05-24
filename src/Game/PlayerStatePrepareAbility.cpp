@@ -7,17 +7,17 @@ PlayerStatePrepareAbility::PlayerStatePrepareAbility(Player * _context)
 	:CombatantStatePrepareAbility(_context)
 {
 	playerContext = _context;
-	notificationWaitingTime = 0.0f;
+	notificationWaitingTime = 0.0;
 }
 
 
 void PlayerStatePrepareAbility::Update()
 {
-	if (notificationWaitingTime > 0.0f)
+	if (notificationWaitingTime > 0.0)
 	{
-		notificationWaitingTime -= g_pTimer->GetElapsedTime().asSeconds();
+		notificationWaitingTime -= g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds();
 
-		if (notificationWaitingTime <= 0.0f)
+		if (notificationWaitingTime <= 0.0)
 			ChangeState();
 	}
 	else
@@ -89,7 +89,7 @@ void PlayerStatePrepareAbility::HandleConfusion()
 
 	SelectAdditionalTargets(!originallyAttackedPlayer);
 
-	notificationWaitingTime = 1.5f;
+	notificationWaitingTime = 1.5;
 }
 
 
@@ -134,7 +134,7 @@ void PlayerStatePrepareAbility::Render()
 {
 	playerContext->RenderShadow();
 
-	playerContext->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
+	playerContext->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds());
 	playerContext->combatantObject->render();
 	playerContext->combatantObject->playSoundTriggers();
 

@@ -12,7 +12,7 @@ public:
 
 	void Init(Combatant *_combatant, NotificationRenderer *_notificationRenderer);
 
-	void UpdateStatusForNewTurn(float _initialWaitingTime = 0.0f);
+	void UpdateStatusForNewTurn(double _initialWaitingTime = 0.0);
 	void ExecuteStatusChanges();
 
 	bool IsExecutingStatusChanges();
@@ -82,7 +82,7 @@ private:
 	void HandleBuffDurations(std::vector<Buff> &_buffs);
 	void HandleDamageOverTime();
 
-	float statusAnnouncementTime;
+	double statusAnnouncementTime;
 	bool sleepChecked;
 	bool damageOverTimeChecked;
 	bool skipRound;

@@ -34,10 +34,10 @@ private:
 	sf::Glsl::Vec2 emitterDirection[2];
 	sf::Color color;
 
-	float elapsedTime;
+	double elapsedTime;
 	int frame;
 
-	float deactivationTime;
+	double deactivationTime;
 
 	sf::Vector2f position;
 };

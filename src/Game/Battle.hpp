@@ -14,7 +14,7 @@ class Battle
 {
 public:
 
-	void Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss);
+	void Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss, GameStatus *_gameStatus);
 	void Update();
 	void Render();
 	void RenderAbilityAnimations();
@@ -29,6 +29,7 @@ public:
 	bool isBossBattle;
 
 	std::array<Enemy*, 4> &GetEnemies() {return enemies;}
+	GameStatus* GetGameStatus() { return gameStatus; }
 
 private:
 
@@ -36,6 +37,7 @@ private:
 	BattleGUI *gui;
 	CGameEngine *engine;
 	NotificationRenderer *notificationRenderer;
+	GameStatus* gameStatus;
 
 
 	std::array<Enemy*, 4> enemies;

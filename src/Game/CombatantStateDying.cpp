@@ -14,7 +14,7 @@ void CombatantStateDying::Render()
 {
 	context->RenderShadow();
 
-	context->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
+	context->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds());
 	context->combatantObject->render();
 	context->combatantObject->playSoundTriggers();
 }

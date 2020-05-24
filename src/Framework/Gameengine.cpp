@@ -54,7 +54,7 @@ void CGameEngine::Run()
 		}
 		else
 		{
-			lag += static_cast<double>(g_pTimer->GetElapsedTime().asMicroseconds()) / 1000.0;
+			lag += g_pTimer->GetElapsedTimeAsMilliseconds();
 			//updates
 			while (lag >= MS_PER_UPDATE)
 			{
@@ -64,6 +64,7 @@ void CGameEngine::Run()
 				//checks if the current state needs to be popped
 				CheckStates();
 				lag -= MS_PER_UPDATE;
+				g_pTimer->ResetTimeSinceLastUpdate();
 			}
 		}
 

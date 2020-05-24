@@ -32,6 +32,6 @@ private:
 	void RenderBuffTooltip(Buff &_buff, bool _positive);
 	void RenderTooltip(const std::string &_tooltip, float _x, float _y);
 
-	float statusRemoveTime[6];
-	float statusAddTime[6];
+	double statusRemoveTime[6];
+	double statusAddTime[6];
 };

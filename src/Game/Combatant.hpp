@@ -33,7 +33,7 @@ const float ABILITY_EFFECT_ANIMATION_SPEED = 0.9f;
 const float COMBATANT_NORMAL_SCALE = 0.6f;
 const float COMBATANT_ABILITY_SCALE = 0.8f;
 
-const float TURN_MARKER_ANIMATION_SCALE = 1.2f;
+const double TURN_MARKER_ANIMATION_SCALE = 1.2;
 
 class Combatant : public CObserver
 {
@@ -113,7 +113,7 @@ protected:
 	SpriterEngine::point lastPosition;
 
 	bool actsInConfusion;
-	float turnMarkerScale;
+	double turnMarkerScale;
 
 	void RenderShadow();
 	void RenderAbilityTargetMarker();

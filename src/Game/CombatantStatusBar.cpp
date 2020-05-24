@@ -12,13 +12,13 @@ void CombatantStatusBar::Init(CombatantStatus *_status, CGameEngine *_engine)
 	engine = _engine;
 	status = _status;
 	healthBar.Load(g_pTextures->healthBar, g_pTextures->healthBarFrame, status->GetCurrentHealthPointer(), status->GetMaxHealthPointer());
-	healthBar.SetSmoothTransformationTime(0.7f);
+	healthBar.SetSmoothTransformationTime(0.7);
 
 	for (auto &s : statusRemoveTime)
-		s = -1.0f;
+		s = -1.0;
 
 	for (auto &s : statusAddTime)
-		s = -1.0f;
+		s = -1.0;
 
 	isTurnPending = false;
 }
@@ -34,7 +34,7 @@ const sf::IntRect &CombatantStatusBar::GetRect()
 void CombatantStatusBar::Update(sf::IntRect &_combatantRect)
 {
 	healthBar.SetPos(_combatantRect.left + _combatantRect.width / 2 - healthBar.GetRect().width / 2, _combatantRect.top + _combatantRect.height + 30);
-	healthBar.Update(g_pTimer->GetElapsedTime().asSeconds());
+	healthBar.Update(g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds());
 }
 
 void CombatantStatusBar::SetTurnPending(bool _turnPending)
@@ -75,33 +75,33 @@ void CombatantStatusBar::RenderStatusSymbol(bool _isActive, statusType _type, CS
 {
 	int y = healthBar.GetRect().top + healthBar.GetRect().height;
 
-	if (_isActive && statusAddTime[_type] == -1.0f)
+	if (_isActive && statusAddTime[_type] == -1.0)
 	{
-		statusAddTime[_type] = 0.5f;
-		statusRemoveTime[_type] = 0.0f;
+		statusAddTime[_type] = 0.5;
+		statusRemoveTime[_type] = 0.0;
 	}
-	else if (!_isActive && statusAddTime[_type] > -1.0f)
+	else if (!_isActive && statusAddTime[_type] > -1.0)
 	{
-		statusRemoveTime[_type] = 0.5f;
-		statusAddTime[_type] = -1.0f;
+		statusRemoveTime[_type] = 0.5;
+		statusAddTime[_type] = -1.0;
 	}
 
 	_sprite.SetScale(1.0f, 1.0f);
-	if (statusAddTime[_type] > 0.0f)
+	if (statusAddTime[_type] > 0.0)
 	{
 		float t = 1.0 - statusAddTime[_type] * 2.0;
 		float scaleFactor = std::pow((1.0 - t), 3) * 1.5 + 3.0 * t*std::pow((1.0 - t), 2) * 0.64 + 3.0 * t*t* (1.0 - t)*0.635 + t*t*t; //cubic bezier for popping in
 		_sprite.SetScale(scaleFactor, scaleFactor);
-		statusAddTime[_type] -= g_pTimer->GetElapsedTime().asSeconds();
+		statusAddTime[_type] -= g_pTimer->GetElapsedTimeAsSeconds();
 	}
-	else if (statusRemoveTime[_type] > 0.0f)
+	else if (statusRemoveTime[_type] > 0.0)
 	{
 		float scaleFactor = -2.4 * std::pow(1.0 - (2.0 * statusRemoveTime[_type]), 2.0) + 1.4 * (1.0 - (2.0 * statusRemoveTime[_type])) + 1.0; //quadratic curve for popping out
 		_sprite.SetScale(scaleFactor, scaleFactor);
-		statusRemoveTime[_type] -= g_pTimer->GetElapsedTime().asSeconds();
+		statusRemoveTime[_type] -= g_pTimer->GetElapsedTimeAsSeconds();
 	}
 
-	if (_isActive || statusRemoveTime[_type] > 0.0f)
+	if (_isActive || statusRemoveTime[_type] > 0.0)
 	{
 		_sprite.SetPos(_x, y);
 		_sprite.Render(engine->GetRenderTarget());

@@ -16,8 +16,8 @@ void CStringInput::Init(sf::Font const &_font, int _characterSize, int _xPos, in
 	m_yPos = _yPos;
 
 	//set the backspace Timer
-	m_backspaceTimer = 0.8f;
-	m_cursorTimer = 0.5f;
+	m_backspaceTimer = 0.8;
+	m_cursorTimer = 0.5;
 
 	m_showCursor = true;
 
@@ -45,15 +45,15 @@ void CStringInput::HandleInput(CGameEngine &_engine)
 	else if (_engine.GetKeystates(KeyID::BackSpace) == Held && m_str.size() > 0)
 	{
 		//if backspace is held: Delete a letter every 0.5 seconds
-		m_backspaceTimer -= g_pTimer->GetElapsedTime().asSeconds();
-		if (m_backspaceTimer <= 0.0f)
+		m_backspaceTimer -= g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds();
+		if (m_backspaceTimer <= 0.0)
 		{
-			m_backspaceTimer = 0.05f;
+			m_backspaceTimer = 0.05;
 			m_str.erase(m_str.end() - 1);
 		}
 	}
 	else if (_engine.GetKeystates(KeyID::BackSpace) == Released)
-		m_backspaceTimer = 0.8f;
+		m_backspaceTimer = 0.8;
 
 
 	
@@ -92,11 +92,11 @@ void CStringInput::Render(sf::RenderTarget &_target)
 void CStringInput::CheckCursor()
 {
 	//check the cursor timer
-	m_cursorTimer -= g_pTimer->GetElapsedTime().asSeconds();
-	if (m_cursorTimer <= 0)
+	m_cursorTimer -= g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds();
+	if (m_cursorTimer <= 0.0)
 	{
 		//reset the timer
-		m_cursorTimer = 0.5f;
+		m_cursorTimer = 0.5;
 
 		//invert the value
 		m_showCursor = !m_showCursor;

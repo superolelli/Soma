@@ -150,6 +150,12 @@ void MainRoom::Update()
 	UpdatePlayerHitboxes();
 	HandleDoors();
 	g_pSounds->Update();
+
+	if (view.getCenter().x - m_pGameEngine->GetWindowSize().x / 2 + xMovement >= 0
+		&& view.getCenter().x + m_pGameEngine->GetWindowSize().x / 2 + xMovement < background[0].GetGlobalRect().width * 4) {
+		view.move(xMovement, 0);
+		sf::Listener::setPosition(sf::Vector3f(view.getCenter().x, view.getCenter().y, -5));
+	}
 }
 
 
@@ -254,13 +260,6 @@ void MainRoom::HandleDoors()
 
 void MainRoom::Render(double _normalizedTimestep)
 {
-	if (view.getCenter().x - m_pGameEngine->GetWindowSize().x / 2 + xMovement * _normalizedTimestep >= 0
-		&& view.getCenter().x + m_pGameEngine->GetWindowSize().x / 2 + xMovement * _normalizedTimestep < background[0].GetGlobalRect().width * 4) {
-		view.move(xMovement * _normalizedTimestep, 0);
-		sf::Listener::setPosition(sf::Vector3f(view.getCenter().x, view.getCenter().y, -5));
-	}
-
-
 	m_pGameEngine->ClearRenderTarget(sf::Color::Black);
 	m_pGameEngine->GetRenderTarget().setView(view);
 
@@ -301,7 +300,7 @@ void MainRoom::RenderMainRoom()
 	}
 
 	for (auto p : players) {
-		p->setTimeElapsed(g_pTimer->GetElapsedTime().asMilliseconds());
+		p->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds());
 		p->render();
 		p->playSoundTriggers();
 	}

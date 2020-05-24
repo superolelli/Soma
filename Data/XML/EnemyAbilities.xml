@@ -88,6 +88,7 @@
 		  <value id="3">true</value>
 	  </positions>
 
+    <fatigue>2</fatigue>
 	  <effect>
 	   <buff>
 		  <duration>3</duration>
@@ -157,6 +158,7 @@
 		  <value id="3">true</value>
 	  </positions>
 
+    <fatigue>1</fatigue>
 		<effect>
 			<mark>2</mark>
 			<buff>
@@ -254,6 +256,7 @@
 			<value id="3">true</value>
 		</positions>
 
+    <fatigue>2</fatigue>
 		<effect>
 			<damageFactor>1.0</damageFactor>
  			<confusion>

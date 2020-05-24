@@ -7,7 +7,6 @@
 #include "CombatantAttributesPanel.hpp"
 #include "LevelGUICommon.hpp"
 
-class AdventureGroup;
 class Combatant;
 class GameStatus;
 
@@ -15,14 +14,13 @@ class BattleGUI : public GUI
 {
 public:
 
-	virtual void Init(CGameEngine *_engine, GameStatus *_gameStatus, AdventureGroup *_adventureGroup);
+	virtual void Init(CGameEngine *_engine, GameStatus *_gameStatus);
 	virtual void Update() override;
 	virtual void Render() override;
 
 	int GetCurrentAbility() { return currentAbility; }
 	void SetCombatantToDisplay(Combatant *_combatant);
 	void SetCurrentPlayer(Combatant *_combatant);
-	void SetAdventureGroup(AdventureGroup *_adventureGroup);
 
 private:
 	CGameEngine *engine;

@@ -30,8 +30,8 @@ private:
 
 	int m_xPos, m_yPos;
 
-	float m_backspaceTimer;
-	float m_cursorTimer;
+	double m_backspaceTimer;
+	double m_cursorTimer;
 
 	bool m_showCursor;
 

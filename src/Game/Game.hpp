@@ -47,7 +47,7 @@ private:
 
 	bool inBattle;
 	bool isPlayingBattleIntro;
-	float afterIntroWaitingTime;
+	double afterIntroWaitingTime;
 	bool levelFinished;
 
 	std::function<void(void)> OnGameFinished;
