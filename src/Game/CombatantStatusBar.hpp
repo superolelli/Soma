@@ -18,7 +18,7 @@ public:
 
 private:
 
-	enum statusType {sleeping, damageOverTime, confused, buffed, debuffed, marked};
+	enum statusType {sleeping, damageOverTime, confused, buffed, debuffed, marked, fatigue_tired, fatigue_stupid};
 
 	CGameEngine *engine;
 	CombatantStatus *status;
@@ -32,6 +32,8 @@ private:
 	void RenderBuffTooltip(Buff &_buff, bool _positive);
 	void RenderTooltip(const std::string &_tooltip, float _x, float _y);
 
-	double statusRemoveTime[6];
-	double statusAddTime[6];
+	void AddStatsToTooltip(std::string& _tooltip, const std::string& _prefix, const CombatantAttributes &_stats);
+
+	double statusRemoveTime[8];
+	double statusAddTime[8];
 };

@@ -164,6 +164,24 @@ void CombatantStatus::AddDebuff(Buff _buff)
 	debuffs.push_back(_buff);
 }
 
+void CombatantStatus::SetFatigueLevel(FatigueLevel _level)
+{
+	if (fatigueLevel == _level)
+		return;
+
+	if (fatigueLevel == FatigueLevel::tired)
+		currentStats -= fatigueDebuff;
+	else if (fatigueLevel == FatigueLevel::stupid)
+		stupid = false;
+
+	if (_level == FatigueLevel::tired)
+		currentStats += fatigueDebuff;
+	else if (_level == FatigueLevel::stupid)
+		stupid = true;
+
+	fatigueLevel = _level;
+}
+
 int CombatantStatus::RoundsDamageOverTime()
 {
 	int maxRounds = 0;
@@ -300,6 +318,7 @@ void CombatantStatus::Reset()
 	damageOverTime.clear();
 	buffs.clear();
 	debuffs.clear();
+	stupid = false;
 }
 
 

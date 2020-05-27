@@ -57,6 +57,8 @@ private:
 	void InitNewBattle();
 	void InitLevelGUI();
 
+	void HandlePlayerFatigue();
+
 	void HandleBattleIntro();
 
 	void HandleFinishedLevel();

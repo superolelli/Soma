@@ -62,6 +62,8 @@ void CombatantStatusBar::RenderStatusSymbols()
 	int y = healthBar.GetRect().top + healthBar.GetRect().height;
 
 	RenderStatusSymbol(status->IsAsleep(), sleeping, g_pSpritePool->sleeping, x);
+	RenderStatusSymbol(status->GetFatigueLevel() == CombatantStatus::FatigueLevel::tired, fatigue_tired, g_pSpritePool->fatigue_tired, x);
+	RenderStatusSymbol(status->GetFatigueLevel() == CombatantStatus::FatigueLevel::stupid, fatigue_stupid, g_pSpritePool->fatigue_stupid, x);
 	RenderStatusSymbol(status->DamageOverTime() > 0.0f, damageOverTime, g_pSpritePool->damageOverTime, x);
 	RenderStatusSymbol(status->IsConfused(), confused, g_pSpritePool->confused, x);
 	RenderStatusSymbol(status->IsBuffed(), buffed, g_pSpritePool->buff, x);
@@ -145,6 +147,16 @@ void CombatantStatusBar::RenderStatusSymbolsTooltips()
 	
 	if (status->IsDebuffed() && g_pSpritePool->debuff.GetRect().contains(engine->GetWorldMousePos()))
 		RenderBuffTooltip(status->GetDebuff(), false);
+
+	if (status->GetFatigueLevel() == CombatantStatus::FatigueLevel::tired && g_pSpritePool->fatigue_tired.GetRect().contains(engine->GetWorldMousePos()))
+	{
+		std::string tooltip("*#503380 Müde*\n#white ");
+		AddStatsToTooltip(tooltip, " ", status->fatigueDebuff);
+		RenderTooltip(tooltip, g_pSpritePool->fatigue_tired.GetRect().left, g_pSpritePool->fatigue_tired.GetRect().top);
+	}
+
+	if (status->GetFatigueLevel() == CombatantStatus::FatigueLevel::stupid && g_pSpritePool->fatigue_stupid.GetRect().contains(engine->GetWorldMousePos()))
+		RenderTooltip("#503380 Nach müde kommt doof", g_pSpritePool->fatigue_stupid.GetRect().left, g_pSpritePool->fatigue_stupid.GetRect().top);
 }
 
 
@@ -162,22 +174,7 @@ void CombatantStatusBar::RenderBuffTooltip(Buff &_buff, bool _positive)
 	else
 		tooltip.append(std::to_string(_buff.duration) + " Runde:\n#aaaadd ");
 
-	if (_buff.stats.armour != 0)
-		tooltip.append(prefix + std::to_string(_buff.stats.armour) + " Rüstung\n");
-	if (_buff.stats.maxHealth != 0)
-		tooltip.append(prefix + std::to_string(_buff.stats.maxHealth) + " Maximales Leben\n");
-	if (_buff.stats.damageMin != 0)
-		tooltip.append(prefix + std::to_string(_buff.stats.damageMin) + " Schaden\n");
-	if (_buff.stats.initiative != 0)
-		tooltip.append(prefix + std::to_string(_buff.stats.initiative) + " Initiative\n");
-	if (_buff.stats.criticalHit != 0)
-		tooltip.append(prefix + std::to_string(_buff.stats.criticalHit) + " Kritische Trefferchance\n");
-	if (_buff.stats.dodge != 0)
-		tooltip.append(prefix + std::to_string(_buff.stats.dodge) + " Ausweichen\n");
-	if (_buff.stats.precision != 0)
-		tooltip.append(prefix + std::to_string(_buff.stats.precision) + " Präzision\n");
-
-	tooltip.pop_back();
+	AddStatsToTooltip(tooltip, prefix, _buff.stats);
 
 	if(_positive)
 		RenderTooltip(tooltip, g_pSpritePool->buff.GetRect().left, g_pSpritePool->buff.GetRect().top);
@@ -204,4 +201,25 @@ void CombatantStatusBar::RenderTooltip(const std::string &_tooltip, float _x, fl
 
 	engine->GetRenderTarget().draw(background);
 	engine->GetRenderTarget().draw(tooltip);
+}
+
+
+void CombatantStatusBar::AddStatsToTooltip(std::string& _tooltip, const std::string& _prefix, const CombatantAttributes& _stats)
+{
+	if (_stats.armour != 0)
+		_tooltip.append(_prefix + std::to_string(_stats.armour) + " Rüstung\n");
+	if (_stats.maxHealth != 0)
+		_tooltip.append(_prefix + std::to_string(_stats.maxHealth) + " Maximales Leben\n");
+	if (_stats.damageMin != 0)
+		_tooltip.append(_prefix + std::to_string(_stats.damageMin) + " Schaden\n");
+	if (_stats.initiative != 0)
+		_tooltip.append(_prefix + std::to_string(_stats.initiative) + " Initiative\n");
+	if (_stats.criticalHit != 0)
+		_tooltip.append(_prefix + std::to_string(_stats.criticalHit) + " Kritische Trefferchance\n");
+	if (_stats.dodge != 0)
+		_tooltip.append(_prefix + std::to_string(_stats.dodge) + " Ausweichen\n");
+	if (_stats.precision != 0)
+		_tooltip.append(_prefix + std::to_string(_stats.precision) + " Präzision\n");
+
+	_tooltip.pop_back();
 }

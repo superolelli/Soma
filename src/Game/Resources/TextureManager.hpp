@@ -109,6 +109,8 @@ public:
 	sf::Texture marked;
 	sf::Texture sleeping;
 	sf::Texture damageOverTime;
+	sf::Texture fatigueTired;
+	sf::Texture fatigueStupid;
 
 	sf::Texture abilityAnnouncementBanner;
 	sf::Texture abilityTargetMarker;

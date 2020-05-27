@@ -25,6 +25,8 @@ public:
 	CSprite marked;
 	CSprite sleeping;
 	CSprite damageOverTime;
+	CSprite fatigue_tired;
+	CSprite fatigue_stupid;
 
 	SpriteWithText abilityAnnouncementBanner;
 

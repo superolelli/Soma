@@ -10,6 +10,8 @@ class CombatantStatus
 {
 public:
 
+	enum class FatigueLevel { awake, tired, stupid };
+
 	void Init(Combatant *_combatant, NotificationRenderer *_notificationRenderer);
 
 	void UpdateStatusForNewTurn(double _initialWaitingTime = 0.0);
@@ -26,6 +28,7 @@ public:
 	void DoDamageOverTime(int _rounds, int _damage);
 	void AddBuff(Buff _buff);
 	void AddDebuff(Buff _buff);
+	void SetFatigueLevel(FatigueLevel _level);
 
 	void RemoveAllBuffs();
 	void RemoveAllDebuffs();
@@ -45,6 +48,9 @@ public:
 
 	Buff &GetBuff();
 	Buff &GetDebuff();
+
+	FatigueLevel GetFatigueLevel() { return fatigueLevel; }
+	const CombatantAttributes fatigueDebuff{ 0,0,0,-3,-3,0,-5,-5,-1 };
 
 	int GetMaxHealth();
 	int GetCurrentHealth();
@@ -76,6 +82,8 @@ private:
 	std::vector<std::pair<int, int>> damageOverTime;
 	std::vector<Buff> buffs;
 	std::vector<Buff> debuffs;
+	FatigueLevel fatigueLevel;
+	bool stupid;
 
 	Buff returnBuff;
 

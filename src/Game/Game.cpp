@@ -102,7 +102,20 @@ void Game::Update()
 		currentGUI->Update();
 	}
 
+	HandlePlayerFatigue();
+
 	g_pVideos->Update();
+}
+
+
+void Game::HandlePlayerFatigue()
+{
+	if (gameStatus->GetRelativeFatigue() <= 0.33)
+		adventureGroup.SetFatigueLevelOfAllPlayers(CombatantStatus::FatigueLevel::awake);
+	else if (gameStatus->GetRelativeFatigue() <= 0.66)
+		adventureGroup.SetFatigueLevelOfAllPlayers(CombatantStatus::FatigueLevel::tired);
+	else
+		adventureGroup.SetFatigueLevelOfAllPlayers(CombatantStatus::FatigueLevel::stupid);
 }
 
 

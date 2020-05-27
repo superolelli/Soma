@@ -57,6 +57,12 @@ void AdventureGroup::Render()
 	}
 }
 
+void AdventureGroup::SetFatigueLevelOfAllPlayers(CombatantStatus::FatigueLevel _level)
+{
+	for (auto& a : adventurer)
+		a->Status().SetFatigueLevel(_level);
+}
+
 
 bool AdventureGroup::IsDead()
 {

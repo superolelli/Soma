@@ -21,6 +21,8 @@ public:
 	void Update(int xMove);
 	void Render();
 
+	void SetFatigueLevelOfAllPlayers(CombatantStatus::FatigueLevel _level);
+
 	bool IsDead();
 	Player *GetPlayer(int _id) { return adventurer[_id]; }
 

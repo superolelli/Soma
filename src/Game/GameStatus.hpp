@@ -35,6 +35,8 @@ public:
 	int* GetFatiguePtr() { return &fatigue; }
 	int* GetMaxFatiguePtr() { return &maxFatigue; }
 
+	float GetRelativeFatigue() { return static_cast<float>(fatigue) / static_cast<float>(maxFatigue); }
+
 	bool IsSkillAcquired(int player, int ability, int skill);
 	void AcquireSkill(int player, int ability, int skill);
 
