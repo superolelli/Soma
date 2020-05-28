@@ -19,6 +19,7 @@ public:
 	virtual void Render() override;
 
 	int GetCurrentAbility() { return currentAbility; }
+	void SetCurrentAbility(int _ability);
 	void SetCombatantToDisplay(Combatant *_combatant);
 	void SetCurrentPlayer(Combatant *_combatant);
 

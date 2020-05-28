@@ -23,9 +23,13 @@ private:
 
 	void ChangeState();
 	void HandleConfusion();
+    void HandleStupidness();
+	void SelectRandomAbilityAndTargets();
+	void SelectConfusionTargets();
 	bool PlayerShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition);
 	bool EnemyShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition);
-	void SelectAdditionalTargets(bool _selectPlayers);
+	void SelectAdditionalConfusionTargets(bool _selectPlayers);
+	void SelectAdditionalTargets();
 	int NumberOfTargetsForCurrentAbility();
 	bool CurrentAbilityAttacksAll();
 	bool CurrentAbilityAttacksAllPlayers();

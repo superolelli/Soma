@@ -94,6 +94,12 @@ void BattleGUI::Update()
 	}
 }
 
+void BattleGUI::SetCurrentAbility(int _ability)
+{
+	currentAbility = _ability;
+	currentAbilityFrame.SetPos(abilities[currentPlayer->GetID()][_ability].GetRect().left - 10, abilities[currentPlayer->GetID()][_ability].GetRect().top - 10);
+}
+
 
 void BattleGUI::UpdateAbilityInformationText()
 {
@@ -156,7 +162,6 @@ void BattleGUI::ShowTooltip(int _ability)
 	tooltip.ShowTooltip(engine->GetRenderTarget(), abilities[combatantToDisplay->GetID()][_ability].GetRect().left, abilities[combatantToDisplay->GetID()][_ability].GetRect().top - 35.0f);
 	tooltip.ShowPossibleTargets(engine->GetRenderTarget(), abilityPanel.GetGlobalRect().left + 65, abilityPanel.GetGlobalRect().top + abilityPanel.GetGlobalRect().height + 5);
 }
-
 
 
 void BattleGUI::SetCombatantToDisplay(Combatant *_combatant)

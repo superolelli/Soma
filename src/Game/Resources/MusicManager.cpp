@@ -53,6 +53,7 @@ void MusicManager::Update()
 	if (blendInAfterBattleTime > 0.0)
 	{
 		blendInAfterBattleTime -= g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds();
+		blendInAfterBattleTime = std::max(blendInAfterBattleTime, 0.0);
 		currentMusic->setVolume(50.0 * (4.0 - blendInAfterBattleTime) / 4.0);
 		currentBattleMusic->setVolume(50.0 * (blendInAfterBattleTime / 4.0));
 

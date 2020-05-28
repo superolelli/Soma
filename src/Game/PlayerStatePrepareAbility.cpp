@@ -26,7 +26,9 @@ void PlayerStatePrepareAbility::Update()
 
 		if (playerContext->engine->GetButtonstates(ButtonID::Left) == Keystates::Released && !playerContext->selectedTargets.empty())
 		{
-			if (playerContext->actsInConfusion)
+			if (playerContext->Status().GetFatigueLevel() == CombatantStatus::FatigueLevel::stupid)
+				HandleStupidness();
+			else if (playerContext->actsInConfusion)
 				HandleConfusion();
 			else
 				ChangeState();
@@ -78,20 +80,87 @@ bool PlayerStatePrepareAbility::CurrentAbilityAttacksAllPlayers()
 
 void PlayerStatePrepareAbility::HandleConfusion()
 {
+	playerContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(playerContext->GetRect().left + playerContext->GetRect().width / 2.0f, playerContext->GetRect().top - 20.0f), 1.0f);
+	notificationWaitingTime = 1.5;
+	SelectConfusionTargets();
+}
+
+
+void PlayerStatePrepareAbility::HandleStupidness()
+{
+	int isStupid = rand() %  3;
+	std::cout << "isStupid: " << isStupid << std::endl;
+	if (isStupid == 0)
+	{
+		playerContext->notificationRenderer->AddNotification("Dummheit", g_pFonts->f_kingArthur, sf::Vector2f(playerContext->GetRect().left + playerContext->GetRect().width / 2.0f, playerContext->GetRect().top - 20.0f), 1.0f);
+		notificationWaitingTime = 1.5;
+
+		int randomNumber = rand() % 3;
+
+		std::cout << randomNumber << std::endl;
+
+		if (randomNumber == 0)
+			SelectRandomAbilityAndTargets();
+		else if (randomNumber == 1)
+			playerContext->selectedTargets.clear();
+		else
+		{
+			playerContext->actsInConfusion = true;
+			SelectConfusionTargets();
+		}
+	}
+	else
+		ChangeState();
+}
+
+
+void PlayerStatePrepareAbility::SelectRandomAbilityAndTargets()
+{
+	playerContext->selectedTargets.clear();
+	playerContext->gui->SetCurrentAbility(rand() % 4);
+
+	int numberOfPossibleTargets = 0;
+	for (Combatant* c : *(playerContext->allCombatants))
+	{
+		if (CurrentAbilityCanAimAtCombatant(c))
+			numberOfPossibleTargets++;
+	}
+
+	if (numberOfPossibleTargets == 0)
+		return;
+
+	int selectedTarget = rand() % numberOfPossibleTargets;
+
+	if (numberOfPossibleTargets == 1)
+		selectedTarget = 0;
+
+	for (auto c : *playerContext->allCombatants)
+	{
+		if (CurrentAbilityCanAimAtCombatant(c))
+		{
+			if (selectedTarget == 0)
+			{
+				playerContext->selectedTargets.push_back(c);
+				SelectAdditionalTargets();
+				return;
+			}
+			selectedTarget--;
+		}
+	}
+}
+
+
+void PlayerStatePrepareAbility::SelectConfusionTargets()
+{
 	bool originallyAttackedPlayer = playerContext->selectedTargets[0]->IsPlayer();
 	playerContext->selectedTargets.clear();
-	playerContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(playerContext->GetRect().left - playerContext->GetRect().width / 2.0f, playerContext->GetRect().top - 20.0f), 1.0f);
-	
 	if (originallyAttackedPlayer)
 		ChooseRandomOpponent();
 	else
 		ChooseRandomAlly();
 
-	SelectAdditionalTargets(!originallyAttackedPlayer);
-
-	notificationWaitingTime = 1.5;
+	SelectAdditionalConfusionTargets(!originallyAttackedPlayer);
 }
-
 
 
 bool PlayerStatePrepareAbility::PlayerShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition)
@@ -114,7 +183,7 @@ bool PlayerStatePrepareAbility::EnemyShouldBeAddedAsTarget(Combatant *_combatant
 }
 
 
-void PlayerStatePrepareAbility::SelectAdditionalTargets(bool _selectPlayers)
+void PlayerStatePrepareAbility::SelectAdditionalConfusionTargets(bool _selectPlayers)
 {
 	if (playerContext->selectedTargets.empty())
 		return;
@@ -158,18 +227,27 @@ void PlayerStatePrepareAbility::UpdateSelectedTargets()
 	{
 		if (c->GetRect().contains(playerContext->engine->GetWorldMousePos()) && CurrentAbilityCanAimAtCombatant(c))
 		{
-			int targetPosition = c->GetBattlePos();
-
-			for (Combatant* com : (*playerContext->allCombatants))
-			{
-				if (CurrentAbilityAttacksAllPlayers() && c->IsPlayer() && com->IsPlayer()
-					|| CurrentAbilityAttacksAll() && playerContext != com
-					|| com->GetBattlePos() >= targetPosition && com->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
-						playerContext->selectedTargets.push_back(com);
-			}
-
+			playerContext->selectedTargets.push_back(c);
+			SelectAdditionalTargets();
 			return;
 		}
+	}
+}
+
+
+void PlayerStatePrepareAbility::SelectAdditionalTargets()
+{
+	int targetPosition = playerContext->selectedTargets[0]->GetBattlePos();
+
+	for (Combatant* com : (*playerContext->allCombatants))
+	{
+		if (com == playerContext->selectedTargets[0])
+			continue;
+
+		if (CurrentAbilityAttacksAllPlayers() && playerContext->selectedTargets[0]->IsPlayer() && com->IsPlayer()
+			|| CurrentAbilityAttacksAll() && playerContext != com
+			|| com->GetBattlePos() >= targetPosition && com->GetBattlePos() < targetPosition + NumberOfTargetsForCurrentAbility())
+			playerContext->selectedTargets.push_back(com);
 	}
 }
 

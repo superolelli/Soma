@@ -21,7 +21,7 @@ EnemyStatePrepareAbility::EnemyStatePrepareAbility(Enemy *_context)
 
 void EnemyStatePrepareAbility::HandleConfusion()
 {
-	enemyContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(enemyContext->GetRect().left - enemyContext->GetRect().width / 2.0f, enemyContext->GetRect().top - 20.0f), 1.0f);
+	enemyContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(enemyContext->GetRect().left + enemyContext->GetRect().width / 2.0f, enemyContext->GetRect().top - 20.0f), 1.0f);
 
 	bool originallyAttackedPlayer = ChosenAbilityHitsPlayer();
 
@@ -280,6 +280,10 @@ void EnemyStatePrepareAbility::ChooseRandomPlayer()
 	if (numberOfPlayers > 0)
 	{
 		int target = rand() % numberOfPlayers;
+
+		if (numberOfPlayers == 1)
+			target = 0;
+
 		for (Combatant* c : (*enemyContext->allCombatants))
 		{
 			if (c->IsPlayer() && CanAimAtCombatant(c))
