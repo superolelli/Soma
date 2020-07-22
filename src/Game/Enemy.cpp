@@ -41,6 +41,9 @@ void Enemy::Init()
 	case CombatantID::TequilaJoe:
 		combatantObject = g_pModels->modelTequilaJoe->getNewEntityInstance("TequilaJoe");
 		break;
+	case CombatantID::BillNoface:
+		combatantObject = g_pModels->modelBillNoface->getNewEntityInstance("BillNoface");
+		break;
 	}
 	
 	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);

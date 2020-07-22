@@ -36,6 +36,7 @@ public:
 	SpriterEngine::SpriterModel *modelApacheKid;
 	SpriterEngine::SpriterModel *modelBigSpencer;
 	SpriterEngine::SpriterModel *modelTequilaJoe;
+	SpriterEngine::SpriterModel* modelBillNoface;
 
 	SpriterEngine::SpriterModel *modelAbilityEffects;
 	SpriterEngine::SpriterModel *modelNewBattleAnimation;

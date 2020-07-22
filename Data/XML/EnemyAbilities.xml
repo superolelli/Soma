@@ -266,4 +266,41 @@
 		</effect>
 	</ability>
 
+    <ability id="15" name="Shotgun">
+        <animation>shotgun</animation>
+        <effectAnimation>shotgun</effectAnimation>
+        <attackAllPlayers>true</attackAllPlayers>
+        <positions>
+            <value id="0">true</value>
+            <value id="1">true</value>
+            <value id="2">true</value>
+            <value id="3">true</value>
+        </positions>
+
+        <effect>
+            <damageFactor>1.0</damageFactor>
+        </effect>
+    </ability>
+
+    <ability id="16" name="Panik">
+        <animation>panic</animation>
+        <effectAnimation>panic</effectAnimation>
+        <positions>
+            <value id="0">true</value>
+            <value id="1">true</value>
+            <value id="2">true</value>
+            <value id="3">true</value>
+        </positions>
+
+        <effect>
+            <damageFactor>0.5</damageFactor>
+            <buff>
+                <isPositive>false</isPositive>
+                <duration>2</duration>
+                <precision>-5</precision>
+                <criticalHit>-3</criticalHit>
+            </buff>
+        </effect>
+    </ability>
+
 </Abilities>

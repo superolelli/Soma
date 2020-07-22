@@ -118,6 +118,8 @@ void EnemyStatePrepareAbility::ChooseAbility()
 	case CombatantID::TequilaJoe:
 		ChooseAbilityTequilaJoe();
 		break;
+	case CombatantID::BillNoface:
+		ChooseAbilityBillNoface();
 	}
 }
 
@@ -215,6 +217,15 @@ void EnemyStatePrepareAbility::ChooseAbilityTequilaJoe()
 	}
 	else
 		chosenAbility = enemyAbilities::jabbering;
+}
+
+
+void EnemyStatePrepareAbility::ChooseAbilityBillNoface()
+{
+	if (rand() % 2 == 0)
+		chosenAbility = enemyAbilities::shotgun;
+	else
+		chosenAbility = enemyAbilities::panic;
 }
 
 

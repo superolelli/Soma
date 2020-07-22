@@ -23,6 +23,7 @@ void CModelManager::LoadModels(CGameEngine &_engine)
 	modelApacheKid = new SpriterEngine::SpriterModel("./Data/Sprites/Enemies/Bang/Apache Kid/ApacheKid.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetRenderTarget()), new SpriterEngine::ExampleObjectFactory(&_engine.GetRenderTarget()));
 	modelBigSpencer= new SpriterEngine::SpriterModel("./Data/Sprites/Enemies/Bang/Big Spencer/BigSpencer.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetRenderTarget()), new SpriterEngine::ExampleObjectFactory(&_engine.GetRenderTarget()));
 	modelTequilaJoe = new SpriterEngine::SpriterModel("./Data/Sprites/Enemies/Bang/Tequila Joe/TequilaJoe.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetRenderTarget()), new SpriterEngine::ExampleObjectFactory(&_engine.GetRenderTarget()));
+	modelBillNoface = new SpriterEngine::SpriterModel("./Data/Sprites/Enemies/Bang/Bill Noface/BillNoface.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetRenderTarget()), new SpriterEngine::ExampleObjectFactory(&_engine.GetRenderTarget()));
 	modelAbilityEffects = new SpriterEngine::SpriterModel("./Data/Sprites/Ability Effects/ability_effects.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetRenderTarget()), new SpriterEngine::ExampleObjectFactory(&_engine.GetRenderTarget()));
 	modelNewBattleAnimation = new SpriterEngine::SpriterModel("./Data/Sprites/Battle/New Battle Animation/new_battle_animation.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetRenderTarget()), new SpriterEngine::ExampleObjectFactory(&_engine.GetRenderTarget()));
 }
@@ -49,6 +50,8 @@ void CModelManager::Quit()
 	SAFE_DELETE(modelApacheKid);
 	SAFE_DELETE(modelBigSpencer);
 	SAFE_DELETE(modelTequilaJoe);
+	SAFE_DELETE(modelBillNoface);
+
 	SAFE_DELETE(modelAbilityEffects);
 	SAFE_DELETE(modelNewBattleAnimation);
 }

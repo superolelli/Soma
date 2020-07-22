@@ -33,6 +33,7 @@ private:
 	void ChooseAbilityHilfssherrif();
 	void ChooseAbilityTequilaJoe();
 	void ChooseAbilityBigSpencer();
+	void ChooseAbilityBillNoface();
 
 	void ChooseTarget();
     void ChooseRandomEnemy();
