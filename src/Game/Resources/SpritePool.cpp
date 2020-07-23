@@ -13,6 +13,7 @@ void SpritePool::LoadSprites()
 	damageOverTime.Load(g_pTextures->damageOverTime);
 	fatigue_tired.Load(g_pTextures->fatigueTired);
 	fatigue_stupid.Load(g_pTextures->fatigueStupid);
+	noface_buff.Load(g_pTextures->nofaceBuff);
 
 	abilityAnnouncementBanner.Load(g_pTextures->abilityAnnouncementBanner);
 	abilityAnnouncementBanner.AddText("Keine Fähigkeit");

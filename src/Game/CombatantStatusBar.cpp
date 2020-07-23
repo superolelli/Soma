@@ -62,6 +62,7 @@ void CombatantStatusBar::RenderStatusSymbols()
 	int y = healthBar.GetRect().top + healthBar.GetRect().height;
 
 	RenderStatusSymbol(status->IsAsleep(), sleeping, g_pSpritePool->sleeping, x);
+	RenderStatusSymbol(status->GetNofaceBuffLevel() >= 0, noface_buff, g_pSpritePool->noface_buff, x);
 	RenderStatusSymbol(status->GetFatigueLevel() == CombatantStatus::FatigueLevel::tired, fatigue_tired, g_pSpritePool->fatigue_tired, x);
 	RenderStatusSymbol(status->GetFatigueLevel() == CombatantStatus::FatigueLevel::stupid, fatigue_stupid, g_pSpritePool->fatigue_stupid, x);
 	RenderStatusSymbol(status->DamageOverTime() > 0.0f, damageOverTime, g_pSpritePool->damageOverTime, x);
@@ -116,6 +117,13 @@ void CombatantStatusBar::RenderStatusSymbolsTooltips()
 {
 	if (status->IsAsleep() && g_pSpritePool->sleeping.GetRect().contains(engine->GetWorldMousePos()))
 		RenderTooltip("Schläft", g_pSpritePool->sleeping.GetRect().left, g_pSpritePool->sleeping.GetRect().top);
+
+	if (status->GetNofaceBuffLevel() >= 0 && g_pSpritePool->noface_buff.GetRect().contains(engine->GetWorldMousePos()))
+	{
+		std::string tooltip("* Seine Wunden machen ihn stärker*\n#white ");
+		AddStatsToTooltip(tooltip, " ", status->GetNofaceStats());
+		RenderTooltip(tooltip, g_pSpritePool->noface_buff.GetRect().left, g_pSpritePool->noface_buff.GetRect().top);
+	}
 
 	if (status->RoundsDamageOverTime() > 0 && g_pSpritePool->damageOverTime.GetRect().contains(engine->GetWorldMousePos()))
 	{

@@ -27,6 +27,7 @@ public:
 	CSprite damageOverTime;
 	CSprite fatigue_tired;
 	CSprite fatigue_stupid;
+	CSprite noface_buff;
 
 	SpriteWithText abilityAnnouncementBanner;
 

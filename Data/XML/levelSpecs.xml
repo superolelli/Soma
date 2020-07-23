@@ -2,7 +2,7 @@
 
 <LevelSpecs>
     <level id="1">
-        <numberOfRooms>5</numberOfRooms>
+        <numberOfRooms>1</numberOfRooms>
         <backgrounds>
             <background>bang_gang_1</background>
             <background>bang_gang_2</background>
@@ -51,7 +51,7 @@
             <enemy>Abtrünniger</enemy>
             <enemy>Abtrünniger</enemy>
             <enemy>Gesetzloser</enemy>
-            <enemy>Gesetzloser</enemy>
+            <enemy>Bill Noface</enemy>
         </bossGroup>
     </level>
 

@@ -145,6 +145,14 @@ void CombatantStatus::GainHealth(int _health)
 	notificationRenderer->AddNotification(std::to_string(_health), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color::Green, sf::Color::Black);
 }
 
+void CombatantStatus::CheckNofaceBuff()
+{
+	if (nofaceBuffLevel >= 0)
+	{
+		SetNofaceBuffLevel((currentStats.maxHealth - currentStats.currentHealth) / 5);
+	}
+}
+
 
 void CombatantStatus::DoDamageOverTime(int _rounds, int _damage)
 {
@@ -180,6 +188,31 @@ void CombatantStatus::SetFatigueLevel(FatigueLevel _level)
 		stupid = true;
 
 	fatigueLevel = _level;
+}
+
+void CombatantStatus::SetNofaceBuffLevel(int _level)
+{
+	if (_level == nofaceBuffLevel)
+		return;
+
+	for (int i = 0; i < nofaceBuffLevel; i++)
+		currentStats -= nofaceBuff;
+	
+	for(int i = 0; i < _level; i++)
+		currentStats += nofaceBuff;
+
+	nofaceBuffLevel = _level;
+}
+
+CombatantAttributes& CombatantStatus::GetNofaceStats()
+{
+	CombatantAttributes attributes;
+	attributes.Reset();
+
+	for (int i = 0; i < nofaceBuffLevel; i++)
+		attributes += nofaceBuff;
+
+	return attributes;
 }
 
 int CombatantStatus::RoundsDamageOverTime()
@@ -319,6 +352,7 @@ void CombatantStatus::Reset()
 	buffs.clear();
 	debuffs.clear();
 	stupid = false;
+	nofaceBuffLevel = -1;
 }
 
 

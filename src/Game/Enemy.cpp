@@ -43,6 +43,7 @@ void Enemy::Init()
 		break;
 	case CombatantID::BillNoface:
 		combatantObject = g_pModels->modelBillNoface->getNewEntityInstance("BillNoface");
+		status.SetNofaceBuffLevel(0);
 		break;
 	}
 	

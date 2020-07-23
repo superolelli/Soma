@@ -29,6 +29,7 @@ public:
 	void AddBuff(Buff _buff);
 	void AddDebuff(Buff _buff);
 	void SetFatigueLevel(FatigueLevel _level);
+	void SetNofaceBuffLevel(int _level);
 
 	void RemoveAllBuffs();
 	void RemoveAllDebuffs();
@@ -39,6 +40,10 @@ public:
 	bool IsConfused() { return confused > 0; }
 	bool IsBuffed() { return buffs.size() > 0; }
 	bool IsDebuffed() { return debuffs.size() > 0; }
+	bool GetNofaceBuffLevel() { return nofaceBuffLevel; }
+	CombatantAttributes& GetNofaceStats();
+
+	void CheckNofaceBuff();
 
 	int RoundsConfused() { return confused; }
 	int RoundsMarked() { return marked; }
@@ -51,6 +56,7 @@ public:
 
 	FatigueLevel GetFatigueLevel() { return fatigueLevel; }
 	const CombatantAttributes fatigueDebuff{ 0,0,0,-3,-3,0,-5,-5,-1 };
+	const CombatantAttributes nofaceBuff{0,0,0,2,2,1,0,2,1};
 
 	int GetMaxHealth();
 	int GetCurrentHealth();
@@ -83,6 +89,7 @@ private:
 	std::vector<Buff> buffs;
 	std::vector<Buff> debuffs;
 	FatigueLevel fatigueLevel;
+	int nofaceBuffLevel;
 	bool stupid;
 
 	Buff returnBuff;
