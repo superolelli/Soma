@@ -79,6 +79,8 @@ void Combatant::Scale(float _x, float _y)
 		combatantObject->setScale(SpriterEngine::point(_x + 0.15, _y + 0.15));
 	else if(GetID() == CombatantID::BigSpencer)
 		combatantObject->setScale(SpriterEngine::point(_x + -0.02, _y + -0.02));
+	else if(GetID() == CombatantID::BillNoface)
+		combatantObject->setScale(SpriterEngine::point(_x + -0.05, _y + -0.05));
 	else
 		combatantObject->setScale(SpriterEngine::point(_x, _y));
 }

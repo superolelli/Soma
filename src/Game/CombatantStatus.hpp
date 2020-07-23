@@ -40,8 +40,8 @@ public:
 	bool IsConfused() { return confused > 0; }
 	bool IsBuffed() { return buffs.size() > 0; }
 	bool IsDebuffed() { return debuffs.size() > 0; }
-	bool GetNofaceBuffLevel() { return nofaceBuffLevel; }
-	CombatantAttributes& GetNofaceStats();
+	int GetNofaceBuffLevel() { return nofaceBuffLevel; }
+	CombatantAttributes GetNofaceStats();
 
 	void CheckNofaceBuff();
 

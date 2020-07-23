@@ -120,8 +120,9 @@ void CombatantStatusBar::RenderStatusSymbolsTooltips()
 
 	if (status->GetNofaceBuffLevel() >= 0 && g_pSpritePool->noface_buff.GetRect().contains(engine->GetWorldMousePos()))
 	{
-		std::string tooltip("* Seine Wunden machen ihn stärker*\n#white ");
-		AddStatsToTooltip(tooltip, " ", status->GetNofaceStats());
+		std::string tooltip("*#dd3333 Seine Wunden machen\nihn stärker*\n#white ");
+		if(status->GetNofaceBuffLevel() > 0)
+			AddStatsToTooltip(tooltip, " ", status->GetNofaceStats());
 		RenderTooltip(tooltip, g_pSpritePool->noface_buff.GetRect().left, g_pSpritePool->noface_buff.GetRect().top);
 	}
 

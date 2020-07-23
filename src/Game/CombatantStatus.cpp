@@ -131,6 +131,8 @@ void CombatantStatus::LooseHealth(int _damage, bool _critical, bool _useArmour)
 		notificationRenderer->AddNotification(std::to_string(damage), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color(180, 0, 0), sf::Color::Black, 40);
 	else
 		notificationRenderer->AddNotification(std::to_string(damage), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color::Red, sf::Color::Black);
+
+	CheckNofaceBuff();
 }
 
 
@@ -143,6 +145,8 @@ void CombatantStatus::GainHealth(int _health)
 
 	auto notificationPos = sf::Vector2f(combatant->GetRect().left + combatant->GetRect().width / 2.0f, combatant->GetRect().top);
 	notificationRenderer->AddNotification(std::to_string(_health), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color::Green, sf::Color::Black);
+
+	CheckNofaceBuff();
 }
 
 void CombatantStatus::CheckNofaceBuff()
@@ -204,7 +208,7 @@ void CombatantStatus::SetNofaceBuffLevel(int _level)
 	nofaceBuffLevel = _level;
 }
 
-CombatantAttributes& CombatantStatus::GetNofaceStats()
+CombatantAttributes CombatantStatus::GetNofaceStats()
 {
 	CombatantAttributes attributes;
 	attributes.Reset();
