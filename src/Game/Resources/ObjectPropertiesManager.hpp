@@ -47,7 +47,7 @@ public:
 	std::map<int, CombatantAttributes> enemyStats;
 	std::unordered_map<int, std::vector<ItemID>> enemyLoot;
 
-	Ability enemyAbilities[15];
+	Ability enemyAbilities[17];
 
 	Ability skills[4][4][8];
 

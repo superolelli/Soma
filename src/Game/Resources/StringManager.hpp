@@ -15,5 +15,5 @@ public:
 	//loads all strings for the specific language
 	void LoadStrings();
 
-	sf::String combatantNames[12];
+	sf::String combatantNames[13];
 };
