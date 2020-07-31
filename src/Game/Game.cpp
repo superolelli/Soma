@@ -140,6 +140,8 @@ void Game::HandleBattleIntro()
 					g_pVideos->PlayVideo(videoId::introBigSpencer);
 				else if (currentBattle->GetEnemies()[3]->GetID() == CombatantID::TequilaJoe)
 					g_pVideos->PlayVideo(videoId::introTequilaJoe);
+				else if (currentBattle->GetEnemies()[3]->GetID() == CombatantID::BillNoface)
+					g_pVideos->PlayVideo(videoId::introBillNoface);
 			}
 		}
 	}
