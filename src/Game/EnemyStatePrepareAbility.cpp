@@ -222,10 +222,13 @@ void EnemyStatePrepareAbility::ChooseAbilityTequilaJoe()
 
 void EnemyStatePrepareAbility::ChooseAbilityBillNoface()
 {
-	if (rand() % 2 == 0)
+	int randomNumber = rand() % 3;
+	if (randomNumber == 0)
 		chosenAbility = enemyAbilities::shotgun;
-	else
+	else if (randomNumber == 1)
 		chosenAbility = enemyAbilities::panic;
+	else
+		chosenAbility = enemyAbilities::rattlesnake;
 }
 
 
@@ -320,7 +323,7 @@ void EnemyStatePrepareAbility::ChooseRandomPlayer()
 
 void EnemyStatePrepareAbility::Update()
 {
-	//Cannot be done in constructor since it does a state change8
+	//Cannot be done in constructor since it does a state change
 	if (enemyContext->selectedTargets.empty())
 	{
 		CombatantStateIdle *newState = new CombatantStateIdle(enemyContext);

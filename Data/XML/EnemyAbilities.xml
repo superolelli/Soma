@@ -303,4 +303,24 @@
         </effect>
     </ability>
 
+	<ability id="17" name="Klapperschlange">
+	  <animation>rattlesnake</animation>
+		<effectAnimation>rattlesnake</effectAnimation>
+
+	  <positions>
+		  <value id="0">true</value>
+		  <value id="1">true</value>
+		  <value id="2">true</value>
+		  <value id="3">true</value>
+	  </positions>
+
+	  <effect>
+			<damageFactor>0.1</damageFactor>
+		  <damageOverTime>
+			  <rounds>3</rounds>
+			  <damage>3</damage>
+		  </damageOverTime>
+	  </effect>
+  	</ability>
+
 </Abilities>
