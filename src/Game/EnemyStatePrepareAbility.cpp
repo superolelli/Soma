@@ -328,6 +328,7 @@ void EnemyStatePrepareAbility::Update()
 	{
 		CombatantStateIdle *newState = new CombatantStateIdle(enemyContext);
 		enemyContext->ChangeState(newState);
+		return;
 	}
 
 	abilityAnnouncementTime -= g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds();
@@ -348,7 +349,7 @@ void EnemyStatePrepareAbility::Render()
 	enemyContext->combatantObject->render();
 	enemyContext->combatantObject->playSoundTriggers();
 
-	if (abilityAnnouncementTime > 0.0)
+	if (abilityAnnouncementTime > 0.0 && !enemyContext->selectedTargets.empty())
 		RenderAbilityAnnouncement();
 
 	enemyContext->RenderTurnMarker();
