@@ -16,4 +16,38 @@
     <Name id="11">Tequila Joe</Name>
     <Name id="12">Bill Noface</Name>
   </CombatantNames>
+
+  <SpeechBubbles>
+      <Simon id="0">
+          <speech>Ihr Wixxas!</speech>
+          <speech>Nee, rate weitaaa!</speech>
+          <speech>Nöhöö!</speech>
+          <speech>SCHICK!</speech>
+      </Simon>
+
+      <Ole id="1">
+          <speech>Eher ungeil...</speech>
+          <speech>Was ne Ratte!</speech>
+          <speech>Peter mag Urin</speech>
+          <speech>Scheiß die Wand an!</speech>
+          <speech>Lappen</speech>
+          <speech>Alligator-Time!</speech>
+      </Ole>
+
+      <Anna id="2">
+          <speech>Happa happa nom nom</speech>
+          <speech>Ich hab euch liiiiiieb!</speech>
+          <speech>Ihr seid scheiße...</speech>
+          <speech>Supi</speech>
+      </Anna>
+
+      <Markus id="3">
+          <speech>Ich liebe die Sinnlosität!</speech>
+          <speech>Halt deine Mutter!</speech>
+          <speech>Halt deine Pipiklappe!</speech>
+          <speech>Alle die mit uns auf Kaperfahrt fahren...</speech>
+          <speech>...müssen Männer mit Bärten sein.</speech>
+      </Markus>
+        
+  </SpeechBubbles>
 </Strings>

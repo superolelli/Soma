@@ -705,6 +705,15 @@
     <ClCompile Include="src\Game\LevelGUICommon.cpp">
       <Filter>Quelldateien\Game\Level\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Framework\Graphics\NinePatch.cpp">
+      <Filter>Quelldateien\Framework\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\SpeechBubbleManager.cpp">
+      <Filter>Quelldateien\Game\Level\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\SpeechBubble.cpp">
+      <Filter>Quelldateien\Game\Level\Players</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -1300,6 +1309,15 @@
     </ClInclude>
     <ClInclude Include="src\Game\LevelGUICommon.hpp">
       <Filter>Headerdateien\Game\Level\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framework\Graphics\NinePatch.hpp">
+      <Filter>Headerdateien\Framework\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\SpeechBubbleManager.hpp">
+      <Filter>Headerdateien\Game\Level\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\SpeechBubble.h">
+      <Filter>Headerdateien\Game\Level\Players</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

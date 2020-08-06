@@ -31,6 +31,8 @@ void Game::Init(CGameEngine * _engine)
 
 	g_pMusic->SetCurrentEnvironment(MusicEnvironment::bangEnvironment);
 	g_pMusic->PlayMusic();
+
+	speechBubbleManager.Init(m_pGameEngine, &adventureGroup);
 }
 
 
@@ -77,6 +79,7 @@ void Game::Update()
 	m_pGameEngine->GetRenderTarget().setView(view);
 
 	dialogManager.Update();
+	speechBubbleManager.Update();
 	g_pMusic->Update();
 	g_pSounds->Update();
 
@@ -219,6 +222,7 @@ void Game::UpdateBattle()
 		SAFE_DELETE(currentBattle);
 
 		g_pMusic->SetBattleEnded();
+		speechBubbleManager.ActivateSpeechBubbles();
 	}
 }
 
@@ -248,6 +252,8 @@ void Game::InitNewBattle()
 	newGui->Init(m_pGameEngine, gameStatus);
 	currentGUI = newGui;
 
+	speechBubbleManager.DeactivateSpeechBubbles();
+
 	currentBattle = new Battle;
 	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer, level->GetEnemyIDs(), level->IsBossBattle(), gameStatus);
 
@@ -276,7 +282,10 @@ void Game::Render(double _normalizedTimestep)
 		level->Render(m_pGameEngine->GetRenderTarget(), view.getCenter().x - view.getSize().x / 2);
 
 		if (currentBattle == nullptr)
+		{
 			adventureGroup.Render();
+			speechBubbleManager.Render();
+		}
 		else
 		{
 			currentBattle->Render();

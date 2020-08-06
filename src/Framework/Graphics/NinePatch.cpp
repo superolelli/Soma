@@ -30,6 +30,8 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+// Altered version by Ole Wegen
+
 #include "NinePatch.hpp"
 
 namespace
@@ -140,8 +142,6 @@ void extractScalePositionsAndContentAreaFromTexture(const sf::Texture* const pTe
 
 } // namespace
 
-namespace selbaward
-{
 
 NinePatch::NinePatch()
 	: m_primitiveType{ sf::PrimitiveType::Quads }
@@ -388,5 +388,3 @@ sf::Vector2f NinePatch::priv_getResultingPositionOfTextureCoord(sf::Vector2f tex
 
 	return result;
 }
-
-} // namespace selbaward

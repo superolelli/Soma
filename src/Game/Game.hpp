@@ -11,6 +11,7 @@
 #include "../Framework/Graphics/NotificationRenderer.hpp"
 #include "GameStatus.hpp"
 #include "DialogManager.hpp"
+#include "SpeechBubbleManager.hpp"
 
 class Game : public GameState
 {
@@ -42,6 +43,7 @@ private:
 
 	NotificationRenderer notificationRenderer;
 	DialogManager dialogManager;
+	SpeechBubbleManager speechBubbleManager;
 
 	sf::Shader blurShader;
 

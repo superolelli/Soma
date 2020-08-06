@@ -4,6 +4,7 @@
 #include <map>
 
 #include <SFML\System.hpp>
+#include <vector>
 
 
 //the class for loading all properties at once
@@ -16,4 +17,6 @@ public:
 	void LoadStrings();
 
 	sf::String combatantNames[13];
+
+	std::vector<sf::String> speechBubbleContents[4];
 };

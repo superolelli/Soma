@@ -230,6 +230,7 @@
     <ClCompile Include="src\Framework\Animations\variable\variableinstancenameandidmap.cpp" />
     <ClCompile Include="src\Framework\CursorManager.cpp" />
     <ClCompile Include="src\Framework\Gameengine.cpp" />
+    <ClCompile Include="src\Framework\Graphics\NinePatch.cpp" />
     <ClCompile Include="src\Framework\Graphics\NotificationRenderer.cpp" />
     <ClCompile Include="src\Framework\Graphics\RichText.cpp" />
     <ClCompile Include="src\Framework\Graphics\RoundedRectangleShape.cpp" />
@@ -312,6 +313,8 @@
     <ClCompile Include="src\Game\Simon.cpp" />
     <ClCompile Include="src\Game\GameStatus.cpp" />
     <ClCompile Include="src\Game\SkillPanel.cpp" />
+    <ClCompile Include="src\Game\SpeechBubble.cpp" />
+    <ClCompile Include="src\Game\SpeechBubbleManager.cpp" />
     <ClCompile Include="src\Game\Tooltip.cpp" />
     <ClCompile Include="src\Game\Util\XMLUtilities.cpp" />
     <ClCompile Include="src\Game\VendingMachinePanel.cpp" />
@@ -319,6 +322,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\CursorManager.hpp" />
+    <ClInclude Include="src\Framework\Graphics\NinePatch.hpp" />
     <ClInclude Include="src\Framework\Graphics\NotificationRenderer.hpp" />
     <ClInclude Include="src\Framework\Graphics\RichText.hpp" />
     <ClInclude Include="src\Framework\Graphics\RoundedRectangleShape.hpp" />
@@ -513,6 +517,8 @@
     <ClInclude Include="src\Game\Simon.hpp" />
     <ClInclude Include="src\Game\GameStatus.hpp" />
     <ClInclude Include="src\Game\SkillPanel.hpp" />
+    <ClInclude Include="src\Game\SpeechBubble.h" />
+    <ClInclude Include="src\Game\SpeechBubbleManager.hpp" />
     <ClInclude Include="src\Game\Tooltip.hpp" />
     <ClInclude Include="src\Game\Util\XMLUtilities.hpp" />
     <ClInclude Include="src\Game\VendingMachinePanel.hpp" />

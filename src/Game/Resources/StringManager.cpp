@@ -13,4 +13,14 @@ void CStringContainer::LoadStrings()
 		std::string tempString = name.text().as_string();
 		combatantNames[name.attribute("id").as_int()] = sf::String::fromUtf8(tempString.begin(), tempString.end());
 	}
+
+	for (xml_node& player : doc.child("Strings").child("SpeechBubbles").children())
+	{
+		int playerId = player.attribute("id").as_int();
+		for (xml_node& speech : player.children())
+		{
+			std::string tempString = speech.text().as_string();
+			speechBubbleContents[playerId].push_back(sf::String::fromUtf8(tempString.begin(), tempString.end()));
+		}
+	}
 }

@@ -73,6 +73,8 @@ void CTextureManager::LoadTextures()
 	lootable[9].loadFromFile("Data/Sprites/Lootables/table.png");
 	lootable[10].loadFromFile("Data/Sprites/Lootables/wagon.png");
 
+	speechBubble.loadFromFile("Data/Sprites/speech_bubble.png");
+
 	/** ITEMS **/
 	inventoryPanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/inventory_panel.png");
 	scrollableItemPanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/scrollable_item_panel.png");

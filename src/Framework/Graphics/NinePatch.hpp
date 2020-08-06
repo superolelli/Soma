@@ -30,17 +30,13 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef SELBAWARD_NINEPATCH_HPP
-#define SELBAWARD_NINEPATCH_HPP
+// Altered version by Ole Wegen
 
-#include "Common.hpp"
-#include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/Rect.hpp>
+#pragma once
 
-namespace selbaward
-{
+#include <SFML/Graphics.hpp>
 
-// SW Nine Patch v1.4.2
+
 class NinePatch : public sf::Drawable, public sf::Transformable
 {
 public:
@@ -87,6 +83,3 @@ inline void NinePatch::setTexture()
 {
 	m_texture = nullptr;
 }
-
-} // namespace selbaward
-#endif // SELBAWARD_NINEPATCH_HPP

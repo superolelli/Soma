@@ -45,6 +45,8 @@ public:
 	/** LOOTABLES **/
 	sf::Texture lootable[11];
 
+	sf::Texture speechBubble;
+
 	/** ITEMS & INVENTORY **/
 	sf::Texture inventoryPanel;
 	sf::Texture scrollableItemPanel;
