@@ -26,19 +26,29 @@ enum MainRoomDoors {
 	door_tichu
 };
 
-static std::unordered_map<std::string, BackgroundID> backgroundIdentifierMap = {
-	{ "bang_gang_ende", BackgroundID::end },
-	{ "bang_gang_1", BackgroundID::corridor_1 },
-	{ "bang_gang_2", BackgroundID::corridor_2 },
-	{ "bang_gang_3", BackgroundID::corridor_3 },
-	{ "bang_gang_4", BackgroundID::corridor_4 },
-	{ "bang_gang_5", BackgroundID::corridor_5 },
-	{ "bang_gang_6", BackgroundID::corridor_6 },
-	{ "bang_gang_7", BackgroundID::corridor_7 },
-	{ "bang_gang_8", BackgroundID::corridor_8 },
-	{ "bang_tür_1", BackgroundID::door_1 },
-	{ "bang_tür_2", BackgroundID::door_2 },
-	{ "bang_raum_1", BackgroundID::room_1 },
-	{ "bang_raum_2", BackgroundID::room_2 },
-	{ "bang_raum_3", BackgroundID::room_3 },
+static std::unordered_map<std::string, BackgroundID> backgroundIdentifierMap[2] = {
+	{
+		{ "bang_gang_ende", BackgroundID::end },
+		{ "bang_gang_1", BackgroundID::corridor_1 },
+		{ "bang_gang_2", BackgroundID::corridor_2 },
+		{ "bang_gang_3", BackgroundID::corridor_3 },
+		{ "bang_gang_4", BackgroundID::corridor_4 },
+		{ "bang_gang_5", BackgroundID::corridor_5 },
+		{ "bang_gang_6", BackgroundID::corridor_6 },
+		{ "bang_gang_7", BackgroundID::corridor_7 },
+		{ "bang_gang_8", BackgroundID::corridor_8 },
+		{ "bang_tür_1", BackgroundID::door_1 },
+		{ "bang_tür_2", BackgroundID::door_2 },
+		{ "bang_raum_1", BackgroundID::room_1 },
+		{ "bang_raum_2", BackgroundID::room_2 },
+		{ "bang_raum_3", BackgroundID::room_3 }
+	},
+	{
+		{ "kutschfahrt_gang_ende", BackgroundID::end },
+		{ "kutschfahrt_gang_1", BackgroundID::corridor_1 },
+		{ "kutschfahrt_gang_2", BackgroundID::corridor_2 },
+		{ "kutschfahrt_gang_3", BackgroundID::corridor_3 },
+		{ "kutschfahrt_gang_4", BackgroundID::corridor_4 }
+
+	}
 };

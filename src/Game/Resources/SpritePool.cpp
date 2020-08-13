@@ -29,13 +29,26 @@ void SpritePool::LoadSprites()
 	turnMarker.Load(g_pTextures->turnMarker);
 	turnPendingMarker.Load(g_pTextures->turnPendingMarker);
 
-	for(int i = 0; i < NUMBER_OF_SECOND_LAYER_BACKGROUNDS; i++)
-		bangBackgroundSecondLayers[i].Load(g_pTextures->bangSecondLayerBackgrounds[i]);
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < g_pTextures->secondLayerBackgrounds[i].size(); j++)
+		{
+			backgroundSecondLayers[i].emplace_back(CSprite());
+			backgroundSecondLayers[i].back().Load(g_pTextures->secondLayerBackgrounds[i][j]);
+		}
+	}
 
-	for (int i = 0; i < NUMBER_OF_THIRD_LAYER_BACKGROUNDS; i++)
-		bangBackgroundThirdLayers[i].Load(g_pTextures->bangThirdLayerBackgrounds[i]);
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < g_pTextures->thirdLayerBackgrounds[i].size(); j++)
+		{
+			backgroundThirdLayers[i].emplace_back(CSprite());
+			backgroundThirdLayers[i].back().Load(g_pTextures->thirdLayerBackgrounds[i][j]);
+		}
+	}
 
-	bangBackgroundFourthLayer.Load(g_pTextures->bangFourthLayerBackground);
+	backgroundFourthLayer[0].Load(g_pTextures->fourthLayerBackground[0]);
+	backgroundFourthLayer[1].Load(g_pTextures->fourthLayerBackground[1]);
 }
 
 

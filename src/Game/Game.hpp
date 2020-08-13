@@ -17,6 +17,8 @@ class Game : public GameState
 {
 public:
 
+	Game(LevelType _levelType);
+
 	void SetGameStatusPtr(GameStatus *_statusPtr) { gameStatus = _statusPtr; } //has to be called before Game::Init()
 
 	void Init(CGameEngine *_engine) override;
@@ -32,6 +34,8 @@ public:
 	void SetOnGameFinishedCallback(std::function<void(void)> _onGameFinished);
 
 private:
+
+	LevelType levelType;
 
 	sf::View view;
 	Level *level;

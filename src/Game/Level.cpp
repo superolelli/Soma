@@ -1,15 +1,16 @@
 #include "Level.hpp"
 
 
-Level::Level()
+Level::Level(LevelType _levelType)
 {	
+	levelType = _levelType;
 	battle = false;
 	bossBattle = false;
 	currentRoomNumber = 0;
-	currentThirdLayer1 = rand() % NUMBER_OF_THIRD_LAYER_BACKGROUNDS;
-	currentThirdLayer2 = rand() % NUMBER_OF_THIRD_LAYER_BACKGROUNDS;
-	currentSecondLayer1 = rand() % NUMBER_OF_SECOND_LAYER_BACKGROUNDS;
-	currentSecondLayer2 = rand() % NUMBER_OF_SECOND_LAYER_BACKGROUNDS;
+	currentThirdLayer1 = rand() % g_pSpritePool->backgroundThirdLayers[_levelType].size();
+	currentThirdLayer2 = rand() % g_pSpritePool->backgroundThirdLayers[_levelType].size();
+	currentSecondLayer1 = rand() % g_pSpritePool->backgroundSecondLayers[_levelType].size();
+	currentSecondLayer2 = rand() % g_pSpritePool->backgroundSecondLayers[_levelType].size();
 }
 
 Level::~Level()
@@ -100,37 +101,37 @@ int Level::IsAtEnd(int _playerPos)
 void Level::RenderBackground(sf::RenderTarget &_target, int _viewX)
 {
 	//Render fourth Layer
-	g_pSpritePool->bangBackgroundFourthLayer.SetPos(_viewX - (_viewX / 9) % g_pSpritePool->bangBackgroundFourthLayer.GetRect().width, 0);
-	g_pSpritePool->bangBackgroundFourthLayer.Render(_target);
-	g_pSpritePool->bangBackgroundFourthLayer.SetPos(g_pSpritePool->bangBackgroundFourthLayer.GetRect().left + g_pSpritePool->bangBackgroundFourthLayer.GetRect().width, 0);
-	g_pSpritePool->bangBackgroundFourthLayer.Render(_target);
+	g_pSpritePool->backgroundFourthLayer[levelType].SetPos(_viewX - (_viewX / 9) % g_pSpritePool->backgroundFourthLayer[levelType].GetRect().width, 0);
+	g_pSpritePool->backgroundFourthLayer[levelType].Render(_target);
+	g_pSpritePool->backgroundFourthLayer[levelType].SetPos(g_pSpritePool->backgroundFourthLayer[levelType].GetRect().left + g_pSpritePool->backgroundFourthLayer[levelType].GetRect().width, 0);
+	g_pSpritePool->backgroundFourthLayer[levelType].Render(_target);
 
 	//Render third Layer
-	int newX = _viewX - (_viewX / 6) % g_pSpritePool->bangBackgroundThirdLayers[currentThirdLayer1].GetRect().width;
-	if (newX >= g_pSpritePool->bangBackgroundThirdLayers[currentThirdLayer1].GetRect().left + g_pSpritePool->bangBackgroundThirdLayers[currentThirdLayer1].GetRect().width)
+	int newX = _viewX - (_viewX / 6) % g_pSpritePool->backgroundThirdLayers[levelType][currentThirdLayer1].GetRect().width;
+	if (newX >= g_pSpritePool->backgroundThirdLayers[levelType][currentThirdLayer1].GetRect().left + g_pSpritePool->backgroundThirdLayers[levelType][currentThirdLayer1].GetRect().width)
 	{
 		currentThirdLayer1 = currentThirdLayer2;
-		currentThirdLayer2 = rand() % NUMBER_OF_THIRD_LAYER_BACKGROUNDS;
+		currentThirdLayer2 = rand() % g_pSpritePool->backgroundThirdLayers[levelType].size();
 	}
 
-	g_pSpritePool->bangBackgroundThirdLayers[currentThirdLayer2].SetPos(newX + g_pSpritePool->bangBackgroundThirdLayers[currentThirdLayer1].GetRect().width, 0);
-	g_pSpritePool->bangBackgroundThirdLayers[currentThirdLayer2].Render(_target);
-	g_pSpritePool->bangBackgroundThirdLayers[currentThirdLayer1].SetPos(newX, 0);
-	g_pSpritePool->bangBackgroundThirdLayers[currentThirdLayer1].Render(_target);
+	g_pSpritePool->backgroundThirdLayers[levelType][currentThirdLayer2].SetPos(newX + g_pSpritePool->backgroundThirdLayers[levelType][currentThirdLayer1].GetRect().width, 0);
+	g_pSpritePool->backgroundThirdLayers[levelType][currentThirdLayer2].Render(_target);
+	g_pSpritePool->backgroundThirdLayers[levelType][currentThirdLayer1].SetPos(newX, 0);
+	g_pSpritePool->backgroundThirdLayers[levelType][currentThirdLayer1].Render(_target);
 
 
 	//Render second Layer
-	newX = _viewX - (_viewX / 3) % g_pSpritePool->bangBackgroundSecondLayers[currentSecondLayer1].GetRect().width;
-	if (newX >= g_pSpritePool->bangBackgroundSecondLayers[currentSecondLayer1].GetRect().left + g_pSpritePool->bangBackgroundSecondLayers[currentSecondLayer1].GetRect().width)
+	newX = _viewX - (_viewX / 3) % g_pSpritePool->backgroundSecondLayers[levelType][currentSecondLayer1].GetRect().width;
+	if (newX >= g_pSpritePool->backgroundSecondLayers[levelType][currentSecondLayer1].GetRect().left + g_pSpritePool->backgroundSecondLayers[levelType][currentSecondLayer1].GetRect().width)
 	{
 		currentSecondLayer1 = currentSecondLayer2;
-		currentSecondLayer2 = rand() % NUMBER_OF_SECOND_LAYER_BACKGROUNDS;
+		currentSecondLayer2 = rand() % g_pSpritePool->backgroundSecondLayers[levelType].size();
 	}
 
-	g_pSpritePool->bangBackgroundSecondLayers[currentSecondLayer2].SetPos(newX + g_pSpritePool->bangBackgroundSecondLayers[currentSecondLayer1].GetRect().width, 0);
-	g_pSpritePool->bangBackgroundSecondLayers[currentSecondLayer2].Render(_target);
-	g_pSpritePool->bangBackgroundSecondLayers[currentSecondLayer1].SetPos(newX, 0);
-	g_pSpritePool->bangBackgroundSecondLayers[currentSecondLayer1].Render(_target);
+	g_pSpritePool->backgroundSecondLayers[levelType][currentSecondLayer2].SetPos(newX + g_pSpritePool->backgroundSecondLayers[levelType][currentSecondLayer1].GetRect().width, 0);
+	g_pSpritePool->backgroundSecondLayers[levelType][currentSecondLayer2].Render(_target);
+	g_pSpritePool->backgroundSecondLayers[levelType][currentSecondLayer1].SetPos(newX, 0);
+	g_pSpritePool->backgroundSecondLayers[levelType][currentSecondLayer1].Render(_target);
 
 
 	// Render first Layer

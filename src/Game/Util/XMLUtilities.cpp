@@ -215,7 +215,7 @@ namespace pugi {
 		specs.battleProbability = levelSpecNode.child("battleProbability").text().as_float();
 		specs.lootableProbability = levelSpecNode.child("lootableProbability").text().as_float();
 		specs.numberOfRooms = levelSpecNode.child("numberOfRooms").text().as_int();
-		specs.endBackground = backgroundIdentifierMap[levelSpecNode.child("endBackground").text().as_string()];
+		specs.endBackground = backgroundIdentifierMap[specs.levelType][levelSpecNode.child("endBackground").text().as_string()];
 
 		specs.reward.dice = levelSpecNode.child("reward").child("dice").text().as_int();
 		specs.reward.cards = levelSpecNode.child("reward").child("cards").text().as_int();
@@ -231,7 +231,7 @@ namespace pugi {
 
 		for (xml_node &background : levelSpecNode.child("backgrounds"))
 		{
-			specs.possibleBackgrounds.push_back(backgroundIdentifierMap[background.text().as_string()]);
+			specs.possibleBackgrounds.push_back(backgroundIdentifierMap[specs.levelType][background.text().as_string()]);
 		}
 	}
 

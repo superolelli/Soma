@@ -51,7 +51,7 @@ public:
 
 	Ability skills[4][4][8];
 
-	LevelSpecs levelSpecs[6];
+	std::vector<LevelSpecs> levelSpecs[2];
 
 	LootableProperties lootableProperties[11];
 

@@ -239,16 +239,16 @@ void MainRoom::HandlePlayerAnimation()
 
 void MainRoom::HandleDoors()
 {
-	for (auto &d : doors)
+	for (int i = 0; i < 3; i++)
 	{
-		if (d.GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos()) && !gui.IsPanelOpen()) 
+		if (doors[i].GetGlobalRect().contains(m_pGameEngine->GetWorldMousePos()) && !gui.IsPanelOpen()) 
 		{
 			m_pGameEngine->SetCursor(sf::Cursor::Type::Hand);
 
 			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released)
 			{
 				g_pSounds->PlaySound(soundID::DOOR);
-				auto newGame = new Game();
+				auto newGame = new Game(static_cast<LevelType>(i));
 				newGame->SetGameStatusPtr(&gameStatus);
 				newGame->SetOnGameFinishedCallback([&]() {gui.ChooseNewShopItems(); });
 				m_pGameEngine->PushState(newGame);

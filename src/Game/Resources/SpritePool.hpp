@@ -39,7 +39,7 @@ public:
 	CSprite turnMarker;
 	CSprite turnPendingMarker;
 
-	CSprite bangBackgroundSecondLayers[NUMBER_OF_SECOND_LAYER_BACKGROUNDS];
-	CSprite bangBackgroundThirdLayers[NUMBER_OF_THIRD_LAYER_BACKGROUNDS];
-	CSprite bangBackgroundFourthLayer;
+	std::vector<CSprite> backgroundSecondLayers[2];
+	std::vector<CSprite> backgroundThirdLayers[2];
+	CSprite backgroundFourthLayer[2];
 };

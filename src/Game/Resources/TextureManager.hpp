@@ -5,9 +5,6 @@
 #include "BackgroundIDs.hpp"
 
 
-const int NUMBER_OF_SECOND_LAYER_BACKGROUNDS = 6;
-const int NUMBER_OF_THIRD_LAYER_BACKGROUNDS = 3;
-
 #define g_pTextures CTextureManager::Get()
 class CTextureManager : public TSingleton<CTextureManager>
 {
@@ -25,10 +22,10 @@ public:
 	sf::Texture bangGenericButton;
 
 	/** BACKGROUNDS **/
-	sf::Texture bangFirstLayerBackgrounds[14];
-	sf::Texture bangSecondLayerBackgrounds[NUMBER_OF_SECOND_LAYER_BACKGROUNDS];
-	sf::Texture bangThirdLayerBackgrounds[NUMBER_OF_THIRD_LAYER_BACKGROUNDS];
-	sf::Texture bangFourthLayerBackground;
+	std::vector<sf::Texture> firstLayerBackgrounds[2];
+	std::vector<sf::Texture> secondLayerBackgrounds[2];
+	std::vector<sf::Texture> thirdLayerBackgrounds[2];
+	sf::Texture fourthLayerBackground[2];
 	sf::Texture bangDoor;
 
 	sf::Texture mainRoomBackgrounds[4];

@@ -5,6 +5,11 @@
 #include "LevelGUI.hpp"
 
 
+Game::Game(LevelType _levelType)
+{
+	levelType = _levelType;
+}
+
 void Game::Init(CGameEngine * _engine)
 {
 	m_pGameEngine = _engine;
@@ -12,7 +17,7 @@ void Game::Init(CGameEngine * _engine)
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetRenderTarget().setView(view);
 
-	level = LevelBuilder::buildLevel(gameStatus->bangLevel, &dialogManager, gameStatus);
+	level = LevelBuilder::buildLevel(levelType, gameStatus->bangLevel, &dialogManager, gameStatus);
 	adventureGroup.Init(_engine, &notificationRenderer, gameStatus);
 
 	InitLevelGUI();

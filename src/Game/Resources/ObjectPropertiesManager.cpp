@@ -171,12 +171,25 @@ void ObjectPropertiesManager::LoadLevelSpecs()
 	using namespace pugi;
 
 	xml_document doc;
-	doc.load_file("Data/XML/LevelSpecs.xml");
+	doc.load_file("Data/XML/levelSpecsBang.xml");
 
 	for (xml_node &level : doc.child("LevelSpecs").children())
 	{
 		int levelID = level.attribute("id").as_int();
-		loadLevelSpecsFromXML(level, levelSpecs[levelID - 1]);
+		LevelSpecs specs;
+		specs.levelType = LevelType::bang;
+		loadLevelSpecsFromXML(level, specs);
+		levelSpecs[LevelType::bang].push_back(specs);
+	}
+
+	doc.load_file("Data/XML/levelSpecsKutschfahrt.xml");
+	for (xml_node& level : doc.child("LevelSpecs").children())
+	{
+		int levelID = level.attribute("id").as_int();
+		LevelSpecs specs;
+		specs.levelType = LevelType::kutschfahrt;
+		loadLevelSpecsFromXML(level, specs);
+		levelSpecs[LevelType::kutschfahrt].push_back(specs);
 	}
 }
 

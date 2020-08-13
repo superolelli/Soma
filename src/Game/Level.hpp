@@ -17,7 +17,7 @@ class Level
 {
 public:
 
-	Level();
+	Level(LevelType _levelType);
 	~Level();
 
 	void Update(int _playerPos, CGameEngine *_engine);
@@ -37,6 +37,7 @@ public:
 private:
 
 	std::vector<Room*> rooms;
+	LevelType levelType;
 
 	void RenderBackground(sf::RenderTarget &_target, int _viewX);
 	void RenderLootables(sf::RenderTarget &_target);

@@ -10,7 +10,10 @@ struct LevelReward {
 	int cards;
 };
 
+enum LevelType {bang, kutschfahrt, tichu};
+
 struct LevelSpecs {
+	LevelType levelType;
 	int level;
 	float battleProbability;
 	float lootableProbability;
