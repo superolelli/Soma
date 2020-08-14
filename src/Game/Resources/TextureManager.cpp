@@ -159,26 +159,40 @@ void CTextureManager::LoadTextures()
 	itemRowPanel.loadFromFile("Data/Sprites/Panels & Buttons/Inventory/item_row_panel.png");
 	sortColorButton.loadFromFile("Data/Sprites/Panels & Buttons/sort_color_button.png");
 	sortNamesButton.loadFromFile("Data/Sprites/Panels & Buttons/sort_names_button.png");
-	item[0].loadFromFile("Data/Sprites/Items/Bang/cards.png");
-	item[1].loadFromFile("Data/Sprites/Items/Bang/dice.png");
-	item[2].loadFromFile("Data/Sprites/Items/Bang/iron_plate.png");
-	item[3].loadFromFile("Data/Sprites/Items/Bang/sombrero.png");
-	item[4].loadFromFile("Data/Sprites/Items/Bang/binocular.png");
-    item[5].loadFromFile("Data/Sprites/Items/Bang/bible.png");
-    item[6].loadFromFile("Data/Sprites/Items/Bang/cowboyhat.png");
-    item[7].loadFromFile("Data/Sprites/Items/Bang/lasso.png");
-	item[8].loadFromFile("Data/Sprites/Items/Bang/ammo.png");
-	item[9].loadFromFile("Data/Sprites/Items/Bang/knife.png");
-	item[10].loadFromFile("Data/Sprites/Items/Bang/tomahawk.png");
-	item[11].loadFromFile("Data/Sprites/Items/Bang/sherrif_star.png");
-	item[12].loadFromFile("Data/Sprites/Items/Bang/boot.png");
-	item[13].loadFromFile("Data/Sprites/Items/Bang/horseshoe.png");
-	item[14].loadFromFile("Data/Sprites/Items/Bang/canteen.png");
-	item[15].loadFromFile("Data/Sprites/Items/Bang/pepperbox.png");
-	item[16].loadFromFile("Data/Sprites/Items/Bang/scope.png");
-	item[17].loadFromFile("Data/Sprites/Items/Bang/beer.png");
-	item[18].loadFromFile("Data/Sprites/Items/Bang/tequila.png");
-	item[19].loadFromFile("Data/Sprites/Items/Bang/whisky.png");
+
+	std::vector<std::string> itemStrings = {
+		{
+			"Data/Sprites/Items/Bang/cards.png",
+			"Data/Sprites/Items/Bang/dice.png",
+			"Data/Sprites/Items/Bang/iron_plate.png",
+			"Data/Sprites/Items/Bang/sombrero.png",
+			"Data/Sprites/Items/Bang/binocular.png",
+			"Data/Sprites/Items/Bang/bible.png",
+			"Data/Sprites/Items/Bang/cowboyhat.png",
+			"Data/Sprites/Items/Bang/lasso.png",
+			"Data/Sprites/Items/Bang/ammo.png",
+			"Data/Sprites/Items/Bang/knife.png",
+			"Data/Sprites/Items/Bang/tomahawk.png",
+			"Data/Sprites/Items/Bang/sherrif_star.png",
+			"Data/Sprites/Items/Bang/boot.png",
+			"Data/Sprites/Items/Bang/horseshoe.png",
+			"Data/Sprites/Items/Bang/canteen.png",
+			"Data/Sprites/Items/Bang/pepperbox.png",
+			"Data/Sprites/Items/Bang/scope.png",
+			"Data/Sprites/Items/Kutschfahrt/iron_mask.png",
+			"Data/Sprites/Items/Kutschfahrt/casting_knives.png",
+			"Data/Sprites/Items/Bang/beer.png",
+			"Data/Sprites/Items/Bang/tequila.png",
+			"Data/Sprites/Items/Bang/whisky.png",
+			"Data/Sprites/Items/Kutschfahrt/drink_of_power.png",
+			"Data/Sprites/Items/Kutschfahrt/absinth.png"
+
+		}
+	};
+
+	for (int i = 0; i < itemStrings.size(); i++)
+		item[i].loadFromFile(itemStrings[i]);
+
 
 	/** VENDING MACHINE **/
 	vendingMachinePanel.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/vending_machine_panel.png");

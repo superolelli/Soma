@@ -85,8 +85,36 @@ void ItemTooltip::GenerateTooltipStringConsumable(std::string & _tooltip)
 
 	_tooltip.append("\n#white ");
 
-	if (itemProperties.health != 0)
-		_tooltip.append("Heilt " + std::to_string(itemProperties.health) + " Leben\n");
+	if (itemProperties.heal != 0)
+		_tooltip.append("#00aa00 Heilt " + std::to_string(itemProperties.heal) + " Leben\n");
+
+	if (itemProperties.buff.duration != 0)
+	{
+		_tooltip.append("#white Für " + std::to_string(itemProperties.buff.duration) + " Runden:\n");
+
+		std::string sign("+");
+
+		if (itemProperties.buff.stats.initiative != 0)
+			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.initiative) + " Initiative\n");
+
+		if (itemProperties.buff.stats.armour != 0)
+			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.armour) + " Rüstung\n");
+
+		if (itemProperties.buff.stats.damageMax != 0)
+			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.damageMax) + " Schaden\n");
+
+		if (itemProperties.buff.stats.criticalHit != 0)
+			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.criticalHit) + " Kritische Trefferchance\n");
+
+		if (itemProperties.buff.stats.dodge != 0)
+			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.dodge) + " Ausweichen\n");
+
+		if (itemProperties.buff.stats.precision != 0)
+			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.precision) + " Präzision\n");
+
+		if (itemProperties.buff.stats.maxHealth != 0)
+			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.maxHealth) + " Maximales Leben\n");
+	}
 
 	if (_tooltip.back() == '\n')
 		_tooltip.pop_back();

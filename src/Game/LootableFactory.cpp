@@ -14,7 +14,7 @@ void LootableFactory::SetLevel(int _level)
 }
 
 
-Lootable * LootableFactory::CreateLootable(int _roomX, int _roomY)
+Lootable * LootableFactory::CreateLootable(LevelType _levelType, int _roomX, int _roomY)
 {
 	Lootable *lootable = new Lootable;
 	LootableID lootableId = LootableID(rand() % numberOfLootables);
@@ -23,7 +23,7 @@ Lootable * LootableFactory::CreateLootable(int _roomX, int _roomY)
 
 	for(int i = 0; i < 9; i++)
 	{
-		lootable->AddItem(ItemFactory::CreateItemForLootable(level, lootableId));
+		lootable->AddItem(ItemFactory::CreateItemForLootable(_levelType, level, lootableId));
 
 		if (rand() % 4 != 0)
 			break;

@@ -17,7 +17,7 @@ void Game::Init(CGameEngine * _engine)
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetRenderTarget().setView(view);
 
-	level = LevelBuilder::buildLevel(levelType, gameStatus->bangLevel, &dialogManager, gameStatus);
+	level = LevelBuilder::buildLevel(levelType, gameStatus->levels[levelType], &dialogManager, gameStatus);
 	adventureGroup.Init(_engine, &notificationRenderer, gameStatus);
 
 	InitLevelGUI();
@@ -163,7 +163,7 @@ void Game::HandleFinishedLevel()
 	{
 		gameStatus->AddDice(level->GetReward().dice);
 		gameStatus->AddCards(level->GetReward().cards);
-		gameStatus->bangLevel++;
+		gameStatus->levels[levelType]++;
 	}
 	OnGameFinished();
 	g_pMusic->SetCurrentEnvironment(MusicEnvironment::mainRoomEnvironment);
@@ -240,7 +240,7 @@ void Game::OpenBattleRewardDialog()
 
 	for (int i = 0; i < 9; i++)
 	{
-		dialog->AddItem(ItemFactory::CreateBattleRewardItem(gameStatus->bangLevel, currentBattle->GetEnemies()));
+		dialog->AddItem(ItemFactory::CreateBattleRewardItem(gameStatus->levels[levelType], currentBattle->GetEnemies()));
 
 		if (rand() % 5 != 0)
 			break;

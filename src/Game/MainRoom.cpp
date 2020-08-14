@@ -201,9 +201,9 @@ void MainRoom::CheckForClickedVendingMachine()
 
 void MainRoom::UpdateLevelSigns()
 {
-	signs[0].ChangeString(0, std::to_string(gameStatus.bangLevel));
-	signs[1].ChangeString(0, std::to_string(gameStatus.kutschfahrtLevel));
-	signs[2].ChangeString(0, std::to_string(gameStatus.tichuLevel));
+	signs[0].ChangeString(0, std::to_string(gameStatus.levels[LevelType::bang]));
+	signs[1].ChangeString(0, std::to_string(gameStatus.levels[LevelType::kutschfahrt]));
+	signs[2].ChangeString(0, std::to_string(gameStatus.levels[LevelType::tichu]));
 }
 
 

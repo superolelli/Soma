@@ -62,8 +62,18 @@ InventoryItemWrapper * ConsumablePanel::OnItemFromItemPanelReceived(InventoryIte
 			rect.left -= engine->GetViewPosition().x;
 			if (_receivedItem->GetGlobalBounds().intersects(rect))
 			{
-				auto health = g_pObjectProperties->consumableStats[_receivedItem->GetItem().id - CONSUMABLE_ITEMS_START].health;
-				adventureGroup->GetPlayer(i)->Status().GainHealth(health);
+				if (g_pObjectProperties->consumableStats[_receivedItem->GetItem().id - CONSUMABLE_ITEMS_START].heal > 0)
+				{
+					auto health = g_pObjectProperties->consumableStats[_receivedItem->GetItem().id - CONSUMABLE_ITEMS_START].heal;
+					adventureGroup->GetPlayer(i)->Status().GainHealth(health);
+				}
+
+				if (g_pObjectProperties->consumableStats[_receivedItem->GetItem().id - CONSUMABLE_ITEMS_START].buff.duration > 0)
+				{
+					auto buff = g_pObjectProperties->consumableStats[_receivedItem->GetItem().id - CONSUMABLE_ITEMS_START].buff;
+					adventureGroup->GetPlayer(i)->Status().AddBuff(buff);
+				}
+
 				g_pSounds->PlaySound(soundID::DRINK);
 				_receivedItem->SetItemAmount(_receivedItem->GetItem().number-1);
 				gameStatus->RemoveItem(_receivedItem->GetItem());

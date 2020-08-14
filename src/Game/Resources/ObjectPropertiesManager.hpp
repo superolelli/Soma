@@ -33,7 +33,8 @@ struct EquipmentProperties : public ItemProperties
 
 struct ConsumableProperties : public ItemProperties
 {
-	int health;
+	int heal;
+	Buff buff;
 };
 
 #define g_pObjectProperties ObjectPropertiesManager::Get()
@@ -58,7 +59,7 @@ public:
 	EquipmentProperties equipmentStats[NUMBER_OF_EQUIPMENT_ITEMS];
 	ConsumableProperties consumableStats[NUMBER_OF_CONSUMABLE_ITEMS];
 
-	std::vector<ItemID> itemsByLevel[10];
+	std::vector<ItemID> itemsByLevel[2][10];
 
 	ItemProperties getItemStats(ItemID _id);
 

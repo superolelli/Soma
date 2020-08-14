@@ -54,9 +54,7 @@ public:
 
 	std::unordered_map<ItemID, bool> &GetConsumablesAvailability() { return consumablesAvailability; }
 
-	int bangLevel;
-	int kutschfahrtLevel;
-	int tichuLevel;
+	int levels[3];
 
 private:
 	int dice;

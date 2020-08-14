@@ -61,7 +61,7 @@ void VendingMachinePanel::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	priceText.setString("Für 0");
 	priceText.setPosition(buttonBuy.GetRect().left, buttonBuy.GetRect().top + 75);
 
-	shopPanel.ChooseNewRandomItems(gameStatus->bangLevel, gameStatus->kutschfahrtLevel, gameStatus->tichuLevel);
+	shopPanel.ChooseNewRandomItems(gameStatus->levels[LevelType::bang], gameStatus->levels[LevelType::kutschfahrt], gameStatus->levels[LevelType::tichu]);
 
 	closed = true;
 }
@@ -193,7 +193,7 @@ void VendingMachinePanel::Render()
 
 void VendingMachinePanel::ChooseNewShopItems()
 {
-	shopPanel.ChooseNewRandomItems(gameStatus->bangLevel, gameStatus->kutschfahrtLevel, gameStatus->tichuLevel);
+	shopPanel.ChooseNewRandomItems(gameStatus->levels[LevelType::bang], gameStatus->levels[LevelType::kutschfahrt], gameStatus->levels[LevelType::tichu]);
 }
 
 void VendingMachinePanel::Open()

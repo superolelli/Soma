@@ -164,7 +164,7 @@ void ShopPanel::ChooseNewRandomItems(int _bangLevel, int _kutschfahrtLevel, int 
 	{
 		InventoryItemWrapper *newItem = new InventoryItemWrapper;
 
-		Item rawItem = ItemFactory::CreateShopItem(_bangLevel);
+		Item rawItem = ItemFactory::CreateShopItem(_bangLevel, _kutschfahrtLevel);
 
 		CSprite newSprite;
 		newSprite.Load(g_pTextures->item[rawItem.id]);

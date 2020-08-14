@@ -1,30 +1,81 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Items>
-  <Default id="-1" name="empty"
-		health="0"
-  >
+  <Default id="-1" name="empty">
     <Level>1</Level>
-	<Price>1</Price>
+    <LevelType>0</LevelType>  <!-- 0=all, 1=Bang, 2=Kutschfahrt, 3=Tichu -->
+	  <Price>1</Price>
+    <effect>
+      <heal>0</heal>
+      <buff>
+        <duration>0</duration>
+        <isPositive>true</isPositive>
+        <onSelf>false</onSelf>
+        <armour>0</armour>
+        <damage>0</damage>
+        <initiative>0</initiative>
+        <maxHealth>0</maxHealth>
+        <currentHealth>0</currentHealth>
+        <criticalHit>0</criticalHit>
+        <precision>0</precision>
+        <dodge>0</dodge>
+      </buff>
+    </effect>
   </Default>
 
-  <Beer id="0" name="Bier"
-    health="5"
-  >
+  <Beer id="0" name="Bier">
 	<Price>10</Price>
+  <LevelType>1</LevelType>
+  <effect>
+    <heal>5</heal>
+  </effect>
   </Beer>
   
-  <Tequila id="1" name="Tequila"
-    health="10"
-  >
+  <Tequila id="1" name="Tequila">
     <Level>2</Level>
 	<Price>25</Price>
+  <LevelType>1</LevelType>
+  <effect>
+    <heal>10</heal>
+  </effect>
   </Tequila>
 
-   <Whisky id="2" name="Whisky"
-			health="20">
+   <Whisky id="2" name="Whisky">
 		<Level>3</Level>
 		<Price>50</Price>
+    <LevelType>1</LevelType>
+    <effect>
+      <heal>20</heal>
+    </effect>
    </Whisky>
+
+   <DrinkOfPower id="3" name="Trank der Macht">
+    <Price>15</Price>
+    <LevelType>2</LevelType>
+    <effect>
+      <buff>
+        <duration>10</duration>
+        <isPositive>true</isPositive>
+        <onSelf>true</onSelf>
+        <precision>5</precision>
+        <criticalHit>5</criticalHit>
+      </buff>
+    </effect>
+   </DrinkOfPower>
+
+   <Absinth id="4" name="Absinth">
+    <Price>30</Price>
+    <Level>1</Level>
+    <LevelType>2</LevelType>
+    <effect>
+      <heal>5</heal>
+      <buff>
+        <duration>10</duration>
+        <isPositive>true</isPositive>
+        <onSelf>true</onSelf>
+        <armour>5</armour>
+      </buff>
+    </effect>
+   </Absinth>
   
 </Items>

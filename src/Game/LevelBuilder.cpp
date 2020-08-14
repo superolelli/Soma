@@ -33,7 +33,7 @@ Level *LevelBuilder::buildLevel(LevelType _levelType, int _levelID, DialogManage
 
 		//lootable
 		if (rand() % 100 < g_pObjectProperties->levelSpecs[_levelType][_levelID - 1].lootableProbability * 100.0f)
-			newRoom->lootable = lootableFactory.CreateLootable(newRoom->background.GetGlobalRect().left, newRoom->background.GetGlobalRect().top);
+			newRoom->lootable = lootableFactory.CreateLootable(_levelType, newRoom->background.GetGlobalRect().left, newRoom->background.GetGlobalRect().top);
 		else
 			newRoom->lootable = nullptr;
 

@@ -284,6 +284,7 @@ void ObjectPropertiesManager::LoadEquipmentItemStats()
 		if (itemID >= 0)
 		{
 			equipmentStats[itemID] = default;
+			int levelType = 0;
 
 			std::string name = item.attribute("name").as_string();
 			equipmentStats[itemID].name = sf::String::fromUtf8(name.begin(), name.end());
@@ -295,9 +296,18 @@ void ObjectPropertiesManager::LoadEquipmentItemStats()
 			if(item.child("Level"))
 				equipmentStats[itemID].level = item.child("Level").text().as_int();
 
+			if (item.child("LevelType"))
+				levelType = item.child("LevelType").text().as_int();
+
 			equipmentStats[itemID].price = equipmentStats[itemID].level * EQUIPMENT_PRICE_PER_LEVEL;
 
-			itemsByLevel[equipmentStats[itemID].level-1].push_back(itemID);
+			if (levelType == 0)
+			{
+				itemsByLevel[0][equipmentStats[itemID].level - 1].push_back(itemID);
+				itemsByLevel[1][equipmentStats[itemID].level - 1].push_back(itemID);
+			}
+			else
+				itemsByLevel[levelType - 1][equipmentStats[itemID].level-1].push_back(itemID);
 		}
 	}
 }
@@ -312,10 +322,11 @@ void ObjectPropertiesManager::LoadConsumableItemStats()
 
 	//get default values
 	ConsumableProperties default;
-	default.health = doc.child("Items").child("Default").attribute("health").as_int();
+	default.heal = doc.child("Items").child("Default").child("effect").child("heal").text().as_int();
 	default.level = doc.child("Items").child("Default").child("Level").text().as_int();
 	default.name = "";
 	default.price = doc.child("Items").child("Default").child("Price").text().as_int();
+	loadBuffFromXML(doc.child("Items").child("Default").child("effect").child("buff"), default.buff);
 
 	//load item values
 	for (xml_node &item : doc.child("Items").children())
@@ -325,14 +336,15 @@ void ObjectPropertiesManager::LoadConsumableItemStats()
 		if (itemID >= 0)
 		{
 			consumableStats[itemID] = default;
+			int levelType = 0;
 
 			std::string name = item.attribute("name").as_string();
 			consumableStats[itemID].name = sf::String::fromUtf8(name.begin(), name.end());
 
 			itemIdentifierMap[name] = ItemID(itemID + CONSUMABLE_ITEMS_START);
 
-			if(item.attribute("health"))
-				consumableStats[itemID].health = item.attribute("health").as_int();
+			if(item.child("effect").child("heal"))
+				consumableStats[itemID].heal = item.child("effect").child("heal").text().as_int();
 
 			if (item.child("Level"))
 				consumableStats[itemID].level = item.child("Level").text().as_int();
@@ -340,7 +352,16 @@ void ObjectPropertiesManager::LoadConsumableItemStats()
 			if(item.child("Price"))
 				consumableStats[itemID].price = item.child("Price").text().as_int();
 
-			itemsByLevel[consumableStats[itemID].level - 1].push_back(ItemID(itemID + CONSUMABLE_ITEMS_START));
+			if (item.child("effect").child("buff"))
+				loadBuffFromXML(item.child("effect").child("buff"), consumableStats[itemID].buff);
+
+			if (levelType == 0)
+			{
+				itemsByLevel[0][consumableStats[itemID].level - 1].push_back(ItemID(itemID + CONSUMABLE_ITEMS_START));
+				itemsByLevel[1][consumableStats[itemID].level - 1].push_back(ItemID(itemID + CONSUMABLE_ITEMS_START));
+			}
+			else
+				itemsByLevel[levelType - 1][consumableStats[itemID].level - 1].push_back(ItemID(itemID + CONSUMABLE_ITEMS_START));
 		}
 	}
 }

@@ -2,11 +2,11 @@
 
 
 
-Item ItemFactory::CreateItemForLootable(int _level, LootableID _lootableID)
+Item ItemFactory::CreateItemForLootable(LevelType _levelType, int _level, LootableID _lootableID)
 {
 	Item item;
 	item.color = GetRandomColor();
-	item.id = GetRandomItemIDForLootable(_lootableID, _level);
+	item.id = GetRandomItemIDForLootable(_lootableID, _levelType, _level);
 	item.number = GetRandomItemNumber(item.id, _level);
 	return item;
 }
@@ -21,24 +21,50 @@ Item ItemFactory::CreateBattleRewardItem(int _level, std::array<Enemy*, 4> &_ene
 }
 
 
-Item ItemFactory::CreateShopItem(int _level)
+Item ItemFactory::CreateShopItem(int _bangLevel, int _kutschfahrtLevel)
 {
 	Item item;
 	item.color = GetRandomColor();
-	item.id = GetRandomItemIDForShop(_level);
+	item.id = GetRandomItemIDForShop(_bangLevel, _kutschfahrtLevel);
 	item.number = 1;
 	return item;
 }
 
 
-ItemID ItemFactory::GetRandomItemIDForShop(int _level)
+ItemID ItemFactory::GetRandomItemIDForShop(int _bangLevel, int _kutschfahrtLevel)
 {
-	ItemID itemID;
+	int bangItems = GetNumberOfPossibleItemsForLevel(LevelType::bang, _bangLevel);
+	int kutschfahrtItems = GetNumberOfPossibleItemsForLevel(LevelType::kutschfahrt, _kutschfahrtLevel);
+	int numberOfItems = bangItems + kutschfahrtItems;
+
+
+	int itemID;
 	do {
-		itemID = GetRandomItemIDForLevel(_level);
+		itemID = rand() % numberOfItems;
+
+		LevelType levelType = LevelType::bang;
+		int level = _bangLevel;
+
+		if (itemID >= bangItems)
+		{
+			levelType = LevelType::kutschfahrt;
+			level = _kutschfahrtLevel;
+			itemID -= bangItems;
+		}
+
+		int i;
+		for (i = 0; i < level; i++)
+		{
+			if (itemID >= g_pObjectProperties->itemsByLevel[levelType][i].size())
+				itemID -= g_pObjectProperties->itemsByLevel[levelType][i].size();
+			else
+				break;
+		}
+
+		itemID = g_pObjectProperties->itemsByLevel[levelType][i][itemID];
 	} while (itemID <= ItemID::dice || itemID >= CONSUMABLE_ITEMS_START);
 
-	return itemID;
+	return ItemID(itemID);
 }
 
 
@@ -63,7 +89,7 @@ ItemID ItemFactory::GetRandomItemIDForBattleReward(std::array<Enemy*, 4> &_enemi
 }
 
 
-ItemID ItemFactory::GetRandomItemIDForLootable(LootableID _lootableID, int _level)
+ItemID ItemFactory::GetRandomItemIDForLootable(LootableID _lootableID, LevelType _levelType, int _level)
 {
 	if (!g_pObjectProperties->lootableProperties[_lootableID].possibleItems.empty())
 	{
@@ -78,7 +104,7 @@ ItemID ItemFactory::GetRandomItemIDForLootable(LootableID _lootableID, int _leve
 		return possibleItems[rand() % possibleItems.size()];
 	}
 	else
-		return GetRandomItemIDForLevel(_level);
+		return GetRandomItemIDForLevel(_levelType, _level);
 }
 
 
@@ -111,27 +137,27 @@ int ItemFactory::GetRandomItemNumber(ItemID _id, int _level)
 }
 
 
-int ItemFactory::GetNumberOfPossibleItemsForLevel(int _level)
+int ItemFactory::GetNumberOfPossibleItemsForLevel(LevelType _levelType, int _level)
 {
 	int numberOfPossibleItems = 0;
 	for (int i = 0; i < _level; i++)
-		numberOfPossibleItems += g_pObjectProperties->itemsByLevel[i].size();
+		numberOfPossibleItems += g_pObjectProperties->itemsByLevel[_levelType][i].size();
 	return numberOfPossibleItems;
 }
 
 
-ItemID ItemFactory::GetRandomItemIDForLevel(int _level)
+ItemID ItemFactory::GetRandomItemIDForLevel(LevelType _levelType, int _level)
 {
-	int itemID = rand() % GetNumberOfPossibleItemsForLevel(_level);;
+	int itemID = rand() % GetNumberOfPossibleItemsForLevel(_levelType, _level);
 
 	int i;
 	for (i = 0; i < _level; i++)
 	{
-		if (itemID >= g_pObjectProperties->itemsByLevel[i].size())
-			itemID -= g_pObjectProperties->itemsByLevel[i].size();
+		if (itemID >= g_pObjectProperties->itemsByLevel[_levelType][i].size())
+			itemID -= g_pObjectProperties->itemsByLevel[_levelType][i].size();
 		else
 			break;
 	}
 
-	return g_pObjectProperties->itemsByLevel[i][itemID];
+	return g_pObjectProperties->itemsByLevel[_levelType][i][itemID];
 }

@@ -3,8 +3,8 @@
 #include <unordered_map>
 #include <SFML\Graphics.hpp>
 
-enum ItemID { empty = -1, cards, dice, iron_plate, sombrero, binocular, bible, cowboyhat, lasso, ammo, knife, tomahawk, sherrifstar, boot, horseshoe, canteen, pepperbox, scope,
-	beer, tequila, whisky, numberOfItems };
+enum ItemID { empty = -1, cards, dice, iron_plate, sombrero, binocular, bible, cowboyhat, lasso, ammo, knife, tomahawk, sherrifstar, boot, horseshoe, canteen, pepperbox, scope, ironmask, castingknives,
+	beer, tequila, whisky, drinkOfPower, absinth, numberOfItems };
 
 const int EQUIPMENT_ITEMS_START = 2;
 const int CONSUMABLE_ITEMS_START = int(beer);

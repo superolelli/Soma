@@ -21,9 +21,9 @@ void GameStatus::Init()
 		diamondStats[i].Reset();
 	}
 
-	bangLevel = 1;
-	kutschfahrtLevel = 1;
-	tichuLevel = 1;
+	levels[0] = 1;
+	levels[1] = 1;
+	levels[2] = 1;
 
 	for (int i = CONSUMABLE_ITEMS_START; i < ItemID::numberOfItems; i++)
 		consumablesAvailability[static_cast<ItemID>(i)] = false;
