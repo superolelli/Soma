@@ -41,3 +41,28 @@ void Tooltip::ShowTooltip(sf::RenderTarget &_target, int _x, int _y)
 	_target.draw(tooltipBackground);
 	_target.draw(tooltipText);
 }
+
+
+void Tooltip::AppendCombatantAttributesTooltip(std::string& _tooltip, CombatantAttributes& _stats, std::string _indentation, std::string _sign, std::string _color)
+{
+	if (_stats.initiative != 0)
+		_tooltip.append(_indentation + _color + _sign + std::to_string(_stats.initiative) + " Initiative\n");
+
+	if (_stats.armour != 0)
+		_tooltip.append(_indentation + _color + _sign + std::to_string(_stats.armour) + " Rüstung\n");
+
+	if (_stats.damageMax != 0)
+		_tooltip.append(_indentation + _color + _sign + std::to_string(_stats.damageMax) + " Schaden\n");
+
+	if (_stats.criticalHit != 0)
+		_tooltip.append(_indentation + _color + _sign + std::to_string(_stats.criticalHit) + " Kritische Trefferchance\n");
+
+	if (_stats.dodge != 0)
+		_tooltip.append(_indentation + _color + _sign + std::to_string(_stats.dodge) + " Ausweichen\n");
+
+	if (_stats.precision != 0)
+		_tooltip.append(_indentation + _color + _sign + std::to_string(_stats.precision) + " Präzision\n");
+
+	if (_stats.maxHealth != 0)
+		_tooltip.append(_indentation + _color + _sign + std::to_string(_stats.maxHealth) + " Maximales Leben\n");
+}

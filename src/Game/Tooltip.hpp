@@ -3,6 +3,7 @@
 #include "../Framework/Gameengine.hpp"
 #include "../Framework/Graphics/RichText.hpp"
 #include "../Framework/Graphics/RoundedRectangleShape.hpp"
+#include "CombatantAttributes.hpp"
 
 class Tooltip
 {
@@ -20,4 +21,5 @@ protected:
 	sf::RoundedRectangleShape tooltipBackground;
 
 	virtual void GenerateTooltipString(std::string &_tooltip) {}
+	void AppendCombatantAttributesTooltip(std::string& _tooltip, CombatantAttributes& _stats, std::string _indentation = "", std::string _sign = "", std::string _color="#aaaadd ");
 };

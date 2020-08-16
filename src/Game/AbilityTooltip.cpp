@@ -137,26 +137,7 @@ void AbilityTooltip::AppendTooltipStringForOneTarget(std::string & _tooltip, boo
 		if (effect->buff.isPositive)
 			sign = "+";
 
-		if (effect->buff.stats.initiative != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.initiative) + " Initiative\n");
-
-		if (effect->buff.stats.armour != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.armour) + " Rüstung\n");
-
-		if (effect->buff.stats.damageMax != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.damageMax) + " Schaden\n");
-
-		if (effect->buff.stats.criticalHit != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.criticalHit) + " Kritische Trefferchance\n");
-
-		if (effect->buff.stats.dodge != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.dodge) + " Ausweichen\n");
-
-		if (effect->buff.stats.precision != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.precision) + " Präzision\n");
-
-		if (effect->buff.stats.maxHealth != 0)
-			_tooltip.append(indentation + "\t#aaaadd " + sign + std::to_string(effect->buff.stats.maxHealth) + " Maximales Leben\n");
+		AppendCombatantAttributesTooltip(_tooltip, effect->buff.stats, indentation + "\t", sign);
 	}
 }
 

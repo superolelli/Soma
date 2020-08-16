@@ -47,26 +47,7 @@ void ItemTooltip::GenerateTooltipStringEquipment(std::string & _tooltip)
 
 	_tooltip.append("\n#white ");
 
-	if (itemProperties.stats.initiative != 0)
-		_tooltip.append(std::to_string(itemProperties.stats.initiative) + " Initiative\n");
-
-	if (itemProperties.stats.armour != 0)
-		_tooltip.append(std::to_string(itemProperties.stats.armour) + " Rüstung\n");
-
-	if (itemProperties.stats.damageMax != 0)
-		_tooltip.append(std::to_string(itemProperties.stats.damageMax) + " Schaden\n");
-
-	if (itemProperties.stats.criticalHit != 0)
-		_tooltip.append(std::to_string(itemProperties.stats.criticalHit) + " Kritische Trefferchance\n");
-
-	if (itemProperties.stats.dodge != 0)
-		_tooltip.append(std::to_string(itemProperties.stats.dodge) + " Ausweichen\n");
-
-	if (itemProperties.stats.precision != 0)
-		_tooltip.append(std::to_string(itemProperties.stats.precision) + " Präzision\n");
-
-	if (itemProperties.stats.maxHealth != 0)
-		_tooltip.append(std::to_string(itemProperties.stats.maxHealth) + " Maximales Leben\n");
+	AppendCombatantAttributesTooltip(_tooltip, itemProperties.stats, "", "", "#white ");
 
 	if (_tooltip.back() == '\n')
 		_tooltip.pop_back();
@@ -81,9 +62,7 @@ void ItemTooltip::GenerateTooltipStringConsumable(std::string & _tooltip)
 
 	auto itemProperties = g_pObjectProperties->consumableStats[itemId - CONSUMABLE_ITEMS_START];
 
-	_tooltip.append("*#ffa500 " + itemProperties.name + "*");
-
-	_tooltip.append("\n#white ");
+	_tooltip.append("*#ffa500 " + itemProperties.name + "*\n");
 
 	if (itemProperties.heal != 0)
 		_tooltip.append("#00aa00 Heilt " + std::to_string(itemProperties.heal) + " Leben\n");
@@ -91,29 +70,7 @@ void ItemTooltip::GenerateTooltipStringConsumable(std::string & _tooltip)
 	if (itemProperties.buff.duration != 0)
 	{
 		_tooltip.append("#white Für " + std::to_string(itemProperties.buff.duration) + " Runden:\n");
-
-		std::string sign("+");
-
-		if (itemProperties.buff.stats.initiative != 0)
-			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.initiative) + " Initiative\n");
-
-		if (itemProperties.buff.stats.armour != 0)
-			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.armour) + " Rüstung\n");
-
-		if (itemProperties.buff.stats.damageMax != 0)
-			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.damageMax) + " Schaden\n");
-
-		if (itemProperties.buff.stats.criticalHit != 0)
-			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.criticalHit) + " Kritische Trefferchance\n");
-
-		if (itemProperties.buff.stats.dodge != 0)
-			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.dodge) + " Ausweichen\n");
-
-		if (itemProperties.buff.stats.precision != 0)
-			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.precision) + " Präzision\n");
-
-		if (itemProperties.buff.stats.maxHealth != 0)
-			_tooltip.append("\t#aaaadd " + sign + std::to_string(itemProperties.buff.stats.maxHealth) + " Maximales Leben\n");
+		AppendCombatantAttributesTooltip(_tooltip, itemProperties.buff.stats, "\t", "+");
 	}
 
 	if (_tooltip.back() == '\n')
