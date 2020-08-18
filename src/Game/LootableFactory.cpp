@@ -17,7 +17,8 @@ void LootableFactory::SetLevel(int _level)
 Lootable * LootableFactory::CreateLootable(LevelType _levelType, int _roomX, int _roomY)
 {
 	Lootable *lootable = new Lootable;
-	LootableID lootableId = LootableID(rand() % numberOfLootables);
+	int lootableIndex = LootableID(rand() % g_pObjectProperties->lootablesByLevelType[_levelType].size());
+	LootableID lootableId = g_pObjectProperties->lootablesByLevelType[_levelType][lootableIndex];
 
 	lootable->Init(lootableId, dialogManager, gameStatus);
 

@@ -1,5 +1,6 @@
 #include "XMLUtilities.hpp"
 #include <SFML\System\String.hpp>
+#include "../Resources/BackgroundIDs.hpp"
 
 namespace pugi {
 

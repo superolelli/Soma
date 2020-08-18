@@ -1,4 +1,5 @@
 #include "ItemPanelSelectDecorator.hpp"
+#include "Resources/ObjectPropertiesManager.hpp"
 
 void ItemPanelSelectDecorator::Init(CGameEngine *_engine, ItemPanel *_itemPanel)
 {

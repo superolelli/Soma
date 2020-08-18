@@ -247,7 +247,11 @@ void MainRoom::HandleDoors()
 
 			if (m_pGameEngine->GetButtonstates(ButtonID::Left) == Released)
 			{
-				g_pSounds->PlaySound(soundID::DOOR);
+				if (i == 0)
+					g_pSounds->PlaySound(soundID::DOOR);
+				else
+					g_pSounds->PlaySound(soundID::DOOR_KUTSCHFAHRT);
+
 				auto newGame = new Game(static_cast<LevelType>(i));
 				newGame->SetGameStatusPtr(&gameStatus);
 				newGame->SetOnGameFinishedCallback([&]() {gui.ChooseNewShopItems(); });

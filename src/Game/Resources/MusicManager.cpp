@@ -8,18 +8,29 @@ void MusicManager::LoadMusic()
 	mainRoomMusic.setRelativeToListener(true);
 	mainRoomMusic.setLoop(true);
 
-	bangBackgroundMusic[0].openFromFile("Data/Music/Bang1.ogg");
-	bangBackgroundMusic[1].openFromFile("Data/Music/Bang2.ogg");
-	bangBackgroundMusic[2].openFromFile("Data/Music/Bang3.ogg");
-	bangBackgroundMusic[3].openFromFile("Data/Music/Bang4.ogg");
-	bangBackgroundMusic[4].openFromFile("Data/Music/Bang5.ogg");
-	bangBackgroundMusic[5].openFromFile("Data/Music/Bang6.ogg");
-	bangBackgroundMusic[6].openFromFile("Data/Music/Bang7.ogg");
+	backgroundMusic[0][0].openFromFile("Data/Music/Bang1.ogg");
+	backgroundMusic[0][1].openFromFile("Data/Music/Bang2.ogg");
+	backgroundMusic[0][2].openFromFile("Data/Music/Bang3.ogg");
+	backgroundMusic[0][3].openFromFile("Data/Music/Bang4.ogg");
+	backgroundMusic[0][4].openFromFile("Data/Music/Bang5.ogg");
+	backgroundMusic[0][5].openFromFile("Data/Music/Bang6.ogg");
+	backgroundMusic[0][6].openFromFile("Data/Music/Bang7.ogg");
 
-	for (auto &m : bangBackgroundMusic)
+	backgroundMusic[1][0].openFromFile("Data/Music/Kutschfahrt1.ogg");
+	backgroundMusic[1][1].openFromFile("Data/Music/Kutschfahrt2.ogg");
+	backgroundMusic[1][2].openFromFile("Data/Music/Kutschfahrt3.ogg");
+	backgroundMusic[1][3].openFromFile("Data/Music/Kutschfahrt4.ogg");
+	backgroundMusic[1][4].openFromFile("Data/Music/Kutschfahrt5.ogg");
+	backgroundMusic[1][5].openFromFile("Data/Music/Kutschfahrt6.ogg");
+	backgroundMusic[1][6].openFromFile("Data/Music/Kutschfahrt7.ogg");
+
+	for (int i = 0; i < 2; i++)
 	{
-		m.setRelativeToListener(true);
-		m.setVolume(50);
+		for (auto& m : backgroundMusic[i])
+		{
+			m.setRelativeToListener(true);
+			m.setVolume(50);
+		}
 	}
 
 	bangBattleMusic.openFromFile("Data/Music/Bang_battle.ogg");
@@ -46,7 +57,7 @@ void MusicManager::Update()
 
 	if (currentMusic->getStatus() == sf::SoundSource::Status::Stopped)
 	{
-		currentMusic = &bangBackgroundMusic[GetNextTrack()];
+		currentMusic = &backgroundMusic[currentEnvironment - 1][GetNextTrack()];
 		currentMusic->play();
 	}
 
@@ -99,9 +110,9 @@ void MusicManager::SetCurrentEnvironment(MusicEnvironment _environmentID)
 		currentMusic = &mainRoomMusic;
 		currentMusic->play();
 	}
-	else if (currentEnvironment == MusicEnvironment::bangEnvironment)
+	else if (currentEnvironment > 0)
 	{
-		currentMusic = &bangBackgroundMusic[GetNextTrack()];
+		currentMusic = &backgroundMusic[currentEnvironment-1][GetNextTrack()];
 		currentMusic->play();
 	}
 }
@@ -109,7 +120,7 @@ void MusicManager::SetCurrentEnvironment(MusicEnvironment _environmentID)
 
 void MusicManager::SetBattleStarted()
 {
-	if (currentEnvironment == MusicEnvironment::bangEnvironment)
+	if (currentEnvironment > 0)
 	{
 		currentMusic->pause();
 		currentBattleMusic = &bangBattleMusic;
@@ -121,7 +132,7 @@ void MusicManager::SetBattleStarted()
 
 void MusicManager::SetBattleEnded()
 {
-	if (currentEnvironment == MusicEnvironment::bangEnvironment)
+	if (currentEnvironment > 0)
 	{
 		blendInAfterBattleTime = 4.0;
 		currentMusic->play();
@@ -137,16 +148,16 @@ void MusicManager::PlayMusic()
 		currentMusic->play();
 	else
 	{
-		switch (currentEnvironment)
+
+		if (currentEnvironment == MusicEnvironment::mainRoomEnvironment)
 		{
-		case MusicEnvironment::mainRoomEnvironment:
 			currentMusic = &mainRoomMusic;
 			currentMusic->play();
-			break;
-		case MusicEnvironment::bangEnvironment:
-			currentMusic = &bangBackgroundMusic[GetNextTrack()];
+		}
+		else
+		{
+			currentMusic = &backgroundMusic[currentEnvironment-1][GetNextTrack()];
 			currentMusic->play();
-			break;
 		}
 	}
 }

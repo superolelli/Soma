@@ -1,5 +1,6 @@
 #include "TextureManager.hpp"
 #include "../LevelSpecs.hpp"
+#include "BackgroundIDs.hpp"
 
 
 
@@ -38,7 +39,8 @@ void CTextureManager::LoadTextures()
 			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang2.png",
 			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang3.png",
 			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang4.png",
-			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang5.png"
+			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang5.png",
+			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_raum1.png"
 		}
 	};
 
@@ -141,6 +143,9 @@ void CTextureManager::LoadTextures()
 	lootable[8].loadFromFile("Data/Sprites/Lootables/stonepile.png");
 	lootable[9].loadFromFile("Data/Sprites/Lootables/table.png");
 	lootable[10].loadFromFile("Data/Sprites/Lootables/wagon.png");
+	lootable[11].loadFromFile("Data/Sprites/Lootables/chest2.png");
+	lootable[12].loadFromFile("Data/Sprites/Lootables/goblet.png");
+	lootable[13].loadFromFile("Data/Sprites/Lootables/secret_bag.png");
 
 	speechBubble.loadFromFile("Data/Sprites/speech_bubble.png");
 

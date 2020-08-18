@@ -34,7 +34,7 @@ void Game::Init(CGameEngine * _engine)
 	afterIntroWaitingTime = 2.0;
 	levelFinished = false;
 
-	g_pMusic->SetCurrentEnvironment(MusicEnvironment::bangEnvironment);
+	g_pMusic->SetCurrentEnvironment(MusicEnvironment(levelType+1));
 	g_pMusic->PlayMusic();
 
 	speechBubbleManager.Init(m_pGameEngine, &adventureGroup);

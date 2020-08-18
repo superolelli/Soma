@@ -11,6 +11,7 @@
         <xPosition>0</xPosition>
         <yPosition>0</yPosition>
         <loot></loot>
+        <levelType>0</levelType>
     </default>
 
     <lootable id="0" name="Fass">
@@ -33,6 +34,7 @@
         </boundingBox>
         <xPosition>630</xPosition>
         <yPosition>269</yPosition>
+        <levelType>1</levelType>
     </lootable>
 
     <lootable id="2" name="Truhe">
@@ -44,6 +46,7 @@
         </boundingBox>
         <xPosition>820</xPosition>
         <yPosition>430</yPosition>
+        <levelType>1</levelType>
     </lootable>
 
     <lootable id="3" name="Tasse">
@@ -55,13 +58,13 @@
         </boundingBox>
         <xPosition>892</xPosition>
         <yPosition>613</yPosition>
-
+        <levelType>1</levelType>
         <loot>
             <item>Karten</item>
             <item>Würfel</item>
             <item>Bier</item>
-			<item>Tequila</item>
-			<item>Whisky</item>
+			      <item>Tequila</item>
+			      <item>Whisky</item>
         </loot>
     </lootable>
 
@@ -85,6 +88,7 @@
         </boundingBox>
         <xPosition>675</xPosition>
         <yPosition>450</yPosition>
+        <levelType>1</levelType>
     </lootable>
 
     <lootable id="6" name="Sack">
@@ -129,6 +133,7 @@
         </boundingBox>
         <xPosition>780</xPosition>
         <yPosition>450</yPosition>
+        <levelType>1</levelType>
     </lootable>
 
     <lootable id="10" name="Minenwagen">
@@ -140,5 +145,49 @@
         </boundingBox>
         <xPosition>806</xPosition>
         <yPosition>550</yPosition>
+        <levelType>1</levelType>
+    </lootable>
+
+    <lootable id="11" name="Truhe">
+        <boundingBox>
+            <left>0</left>
+            <top>55</top>
+            <width>313</width>
+            <height>203</height>
+        </boundingBox>
+        <xPosition>820</xPosition>
+        <yPosition>430</yPosition>
+        <levelType>2</levelType>
+    </lootable>
+
+    <lootable id="12" name="Kelch">
+        <boundingBox>
+            <left>33</left>
+            <top>1</top>
+            <width>61</width>
+            <height>87</height>
+        </boundingBox>
+        <xPosition>954</xPosition>
+        <yPosition>591</yPosition>
+        <levelType>2</levelType>
+        <loot>
+            <item>Karten</item>
+            <item>Würfel</item>
+            <item>Trank der Macht</item>
+            <item>Blitzpulver</item>
+            <item>Absinth</item>
+        </loot>
+    </lootable>
+
+    <lootable id="13" name="Geheimer Koffer">
+        <boundingBox>
+            <left>4</left>
+            <top>0</top>
+            <width>255</width>
+            <height>176</height>
+        </boundingBox>
+        <xPosition>868</xPosition>
+        <yPosition>530</yPosition>
+        <levelType>2</levelType>
     </lootable>
 </Lootables>

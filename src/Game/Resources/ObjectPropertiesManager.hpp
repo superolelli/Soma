@@ -6,6 +6,7 @@
 
 #include "../Ability.hpp"
 #include "../LevelSpecs.hpp"
+#include "../Lootable.hpp"
 
 #include "../Item.hpp"
 
@@ -54,7 +55,8 @@ public:
 
 	std::vector<LevelSpecs> levelSpecs[2];
 
-	LootableProperties lootableProperties[11];
+	LootableProperties lootableProperties[LootableID::numberOfLootables];
+	std::vector<LootableID> lootablesByLevelType[2];
 
 	EquipmentProperties equipmentStats[NUMBER_OF_EQUIPMENT_ITEMS];
 	ConsumableProperties consumableStats[NUMBER_OF_CONSUMABLE_ITEMS];

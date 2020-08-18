@@ -259,6 +259,19 @@ void ObjectPropertiesManager::LoadLootableProperties()
 				lootableProperties[lootableID].possibleItems.push_back(itemIdentifierMap[item.text().as_string()]);
 			}
 		}
+
+		int levelType = 0;
+		if (lootable.child("levelType"))
+			levelType = lootable.child("levelType").text().as_int();
+
+		if (levelType == 0)
+		{
+			lootablesByLevelType[LevelType::bang].push_back(LootableID(lootableID));
+			lootablesByLevelType[LevelType::kutschfahrt].push_back(LootableID(lootableID));
+		}
+		else
+			lootablesByLevelType[levelType - 1].push_back(LootableID(lootableID));
+
 	}
 }
 

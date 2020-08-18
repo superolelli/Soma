@@ -4,9 +4,27 @@
 #include "../Framework/Gameengine.hpp"
 #include "DialogManager.hpp"
 #include "LootableDialog.hpp"
+#include "Resources/SoundManager.hpp"
 
 
-enum LootableID { barrel, cabinet, chest, cup, keg, rubbish, sack, skeleton, stonepile, table, wagon, numberOfLootables };
+enum LootableID { barrel, cabinet, chest, cup, keg, rubbish, sack, skeleton, stonepile, table, wagon, beautiful_chest, goblet, secret_bag, numberOfLootables };
+
+static const soundID lootableSounds[numberOfLootables] = {
+soundID::BARREL,
+soundID::CABINET,
+soundID::CHEST,
+soundID::CUP,
+soundID::KEG,
+soundID::RUBBISH,
+soundID::SACK,
+soundID::SKELETON,
+soundID::STONEPILE,
+soundID::TABLE,
+soundID::WAGON,
+soundID::CHEST,
+soundID::CUP,
+soundID::SACK
+};
 
 class Lootable
 {
@@ -19,6 +37,7 @@ public:
 	void AddItem(Item &_item);
 
 private:
+
 	DialogManager *dialogManager;
 	GameStatus *gameStatus;
 

@@ -1,6 +1,7 @@
 #include "ScrollableItemPanel.hpp"
 #include "Resources\SoundManager.hpp"
 #include "Resources\StringManager.hpp"
+#include "Resources/ObjectPropertiesManager.hpp"
 
 void ScrollableItemPanel::Init(CGameEngine * _engine)
 {

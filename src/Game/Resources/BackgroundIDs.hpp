@@ -3,53 +3,37 @@
 #include <unordered_map>
 
 
-enum BackgroundID { 
-	end, 
-	corridor_1,
-	corridor_2,
-	corridor_3,
-	corridor_4,
-	corridor_5,
-	corridor_6,
-	corridor_7,
-	corridor_8,
-	door_1, 
-	door_2, 
-	room_1,
-	room_2,
-	room_3
-};
-
 enum MainRoomDoors {
 	door_bang,
 	door_kutschfahrt,
 	door_tichu
 };
 
-static std::unordered_map<std::string, BackgroundID> backgroundIdentifierMap[2] = {
+static std::unordered_map<std::string, int> backgroundIdentifierMap[2] = {
 	{
-		{ "bang_gang_ende", BackgroundID::end },
-		{ "bang_gang_1", BackgroundID::corridor_1 },
-		{ "bang_gang_2", BackgroundID::corridor_2 },
-		{ "bang_gang_3", BackgroundID::corridor_3 },
-		{ "bang_gang_4", BackgroundID::corridor_4 },
-		{ "bang_gang_5", BackgroundID::corridor_5 },
-		{ "bang_gang_6", BackgroundID::corridor_6 },
-		{ "bang_gang_7", BackgroundID::corridor_7 },
-		{ "bang_gang_8", BackgroundID::corridor_8 },
-		{ "bang_tür_1", BackgroundID::door_1 },
-		{ "bang_tür_2", BackgroundID::door_2 },
-		{ "bang_raum_1", BackgroundID::room_1 },
-		{ "bang_raum_2", BackgroundID::room_2 },
-		{ "bang_raum_3", BackgroundID::room_3 }
+		{ "bang_gang_ende", 0 },
+		{ "bang_gang_1", 1 },
+		{ "bang_gang_2", 2 },
+		{ "bang_gang_3", 3 },
+		{ "bang_gang_4", 4 },
+		{ "bang_gang_5", 5 },
+		{ "bang_gang_6", 6 },
+		{ "bang_gang_7", 7 },
+		{ "bang_gang_8", 8 },
+		{ "bang_tür_1", 9 },
+		{ "bang_tür_2", 10 },
+		{ "bang_raum_1", 11 },
+		{ "bang_raum_2", 12 },
+		{ "bang_raum_3", 13 }
 	},
 	{
-		{ "kutschfahrt_gang_ende", BackgroundID::end },
-		{ "kutschfahrt_gang_1", BackgroundID::corridor_1 },
-		{ "kutschfahrt_gang_2", BackgroundID::corridor_2 },
-		{ "kutschfahrt_gang_3", BackgroundID::corridor_3 },
-		{ "kutschfahrt_gang_4", BackgroundID::corridor_4 },
-		{ "kutschfahrt_gang_5", BackgroundID::corridor_5 }
+		{ "kutschfahrt_gang_ende", 0 },
+		{ "kutschfahrt_gang_1", 1 },
+		{ "kutschfahrt_gang_2", 2 },
+		{ "kutschfahrt_gang_3", 3 },
+		{ "kutschfahrt_gang_4", 4 },
+		{ "kutschfahrt_gang_5", 5 },
+		{ "kutschfahrt_raum_1", 6 }
 
 	}
 };

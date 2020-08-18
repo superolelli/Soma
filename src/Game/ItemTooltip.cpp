@@ -1,4 +1,5 @@
 #include "ItemTooltip.hpp"
+#include "Resources\ObjectPropertiesManager.hpp"
 
 void ItemTooltip::Init()
 {

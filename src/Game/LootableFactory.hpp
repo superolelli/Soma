@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Lootable.hpp"
+#include "LevelSpecs.hpp"
 
 class LootableFactory
 {

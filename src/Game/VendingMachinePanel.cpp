@@ -1,5 +1,6 @@
 #include "VendingMachinePanel.hpp"
 #include "Resources\SoundManager.hpp"
+#include "Resources/ObjectPropertiesManager.hpp"
 
 void VendingMachinePanel::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 {

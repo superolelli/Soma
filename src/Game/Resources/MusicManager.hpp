@@ -23,7 +23,7 @@ private:
 
 	int GetNextTrack();
 
-	sf::Music bangBackgroundMusic[7];
+	sf::Music backgroundMusic[2][7];
 	sf::Music bangBattleMusic;
 
 	sf::Music mainRoomMusic;

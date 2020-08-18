@@ -1,7 +1,6 @@
 #include "Lootable.hpp"
 #include "Resources\TextureManager.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
-#include "Resources\SoundManager.hpp"
 
 void Lootable::Init(LootableID _id, DialogManager *_dialogManager, GameStatus *_gameStatus)
 {
@@ -54,7 +53,7 @@ void Lootable::Update(CGameEngine *_engine)
 			dialogManager->AddLootableDialog(dialog);
 
 			wasLooted = true;
-			g_pSounds->PlaySound(soundID(id + LOOTABLE_SOUNDS_START));
+			g_pSounds->PlaySound(lootableSounds[id]);
 		}
 	}
 }

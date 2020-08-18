@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "../../Framework/Patterns/singleton.hpp"
-#include "BackgroundIDs.hpp"
 
 
 #define g_pTextures CTextureManager::Get()
@@ -41,7 +40,7 @@ public:
 	sf::Texture mainRoomButtonShop;
 
 	/** LOOTABLES **/
-	sf::Texture lootable[11];
+	sf::Texture lootable[14];
 
 	sf::Texture speechBubble;
 

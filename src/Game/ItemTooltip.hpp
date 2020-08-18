@@ -5,8 +5,9 @@
 #include "../Framework/Gameengine.hpp"
 #include "GameStatus.hpp"
 #include "Tooltip.hpp"
-#include "Resources\ObjectPropertiesManager.hpp"
 
+
+struct EquipmentProperties;
 
 class ItemTooltip : public Tooltip
 {
