@@ -1,7 +1,7 @@
 #include "LevelFinishedPanel.hpp"
 #include "Resources\SoundManager.hpp"
 
-void LevelFinishedPanel::Init(CGameEngine *_engine, bool _levelFailed)
+void LevelFinishedPanel::Init(CGameEngine *_engine, LevelType _levelType, bool _levelFailed)
 {
 	engine = _engine;
 	levelFailed = _levelFailed;
@@ -20,12 +20,12 @@ void LevelFinishedPanel::Init(CGameEngine *_engine, bool _levelFailed)
 
 	if (_levelFailed)
 	{
-		panel.Load(g_pTextures->bangLevelFailedPanel);
+		panel.Load(g_pTextures->levelFailedPanel[_levelType]);
 		levelFinishedText.setString("Versagt!");
 	}
 	else
 	{
-		panel.Load(g_pTextures->bangLevelFinishedPanel);
+		panel.Load(g_pTextures->levelFinishedPanel[_levelType]);
 		levelFinishedText.setString("Level beendet!");
 	}
 

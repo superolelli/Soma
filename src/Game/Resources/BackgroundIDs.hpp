@@ -48,7 +48,8 @@ static std::unordered_map<std::string, BackgroundID> backgroundIdentifierMap[2] 
 		{ "kutschfahrt_gang_1", BackgroundID::corridor_1 },
 		{ "kutschfahrt_gang_2", BackgroundID::corridor_2 },
 		{ "kutschfahrt_gang_3", BackgroundID::corridor_3 },
-		{ "kutschfahrt_gang_4", BackgroundID::corridor_4 }
+		{ "kutschfahrt_gang_4", BackgroundID::corridor_4 },
+		{ "kutschfahrt_gang_5", BackgroundID::corridor_5 }
 
 	}
 };

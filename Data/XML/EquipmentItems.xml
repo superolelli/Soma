@@ -132,5 +132,44 @@
    >
     <LevelType>2</LevelType>
    </CastingKnives>
+
+   <DuelPistol id="19" name="Duellpistole"
+    damageMin="2"
+    damageMax="2"
+   >
+    <LevelType>2</LevelType>
+   </DuelPistol>
+
+   <Monocle id="20" name="Monokel"
+    precision="5"
+   >
+    <LevelType>2</LevelType>
+   </Monocle>
+
+   <PoisonRing id="21" name="Giftring"
+    criticalHit="4"
+   >
+    <LevelType>2</LevelType>
+   </PoisonRing>
+
+   <PocketWatch id="22" name="Taschenuhr"
+    initiative="2"
+    dodge="4"
+   >
+    <LevelType>2</LevelType>
+   </PocketWatch>
+
+   <Tome id="23" name="Foliant"
+    health="5"
+    dodge="3"
+   >
+    <LevelType>2</LevelType>
+   </Tome>
+
+   <TopHat id="24" name="Zylinder"
+    armour="5"
+   >
+    <LevelType>2</LevelType>
+   </TopHat>
   
 </Items>

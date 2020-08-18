@@ -355,6 +355,9 @@ void ObjectPropertiesManager::LoadConsumableItemStats()
 			if (item.child("effect").child("buff"))
 				loadBuffFromXML(item.child("effect").child("buff"), consumableStats[itemID].buff);
 
+			if (item.child("LevelType"))
+				levelType = item.child("LevelType").text().as_int();
+
 			if (levelType == 0)
 			{
 				itemsByLevel[0][consumableStats[itemID].level - 1].push_back(ItemID(itemID + CONSUMABLE_ITEMS_START));

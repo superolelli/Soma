@@ -44,7 +44,7 @@ void Game::Init(CGameEngine * _engine)
 void Game::InitLevelGUI()
 {
 	LevelGUI *newGui = new LevelGUI;
-	newGui->Init(m_pGameEngine, gameStatus, &adventureGroup);
+	newGui->Init(m_pGameEngine, gameStatus, &adventureGroup, levelType);
 	newGui->SetOnLevelExitedCallback([&]() {HandleFinishedLevel(); });
 	currentGUI = newGui;
 }

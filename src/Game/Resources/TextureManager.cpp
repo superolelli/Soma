@@ -7,9 +7,12 @@ void CTextureManager::LoadTextures()
 {
 	statusBar.loadFromFile("Data/Sprites/Panels & Buttons/status_bar.png");
 
-	bangLevelFinishedPanel.loadFromFile("Data/Sprites/Panels & Buttons/Bang/level_finished.png");
-	bangLevelFailedPanel.loadFromFile("Data/Sprites/Panels & Buttons/Bang/level_failed.png");
+	levelFinishedPanel[0].loadFromFile("Data/Sprites/Panels & Buttons/Bang/level_finished.png");
+	levelFailedPanel[0].loadFromFile("Data/Sprites/Panels & Buttons/Bang/level_failed.png");
 	bangGenericButton.loadFromFile("Data/Sprites/Panels & Buttons/Bang/generic_button.png");
+
+	levelFinishedPanel[1].loadFromFile("Data/Sprites/Panels & Buttons/Kutschfahrt/level_finished.png");
+	levelFailedPanel[1].loadFromFile("Data/Sprites/Panels & Buttons/Kutschfahrt/level_failed.png");
 
 	/** BACKGROUNDS **/
 	std::vector<std::string> firstBackgrounds[2] = {
@@ -34,7 +37,8 @@ void CTextureManager::LoadTextures()
 			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang1.png",
 			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang2.png",
 			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang3.png",
-			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang4.png"
+			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang4.png",
+			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang5.png"
 		}
 	};
 
@@ -181,11 +185,18 @@ void CTextureManager::LoadTextures()
 			"Data/Sprites/Items/Bang/scope.png",
 			"Data/Sprites/Items/Kutschfahrt/iron_mask.png",
 			"Data/Sprites/Items/Kutschfahrt/casting_knives.png",
+			"Data/Sprites/Items/Kutschfahrt/duel_pistol.png",
+			"Data/Sprites/Items/Kutschfahrt/monocle.png",
+			"Data/Sprites/Items/Kutschfahrt/poison_ring.png",
+			"Data/Sprites/Items/Kutschfahrt/pocket_watch.png",
+			"Data/Sprites/Items/Kutschfahrt/tome.png",
+			"Data/Sprites/Items/Kutschfahrt/top_hat.png",
 			"Data/Sprites/Items/Bang/beer.png",
 			"Data/Sprites/Items/Bang/tequila.png",
 			"Data/Sprites/Items/Bang/whisky.png",
 			"Data/Sprites/Items/Kutschfahrt/drink_of_power.png",
-			"Data/Sprites/Items/Kutschfahrt/absinth.png"
+			"Data/Sprites/Items/Kutschfahrt/absinth.png",
+			"Data/Sprites/Items/Kutschfahrt/flash_powder.png"
 
 		}
 	};

@@ -12,7 +12,7 @@ public:
 
 	~LevelGUI();
 
-	virtual void Init(CGameEngine *_engine, GameStatus *_gameStatus, AdventureGroup *_adventureGroup);
+	virtual void Init(CGameEngine *_engine, GameStatus *_gameStatus, AdventureGroup *_adventureGroup, LevelType _levelType);
 	virtual void Update() override;
 	virtual void Render() override;
 
@@ -24,6 +24,8 @@ public:
 private:
 	CGameEngine *engine;
 	GameStatus *gameStatus;
+
+	LevelType levelType;
 
 	LevelGUICommon commonGUIParts;
 

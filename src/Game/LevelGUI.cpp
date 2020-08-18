@@ -2,10 +2,12 @@
 
 
 
-void LevelGUI::Init(CGameEngine * _engine, GameStatus *_gameStatus, AdventureGroup *_adventureGroup)
+void LevelGUI::Init(CGameEngine * _engine, GameStatus *_gameStatus, AdventureGroup *_adventureGroup, LevelType _levelType)
 {
 	engine = _engine;
 	gameStatus = _gameStatus;
+
+	levelType = _levelType;
 
 	commonGUIParts.Init(_engine, _gameStatus);
 	consumablePanel.Init(engine, _gameStatus, _adventureGroup);
@@ -49,7 +51,7 @@ void LevelGUI::Render()
 void LevelGUI::OpenLevelFailedPanel()
 {
 	levelFinishedPanel = new LevelFinishedPanel;
-	levelFinishedPanel->Init(engine, true);
+	levelFinishedPanel->Init(engine, levelType, true);
 	levelFinishedPanel->SetPos(engine->GetWindowSize().x / 2 - 458, 190);
 }
 
@@ -57,7 +59,7 @@ void LevelGUI::OpenLevelFailedPanel()
 void LevelGUI::OpenLevelFinishedPanel(LevelReward &_reward)
 {
 	levelFinishedPanel = new LevelFinishedPanel;
-	levelFinishedPanel->Init(engine, false);
+	levelFinishedPanel->Init(engine, levelType, false);
 	levelFinishedPanel->SetReward(_reward);
 	levelFinishedPanel->SetPos(engine->GetWindowSize().x / 2 - 458, 200);
 }

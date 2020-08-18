@@ -4,7 +4,8 @@
 #include <SFML\Graphics.hpp>
 
 enum ItemID { empty = -1, cards, dice, iron_plate, sombrero, binocular, bible, cowboyhat, lasso, ammo, knife, tomahawk, sherrifstar, boot, horseshoe, canteen, pepperbox, scope, ironmask, castingknives,
-	beer, tequila, whisky, drinkOfPower, absinth, numberOfItems };
+			duelPistol, monocle, poisonRing, pocketWatch, tome, topHat, 
+			beer, tequila, whisky, drinkOfPower, absinth, flashPowder, numberOfItems };
 
 const int EQUIPMENT_ITEMS_START = 2;
 const int CONSUMABLE_ITEMS_START = int(beer);

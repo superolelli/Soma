@@ -65,7 +65,7 @@
 
    <Absinth id="4" name="Absinth">
     <Price>30</Price>
-    <Level>1</Level>
+    <Level>2</Level>
     <LevelType>2</LevelType>
     <effect>
       <heal>5</heal>
@@ -77,5 +77,20 @@
       </buff>
     </effect>
    </Absinth>
+
+    <FlashPowder id="5" name="Blitzpulver">
+    <Price>40</Price>
+    <Level>3</Level>
+    <LevelType>2</LevelType>
+    <effect>
+      <buff>
+        <duration>10</duration>
+        <isPositive>true</isPositive>
+        <onSelf>true</onSelf>
+        <damage>2</damage>
+        <criticalHit>4</criticalHit>
+      </buff>
+    </effect>
+   </FlashPowder>
   
 </Items>

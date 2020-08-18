@@ -17,9 +17,10 @@ public:
 
 	sf::Texture statusBar;
 
-	sf::Texture bangLevelFinishedPanel;
-	sf::Texture bangLevelFailedPanel;
+	sf::Texture levelFinishedPanel[2];
+	sf::Texture levelFailedPanel[2];
 	sf::Texture bangGenericButton;
+
 
 	/** BACKGROUNDS **/
 	std::vector<sf::Texture> firstLayerBackgrounds[2];
@@ -60,7 +61,7 @@ public:
 	sf::Texture itemRowPanel;
 	sf::Texture sortColorButton;
 	sf::Texture sortNamesButton;
-	sf::Texture item[24];
+	sf::Texture item[31];
 
 	/** VENDING MACHINE **/
 	sf::Texture vendingMachinePanel;

@@ -9,7 +9,7 @@ class LevelFinishedPanel
 {
 public:
 
-	void Init(CGameEngine *_engine, bool _levelFailed);
+	void Init(CGameEngine *_engine, LevelType _levelType, bool _levelFailed);
 	void Update();
 	void Render();
 
