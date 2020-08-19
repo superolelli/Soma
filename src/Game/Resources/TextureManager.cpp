@@ -198,6 +198,8 @@ void CTextureManager::LoadTextures()
 			"Data/Sprites/Items/Kutschfahrt/pocket_watch.png",
 			"Data/Sprites/Items/Kutschfahrt/tome.png",
 			"Data/Sprites/Items/Kutschfahrt/top_hat.png",
+			"Data/Sprites/Items/Kutschfahrt/crystal_ball.png",
+			"Data/Sprites/Items/Kutschfahrt/black_pearl.png",
 			"Data/Sprites/Items/Bang/beer.png",
 			"Data/Sprites/Items/Bang/tequila.png",
 			"Data/Sprites/Items/Bang/whisky.png",
