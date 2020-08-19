@@ -136,7 +136,7 @@ void CombatantStatus::LooseHealth(int _damage, bool _critical, bool _useArmour)
 }
 
 
-void CombatantStatus::GainHealth(int _health)
+void CombatantStatus::GainHealth(int _health, bool _critical)
 {
 	currentStats.currentHealth += _health;
 
@@ -144,7 +144,11 @@ void CombatantStatus::GainHealth(int _health)
 		currentStats.currentHealth = currentStats.maxHealth;
 
 	auto notificationPos = sf::Vector2f(combatant->GetRect().left + combatant->GetRect().width / 2.0f, combatant->GetRect().top);
-	notificationRenderer->AddNotification(std::to_string(_health), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color::Green, sf::Color::Black);
+
+	if(_critical)
+		notificationRenderer->AddNotification(std::to_string(_health), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color(0, 180, 0), sf::Color::Black, 40);
+	else
+		notificationRenderer->AddNotification(std::to_string(_health), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color::Green, sf::Color::Black);
 
 	CheckNofaceBuff();
 }

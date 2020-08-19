@@ -253,39 +253,44 @@ void Combatant::SetTurnPending(bool _pending)
 
 void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effect, float _additionalDamageFactor)
 {
+	int criticalEffectFactor = 1;
+	float criticalDurationFactor = 1;
+
+	bool isCriticalHit = rand() % 100 < _attacker->status.GetCriticalHit() + _effect.criticalHitModificator;
+	if (isCriticalHit)
+	{
+		g_pSounds->PlaySound(CRITICAL_HIT);
+		criticalEffectFactor = 2;
+		criticalDurationFactor = 1.5;
+	}
+
 	if (_effect.damageFactor != 0) 
 	{
 		auto damage = _attacker->status.GetDamage() * (_effect.damageFactor + _additionalDamageFactor);
-		if (rand() % 100 < _attacker->status.GetCriticalHit() + _effect.criticalHitModificator)
-		{
-			g_pSounds->PlaySound(CRITICAL_HIT);
-			Status().LooseHealth(damage * 2, true);
-		}
-		else
-			Status().LooseHealth(damage, false);
+		Status().LooseHealth(damage * criticalEffectFactor, isCriticalHit);
 	}
 
 	if (_effect.heal != 0)
-		Status().GainHealth(_effect.heal);
+		Status().GainHealth(_effect.heal * criticalEffectFactor, isCriticalHit);
 
 	if (_effect.healSelf != 0)
 		_attacker->status.GainHealth(_effect.healSelf);
 
 	if (_effect.confusion != 0)
 	{
-		if ((rand() % 100) + 1 <= _effect.confusionProbability * 100.0f)
-			Status().Confuse(_effect.confusion);
+		if ((rand() % 100) + 1 <= (_effect.confusionProbability * criticalEffectFactor) * 100.0f)
+			Status().Confuse(std::round((float)(_effect.confusion) * criticalDurationFactor));
 	}
 
 	if (_effect.damageOverTimeRounds != 0)
-		Status().DoDamageOverTime(_effect.damageOverTimeRounds, _effect.damageOverTime);
+		Status().DoDamageOverTime(std::round((float)(_effect.damageOverTimeRounds) * criticalDurationFactor), _effect.damageOverTime);
 
 	if (_effect.mark != 0)
-		Status().Mark(_effect.mark);
+		Status().Mark(std::round((float)(_effect.mark) * criticalDurationFactor));
 
 	if (_effect.putToSleepProbability != 0.0f)
 	{
-		if ((rand() % 100) + 1 <= _effect.putToSleepProbability * 100.0f)
+		if ((rand() % 100) + 1 <= (_effect.putToSleepProbability * criticalEffectFactor) * 100.0f)
 			Status().PutToSleep();
 	}
 
@@ -297,9 +302,11 @@ void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effec
 
 	if (_effect.buff.duration != 0)
 	{
+		auto tempBuff = _effect.buff;
+		tempBuff.duration = std::round((float)(tempBuff.duration) * criticalDurationFactor);
 		if (_effect.buff.isPositive)
-			Status().AddBuff(_effect.buff);
+			Status().AddBuff(tempBuff);
 		else
-			Status().AddDebuff(_effect.buff);
+			Status().AddDebuff(tempBuff);
 	}
 }

@@ -20,7 +20,7 @@ public:
 	bool IsExecutingStatusChanges();
 
 	void LooseHealth(int _damage, bool _critical, bool _useArmour = true);
-	void GainHealth(int _health);
+	void GainHealth(int _health, bool _critical = false);
 
 	void Mark(int _rounds) { marked += _rounds; }
 	void Confuse(int _rounds) { confused += _rounds; }

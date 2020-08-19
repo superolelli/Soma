@@ -40,7 +40,7 @@ public:
 	sf::Texture mainRoomButtonShop;
 
 	/** LOOTABLES **/
-	sf::Texture lootable[14];
+	sf::Texture lootable[16];
 
 	sf::Texture speechBubble;
 

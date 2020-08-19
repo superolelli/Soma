@@ -190,4 +190,28 @@
         <yPosition>530</yPosition>
         <levelType>2</levelType>
     </lootable>
+
+    <lootable id="14" name="Schränkchen der Bruderschaft">
+        <boundingBox>
+            <left>72</left>
+            <top>0</top>
+            <width>230</width>
+            <height>300</height>
+        </boundingBox>
+        <xPosition>800</xPosition>
+        <yPosition>425</yPosition>
+        <levelType>2</levelType>
+    </lootable>
+
+    <lootable id="15" name="Vitrine des Ordens">
+        <boundingBox>
+            <left>0</left>
+            <top>0</top>
+            <width>391</width>
+            <height>290</height>
+        </boundingBox>
+        <xPosition>788</xPosition>
+        <yPosition>414</yPosition>
+        <levelType>2</levelType>
+    </lootable>
 </Lootables>

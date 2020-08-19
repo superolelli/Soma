@@ -171,5 +171,17 @@
    >
     <LevelType>2</LevelType>
    </TopHat>
+
+    <CrystalBall id="25" name="Kristallkugel"
+     dodge="7"
+    >
+      <LevelType>2</LevelType>
+    </CrystalBall>
+
+    <BlackPearl id="26" name="Schwarze Perle"
+      health="1"       
+     >
+     <LevelType>2</LevelType>
+    </BlackPearl>
   
 </Items>

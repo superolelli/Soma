@@ -2,7 +2,7 @@
 
 <LevelSpecs>
     <level id="1">
-        <numberOfRooms>5</numberOfRooms>
+        <numberOfRooms>10</numberOfRooms>
         <backgrounds>
             <background>kutschfahrt_gang_1</background>
             <background>kutschfahrt_gang_2</background>
@@ -16,7 +16,7 @@
             <cards>25</cards>
         </reward>
         <battleProbability>0.0</battleProbability>
-        <lootableProbability>0.4</lootableProbability>
+        <lootableProbability>1.0</lootableProbability>
         <enemyGroups>
             <group>
                 <enemy>Indianer</enemy>
