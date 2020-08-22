@@ -60,7 +60,7 @@ public:
 	sf::Texture itemRowPanel;
 	sf::Texture sortColorButton;
 	sf::Texture sortNamesButton;
-	sf::Texture item[33];
+	sf::Texture item[34];
 
 	/** VENDING MACHINE **/
 	sf::Texture vendingMachinePanel;

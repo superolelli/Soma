@@ -183,5 +183,11 @@
      >
      <LevelType>2</LevelType>
     </BlackPearl>
+
+    <Gloves id="27" name="Handschuhe"
+        armour="5"
+     >
+      <LevelType>2</LevelType>
+    </Gloves>
   
 </Items>
