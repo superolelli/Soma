@@ -7,7 +7,7 @@
 #include "Resources/SoundManager.hpp"
 
 
-enum LootableID { barrel, cabinet, chest, cup, keg, rubbish, sack, skeleton, stonepile, table, wagon, beautiful_chest, goblet, secret_bag, brotherhood_cupboard, order_vitrine, numberOfLootables };
+enum LootableID { barrel, cabinet, chest, cup, keg, rubbish, sack, skeleton, stonepile, table, wagon, beautiful_chest, goblet, secret_bag, brotherhood_cupboard, order_vitrine, tree_stump, numberOfLootables };
 
 static const soundID lootableSounds[numberOfLootables] = {
 soundID::BARREL,
@@ -25,7 +25,8 @@ soundID::CHEST,
 soundID::CUP,
 soundID::SACK,
 soundID::CABINET,
-soundID::TABLE
+soundID::TABLE,
+soundID::DEAD_TREE
 };
 
 class Lootable

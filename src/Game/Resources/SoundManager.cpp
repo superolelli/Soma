@@ -24,6 +24,7 @@ void SoundManager::LoadSounds()
 	soundBuffers[STONEPILE].loadFromFile("Data/Sound/Lootables/stonepile.ogg");
 	soundBuffers[TABLE].loadFromFile("Data/Sound/Lootables/table.ogg");
 	soundBuffers[WAGON].loadFromFile("Data/Sound/Lootables/wagon.ogg");
+	soundBuffers[DEAD_TREE].loadFromFile("Data/Sound/Lootables/dead_tree.ogg");
 
 	for (int i = 0; i < 10; i++)
 	{

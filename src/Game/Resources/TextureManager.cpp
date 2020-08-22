@@ -148,6 +148,7 @@ void CTextureManager::LoadTextures()
 	lootable[13].loadFromFile("Data/Sprites/Lootables/secret_bag.png");
 	lootable[14].loadFromFile("Data/Sprites/Lootables/brotherhood_cabinet.png");
 	lootable[15].loadFromFile("Data/Sprites/Lootables/order_vitrine.png");
+	lootable[16].loadFromFile("Data/Sprites/Lootables/tree_stump.png");
 
 	speechBubble.loadFromFile("Data/Sprites/speech_bubble.png");
 

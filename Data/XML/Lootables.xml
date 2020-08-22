@@ -191,7 +191,7 @@
         <levelType>2</levelType>
     </lootable>
 
-    <lootable id="14" name="Schränkchen der Bruderschaft">
+    <lootable id="14" name="Schränkchen">
         <boundingBox>
             <left>72</left>
             <top>0</top>
@@ -203,7 +203,7 @@
         <levelType>2</levelType>
     </lootable>
 
-    <lootable id="15" name="Vitrine des Ordens">
+    <lootable id="15" name="Vitrine">
         <boundingBox>
             <left>0</left>
             <top>0</top>
@@ -212,6 +212,18 @@
         </boundingBox>
         <xPosition>788</xPosition>
         <yPosition>414</yPosition>
+        <levelType>2</levelType>
+    </lootable>
+
+    <lootable id="16" name="Toter Baum">
+        <boundingBox>
+            <left>0</left>
+            <top>0</top>
+            <width>244</width>
+            <height>242</height>
+        </boundingBox>
+        <xPosition>912</xPosition>
+        <yPosition>450</yPosition>
         <levelType>2</levelType>
     </lootable>
 </Lootables>
