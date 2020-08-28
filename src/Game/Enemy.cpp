@@ -45,6 +45,9 @@ void Enemy::Init()
 		combatantObject = g_pModels->modelBillNoface->getNewEntityInstance("BillNoface");
 		status.SetNofaceBuffLevel(0);
 		break;
+	case CombatantID::JuanTirador:
+		combatantObject = g_pModels->modelJuanTirador->getNewEntityInstance("JuanTirador");
+		break;
 	}
 	
 	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);

@@ -142,6 +142,9 @@ namespace pugi {
 		if (abilityNode.child("attackAllEnemies"))
 			ability.possibleAims.attackAllEnemies = abilityNode.child("attackAllEnemies").text().as_bool();
 
+		if (abilityNode.child("attackSelf"))
+			ability.possibleAims.attackSelf = abilityNode.child("attackSelf").text().as_bool();
+
 		for (xml_node &pos : abilityNode.child("positions").children())
 		{
 			ability.possibleAims.position[pos.attribute("id").as_int()] = pos.text().as_bool();

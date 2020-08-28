@@ -40,6 +40,7 @@ void CTextureManager::LoadTextures()
 			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang3.png",
 			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang4.png",
 			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang5.png",
+			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_gang6.png",
 			"Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_raum1.png"
 		}
 	};

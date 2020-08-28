@@ -13,6 +13,7 @@ struct PossibleAims
 	bool attackAll;
 	bool attackAllPlayers;
 	bool attackAllEnemies;
+    bool attackSelf;
     int howMany;
 
 	void applySkill(const PossibleAims &_aims);

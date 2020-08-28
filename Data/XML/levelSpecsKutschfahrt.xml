@@ -2,53 +2,33 @@
 
 <LevelSpecs>
     <level id="1">
-        <numberOfRooms>10</numberOfRooms>
+        <numberOfRooms>5</numberOfRooms>
         <backgrounds>
             <background>kutschfahrt_gang_1</background>
             <background>kutschfahrt_gang_2</background>
             <background>kutschfahrt_gang_3</background>
             <background>kutschfahrt_gang_4</background>
             <background>kutschfahrt_gang_5</background>
+            <background>kutschfahrt_gang_6</background>
         </backgrounds>
         <endBackground>kutschfahrt_gang_ende</endBackground>
         <reward>
             <dice>1</dice>
             <cards>25</cards>
         </reward>
-        <battleProbability>0.0</battleProbability>
-        <lootableProbability>1.0</lootableProbability>
+        <battleProbability>0.3</battleProbability>
+        <lootableProbability>0.4</lootableProbability>
         <enemyGroups>
             <group>
-                <enemy>Indianer</enemy>
-                <enemy>Indianer</enemy>
-            </group>
-            <group>
-                <enemy>Abtrünniger</enemy>
-                <enemy>Abtrünniger</enemy>
-                <enemy>Abtrünniger</enemy>
-            </group>
-            <group>
-                <enemy>Abtrünniger</enemy>
-                <enemy>Gesetzloser</enemy>
-            </group>
-            <group>
-                <enemy>Indianer</enemy>
-                <enemy>Abtrünniger</enemy>
-            </group>
-            <group>
-                <enemy>Gesetzloser</enemy>
-                <enemy>Gesetzloser</enemy>
-            </group>
-            <group>
-                <enemy>Hilfssheriff</enemy>
-                <enemy>Hilfssheriff</enemy>
+                <enemy>Juan Tirador</enemy>
+                <enemy>Juan Tirador</enemy>
             </group>
         </enemyGroups>
         <bossGroup>
-            <enemy>Abtrünniger</enemy>
-            <enemy>Abtrünniger</enemy>
-            <enemy>Gesetzloser</enemy>
-            <enemy>Gesetzloser</enemy>
+            <enemy>Juan Tirador</enemy>
+            <enemy>Juan Tirador</enemy>
+            <enemy>Juan Tirador</enemy>
+            <enemy>Juan Tirador</enemy>
         </bossGroup>
     </level>
 </LevelSpecs>

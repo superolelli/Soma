@@ -9,6 +9,7 @@
 	<attackAll>false</attackAll>
 	<attackAllPlayers>false</attackAllPlayers>
     <attackAllEnemies>false</attackAllEnemies>
+   <attackSelf>false</attackSelf>
     <positions>
       <value id="0">false</value>
       <value id="1">false</value>

@@ -69,9 +69,7 @@
 	<ability id="4" name="Die Toten begraben">
 	  <animation>bury_the_dead</animation>
 
-	  <positions>
-		  <value id="7">true</value>
-	  </positions>
+      <attackSelf>true</attackSelf>
 
 	  <effect>
 		  <healSelf>20</healSelf>
@@ -102,9 +100,7 @@
 	<ability id="6" name="Indianer!">
 	  <animation>indians</animation>
 
-	  <positions>
-		  <value id="7">true</value>
-	  </positions>
+     <attackSelf>true</attackSelf>
 
 	  <effect>
 	  </effect>
@@ -208,9 +204,7 @@
 		<animation>beer</animation>
 		<effectAnimation>empty</effectAnimation>
 
-		<positions>
-			<value id="7">true</value>
-		</positions>
+     <attackSelf>true</attackSelf>
 
 		<effect>
 			<heal>8</heal>
@@ -322,5 +316,37 @@
 		  </damageOverTime>
 	  </effect>
   	</ability>
+
+    <ability id="18" name="Duellpistole">
+        <animation>duelpistol</animation>
+        <effectAnimation>duelpistol</effectAnimation>
+
+        <positions>
+            <value id="0">true</value>
+            <value id="1">true</value>
+            <value id="2">true</value>
+            <value id="3">true</value>
+        </positions>
+
+        <effect>
+            <damageFactor>1</damageFactor>
+        </effect>
+    </ability>
+
+    <ability id="19" name="Schläger">
+        <animation>thug</animation>
+        <effectAnimation>empty</effectAnimation>
+
+        <attackSelf>true</attackSelf>
+
+        <effect>
+            <buff>
+                <duration>3</duration>
+                <isPositive>true</isPositive>
+                <onSelf>true</onSelf>
+                <damage>3</damage>
+            </buff>
+        </effect>
+    </ability>
 
 </Abilities>

@@ -52,7 +52,8 @@ void PlayerStatePrepareAbility::ChangeState()
 
 bool PlayerStatePrepareAbility::CurrentAbilityCanAimAtCombatant(Combatant* _combatant)
 {
-	bool canAim = g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()].possibleAims.position[_combatant->GetBattlePos()] && !_combatant->IsDying();
+	bool canAim = g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()].possibleAims.position[_combatant->GetBattlePos()] && !_combatant->IsDying() ||
+		g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()].possibleAims.attackSelf && _combatant == context;
 
 	if (dynamic_cast<PlayerMarkus*>(playerContext) != nullptr && playerContext->gui->GetCurrentAbility() == 0) {
 		auto *markus = dynamic_cast<PlayerMarkus*>(playerContext);

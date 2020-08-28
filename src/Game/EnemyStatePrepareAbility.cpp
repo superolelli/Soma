@@ -56,7 +56,7 @@ bool EnemyStatePrepareAbility::ChosenAbilityHitsPlayer()
 
 bool EnemyStatePrepareAbility::ChosenAbilityHitsSelf()
 {
-    return g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.position[enemyContext->battlePosition];
+    return g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.position[enemyContext->battlePosition] || g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackSelf;
 }
 
 bool EnemyStatePrepareAbility::PlayerShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition)
@@ -120,6 +120,10 @@ void EnemyStatePrepareAbility::ChooseAbility()
 		break;
 	case CombatantID::BillNoface:
 		ChooseAbilityBillNoface();
+		break;
+	case CombatantID::JuanTirador:
+		ChooseAbilityJuanTirador();
+		break;
 	}
 }
 
@@ -231,6 +235,15 @@ void EnemyStatePrepareAbility::ChooseAbilityBillNoface()
 		chosenAbility = enemyAbilities::rattlesnake;
 }
 
+
+void EnemyStatePrepareAbility::ChooseAbilityJuanTirador()
+{
+	int randomNumber = rand() % 2;
+	if (randomNumber == 0)
+		chosenAbility = enemyAbilities::duelpistol;
+	else
+		chosenAbility = enemyAbilities::thug;
+}
 
 bool EnemyStatePrepareAbility::OnlyOneCompanionLeft()
 {

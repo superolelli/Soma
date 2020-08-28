@@ -33,7 +33,8 @@ static std::unordered_map<std::string, int> backgroundIdentifierMap[2] = {
 		{ "kutschfahrt_gang_3", 3 },
 		{ "kutschfahrt_gang_4", 4 },
 		{ "kutschfahrt_gang_5", 5 },
-		{ "kutschfahrt_raum_1", 6 }
+		{ "kutschfahrt_gang_6", 6 },
+		{ "kutschfahrt_raum_1", 7 }
 
 	}
 };
