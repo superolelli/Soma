@@ -10,7 +10,9 @@
 		criticalHit="6"
 		dodge="3"
 		precision="6"
-  ></Simon>
+  >
+      <Model>./Data/Sprites/Players/Simon2/simon.scml</Model>
+  </Simon>
 
   <Ole id="1"
     armour ="1"
@@ -21,7 +23,9 @@
 	criticalHit="6"
 	dodge="6"
 	precision="6"
-  ></Ole>
+  >
+      <Model>./Data/Sprites/Players/Ole2/ole2.scml</Model>
+  </Ole>
 
   <Anna id="2"
     armour ="1"
@@ -32,7 +36,9 @@
 	criticalHit="5"
 	dodge="9"
 	precision="5"
-  ></Anna>
+  >
+      <Model>./Data/Sprites/Players/Anna2/anna.scml</Model>
+  </Anna>
 
   <Markus id="3"
     armour ="1"
@@ -43,6 +49,8 @@
 		criticalHit="4"
 		dodge="3"
 		precision="4"
-  ></Markus>
+  >
+      <Model>./Data/Sprites/Players/Markus2/markus.scml</Model>
+  </Markus>
   
 </PlayerAttributes>

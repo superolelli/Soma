@@ -23,21 +23,7 @@ public:
 	SpriterEngine::SpriterModel *modelSimonMainRoom;
 	SpriterEngine::SpriterModel *modelMarkusMainRoom;
 
-	SpriterEngine::SpriterModel *modelOle;
-	SpriterEngine::SpriterModel *modelAnna;
-	SpriterEngine::SpriterModel *modelSimon;
-	SpriterEngine::SpriterModel *modelMarkus;
-
-	SpriterEngine::SpriterModel *modelAbtruenniger;
-	SpriterEngine::SpriterModel *modelGesetzloser;
-	SpriterEngine::SpriterModel *modelIndianer;
-	SpriterEngine::SpriterModel *modelHilfssheriff;
-	SpriterEngine::SpriterModel *modelGreg;
-	SpriterEngine::SpriterModel *modelApacheKid;
-	SpriterEngine::SpriterModel *modelBigSpencer;
-	SpriterEngine::SpriterModel *modelTequilaJoe;
-	SpriterEngine::SpriterModel *modelBillNoface;
-	SpriterEngine::SpriterModel* modelJuanTirador;
+    std::vector<SpriterEngine::SpriterModel*> combatantModels;
 
 	SpriterEngine::SpriterModel *modelAbilityEffects;
 	SpriterEngine::SpriterModel *modelNewBattleAnimation;

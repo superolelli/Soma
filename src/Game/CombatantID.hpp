@@ -17,23 +17,9 @@ enum CombatantID {
 	BigSpencer,
 	TequilaJoe,
 	BillNoface,
-	JuanTirador
+	JuanTirador,
+    number_of_combatants
 };
 
 
-static std::unordered_map<std::string, CombatantID> combatantIdentifierMap = {
-	{ "Simon", CombatantID::Simon },
-	{ "Ole", CombatantID::Ole },
-	{ "Anna", CombatantID::Anna },
-	{ "Markus", CombatantID::Markus },
-	{ "Gesetzloser", CombatantID::Gesetzloser },
-	{ "Abtrünniger", CombatantID::Abtruenniger },
-	{ "Indianer", CombatantID::Indianer },
-	{ "Hilfssheriff", CombatantID::Hilfssheriff },
-	{ "Greg Digger", CombatantID::Greg},
-	{ "Apache Kid", CombatantID::Apachekid},
-	{ "Big Spencer", CombatantID::BigSpencer},
-	{ "Tequila Joe", CombatantID::TequilaJoe},
-	{ "Bill Noface", CombatantID::BillNoface},
-	{ "Juan Tirador", CombatantID::JuanTirador}
-};
+static std::unordered_map<std::string, CombatantID> combatantIdentifierMap = {};

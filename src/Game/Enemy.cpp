@@ -15,42 +15,11 @@ Enemy::Enemy(int _id, CGameEngine * _engine, NotificationRenderer * _notificatio
 
 void Enemy::Init()
 {
-	switch (enemyID)
-	{
-	case CombatantID::Gesetzloser:
-		combatantObject = g_pModels->modelGesetzloser->getNewEntityInstance("Gesetzloser");
-		break;
-	case CombatantID::Abtruenniger:
-		combatantObject = g_pModels->modelAbtruenniger->getNewEntityInstance("Abtruenniger");
-		break;
-	case CombatantID::Indianer:
-		combatantObject = g_pModels->modelIndianer->getNewEntityInstance("Indianer");
-		break;
-	case CombatantID::Hilfssheriff:
-		combatantObject = g_pModels->modelHilfssheriff->getNewEntityInstance("Hilfssheriff");
-		break;
-	case CombatantID::Greg:
-		combatantObject = g_pModels->modelGreg->getNewEntityInstance("Greg");
-		break;
-	case CombatantID::Apachekid:
-		combatantObject = g_pModels->modelApacheKid->getNewEntityInstance("ApacheKid");
-		break;
-	case CombatantID::BigSpencer:
-		combatantObject = g_pModels->modelBigSpencer->getNewEntityInstance("BigSpencer");
-		break;
-	case CombatantID::TequilaJoe:
-		combatantObject = g_pModels->modelTequilaJoe->getNewEntityInstance("TequilaJoe");
-		break;
-	case CombatantID::BillNoface:
-		combatantObject = g_pModels->modelBillNoface->getNewEntityInstance("BillNoface");
-		status.SetNofaceBuffLevel(0);
-		break;
-	case CombatantID::JuanTirador:
-		combatantObject = g_pModels->modelJuanTirador->getNewEntityInstance("JuanTirador");
-		break;
-	}
-	
+    combatantObject = g_pModels->combatantModels[enemyID]->getNewEntityInstance(g_pObjectProperties->enemyInstanceNames[enemyID]);
 	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);
+
+    if (enemyID == CombatantID::BillNoface)
+        status.SetNofaceBuffLevel(0);
 
 	Combatant::Init();
 }

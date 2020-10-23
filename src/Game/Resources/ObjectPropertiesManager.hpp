@@ -10,6 +10,8 @@
 
 #include "../Item.hpp"
 
+#include "EnemyAbilities.hpp"
+
 #include <map>
 
 struct LootableProperties
@@ -48,8 +50,10 @@ public:
 	CombatantAttributes playerStats[4];
 	std::map<int, CombatantAttributes> enemyStats;
 	std::unordered_map<int, std::vector<ItemID>> enemyLoot;
+    std::unordered_map<int, std::string> enemyInstanceNames;
+    std::string combatantModelFileNames[CombatantID::number_of_combatants];
 
-	Ability enemyAbilities[20];
+	Ability enemyAbilities[int(enemyAbilities::number_of_abilities)];
 
 	Ability skills[4][4][8];
 

@@ -14,6 +14,7 @@
 	  <Loot>
 		  <Item>Patronen</Item>
 	  </Loot>
+      <Model>./Data/Sprites/Enemies/Bang/Abtruenniger/abtruenniger.scml</Model>
   </Gesetzloser>
 
   <Abtruenniger id="5" 
@@ -32,6 +33,7 @@
 		  <Item>Stiefel</Item>
 		  <Item>Patronen</Item>
 	  </Loot>
+      <Model>./Data/Sprites/Enemies/Bang/Gesetzloser/gesetzloser.scml</Model>
   </Abtruenniger>
 
   <Indianer id="6" 
@@ -47,6 +49,7 @@
 	  <Loot>
 		  <Item>Tomahawk</Item>
 	  </Loot>
+      <Model>./Data/Sprites/Enemies/Bang/Indianer/indianer.scml</Model>
   </Indianer>
 
   <Hilfssheriff id="7"
@@ -64,6 +67,7 @@
 		  <Item>Stiefel</Item>
 		  <Item>Patronen</Item>
 	  </Loot>
+      <Model>./Data/Sprites/Enemies/Bang/Hilfssheriff/hilfssheriff.scml</Model>
   </Hilfssheriff>
 
   <Greg id="8" 
@@ -78,6 +82,7 @@
   >
 	  <Loot>
 	  </Loot>
+      <Model>./Data/Sprites/Enemies/Bang/Greg Digger/greg.scml</Model>
   </Greg>
 
     <ApacheKid id="9" 
@@ -94,6 +99,7 @@
 			<Item>Messer</Item>
 			<Item>Tomahawk</Item>
 		</Loot>
+        <Model>./Data/Sprites/Enemies/Bang/Apache Kid/ApacheKid.scml</Model>
 	</ApacheKid>
 	
    <BigSpencer id="10" 
@@ -109,6 +115,7 @@
 		<Loot>
 			<Item>Bier</Item>
 		</Loot>
+       <Model>./Data/Sprites/Enemies/Bang/Big Spencer/BigSpencer.scml</Model>
 	</BigSpencer>
 
   <TequilaJoe id="11" 
@@ -125,6 +132,7 @@
 			<Item>Bier</Item>
       <Item>Tequila</Item>
 		</Loot>
+      <Model>./Data/Sprites/Enemies/Bang/Tequila Joe/TequilaJoe.scml</Model>
 	</TequilaJoe>
 
     <BillNoface id="12"
@@ -140,6 +148,7 @@
       <Loot>
           <Item>Patronen</Item>
       </Loot>
+        <Model>./Data/Sprites/Enemies/Bang/Bill Noface/BillNoface.scml</Model>
     </BillNoface>
 
     <JuanTirador id="13"
@@ -155,6 +164,7 @@
       <Loot>
           <Item>Duellpistole</Item>
       </Loot>
+        <Model>./Data/Sprites/Enemies/Kutschfahrt/JuanTirador/JuanTirador.scml</Model>
     </JuanTirador>
   
 </EnemyAttributes>

@@ -5,12 +5,12 @@
 void LoadAllData(std::atomic<bool> *_everythingLoaded, CGameEngine *_engine)
 {
 	g_pTextures->LoadTextures();
-	g_pModels->LoadModels(*_engine);
-	g_pSpritePool->LoadSprites();
-	g_pFonts->LoadFonts();
-	g_pSounds->LoadSounds();
 	g_pStringContainer->LoadStrings();
 	g_pObjectProperties->LoadObjectProperties();
+    g_pFonts->LoadFonts();
+    g_pSounds->LoadSounds();
+    g_pModels->LoadModels(*_engine);
+    g_pSpritePool->LoadSprites();
 	g_pVideos->LoadVideos(_engine);
 	g_pMusic->LoadMusic();
 	*_everythingLoaded = true;

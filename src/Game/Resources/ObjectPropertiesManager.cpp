@@ -1,6 +1,6 @@
 #include "ObjectPropertiesManager.hpp"
 #include "../CombatantID.hpp"
-
+#include "StringManager.hpp"
 
 
 
@@ -16,6 +16,9 @@ void ObjectPropertiesManager::LoadObjectProperties()
 	LoadEnemyAttributes();
 	LoadLevelSpecs();
 	LoadMainRoomPositions();
+
+    for (int i = 0; i < g_pStringContainer->combatantNames.size(); i++)
+        combatantIdentifierMap[g_pStringContainer->combatantNames[i]] = CombatantID(i);
 }
 
 
@@ -80,6 +83,7 @@ void ObjectPropertiesManager::LoadPlayerAttributes()
 		int playerID = player.attribute("id").as_int();
 		
 		loadAttributesFromXML(player, playerStats[playerID]);
+        combatantModelFileNames[playerID] = player.child("Model").text().as_string();
 	}
 }
 
@@ -162,6 +166,8 @@ void ObjectPropertiesManager::LoadEnemyAttributes()
 
 		loadAttributesFromXML(enemy, enemyStats[enemyID]);
 		loadPossibleLootFromXML(enemy, enemyLoot[enemyID]);
+        enemyInstanceNames[enemyID] = enemy.name();
+        combatantModelFileNames[enemyID] = enemy.child("Model").text().as_string();
 	}
 }
 
