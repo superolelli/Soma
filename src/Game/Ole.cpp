@@ -8,7 +8,7 @@ PlayerOle::PlayerOle(int _id, CGameEngine * _engine, NotificationRenderer * _not
 
 void PlayerOle::Init()
 {
-	combatantObject = g_pModels->combatantModels[CombatantID::Ole]->getNewEntityInstance("Ole");
+	combatantObject = g_pModels->GetNewCombatantModelInstance(CombatantID::Ole);
 
 	this->Player::Init();
 }

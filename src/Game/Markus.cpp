@@ -8,7 +8,7 @@ PlayerMarkus::PlayerMarkus(int _id, CGameEngine * _engine, NotificationRenderer 
 
 void PlayerMarkus::Init()
 {
-	combatantObject = g_pModels->combatantModels[CombatantID::Markus]->getNewEntityInstance("Markus");
+	combatantObject = g_pModels->GetNewCombatantModelInstance(CombatantID::Markus);
 
 	this->Player::Init();
 

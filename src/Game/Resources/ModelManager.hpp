@@ -10,6 +10,8 @@
 
 #include "../../Framework/Gameengine.hpp"
 
+#include "../CombatantID.hpp"
+
 #define g_pModels CModelManager::Get()
 class CModelManager : public TSingleton<CModelManager>
 {
@@ -18,13 +20,17 @@ public:
 	void LoadModels(CGameEngine &_engine);
 	void Quit();
 
+	SpriterEngine::EntityInstance* GetNewCombatantModelInstance(CombatantID _id);
+
 	SpriterEngine::SpriterModel *modelOleMainRoom;
 	SpriterEngine::SpriterModel *modelAnnaMainRoom;
 	SpriterEngine::SpriterModel *modelSimonMainRoom;
 	SpriterEngine::SpriterModel *modelMarkusMainRoom;
 
-    std::vector<SpriterEngine::SpriterModel*> combatantModels;
-
 	SpriterEngine::SpriterModel *modelAbilityEffects;
 	SpriterEngine::SpriterModel *modelNewBattleAnimation;
+
+private:
+	std::vector<SpriterEngine::SpriterModel*> combatantModels;
+	std::vector<std::string> instanceNames;
 };

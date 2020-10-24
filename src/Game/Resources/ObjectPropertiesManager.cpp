@@ -16,9 +16,6 @@ void ObjectPropertiesManager::LoadObjectProperties()
 	LoadEnemyAttributes();
 	LoadLevelSpecs();
 	LoadMainRoomPositions();
-
-    for (int i = 0; i < g_pStringContainer->combatantNames.size(); i++)
-        combatantIdentifierMap[g_pStringContainer->combatantNames[i]] = CombatantID(i);
 }
 
 
@@ -81,9 +78,7 @@ void ObjectPropertiesManager::LoadPlayerAttributes()
 	for (xml_node &player : doc.child("PlayerAttributes").children())
 	{
 		int playerID = player.attribute("id").as_int();
-		
 		loadAttributesFromXML(player, playerStats[playerID]);
-        combatantModelFileNames[playerID] = player.child("Model").text().as_string();
 	}
 }
 
@@ -163,11 +158,8 @@ void ObjectPropertiesManager::LoadEnemyAttributes()
 	for (xml_node &enemy : doc.child("EnemyAttributes").children())
 	{
 		int enemyID = enemy.attribute("id").as_int();
-
 		loadAttributesFromXML(enemy, enemyStats[enemyID]);
 		loadPossibleLootFromXML(enemy, enemyLoot[enemyID]);
-        enemyInstanceNames[enemyID] = enemy.name();
-        combatantModelFileNames[enemyID] = enemy.child("Model").text().as_string();
 	}
 }
 

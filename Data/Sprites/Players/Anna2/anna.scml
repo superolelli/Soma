@@ -33,7 +33,7 @@
         <file id="1" name="Sound/laugh1.wav" type="sound"/>
         <file id="2" name="Sound/scary_laugh.wav" type="sound"/>
     </folder>
-    <entity id="0" name="anna">
+    <entity id="0" name="Anna">
         <obj_info name="bone_000" type="bone" w="182.808" h="10"/>
         <obj_info name="bone_001" type="bone" w="70.1649" h="10"/>
         <obj_info name="bone_002" type="bone" w="65.6002" h="10"/>

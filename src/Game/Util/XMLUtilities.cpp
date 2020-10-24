@@ -1,6 +1,7 @@
 #include "XMLUtilities.hpp"
 #include <SFML\System\String.hpp>
 #include "../Resources/BackgroundIDs.hpp"
+#include "../Resources/StringManager.hpp"
 
 namespace pugi {
 
@@ -247,7 +248,9 @@ namespace pugi {
 		for (xml_node &enemy : enemyGroupNode)
 		{
 			std::string str(enemy.text().as_string());
-			newGroup[currentEnemy++] = combatantIdentifierMap[sf::String::fromUtf8(str.begin(), str.end())];
+			auto it = std::find(g_pStringContainer->combatantNames.begin(), g_pStringContainer->combatantNames.end(), sf::String::fromUtf8(str.begin(), str.end()));
+			auto index = std::distance(g_pStringContainer->combatantNames.begin(), it);
+			newGroup[currentEnemy++] = CombatantID(index);
 		}
 	}
 }

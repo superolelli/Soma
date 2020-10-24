@@ -15,7 +15,7 @@ Enemy::Enemy(int _id, CGameEngine * _engine, NotificationRenderer * _notificatio
 
 void Enemy::Init()
 {
-    combatantObject = g_pModels->combatantModels[enemyID]->getNewEntityInstance(g_pObjectProperties->enemyInstanceNames[enemyID]);
+    combatantObject = g_pModels->GetNewCombatantModelInstance(CombatantID(enemyID));
 	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);
 
     if (enemyID == CombatantID::BillNoface)

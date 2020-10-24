@@ -14,7 +14,7 @@
 	  <Loot>
 		  <Item>Patronen</Item>
 	  </Loot>
-      <Model>./Data/Sprites/Enemies/Bang/Abtruenniger/abtruenniger.scml</Model>
+      <Model>./Data/Sprites/Enemies/Bang/Gesetzloser/gesetzloser.scml</Model>
   </Gesetzloser>
 
   <Abtruenniger id="5" 
@@ -33,7 +33,7 @@
 		  <Item>Stiefel</Item>
 		  <Item>Patronen</Item>
 	  </Loot>
-      <Model>./Data/Sprites/Enemies/Bang/Gesetzloser/gesetzloser.scml</Model>
+      <Model>./Data/Sprites/Enemies/Bang/Abtruenniger/abtruenniger.scml</Model>
   </Abtruenniger>
 
   <Indianer id="6" 

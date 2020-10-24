@@ -8,7 +8,7 @@ PlayerSimon::PlayerSimon(int _id, CGameEngine * _engine, NotificationRenderer * 
 
 void PlayerSimon::Init()
 {
-	combatantObject = g_pModels->combatantModels[CombatantID::Simon]->getNewEntityInstance("Simon");
+	combatantObject = g_pModels->GetNewCombatantModelInstance(CombatantID::Simon);
 
 	this->Player::Init();
 }

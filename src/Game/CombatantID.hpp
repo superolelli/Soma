@@ -20,6 +20,3 @@ enum CombatantID {
 	JuanTirador,
     number_of_combatants
 };
-
-
-static std::unordered_map<std::string, CombatantID> combatantIdentifierMap = {};

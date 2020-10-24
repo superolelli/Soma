@@ -7,6 +7,6 @@ PlayerAnna::PlayerAnna(int _id, CGameEngine * _engine, NotificationRenderer * _n
 
 void PlayerAnna::Init()
 {
-	combatantObject = g_pModels->combatantModels[CombatantID::Anna]->getNewEntityInstance("anna");
+	combatantObject = g_pModels->GetNewCombatantModelInstance(CombatantID::Anna);
 	this->Player::Init();
 }
