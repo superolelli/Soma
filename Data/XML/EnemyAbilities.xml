@@ -349,4 +349,40 @@
         </effect>
     </ability>
 
+    <ability id="20" name="Ablenkung">
+        <animation>distraction</animation>
+        <effectAnimation>distraction</effectAnimation>
+
+        <positions>
+            <value id="0">true</value>
+            <value id="1">true</value>
+            <value id="2">true</value>
+            <value id="3">true</value>
+        </positions>
+
+        <effect>
+            <damageFactor>1.0</damageFactor>
+            <confusion>
+                <probability>0.7</probability>
+                <rounds>3</rounds>
+            </confusion>
+        </effect>
+    </ability>
+
+    <ability id="21" name="Spionin">
+        <animation>spy</animation>
+        <effectAnimation>empty</effectAnimation>
+
+        <attackSelf>true</attackSelf>
+
+        <effect>
+            <buff>
+                <duration>1</duration>
+                <isPositive>true</isPositive>
+                <onSelf>true</onSelf>
+                <armour>40</armour>
+            </buff>
+        </effect>
+    </ability>
+
 </Abilities>

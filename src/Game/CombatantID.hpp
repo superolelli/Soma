@@ -18,5 +18,6 @@ enum CombatantID {
 	TequilaJoe,
 	BillNoface,
 	JuanTirador,
+	MarieSaunier,
     number_of_combatants
 };

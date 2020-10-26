@@ -124,6 +124,9 @@ void EnemyStatePrepareAbility::ChooseAbility()
 	case CombatantID::JuanTirador:
 		ChooseAbilityJuanTirador();
 		break;
+	case CombatantID::MarieSaunier:
+		ChooseAbilityMarieSaunier();
+		break;
 	}
 }
 
@@ -243,6 +246,15 @@ void EnemyStatePrepareAbility::ChooseAbilityJuanTirador()
 		chosenAbility = enemyAbilities::duelpistol;
 	else
 		chosenAbility = enemyAbilities::thug;
+}
+
+void EnemyStatePrepareAbility::ChooseAbilityMarieSaunier()
+{
+	int randomNumber = rand() % 2;
+	if (randomNumber == 0)
+		chosenAbility = enemyAbilities::distraction;
+	else
+		chosenAbility = enemyAbilities::spy;
 }
 
 bool EnemyStatePrepareAbility::OnlyOneCompanionLeft()

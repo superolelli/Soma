@@ -166,5 +166,18 @@
       </Loot>
         <Model>./Data/Sprites/Enemies/Kutschfahrt/JuanTirador/JuanTirador.scml</Model>
     </JuanTirador>
+    
+    <MarieSaunier id="14"
+        armour ="3"
+        health ="20"
+        damageMin ="0"
+        damageMax = "2"
+        initiative ="3"
+	      criticalHit="8"
+	      dodge="10"
+	      precision="6"
+    >
+        <Model>./Data/Sprites/Enemies/Kutschfahrt/MarieSaunier/MarieSaunier.scml</Model>
+    </MarieSaunier>
   
 </EnemyAttributes>

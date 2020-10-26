@@ -31,7 +31,7 @@ void CModelManager::LoadModels(CGameEngine &_engine)
 	modelSimonMainRoom = new SpriterEngine::SpriterModel("./Data/Sprites/Players/Simon2/simonMainRoom.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetRenderTarget()), new SpriterEngine::ExampleObjectFactory(&_engine.GetRenderTarget()));
 	modelMarkusMainRoom = new SpriterEngine::SpriterModel("./Data/Sprites/Players/Markus2/markusMainRoom.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetRenderTarget()), new SpriterEngine::ExampleObjectFactory(&_engine.GetRenderTarget()));
 
-    modelAbilityEffects = new SpriterEngine::SpriterModel("./Data/Sprites/Ability Effects/ability_effects2.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetRenderTarget()), new SpriterEngine::ExampleObjectFactory(&_engine.GetRenderTarget()));
+    modelAbilityEffects = new SpriterEngine::SpriterModel("./Data/Sprites/Ability Effects/ability_effects.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetRenderTarget()), new SpriterEngine::ExampleObjectFactory(&_engine.GetRenderTarget()));
 	modelNewBattleAnimation = new SpriterEngine::SpriterModel("./Data/Sprites/Battle/New Battle Animation/new_battle_animation.scml", new SpriterEngine::ExampleFileFactory(&_engine.GetRenderTarget()), new SpriterEngine::ExampleObjectFactory(&_engine.GetRenderTarget()));
 }
 
