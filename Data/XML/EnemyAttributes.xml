@@ -169,7 +169,7 @@
     
     <MarieSaunier id="14"
         armour ="3"
-        health ="20"
+        health ="15"
         damageMin ="0"
         damageMax = "2"
         initiative ="3"
@@ -179,5 +179,18 @@
     >
         <Model>./Data/Sprites/Enemies/Kutschfahrt/MarieSaunier/MarieSaunier.scml</Model>
     </MarieSaunier>
+
+    <BruderZacharias id="15"
+    armour ="0"
+    health ="20"
+    damageMin ="5"
+    damageMax = "8"
+    initiative ="2"
+    criticalHit="5"
+    dodge="4"
+    precision="5"
+    >
+        <Model>./Data/Sprites/Enemies/Kutschfahrt/BruderZacharias/BruderZacharias.scml</Model>
+    </BruderZacharias>
   
 </EnemyAttributes>

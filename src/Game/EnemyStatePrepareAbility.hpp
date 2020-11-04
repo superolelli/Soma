@@ -36,6 +36,9 @@ private:
 	void ChooseAbilityBillNoface();
 	void ChooseAbilityJuanTirador();
 	void ChooseAbilityMarieSaunier();
+	void ChooseAbilityBruderZacharias();
+
+	void ChooseTargetForDoctor();
 
 	void ChooseTarget();
     void ChooseRandomEnemy();

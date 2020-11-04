@@ -127,6 +127,9 @@ void EnemyStatePrepareAbility::ChooseAbility()
 	case CombatantID::MarieSaunier:
 		ChooseAbilityMarieSaunier();
 		break;
+	case CombatantID::BruderZacharias:
+		ChooseAbilityBruderZacharias();
+		break;
 	}
 }
 
@@ -257,6 +260,32 @@ void EnemyStatePrepareAbility::ChooseAbilityMarieSaunier()
 		chosenAbility = enemyAbilities::spy;
 }
 
+
+void EnemyStatePrepareAbility::ChooseAbilityBruderZacharias()
+{
+	bool allyWounded = false;
+	for (auto* c : *enemyContext->allCombatants)
+	{
+		if (!c->IsPlayer() && c != enemyContext && c->status.GetCurrentHealth() <= c->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::doctor)].effectFriendly.heal)
+		{
+			allyWounded = true;
+			break;
+		}
+	}
+
+	if (allyWounded)
+	{
+		int randomNumber = rand() % 5;
+		if (randomNumber == 0)
+			chosenAbility = enemyAbilities::staff;
+		else
+			chosenAbility = enemyAbilities::doctor;
+	}
+	else
+		chosenAbility = enemyAbilities::staff;
+}
+
+
 bool EnemyStatePrepareAbility::OnlyOneCompanionLeft()
 {
 	return std::count_if(enemyContext->allCombatants->begin(), enemyContext->allCombatants->end(), [&](Combatant *c) {return !c->IsPlayer(); }) <= 2;
@@ -265,6 +294,12 @@ bool EnemyStatePrepareAbility::OnlyOneCompanionLeft()
 
 void EnemyStatePrepareAbility::ChooseTarget()
 {
+	if (chosenAbility == enemyAbilities::doctor)
+	{
+		ChooseTargetForDoctor();
+		return;
+	}
+
 	if (ChosenAbilityHitsSelf())
 		enemyContext->selectedTargets.push_back(enemyContext);
     else if (ChosenAbilityHitsPlayer())
@@ -273,8 +308,29 @@ void EnemyStatePrepareAbility::ChooseTarget()
         if (enemyContext->selectedTargets.empty())
             ChooseRandomPlayer();
     }
-	else 
-        ChooseRandomEnemy();
+	else
+		ChooseRandomEnemy();
+}
+
+
+void EnemyStatePrepareAbility::ChooseTargetForDoctor()
+{
+	for (auto* c : *enemyContext->allCombatants)
+	{
+		if (!c->IsPlayer() && c != enemyContext && !c->IsDying() && c->status.GetCurrentHealth() <= c->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::doctor)].effectFriendly.heal)
+		{
+			enemyContext->selectedTargets.push_back(c);
+			break;
+		}
+	}
+
+	if (enemyContext->selectedTargets.empty())
+	{
+		chosenAbility = enemyAbilities::staff;
+		CheckForMarkedPlayers();
+		if (enemyContext->selectedTargets.empty())
+			ChooseRandomPlayer();
+	}
 }
 
 void EnemyStatePrepareAbility::CheckForMarkedPlayers()

@@ -32,11 +32,19 @@
                 <enemy>Juan Tirador</enemy>
                 <enemy>Juan Tirador</enemy>
             </group>
+            <group>
+                <enemy>Juan Tirador</enemy>
+                <enemy>Bruder Zacharias</enemy>
+            </group>
+            <group>
+                <enemy>Marie Saunière</enemy>
+                <enemy>Bruder Zacharias</enemy>
+            </group>
         </enemyGroups>
         <bossGroup>
             <enemy>Juan Tirador</enemy>
             <enemy>Juan Tirador</enemy>
-            <enemy>Juan Tirador</enemy>
+            <enemy>Bruder Zacharias</enemy>
             <enemy>Marie Saunière</enemy>
         </bossGroup>
     </level>
