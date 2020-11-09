@@ -25,6 +25,7 @@ private:
 	bool ChosenAbilityHitsPlayer();
 
     bool ChosenAbilityHitsSelf();
+	bool ChosenAbilityHitsOnlySelf();
 
 	void ChooseAbility();
 	void ChooseAbilityGreg();

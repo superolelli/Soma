@@ -7,28 +7,34 @@ CombatantStatePrepareAbility::CombatantStatePrepareAbility(Combatant * _context)
 }
 
 
-void CombatantStatePrepareAbility::ChooseRandomAlly()
+void CombatantStatePrepareAbility::ChooseRandomAlly(bool _canChooseSelf)
 {
 	int numberOfAllies = std::accumulate((*context->allCombatants).begin(), (*context->allCombatants).end(), 0, [&](int sum, Combatant *c) {if (context->IsAlly(c) && !c->IsDying())return sum + 1; else return sum; });
 
-	if (numberOfAllies <= 1)
+	if (!_canChooseSelf)
+		numberOfAllies -= 1;
+
+	if (numberOfAllies <= 0)
 		return;
 
-	int target = rand() % (numberOfAllies - 1);
+	int target = rand() % (numberOfAllies);
 
-	if (numberOfAllies == 2)
+	if (numberOfAllies == 1)
 		target = 0;
 
 	for (Combatant *c : (*context->allCombatants))
 	{
-		if (context->IsAlly(c) && c != context && !c->IsDying())
+		if (context->IsAlly(c) && !c->IsDying())
 		{
-			if (target == 0)
+			if (_canChooseSelf || c != context)
 			{
-				context->selectedTargets.push_back(c);
-				return;
+				if (target == 0)
+				{
+					context->selectedTargets.push_back(c);
+					return;
+				}
+				target--;
 			}
-			target--;
 		}
 	}
 }

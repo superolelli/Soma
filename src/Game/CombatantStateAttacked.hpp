@@ -16,8 +16,4 @@ public:
 private:
 
 	bool dodged;
-	SpriterEngine::point abilityEffectPoint;
-
-	void RenderAbilityEffects();
-	void ReloadAbilityEffectPoint();
 };

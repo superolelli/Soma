@@ -80,6 +80,16 @@ void CombatantStateExecutingAbility::Render()
 	context->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds());
 	context->combatantObject->render();
 	context->combatantObject->playSoundTriggers();
+
+	for (auto t : context->selectedTargets)
+	{
+		if (t == context)
+		{
+			context->RenderAbilityEffect(false);
+			break;
+		}
+	}
+
 }
 
 

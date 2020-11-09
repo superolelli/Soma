@@ -56,7 +56,13 @@ bool EnemyStatePrepareAbility::ChosenAbilityHitsPlayer()
 
 bool EnemyStatePrepareAbility::ChosenAbilityHitsSelf()
 {
-    return g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.position[enemyContext->battlePosition] || g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackSelf;
+    return g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.attackSelf;
+}
+
+bool EnemyStatePrepareAbility::ChosenAbilityHitsOnlySelf()
+{
+	auto hitPositions = g_pObjectProperties->enemyAbilities[int(chosenAbility)].possibleAims.position;
+	return ChosenAbilityHitsSelf() && !hitPositions[4] && !hitPositions[5] && !hitPositions[6] && !hitPositions[7];
 }
 
 bool EnemyStatePrepareAbility::PlayerShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition)
@@ -266,7 +272,7 @@ void EnemyStatePrepareAbility::ChooseAbilityBruderZacharias()
 	bool allyWounded = false;
 	for (auto* c : *enemyContext->allCombatants)
 	{
-		if (!c->IsPlayer() && c != enemyContext && c->status.GetCurrentHealth() <= c->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::doctor)].effectFriendly.heal)
+		if (!c->IsPlayer() && c->status.GetCurrentHealth() <= c->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::doctor)].effectFriendly.heal)
 		{
 			allyWounded = true;
 			break;
@@ -300,7 +306,7 @@ void EnemyStatePrepareAbility::ChooseTarget()
 		return;
 	}
 
-	if (ChosenAbilityHitsSelf())
+	if (ChosenAbilityHitsOnlySelf())
 		enemyContext->selectedTargets.push_back(enemyContext);
     else if (ChosenAbilityHitsPlayer())
     {
@@ -317,7 +323,7 @@ void EnemyStatePrepareAbility::ChooseTargetForDoctor()
 {
 	for (auto* c : *enemyContext->allCombatants)
 	{
-		if (!c->IsPlayer() && c != enemyContext && !c->IsDying() && c->status.GetCurrentHealth() <= c->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::doctor)].effectFriendly.heal)
+		if (!c->IsPlayer() && !c->IsDying() && c->status.GetCurrentHealth() <= c->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::doctor)].effectFriendly.heal)
 		{
 			enemyContext->selectedTargets.push_back(c);
 			break;
@@ -358,7 +364,7 @@ bool EnemyStatePrepareAbility::CanAimAtCombatant(Combatant *_combatant)
 
 void EnemyStatePrepareAbility::ChooseRandomEnemy()
 {
-    ChooseRandomAlly();
+    ChooseRandomAlly(ChosenAbilityHitsSelf());
     SelectAdditionalTargets(false);
 
     if(enemyContext->selectedTargets.empty())

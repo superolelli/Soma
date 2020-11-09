@@ -14,6 +14,6 @@ public:
 	virtual void Render() override {};
 
 protected:
-	void ChooseRandomAlly();
+	void ChooseRandomAlly(bool _canChooseSelf = false);
 	void ChooseRandomOpponent();
 };

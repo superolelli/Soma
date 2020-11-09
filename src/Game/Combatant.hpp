@@ -92,6 +92,9 @@ public:
 	void StopAttackedAnimation();
 	void StartDeathAnimation();
 
+	void RenderAbilityEffect(bool _dodged);
+	SpriterEngine::point GetAbilityEffectPoint();
+
 
 protected:
 

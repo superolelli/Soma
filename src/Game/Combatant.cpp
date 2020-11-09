@@ -227,6 +227,38 @@ void Combatant::StartDeathAnimation()
 	SetAnimation("dying", IDLE_ANIMATION_SPEED);
 }
 
+void Combatant::RenderAbilityEffect(bool _dodged)
+{
+	auto abilityEffectPoint = GetAbilityEffectPoint();
+
+	g_pSpritePool->abilityEffectsAnimation->setPosition(SpriterEngine::point(0, 0));
+	g_pSpritePool->abilityEffectsAnimation->reprocessCurrentTime();
+	SpriterEngine::UniversalObjectInterface* pointObj = g_pSpritePool->abilityEffectsAnimation->getObjectInstance("attaching_point");
+
+	g_pSpritePool->abilityEffectsAnimation->setPosition(SpriterEngine::point(abilityEffectPoint.x - pointObj->getPosition().x, abilityEffectPoint.y - pointObj->getPosition().y));
+
+	if (Combatant::setElapsedTimeForAbilityEffect == false)
+	{
+		g_pSpritePool->abilityEffectsAnimation->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds() * ABILITY_EFFECT_ANIMATION_SPEED);
+		Combatant::setElapsedTimeForAbilityEffect = true;
+	}
+	else
+		g_pSpritePool->abilityEffectsAnimation->setTimeElapsed(0);
+
+	if (!_dodged)
+	{
+		g_pSpritePool->abilityEffectsAnimation->render();
+		g_pSpritePool->abilityEffectsAnimation->playSoundTriggers();
+	}
+}
+
+SpriterEngine::point Combatant::GetAbilityEffectPoint()
+{
+	combatantObject->reprocessCurrentTime();
+	SpriterEngine::UniversalObjectInterface* pointObj = combatantObject->getObjectInstance("ability_effect_point");
+	return pointObj->getPosition();
+}
+
 
 void Combatant::GiveTurnTo(std::vector<Combatant*>* _targets, BattleGUI *_gui)
 {

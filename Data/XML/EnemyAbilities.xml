@@ -389,6 +389,8 @@
     <ability id="22" name="Doktor">
         <animation>doctor</animation>
         <effectAnimation>spend_a_round</effectAnimation>
+
+        <attackSelf>true</attackSelf>
         <positions>
             <value id="4">true</value>
             <value id="5">true</value>
