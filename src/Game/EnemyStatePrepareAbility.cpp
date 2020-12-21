@@ -141,7 +141,7 @@ void EnemyStatePrepareAbility::ChooseAbility()
 
 void EnemyStatePrepareAbility::ChooseAbilityGreg()
 {
-	if (enemyContext->battle->EnemyDiedLastRound() && enemyContext->status.GetCurrentHealth() < enemyContext->status.GetMaxHealth())
+	if (enemyContext->battle->EnemyDiedLastRound() && enemyContext->status.GetAttribute("currentHealth") < enemyContext->status.GetAttribute("maxHealth"))
 		chosenAbility = enemyAbilities::bury_the_dead;
 	else
 		if (rand() % 2 == 0)
@@ -195,12 +195,12 @@ void EnemyStatePrepareAbility::ChooseAbilityHilfssherrif()
 
 void EnemyStatePrepareAbility::ChooseAbilityTequilaJoe()
 {
-	bool selfWounded = enemyContext->status.GetCurrentHealth() <= enemyContext->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::beer)].effectFriendly.heal;
+	bool selfWounded = enemyContext->status.GetAttribute("currentHealth") <= enemyContext->status.GetAttribute("maxHealth") - g_pObjectProperties->enemyAbilities[int(enemyAbilities::beer)].effectFriendly.heal;
 
 	bool allyWounded = false;
 	for (auto *c : *enemyContext->allCombatants)
 	{
-		if (!c->IsPlayer() && c->status.GetCurrentHealth() <= c->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::spend_a_round)].effectFriendly.heal)
+		if (!c->IsPlayer() && c->status.GetAttribute("currentHealth") <= c->status.GetAttribute("maxHealth") - g_pObjectProperties->enemyAbilities[int(enemyAbilities::spend_a_round)].effectFriendly.heal)
 		{
 			allyWounded = true;
 			break;
@@ -272,7 +272,7 @@ void EnemyStatePrepareAbility::ChooseAbilityBruderZacharias()
 	bool allyWounded = false;
 	for (auto* c : *enemyContext->allCombatants)
 	{
-		if (!c->IsPlayer() && c->status.GetCurrentHealth() <= c->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::doctor)].effectFriendly.heal)
+		if (!c->IsPlayer() && c->status.GetAttribute("currentHealth") <= c->status.GetAttribute("maxHealth") - g_pObjectProperties->enemyAbilities[int(enemyAbilities::doctor)].effectFriendly.heal)
 		{
 			allyWounded = true;
 			break;
@@ -323,7 +323,7 @@ void EnemyStatePrepareAbility::ChooseTargetForDoctor()
 {
 	for (auto* c : *enemyContext->allCombatants)
 	{
-		if (!c->IsPlayer() && !c->IsDying() && c->status.GetCurrentHealth() <= c->status.GetMaxHealth() - g_pObjectProperties->enemyAbilities[int(enemyAbilities::doctor)].effectFriendly.heal)
+		if (!c->IsPlayer() && !c->IsDying() && c->status.GetAttribute("currentHealth") <= c->status.GetAttribute("maxHealth") - g_pObjectProperties->enemyAbilities[int(enemyAbilities::doctor)].effectFriendly.heal)
 		{
 			enemyContext->selectedTargets.push_back(c);
 			break;

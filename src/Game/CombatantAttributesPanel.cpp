@@ -71,23 +71,12 @@ void CombatantAttributesPanel::Update(CombatantStatus &_status)
 	Buff buff = _status.GetBuff();
 	Buff debuff = _status.GetDebuff();
 
-	statValueText[0].setString(std::to_string(_status.GetArmour()));
-	SetValueTextColor(statValueText[0], buff.stats.armour, debuff.stats.armour);
-
-	statValueText[1].setString(std::to_string(_status.GetDamageMin()) + "-" + std::to_string(_status.GetDamageMax()));
-	SetValueTextColor(statValueText[1], buff.stats.damageMin, debuff.stats.damageMin);
-
-	statValueText[2].setString(std::to_string(_status.GetInitiative()));
-	SetValueTextColor(statValueText[2], buff.stats.initiative, debuff.stats.initiative);
-
-	statValueText[3].setString(std::to_string(_status.GetCriticalHit()));
-	SetValueTextColor(statValueText[3], buff.stats.criticalHit, debuff.stats.criticalHit);
-
-	statValueText[4].setString(std::to_string(_status.GetDodge()));
-	SetValueTextColor(statValueText[4], buff.stats.dodge, debuff.stats.dodge);
-
-	statValueText[5].setString(std::to_string(_status.GetPrecision()));
-	SetValueTextColor(statValueText[5], buff.stats.precision, debuff.stats.precision);
+	std::vector<std::string> toShow = { "armour", "damageMin", "initiative", "criticalHit", "dodge", "precision" };
+	for (int i = 0; i < 6 ; i++)
+	{
+		statValueText[i].setString(std::to_string(_status.GetAttribute(toShow[i])));
+		SetValueTextColor(statValueText[i], buff.stats[toShow[i]], debuff.stats[toShow[i]]);
+	}
 
 	auto backgroundWidth = statValueText[0].getGlobalBounds().left - statsText.getGlobalBounds().left + 50.0f;
 	background.setSize(sf::Vector2f(backgroundWidth, statsText.getLocalBounds().height + 20.0f));	

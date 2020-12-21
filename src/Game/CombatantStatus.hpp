@@ -55,22 +55,14 @@ public:
 	Buff &GetDebuff();
 
 	FatigueLevel GetFatigueLevel() { return fatigueLevel; }
-	const CombatantAttributes fatigueDebuff{ 0,0,0,-3,-3,0,-5,-5,-1 };
-	const CombatantAttributes nofaceBuff{0,0,0,2,2,1,0,2,1};
+	CombatantAttributes fatigueDebuff;
+	CombatantAttributes nofaceBuff;
 
-	int GetMaxHealth();
-	int GetCurrentHealth();
 	int GetDamage();
-	int GetDamageMin();
-	int GetDamageMax();
-	int GetArmour();
-	int GetCriticalHit();
-	int GetDodge();
-	int GetPrecision();
-	int GetInitiative();
+	int GetAttribute(const std::string &identifier);
 
-	int *GetCurrentHealthPointer() { return &currentStats.currentHealth; }
-	int *GetMaxHealthPointer() { return &currentStats.maxHealth; }
+	int *GetCurrentHealthPointer() { return &currentStats["currentHealth"]; }
+	int *GetMaxHealthPointer() { return &currentStats["maxHealth"]; }
 
 	void SetStats(CombatantAttributes &_stats) { currentStats = _stats; }
 	void AddStats(CombatantAttributes &_stats) { currentStats += _stats; }

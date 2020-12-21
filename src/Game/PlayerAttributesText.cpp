@@ -53,12 +53,12 @@ void PlayerAttributesText::Render(sf::RenderTarget & _target)
 
 void PlayerAttributesText::Update(CombatantAttributes & _status)
 {
-	statValueText[0].setString(std::to_string(_status.armour));
-	statValueText[1].setString(std::to_string(_status.damageMin) + "-" + std::to_string(_status.damageMax));
-	statValueText[2].setString(std::to_string(_status.initiative));
-	statValueText[3].setString(std::to_string(_status.criticalHit));
-	statValueText[4].setString(std::to_string(_status.dodge));
-	statValueText[5].setString(std::to_string(_status.precision));
+	statValueText[0].setString(std::to_string(_status["armour"]));
+	statValueText[1].setString(std::to_string(_status["damageMin"]) + "-" + std::to_string(_status["damageMax"]));
+	statValueText[2].setString(std::to_string(_status["initiative"]));
+	statValueText[3].setString(std::to_string(_status["criticalHit"]));
+	statValueText[4].setString(std::to_string(_status["dodge"]));
+	statValueText[5].setString(std::to_string(_status["precision"]));
 }
 
 void PlayerAttributesText::SetPos(float _x, float _y)

@@ -178,7 +178,7 @@ void CombatantStateExecutingAbility::StartAttackedAnimation(Combatant *_combatan
 
 bool CombatantStateExecutingAbility::CheckForDodging(Combatant *_attacker, Combatant *_defender)
 {
-	int difference = _defender->status.GetDodge() - (_attacker->Status().GetPrecision() + ability->precisionModificator);
+	int difference = _defender->status.GetAttribute("dodge") - (_attacker->Status().GetAttribute("precision") + ability->precisionModificator);
 	if (rand() % 100 < difference * 2)
 		return true;
 

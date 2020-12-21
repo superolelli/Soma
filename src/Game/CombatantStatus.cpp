@@ -8,6 +8,18 @@ void CombatantStatus::Init(Combatant *_combatant, NotificationRenderer *_notific
 {
 	combatant = _combatant;
 	notificationRenderer = _notificationRenderer;
+
+	fatigueDebuff["damageMin"] = -3;
+	fatigueDebuff["damageMax"] = -3;
+	fatigueDebuff["dodge"] = -5;
+	fatigueDebuff["precision"] = -5;
+	fatigueDebuff["initiative"] = -1;
+
+	nofaceBuff["damageMin"] = 2;
+	nofaceBuff["damageMax"] = 2;
+	nofaceBuff["criticalHit"] = 1;
+	nofaceBuff["precision"] = 2;
+	nofaceBuff["initiative"] = 1;
 }
 
 
@@ -107,7 +119,7 @@ void CombatantStatus::HandleDamageOverTime()
 		statusAnnouncementTime = 2.0;
 		g_pSounds->PlaySound(DAMAGE_OVER_TIME);
 
-		if (GetCurrentHealth() <= 0)
+		if (GetAttribute("currentHealth") <= 0)
 			skipRound = true;
 	}
 }
@@ -118,12 +130,12 @@ void CombatantStatus::LooseHealth(int _damage, bool _critical, bool _useArmour)
 	int damage = _damage;
 
 	if(_useArmour)
-		damage -= std::round(((float)currentStats.armour / 100.0f * _damage));
+		damage -= std::round(((float)currentStats["armour"] / 100.0f * _damage));
 
-	currentStats.currentHealth -= damage;
+	currentStats["currentHealth"] -= damage;
 
-	if (currentStats.currentHealth < 0)
-		currentStats.currentHealth = 0;
+	if (currentStats["currentHealth"] < 0)
+		currentStats["currentHealth"] = 0;
 
 	auto notificationPos = sf::Vector2f(combatant->GetRect().left + combatant->GetRect().width / 2.0f, combatant->GetRect().top);
 
@@ -138,10 +150,10 @@ void CombatantStatus::LooseHealth(int _damage, bool _critical, bool _useArmour)
 
 void CombatantStatus::GainHealth(int _health, bool _critical)
 {
-	currentStats.currentHealth += _health;
+	currentStats["currentHealth"] += _health;
 
-	if (currentStats.currentHealth > currentStats.maxHealth)
-		currentStats.currentHealth = currentStats.maxHealth;
+	if (currentStats["currentHealth"] > currentStats["maxHealth"])
+		currentStats["currentHealth"] = currentStats["maxHealth"];
 
 	auto notificationPos = sf::Vector2f(combatant->GetRect().left + combatant->GetRect().width / 2.0f, combatant->GetRect().top);
 
@@ -157,7 +169,7 @@ void CombatantStatus::CheckNofaceBuff()
 {
 	if (nofaceBuffLevel >= 0)
 	{
-		SetNofaceBuffLevel((currentStats.maxHealth - currentStats.currentHealth) / 5);
+		SetNofaceBuffLevel((currentStats["maxHealth"] - currentStats["currentHealth"]) / 5);
 	}
 }
 
@@ -298,57 +310,15 @@ void CombatantStatus::RemoveAllDebuffs()
 }
 
 
-int CombatantStatus::GetMaxHealth()
+int CombatantStatus::GetAttribute(const std::string& identifier)
 {
-	return currentStats.maxHealth < 0 ? 0 : currentStats.maxHealth;
-}
-
-
-int CombatantStatus::GetCurrentHealth()
-{
-	return currentStats.currentHealth < 0 ? 0 : currentStats.currentHealth;
+	return currentStats[identifier] < 0 ? 0 : currentStats[identifier];
 }
 
 
 int CombatantStatus::GetDamage()
 {
-	return GetDamageMin() + rand() % (GetDamageMax() - GetDamageMin() + 1);
-}
-
-int CombatantStatus::GetDamageMin()
-{
-	return currentStats.damageMin < 0 ? 0 : currentStats.damageMin;
-}
-
-int CombatantStatus::GetDamageMax()
-{
-	return currentStats.damageMax < 0 ? 0 : currentStats.damageMax;
-}
-
-int CombatantStatus::GetArmour()
-{
-	return currentStats.armour < 0 ? 0 : currentStats.armour;
-}
-
-int CombatantStatus::GetCriticalHit()
-{
-	return currentStats.criticalHit < 0 ? 0 : currentStats.criticalHit;
-}
-
-int CombatantStatus::GetDodge()
-{
-	return currentStats.dodge < 0 ? 0 : currentStats.dodge;
-}
-
-int CombatantStatus::GetPrecision()
-{
-	return currentStats.precision < 0 ? 0 : currentStats.precision;
-}
-
-
-int CombatantStatus::GetInitiative()
-{
-	return currentStats.initiative < 0 ? 0 : currentStats.initiative;
+	return GetAttribute("damageMin") + rand() % (GetAttribute("damageMax") - GetAttribute("damageMin") + 1);
 }
 
 void CombatantStatus::Reset()

@@ -104,12 +104,12 @@ void BattleGUI::SetCurrentAbility(int _ability)
 void BattleGUI::UpdateAbilityInformationText()
 {
 	float additionalDamageFactor = dynamic_cast<Player*>(currentPlayer)->GetAdditionalDamageForCurrentlyAimedCombatant();
-	int hitProbability = 100 - (combatantToDisplay->Status().GetDodge() - (currentPlayer->Status().GetPrecision() + g_pObjectProperties->playerAbilities[currentPlayer->GetID()][currentAbility].precisionModificator)) * 2;
+	int hitProbability = 100 - (combatantToDisplay->Status().GetAttribute("dodge") - (currentPlayer->Status().GetAttribute("precision") + g_pObjectProperties->playerAbilities[currentPlayer->GetID()][currentAbility].precisionModificator)) * 2;
 	hitProbability = std::max(0, std::min(100, hitProbability));
-	int maxDamage = currentPlayer->Status().GetDamageMax() * (g_pObjectProperties->playerAbilities[currentPlayer->GetID()][currentAbility].effectHostile.damageFactor + additionalDamageFactor);
-	maxDamage -= std::round(((float)combatantToDisplay->Status().GetArmour() / 100.0f * maxDamage));
-	int minDamage = currentPlayer->Status().GetDamageMin() * (g_pObjectProperties->playerAbilities[currentPlayer->GetID()][currentAbility].effectHostile.damageFactor + additionalDamageFactor);
-	minDamage -= std::round(((float)combatantToDisplay->Status().GetArmour() / 100.0f * minDamage));
+	int maxDamage = currentPlayer->Status().GetAttribute("damageMax") * (g_pObjectProperties->playerAbilities[currentPlayer->GetID()][currentAbility].effectHostile.damageFactor + additionalDamageFactor);
+	maxDamage -= std::round(((float)combatantToDisplay->Status().GetAttribute("armour") / 100.0f * maxDamage));
+	int minDamage = currentPlayer->Status().GetAttribute("damageMin") * (g_pObjectProperties->playerAbilities[currentPlayer->GetID()][currentAbility].effectHostile.damageFactor + additionalDamageFactor);
+	minDamage -= std::round(((float)combatantToDisplay->Status().GetAttribute("armour") / 100.0f * minDamage));
 
 	std::string abilityInformation = "";
 	abilityInformation.append("Treffer: " + std::to_string(hitProbability) + "% | ");

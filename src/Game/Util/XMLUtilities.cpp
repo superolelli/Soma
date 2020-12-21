@@ -18,31 +18,31 @@ namespace pugi {
 			buff.onSelf = buffNode.child("onSelf").text().as_bool();
         
         if (buffNode.child("armour"))
-            buff.stats.armour = buffNode.child("armour").text().as_int(); 
+            buff.stats["armour"] = buffNode.child("armour").text().as_int(); 
         
         if (buffNode.child("damage"))
-            buff.stats.damageMin = buffNode.child("damage").text().as_int();
+            buff.stats["damageMin"] = buffNode.child("damage").text().as_int();
 
 		if (buffNode.child("damage"))
-			buff.stats.damageMax = buffNode.child("damage").text().as_int();
+			buff.stats["damageMax"] = buffNode.child("damage").text().as_int();
         
         if (buffNode.child("initiative"))
-            buff.stats.initiative = buffNode.child("initiative").text().as_int();
+            buff.stats["initiative"] = buffNode.child("initiative").text().as_int();
         
         if (buffNode.child("maxHealth"))
-            buff.stats.maxHealth = buffNode.child("maxHealth").text().as_int();
+            buff.stats["maxHealth"] = buffNode.child("maxHealth").text().as_int();
         
         if (buffNode.child("currentHealth"))
-            buff.stats.currentHealth = buffNode.child("currentHealth").text().as_int(); 
+            buff.stats["currentHealth"] = buffNode.child("currentHealth").text().as_int(); 
 
 		if (buffNode.child("criticalHit"))
-			buff.stats.criticalHit = buffNode.child("criticalHit").text().as_int();
+			buff.stats["criticalHit"] = buffNode.child("criticalHit").text().as_int();
 
 		if (buffNode.child("precision"))
-			buff.stats.precision = buffNode.child("precision").text().as_int();
+			buff.stats["precision"] = buffNode.child("precision").text().as_int();
 
 		if (buffNode.child("dodge"))
-			buff.stats.dodge = buffNode.child("dodge").text().as_int();
+			buff.stats["dodge"] = buffNode.child("dodge").text().as_int();
     }
 
 
@@ -178,30 +178,30 @@ namespace pugi {
 	void loadAttributesFromXML(const xml_node & attributeNode, CombatantAttributes & stats)
 	{
 		if(attributeNode.attribute("armour"))
-			stats.armour = attributeNode.attribute("armour").as_int();
+			stats["armour"] = attributeNode.attribute("armour").as_int();
 
 		if (attributeNode.attribute("health"))
-		stats.maxHealth = attributeNode.attribute("health").as_int();
+		stats["maxHealth"] = attributeNode.attribute("health").as_int();
 
 		if (attributeNode.attribute("damageMin"))
-			stats.damageMin = attributeNode.attribute("damageMin").as_int();
+			stats["damageMin"] = attributeNode.attribute("damageMin").as_int();
 
 		if (attributeNode.attribute("damageMax"))
-			stats.damageMax = attributeNode.attribute("damageMax").as_int();
+			stats["damageMax"] = attributeNode.attribute("damageMax").as_int();
 
 		if (attributeNode.attribute("initiative"))
-			stats.initiative = attributeNode.attribute("initiative").as_int();
+			stats["initiative"] = attributeNode.attribute("initiative").as_int();
 
 		if (attributeNode.attribute("criticalHit"))
-			stats.criticalHit = attributeNode.attribute("criticalHit").as_int();
+			stats["criticalHit"] = attributeNode.attribute("criticalHit").as_int();
 
 		if (attributeNode.attribute("dodge"))
-			stats.dodge = attributeNode.attribute("dodge").as_int();
+			stats["dodge"] = attributeNode.attribute("dodge").as_int();
 
 		if (attributeNode.attribute("precision"))
-			stats.precision = attributeNode.attribute("precision").as_int();
+			stats["precision"] = attributeNode.attribute("precision").as_int();
 		
-		stats.currentHealth = stats.maxHealth;
+		stats["currentHealth"] = stats["maxHealth"];
 	}
 
 

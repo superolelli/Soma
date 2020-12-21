@@ -288,10 +288,10 @@ void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effec
 	int criticalEffectFactor = 1;
 	float criticalDurationFactor = 1;
 
-	bool isCriticalHit = rand() % 100 < _attacker->status.GetCriticalHit() + _effect.criticalHitModificator;
+	bool isCriticalHit = rand() % 100 < _attacker->status.GetAttribute("criticalHit") + _effect.criticalHitModificator;
 	if (isCriticalHit)
 	{
-		notificationRenderer->AddNotification("Kritisch!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top), 1.0f);
+		notificationRenderer->AddNotification("Kritisch!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top - 30), 1.0f);
 		g_pSounds->PlaySound(CRITICAL_HIT);
 		criticalEffectFactor = 2;
 		criticalDurationFactor = 1.5;

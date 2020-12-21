@@ -215,20 +215,13 @@ void CombatantStatusBar::RenderTooltip(const std::string &_tooltip, float _x, fl
 
 void CombatantStatusBar::AddStatsToTooltip(std::string& _tooltip, const std::string& _prefix, const CombatantAttributes& _stats)
 {
-	if (_stats.armour != 0)
-		_tooltip.append(_prefix + std::to_string(_stats.armour) + " Rüstung\n");
-	if (_stats.maxHealth != 0)
-		_tooltip.append(_prefix + std::to_string(_stats.maxHealth) + " Maximales Leben\n");
-	if (_stats.damageMin != 0)
-		_tooltip.append(_prefix + std::to_string(_stats.damageMin) + " Schaden\n");
-	if (_stats.initiative != 0)
-		_tooltip.append(_prefix + std::to_string(_stats.initiative) + " Initiative\n");
-	if (_stats.criticalHit != 0)
-		_tooltip.append(_prefix + std::to_string(_stats.criticalHit) + " Kritische Trefferchance\n");
-	if (_stats.dodge != 0)
-		_tooltip.append(_prefix + std::to_string(_stats.dodge) + " Ausweichen\n");
-	if (_stats.precision != 0)
-		_tooltip.append(_prefix + std::to_string(_stats.precision) + " Präzision\n");
+	std::vector<std::string> toShow = {"armour", "maxHealth", "damageMin", "initiative", "criticalHit", "dodge", "precision"};
+
+	for (auto& s : toShow)
+	{
+		if(_stats[s] != 0)
+			_tooltip.append(_prefix + std::to_string(_stats[s]) + " " + CombatantAttributes::attributeDisplayNames.at(s) + "\n");
+	}
 
 	_tooltip.pop_back();
 }

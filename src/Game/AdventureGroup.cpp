@@ -52,7 +52,7 @@ void AdventureGroup::Render()
 {
 	for (auto a : adventurer)
 	{
-		if(a->Status().GetCurrentHealth() > 0)
+		if(a->Status().GetAttribute("currentHealth") > 0)
 			a->Render();
 	}
 }
@@ -68,7 +68,7 @@ bool AdventureGroup::IsDead()
 {
 	for (auto &a : adventurer)
 	{
-		if (a->Status().GetCurrentHealth() > 0)
+		if (a->Status().GetAttribute("currentHealth") > 0)
 			return false;
 	}
 

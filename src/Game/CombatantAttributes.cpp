@@ -1,49 +1,66 @@
 #include "CombatantAttributes.hpp"
 
 
+const std::vector<std::string> CombatantAttributes::attributeIdentifiers = {
+	"maxHealth", 
+	"currentHealth", 
+	"damageMin",
+	"damageMax",
+	"armour",
+	"criticalHit",
+	"dodge",
+	"initiative",
+	"precision"
+};
+
+const std::unordered_map<std::string, std::string> CombatantAttributes::attributeDisplayNames = {
+	{"maxHealth",     "Maximales Leben"},
+	{"currentHealth", "Derzeitiges Leben"},
+	{"damageMin",	  "Schaden"},
+	{"damageMax",	  "Schaden"},
+	{"armour",		  "Rüstung"},
+	{"criticalHit",	  "Kritische Trefferchance"},
+	{"dodge",		  "Ausweichen"},
+	{"initiative",	  "Initiative"},
+	{"precision",	  "Präzision"}
+};					  
 
 
+CombatantAttributes::CombatantAttributes()
+{
+	Reset();
+}
 
 
 void CombatantAttributes::operator+=(const CombatantAttributes & _stats)
 {
-	maxHealth += _stats.maxHealth;
-	currentHealth += _stats.currentHealth;
-	damageMin += _stats.damageMin;
-	damageMax += _stats.damageMax;
-	armour += _stats.armour;
-	criticalHit += _stats.criticalHit;
-	dodge += _stats.dodge;
-	initiative += _stats.initiative;
-	precision += _stats.precision;
+	for (auto& attr : attributes)
+		attr.second += _stats.attributes.at(attr.first);
 }
 
 
 void CombatantAttributes::operator-=(const CombatantAttributes & _stats)
 {
-	maxHealth -= _stats.maxHealth;
-	currentHealth -= _stats.currentHealth;
-	damageMin -= _stats.damageMin;
-	damageMax -= _stats.damageMax;
-	armour -= _stats.armour;
-	criticalHit -= _stats.criticalHit;
-	dodge -= _stats.dodge;
-	initiative -= _stats.initiative;
-	precision -= _stats.precision;
+	for (auto& attr : attributes)
+		attr.second -= _stats.attributes.at(attr.first);
 }
 
 
 void CombatantAttributes::Reset()
 {
-	maxHealth = 0;
-	currentHealth = 0;
-	damageMin = 0;
-	damageMax = 0;
-	armour = 0;
-	criticalHit = 0;
-	dodge = 0;
-	initiative = 0;
-	precision = 0;
+	for (auto& id : attributeIdentifiers)
+		attributes[id] = 0;
+}
+
+
+int& CombatantAttributes::operator [](const std::string& id)
+{
+	return attributes[id];
+}
+
+int CombatantAttributes::operator [] (const std::string& id) const
+{
+	return attributes.at(id);
 }
 
 CombatantAttributes operator+(CombatantAttributes _lhs, const CombatantAttributes & _rhs)

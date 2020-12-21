@@ -32,7 +32,7 @@ void Battle::InitCombatants(int _xView, int enemyIDs[4])
 {
 	for (int i = 0; i < 4; i++)
 	{
-		if (players->GetPlayer(i)->Status().GetCurrentHealth() > 0)
+		if (players->GetPlayer(i)->Status().GetAttribute("currentHealth") > 0)
 		{
 			combatants.push_back(players->GetPlayer(i));
 			combatants.back()->SetBattlePos(i);
@@ -154,7 +154,7 @@ void Battle::GiveTurnToNextCombatant()
 {
 	do {
 		ChooseNextCombatant();
-	} while (combatants[currentCombatant]->Status().GetCurrentHealth() <= 0);
+	} while (combatants[currentCombatant]->Status().GetAttribute("currentHealth") <= 0);
 
 	combatants[currentCombatant]->GiveTurnTo(&combatants, gui);
 	if (combatants[currentCombatant]->IsPlayer())
@@ -188,7 +188,7 @@ void Battle::HandleDeaths()
 	std::vector<Combatant*>::iterator i;
 	for (i = combatants.begin(); i != combatants.end(); combatantNumber++)
 	{
-		if ((*i)->Status().GetCurrentHealth() <= 0)
+		if ((*i)->Status().GetAttribute("currentHealth") <= 0)
 		{
 			if (!(*i)->IsDying()) 
 			{
@@ -247,13 +247,13 @@ bool Battle::IsOneGroupDying()
 
 	for (int i = 0; i < 4; i++)
 	{
-		if (players->GetPlayer(i)->Status().GetCurrentHealth() > 0)
+		if (players->GetPlayer(i)->Status().GetAttribute("currentHealth") > 0)
 			PlayersAlive++;
 	}
 
 	for (Enemy *e : enemies)
 	{
-		if (e != nullptr && e->Status().GetCurrentHealth() > 0)
+		if (e != nullptr && e->Status().GetAttribute("currentHealth") > 0)
 			EnemiesAlive++;
 	}
 
@@ -285,7 +285,7 @@ void Battle::InitNewRound()
 void Battle::CalculateTurnOrder()
 {
 	std::sort(combatants.begin(), combatants.end(), [](Combatant *c1, Combatant *c2) {
-		return c1->Status().GetInitiative() > c2->Status().GetInitiative();
+		return c1->Status().GetAttribute("initiative") > c2->Status().GetAttribute("initiative");
 	});
 
 	auto startIt = combatants.begin();
@@ -293,7 +293,7 @@ void Battle::CalculateTurnOrder()
 
 	do
 	{
-		while (endIt != combatants.end() && (*startIt)->Status().GetInitiative() == (*endIt)->Status().GetInitiative())
+		while (endIt != combatants.end() && (*startIt)->Status().GetAttribute("initiative") == (*endIt)->Status().GetAttribute("initiative"))
 			endIt++;
 
 		std::random_shuffle(startIt, endIt);
