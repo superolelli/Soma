@@ -714,6 +714,9 @@
     <ClCompile Include="src\Game\SpeechBubble.cpp">
       <Filter>Quelldateien\Game\Level\Players</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\CombatantResistancesPanel.cpp">
+      <Filter>Quelldateien\Game\CommonGUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -1318,6 +1321,9 @@
     </ClInclude>
     <ClInclude Include="src\Game\SpeechBubble.h">
       <Filter>Headerdateien\Game\Level\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\CombatantResistancesPanel.hpp">
+      <Filter>Headerdateien\Game\CommonGUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

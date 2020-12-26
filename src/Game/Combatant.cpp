@@ -291,7 +291,7 @@ void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effec
 	bool isCriticalHit = rand() % 100 < _attacker->status.GetAttribute("criticalHit") + _effect.criticalHitModificator;
 	if (isCriticalHit)
 	{
-		notificationRenderer->AddNotification("Kritisch!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top - 30), 1.0f);
+		notificationRenderer->AddNotification("Kritisch!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top - 40), 1.0f);
 		g_pSounds->PlaySound(CRITICAL_HIT);
 		criticalEffectFactor = 2;
 		criticalDurationFactor = 1.5;
@@ -304,19 +304,37 @@ void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effec
 	}
 
 	if (_effect.heal != 0)
-		Status().GainHealth(_effect.heal * criticalEffectFactor, isCriticalHit);
+	{
+		float healingModificator = 1.0f + static_cast<float>(_attacker->Status().GetAttribute("healing")) / 100.0f;
+		Status().GainHealth(_effect.heal * healingModificator * criticalEffectFactor, isCriticalHit);
+	}
 
 	if (_effect.healSelf != 0)
-		_attacker->status.GainHealth(_effect.healSelf);
+	{
+		float healingModificator = 1.0f + static_cast<float>(_attacker->Status().GetAttribute("healing")) / 100.0f;
+		_attacker->status.GainHealth(_effect.healSelf * healingModificator);
+	}
+
 
 	if (_effect.confusion != 0)
 	{
 		if ((rand() % 100) + 1 <= (_effect.confusionProbability * criticalEffectFactor) * 100.0f)
-			Status().Confuse(std::round((float)(_effect.confusion) * criticalDurationFactor));
+		{
+			if ((rand() % 100) + 1 > Status().GetAttribute("confusionResistance"))
+				Status().Confuse(std::round((float)(_effect.confusion) * criticalDurationFactor));
+			else
+				AddResistanceNotification();
+		}
 	}
 
-	if (_effect.damageOverTimeRounds != 0)
-		Status().DoDamageOverTime(std::round((float)(_effect.damageOverTimeRounds) * criticalDurationFactor), _effect.damageOverTime);
+	if (_effect.decayRounds != 0)
+	{
+		float decayProbability = 100 - Status().GetAttribute("decayResistance");
+		if ((rand() % 100) + 1 <= decayProbability)
+			Status().AddDecay(std::round((float)(_effect.decayRounds) * criticalDurationFactor), _effect.decay);
+		else
+			AddResistanceNotification();
+	}
 
 	if (_effect.mark != 0)
 		Status().Mark(std::round((float)(_effect.mark) * criticalDurationFactor));
@@ -324,7 +342,13 @@ void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effec
 	if (_effect.putToSleepProbability != 0.0f)
 	{
 		if ((rand() % 100) + 1 <= (_effect.putToSleepProbability * criticalEffectFactor) * 100.0f)
-			Status().PutToSleep();
+		{
+			if ((rand() % 100) + 1 > Status().GetAttribute("sleepResistance"))
+				Status().PutToSleep();
+			else
+				AddResistanceNotification();
+		}
+			
 	}
 
 	if (_effect.removeBuffs)
@@ -340,6 +364,18 @@ void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effec
 		if (_effect.buff.isPositive)
 			Status().AddBuff(tempBuff);
 		else
-			Status().AddDebuff(tempBuff);
+		{
+			if ((rand() % 100) + 1 > Status().GetAttribute("debuffResistance"))
+				Status().AddDebuff(tempBuff);
+			else
+				AddResistanceNotification();
+		}
 	}
+}
+
+
+void Combatant::AddResistanceNotification()
+{
+	notificationRenderer->AddNotification("Widerstanden!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top - 30), 1.0f);
+	//TODO: Play some sound
 }

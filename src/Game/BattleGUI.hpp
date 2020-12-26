@@ -5,6 +5,7 @@
 #include "../Framework/Gui/Bar.hpp"
 #include "Resources\Resources.hpp"
 #include "CombatantAttributesPanel.hpp"
+#include "CombatantResistancesPanel.hpp"
 #include "LevelGUICommon.hpp"
 
 class Combatant;
@@ -39,6 +40,7 @@ private:
 
 	CSprite combatantInformationPanel;
 	CombatantAttributesPanel combatantAttributesPanel;
+	CombatantResistancesPanel combatantResistancesPanel;
 	Bar currentCombatantHealthBar;
 
 	sf::Text currentCombatantName;

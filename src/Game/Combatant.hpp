@@ -122,6 +122,8 @@ protected:
 	void RenderAbilityTargetMarker();
 	void RenderTurnMarker();
 
+	void AddResistanceNotification();
+
 	void ApplyAbilityEffect(Combatant *_attacker, AbilityEffect &_effect, float _additionalDamageFactor = 0.0f);
 
 	void ScaleForAbilityAnimation(int _xPos, int _yPos);

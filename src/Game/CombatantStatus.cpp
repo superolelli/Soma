@@ -26,7 +26,7 @@ void CombatantStatus::Init(Combatant *_combatant, NotificationRenderer *_notific
 void CombatantStatus::UpdateStatusForNewTurn(double _initialWaitingTime)
 {
 	sleepChecked = false;
-	damageOverTimeChecked = false;
+	decayChecked = false;
 	skipRound = false;
 	statusAnnouncementTime = _initialWaitingTime;
 
@@ -49,10 +49,10 @@ void CombatantStatus::ExecuteStatusChanges()
 		return;
 	}
 
-	if (!damageOverTimeChecked)
+	if (!decayChecked)
 	{
-		HandleDamageOverTime();
-		damageOverTimeChecked = true;
+		HandleDecay();
+		decayChecked = true;
 	}
 	else if (!sleepChecked)
 	{
@@ -71,7 +71,7 @@ void CombatantStatus::ExecuteStatusChanges()
 
 bool CombatantStatus::IsExecutingStatusChanges()
 {
-	return !sleepChecked || !damageOverTimeChecked || statusAnnouncementTime > 0.0;
+	return !sleepChecked || !decayChecked || statusAnnouncementTime > 0.0;
 }
 
 
@@ -95,11 +95,11 @@ void CombatantStatus::HandleBuffDurations(std::vector<Buff> &_buffs)
 	}
 }
 
-void CombatantStatus::HandleDamageOverTime()
+void CombatantStatus::HandleDecay()
 {
 	int damage = 0;
 	std::vector<std::pair<int, int>>::iterator i;
-	for (i = damageOverTime.begin(); i != damageOverTime.end();)
+	for (i = decay.begin(); i != decay.end();)
 	{
 		if (i->first > 0)
 		{
@@ -108,7 +108,7 @@ void CombatantStatus::HandleDamageOverTime()
 		}
 
 		if (i->first <= 0)
-			i = damageOverTime.erase(i);
+			i = decay.erase(i);
 		else
 			i++;
 	}
@@ -174,9 +174,9 @@ void CombatantStatus::CheckNofaceBuff()
 }
 
 
-void CombatantStatus::DoDamageOverTime(int _rounds, int _damage)
+void CombatantStatus::AddDecay(int _rounds, int _damage)
 {
-	damageOverTime.push_back(std::pair<int, int>(_rounds, _damage));
+	decay.push_back(std::pair<int, int>(_rounds, _damage));
 }
 
 void CombatantStatus::AddBuff(Buff _buff)
@@ -235,10 +235,10 @@ CombatantAttributes CombatantStatus::GetNofaceStats()
 	return attributes;
 }
 
-int CombatantStatus::RoundsDamageOverTime()
+int CombatantStatus::RoundsDecay()
 {
 	int maxRounds = 0;
-	for (auto &d : damageOverTime)
+	for (auto &d : decay)
 	{
 		if (d.first > maxRounds)
 			maxRounds = d.first;
@@ -247,11 +247,11 @@ int CombatantStatus::RoundsDamageOverTime()
 }
 
 
-int CombatantStatus::DamageOverTime()
+int CombatantStatus::GetDecay()
 {
 	int damage = 0;
 
-	for (auto &d : damageOverTime)
+	for (auto &d : decay)
 		damage += d.second;
 
 	return damage;
@@ -326,7 +326,7 @@ void CombatantStatus::Reset()
 	confused = 0;
 	sleeping = false;
 	marked = 0;
-	damageOverTime.clear();
+	decay.clear();
 	buffs.clear();
 	debuffs.clear();
 	stupid = false;

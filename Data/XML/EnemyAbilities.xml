@@ -119,10 +119,10 @@
 
 	  <effect>
 			<damageFactor>1</damageFactor>
-		  <damageOverTime>
+		  <decay>
 			  <rounds>3</rounds>
 			  <damage>1</damage>
-		  </damageOverTime>
+		  </decay>
 	  </effect>
   </ability>
 
@@ -311,10 +311,10 @@
 
 	  <effect>
 			<damageFactor>0.1</damageFactor>
-		  <damageOverTime>
+		  <decay>
 			  <rounds>3</rounds>
 			  <damage>3</damage>
-		  </damageOverTime>
+		  </decay>
 	  </effect>
   	</ability>
 

@@ -1,5 +1,6 @@
 #include "Tooltip.hpp"
 #include "Resources\FontManager.hpp"
+#include <deque>
 
 void Tooltip::Init()
 {
@@ -45,7 +46,16 @@ void Tooltip::ShowTooltip(sf::RenderTarget &_target, int _x, int _y)
 
 void Tooltip::AppendCombatantAttributesTooltip(std::string& _tooltip, CombatantAttributes& _stats, std::string _indentation, std::string _sign, std::string _color)
 {
-	std::vector<std::string> toShow = { "armour", "maxHealth", "damageMin", "initiative", "criticalHit", "dodge", "precision" };
+	std::deque<std::string> toShow = { "damageMin", "damageMax", "armour", "maxHealth", "initiative", "criticalHit", "dodge", "precision", 
+									   "healing", "sleepResistance", "confusionResistance", "debuffResistance", "decayResistance"};
+
+	if (_stats["damageMin"] != 0 && _stats["damageMin"] == _stats["damageMax"])
+	{
+		_tooltip.append(_indentation + _color + _sign + std::to_string(_stats["damageMin"]) + " " + "Schaden" + "\n");
+		toShow.pop_front();
+		toShow.pop_front();
+	}
+
 
 	for (auto& s : toShow)
 	{

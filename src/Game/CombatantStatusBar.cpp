@@ -3,7 +3,7 @@
 #include "Resources\SpritePool.hpp"
 #include "../Framework/Graphics/RichText.hpp"
 #include "../Framework/Graphics/RoundedRectangleShape.hpp"
-
+#include <deque>
 
 
 
@@ -65,7 +65,7 @@ void CombatantStatusBar::RenderStatusSymbols()
 	RenderStatusSymbol(status->GetNofaceBuffLevel() >= 0, noface_buff, g_pSpritePool->noface_buff, x);
 	RenderStatusSymbol(status->GetFatigueLevel() == CombatantStatus::FatigueLevel::tired, fatigue_tired, g_pSpritePool->fatigue_tired, x);
 	RenderStatusSymbol(status->GetFatigueLevel() == CombatantStatus::FatigueLevel::stupid, fatigue_stupid, g_pSpritePool->fatigue_stupid, x);
-	RenderStatusSymbol(status->DamageOverTime() > 0.0f, damageOverTime, g_pSpritePool->damageOverTime, x);
+	RenderStatusSymbol(status->GetDecay() > 0.0f, decay, g_pSpritePool->decay, x);
 	RenderStatusSymbol(status->IsConfused(), confused, g_pSpritePool->confused, x);
 	RenderStatusSymbol(status->IsBuffed(), buffed, g_pSpritePool->buff, x);
 	RenderStatusSymbol(status->IsDebuffed(), debuffed, g_pSpritePool->debuff, x);
@@ -126,12 +126,12 @@ void CombatantStatusBar::RenderStatusSymbolsTooltips()
 		RenderTooltip(tooltip, g_pSpritePool->noface_buff.GetRect().left, g_pSpritePool->noface_buff.GetRect().top);
 	}
 
-	if (status->RoundsDamageOverTime() > 0 && g_pSpritePool->damageOverTime.GetRect().contains(engine->GetWorldMousePos()))
+	if (status->RoundsDecay() > 0 && g_pSpritePool->decay.GetRect().contains(engine->GetWorldMousePos()))
 	{
-		if(status->RoundsDamageOverTime() > 1)
-			RenderTooltip("#dd3333 " + std::to_string(status->DamageOverTime()) + " Schaden (" + std::to_string(status->RoundsDamageOverTime()) + " Runden)", g_pSpritePool->damageOverTime.GetRect().left, g_pSpritePool->damageOverTime.GetRect().top);
+		if(status->RoundsDecay() > 1)
+			RenderTooltip("#dd3333 " + std::to_string(status->GetDecay()) + " Verfall (" + std::to_string(status->RoundsDecay()) + " Runden)", g_pSpritePool->decay.GetRect().left, g_pSpritePool->decay.GetRect().top);
 		else
-			RenderTooltip("#dd3333 " + std::to_string(status->DamageOverTime()) + " Schaden (1 Runde)", g_pSpritePool->damageOverTime.GetRect().left, g_pSpritePool->damageOverTime.GetRect().top);
+			RenderTooltip("#dd3333 " + std::to_string(status->GetDecay()) + " Verfall (1 Runde)", g_pSpritePool->decay.GetRect().left, g_pSpritePool->decay.GetRect().top);
 	}
 
 
@@ -215,7 +215,15 @@ void CombatantStatusBar::RenderTooltip(const std::string &_tooltip, float _x, fl
 
 void CombatantStatusBar::AddStatsToTooltip(std::string& _tooltip, const std::string& _prefix, const CombatantAttributes& _stats)
 {
-	std::vector<std::string> toShow = {"armour", "maxHealth", "damageMin", "initiative", "criticalHit", "dodge", "precision"};
+	std::deque<std::string> toShow = { "damageMin", "damageMax", "armour", "maxHealth", "initiative", "criticalHit", "dodge", "precision",
+									   "healing", "sleepResistance", "confusionResistance", "debuffResistance", "decayResistance" };
+
+	if (_stats["damageMin"] != 0 && _stats["damageMin"] == _stats["damageMax"])
+	{
+		_tooltip.append(_prefix + std::to_string(_stats["damageMin"]) + " " + "Schaden" + "\n");
+		toShow.pop_front();
+		toShow.pop_front();
+	}
 
 	for (auto& s : toShow)
 	{

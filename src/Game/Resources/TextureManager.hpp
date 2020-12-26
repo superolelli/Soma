@@ -107,7 +107,7 @@ public:
 	sf::Texture confused;
 	sf::Texture marked;
 	sf::Texture sleeping;
-	sf::Texture damageOverTime;
+	sf::Texture decay;
 	sf::Texture fatigueTired;
 	sf::Texture fatigueStupid;
 	sf::Texture nofaceBuff;

@@ -13,8 +13,8 @@ void AbilityEffect::clear()
 	confusionProbability = 0;
 	mark = 0;
 	putToSleepProbability = 0.0f;
-	damageOverTime = 0;
-	damageOverTimeRounds = 0;
+	decay = 0;
+	decayRounds = 0;
 	removeBuffs = false;
 	removeDebuffs = false;
 	buff.SetStandardValues();
@@ -32,8 +32,8 @@ void AbilityEffect::applySkill(const AbilityEffect &_effect)
 	confusionProbability += _effect.confusionProbability;
 	mark += _effect.mark;
 	putToSleepProbability += _effect.putToSleepProbability;
-	damageOverTime += _effect.damageOverTime;
-	damageOverTimeRounds += _effect.damageOverTimeRounds;
+	decay += _effect.decay;
+	decayRounds += _effect.decayRounds;
 	removeBuffs = removeBuffs || _effect.removeBuffs;
 	removeDebuffs = removeDebuffs || _effect.removeDebuffs;
 	buff.ApplySkill(_effect.buff);

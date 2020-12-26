@@ -53,7 +53,7 @@ void Inventory::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	equipmentPanel.Init(engine, gameStatus, inventoryPanel.GetRect().left + 309, inventoryPanel.GetRect().top + 287);
 	equipmentPanel.SetOnItemDroppedCallback([&](InventoryItemWrapper* _item, int _currentPlayer, int _equipmentId) {return OnItemFromEquipmentPanelReceived(_item, _currentPlayer, _equipmentId); });
 
-	playerAttributesText.SetPos(inventoryPanel.GetRect().left + 85, inventoryPanel.GetRect().top + 408);
+	playerAttributesText.SetPos(inventoryPanel.GetRect().left + 65, inventoryPanel.GetRect().top + 330);
 
 	closed = true;
 }

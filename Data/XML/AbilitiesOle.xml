@@ -37,10 +37,10 @@ Für 3 Runden:
         <fatigue>1</fatigue>
         <effect>
             <damageFactor>0.7</damageFactor>
-			<damageOverTime>
+			<decay>
 				<rounds>3</rounds>
 				<damage>1</damage>
-			</damageOverTime>
+			</decay>
         </effect>
 
         <description>*#ffa500 Ganzkörpertritt*

@@ -20,5 +20,5 @@ private:
 	void InitValueTexts();
 
 	sf::Text statsText;
-	sf::Text statValueText[6];
+	sf::Text statValueText[11];
 };

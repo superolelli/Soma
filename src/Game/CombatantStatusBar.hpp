@@ -18,7 +18,7 @@ public:
 
 private:
 
-	enum statusType {sleeping, damageOverTime, confused, buffed, debuffed, marked, fatigue_tired, fatigue_stupid, noface_buff, number_of_states};
+	enum statusType {sleeping, decay, confused, buffed, debuffed, marked, fatigue_tired, fatigue_stupid, noface_buff, number_of_states};
 
 	CGameEngine *engine;
 	CombatantStatus *status;

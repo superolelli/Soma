@@ -312,7 +312,7 @@ void CTextureManager::LoadTextures()
 	confused.loadFromFile("Data/Sprites/Battle/confused.png");
 	marked.loadFromFile("Data/Sprites/Battle/marked.png");
 	sleeping.loadFromFile("Data/Sprites/Battle/sleeping.png");
-	damageOverTime.loadFromFile("Data/Sprites/Battle/damage_over_time.png");
+	decay.loadFromFile("Data/Sprites/Battle/decay.png");
 	fatigueTired.loadFromFile("Data/Sprites/Battle/fatigue_debuff.png");
 	fatigueStupid.loadFromFile("Data/Sprites/Battle/fatigue_debuff2.png");
 	nofaceBuff.loadFromFile("Data/Sprites/Battle/noface_buff.png");

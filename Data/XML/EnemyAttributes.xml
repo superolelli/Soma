@@ -3,7 +3,7 @@
 <EnemyAttributes>
   <Gesetzloser id="4"
     armour ="1"
-    health ="20"
+    maxHealth ="20"
     damageMin ="7"
     damageMax = "10"
     initiative ="1"
@@ -19,7 +19,7 @@
 
   <Abtruenniger id="5" 
     armour ="1"
-    health ="20"
+    maxHealth ="20"
     damageMin ="5"
     damageMax ="8"
     initiative ="1"
@@ -38,13 +38,14 @@
 
   <Indianer id="6" 
     armour ="1"
-    health ="20"
+    maxHealth ="20"
     damageMin ="5"
     damageMax ="8"
     initiative ="2"
 	  criticalHit="5"
 	  dodge="8"
 	  precision="5"
+    confusionResistance="20"
   >
 	  <Loot>
 		  <Item>Tomahawk</Item>
@@ -54,7 +55,7 @@
 
   <Hilfssheriff id="7"
     armour ="1"
-    health ="20"
+    maxHealth ="20"
     damageMin ="5"
     damageMax ="8"
     initiative ="1"
@@ -72,7 +73,7 @@
 
   <Greg id="8" 
     armour ="5"
-    health ="35"
+    maxHealth ="35"
     damageMin ="7"
     damageMax ="10"
     initiative ="5"
@@ -87,13 +88,15 @@
 
     <ApacheKid id="9" 
     armour ="1"
-    health ="35"
+    maxHealth ="35"
     damageMin ="9"
     damageMax ="12"
     initiative ="8"
 	  criticalHit="9"
 	  dodge="24"
 	  precision="9"
+    confusionResistance="30"
+    decayResistance="30"
   >
 		<Loot>
 			<Item>Messer</Item>
@@ -104,13 +107,14 @@
 	
    <BigSpencer id="10" 
     armour ="10"
-    health ="100"
+    maxHealth ="100"
     damageMin ="9"
     damageMax ="12"
     initiative ="3"
 	criticalHit="5"
 	dodge="0"
 	precision="5"
+    debuffResistance="40"
   >
 		<Loot>
 			<Item>Bier</Item>
@@ -120,7 +124,7 @@
 
   <TequilaJoe id="11" 
     armour ="5"
-    health ="30"
+    maxHealth ="30"
     damageMin ="3"
     damageMax ="6"
     initiative ="1"
@@ -137,13 +141,14 @@
 
     <BillNoface id="12"
       armour ="5"
-      health ="30"
+      maxHealth ="30"
       damageMin ="3"
       damageMax ="6"
       initiative ="1"
       criticalHit="5"
       dodge="10"
       precision="5"
+      sleepResistance="30"
       >
       <Loot>
           <Item>Patronen</Item>
@@ -153,7 +158,7 @@
 
     <JuanTirador id="13"
         armour ="4"
-        health ="20"
+        maxHealth ="20"
         damageMin ="6"
         damageMax = "9"
         initiative ="1"
@@ -169,7 +174,7 @@
     
     <MarieSaunier id="14"
         armour ="3"
-        health ="15"
+        maxHealth ="15"
         damageMin ="0"
         damageMax = "2"
         initiative ="3"
@@ -182,13 +187,14 @@
 
     <BruderZacharias id="15"
     armour ="0"
-    health ="20"
+    maxHealth ="20"
     damageMin ="5"
     damageMax = "8"
     initiative ="2"
     criticalHit="5"
     dodge="4"
     precision="5"
+    confusionResistanc="30"
     >
         <Model>./Data/Sprites/Enemies/Kutschfahrt/BruderZacharias/BruderZacharias.scml</Model>
     </BruderZacharias>

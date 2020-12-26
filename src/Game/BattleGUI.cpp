@@ -63,11 +63,13 @@ void BattleGUI::Init(CGameEngine *_engine, GameStatus *_gameStatus)
 
 void BattleGUI::Update()
 {
-
 	int xPos = combatantInformationPanel.GetGlobalRect().left + combatantInformationPanel.GetRect().width - combatantAttributesPanel.GetRect().width - 30;
 	int yPos = combatantInformationPanel.GetGlobalRect().top + (combatantInformationPanel.GetRect().height - combatantAttributesPanel.GetRect().height) / 2;
 	combatantAttributesPanel.Update(combatantToDisplay->Status());
 	combatantAttributesPanel.SetPos(xPos, yPos);
+
+	combatantResistancesPanel.Update(combatantToDisplay->Status());
+	combatantResistancesPanel.SetPos(xPos - combatantResistancesPanel.GetRect().width - 30, yPos);
 
 	commonGUIParts.Update();
 
@@ -151,6 +153,7 @@ void BattleGUI::RenderCombatantInformation()
 {
 	combatantInformationPanel.Render(engine->GetRenderTarget());
 	combatantAttributesPanel.Render(engine->GetRenderTarget());
+	combatantResistancesPanel.Render(engine->GetRenderTarget());
 	currentCombatantHealthBar.Render(engine->GetRenderTarget(), true);
 	engine->GetRenderTarget().draw(currentCombatantName);
 }

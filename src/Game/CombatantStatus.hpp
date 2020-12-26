@@ -25,7 +25,7 @@ public:
 	void Mark(int _rounds) { marked += _rounds; }
 	void Confuse(int _rounds) { confused += _rounds; }
 	void PutToSleep() { sleeping = true; }
-	void DoDamageOverTime(int _rounds, int _damage);
+	void AddDecay(int _rounds, int _damage);
 	void AddBuff(Buff _buff);
 	void AddDebuff(Buff _buff);
 	void SetFatigueLevel(FatigueLevel _level);
@@ -47,9 +47,7 @@ public:
 
 	int RoundsConfused() { return confused; }
 	int RoundsMarked() { return marked; }
-
-	int RoundsDamageOverTime();
-	int DamageOverTime();
+	int RoundsDecay();
 
 	Buff &GetBuff();
 	Buff &GetDebuff();
@@ -59,6 +57,7 @@ public:
 	CombatantAttributes nofaceBuff;
 
 	int GetDamage();
+	int GetDecay();
 	int GetAttribute(const std::string &identifier);
 
 	int *GetCurrentHealthPointer() { return &currentStats["currentHealth"]; }
@@ -77,7 +76,7 @@ private:
 	int confused;
 	bool sleeping;
 	int marked;
-	std::vector<std::pair<int, int>> damageOverTime;
+	std::vector<std::pair<int, int>> decay;
 	std::vector<Buff> buffs;
 	std::vector<Buff> debuffs;
 	FatigueLevel fatigueLevel;
@@ -87,10 +86,10 @@ private:
 	Buff returnBuff;
 
 	void HandleBuffDurations(std::vector<Buff> &_buffs);
-	void HandleDamageOverTime();
+	void HandleDecay();
 
 	double statusAnnouncementTime;
 	bool sleepChecked;
-	bool damageOverTimeChecked;
+	bool decayChecked;
 	bool skipRound;
 };

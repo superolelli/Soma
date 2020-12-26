@@ -36,10 +36,10 @@
         </confusion>
         <mark>0</mark>
         <putToSleepProbability>0</putToSleepProbability>
-		<damageOverTime>
+		<decay>
 			<damage>0</damage>
 			<rounds>0</rounds>
-		</damageOverTime>
+		</decay>
         <removeDebuffs>false</removeDebuffs>
         <removeBuffs>false</removeBuffs>
         <buff>
@@ -48,12 +48,19 @@
             <onSelf>false</onSelf>
             <armour>0</armour>
             <damage>0</damage>
+            <damageMin>0</damageMin>
+            <damageMax>0</damageMax>
             <initiative>0</initiative>
             <maxHealth>0</maxHealth>
             <currentHealth>0</currentHealth>
-			<criticalHit>0</criticalHit>
-			<precision>0</precision>
-			<dodge>0</dodge>
+			      <criticalHit>0</criticalHit>
+			      <precision>0</precision>
+			      <dodge>0</dodge>
+            <healing>0</healing>
+            <sleepResistance>0</sleepResistance>
+            <confusionResistance>0</confusionResistance>
+            <debuffResistance>0</debuffResistance>
+            <decayResistance>0</decayResistance>
         </buff>
     </effect>
 

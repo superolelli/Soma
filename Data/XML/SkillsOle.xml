@@ -66,9 +66,9 @@ pro fehlendem Gegner erhöht.</description>
     <whole_body_kick abilityID="1">
         <skill id="1" name="Schächender Tritt I">
             <effect>
-				<damageOverTime>
+				<decay>
 					<damage>1</damage>
-				</damageOverTime>
+				</decay>
             </effect>
                 <description>*#ffa500 Schwächender Tritt I*
 #white Erhöht den Schaden pro Runde um 1.</description>
@@ -76,9 +76,9 @@ pro fehlendem Gegner erhöht.</description>
 
         <skill id="2" name="Nachhaltiger Tritt">
             <effect>
-				<damageOverTime>
+				<decay>
 					<rounds>1</rounds>
-				</damageOverTime>
+				</decay>
             </effect>
                 <description>*#ffa500 Nachhaltiger Tritt*
 #white Verlängert die Dauer des 
@@ -87,9 +87,9 @@ Rundenschadens um eine Runde.</description>
 
         <skill id="3" name="Schwächender Tritt II">
             <effect>
-				<damageOverTime>
+				<decay>
 					<damage>2</damage>
-				</damageOverTime>
+				</decay>
             </effect>
                 <description>*#ffa500 Schwächender Tritt II*
 #white Erhöht den Schaden pro Runde um 1.</description>

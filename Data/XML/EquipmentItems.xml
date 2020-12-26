@@ -10,6 +10,11 @@
 		criticalHit="0"
 		dodge="0"
 		precision="0"
+    healing="0"
+    sleepResistance="0"
+    confusionResistance="0"
+    debuffResistance="0"
+    decayResistance="0"
   >
     <Level>1</Level>
     <LevelType>0</LevelType>  <!-- 0=all, 1=Bang, 2=Kutschfahrt, 3=Tichu -->
@@ -40,7 +45,7 @@
 
   <Bible id="5" name="Bibel"
       armour="5"
-      health="5"
+      debuffResistance="5"
   >
     <LevelType>1</LevelType>
   </Bible>
@@ -80,7 +85,7 @@
 
   <SherrifStar id="11" name="Sherrifstern"
 	initiative="2"
-    health="5"
+    confusionResistance="10"
   >
     <LevelType>1</LevelType>
 	  <Level>2</Level>
@@ -99,7 +104,7 @@
    </Horseshoe>
 
    <Canteen id="14" name="Feldflasche"
-	  health="10">
+	  healing="20">
 	   <Level>2</Level>
      <LevelType>1</LevelType>
    </Canteen>
@@ -141,7 +146,7 @@
    </DuelPistol>
 
    <Monocle id="20" name="Monokel"
-    precision="5"
+    sleepResistance="10"
    >
     <LevelType>2</LevelType>
    </Monocle>
@@ -153,15 +158,13 @@
    </PoisonRing>
 
    <PocketWatch id="22" name="Taschenuhr"
-    initiative="2"
-    dodge="4"
+    confusionResistance="10"
    >
     <LevelType>2</LevelType>
    </PocketWatch>
 
    <Tome id="23" name="Foliant"
-    health="5"
-    dodge="3"
+    decayResistance="10"
    >
     <LevelType>2</LevelType>
    </Tome>
@@ -179,13 +182,16 @@
     </CrystalBall>
 
     <BlackPearl id="26" name="Schwarze Perle"
-      health="1"       
+      damageMin="5"     
+      damageMax="5"
+      health="-7"
      >
      <LevelType>2</LevelType>
     </BlackPearl>
 
     <Gloves id="27" name="Handschuhe"
         armour="5"
+        debuffResistance="10"
      >
       <LevelType>2</LevelType>
     </Gloves>

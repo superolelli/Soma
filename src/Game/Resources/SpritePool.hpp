@@ -24,7 +24,7 @@ public:
 	CSprite confused;
 	CSprite marked;
 	CSprite sleeping;
-	CSprite damageOverTime;
+	CSprite decay;
 	CSprite fatigue_tired;
 	CSprite fatigue_stupid;
 	CSprite noface_buff;

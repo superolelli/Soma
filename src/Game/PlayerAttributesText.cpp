@@ -16,7 +16,12 @@ void PlayerAttributesText::InitDescriptionTexts()
 	statsString << "Initiative:\n";
 	statsString << "Krit. Chance:\n";
 	statsString << "Ausweichen:\n";
-	statsString << "Präzision:";
+	statsString << "Präzision:\n";
+	statsString << "Heilungsmod.:\n";
+	statsString << "Schlaf-Res.:\n";
+	statsString << "Verwirrungs-Res.:\n";
+	statsString << "Debuff-Res.:\n";
+	statsString << "Verfall-Res.:";
 
 	statsText.setCharacterSize(16);
 	statsText.setFont(g_pFonts->f_trajan);
@@ -25,7 +30,7 @@ void PlayerAttributesText::InitDescriptionTexts()
 	statsText.setOutlineThickness(1.0f);
 	statsText.setString(statsString.str());
 	statsText.setPosition(0.0f, 0.0f);
-	statsText.setLineSpacing(1.8f);
+	statsText.setLineSpacing(1.7f);
 }
 
 void PlayerAttributesText::InitValueTexts()
@@ -56,9 +61,14 @@ void PlayerAttributesText::Update(CombatantAttributes & _status)
 	statValueText[0].setString(std::to_string(_status["armour"]));
 	statValueText[1].setString(std::to_string(_status["damageMin"]) + "-" + std::to_string(_status["damageMax"]));
 	statValueText[2].setString(std::to_string(_status["initiative"]));
-	statValueText[3].setString(std::to_string(_status["criticalHit"]));
+	statValueText[3].setString(std::to_string(_status["criticalHit"]) + "%");
 	statValueText[4].setString(std::to_string(_status["dodge"]));
 	statValueText[5].setString(std::to_string(_status["precision"]));
+	statValueText[6].setString(std::to_string(_status["healing"]) + "%");
+	statValueText[7].setString(std::to_string(_status["sleepResistance"]) + "%");
+	statValueText[8].setString(std::to_string(_status["confusionResistance"]) + "%");
+	statValueText[9].setString(std::to_string(_status["debuffResistance"]) + "%");
+	statValueText[10].setString(std::to_string(_status["decayResistance"]) + "%");
 }
 
 void PlayerAttributesText::SetPos(float _x, float _y)
@@ -69,6 +79,6 @@ void PlayerAttributesText::SetPos(float _x, float _y)
 	for (auto &text : statValueText)
 	{
 		text.setPosition(statsText.getGlobalBounds().left + statsText.getGlobalBounds().width + 10.0f, yPos);
-		yPos += 34.3f;
+		yPos += 32.4f;
 	}
 }

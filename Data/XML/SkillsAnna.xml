@@ -180,9 +180,9 @@ als Ziel gewählt werden.</description>
 
         <skill id="4" name="Schadenserhöhung I">
             <effect>
-				<damageOverTime>
+				<decay>
 					<damage>1</damage>
-				</damageOverTime>
+				</decay>
             </effect>
                 <description>*#ffa500 Schadenserhöhung I*
 #white Erhöht den Schaden pro Runde um 1.</description>
@@ -190,18 +190,18 @@ als Ziel gewählt werden.</description>
 
         <skill id="5" name="Schadenserhöhung II">
             <effect>
-				<damageOverTime>
+				<decay>
 					<damage>1</damage>
-				</damageOverTime>
+				</decay>
             </effect>
                 <description>*#ffa500 Schadenserhöhung II*
 #white Erhöht den Schaden pro Runde um 1.</description>
         </skill>
 
         <skill id="6" name="Schadenserhöhung III">
-			<damageOverTime>
+			<decay>
 				<damage>2</damage>
-			</damageOverTime>
+			</decay>
                 <description>*#ffa500 Schadenserhöhung III*
 #white Erhöht den Schaden pro Runde um 2.</description>
         </skill>

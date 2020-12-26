@@ -74,7 +74,11 @@ void CombatantAttributesPanel::Update(CombatantStatus &_status)
 	std::vector<std::string> toShow = { "armour", "damageMin", "initiative", "criticalHit", "dodge", "precision" };
 	for (int i = 0; i < 6 ; i++)
 	{
-		statValueText[i].setString(std::to_string(_status.GetAttribute(toShow[i])));
+		if(toShow[i] == "damageMin")
+			statValueText[i].setString(std::to_string(_status.GetAttribute(toShow[i])));
+		else
+			statValueText[i].setString(std::to_string(_status.GetAttribute("damageMin")) + "-" + std::to_string(_status.GetAttribute("damageMax")));
+
 		SetValueTextColor(statValueText[i], buff.stats[toShow[i]], debuff.stats[toShow[i]]);
 	}
 

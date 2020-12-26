@@ -254,6 +254,7 @@
     <ClCompile Include="src\Game\Combatant.cpp" />
     <ClCompile Include="src\Game\CombatantAttributes.cpp" />
     <ClCompile Include="src\Game\CombatantAttributesPanel.cpp" />
+    <ClCompile Include="src\Game\CombatantResistancesPanel.cpp" />
     <ClCompile Include="src\Game\CombatantState.cpp" />
     <ClCompile Include="src\Game\CombatantStateDying.cpp" />
     <ClCompile Include="src\Game\CombatantStateExecutingAbility.cpp" />
@@ -334,6 +335,7 @@
     <ClInclude Include="src\Game\AbilityTooltip.hpp" />
     <ClInclude Include="src\Game\CombatantID.hpp" />
     <ClInclude Include="src\Game\CombatantAttributesPanel.hpp" />
+    <ClInclude Include="src\Game\CombatantResistancesPanel.hpp" />
     <ClInclude Include="src\Game\CombatantState.hpp" />
     <ClInclude Include="src\Game\CombatantStateDying.hpp" />
     <ClInclude Include="src\Game\CombatantStateExecutingAbility.hpp" />

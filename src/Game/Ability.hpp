@@ -30,8 +30,8 @@ struct AbilityEffect
     int healSelf;
     int confusion;
 	float confusionProbability;
-	int damageOverTime;
-	int damageOverTimeRounds;
+	int decay;
+	int decayRounds;
     int mark;
 	float putToSleepProbability;
     bool removeBuffs;

@@ -105,8 +105,8 @@ void AbilityTooltip::AppendTooltipStringForOneTarget(std::string & _tooltip, boo
 		_tooltip.append("#aa5000 Werden weniger als " + std::to_string(currentAbility.possibleAims.howMany) + " Gegner attackiert,\n"
 			+ "steigt der Schadensfaktor pro fehlendem\nGegner um " + std::to_string(static_cast<int>(effect->lessTargetsMoreDamage * 100)) + " Prozentpunkte\n");
 
-	if (effect->damageOverTimeRounds != 0)
-		_tooltip.append(indentation + "#white Für " + std::to_string(effect->damageOverTimeRounds) + " Runden:\n\t#aa0000 " + std::to_string(effect->damageOverTime) + " Schaden pro Runde\n");
+	if (effect->decayRounds != 0)
+		_tooltip.append(indentation + "#aa0000 Verfall (" + std::to_string(effect->decayRounds) + " Runden): " + std::to_string(effect->decay) + " Schaden\n");
 
 	if (effect->confusion != 0)
 		_tooltip.append(indentation + "#bb77bb Verwirrung (" + std::to_string(effect->confusion) + " Runden): " + std::to_string(static_cast<int>(effect->confusionProbability * 100)) + "%\n");

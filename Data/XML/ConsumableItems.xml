@@ -19,6 +19,11 @@
         <criticalHit>0</criticalHit>
         <precision>0</precision>
         <dodge>0</dodge>
+        <healing>0</healing>
+        <sleepResistance>0</sleepResistance>
+        <confusionResistance>0</confusionResistance>
+        <debuffResistance>0</debuffResistance>
+        <decayResistance>0</decayResistance>
       </buff>
     </effect>
   </Default>

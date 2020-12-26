@@ -3,7 +3,7 @@
 <PlayerAttributes>
   <Simon id="0"
     armour ="1"
-    health ="25"
+    maxHealth ="25"
     damageMin ="5"
     damageMax = "8"
     initiative ="1"
@@ -16,7 +16,7 @@
 
   <Ole id="1"
     armour ="1"
-    health ="20"
+    maxHealth ="20"
     damageMin ="5"
     damageMax = "8"
     initiative ="2"
@@ -29,7 +29,7 @@
 
   <Anna id="2"
     armour ="1"
-    health ="20"
+    maxHealth ="20"
     damageMin ="5"
     damageMax = "8"
     initiative ="3"
@@ -42,7 +42,7 @@
 
   <Markus id="3"
     armour ="1"
-    health ="30"
+    maxHealth ="30"
     damageMin ="9"
     damageMax = "12"
     initiative ="1"

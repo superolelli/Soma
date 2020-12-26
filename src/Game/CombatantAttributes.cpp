@@ -10,19 +10,29 @@ const std::vector<std::string> CombatantAttributes::attributeIdentifiers = {
 	"criticalHit",
 	"dodge",
 	"initiative",
-	"precision"
+	"precision",
+	"healing",
+	"sleepResistance",
+	"confusionResistance",
+	"debuffResistance",
+	"decayResistance"
 };
 
 const std::unordered_map<std::string, std::string> CombatantAttributes::attributeDisplayNames = {
 	{"maxHealth",     "Maximales Leben"},
 	{"currentHealth", "Derzeitiges Leben"},
-	{"damageMin",	  "Schaden"},
-	{"damageMax",	  "Schaden"},
+	{"damageMin",	  "Min. Schaden"},
+	{"damageMax",	  "Max. Schaden"},
 	{"armour",		  "Rüstung"},
-	{"criticalHit",	  "Kritische Trefferchance"},
+	{"criticalHit",	  "% Kritische Trefferchance"},
 	{"dodge",		  "Ausweichen"},
 	{"initiative",	  "Initiative"},
-	{"precision",	  "Präzision"}
+	{"precision",	  "Präzision"},
+	{"healing",       "% Heilungsmod."},
+	{"sleepResistance", "% Schlaf-Resistenz"},
+	{"confusionResistance", "% Verwirrungs-Resistenz"},
+	{"debuffResistance", "% Debuff-Resistenz"},
+	{"decayResistance", "% Verfall-Resistenz"}
 };					  
 
 

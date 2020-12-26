@@ -20,11 +20,17 @@ namespace pugi {
         if (buffNode.child("armour"))
             buff.stats["armour"] = buffNode.child("armour").text().as_int(); 
         
-        if (buffNode.child("damage"))
-            buff.stats["damageMin"] = buffNode.child("damage").text().as_int();
+        if (buffNode.child("damageMin"))
+            buff.stats["damageMin"] = buffNode.child("damageMin").text().as_int();
+
+		if (buffNode.child("damageMax"))
+			buff.stats["damageMax"] = buffNode.child("damageMax").text().as_int();
 
 		if (buffNode.child("damage"))
+		{
+			buff.stats["damageMin"] = buffNode.child("damage").text().as_int();
 			buff.stats["damageMax"] = buffNode.child("damage").text().as_int();
+		}
         
         if (buffNode.child("initiative"))
             buff.stats["initiative"] = buffNode.child("initiative").text().as_int();
@@ -43,6 +49,21 @@ namespace pugi {
 
 		if (buffNode.child("dodge"))
 			buff.stats["dodge"] = buffNode.child("dodge").text().as_int();
+
+		if (buffNode.child("healing"))
+			buff.stats["healing"] = buffNode.child("healing").text().as_int();
+
+		if (buffNode.child("sleepResistance"))
+			buff.stats["sleepResistance"] = buffNode.child("sleepResistance").text().as_int();
+
+		if (buffNode.child("confusionResistance"))
+			buff.stats["confusionResistance"] = buffNode.child("confusionResistance").text().as_int();
+
+		if (buffNode.child("debuffResistance"))
+			buff.stats["debuffResistance"] = buffNode.child("debuffResistance").text().as_int();
+
+		if (buffNode.child("decayResistance"))
+			buff.stats["decayResistance"] = buffNode.child("decayResistance").text().as_int();
     }
 
 
@@ -79,13 +100,13 @@ namespace pugi {
 		if (effectNode.child("putToSleepProbability"))
 			effect.putToSleepProbability = effectNode.child("putToSleepProbability").text().as_float();
 
-		if (effectNode.child("damageOverTime"))
+		if (effectNode.child("decay"))
 		{
-			if (effectNode.child("damageOverTime").child("damage"))
-				effect.damageOverTime = effectNode.child("damageOverTime").child("damage").text().as_int();
+			if (effectNode.child("decay").child("damage"))
+				effect.decay = effectNode.child("decay").child("damage").text().as_int();
 
-			if (effectNode.child("damageOverTime").child("rounds"))
-				effect.damageOverTimeRounds = effectNode.child("damageOverTime").child("rounds").text().as_int();
+			if (effectNode.child("decay").child("rounds"))
+				effect.decayRounds = effectNode.child("decay").child("rounds").text().as_int();
 		}
 
 		if (effectNode.child("removeBuffs"))
@@ -177,29 +198,14 @@ namespace pugi {
 
 	void loadAttributesFromXML(const xml_node & attributeNode, CombatantAttributes & stats)
 	{
-		if(attributeNode.attribute("armour"))
-			stats["armour"] = attributeNode.attribute("armour").as_int();
+		std::vector<std::string> toLoad = {"armour", "maxHealth", "damageMin", "damageMax", "initiative", "criticalHit", "dodge", "precision",
+										   "healing", "sleepResistance", "confusionResistance", "debuffResistance", "decayResistance"};
 
-		if (attributeNode.attribute("health"))
-		stats["maxHealth"] = attributeNode.attribute("health").as_int();
-
-		if (attributeNode.attribute("damageMin"))
-			stats["damageMin"] = attributeNode.attribute("damageMin").as_int();
-
-		if (attributeNode.attribute("damageMax"))
-			stats["damageMax"] = attributeNode.attribute("damageMax").as_int();
-
-		if (attributeNode.attribute("initiative"))
-			stats["initiative"] = attributeNode.attribute("initiative").as_int();
-
-		if (attributeNode.attribute("criticalHit"))
-			stats["criticalHit"] = attributeNode.attribute("criticalHit").as_int();
-
-		if (attributeNode.attribute("dodge"))
-			stats["dodge"] = attributeNode.attribute("dodge").as_int();
-
-		if (attributeNode.attribute("precision"))
-			stats["precision"] = attributeNode.attribute("precision").as_int();
+		for (auto& s : toLoad)
+		{
+			if (attributeNode.attribute(s.c_str()))
+				stats[s] = attributeNode.attribute(s.c_str()).as_int();
+		}
 		
 		stats["currentHealth"] = stats["maxHealth"];
 	}

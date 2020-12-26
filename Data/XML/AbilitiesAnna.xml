@@ -68,10 +68,10 @@ Schlaf: 25%</description>
         <fatigue>1</fatigue>
 
         <effect>
-			<damageOverTime>
+			<decay>
 				<rounds>3</rounds>
 				<damage>2</damage>
-			</damageOverTime>
+			</decay>
         </effect>
 
         <description>*#ffa500 Nasenflügelschlag*
