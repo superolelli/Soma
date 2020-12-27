@@ -36,6 +36,8 @@ struct AbilityEffect
 	float putToSleepProbability;
     bool removeBuffs;
     bool removeDebuffs;
+    int addMiss;
+    int addMissSelf;
     Buff buff;
 
 	void applySkill(const AbilityEffect &_effect);

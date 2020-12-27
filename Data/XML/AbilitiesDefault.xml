@@ -36,6 +36,8 @@
         </confusion>
         <mark>0</mark>
         <putToSleepProbability>0</putToSleepProbability>
+        <addMiss>0</addMiss>
+        <addMissSelf>0</addMissSelf>
 		<decay>
 			<damage>0</damage>
 			<rounds>0</rounds>

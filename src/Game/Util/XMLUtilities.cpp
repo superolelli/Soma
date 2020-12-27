@@ -115,6 +115,12 @@ namespace pugi {
 		if (effectNode.child("removeDebuffs"))
 			effect.removeDebuffs = effectNode.child("removeDebuffs").text().as_bool();
 
+		if (effectNode.child("addMiss"))
+			effect.addMiss = effectNode.child("addMiss").text().as_int();
+
+		if (effectNode.child("addMissSelf"))
+			effect.addMissSelf = effectNode.child("addMissSelf").text().as_int();
+
 		if (effectNode.child("buff"))
 			loadBuffFromXML(effectNode.child("buff"), effect.buff);
     }

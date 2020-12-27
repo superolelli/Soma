@@ -316,6 +316,7 @@ void CTextureManager::LoadTextures()
 	fatigueTired.loadFromFile("Data/Sprites/Battle/fatigue_debuff.png");
 	fatigueStupid.loadFromFile("Data/Sprites/Battle/fatigue_debuff2.png");
 	nofaceBuff.loadFromFile("Data/Sprites/Battle/noface_buff.png");
+	missed.loadFromFile("Data/Sprites/Battle/missed.png");
 
 	abilityAnnouncementBanner.loadFromFile("Data/Sprites/Battle/ability_announcement.png");
 

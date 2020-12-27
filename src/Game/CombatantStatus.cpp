@@ -192,6 +192,24 @@ void CombatantStatus::AddDebuff(Buff _buff)
 	debuffs.push_back(_buff);
 }
 
+
+void CombatantStatus::AddMiss(int _number)
+{
+	misses += _number;
+	std::cout << misses << std::endl;
+}
+
+void CombatantStatus::RemoveMiss()
+{
+	misses -= 1;
+	misses = std::max(0, misses);
+}
+
+int CombatantStatus::NumberOfMisses()
+{
+	return misses;
+}
+
 void CombatantStatus::SetFatigueLevel(FatigueLevel _level)
 {
 	if (fatigueLevel == _level)
@@ -331,6 +349,7 @@ void CombatantStatus::Reset()
 	debuffs.clear();
 	stupid = false;
 	nofaceBuffLevel = -1;
+	misses = 0;
 }
 
 

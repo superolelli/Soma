@@ -309,11 +309,8 @@ void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effec
 		Status().GainHealth(_effect.heal * healingModificator * criticalEffectFactor, isCriticalHit);
 	}
 
-	if (_effect.healSelf != 0)
-	{
-		float healingModificator = 1.0f + static_cast<float>(_attacker->Status().GetAttribute("healing")) / 100.0f;
-		_attacker->status.GainHealth(_effect.healSelf * healingModificator);
-	}
+	if (_effect.addMiss != 0)
+		Status().AddMiss(_effect.addMiss);
 
 
 	if (_effect.confusion != 0)

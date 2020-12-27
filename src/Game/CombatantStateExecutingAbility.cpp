@@ -116,20 +116,34 @@ void CombatantStateExecutingAbility::ExecuteAbility()
 
 void CombatantStateExecutingAbility::ApplyAbilityEffect()
 {
+	AbilityEffect *selfEffect = nullptr;
+
 	context->battle->GetGameStatus()->AddFatigue(ability->fatigue);
 	for (Combatant *t : context->selectedTargets)
 	{
+		AbilityEffect* effect = nullptr;
 		if (context->IsAlly(t) && !context->actsInConfusion || !context->IsAlly(t) && context->actsInConfusion)
-		{
-			float additionalDamage = ability->effectFriendly.lessTargetsMoreDamage * (ability->possibleAims.howMany - context->selectedTargets.size());
-			t->ApplyAbilityEffect(context, ability->effectFriendly, additionalDamage);
-		}
+			effect = &ability->effectFriendly;
 		else if (t->GetAbilityStatus() != dodging)
+			effect = &ability->effectHostile;
+
+		if (effect != nullptr)
 		{
-			float additionalDamage = ability->effectHostile.lessTargetsMoreDamage * (ability->possibleAims.howMany - context->selectedTargets.size());
-			t->ApplyAbilityEffect(context, ability->effectHostile, additionalDamage);
+			float additionalDamage = effect->lessTargetsMoreDamage * (ability->possibleAims.howMany - context->selectedTargets.size());
+			t->ApplyAbilityEffect(context, *effect, additionalDamage);
+			selfEffect = effect;
 		}
 	}
+
+	// Handle self effects
+	if (selfEffect && selfEffect->healSelf != 0 )
+	{
+		float healingModificator = 1.0f + static_cast<float>(context->Status().GetAttribute("healing")) / 100.0f;
+		context->status.GainHealth(ability->effectFriendly.healSelf * healingModificator);
+	}
+
+	if (selfEffect && selfEffect->addMissSelf != 0)
+		context->status.AddMiss(selfEffect->addMissSelf);
 }
 
 
@@ -178,6 +192,13 @@ void CombatantStateExecutingAbility::StartAttackedAnimation(Combatant *_combatan
 
 bool CombatantStateExecutingAbility::CheckForDodging(Combatant *_attacker, Combatant *_defender)
 {
+	if (_defender->status.NumberOfMisses() > 0)
+	{
+		_defender->status.RemoveMiss();
+		return true;
+	}
+
+
 	int difference = _defender->status.GetAttribute("dodge") - (_attacker->Status().GetAttribute("precision") + ability->precisionModificator);
 	if (rand() % 100 < difference * 2)
 		return true;

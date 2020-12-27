@@ -15,6 +15,7 @@
 
 	  <effect>
 		  <damageFactor>1</damageFactor>
+      <addMissSelf>1</addMissSelf>
 	  </effect>
   </ability>
 

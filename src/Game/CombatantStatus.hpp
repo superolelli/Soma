@@ -30,6 +30,7 @@ public:
 	void AddDebuff(Buff _buff);
 	void SetFatigueLevel(FatigueLevel _level);
 	void SetNofaceBuffLevel(int _level);
+	void AddMiss(int _number = 1);
 
 	void RemoveAllBuffs();
 	void RemoveAllDebuffs();
@@ -41,6 +42,8 @@ public:
 	bool IsBuffed() { return buffs.size() > 0; }
 	bool IsDebuffed() { return debuffs.size() > 0; }
 	int GetNofaceBuffLevel() { return nofaceBuffLevel; }
+	void RemoveMiss();
+	int NumberOfMisses();
 	CombatantAttributes GetNofaceStats();
 
 	void CheckNofaceBuff();
@@ -76,6 +79,7 @@ private:
 	int confused;
 	bool sleeping;
 	int marked;
+	int misses;
 	std::vector<std::pair<int, int>> decay;
 	std::vector<Buff> buffs;
 	std::vector<Buff> debuffs;

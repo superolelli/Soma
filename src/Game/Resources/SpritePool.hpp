@@ -28,6 +28,7 @@ public:
 	CSprite fatigue_tired;
 	CSprite fatigue_stupid;
 	CSprite noface_buff;
+	CSprite missed;
 
 	SpriteWithText abilityAnnouncementBanner;
 

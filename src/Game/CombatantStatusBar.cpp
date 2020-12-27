@@ -70,6 +70,7 @@ void CombatantStatusBar::RenderStatusSymbols()
 	RenderStatusSymbol(status->IsBuffed(), buffed, g_pSpritePool->buff, x);
 	RenderStatusSymbol(status->IsDebuffed(), debuffed, g_pSpritePool->debuff, x);
 	RenderStatusSymbol(status->IsMarked(), marked, g_pSpritePool->marked, x);
+	RenderStatusSymbol(status->NumberOfMisses() > 0, miss, g_pSpritePool->missed, x);
 
 	RenderStatusSymbolsTooltips();
 }
@@ -149,6 +150,14 @@ void CombatantStatusBar::RenderStatusSymbolsTooltips()
 			RenderTooltip("Markiert (" + std::to_string(status->RoundsMarked()) + " Runden)", g_pSpritePool->marked.GetRect().left, g_pSpritePool->marked.GetRect().top);
 		else
 			RenderTooltip("Markiert (" + std::to_string(status->RoundsMarked()) + " Runde)", g_pSpritePool->marked.GetRect().left, g_pSpritePool->marked.GetRect().top);
+	}
+
+	if (status->NumberOfMisses() > 0 && g_pSpritePool->missed.GetRect().contains(engine->GetWorldMousePos()))
+	{
+		if(status->NumberOfMisses() == 1)
+			RenderTooltip("1 Fehlschuss ", g_pSpritePool->missed.GetRect().left, g_pSpritePool->missed.GetRect().top);
+		else
+			RenderTooltip(std::to_string(status->NumberOfMisses()) + " Fehlschüsse ", g_pSpritePool->missed.GetRect().left, g_pSpritePool->missed.GetRect().top);
 	}
 
 	if (status->IsBuffed() && g_pSpritePool->buff.GetRect().contains(engine->GetWorldMousePos()))

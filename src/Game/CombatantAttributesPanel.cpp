@@ -75,9 +75,9 @@ void CombatantAttributesPanel::Update(CombatantStatus &_status)
 	for (int i = 0; i < 6 ; i++)
 	{
 		if(toShow[i] == "damageMin")
-			statValueText[i].setString(std::to_string(_status.GetAttribute(toShow[i])));
+			statValueText[i].setString(std::to_string(_status.GetAttribute("damageMin")) + "-" + std::to_string(_status.GetAttribute("damageMax")));	
 		else
-			statValueText[i].setString(std::to_string(_status.GetAttribute("damageMin")) + "-" + std::to_string(_status.GetAttribute("damageMax")));
+			statValueText[i].setString(std::to_string(_status.GetAttribute(toShow[i])));
 
 		SetValueTextColor(statValueText[i], buff.stats[toShow[i]], debuff.stats[toShow[i]]);
 	}
