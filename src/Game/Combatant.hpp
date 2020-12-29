@@ -95,6 +95,8 @@ public:
 	void RenderAbilityEffect(bool _dodged);
 	SpriterEngine::point GetAbilityEffectPoint();
 
+	Combatant* CombatantAtNextPosition();
+
 
 protected:
 

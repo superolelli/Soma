@@ -38,6 +38,7 @@ struct AbilityEffect
     bool removeDebuffs;
     int addMiss;
     int addMissSelf;
+    bool dynamite;
     Buff buff;
 
 	void applySkill(const AbilityEffect &_effect);

@@ -13,6 +13,7 @@ void SoundManager::LoadSounds()
 	soundBuffers[DAMAGE_OVER_TIME].loadFromFile("Data/Sound/damage_over_time.wav");
 	soundBuffers[CRITICAL_HIT].loadFromFile("Data/Sound/critical_hit.wav");
 	soundBuffers[DODGED].loadFromFile("Data/Sound/dodged.wav");
+	soundBuffers[DYNAMITE].loadFromFile("Data/Sound/dynamite.ogg");
 	soundBuffers[BARREL].loadFromFile("Data/Sound/Lootables/barrel.ogg");
 	soundBuffers[CABINET].loadFromFile("Data/Sound/Lootables/cabinet.ogg");
 	soundBuffers[CHEST].loadFromFile("Data/Sound/Lootables/chest.wav");

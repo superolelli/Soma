@@ -333,6 +333,9 @@ void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effec
 			AddResistanceNotification();
 	}
 
+	if (_effect.dynamite)
+		Status().AddDynamite();
+
 	if (_effect.mark != 0)
 		Status().Mark(std::round((float)(_effect.mark) * criticalDurationFactor));
 
@@ -375,4 +378,14 @@ void Combatant::AddResistanceNotification()
 {
 	notificationRenderer->AddNotification("Widerstanden!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top - 30), 1.0f);
 	//TODO: Play some sound
+}
+
+
+Combatant* Combatant::CombatantAtNextPosition()
+{
+	int position = battlePosition + 1;
+	if (position > allCombatants->size())
+		position = 0;
+
+	return allCombatants->at(position);
 }

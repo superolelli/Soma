@@ -112,6 +112,7 @@ public:
 	sf::Texture fatigueStupid;
 	sf::Texture nofaceBuff;
 	sf::Texture missed;
+	sf::Texture dynamite;
 
 	sf::Texture abilityAnnouncementBanner;
 	sf::Texture abilityTargetMarker;

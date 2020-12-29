@@ -15,6 +15,9 @@ void AbilityEffect::clear()
 	putToSleepProbability = 0.0f;
 	decay = 0;
 	decayRounds = 0;
+	dynamite = false;
+	addMiss = 0;
+	addMissSelf = 0;
 	removeBuffs = false;
 	removeDebuffs = false;
 	buff.SetStandardValues();

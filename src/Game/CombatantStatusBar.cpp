@@ -61,6 +61,7 @@ void CombatantStatusBar::RenderStatusSymbols()
 	int x = healthBar.GetRect().left;
 	int y = healthBar.GetRect().top + healthBar.GetRect().height;
 
+	RenderStatusSymbol(status->HasDynamite(), dynamite, g_pSpritePool->dynamite, x);
 	RenderStatusSymbol(status->IsAsleep(), sleeping, g_pSpritePool->sleeping, x);
 	RenderStatusSymbol(status->GetNofaceBuffLevel() >= 0, noface_buff, g_pSpritePool->noface_buff, x);
 	RenderStatusSymbol(status->GetFatigueLevel() == CombatantStatus::FatigueLevel::tired, fatigue_tired, g_pSpritePool->fatigue_tired, x);
@@ -116,6 +117,9 @@ void CombatantStatusBar::RenderStatusSymbol(bool _isActive, statusType _type, CS
 
 void CombatantStatusBar::RenderStatusSymbolsTooltips()
 {
+	if (status->HasDynamite() && g_pSpritePool->dynamite.GetRect().contains(engine->GetWorldMousePos()))
+		RenderTooltip("*#dd3333 Dynamit*\nExplodiert zu 20%\n#888888 Falls ja: 15 Schaden\nFalls nein: Weiter an Nächsten", g_pSpritePool->dynamite.GetRect().left, g_pSpritePool->dynamite.GetRect().top);
+
 	if (status->IsAsleep() && g_pSpritePool->sleeping.GetRect().contains(engine->GetWorldMousePos()))
 		RenderTooltip("Schläft", g_pSpritePool->sleeping.GetRect().left, g_pSpritePool->sleeping.GetRect().top);
 

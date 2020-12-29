@@ -109,6 +109,9 @@ namespace pugi {
 				effect.decayRounds = effectNode.child("decay").child("rounds").text().as_int();
 		}
 
+		if (effectNode.child("dynamite"))
+			effect.dynamite = effectNode.child("dynamite").text().as_bool();
+
 		if (effectNode.child("removeBuffs"))
 			effect.removeBuffs = effectNode.child("removeBuffs").text().as_bool();
 

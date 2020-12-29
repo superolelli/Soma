@@ -27,6 +27,7 @@ void CombatantStatus::UpdateStatusForNewTurn(double _initialWaitingTime)
 {
 	sleepChecked = false;
 	decayChecked = false;
+	dynamiteChecked = false;
 	skipRound = false;
 	statusAnnouncementTime = _initialWaitingTime;
 
@@ -49,7 +50,12 @@ void CombatantStatus::ExecuteStatusChanges()
 		return;
 	}
 
-	if (!decayChecked)
+	if (!dynamiteChecked)
+	{
+		HandleDynamite();
+		dynamiteChecked = true;
+	}
+	else if (!decayChecked)
 	{
 		HandleDecay();
 		decayChecked = true;
@@ -66,12 +72,11 @@ void CombatantStatus::ExecuteStatusChanges()
 			notificationRenderer->AddNotification("Aufgewacht!", g_pFonts->f_kingArthur, sf::Vector2f(combatant->GetRect().left - combatant->GetRect().width / 2.0f, combatant->GetRect().top - 20.0f), 1.0f);
 		}
 	}
-
 }
 
 bool CombatantStatus::IsExecutingStatusChanges()
 {
-	return !sleepChecked || !decayChecked || statusAnnouncementTime > 0.0;
+	return !sleepChecked || !decayChecked || !dynamiteChecked || statusAnnouncementTime > 0.0;
 }
 
 
@@ -121,6 +126,26 @@ void CombatantStatus::HandleDecay()
 
 		if (GetAttribute("currentHealth") <= 0)
 			skipRound = true;
+	}
+}
+
+void CombatantStatus::HandleDynamite()
+{
+	if (dynamite)
+	{
+		if (rand() % 5 == 0)
+		{
+			LooseHealth(15, false);
+			statusAnnouncementTime = 2.0;
+			g_pSounds->PlaySound(DYNAMITE);
+
+			if (GetAttribute("currentHealth") <= 0)
+				skipRound = true;
+		}
+		else 
+			combatant->CombatantAtNextPosition()->Status().AddDynamite();
+
+		dynamite = false;
 	}
 }
 
@@ -350,6 +375,7 @@ void CombatantStatus::Reset()
 	stupid = false;
 	nofaceBuffLevel = -1;
 	misses = 0;
+	dynamite = false;
 }
 
 

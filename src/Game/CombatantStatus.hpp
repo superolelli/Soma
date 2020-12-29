@@ -31,6 +31,8 @@ public:
 	void SetFatigueLevel(FatigueLevel _level);
 	void SetNofaceBuffLevel(int _level);
 	void AddMiss(int _number = 1);
+	void AddDynamite() {dynamite = true;}
+	void RemoveDynamite() { dynamite = false; }
 
 	void RemoveAllBuffs();
 	void RemoveAllDebuffs();
@@ -44,6 +46,7 @@ public:
 	int GetNofaceBuffLevel() { return nofaceBuffLevel; }
 	void RemoveMiss();
 	int NumberOfMisses();
+	bool HasDynamite() { return dynamite; }
 	CombatantAttributes GetNofaceStats();
 
 	void CheckNofaceBuff();
@@ -86,14 +89,17 @@ private:
 	FatigueLevel fatigueLevel;
 	int nofaceBuffLevel;
 	bool stupid;
+	bool dynamite;
 
 	Buff returnBuff;
 
 	void HandleBuffDurations(std::vector<Buff> &_buffs);
 	void HandleDecay();
+	void HandleDynamite();
 
 	double statusAnnouncementTime;
 	bool sleepChecked;
 	bool decayChecked;
+	bool dynamiteChecked;
 	bool skipRound;
 };
