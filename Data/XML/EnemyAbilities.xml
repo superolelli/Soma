@@ -47,6 +47,10 @@
 
 	  <effect>
 		  <damageFactor>1</damageFactor>
+        <decay>
+            <rounds>3</rounds>
+            <damage>1</damage>
+        </decay>
 	  </effect>
   </ability>
 
@@ -415,6 +419,34 @@
 
         <effect>
             <damageFactor>1.0</damageFactor>
+        </effect>
+    </ability>
+    
+
+		<ability id="24" name="Fehlschuss">
+        <animation>miss</animation>
+        <effectAnimation>empty</effectAnimation>
+        <attackSelf>true</attackSelf>
+
+        <effect>
+            <addMissSelf>2</addMissSelf>
+        </effect>
+    </ability>
+
+    <ability id="25" name="Knock Out">
+        <animation>knock_out</animation>
+        <effectAnimation>knock_out</effectAnimation>
+
+         <positions>
+            <value id="0">true</value>
+            <value id="1">true</value>
+            <value id="2">true</value>
+            <value id="3">true</value>
+        </positions>
+        
+        <effect>
+            <damageFactor>1.0</damageFactor>
+            <putToSleepProbability>0.9</putToSleepProbability>
         </effect>
     </ability>
 

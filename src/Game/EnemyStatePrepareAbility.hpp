@@ -29,6 +29,8 @@ private:
 
 	void ChooseAbility();
 	void ChooseAbilityGreg();
+	void ChooseAbilityGesetzloser();
+	void ChooseAbilityIndianer();
 	void ChooseAbilityAbtruenniger();
 	void ChooseAbilityApacheKid();
 	void ChooseAbilityHilfssherrif();
@@ -40,6 +42,7 @@ private:
 	void ChooseAbilityBruderZacharias();
 
 	void ChooseTargetForDoctor();
+	void ChooseTargetForKnockOut();
 
 	void ChooseTarget();
     void ChooseRandomEnemy();

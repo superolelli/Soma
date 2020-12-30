@@ -101,10 +101,10 @@ void EnemyStatePrepareAbility::ChooseAbility()
 	switch (enemyContext->GetID())
 	{
 	case CombatantID::Gesetzloser:
-		chosenAbility = enemyAbilities::springfield;
+		ChooseAbilityGesetzloser();
 		break;
 	case CombatantID::Indianer:
-		chosenAbility = enemyAbilities::tomahawk;
+		ChooseAbilityIndianer();
 		break;
 	case CombatantID::Abtruenniger:
 		ChooseAbilityAbtruenniger();
@@ -150,8 +150,49 @@ void EnemyStatePrepareAbility::ChooseAbilityGreg()
 			chosenAbility = enemyAbilities::gravedigger_gaze;
 }
 
+void EnemyStatePrepareAbility::ChooseAbilityGesetzloser()
+{
+
+	if (context->Status().NumberOfMisses() >= 2)
+		chosenAbility = enemyAbilities::springfield;
+	else if (rand() % 2 == 0)
+		chosenAbility = enemyAbilities::springfield;
+	else
+		chosenAbility = enemyAbilities::miss;
+}
+
+void EnemyStatePrepareAbility::ChooseAbilityIndianer()
+{
+	bool playerAwake = false;
+	for (auto c : *context->allCombatants)
+	{
+		if (c->IsPlayer() && !c->Status().IsAsleep())
+		{
+			playerAwake = true;
+			break;
+		}
+	}
+
+	if(!playerAwake)
+		chosenAbility = enemyAbilities::tomahawk;
+	else
+	{
+		if (rand() % 2 == 0)
+			chosenAbility = enemyAbilities::knock_out;
+		else
+			chosenAbility = enemyAbilities::tomahawk;
+	}
+}
+
 void EnemyStatePrepareAbility::ChooseAbilityBigSpencer()
 {
+	int numberOfPlayerBuffs = 0;
+	for (auto c : *context->allCombatants)
+	{
+		if (c->IsPlayer() && c->Status().IsBuffed())
+			numberOfPlayerBuffs++;
+	}
+
 	if (rand() % 2 == 0)
 		chosenAbility = enemyAbilities::punch;
 	else
@@ -177,13 +218,15 @@ void EnemyStatePrepareAbility::ChooseAbilityApacheKid()
 
 void EnemyStatePrepareAbility::ChooseAbilityHilfssherrif()
 {
+	bool otherAlly = false;
+	bool unmarkedPlayer = false;
 	for (auto *c : *enemyContext->allCombatants)
 	{
-		if (c->IsPlayer() && c->Status().IsMarked())
-		{
-			chosenAbility = enemyAbilities::bang;
-			return;
-		}
+		if (!c->IsPlayer() && c->GetID() != CombatantID::Hilfssheriff)
+			otherAlly = true;
+
+		if (c->IsPlayer() && !c->Status().IsMarked())
+			unmarkedPlayer = true;
 	}
 
 	if (rand() % 2 == 0)
@@ -305,6 +348,11 @@ void EnemyStatePrepareAbility::ChooseTarget()
 		ChooseTargetForDoctor();
 		return;
 	}
+	else if (chosenAbility == enemyAbilities::knock_out)
+	{
+		ChooseTargetForKnockOut();
+		return;
+	}
 
 	if (ChosenAbilityHitsOnlySelf())
 		enemyContext->selectedTargets.push_back(enemyContext);
@@ -336,6 +384,37 @@ void EnemyStatePrepareAbility::ChooseTargetForDoctor()
 		CheckForMarkedPlayers();
 		if (enemyContext->selectedTargets.empty())
 			ChooseRandomPlayer();
+	}
+}
+
+
+void EnemyStatePrepareAbility::ChooseTargetForKnockOut()
+{
+	int numberOfTargets = 0;
+
+	for (auto c : *context->allCombatants)
+	{
+		if (c->IsPlayer() && !c->Status().IsAsleep())
+			numberOfTargets++;
+	}
+
+	int target = rand() % numberOfTargets;
+
+	if (numberOfTargets == 1)
+		target = 0;
+
+	for (auto c : *context->allCombatants)
+	{
+		if (c->IsPlayer() && !c->Status().IsAsleep())
+		{
+			if (target == 0)
+			{
+				enemyContext->selectedTargets.push_back(c);
+				return;
+			}
+
+			target--;
+		}
 	}
 }
 
