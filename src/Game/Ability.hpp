@@ -39,6 +39,7 @@ struct AbilityEffect
     int addMiss;
     int addMissSelf;
     bool dynamite;
+    int bounty;
     Buff buff;
 
 	void applySkill(const AbilityEffect &_effect);

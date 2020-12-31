@@ -18,6 +18,7 @@ void AbilityEffect::clear()
 	dynamite = false;
 	addMiss = 0;
 	addMissSelf = 0;
+	bounty = 0;
 	removeBuffs = false;
 	removeDebuffs = false;
 	buff.SetStandardValues();
@@ -37,6 +38,10 @@ void AbilityEffect::applySkill(const AbilityEffect &_effect)
 	putToSleepProbability += _effect.putToSleepProbability;
 	decay += _effect.decay;
 	decayRounds += _effect.decayRounds;
+	bounty += _effect.bounty;
+	dynamite += _effect.dynamite;
+	addMiss += _effect.addMiss;
+	addMissSelf += _effect.addMissSelf;
 	removeBuffs = removeBuffs || _effect.removeBuffs;
 	removeDebuffs = removeDebuffs || _effect.removeDebuffs;
 	buff.ApplySkill(_effect.buff);

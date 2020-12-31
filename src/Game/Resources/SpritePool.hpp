@@ -30,6 +30,7 @@ public:
 	CSprite noface_buff;
 	CSprite missed;
 	CSprite dynamite;
+	CSprite bounty;
 
 	SpriteWithText abilityAnnouncementBanner;
 

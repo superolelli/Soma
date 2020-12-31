@@ -225,14 +225,21 @@ void EnemyStatePrepareAbility::ChooseAbilityHilfssherrif()
 		if (!c->IsPlayer() && c->GetID() != CombatantID::Hilfssheriff)
 			otherAlly = true;
 
-		if (c->IsPlayer() && !c->Status().IsMarked())
+		if (c->IsPlayer() && !c->Status().HasBounty())
 			unmarkedPlayer = true;
 	}
 
-	if (rand() % 2 == 0)
+	if (!otherAlly)
 		chosenAbility = enemyAbilities::bang;
+	else if (unmarkedPlayer)
+	{
+		if (rand() % 2 == 0)
+			chosenAbility = enemyAbilities::deputy;
+		else
+			chosenAbility = enemyAbilities::bounty;
+	}
 	else
-		chosenAbility = enemyAbilities::bounty;
+		chosenAbility = enemyAbilities::deputy;
 }
 
 
@@ -353,6 +360,11 @@ void EnemyStatePrepareAbility::ChooseTarget()
 		ChooseTargetForKnockOut();
 		return;
 	}
+	else if (chosenAbility == enemyAbilities::bounty)
+	{
+		ChooseTargetForBounty();
+		return;
+	}
 
 	if (ChosenAbilityHitsOnlySelf())
 		enemyContext->selectedTargets.push_back(enemyContext);
@@ -406,6 +418,36 @@ void EnemyStatePrepareAbility::ChooseTargetForKnockOut()
 	for (auto c : *context->allCombatants)
 	{
 		if (c->IsPlayer() && !c->Status().IsAsleep())
+		{
+			if (target == 0)
+			{
+				enemyContext->selectedTargets.push_back(c);
+				return;
+			}
+
+			target--;
+		}
+	}
+}
+
+void EnemyStatePrepareAbility::ChooseTargetForBounty()
+{
+	int numberOfTargets = 0;
+
+	for (auto c : *context->allCombatants)
+	{
+		if (c->IsPlayer() && !c->Status().HasBounty())
+			numberOfTargets++;
+	}
+
+	int target = rand() % numberOfTargets;
+
+	if (numberOfTargets == 1)
+		target = 0;
+
+	for (auto c : *context->allCombatants)
+	{
+		if (c->IsPlayer() && !c->Status().HasBounty())
 		{
 			if (target == 0)
 			{

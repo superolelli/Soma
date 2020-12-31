@@ -26,6 +26,8 @@ public:
 	void Confuse(int _rounds) { confused += _rounds; }
 	void PutToSleep() { sleeping = true; }
 	void AddDecay(int _rounds, int _damage);
+	void AddBounty(int _rounds) {bounty += _rounds;}
+	void AddBountyBuff();
 	void AddBuff(Buff _buff);
 	void AddDebuff(Buff _buff);
 	void SetFatigueLevel(FatigueLevel _level);
@@ -43,6 +45,7 @@ public:
 	bool IsConfused() { return confused > 0; }
 	bool IsBuffed() { return buffs.size() > 0; }
 	bool IsDebuffed() { return debuffs.size() > 0; }
+	bool HasBounty() { return bounty > 0; }
 	int GetNofaceBuffLevel() { return nofaceBuffLevel; }
 	void RemoveMiss();
 	int NumberOfMisses();
@@ -54,6 +57,7 @@ public:
 	int RoundsConfused() { return confused; }
 	int RoundsMarked() { return marked; }
 	int RoundsDecay();
+	int RoundsBounty() { return bounty; }
 
 	Buff &GetBuff();
 	Buff &GetDebuff();
@@ -83,6 +87,7 @@ private:
 	bool sleeping;
 	int marked;
 	int misses;
+	int bounty;
 	std::vector<std::pair<int, int>> decay;
 	std::vector<Buff> buffs;
 	std::vector<Buff> debuffs;

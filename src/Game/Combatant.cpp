@@ -301,6 +301,9 @@ void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effec
 	{
 		auto damage = _attacker->status.GetDamage() * (_effect.damageFactor + _additionalDamageFactor);
 		Status().LooseHealth(damage * criticalEffectFactor, isCriticalHit);
+
+		if (Status().HasBounty())
+			_attacker->status.AddBountyBuff();
 	}
 
 	if (_effect.heal != 0)
@@ -338,6 +341,9 @@ void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effec
 
 	if (_effect.mark != 0)
 		Status().Mark(std::round((float)(_effect.mark) * criticalDurationFactor));
+
+	if(_effect.bounty != 0)
+		Status().AddBounty(_effect.bounty);
 
 	if (_effect.putToSleepProbability != 0.0f)
 	{

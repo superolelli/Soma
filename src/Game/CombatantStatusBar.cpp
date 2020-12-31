@@ -72,6 +72,7 @@ void CombatantStatusBar::RenderStatusSymbols()
 	RenderStatusSymbol(status->IsDebuffed(), debuffed, g_pSpritePool->debuff, x);
 	RenderStatusSymbol(status->IsMarked(), marked, g_pSpritePool->marked, x);
 	RenderStatusSymbol(status->NumberOfMisses() > 0, miss, g_pSpritePool->missed, x);
+	RenderStatusSymbol(status->HasBounty(), bounty, g_pSpritePool->bounty, x);
 
 	RenderStatusSymbolsTooltips();
 }
@@ -145,7 +146,7 @@ void CombatantStatusBar::RenderStatusSymbolsTooltips()
 		if (status->RoundsConfused() > 1)
 			RenderTooltip("#bb77bb Verwirrt (" + std::to_string(status->RoundsConfused()) + " Runden)", g_pSpritePool->confused.GetRect().left, g_pSpritePool->confused.GetRect().top);
 		else
-			RenderTooltip("#bb77bb Verwirrt (" + std::to_string(status->RoundsConfused()) + " Runde)", g_pSpritePool->confused.GetRect().left, g_pSpritePool->confused.GetRect().top);
+			RenderTooltip("#bb77bb Verwirrt (1 Runde)", g_pSpritePool->confused.GetRect().left, g_pSpritePool->confused.GetRect().top);
 	}
 
 	if (status->IsMarked() && g_pSpritePool->marked.GetRect().contains(engine->GetWorldMousePos()))
@@ -153,7 +154,15 @@ void CombatantStatusBar::RenderStatusSymbolsTooltips()
 		if (status->RoundsMarked() > 1)
 			RenderTooltip("Markiert (" + std::to_string(status->RoundsMarked()) + " Runden)", g_pSpritePool->marked.GetRect().left, g_pSpritePool->marked.GetRect().top);
 		else
-			RenderTooltip("Markiert (" + std::to_string(status->RoundsMarked()) + " Runde)", g_pSpritePool->marked.GetRect().left, g_pSpritePool->marked.GetRect().top);
+			RenderTooltip("Markiert (1 Runde)", g_pSpritePool->marked.GetRect().left, g_pSpritePool->marked.GetRect().top);
+	}
+
+	if (status->HasBounty() && g_pSpritePool->bounty.GetRect().contains(engine->GetWorldMousePos()))
+	{
+		if (status->RoundsBounty() > 1)
+			RenderTooltip("Kopfgeld (" + std::to_string(status->RoundsBounty()) + " Runden)\n#888888 Bei Schaden:\n+2 Schaden für Angreifer", g_pSpritePool->bounty.GetRect().left, g_pSpritePool->bounty.GetRect().top);
+		else
+			RenderTooltip("Kopfgeld (1 Runde)\n#888888 Bei Schaden:\n+2 Schaden für Angreifer", g_pSpritePool->bounty.GetRect().left, g_pSpritePool->bounty.GetRect().top);
 	}
 
 	if (status->NumberOfMisses() > 0 && g_pSpritePool->missed.GetRect().contains(engine->GetWorldMousePos()))

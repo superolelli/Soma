@@ -43,6 +43,7 @@ private:
 
 	void ChooseTargetForDoctor();
 	void ChooseTargetForKnockOut();
+	void ChooseTargetForBounty();
 
 	void ChooseTarget();
     void ChooseRandomEnemy();

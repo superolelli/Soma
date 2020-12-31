@@ -113,6 +113,7 @@ public:
 	sf::Texture nofaceBuff;
 	sf::Texture missed;
 	sf::Texture dynamite;
+	sf::Texture bounty;
 
 	sf::Texture abilityAnnouncementBanner;
 	sf::Texture abilityTargetMarker;

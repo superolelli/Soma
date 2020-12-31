@@ -50,8 +50,8 @@
         <bossGroup>
             <enemy>Indianer</enemy>
             <enemy>Indianer</enemy>
-            <enemy>Gesetzloser</enemy>
-            <enemy>Gesetzloser</enemy>
+            <enemy>Hilfssheriff</enemy>
+            <enemy>Hilfssheriff</enemy>
         </bossGroup>
     </level>
 

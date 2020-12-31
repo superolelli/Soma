@@ -37,6 +37,9 @@ void CombatantStatus::UpdateStatusForNewTurn(double _initialWaitingTime)
 	if (confused > 0)
 		confused--;
 
+	if (bounty > 0)
+		bounty--;
+
 	HandleBuffDurations(buffs);
 	HandleBuffDurations(debuffs);
 }
@@ -99,6 +102,7 @@ void CombatantStatus::HandleBuffDurations(std::vector<Buff> &_buffs)
 			i++;
 	}
 }
+
 
 void CombatantStatus::HandleDecay()
 {
@@ -208,6 +212,17 @@ void CombatantStatus::AddBuff(Buff _buff)
 {
 	currentStats += _buff.stats;
 	buffs.push_back(_buff);
+}
+
+void CombatantStatus::AddBountyBuff()
+{
+	Buff buff;
+	buff.SetStandardValues();
+	buff.duration = 3;
+	buff.isPositive = true;
+	buff.stats.attributes["damageMin"] += 2;
+	buff.stats.attributes["damageMax"] += 2;
+	AddBuff(buff);
 }
 
 
@@ -375,6 +390,7 @@ void CombatantStatus::Reset()
 	stupid = false;
 	nofaceBuffLevel = -1;
 	misses = 0;
+	bounty = 0;
 	dynamite = false;
 }
 

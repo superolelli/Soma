@@ -318,6 +318,7 @@ void CTextureManager::LoadTextures()
 	nofaceBuff.loadFromFile("Data/Sprites/Battle/noface_buff.png");
 	missed.loadFromFile("Data/Sprites/Battle/missed.png");
 	dynamite.loadFromFile("Data/Sprites/Battle/dynamite.png");
+	bounty.loadFromFile("Data/Sprites/Battle/bounty.png");
 
 	abilityAnnouncementBanner.loadFromFile("Data/Sprites/Battle/ability_announcement.png");
 

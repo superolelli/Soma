@@ -38,6 +38,7 @@
     <putToSleepProbability>0</putToSleepProbability>
     <addMiss>0</addMiss>
     <addMissSelf>0</addMissSelf>
+    <bounty>0</bounty>
 		<decay>
 			<damage>0</damage>
 			<rounds>0</rounds>

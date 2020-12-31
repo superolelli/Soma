@@ -109,6 +109,9 @@ namespace pugi {
 				effect.decayRounds = effectNode.child("decay").child("rounds").text().as_int();
 		}
 
+		if (effectNode.child("bounty"))
+			effect.bounty = effectNode.child("bounty").text().as_int();
+
 		if (effectNode.child("dynamite"))
 			effect.dynamite = effectNode.child("dynamite").text().as_bool();
 
