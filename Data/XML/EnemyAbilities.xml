@@ -95,8 +95,7 @@
 	   <buff>
 		  <duration>3</duration>
 		  <isPositive>false</isPositive>
-          <dodge>-3</dodge>
-          <damage>-3</damage>
+          <damage>-5</damage>
       </buff>
 	  </effect>
   </ability>
@@ -463,6 +462,43 @@
                 <criticalHit>5</criticalHit>
                 <precision>10</precision>
             </buff>
+        </effect>
+    </ability>
+
+    <ability id="27" name="Kein Schmerz">
+        <animation>no_pain</animation>
+        <effectAnimation>indomitable_happiness_friendly</effectAnimation>
+
+        <positions>
+            <value id="4">true</value>
+            <value id="5">true</value>
+            <value id="6">true</value>
+            <value id="7">true</value>
+        </positions>
+
+        <effect>
+            <buff>
+                <duration>3</duration>
+                <armour>10</armour>
+                <sleepResistance>20</sleepResistance>
+                <confusionResistance>20</confusionResistance>
+                <decayResistance>20</decayResistance>
+                <debuffResistance>20</debuffResistance>
+            </buff>
+        </effect>
+    </ability>
+
+    <ability id="28" name="Dynamit">
+        <animation>dynamite</animation>
+        <effectAnimation>dynamite</effectAnimation>
+
+        <positions>
+            <value id="0">true</value>
+            <value id="1">true</value>
+        </positions>
+
+        <effect>
+            <dynamite>true</dynamite>
         </effect>
     </ability>
 

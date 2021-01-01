@@ -48,10 +48,10 @@
             </group>
         </enemyGroups>
         <bossGroup>
+            <enemy>Apache Kid</enemy>
+            <enemy>Big Spencer</enemy>
             <enemy>Indianer</enemy>
             <enemy>Indianer</enemy>
-            <enemy>Hilfssheriff</enemy>
-            <enemy>Hilfssheriff</enemy>
         </bossGroup>
     </level>
 

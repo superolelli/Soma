@@ -187,17 +187,38 @@ void EnemyStatePrepareAbility::ChooseAbilityIndianer()
 void EnemyStatePrepareAbility::ChooseAbilityBigSpencer()
 {
 	int numberOfPlayerBuffs = 0;
+	bool dynamitePossible = true;
 	for (auto c : *context->allCombatants)
 	{
 		if (c->IsPlayer() && c->Status().IsBuffed())
 			numberOfPlayerBuffs++;
+		if (c->Status().HasDynamite())
+			dynamitePossible = false;
 	}
 
-	if (rand() % 2 == 0)
-		chosenAbility = enemyAbilities::punch;
+	if (numberOfPlayerBuffs > 0)
+	{
+		if (dynamitePossible)
+		{
+			if (rand() % 2 == 0)
+				chosenAbility = enemyAbilities::brawl;
+			else
+				chosenAbility = enemyAbilities::dynamite;
+		}
+		else
+			chosenAbility = enemyAbilities::brawl;
+	}
+	else if (dynamitePossible)
+	{
+		if (rand() % 2 == 0)
+			chosenAbility = enemyAbilities::punch;
+		else
+			chosenAbility = enemyAbilities::dynamite;
+	}
 	else
-		chosenAbility = enemyAbilities::brawl;
+		chosenAbility = enemyAbilities::punch;
 }
+
 
 void EnemyStatePrepareAbility::ChooseAbilityAbtruenniger()
 {
@@ -211,8 +232,10 @@ void EnemyStatePrepareAbility::ChooseAbilityApacheKid()
 {
 	if (OnlyOneCompanionLeft())
 		chosenAbility = enemyAbilities::indians;
-	else
+	else if (rand() % 2 == 0)
 		chosenAbility = enemyAbilities::knife;
+	else
+		chosenAbility = enemyAbilities::no_pain;
 }
 
 

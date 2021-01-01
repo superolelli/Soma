@@ -346,6 +346,9 @@ Buff & CombatantStatus::GetDebuff()
 
 void CombatantStatus::RemoveAllBuffs()
 {
+	if (buffs.empty())
+		return;
+
 	std::vector<Buff>::iterator i;
 	for (i = buffs.begin(); i != buffs.end(); i++)
 		currentStats -= i->stats;
@@ -358,6 +361,9 @@ void CombatantStatus::RemoveAllBuffs()
 
 void CombatantStatus::RemoveAllDebuffs()
 {
+	if (debuffs.empty())
+		return;
+
 	std::vector<Buff>::iterator i;
 	for (i = debuffs.begin(); i != debuffs.end(); i++)
 		currentStats -= i->stats;

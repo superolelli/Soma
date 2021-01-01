@@ -389,9 +389,21 @@ void Combatant::AddResistanceNotification()
 
 Combatant* Combatant::CombatantAtNextPosition()
 {
-	int position = battlePosition + 1;
-	if (position > allCombatants->size())
-		position = 0;
+	Combatant* combatant = nullptr;
+	for (auto c : *allCombatants)
+	{
+		if (c->GetBattlePos() > battlePosition && (combatant == nullptr || c->GetBattlePos() < combatant->GetBattlePos()))
+			combatant = c;
+	}
 
-	return allCombatants->at(position);
+	if (combatant == nullptr)
+	{
+		for (auto c : *allCombatants)
+		{
+			if (c->GetBattlePos() < battlePosition && (combatant == nullptr || c->GetBattlePos() < combatant->GetBattlePos()))
+				combatant = c;
+		}
+	}
+
+	return combatant;
 }
