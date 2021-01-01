@@ -204,14 +204,10 @@ void PlayerStatePrepareAbility::Render()
 {
 	playerContext->RenderShadow();
 
-	playerContext->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds());
-	playerContext->combatantObject->render();
-	playerContext->combatantObject->playSoundTriggers();
+	CombatantState::Render();
 
 	playerContext->RenderTurnMarker();
 	RenderAbilityTargetMarker();
-
-	playerContext->statusBar.Render();
 }
 
 

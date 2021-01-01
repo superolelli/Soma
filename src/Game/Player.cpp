@@ -55,14 +55,6 @@ void Player::Update(int _xMove, bool _is_walking)
 }
 
 
-
-void Player::Render()
-{
-	currentState->Render();
-}
-
-
-
 void Player::SetAbilityStatus(abilityPhase _status)
 {
 	SAFE_DELETE(currentState);

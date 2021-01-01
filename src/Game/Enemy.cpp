@@ -31,11 +31,6 @@ void Enemy::Update()
 }
 
 
-void Enemy::Render()
-{
-	currentState->Render();
-}
-
 abilityPhase Enemy::GetAbilityStatus()
 {
 	return currentState->GetStateID();

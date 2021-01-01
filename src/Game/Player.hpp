@@ -14,7 +14,6 @@ public:
 
 	virtual void Init() override;
 	void Update(int _xMove, bool _is_walking);
-	virtual void Render() override;
 
 	virtual bool IsPlayer() override { return true; }
 	virtual int GetID() override { return -3; }

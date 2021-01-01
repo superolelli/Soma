@@ -77,9 +77,7 @@ void CombatantStateExecutingAbility::Update()
 
 void CombatantStateExecutingAbility::Render()
 {
-	context->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds());
-	context->combatantObject->render();
-	context->combatantObject->playSoundTriggers();
+	CombatantState::Render();
 
 	for (auto t : context->selectedTargets)
 	{

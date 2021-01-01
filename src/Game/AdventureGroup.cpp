@@ -55,6 +55,12 @@ void AdventureGroup::Render()
 		if(a->Status().GetAttribute("currentHealth") > 0)
 			a->Render();
 	}
+
+	for (auto a : adventurer)
+	{
+		if (a->Status().GetAttribute("currentHealth") > 0)
+			a->RenderStatusBar();
+	}
 }
 
 void AdventureGroup::SetFatigueLevelOfAllPlayers(CombatantStatus::FatigueLevel _level)

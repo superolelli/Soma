@@ -307,10 +307,16 @@ void Battle::CalculateTurnOrder()
 void Battle::Render()
 {
 	Combatant::setElapsedTimeForAbilityEffect = false;
-	for (Combatant* c : combatants)
+	for (Combatant *c : combatants)
 	{
 		if (c->GetAbilityStatus() != executing && c->GetAbilityStatus() != attacked && c->GetAbilityStatus() != dodging)
 			c->Render();
+	}
+
+	for (Combatant* c : combatants)
+	{
+		if (c->GetAbilityStatus() != executing && c->GetAbilityStatus() != attacked && c->GetAbilityStatus() != dodging && c->GetAbilityStatus() != dying)
+			c->RenderStatusBar();
 	}
 }
 

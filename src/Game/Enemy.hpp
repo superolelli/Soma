@@ -19,8 +19,6 @@ public:
 
 	void Update() override;
 
-	virtual void Render() override;
-
 	abilityPhase GetAbilityStatus() override;
 
 	void SetAbilityStatus(abilityPhase _status) override;

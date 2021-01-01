@@ -45,6 +45,7 @@ class Combatant : public CObserver
 	friend class PlayerStatePrepareAbility;
 	friend class CombatantStatePrepareAbility;
 	friend class CombatantStateDying;
+	friend class CombatantState;
 
 public:
 	static bool setElapsedTimeForAbilityEffect;
@@ -55,7 +56,8 @@ public:
 	void Quit();
 	virtual void Update();
 
-	virtual void Render() = 0;
+	void Render();
+	void RenderStatusBar();
 	virtual int GetID() = 0;
 	virtual bool IsPlayer() = 0;
 	virtual void SetAbilityStatus(abilityPhase _status) = 0;

@@ -72,7 +72,7 @@ void CombatantStatus::ExecuteStatusChanges()
 			skipRound = true;
 			combatant->SetAnimation("idle", IDLE_ANIMATION_SPEED);
 			statusAnnouncementTime = 2.0;
-			notificationRenderer->AddNotification("Aufgewacht!", g_pFonts->f_kingArthur, sf::Vector2f(combatant->GetRect().left - combatant->GetRect().width / 2.0f, combatant->GetRect().top - 20.0f), 1.0f);
+			notificationRenderer->AddNotification("Aufgewacht!", g_pFonts->f_blackwoodCastle, sf::Vector2f(combatant->GetRect().left + combatant->GetRect().width / 2.0f, combatant->GetRect().top - 20.0f), 1.0f);
 		}
 	}
 }
@@ -145,6 +145,9 @@ void CombatantStatus::HandleDynamite()
 
 			if (GetAttribute("currentHealth") <= 0)
 				skipRound = true;
+
+			notificationRenderer->AddNotification("Explodiert!", g_pFonts->f_blackwoodCastle, sf::Vector2f(combatant->GetRect().left + combatant->GetRect().width / 2.0f, combatant->GetRect().top - 40.0f), 1.0f);
+
 		}
 		else 
 			combatant->CombatantAtNextPosition()->Status().AddDynamite();
@@ -171,7 +174,7 @@ void CombatantStatus::LooseHealth(int _damage, bool _critical, bool _useArmour)
 	if(_critical)
 		notificationRenderer->AddNotification(std::to_string(damage), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color(180, 0, 0), sf::Color::Black, 40);
 	else
-		notificationRenderer->AddNotification(std::to_string(damage), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color::Red, sf::Color::Black);
+		notificationRenderer->AddNotification(std::to_string(damage), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color::Red, sf::Color::Black, 30);
 
 	CheckNofaceBuff();
 }
@@ -189,7 +192,7 @@ void CombatantStatus::GainHealth(int _health, bool _critical)
 	if(_critical)
 		notificationRenderer->AddNotification(std::to_string(_health), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color(0, 180, 0), sf::Color::Black, 40);
 	else
-		notificationRenderer->AddNotification(std::to_string(_health), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color::Green, sf::Color::Black);
+		notificationRenderer->AddNotification(std::to_string(_health), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color::Green, sf::Color::Black, 30);
 
 	CheckNofaceBuff();
 }
@@ -355,7 +358,7 @@ void CombatantStatus::RemoveAllBuffs()
 
 	buffs.clear();
 
-	notificationRenderer->AddNotification("Buffs entfernt!", g_pFonts->f_kingArthur, sf::Vector2f(combatant->GetRect().left - combatant->GetRect().width / 2.0f, combatant->GetRect().top - 20.0f), 1.0f);
+	notificationRenderer->AddNotification("Buffs entfernt!", g_pFonts->f_blackwoodCastle, sf::Vector2f(combatant->GetRect().left + combatant->GetRect().width / 2.0f, combatant->GetRect().top - 40.0f), 1.0f);
 }
 
 
@@ -370,7 +373,7 @@ void CombatantStatus::RemoveAllDebuffs()
 
 	debuffs.clear();
 
-	notificationRenderer->AddNotification("Debuffs entfernt!", g_pFonts->f_kingArthur, sf::Vector2f(combatant->GetRect().left - combatant->GetRect().width / 2.0f, combatant->GetRect().top - 20.0f), 1.0f);
+	notificationRenderer->AddNotification("Debuffs entfernt!", g_pFonts->f_blackwoodCastle, sf::Vector2f(combatant->GetRect().left - combatant->GetRect().width / 2.0f, combatant->GetRect().top - 40.0f), 1.0f);
 }
 
 

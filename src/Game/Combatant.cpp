@@ -50,6 +50,18 @@ void Combatant::Update()
 	currentState->Update();
 }
 
+
+void Combatant::Render()
+{
+	currentState->Render();
+}
+
+
+void Combatant::RenderStatusBar()
+{
+	currentState->RenderStatusBar();
+}
+
 void Combatant::ChangeState(CombatantState * _state)
 {
 	SAFE_DELETE(currentState);
@@ -195,7 +207,7 @@ void Combatant::StartDodgingAnimation(int _xPos, int _yPos)
 	ScaleForAbilityAnimation(_xPos, _yPos);
 	SetAnimation("attacked", ABILITY_ANIMATION_SPEED);
 	ReloadHitbox();
-	notificationRenderer->AddNotification("Ausgewichen!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top), 1.0f);
+	notificationRenderer->AddNotification("Ausgewichen!", g_pFonts->f_blackwoodCastle, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top), 1.0f);
 
 	SetAbilityStatus(dodging);
 	g_pSounds->PlaySound(DODGED);
@@ -291,7 +303,7 @@ void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effec
 	bool isCriticalHit = rand() % 100 < _attacker->status.GetAttribute("criticalHit") + _effect.criticalHitModificator;
 	if (isCriticalHit)
 	{
-		notificationRenderer->AddNotification("Kritisch!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top - 40), 1.0f);
+		notificationRenderer->AddNotification("Kritisch!", g_pFonts->f_blackwoodCastle, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top - 40), 1.0f);
 		g_pSounds->PlaySound(CRITICAL_HIT);
 		criticalEffectFactor = 2;
 		criticalDurationFactor = 1.5;
@@ -382,7 +394,7 @@ void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effec
 
 void Combatant::AddResistanceNotification()
 {
-	notificationRenderer->AddNotification("Widerstanden!", g_pFonts->f_kingArthur, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top - 30), 1.0f);
+	notificationRenderer->AddNotification("Widerstanden!", g_pFonts->f_blackwoodCastle, sf::Vector2f(GetRect().left + GetRect().width / 2.0f, GetRect().top - 30), 1.0f);
 	//TODO: Play some sound
 }
 
@@ -392,7 +404,7 @@ Combatant* Combatant::CombatantAtNextPosition()
 	Combatant* combatant = nullptr;
 	for (auto c : *allCombatants)
 	{
-		if (c->GetBattlePos() > battlePosition && (combatant == nullptr || c->GetBattlePos() < combatant->GetBattlePos()))
+		if (!c->IsDying() && c->GetBattlePos() > battlePosition && (combatant == nullptr || c->GetBattlePos() < combatant->GetBattlePos()))
 			combatant = c;
 	}
 
@@ -400,10 +412,13 @@ Combatant* Combatant::CombatantAtNextPosition()
 	{
 		for (auto c : *allCombatants)
 		{
-			if (c->GetBattlePos() < battlePosition && (combatant == nullptr || c->GetBattlePos() < combatant->GetBattlePos()))
+			if (!c->IsDying() && c->GetBattlePos() < battlePosition && (combatant == nullptr || c->GetBattlePos() < combatant->GetBattlePos()))
 				combatant = c;
 		}
 	}
+
+	if (combatant == nullptr)
+		combatant = this;
 
 	return combatant;
 }

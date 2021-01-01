@@ -21,7 +21,7 @@ EnemyStatePrepareAbility::EnemyStatePrepareAbility(Enemy *_context)
 
 void EnemyStatePrepareAbility::HandleConfusion()
 {
-	enemyContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(enemyContext->GetRect().left + enemyContext->GetRect().width / 2.0f, enemyContext->GetRect().top - 20.0f), 1.0f);
+	enemyContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_blackwoodCastle, sf::Vector2f(enemyContext->GetRect().left + enemyContext->GetRect().width / 2.0f, enemyContext->GetRect().top - 20.0f), 1.0f);
 
 	bool originallyAttackedPlayer = ChosenAbilityHitsPlayer();
 
@@ -576,9 +576,7 @@ void EnemyStatePrepareAbility::Render()
 {
 	enemyContext->RenderShadow();
 
-	enemyContext->combatantObject->setTimeElapsed(g_pTimer->GetElapsedTimeAsMilliseconds());
-	enemyContext->combatantObject->render();
-	enemyContext->combatantObject->playSoundTriggers();
+	CombatantState::Render();
 
 	if (abilityAnnouncementTime > 0.0 && !enemyContext->selectedTargets.empty())
 		RenderAbilityAnnouncement();
@@ -587,8 +585,6 @@ void EnemyStatePrepareAbility::Render()
 
 	if (abilityAnnouncementTime >= 0.0)
 		RenderAbilityTargetMarker();
-
-	enemyContext->statusBar.Render();
 }
 
 
