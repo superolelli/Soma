@@ -84,7 +84,7 @@ void Inventory::Update()
 
 		scrollableItemPanel.Update();
 
-		playerAttributesText.Update(gameStatus->GetEquipmentStats(currentPlayer) + g_pObjectProperties->playerStats[currentPlayer]);
+		playerAttributesText.Update(gameStatus->GetEquipmentStats(currentPlayer).stats + g_pObjectProperties->playerStats[currentPlayer]);
 	}
 }
 

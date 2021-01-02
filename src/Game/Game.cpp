@@ -14,6 +14,8 @@ void Game::Init(CGameEngine * _engine)
 {
 	m_pGameEngine = _engine;
 
+	gameStatus->ResetFatigue();
+
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetRenderTarget().setView(view);
 

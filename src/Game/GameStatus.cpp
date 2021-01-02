@@ -17,7 +17,8 @@ void GameStatus::Init()
 
 			equipment[i][j].id = ItemID::empty;
 		}
-		equipmentStats[i].Reset();
+		equipmentStats[i].stats.Reset();
+		equipmentStats[i].missOnHighDamage = false;
 		diamondStats[i].Reset();
 	}
 
@@ -123,16 +124,28 @@ void GameStatus::RemoveItem(Item &_item, bool _removeOne)
 void GameStatus::AddEquipment(int _player, int _slot, Item _item)
 {
 	equipment[_player][_slot] = _item;
-	equipmentStats[_player] += g_pObjectProperties->equipmentStats[_item.id].stats;
+	equipmentStats[_player].stats += g_pObjectProperties->equipmentStats[_item.id].stats;
+
+	if (g_pObjectProperties->equipmentStats[_item.id].missOnHighDamage)
+		equipmentStats[_player].missOnHighDamage = true;
 }
 
 void GameStatus::RemoveEquipment(int _player, int _slot)
 {
-	equipmentStats[_player] -= g_pObjectProperties->equipmentStats[equipment[_player][_slot].id].stats;
+	equipmentStats[_player].stats -= g_pObjectProperties->equipmentStats[equipment[_player][_slot].id].stats;
+	if (g_pObjectProperties->equipmentStats[equipment[_player][_slot].id].missOnHighDamage)
+	{
+		equipmentStats[_player].missOnHighDamage = false;
+		for (int i = 0; i < 4; i++)
+		{
+			if (equipment[_player][i].id != ItemID::empty && i != _slot && g_pObjectProperties->equipmentStats[equipment[_player][i].id].missOnHighDamage)
+				equipmentStats[_player].missOnHighDamage = true;
+		}
+	}
 	equipment[_player][_slot].id = ItemID::empty;
 }
 
-CombatantAttributes & GameStatus::GetEquipmentStats(int _player)
+EquipmentProperties & GameStatus::GetEquipmentStats(int _player)
 {
 	return equipmentStats[_player];
 }
@@ -185,4 +198,9 @@ void GameStatus::AddFatigue(int _fatigue)
 void GameStatus::RemoveFatigue(int _fatigue)
 {
 	fatigue = std::max(0, fatigue - _fatigue);
+}
+
+void GameStatus::ResetFatigue()
+{
+	fatigue = 0;
 }

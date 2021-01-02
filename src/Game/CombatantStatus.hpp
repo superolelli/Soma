@@ -35,6 +35,7 @@ public:
 	void AddMiss(int _number = 1);
 	void AddDynamite() {dynamite = true;}
 	void RemoveDynamite() { dynamite = false; }
+	void SetMissOnHighDamage(bool _missOnHighDamage) { missOnHighDamage = _missOnHighDamage; }
 
 	void RemoveAllBuffs();
 	void RemoveAllDebuffs();
@@ -95,6 +96,7 @@ private:
 	int nofaceBuffLevel;
 	bool stupid;
 	bool dynamite;
+	bool missOnHighDamage;
 
 	Buff returnBuff;
 

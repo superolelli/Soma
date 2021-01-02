@@ -71,7 +71,7 @@ pro fehlendem Gegner erhöht.</description>
 				</decay>
             </effect>
                 <description>*#ffa500 Schwächender Tritt I*
-#white Erhöht den Schaden pro Runde um 1.</description>
+#white Erhöht den Schaden des Verfalls um 1.</description>
         </skill>
 
         <skill id="2" name="Nachhaltiger Tritt">
@@ -82,7 +82,7 @@ pro fehlendem Gegner erhöht.</description>
             </effect>
                 <description>*#ffa500 Nachhaltiger Tritt*
 #white Verlängert die Dauer des 
-Rundenschadens um eine Runde.</description>
+Verfalls um eine Runde.</description>
         </skill>
 
         <skill id="3" name="Schwächender Tritt II">
@@ -92,7 +92,7 @@ Rundenschadens um eine Runde.</description>
 				</decay>
             </effect>
                 <description>*#ffa500 Schwächender Tritt II*
-#white Erhöht den Schaden pro Runde um 1.</description>
+#white Erhöht den Schaden des Verfalls um 1.</description>
         </skill>
 
         <skill id="4" name="Langes Bein I">
@@ -205,11 +205,15 @@ Verringert den Wert des Ziels für Ausweichen um 5.</description>
         <skill id="8" name="Spamangriff">
             <effect>
                 <buff>
-                    <precision>-10</precision>
+                    <sleepResistance>-10</sleepResistance>
+                    <confusionResistance>-10</confusionResistance>
+                    <decayResistance>-10</decayResistance>
+                    <debuffResistance>-10</debuffResistance>
                 </buff>
             </effect>
                 <description>*#ffa500 Spamangriff*
-#white Verringert die Präzision des Ziels um 10.</description>
+#white Verringert alle Resistenzen des Ziels 
+für 3 Runden um 10%.</description>
         </skill>
     </hack_into_the_system>
 

@@ -3,7 +3,7 @@
 <Items>
   <Default id="-1" name="empty"	 
     armour ="0"
-    health ="0"
+    maxHealth ="0"
     damageMin ="0"
     damageMax = "0"
     initiative ="0"
@@ -18,6 +18,9 @@
   >
     <Level>1</Level>
     <LevelType>0</LevelType>  <!-- 0=all, 1=Bang, 2=Kutschfahrt, 3=Tichu -->
+    <AdditionalEffects>
+        <MissOnHighDamage>false</MissOnHighDamage>
+    </AdditionalEffects>
   </Default>
 
   <Cards id="0" name="Karten"></Cards>
@@ -30,11 +33,12 @@
     <LevelType>1</LevelType>
   </IronPlate>
 
-  <Sombrero id="3" name="Sombrero"
-    dodge="7"
-  >
+  <Sombrero id="3" name="Sombrero">
 	  <Level>2</Level>
     <LevelType>1</LevelType>
+    <AdditionalEffects>
+        <MissOnHighDamage>true</MissOnHighDamage>
+    </AdditionalEffects>
   </Sombrero>
 
   <Binocular id="4" name="Fernglas"
@@ -184,7 +188,7 @@
     <BlackPearl id="26" name="Schwarze Perle"
       damageMin="5"     
       damageMax="5"
-      health="-7"
+      maxHealth="-7"
      >
      <LevelType>2</LevelType>
     </BlackPearl>

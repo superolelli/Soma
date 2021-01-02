@@ -31,6 +31,7 @@ public:
 
 	void AddFatigue(int _fatigue);
 	void RemoveFatigue(int _fatigue);
+	void ResetFatigue();
 
 	int* GetFatiguePtr() { return &fatigue; }
 	int* GetMaxFatiguePtr() { return &maxFatigue; }
@@ -47,7 +48,7 @@ public:
 
 	void AddEquipment(int _player, int _slot, Item _item);
 	void RemoveEquipment(int _player, int _slot);
-	CombatantAttributes &GetEquipmentStats(int _player);
+	EquipmentProperties &GetEquipmentStats(int _player);
 
 	void SetDiamondStats(int _player, CombatantAttributes &_stats);
 	CombatantAttributes &GetDiamondStats(int _player);
@@ -69,7 +70,7 @@ private:
 	std::vector<Item> consumables;
 
 	Item equipment[4][4];
-	CombatantAttributes equipmentStats[4];
+	EquipmentProperties equipmentStats[4];
 
 	CombatantAttributes diamondStats[4];
 

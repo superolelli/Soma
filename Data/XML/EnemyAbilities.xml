@@ -423,7 +423,7 @@
         <attackSelf>true</attackSelf>
 
         <effect>
-            <addMissSelf>2</addMissSelf>
+            <addMissSelf>1</addMissSelf>
         </effect>
     </ability>
 

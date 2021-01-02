@@ -113,28 +113,40 @@ lassen steigt um 5%.</description>
 lassen steigt um 5%.</description>
         </skill>
 
-        <skill id="4" name="Schadenserhöhung I">
+        <skill id="4" name="Heilende Worte I">
             <effect>
-                <damageFactor>0.05</damageFactor>
+                <buff>
+                    <duration>2</duration>
+                    <onSelf>true</onSelf>
+                    <isPositive>true</isPositive>
+                    <healing>10</healing>
+                </buff>
             </effect>
-                <description>*#ffa500 Schadenserhöhung I*
-#white Erhöht den Schadensfaktor um 5%.</description>
+                <description>*#ffa500 Heilende Worte I*
+#white Anna erhält Buff für 2 Runden: 
+Heilung +10%.</description>
         </skill>
 
-        <skill id="5" name="Schadenserhöhung II">
+        <skill id="5" name="Heilende Worte II">
             <effect>
-                <damageFactor>0.05</damageFactor>
+                <buff>
+                    <healing>10</healing>
+                </buff>
             </effect>
-                <description>*#ffa500 Schadenserhöhung II*
-#white Erhöht den Schadensfaktor um 5%.</description>
+                <description>*#ffa500 Heilende Worte II*
+#white Erhöht die Heilungsverbesserung um
+weitere 10%.</description>
         </skill>
 
-        <skill id="6" name="Schadenserhöhung III">
+        <skill id="6" name="Nachhallende Worte">
             <effect>
-                <damageFactor>0.05</damageFactor>
+                <buff>
+                    <duration>2</duration>
+                </buff>
             </effect>
-                <description>*#ffa500 Schadenserhöhung III*
-#white Erhöht den Schadensfaktor um 5%.</description>
+                <description>*#ffa500 Nachhallende Worte*
+#white Erhöht die Dauer der Heilungsverbesserung 
+um 2 Runden.</description>
         </skill>
 
         <skill id="7" name="Mehr Leute zulabern I">
@@ -145,8 +157,13 @@ lassen steigt um 5%.</description>
 
         <skill id="8" name="Mehr Leute zulabern II">
             <howMany>1</howMany>
+            <positions>
+                <value id="5">true</value>
+            </positions>
                 <description>*#ffa500 Mehr Leute zulabern II*
-#white Es wird ein zusätzlicher Gegner getroffen.</description>
+#white Es wird ein zusätzlicher Gegner getroffen.
+Auch der Gegner auf der Gegner auf der zweiten
+Position kann als Ziel gewählt werden.</description>
         </skill>
     </word_gush>
 
@@ -185,7 +202,7 @@ als Ziel gewählt werden.</description>
 				</decay>
             </effect>
                 <description>*#ffa500 Schadenserhöhung I*
-#white Erhöht den Schaden pro Runde um 1.</description>
+#white Erhöht den Schaden des Verfalls um 1.</description>
         </skill>
 
         <skill id="5" name="Schadenserhöhung II">
@@ -195,7 +212,7 @@ als Ziel gewählt werden.</description>
 				</decay>
             </effect>
                 <description>*#ffa500 Schadenserhöhung II*
-#white Erhöht den Schaden pro Runde um 1.</description>
+#white Erhöht den Schaden des Verfalls um 1.</description>
         </skill>
 
         <skill id="6" name="Schadenserhöhung III">
@@ -203,7 +220,7 @@ als Ziel gewählt werden.</description>
 				<damage>2</damage>
 			</decay>
                 <description>*#ffa500 Schadenserhöhung III*
-#white Erhöht den Schaden pro Runde um 2.</description>
+#white Erhöht den Schaden des Verfalls um 2.</description>
         </skill>
 
         <skill id="7" name="Große Nasenflügel">

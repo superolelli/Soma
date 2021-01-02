@@ -108,28 +108,39 @@ Erhöht Simons Rüstung um 10.</description>
 #white Die Chance das Ziel zu verwirren steigt um 10%.</description>
         </skill>
 
-        <skill id="4" name="Schadenserhöhung I">
+        <skill id="4" name="Ich krieg dich noch I">
             <effect>
-                <damageFactor>0.1</damageFactor>
+                <buff>
+                    <isPositive>false</isPositive>
+                    <duration>2</duration>
+                    <confusionResistance>-10</confusionResistance>
+                </buff>
             </effect>
-                <description>*#ffa500 Schadenserhöhung I*
-#white Erhöht den Schadensfaktor um 10%.</description>
+                <description>*#ffa500 Ich krieg dich noch I*
+#white Verringert die Verwirrungsresistenz
+des Ziels für 2 Runden um 10%.</description>
         </skill>
 
-        <skill id="5" name="Schadenserhöhung II">
+        <skill id="5" name="Ich krieg dich noch II">
             <effect>
-                <damageFactor>0.1</damageFactor>
+                <buff>
+                    <confusionResistance>-10</confusionResistance>
+                </buff>
             </effect>
-                <description>*#ffa500 Schadenserhöhung II*
-#white Erhöht den Schadensfaktor um 10%.</description>
+                <description>*#ffa500 Ich krieg dich noch II*
+#white Verringert die Verwirrungsresistenz
+des Ziels um weitere 10%.</description>
         </skill>
 
-        <skill id="6" name="Schadenserhöhung III">
+        <skill id="6" name="Ich krieg dich noch III">
             <effect>
-                <damageFactor>0.1</damageFactor>
+                <buff>
+                    <confusionResistance>-10</confusionResistance>
+                </buff>
             </effect>
-                <description>*#ffa500 Schadenserhöhung III*
-#white Erhöht den Schadensfaktor um 10%.</description>
+                <description>*#ffa500 Ich krieg dich noch III*
+#white Verringert die Verwirrungsresistenz
+des Ziels um weitere 10%.</description>
         </skill>
 
         <skill id="7" name="Präzisionsverarsche">

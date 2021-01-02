@@ -48,6 +48,9 @@ void ItemTooltip::GenerateTooltipStringEquipment(std::string & _tooltip)
 
 	_tooltip.append("\n#white ");
 
+	if (itemProperties.missOnHighDamage)
+		_tooltip.append("Wenn mindestens 10 Schaden\nauf einmal bekommen:\nErhalte einen Fehlschuss");
+
 	AppendCombatantAttributesTooltip(_tooltip, itemProperties.stats, "", "", "#white ");
 
 	if (_tooltip.back() == '\n')

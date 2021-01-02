@@ -286,6 +286,7 @@ void ObjectPropertiesManager::LoadEquipmentItemStats()
 	loadAttributesFromXML(doc.child("Items").child("Default"), default.stats);
 	default.level = doc.child("Items").child("Default").child("Level").text().as_int();
 	default.name = "";
+	default.missOnHighDamage = doc.child("Items").child("Default").child("AdditionalEffects").child("MissOnHighDamage").text().as_bool();
 
 	//load item values
 	for (xml_node &item : doc.child("Items").children())
@@ -309,6 +310,12 @@ void ObjectPropertiesManager::LoadEquipmentItemStats()
 
 			if (item.child("LevelType"))
 				levelType = item.child("LevelType").text().as_int();
+
+			if (item.child("AdditionalEffects"))
+			{
+				if (item.child("AdditionalEffects").child("MissOnHighDamage"))
+					equipmentStats[itemID].missOnHighDamage = item.child("AdditionalEffects").child("MissOnHighDamage").text().as_bool();
+			}
 
 			equipmentStats[itemID].price = equipmentStats[itemID].level * EQUIPMENT_PRICE_PER_LEVEL;
 

@@ -22,24 +22,6 @@ struct LootableProperties
 	std::vector<ItemID> possibleItems;
 };
 
-struct ItemProperties
-{
-	sf::String name;
-	int level;
-	int price;
-};
-
-struct EquipmentProperties : public ItemProperties
-{
-	CombatantAttributes stats;
-};
-
-struct ConsumableProperties : public ItemProperties
-{
-	int heal;
-	Buff buff;
-};
-
 #define g_pObjectProperties ObjectPropertiesManager::Get()
 class ObjectPropertiesManager : public TSingleton<ObjectPropertiesManager>
 {

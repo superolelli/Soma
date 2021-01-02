@@ -169,6 +169,9 @@ void CombatantStatus::LooseHealth(int _damage, bool _critical, bool _useArmour)
 	if (currentStats["currentHealth"] < 0)
 		currentStats["currentHealth"] = 0;
 
+	if (damage >= 10 && missOnHighDamage)
+		AddMiss();
+
 	auto notificationPos = sf::Vector2f(combatant->GetRect().left + combatant->GetRect().width / 2.0f, combatant->GetRect().top);
 
 	if(_critical)
@@ -401,6 +404,7 @@ void CombatantStatus::Reset()
 	misses = 0;
 	bounty = 0;
 	dynamite = false;
+	missOnHighDamage = false;
 }
 
 

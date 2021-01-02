@@ -22,8 +22,9 @@ void AdventureGroup::Init(CGameEngine *_engine, NotificationRenderer *_notificat
 	for (int i = 0; i < 4; i++)
 	{
 		adventurer[i]->SetPos(x, GROUP_Y_POS);
-		adventurer[i]->SetEquipment(_gameStatus->GetEquipmentStats(i));
+		adventurer[i]->SetEquipment(_gameStatus->GetEquipmentStats(i).stats);
 		adventurer[i]->SetEquipment(_gameStatus->GetDiamondStats(i));
+		adventurer[i]->Status().SetMissOnHighDamage(_gameStatus->GetEquipmentStats(i).missOnHighDamage);
 		x += PLAYER_SPACING;
 	}
 }
