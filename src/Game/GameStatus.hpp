@@ -18,6 +18,8 @@ const int MAX_FATIGUE_VALUE = 100;
 
 class GameStatus : public CSubject
 {
+	friend class SavegameManager;
+
 public:
 
 	void Init();
@@ -55,9 +57,13 @@ public:
 
 	std::unordered_map<ItemID, bool> &GetConsumablesAvailability() { return consumablesAvailability; }
 
+	void SetFilepath(const std::string& _path) { path = _path; }
+
 	int levels[3];
 
 private:
+	std::string path;
+
 	int dice;
 	int cards;
 

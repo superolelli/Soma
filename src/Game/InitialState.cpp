@@ -1,5 +1,5 @@
 #include "InitialState.hpp"
-#include "MainRoom.hpp"
+#include "MainMenu.hpp"
 
 
 void LoadAllData(std::atomic<bool> *_everythingLoaded, CGameEngine *_engine)
@@ -74,7 +74,7 @@ void CInitialState::Update()
 		SAFE_DELETE(modelLoadingScreen);
 		SAFE_DELETE(loadingScreen);
 
-		m_pGameEngine->ChangeStateImmediately(new MainRoom);
+		m_pGameEngine->ChangeStateImmediately(new MainMenu);
 	}
 }
 

@@ -33,6 +33,8 @@ void GameStatus::Init()
 
 	fatigue = 0;
 	maxFatigue = MAX_FATIGUE_VALUE;
+
+	path = "empty";
 }
 
 

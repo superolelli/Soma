@@ -134,14 +134,23 @@ void CombatantStateExecutingAbility::ApplyAbilityEffect()
 	}
 
 	// Handle self effects
-	if (selfEffect && selfEffect->healSelf != 0 )
+	if (selfEffect && selfEffect->healSelf != 0)
 	{
 		float healingModificator = 1.0f + static_cast<float>(context->Status().GetAttribute("healing")) / 100.0f;
-		context->status.GainHealth(ability->effectFriendly.healSelf * healingModificator);
+
+		if (context->actsInConfusion) {
+			context->selectedTargets.front()->status.GainHealth(ability->effectFriendly.healSelf * healingModificator);
+		}
+		else
+			context->status.GainHealth(ability->effectFriendly.healSelf * healingModificator);
 	}
 
-	if (selfEffect && selfEffect->addMissSelf != 0)
-		context->status.AddMiss(selfEffect->addMissSelf);
+	if (selfEffect && selfEffect->addMissSelf != 0) {
+		if (context->actsInConfusion)
+			context->selectedTargets.front()->status.AddMiss(selfEffect->addMissSelf);
+		else
+			context->status.AddMiss(selfEffect->addMissSelf);
+	}
 }
 
 

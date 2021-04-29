@@ -10,6 +10,8 @@ class MainRoom : public GameState
 {
 public:
 
+	MainRoom(GameStatus *_status);
+
 	void Init(CGameEngine *_engine) override;
 	void Cleanup() override;
 
@@ -32,7 +34,7 @@ private:
 	sf::IntRect playerHitbox[4];
 
 	MainRoomGUI gui;
-	GameStatus gameStatus;
+	GameStatus *gameStatus;
 
 	sf::View view;
 

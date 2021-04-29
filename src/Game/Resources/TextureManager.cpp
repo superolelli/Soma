@@ -15,6 +15,11 @@ void CTextureManager::LoadTextures()
 	levelFinishedPanel[1].loadFromFile("Data/Sprites/Panels & Buttons/Kutschfahrt/level_finished.png");
 	levelFailedPanel[1].loadFromFile("Data/Sprites/Panels & Buttons/Kutschfahrt/level_failed.png");
 
+	/** MAIN MENU**/
+	mainMenuBackground.loadFromFile("Data/Sprites/MainMenu/background.png");
+	savegamePanel.loadFromFile("Data/Sprites/MainMenu/savegame.png");
+	nameInputBackground.loadFromFile("Data/Sprites/MainMenu/name_input.png");
+
 	/** BACKGROUNDS **/
 	std::vector<std::string> firstBackgrounds[2] = {
 		{

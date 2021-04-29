@@ -89,6 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfeMovie-d.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -112,6 +113,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -291,9 +293,11 @@
     <ClCompile Include="src\Game\Lootable.cpp" />
     <ClCompile Include="src\Game\LootableDialog.cpp" />
     <ClCompile Include="src\Game\LootableFactory.cpp" />
+    <ClCompile Include="src\Game\MainMenu.cpp" />
     <ClCompile Include="src\Game\MainRoom.cpp" />
     <ClCompile Include="src\Game\MainRoomGui.cpp" />
     <ClCompile Include="src\Game\Markus.cpp" />
+    <ClCompile Include="src\Game\NameInputPanel.cpp" />
     <ClCompile Include="src\Game\Ole.cpp" />
     <ClCompile Include="src\Game\Player.cpp" />
     <ClCompile Include="src\Game\PlayerAttributesText.cpp" />
@@ -308,6 +312,8 @@
     <ClCompile Include="src\Game\Resources\StringManager.cpp" />
     <ClCompile Include="src\Game\Resources\TextureManager.cpp" />
     <ClCompile Include="src\Game\Resources\VideoManager.cpp" />
+    <ClCompile Include="src\Game\SavegameManager.cpp" />
+    <ClCompile Include="src\Game\SavegamePanel.cpp" />
     <ClCompile Include="src\Game\ScrollableItemPanel.cpp" />
     <ClCompile Include="src\Game\SellMultipleDialog.cpp" />
     <ClCompile Include="src\Game\ShopPanel.cpp" />
@@ -367,8 +373,10 @@
     <ClInclude Include="src\Game\Lootable.hpp" />
     <ClInclude Include="src\Game\LootableDialog.hpp" />
     <ClInclude Include="src\Game\LootableFactory.hpp" />
+    <ClInclude Include="src\Game\MainMenu.hpp" />
     <ClInclude Include="src\Game\MainRoom.hpp" />
     <ClInclude Include="src\Game\MainRoomGui.hpp" />
+    <ClInclude Include="src\Game\NameInputPanel.hpp" />
     <ClInclude Include="src\Game\ObserverNotificationGameStatus.h" />
     <ClInclude Include="src\Game\PlayerAttributesText.hpp" />
     <ClInclude Include="src\Game\PlayerStatePrepareAbility.hpp" />
@@ -513,6 +521,8 @@
     <ClInclude Include="src\Game\Resources\StringManager.hpp" />
     <ClInclude Include="src\Game\Resources\TextureManager.hpp" />
     <ClInclude Include="src\Game\Resources\VideoManager.hpp" />
+    <ClInclude Include="src\Game\SavegameManager.hpp" />
+    <ClInclude Include="src\Game\SavegamePanel.hpp" />
     <ClInclude Include="src\Game\ScrollableItemPanel.hpp" />
     <ClInclude Include="src\Game\SellMultipleDialog.hpp" />
     <ClInclude Include="src\Game\ShopPanel.hpp" />

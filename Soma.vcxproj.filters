@@ -157,6 +157,12 @@
     <Filter Include="Headerdateien\Game\Level\Battle\CombatantStates">
       <UniqueIdentifier>{14f25393-2fb0-481f-9276-87d7c3501263}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Game\MainMenu">
+      <UniqueIdentifier>{040bd3f7-36ef-45b7-9575-957954fbc809}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Game\MainMenu">
+      <UniqueIdentifier>{551bef86-36a5-4599-a5c6-85b86ed7d709}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -716,6 +722,18 @@
     </ClCompile>
     <ClCompile Include="src\Game\CombatantResistancesPanel.cpp">
       <Filter>Quelldateien\Game\CommonGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\MainMenu.cpp">
+      <Filter>Quelldateien\Game\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\SavegamePanel.cpp">
+      <Filter>Quelldateien\Game\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\NameInputPanel.cpp">
+      <Filter>Quelldateien\Game\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\SavegameManager.cpp">
+      <Filter>Quelldateien\Game\MainMenu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1324,6 +1342,18 @@
     </ClInclude>
     <ClInclude Include="src\Game\CombatantResistancesPanel.hpp">
       <Filter>Headerdateien\Game\CommonGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\MainMenu.hpp">
+      <Filter>Headerdateien\Game\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\SavegamePanel.hpp">
+      <Filter>Headerdateien\Game\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\NameInputPanel.hpp">
+      <Filter>Headerdateien\Game\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\SavegameManager.hpp">
+      <Filter>Headerdateien\Game\MainMenu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

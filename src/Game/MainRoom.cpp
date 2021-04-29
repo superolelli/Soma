@@ -1,6 +1,12 @@
 #include "MainRoom.hpp"
 #include "Game.hpp"
+#include "SavegameManager.hpp"
 
+
+MainRoom::MainRoom(GameStatus* _status)
+{
+	gameStatus = _status;
+}
 
 void MainRoom::Init(CGameEngine * _engine)
 {
@@ -21,9 +27,7 @@ void MainRoom::Init(CGameEngine * _engine)
 	vendingMachine.Load(g_pTextures->mainRoomVendingMachine);
 	vendingMachine.SetPos(g_pObjectProperties->mainRoomVendingMachinePosition.x, g_pObjectProperties->mainRoomVendingMachinePosition.y);
 
-	gameStatus.Init();
-
-	gui.Init(m_pGameEngine, &gameStatus);
+	gui.Init(m_pGameEngine, gameStatus);
 
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetRenderTarget().setView(view);
@@ -111,6 +115,8 @@ void MainRoom::Cleanup()
 	for(auto p : players)
 		SAFE_DELETE(p);
 
+	SAFE_DELETE(gameStatus);
+
 	gui.Quit();
 
 	g_pModels->Quit();  //Muss in letztem Gamestate passieren
@@ -143,6 +149,9 @@ void MainRoom::Update()
 
 	if (m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
 		m_pGameEngine->StopEngine();
+
+	if (m_pGameEngine->GetKeystates(KeyID::F5) == Keystates::Released)
+		SavegameManager::StoreSavegame(gameStatus);
 
 	HandleGUI();
 	CheckForMovement();
@@ -201,9 +210,9 @@ void MainRoom::CheckForClickedVendingMachine()
 
 void MainRoom::UpdateLevelSigns()
 {
-	signs[0].ChangeString(0, std::to_string(gameStatus.levels[LevelType::bang]));
-	signs[1].ChangeString(0, std::to_string(gameStatus.levels[LevelType::kutschfahrt]));
-	signs[2].ChangeString(0, std::to_string(gameStatus.levels[LevelType::tichu]));
+	signs[0].ChangeString(0, std::to_string(gameStatus->levels[LevelType::bang]));
+	signs[1].ChangeString(0, std::to_string(gameStatus->levels[LevelType::kutschfahrt]));
+	signs[2].ChangeString(0, std::to_string(gameStatus->levels[LevelType::tichu]));
 }
 
 
@@ -253,8 +262,8 @@ void MainRoom::HandleDoors()
 					g_pSounds->PlaySound(soundID::DOOR_KUTSCHFAHRT);
 
 				auto newGame = new Game(static_cast<LevelType>(i));
-				newGame->SetGameStatusPtr(&gameStatus);
-				newGame->SetOnGameFinishedCallback([&]() {gui.ChooseNewShopItems(); });
+				newGame->SetGameStatusPtr(gameStatus);
+				newGame->SetOnGameFinishedCallback([&]() {	SavegameManager::StoreSavegame(gameStatus); gui.ChooseNewShopItems(); });
 				m_pGameEngine->PushState(newGame);
 			}
 		}

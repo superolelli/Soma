@@ -20,6 +20,11 @@ public:
 	sf::Texture levelFailedPanel[2];
 	sf::Texture bangGenericButton;
 
+	/** MAIN MENU **/
+	sf::Texture mainMenuBackground;
+	sf::Texture savegamePanel;
+	sf::Texture nameInputBackground;
+
 
 	/** BACKGROUNDS **/
 	std::vector<sf::Texture> firstLayerBackgrounds[2];

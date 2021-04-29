@@ -84,7 +84,7 @@ void Inventory::Update()
 
 		scrollableItemPanel.Update();
 
-		playerAttributesText.Update(gameStatus->GetEquipmentStats(currentPlayer).stats + g_pObjectProperties->playerStats[currentPlayer]);
+		playerAttributesText.Update(gameStatus->GetEquipmentStats(currentPlayer).stats + g_pObjectProperties->playerStats[currentPlayer] + gameStatus->GetDiamondStats(currentPlayer));
 	}
 }
 
@@ -195,6 +195,9 @@ void Inventory::Open(int _player)
 	scrollableItemPanel.Clear();
 	for (auto &i : gameStatus->GetItems())
 		scrollableItemPanel.AddItem(i);
+
+	
+	// TODO: Read equipment from game status and place it in equipment panel
 }
 
 

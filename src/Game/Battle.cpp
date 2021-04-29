@@ -1,5 +1,6 @@
 #include "Battle.hpp"
-
+#include <algorithm>
+#include <random>
 
 void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss, GameStatus *_gameStatus)
 {
@@ -291,12 +292,14 @@ void Battle::CalculateTurnOrder()
 	auto startIt = combatants.begin();
 	auto endIt = combatants.begin();
 
+	std::random_device rd;
+	std::mt19937 g(rd());
 	do
 	{
 		while (endIt != combatants.end() && (*startIt)->Status().GetAttribute("initiative") == (*endIt)->Status().GetAttribute("initiative"))
 			endIt++;
 
-		std::random_shuffle(startIt, endIt);
+		std::shuffle(startIt, endIt, g);
 
 		startIt = endIt;
 	} while (endIt != combatants.end());
