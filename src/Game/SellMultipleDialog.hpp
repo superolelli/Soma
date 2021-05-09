@@ -14,7 +14,7 @@ public:
 	void Render();
 	void Quit();
 
-	void SetItem(Item &_item);
+	void SetItem(Item const &_item);
 
 	void SetPos(int _x, int _y);
 

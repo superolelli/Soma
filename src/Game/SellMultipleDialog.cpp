@@ -64,7 +64,7 @@ void SellMultipleDialog::Quit()
 {
 }
 
-void SellMultipleDialog::SetItem(Item & _item)
+void SellMultipleDialog::SetItem(Item const & _item)
 {
 	slider.SetMaximum(_item.number);
 }

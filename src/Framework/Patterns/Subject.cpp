@@ -20,7 +20,7 @@ void CSubject::RemoveObserver(CObserver *_observer)
 
 
 
-void CSubject::Notify(ObserverNotification &_notification)
+void CSubject::Notify(ObserverNotification const &_notification)
 {
 	//notifies the action to each observer
 	for (auto a : m_pObserverList)

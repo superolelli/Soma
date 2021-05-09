@@ -15,7 +15,7 @@ void Lootable::Init(LootableID _id, DialogManager *_dialogManager, GameStatus *_
 }
 
 
-void Lootable::AddItem(Item &_item)
+void Lootable::AddItem(Item const &_item)
 {
 	items.push_back(_item);
 }

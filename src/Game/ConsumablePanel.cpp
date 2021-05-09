@@ -91,9 +91,9 @@ InventoryItemWrapper * ConsumablePanel::OnItemFromItemPanelReceived(InventoryIte
 }
 
 
-void ConsumablePanel::OnNotify(ObserverNotification &_notification)
+void ConsumablePanel::OnNotify(ObserverNotification const &_notification)
 {
-	auto notification = dynamic_cast<ObserverNotificationGameStatus*>(&_notification);
+	auto notification = dynamic_cast<ObserverNotificationGameStatus const*>(&_notification);
 
 	if (notification->event == gameStatusEvents::consumableAdded)
 		AddItem(notification->item);

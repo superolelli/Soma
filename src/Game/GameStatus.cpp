@@ -92,7 +92,7 @@ void GameStatus::AddItem(Item _item)
 }
 
 
-void GameStatus::RemoveItem(Item &_item, bool _removeOne)
+void GameStatus::RemoveItem(Item const &_item, bool _removeOne)
 {
 	if (_item.id < CONSUMABLE_ITEMS_START)
 	{

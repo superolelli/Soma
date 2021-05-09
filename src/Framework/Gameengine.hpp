@@ -51,7 +51,7 @@ public:
 	void ClearRenderTarget(sf::Color const& _color) { m_RenderTextures[currentRenderTexture].clear(_color); }
 
 	//Returns the size of the render window
-	sf::Vector2u &GetWindowSize() { return m_Window.GetRenderWindow()->getSize(); }
+	sf::Vector2u const &GetWindowSize() { return m_Window.GetRenderWindow()->getSize(); }
 
 	//Returns the position of the upper left corner of the view
 	sf::Vector2f GetViewPosition() { return GetRenderTarget().getView().getCenter() - GetRenderTarget().getView().getSize() / 2.0f; }

@@ -13,9 +13,9 @@ public:
 	void Render();
 	void Quit();
 
-	void AddItem(Item &_item);
+	void AddItem(Item _item);
 
-	void SetTitle(std::string &_str);
+	void SetTitle(std::string const &_str);
 	void SetPos(int _x, int _y);
 
 	bool IsOpen() { return isOpen; }

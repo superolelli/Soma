@@ -42,13 +42,7 @@ void EquipmentPanel::Init(CGameEngine * _engine, GameStatus *_gameStatus, int _x
 
 void EquipmentPanel::Quit()
 {
-	for (int p = 0; p < 4; p++)
-	{
-		for(int i = 0; i < 4; i++)
-		{
-			SAFE_DELETE(items[p][i]);
-		}
-	}
+	Clear();
 }
 
 void EquipmentPanel::SetOnItemDroppedCallback(std::function<InventoryItemWrapper*(InventoryItemWrapper*, int, int)> _onItemDropped)
@@ -231,6 +225,41 @@ bool EquipmentPanel::CanBePlaced(CSprite & _itemSprite)
 	}
 
 	return false;
+}
+
+void EquipmentPanel::Clear()
+{
+	for (int i = 0; i < 4; i++) 
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			SAFE_DELETE(items[i][j]);
+		}
+	}
+}
+
+void EquipmentPanel::AddItem(Item& _item, int player, int slot)
+{
+	if (_item.id == ItemID::empty)
+		return;
+
+	SAFE_DELETE(items[player][slot]);
+
+	auto newItem = new InventoryItemWrapper;
+
+	CSprite newSprite;
+	newSprite.Load(g_pTextures->item[_item.id]);
+	newItem->Init(std::move(_item), std::move(newSprite));
+	newItem->SetPos(equipmentField[slot].GetGlobalRect().left + 10, equipmentField[slot].GetGlobalRect().top + 10);
+
+	items[player][slot] = newItem;
+
+	auto tempCurrentPlayer = currentPlayer;
+	SetCurrentPlayer(player);
+	CheckConnections(slot);
+	diamond[player].RecolorDiamond(connections[player]);
+	gameStatus->SetDiamondStats(player, diamond[player].GetStats());
+	SetCurrentPlayer(tempCurrentPlayer);
 }
 
 

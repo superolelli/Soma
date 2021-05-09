@@ -37,7 +37,7 @@ public:
 	void Update(CGameEngine *_engine);
 	void SetPos(int _x, int _y);
 
-	void AddItem(Item &_item);
+	void AddItem(Item const &_item);
 
 private:
 

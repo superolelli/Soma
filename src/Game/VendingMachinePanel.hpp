@@ -51,7 +51,7 @@ private:
 	void OnItemOfScrollablePanelSelected(Item &_item);
 	void OnItemOfShopPanelSelected(Item &_item);
 
-	void SellItem(Item &_item, int _amount = 1);
+	void SellItem(Item const &_item, int _amount = 1);
 
 	void HandleDialog();
 	void BuyCurrentItemFromShop();

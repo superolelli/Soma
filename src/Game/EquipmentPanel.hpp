@@ -24,6 +24,9 @@ public:
 	InventoryItemWrapper *PlaceItem(InventoryItemWrapper *_item);
 	bool CanBePlaced(CSprite &_itemSprite);
 
+	void Clear();
+	void AddItem(Item &_item, int player, int slot);
+
 private:
 
 	CGameEngine *engine;

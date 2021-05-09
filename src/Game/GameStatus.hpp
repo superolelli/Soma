@@ -44,12 +44,13 @@ public:
 	void AcquireSkill(int player, int ability, int skill);
 
 	void AddItem(Item _item);
-	void RemoveItem(Item &_item, bool _removeOne = true);
+	void RemoveItem(Item const &_item, bool _removeOne = true);
 	const std::vector<Item> &GetItems() { return items; }
 	const std::vector<Item> &GetConsumables() { return consumables; }
 
 	void AddEquipment(int _player, int _slot, Item _item);
 	void RemoveEquipment(int _player, int _slot);
+	Item &GetEquipment(int _player, int _slot) { return equipment[_player][_slot]; }
 	EquipmentProperties &GetEquipmentStats(int _player);
 
 	void SetDiamondStats(int _player, CombatantAttributes &_stats);

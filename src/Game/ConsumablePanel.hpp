@@ -21,7 +21,7 @@ public:
 
 	void SetPos(int _x, int _y);
 
-	void OnNotify(ObserverNotification &_notification);
+	void OnNotify(ObserverNotification const &_notification) override;
 
 private:
 	CGameEngine *engine;

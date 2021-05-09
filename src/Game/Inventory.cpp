@@ -196,8 +196,14 @@ void Inventory::Open(int _player)
 	for (auto &i : gameStatus->GetItems())
 		scrollableItemPanel.AddItem(i);
 
-	
-	// TODO: Read equipment from game status and place it in equipment panel
+	equipmentPanel.Clear();
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			equipmentPanel.AddItem(gameStatus->GetEquipment(i, j), i, j);
+		}
+	}
 }
 
 

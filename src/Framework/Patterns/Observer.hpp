@@ -11,7 +11,7 @@ class CObserver
 {
 public:
 
-	virtual void OnNotify(ObserverNotification &_notification) {};
+	virtual void OnNotify(ObserverNotification const &_notification) {};
 };
 
 

@@ -33,11 +33,17 @@ GameStatus* SavegameManager::LoadSavegame(int _index)
     input >> status->levels[1];
     input >> status->levels[2];
 
-    for (auto& player : status->skillAcquired)
-        for (auto& ability : player)
-            for (auto& skill : ability)
+    bool skill;
+    for (int p = 0; p < 4; p++) {
+        for (int a = 0; a < 4; a++) {
+            for (int s = 0; s < 8; s++) {
                 input >> skill;
-
+                if(skill == true)
+                    status->AcquireSkill(p, a, s);
+            }
+        }
+    }
+   
     int currentID;
     int r, g, b;
     input >> currentID;

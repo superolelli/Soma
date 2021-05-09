@@ -11,7 +11,7 @@ public:
 	PlayerAttributesText();
 
 	void Render(sf::RenderTarget &_target);
-	void Update(CombatantAttributes &_status);
+	void Update(CombatantAttributes const &_status);
 
 	void SetPos(float _x, float _y);
 

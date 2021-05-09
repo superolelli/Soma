@@ -15,7 +15,7 @@ public:
 protected:
 
 	//notifies an action to all the observers
-	void Notify(ObserverNotification &_notification);
+	void Notify(ObserverNotification const &_notification);
 
 	//a list with all the observers
 	std::list<CObserver*> m_pObserverList;

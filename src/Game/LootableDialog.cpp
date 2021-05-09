@@ -38,7 +38,7 @@ void LootableDialog::Quit()
 		SAFE_DELETE(items[i]);
 }
 
-void LootableDialog::SetTitle(std::string &_str)
+void LootableDialog::SetTitle(std::string const &_str)
 {
 	lootableNameText.setString(_str);
 	lootableNameText.setPosition(lootablePanel.GetGlobalRect().left + 467 - lootableNameText.getGlobalBounds().width / 2, lootablePanel.GetGlobalRect().top + 15);
@@ -116,7 +116,7 @@ void LootableDialog::Render()
 }
 
 
-void LootableDialog::AddItem(Item &_item)
+void LootableDialog::AddItem(Item _item)
 {
 	int freeSlot = GetFreeItemSlot();
 	if (freeSlot == -1)

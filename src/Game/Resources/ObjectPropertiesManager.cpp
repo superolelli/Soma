@@ -38,15 +38,15 @@ void ObjectPropertiesManager::LoadPlayerAbilities()
     doc.load_file("Data/XML/AbilitiesDefault.xml");
 
     //get default values
-    Ability default;
-	default.clear();
+    Ability defaultAbility;
+	defaultAbility.clear();
 
-	loadAbilityFromXML(doc.child("ability"), default);
+	loadAbilityFromXML(doc.child("ability"), defaultAbility);
 
-	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesSimon.xml", CombatantID::Simon, default);
-	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesOle.xml", CombatantID::Ole, default);
-	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesAnna.xml", CombatantID::Anna, default);
-	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesMarkus.xml", CombatantID::Markus, default);
+	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesSimon.xml", CombatantID::Simon, defaultAbility);
+	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesOle.xml", CombatantID::Ole, defaultAbility);
+	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesAnna.xml", CombatantID::Anna, defaultAbility);
+	LoadAbilitiesOfSpecificPlayer("Data/XML/AbilitiesMarkus.xml", CombatantID::Markus, defaultAbility);
 }
 
 
@@ -91,16 +91,16 @@ void ObjectPropertiesManager::LoadSkills()
 	doc.load_file("Data/XML/AbilitiesDefault.xml");
 
 	//get default values
-	Ability default;
-	default.clear();
+	Ability defaultAbility;
+	defaultAbility.clear();
 
-	loadAbilityFromXML(doc.child("ability"), default);
-	default.possibleAims.howMany = 0;
+	loadAbilityFromXML(doc.child("ability"), defaultAbility);
+	defaultAbility.possibleAims.howMany = 0;
 
-	LoadSkillsOfSpecificPlayer("Data/XML/SkillsSimon.xml", CombatantID::Simon, default);
-	LoadSkillsOfSpecificPlayer("Data/XML/SkillsOle.xml", CombatantID::Ole, default);
-	LoadSkillsOfSpecificPlayer("Data/XML/SkillsAnna.xml", CombatantID::Anna, default);
-	LoadSkillsOfSpecificPlayer("Data/XML/SkillsMarkus.xml", CombatantID::Markus, default);
+	LoadSkillsOfSpecificPlayer("Data/XML/SkillsSimon.xml", CombatantID::Simon, defaultAbility);
+	LoadSkillsOfSpecificPlayer("Data/XML/SkillsOle.xml", CombatantID::Ole, defaultAbility);
+	LoadSkillsOfSpecificPlayer("Data/XML/SkillsAnna.xml", CombatantID::Anna, defaultAbility);
+	LoadSkillsOfSpecificPlayer("Data/XML/SkillsMarkus.xml", CombatantID::Markus, defaultAbility);
 }
 
 
@@ -132,16 +132,16 @@ void ObjectPropertiesManager::LoadEnemyAbilities()
 	doc.load_file("Data/XML/AbilitiesDefault.xml");
 
 	//get default values
-	Ability default;
-	default.clear();
-	loadAbilityFromXML(doc.child("ability"), default);
+	Ability defaultAbility;
+	defaultAbility.clear();
+	loadAbilityFromXML(doc.child("ability"), defaultAbility);
 
 	doc.load_file("Data/XML/EnemyAbilities.xml");
 
 	for (xml_node &ability : doc.child("Abilities").children())
 	{
 		int abilityID = ability.attribute("id").as_int();
-		enemyAbilities[abilityID] = default;
+		enemyAbilities[abilityID] = defaultAbility;
 
 		loadAbilityFromXML(ability, enemyAbilities[abilityID]);
 	}
@@ -282,11 +282,11 @@ void ObjectPropertiesManager::LoadEquipmentItemStats()
 	doc.load_file("Data/XML/EquipmentItems.xml");
 
 	//get default values
-	EquipmentProperties default;
-	loadAttributesFromXML(doc.child("Items").child("Default"), default.stats);
-	default.level = doc.child("Items").child("Default").child("Level").text().as_int();
-	default.name = "";
-	default.missOnHighDamage = doc.child("Items").child("Default").child("AdditionalEffects").child("MissOnHighDamage").text().as_bool();
+	EquipmentProperties defaulProperties;
+	loadAttributesFromXML(doc.child("Items").child("Default"), defaulProperties.stats);
+	defaulProperties.level = doc.child("Items").child("Default").child("Level").text().as_int();
+	defaulProperties.name = "";
+	defaulProperties.missOnHighDamage = doc.child("Items").child("Default").child("AdditionalEffects").child("MissOnHighDamage").text().as_bool();
 
 	//load item values
 	for (xml_node &item : doc.child("Items").children())
@@ -295,7 +295,7 @@ void ObjectPropertiesManager::LoadEquipmentItemStats()
 
 		if (itemID >= 0)
 		{
-			equipmentStats[itemID] = default;
+			equipmentStats[itemID] = defaulProperties;
 			int levelType = 0;
 
 			std::string name = item.attribute("name").as_string();
@@ -339,12 +339,12 @@ void ObjectPropertiesManager::LoadConsumableItemStats()
 	doc.load_file("Data/XML/ConsumableItems.xml");
 
 	//get default values
-	ConsumableProperties default;
-	default.heal = doc.child("Items").child("Default").child("effect").child("heal").text().as_int();
-	default.level = doc.child("Items").child("Default").child("Level").text().as_int();
-	default.name = "";
-	default.price = doc.child("Items").child("Default").child("Price").text().as_int();
-	loadBuffFromXML(doc.child("Items").child("Default").child("effect").child("buff"), default.buff);
+	ConsumableProperties defaulProperties;
+	defaulProperties.heal = doc.child("Items").child("Default").child("effect").child("heal").text().as_int();
+	defaulProperties.level = doc.child("Items").child("Default").child("Level").text().as_int();
+	defaulProperties.name = "";
+	defaulProperties.price = doc.child("Items").child("Default").child("Price").text().as_int();
+	loadBuffFromXML(doc.child("Items").child("Default").child("effect").child("buff"), defaulProperties.buff);
 
 	//load item values
 	for (xml_node &item : doc.child("Items").children())
@@ -353,7 +353,7 @@ void ObjectPropertiesManager::LoadConsumableItemStats()
 
 		if (itemID >= 0)
 		{
-			consumableStats[itemID] = default;
+			consumableStats[itemID] = defaulProperties;
 			int levelType = 0;
 
 			std::string name = item.attribute("name").as_string();

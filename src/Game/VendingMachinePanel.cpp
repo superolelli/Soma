@@ -249,7 +249,7 @@ void VendingMachinePanel::OnItemOfShopPanelSelected(Item &_item)
 }
 
 
-void VendingMachinePanel::SellItem(Item &_item, int _amount)
+void VendingMachinePanel::SellItem(Item const &_item, int _amount)
 {
 	int buyingPrice = g_pObjectProperties->getItemStats(_item.id).price;
 	gameStatus->AddCards(buyingPrice * _amount / 5);

@@ -56,7 +56,7 @@ void PlayerAttributesText::Render(sf::RenderTarget & _target)
 		_target.draw(text);
 }
 
-void PlayerAttributesText::Update(CombatantAttributes & _status)
+void PlayerAttributesText::Update(CombatantAttributes const & _status)
 {
 	statValueText[0].setString(std::to_string(_status["armour"]));
 	statValueText[1].setString(std::to_string(_status["damageMin"]) + "-" + std::to_string(_status["damageMax"]));
