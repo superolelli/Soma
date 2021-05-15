@@ -28,6 +28,7 @@ void MainRoom::Init(CGameEngine * _engine)
 	vendingMachine.SetPos(g_pObjectProperties->mainRoomVendingMachinePosition.x, g_pObjectProperties->mainRoomVendingMachinePosition.y);
 
 	gui.Init(m_pGameEngine, gameStatus);
+	exitDialog.Init(m_pGameEngine);
 
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetRenderTarget().setView(view);
@@ -118,10 +119,7 @@ void MainRoom::Cleanup()
 	SAFE_DELETE(gameStatus);
 
 	gui.Quit();
-
-	g_pModels->Quit();  //Muss in letztem Gamestate passieren
-	g_pSpritePool->FreeSprites();   //Muss in letztem Gamestate passieren
-	g_pSounds->Quit(); //Muss in letztem Gamestate passieren
+	exitDialog.Quit();
 }
 
 
@@ -148,22 +146,25 @@ void MainRoom::Update()
 	m_pGameEngine->GetRenderTarget().setView(view);
 
 	if (m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
-		m_pGameEngine->StopEngine();
+		exitDialog.Open();
 
 	if (m_pGameEngine->GetKeystates(KeyID::F5) == Keystates::Released)
 		SavegameManager::StoreSavegame(gameStatus);
 
-	HandleGUI();
-	CheckForMovement();
-	HandlePlayerAnimation();
-	UpdatePlayerHitboxes();
-	HandleDoors();
 	g_pSounds->Update();
+	HandleGUI();
 
-	if (view.getCenter().x - m_pGameEngine->GetWindowSize().x / 2 + xMovement >= 0
-		&& view.getCenter().x + m_pGameEngine->GetWindowSize().x / 2 + xMovement < background[0].GetGlobalRect().width * 4) {
-		view.move(xMovement, 0);
-		sf::Listener::setPosition(sf::Vector3f(view.getCenter().x, view.getCenter().y, -5));
+	if (!exitDialog.IsOpen()) {
+		CheckForMovement();
+		HandlePlayerAnimation();
+		UpdatePlayerHitboxes();
+		HandleDoors();
+
+		if (view.getCenter().x - m_pGameEngine->GetWindowSize().x / 2 + xMovement >= 0
+			&& view.getCenter().x + m_pGameEngine->GetWindowSize().x / 2 + xMovement < background[0].GetGlobalRect().width * 4) {
+			view.move(xMovement, 0);
+			sf::Listener::setPosition(sf::Vector3f(view.getCenter().x, view.getCenter().y, -5));
+		}
 	}
 }
 
@@ -171,13 +172,21 @@ void MainRoom::Update()
 
 void MainRoom::HandleGUI()
 {
-	if (!gui.IsPanelOpen())
+	if (!gui.IsPanelOpen() && !exitDialog.IsOpen())
 	{
 		CheckForClickedPlayer();
 		CheckForClickedVendingMachine();
 	}
 
 	m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());
+
+	if (exitDialog.Update() == true)
+	{
+		SavegameManager::StoreSavegame(gameStatus);
+		m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());
+		m_pGameEngine->PopState();
+	}
+
 	gui.Update();
 	m_pGameEngine->GetRenderTarget().setView(view);
 }
@@ -280,6 +289,7 @@ void MainRoom::Render(double _normalizedTimestep)
 
 	m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());
 	gui.Render();
+	exitDialog.Render();
 
 	m_pGameEngine->FlushRenderTarget();
 	m_pGameEngine->FlipWindow();

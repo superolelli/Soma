@@ -80,8 +80,21 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-	if(m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
-		m_pGameEngine->StopEngine();
+	if (m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
+	{
+		if (inBattle)
+		{
+			currentBattle->Quit();
+			SAFE_DELETE(currentBattle);
+			inBattle = false;
+		}
+
+		g_pMusic->SetCurrentEnvironment(MusicEnvironment::mainRoomEnvironment);
+		m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());
+		m_pGameEngine->PopState();
+		m_pGameEngine->PopState();
+		return;
+	}
 
 	m_pGameEngine->GetRenderTarget().setView(view);
 

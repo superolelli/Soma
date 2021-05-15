@@ -5,6 +5,7 @@
 
 void MainMenu::Init(CGameEngine* _engine)
 {
+	SavegameManager::InitSavegameDirectory();
 	m_pGameEngine = _engine;
 
 	activeGameslot = -1;
@@ -73,9 +74,9 @@ void MainMenu::Update()
 
 		auto gameStatus = new GameStatus();
 		gameStatus->Init();
-		gameStatus->SetFilepath("Data/Saves/" + std::to_string(activeGameslot) + "_" + nameInputPanel.GetString());
+		gameStatus->SetFilepath(SavegameManager::SAVEGAME_PATH + std::to_string(activeGameslot) + "_" + nameInputPanel.GetString());
 		SavegameManager::StoreSavegame(gameStatus);
-		m_pGameEngine->ChangeStateImmediately(new MainRoom(gameStatus));
+		m_pGameEngine->PushStateImmediately(new MainRoom(gameStatus));
 		return;
 	}
 
@@ -85,7 +86,7 @@ void MainMenu::Update()
 			auto updateResult = savegamePanels[i].Update();
 			if (updateResult == SavegamePanel::SavegameState::Continue) {
 				auto gameStatus = SavegameManager::LoadSavegame(i);
-				m_pGameEngine->ChangeStateImmediately(new MainRoom(gameStatus));
+				m_pGameEngine->PushStateImmediately(new MainRoom(gameStatus));
 				return;
 			}	
 			else if (updateResult == SavegamePanel::SavegameState::Create) {

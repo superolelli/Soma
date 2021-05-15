@@ -222,7 +222,11 @@ void EnemyStatePrepareAbility::ChooseAbilityBigSpencer()
 
 void EnemyStatePrepareAbility::ChooseAbilityAbtruenniger()
 {
-	if (rand() % 2 == 0)
+	bool canHitFanning = false;
+	for (auto& c : *context->allCombatants)
+		canHitFanning |= c->GetBattlePos() > 0 && c->IsPlayer();
+
+	if (rand() % 2 == 0 || !canHitFanning)
 		chosenAbility = enemyAbilities::bang;
 	else
 		chosenAbility = enemyAbilities::fanning;

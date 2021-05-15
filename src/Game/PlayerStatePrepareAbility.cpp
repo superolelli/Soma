@@ -81,7 +81,7 @@ bool PlayerStatePrepareAbility::CurrentAbilityAttacksAllPlayers()
 
 void PlayerStatePrepareAbility::HandleConfusion()
 {
-	playerContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_kingArthur, sf::Vector2f(playerContext->GetRect().left + playerContext->GetRect().width / 2.0f, playerContext->GetRect().top - 20.0f), 1.0f);
+	playerContext->notificationRenderer->AddNotification("Verwirrt!", g_pFonts->f_blackwoodCastle, sf::Vector2f(playerContext->GetRect().left + playerContext->GetRect().width / 2.0f, playerContext->GetRect().top - 20.0f), 1.0f);
 	notificationWaitingTime = 1.5;
 	SelectConfusionTargets();
 }
@@ -93,7 +93,7 @@ void PlayerStatePrepareAbility::HandleStupidness()
 	std::cout << "isStupid: " << isStupid << std::endl;
 	if (isStupid == 0)
 	{
-		playerContext->notificationRenderer->AddNotification("Dummheit", g_pFonts->f_kingArthur, sf::Vector2f(playerContext->GetRect().left + playerContext->GetRect().width / 2.0f, playerContext->GetRect().top - 20.0f), 1.0f);
+		playerContext->notificationRenderer->AddNotification("Dummheit", g_pFonts->f_blackwoodCastle, sf::Vector2f(playerContext->GetRect().left + playerContext->GetRect().width / 2.0f, playerContext->GetRect().top - 20.0f), 1.0f);
 		notificationWaitingTime = 1.5;
 
 		int randomNumber = rand() % 3;
@@ -166,7 +166,7 @@ void PlayerStatePrepareAbility::SelectConfusionTargets()
 
 bool PlayerStatePrepareAbility::PlayerShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition)
 {
-	if (!_combatant->IsPlayer() || _combatant == playerContext)
+	if (!_combatant->IsPlayer() || _combatant == playerContext || _combatant->IsDying())
 		return false;
 
 	return CurrentAbilityAttacksAll() && playerContext != _combatant  && playerContext->selectedTargets[0] != _combatant
@@ -175,7 +175,7 @@ bool PlayerStatePrepareAbility::PlayerShouldBeAddedAsTarget(Combatant *_combatan
 
 bool PlayerStatePrepareAbility::EnemyShouldBeAddedAsTarget(Combatant *_combatant, int _targetPosition)
 {
-	if (_combatant->IsPlayer())
+	if (_combatant->IsPlayer() || _combatant->IsDying())
 		return false;
 	
 	return CurrentAbilityAttacksAllPlayers() && playerContext->selectedTargets[0] != _combatant
@@ -238,7 +238,7 @@ void PlayerStatePrepareAbility::SelectAdditionalTargets()
 
 	for (Combatant* com : (*playerContext->allCombatants))
 	{
-		if (com == playerContext->selectedTargets[0])
+		if (com == playerContext->selectedTargets[0] || com->IsDying())
 			continue;
 
 		if (CurrentAbilityAttacksAllPlayers() && playerContext->selectedTargets[0]->IsPlayer() && com->IsPlayer()

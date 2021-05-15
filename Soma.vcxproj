@@ -79,7 +79,7 @@
     <IntDir>$(Configuration)\temps\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>F:\Soma\Dependencies\SFML-2.4.2\lib;F:\Soma\Dependencies\boost_1_61_0\libs;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Soma\Dependencies\SFML-2.5.1\lib;F:\Soma\Dependencies\boost_1_61_0\libs;C:\Soma\Dependencies\sfe-movie\lib;C:\Soma\Dependencies\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LibraryPath>F:\Soma\Dependencies\SFML-2.4.2\lib;F:\Soma\Dependencies\boost_1_61_0\libs;$(LibraryPath)</LibraryPath>
@@ -128,11 +128,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>F:\Soma\Dependencies\SFML-2.4.2\include;F:\Soma\Dependencies\boost_1_61_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Soma\Dependencies\SFML-2.5.1\include;F:\Soma\Dependencies\boost_1_61_0;C:\Soma\Dependencies\sfe-movie\include;C:\Soma\Dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-audio.lib;sfeMovie.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -273,6 +275,7 @@
     <ClCompile Include="src\Game\EquipmentConnections.cpp" />
     <ClCompile Include="src\Game\EquipmentPanel.cpp" />
     <ClCompile Include="src\Game\EquipmentPanelDiamond.cpp" />
+    <ClCompile Include="src\Game\ExitDialog.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Game\GUI.cpp" />
     <ClCompile Include="src\Game\InitialState.cpp" />
@@ -356,6 +359,7 @@
     <ClInclude Include="src\Game\EquipmentConnections.hpp" />
     <ClInclude Include="src\Game\EquipmentPanel.hpp" />
     <ClInclude Include="src\Game\EquipmentPanelDiamond.hpp" />
+    <ClInclude Include="src\Game\ExitDialog.hpp" />
     <ClInclude Include="src\Game\Inventory.hpp" />
     <ClInclude Include="src\Game\InventoryItemWrapper.hpp" />
     <ClInclude Include="src\Game\Item.hpp" />

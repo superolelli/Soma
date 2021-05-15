@@ -15,6 +15,7 @@ void CGameEngine::Init(std::string const &_name)
 	nextGameState = NULL;
 
 	nextAction = action::hold;
+	nextActionCount = 0;
 	m_running = true;
 	m_simpleRenderLoop = false;
 }
@@ -92,6 +93,14 @@ void CGameEngine::PushStateImmediately(GameState * _state)
 void CGameEngine::PopState()
 {
 	nextAction = action::pop;
+	nextActionCount++;
+}
+
+void CGameEngine::PopStateImmediately()
+{
+	m_pStates.back()->Cleanup();
+	SAFE_DELETE(m_pStates.back());
+	m_pStates.pop_back();
 }
 
 void CGameEngine::FlushRenderTarget(sf::Shader *_shader)
@@ -127,7 +136,6 @@ void CGameEngine::ChangeStateImmediately(GameState * _state)
 
 
 
-
 void CGameEngine::ClearStates()
 {
 	//delete every state on the stack
@@ -141,8 +149,6 @@ void CGameEngine::ClearStates()
 }
 
 
-
-
 void CGameEngine::CheckStates()
 {
 	switch (nextAction)
@@ -152,9 +158,12 @@ void CGameEngine::CheckStates()
 		break;
 
 	case action::pop:
-		m_pStates.back()->Cleanup();
-		SAFE_DELETE(m_pStates.back());
-		m_pStates.pop_back();
+		for (int i = 0; i < nextActionCount; i++)
+		{
+			m_pStates.back()->Cleanup();
+			SAFE_DELETE(m_pStates.back());
+			m_pStates.pop_back();
+		}
 		break;
 
 	case action::change:
@@ -164,5 +173,5 @@ void CGameEngine::CheckStates()
 	
 	nextGameState = nullptr;
 	nextAction = action::hold;
-	
+	nextActionCount = 0;
 }

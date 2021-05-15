@@ -735,6 +735,9 @@
     <ClCompile Include="src\Game\SavegameManager.cpp">
       <Filter>Quelldateien\Game\MainMenu</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\ExitDialog.cpp">
+      <Filter>Quelldateien\Game\MainRoom\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -1354,6 +1357,9 @@
     </ClInclude>
     <ClInclude Include="src\Game\SavegameManager.hpp">
       <Filter>Headerdateien\Game\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\ExitDialog.hpp">
+      <Filter>Headerdateien\Game\MainRoom\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

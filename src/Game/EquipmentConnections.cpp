@@ -187,4 +187,5 @@ void EquipmentConnections::Restart()
 {
 	frame = 0;
 	elapsedTime = 0.0;
+	deactivationTime = 0.0;
 }

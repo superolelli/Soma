@@ -4,9 +4,16 @@
 
 namespace fs = std::filesystem;
 
+std::string SavegameManager::SAVEGAME_PATH = "Data/Saves/";
+
+void SavegameManager::InitSavegameDirectory()
+{
+    fs::create_directory(SAVEGAME_PATH);
+}
+
 const std::string SavegameManager::GetSavegameName(int _index)
 {
-    for (const auto& entry : fs::directory_iterator("Data/Saves"))
+    for (const auto& entry : fs::directory_iterator(SAVEGAME_PATH))
     {
         if (entry.path().filename().string().starts_with(std::to_string(_index))) {
             auto path = entry.path().filename().string();
@@ -20,7 +27,7 @@ const std::string SavegameManager::GetSavegameName(int _index)
 GameStatus* SavegameManager::LoadSavegame(int _index)
 {
     auto name = GetSavegameName(_index);
-    auto path = "Data/Saves/" + std::to_string(_index) + "_" + name;
+    auto path = SAVEGAME_PATH + std::to_string(_index) + "_" + name;
     auto status = new GameStatus();
     status->Init();
 
@@ -147,7 +154,7 @@ void SavegameManager::StoreSavegame(GameStatus* _status)
 
 void SavegameManager::DeleteSavegame(int _index)
 {
-    for (const auto& entry : fs::directory_iterator("Data/Saves"))
+    for (const auto& entry : fs::directory_iterator(SAVEGAME_PATH))
     {
         if (entry.path().filename().string().starts_with(std::to_string(_index))) {
             fs::remove(entry.path());

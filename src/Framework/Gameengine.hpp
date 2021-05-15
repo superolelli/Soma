@@ -34,6 +34,8 @@ public:
 	//pops the last state of the stack
 	void PopState();
 
+	void PopStateImmediately();
+
 	//stops the engine
 	void StopEngine() { m_running = false; }
 
@@ -93,6 +95,8 @@ private:
 
 	GameState *nextGameState;
 	enum class action {hold, push, pop, change} nextAction;
+
+	int nextActionCount;
 
 	//clears all states
 	void ClearStates();
