@@ -40,10 +40,10 @@ private:
 	void ChooseAbilityJuanTirador();
 	void ChooseAbilityMarieSaunier();
 	void ChooseAbilityBruderZacharias();
+	void ChooseAbilityTheodoraKrayenborg();
 
+	void ChooseTargetIf(std::function<bool(Combatant *)> predicate);
 	void ChooseTargetForDoctor();
-	void ChooseTargetForKnockOut();
-	void ChooseTargetForBounty();
 
 	void ChooseTarget();
     void ChooseRandomEnemy();

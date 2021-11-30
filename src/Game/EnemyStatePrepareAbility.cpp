@@ -136,6 +136,9 @@ void EnemyStatePrepareAbility::ChooseAbility()
 	case CombatantID::BruderZacharias:
 		ChooseAbilityBruderZacharias();
 		break;
+	case CombatantID::TheodoraKrayenborg:
+		ChooseAbilityTheodoraKrayenborg();
+		break;
 	}
 }
 
@@ -368,6 +371,38 @@ void EnemyStatePrepareAbility::ChooseAbilityBruderZacharias()
 		chosenAbility = enemyAbilities::staff;
 }
 
+void EnemyStatePrepareAbility::ChooseAbilityTheodoraKrayenborg()
+{
+	bool enemyBuffed = false;
+	for (auto* c : *enemyContext->allCombatants)
+	{
+		if (c->IsPlayer() && c->Status().IsBuffed())
+		{
+			enemyBuffed = true;
+			break;
+		}
+	}
+
+	if (enemyBuffed)
+	{
+		int randomNumber = rand() % 6;
+		if (randomNumber < 4)
+			chosenAbility = enemyAbilities::crystal_ball;
+		else if (randomNumber == 4)
+			chosenAbility = enemyAbilities::throwing_knives;
+		else
+			chosenAbility = enemyAbilities::psychic;
+	}
+	else
+	{
+		int randomNumber = rand() % 2;
+		if (randomNumber == 0)
+			chosenAbility = enemyAbilities::psychic;
+		else
+			chosenAbility = enemyAbilities::throwing_knives;
+	}
+}
+
 
 bool EnemyStatePrepareAbility::OnlyOneCompanionLeft()
 {
@@ -384,12 +419,17 @@ void EnemyStatePrepareAbility::ChooseTarget()
 	}
 	else if (chosenAbility == enemyAbilities::knock_out)
 	{
-		ChooseTargetForKnockOut();
+		ChooseTargetIf([](Combatant* c) {return c->IsPlayer() && !c->Status().IsAsleep();});
 		return;
 	}
 	else if (chosenAbility == enemyAbilities::bounty)
 	{
-		ChooseTargetForBounty();
+		ChooseTargetIf([](Combatant *c) {return c->IsPlayer() && !c->Status().HasBounty();});
+		return;
+	}
+	else if (chosenAbility == enemyAbilities::crystal_ball)
+	{
+		ChooseTargetIf([](Combatant *c) {return c->IsPlayer() && c->Status().IsBuffed();});
 		return;
 	}
 
@@ -405,6 +445,35 @@ void EnemyStatePrepareAbility::ChooseTarget()
 		ChooseRandomEnemy();
 }
 
+void EnemyStatePrepareAbility::ChooseTargetIf(std::function<bool(Combatant*)> predicate)
+{
+	int numberOfTargets = 0;
+
+	for (auto c : *context->allCombatants)
+	{
+		if (predicate(c))
+			numberOfTargets++;
+	}
+
+	int target = rand() % numberOfTargets;
+
+	if (numberOfTargets == 1)
+		target = 0;
+
+	for (auto c : *context->allCombatants)
+	{
+		if (predicate(c))
+		{
+			if (target == 0)
+			{
+				enemyContext->selectedTargets.push_back(c);
+				return;
+			}
+
+			target--;
+		}
+	}
+}
 
 void EnemyStatePrepareAbility::ChooseTargetForDoctor()
 {
@@ -423,67 +492,6 @@ void EnemyStatePrepareAbility::ChooseTargetForDoctor()
 		CheckForMarkedPlayers();
 		if (enemyContext->selectedTargets.empty())
 			ChooseRandomPlayer();
-	}
-}
-
-
-void EnemyStatePrepareAbility::ChooseTargetForKnockOut()
-{
-	int numberOfTargets = 0;
-
-	for (auto c : *context->allCombatants)
-	{
-		if (c->IsPlayer() && !c->Status().IsAsleep())
-			numberOfTargets++;
-	}
-
-	int target = rand() % numberOfTargets;
-
-	if (numberOfTargets == 1)
-		target = 0;
-
-	for (auto c : *context->allCombatants)
-	{
-		if (c->IsPlayer() && !c->Status().IsAsleep())
-		{
-			if (target == 0)
-			{
-				enemyContext->selectedTargets.push_back(c);
-				return;
-			}
-
-			target--;
-		}
-	}
-}
-
-void EnemyStatePrepareAbility::ChooseTargetForBounty()
-{
-	int numberOfTargets = 0;
-
-	for (auto c : *context->allCombatants)
-	{
-		if (c->IsPlayer() && !c->Status().HasBounty())
-			numberOfTargets++;
-	}
-
-	int target = rand() % numberOfTargets;
-
-	if (numberOfTargets == 1)
-		target = 0;
-
-	for (auto c : *context->allCombatants)
-	{
-		if (c->IsPlayer() && !c->Status().HasBounty())
-		{
-			if (target == 0)
-			{
-				enemyContext->selectedTargets.push_back(c);
-				return;
-			}
-
-			target--;
-		}
 	}
 }
 

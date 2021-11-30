@@ -121,6 +121,9 @@ namespace pugi {
 		if (effectNode.child("removeDebuffs"))
 			effect.removeDebuffs = effectNode.child("removeDebuffs").text().as_bool();
 
+		if (effectNode.child("stealBuffs"))
+			effect.stealBuffs = effectNode.child("stealBuffs").text().as_bool();
+
 		if (effectNode.child("addMiss"))
 			effect.addMiss = effectNode.child("addMiss").text().as_int();
 

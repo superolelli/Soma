@@ -198,5 +198,22 @@
     >
         <Model>./Data/Sprites/Enemies/Kutschfahrt/BruderZacharias/BruderZacharias.scml</Model>
     </BruderZacharias>
+
+    <TheodoraKrayenborg id="16"
+      armour ="0"
+      maxHealth ="15"
+      damageMin ="4"
+      damageMax = "6"
+      initiative ="3"
+      criticalHit="5"
+      dodge="5"
+      precision="5"
+      >
+      <Loot>
+          <Item>Kristallkugel</Item>
+          <Item>Wurfmesser</Item>
+      </Loot>
+        <Model>./Data/Sprites/Enemies/Kutschfahrt/TheodoraKrayenborg/TheodoraKrayenborg.scml</Model>
+    </TheodoraKrayenborg>
   
 </EnemyAttributes>

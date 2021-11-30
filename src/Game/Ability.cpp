@@ -21,6 +21,7 @@ void AbilityEffect::clear()
 	bounty = 0;
 	removeBuffs = false;
 	removeDebuffs = false;
+	stealBuffs = false;
 	buff.SetStandardValues();
 }
 
@@ -44,6 +45,7 @@ void AbilityEffect::applySkill(const AbilityEffect &_effect)
 	addMissSelf += _effect.addMissSelf;
 	removeBuffs = removeBuffs || _effect.removeBuffs;
 	removeDebuffs = removeDebuffs || _effect.removeDebuffs;
+	stealBuffs = stealBuffs || _effect.stealBuffs;
 	buff.ApplySkill(_effect.buff);
 }
 

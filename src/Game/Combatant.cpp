@@ -375,6 +375,12 @@ void Combatant::ApplyAbilityEffect(Combatant * _attacker, AbilityEffect & _effec
 	if (_effect.removeDebuffs)
 		Status().RemoveAllDebuffs();
 
+	if (_effect.stealBuffs && Status().IsBuffed())
+	{
+		_attacker->Status().AddBuff(Status().GetBuff());
+		Status().RemoveAllBuffs();
+	}
+
 	if (_effect.buff.duration != 0)
 	{
 		auto tempBuff = _effect.buff;

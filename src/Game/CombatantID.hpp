@@ -20,5 +20,6 @@ enum CombatantID {
 	JuanTirador,
 	MarieSaunier,
 	BruderZacharias,
+	TheodoraKrayenborg,
     number_of_combatants
 };

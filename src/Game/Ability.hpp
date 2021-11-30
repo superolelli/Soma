@@ -36,6 +36,7 @@ struct AbilityEffect
 	float putToSleepProbability;
     bool removeBuffs;
     bool removeDebuffs;
+    bool stealBuffs;
     int addMiss;
     int addMissSelf;
     bool dynamite;
