@@ -203,11 +203,11 @@ void Battle::HandleDeaths()
 				if (combatantNumber < currentCombatant)
 					currentCombatant--;
 
-				if (!(*i)->IsPlayer())
+				/*if (!(*i)->IsPlayer())
 				{
 					(*i)->Quit();
 					SAFE_DELETE(enemies[battlePos - 4]);
-				}
+				}*/
 
 				i = combatants.erase(i);
 				continue;

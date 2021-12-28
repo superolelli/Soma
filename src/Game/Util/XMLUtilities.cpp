@@ -230,7 +230,8 @@ namespace pugi {
 	{
 		for (auto &c : enemyNode.child("Loot").children())
 		{
-			loot.push_back(itemIdentifierMap[c.text().as_string()]);
+			std::string name = c.text().as_string();
+			loot.push_back(itemIdentifierMap[name]);
 		}
 	}
 

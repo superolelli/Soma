@@ -4,6 +4,9 @@
 
 
 
+std::unordered_map<std::string, ItemID> itemIdentifierMap;
+
+
 void ObjectPropertiesManager::LoadObjectProperties()
 {
 	LoadEquipmentItemStats();
@@ -17,8 +20,6 @@ void ObjectPropertiesManager::LoadObjectProperties()
 	LoadLevelSpecs();
 	LoadMainRoomPositions();
 }
-
-
 
 
 ItemProperties ObjectPropertiesManager::getItemStats(ItemID _id)

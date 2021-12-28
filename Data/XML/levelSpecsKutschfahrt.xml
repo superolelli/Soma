@@ -19,7 +19,7 @@
         <battleProbability>1.0</battleProbability>
         <lootableProbability>0.4</lootableProbability>
         <enemyGroups>
-            <!-- <group>
+            <group>
                 <enemy>Juan Tirador</enemy>
                 <enemy>Juan Tirador</enemy>
             </group>
@@ -39,7 +39,7 @@
             <group>
                 <enemy>Marie Saunière</enemy>
                 <enemy>Bruder Zacharias</enemy>
-            </group>-->
+            </group>
             <group>
                 <enemy>Bruder Zacharias</enemy>
                 <enemy>Theodora Krayenborg</enemy>

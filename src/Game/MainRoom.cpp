@@ -185,6 +185,7 @@ void MainRoom::HandleGUI()
 		SavegameManager::StoreSavegame(gameStatus);
 		m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());
 		m_pGameEngine->PopState();
+		return;
 	}
 
 	gui.Update();

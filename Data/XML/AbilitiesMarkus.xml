@@ -12,7 +12,7 @@
             <value id="7">true</value>
         </positions>
 
-        <fatigue>3</fatigue>
+        <fatigue>2</fatigue>
         <effect>
             <damageFactor>1.2</damageFactor>
         </effect>
@@ -29,15 +29,15 @@ Markus letze Runde angegriffen haben
 
         <positions>
             <value id="4">true</value>
+            <value id="5">true</value>
         </positions>
 
-        <fatigue>1</fatigue>
         <effect>
-            <damageFactor>0.1</damageFactor>
+            <damageFactor>0.2</damageFactor>
         </effect>
 
         <description>*#ffa500 Nasenrammbock*
-#white Schadensfaktor: 10%</description>
+#white Schadensfaktor: 20%</description>
     </ability>
 
     <ability id="2" name="Harte Zerstörung">
@@ -82,7 +82,7 @@ Markus letze Runde angegriffen haben
         </positions>
 
         <effect>
-            <damageFactor>0.2</damageFactor>
+            <damageFactor>0.15</damageFactor>
             <buff>
                 <duration>3</duration>
                 <isPositive>false</isPositive>
@@ -92,7 +92,7 @@ Markus letze Runde angegriffen haben
         </effect>
 
         <description>*#ffa500 Fürchterliches Grinsen*    
-#white Schadensfaktor: 20%
+#white Schadensfaktor: 15%
 Für 3 Runden:
     #aaaadd -2 Schaden
     -3 Präzision</description>

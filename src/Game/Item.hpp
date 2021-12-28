@@ -16,7 +16,7 @@ const int CONSUMABLE_ITEMS_START = int(beer);
 const int NUMBER_OF_EQUIPMENT_ITEMS = CONSUMABLE_ITEMS_START;
 const int NUMBER_OF_CONSUMABLE_ITEMS = numberOfItems - CONSUMABLE_ITEMS_START;
 
-static std::unordered_map<std::string, ItemID> itemIdentifierMap; //is filled in ObjectPropertiesManager
+extern std::unordered_map<std::string, ItemID> itemIdentifierMap; //is filled in ObjectPropertiesManager
 
 const int EQUIPMENT_PRICE_PER_LEVEL = 40;
 
