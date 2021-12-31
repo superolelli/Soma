@@ -12,7 +12,7 @@ void BattleGUI::Init(CGameEngine *_engine, GameStatus *_gameStatus)
 	commonGUIParts.Init(_engine, _gameStatus);
 
 	abilityPanel.Load(g_pTextures->abilityPanel);
-	abilityPanel.SetPos(130, 860);
+	abilityPanel.SetPos(100, 860);
 
 	int x = 0;
 	for (int j = 0; j < 4; j++)
@@ -31,6 +31,9 @@ void BattleGUI::Init(CGameEngine *_engine, GameStatus *_gameStatus)
 
 	combatantInformationPanel.Load(g_pTextures->combatantInformationPanel);
 	combatantInformationPanel.SetPos(820, 850);
+
+	skipTurnButton.Load(g_pTextures->skipTurnButton, Buttontypes::Up);
+	skipTurnButton.SetPos(abilityPanel.GetRect().left + abilityPanel.GetRect().width, abilityPanel.GetRect().top + abilityPanel.GetRect().height / 2 - skipTurnButton.GetRect().height / 2);
 
 	currentCombatantHealthBar.Load(g_pTextures->healthBarBig, g_pTextures->healthBarBigFrame, nullptr, nullptr);
 	currentCombatantHealthBar.SetSmoothTransformationTime(0.7);
@@ -55,6 +58,7 @@ void BattleGUI::Init(CGameEngine *_engine, GameStatus *_gameStatus)
 	tooltip.SetShowAboveY(true);
 
 	currentAbility = 0;
+	skipTurn = false;
 	combatantToDisplay = nullptr;
 	currentPlayer = nullptr;
 }
@@ -89,6 +93,10 @@ void BattleGUI::Update()
 					currentAbilityFrame.SetPos(abilities[currentPlayer->GetID()][i].GetRect().left - 10, abilities[currentPlayer->GetID()][i].GetRect().top - 10);
 				}
 			}
+		}
+
+		if (skipTurnButton.Update(*engine)) {
+			skipTurn = true;
 		}
 
 		if (!combatantToDisplay->IsPlayer() && dynamic_cast<Player*>(currentPlayer)->CurrentAbilityCanAimAtCombatant(combatantToDisplay))
@@ -131,6 +139,8 @@ void BattleGUI::Render()
 
 		for (CSprite &a : abilities[currentPlayer->GetID()])
 			a.Render(engine->GetRenderTarget());
+
+		skipTurnButton.Render(engine->GetRenderTarget());
 
 		for (int i = 0; i < 4; i++)
 		{
@@ -186,6 +196,7 @@ void BattleGUI::SetCombatantToDisplay(Combatant *_combatant)
 void BattleGUI::SetCurrentPlayer(Combatant *_combatant)
 {
 	currentPlayer = _combatant;
+	skipTurn = false;
 
 	if(currentPlayer)
 		tooltip.SetPlayerID(currentPlayer->GetID());

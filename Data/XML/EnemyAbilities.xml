@@ -363,7 +363,7 @@
             <damageFactor>1.0</damageFactor>
             <confusion>
                 <probability>0.7</probability>
-                <rounds>3</rounds>
+                <rounds>2</rounds>
             </confusion>
         </effect>
     </ability>

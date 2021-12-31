@@ -20,6 +20,7 @@ public:
 	virtual void Render() override;
 
 	int GetCurrentAbility() { return currentAbility; }
+	bool ShouldSkipTurn() { return skipTurn; }
 	void SetCurrentAbility(int _ability);
 	void SetCombatantToDisplay(Combatant *_combatant);
 	void SetCurrentPlayer(Combatant *_combatant);
@@ -30,6 +31,7 @@ private:
 	LevelGUICommon commonGUIParts;
 
 	int currentAbility;
+	bool skipTurn;
 	Combatant *combatantToDisplay;
 	Combatant *currentPlayer;
 	AdventureGroup *players;
@@ -37,6 +39,7 @@ private:
 	CSprite abilityPanel;
 	CSprite abilities[4][4];
 	CSprite currentAbilityFrame;
+	CButton skipTurnButton;
 
 	CSprite combatantInformationPanel;
 	CombatantAttributesPanel combatantAttributesPanel;

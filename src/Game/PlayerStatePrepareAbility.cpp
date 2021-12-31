@@ -24,6 +24,12 @@ void PlayerStatePrepareAbility::Update()
 	{
 		UpdateSelectedTargets();
 
+		if (playerContext->gui->ShouldSkipTurn())
+		{
+			playerContext->selectedTargets.clear();
+			ChangeState();
+		}
+
 		if (playerContext->engine->GetButtonstates(ButtonID::Left) == Keystates::Released && !playerContext->selectedTargets.empty())
 		{
 			if (playerContext->Status().GetFatigueLevel() == CombatantStatus::FatigueLevel::stupid)
