@@ -112,7 +112,7 @@ ItemID ItemFactory::GetRandomItemIDForLootable(LootableID _lootableID, LevelType
 
 sf::Color ItemFactory::GetRandomColor()
 {
-	int randomNumber = rand() % 4;
+	int randomNumber = rand() % 8;   //50% colorless, 50% colored
 
 	if (randomNumber == 0)
 		return sf::Color(128, 0, 0);
@@ -120,8 +120,10 @@ sf::Color ItemFactory::GetRandomColor()
 		return sf::Color(0, 128, 0);
 	else if (randomNumber == 2)
 		return sf::Color(0, 0, 128);
-	else
+	else if (randomNumber == 3)
 		return sf::Color(128, 128, 0);
+	else
+		return sf::Color::Black;
 }
 
 int ItemFactory::GetRandomItemNumber(ItemID _id, int _level)

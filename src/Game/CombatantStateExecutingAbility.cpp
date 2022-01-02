@@ -117,6 +117,12 @@ void CombatantStateExecutingAbility::ApplyAbilityEffect()
 	AbilityEffect *selfEffect = nullptr;
 
 	context->battle->GetGameStatus()->AddFatigue(ability->fatigue);
+	if (ability->fatigue != 0)
+	{
+		auto notificationPos = sf::Vector2f(context->engine->GetWindowSize().x / 2 + context->engine->GetViewPosition().x, 20);
+		context->notificationRenderer->AddNotification(std::to_string(ability->fatigue), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color(70, 44, 108), sf::Color::Black, 30, false);
+	}
+
 	for (Combatant *t : context->selectedTargets)
 	{
 		AbilityEffect* effect = nullptr;
