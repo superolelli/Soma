@@ -51,6 +51,9 @@ void ItemTooltip::GenerateTooltipStringEquipment(std::string & _tooltip)
 	if (itemProperties.missOnHighDamage)
 		_tooltip.append("Wenn mindestens 10 Schaden\nauf einmal bekommen:\nErhalte einen Fehlschuss");
 
+	if (itemProperties.healOnPass)
+		_tooltip.append("Heile 3 Leben und 3 Müdigkeit beim Passen");
+
 	AppendCombatantAttributesTooltip(_tooltip, itemProperties.stats, "", "", "#white ");
 
 	if (_tooltip.back() == '\n')

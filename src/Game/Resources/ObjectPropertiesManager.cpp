@@ -292,6 +292,7 @@ void ObjectPropertiesManager::LoadEquipmentItemStats()
 	defaulProperties.level = doc.child("Items").child("Default").child("Level").text().as_int();
 	defaulProperties.name = "";
 	defaulProperties.missOnHighDamage = doc.child("Items").child("Default").child("AdditionalEffects").child("MissOnHighDamage").text().as_bool();
+	defaulProperties.healOnPass = doc.child("Items").child("Default").child("AdditionalEffects").child("HealOnPass").text().as_bool();
 
 	//load item values
 	for (xml_node &item : doc.child("Items").children())
@@ -320,6 +321,9 @@ void ObjectPropertiesManager::LoadEquipmentItemStats()
 			{
 				if (item.child("AdditionalEffects").child("MissOnHighDamage"))
 					equipmentStats[itemID].missOnHighDamage = item.child("AdditionalEffects").child("MissOnHighDamage").text().as_bool();
+			
+				if (item.child("AdditionalEffects").child("HealOnPass"))
+					equipmentStats[itemID].healOnPass = item.child("AdditionalEffects").child("HealOnPass").text().as_bool();
 			}
 
 			equipmentStats[itemID].price = equipmentStats[itemID].level * EQUIPMENT_PRICE_PER_LEVEL;

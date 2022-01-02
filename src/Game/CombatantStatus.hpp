@@ -36,6 +36,7 @@ public:
 	void AddDynamite() {dynamite = true;}
 	void RemoveDynamite() { dynamite = false; }
 	void SetMissOnHighDamage(bool _missOnHighDamage) { missOnHighDamage = _missOnHighDamage; }
+	void SetHealOnPass(bool _healOnPass) { healOnPass = _healOnPass; }
 
 	void RemoveAllBuffs();
 	void RemoveAllDebuffs();
@@ -51,6 +52,7 @@ public:
 	void RemoveMiss();
 	int NumberOfMisses();
 	bool HasDynamite() { return dynamite; }
+	bool HasHealOnPass() { return healOnPass; }
 	CombatantAttributes GetNofaceStats();
 
 	void CheckNofaceBuff();
@@ -97,6 +99,7 @@ private:
 	bool stupid;
 	bool dynamite;
 	bool missOnHighDamage;
+	bool healOnPass;
 
 	Buff returnBuff;
 

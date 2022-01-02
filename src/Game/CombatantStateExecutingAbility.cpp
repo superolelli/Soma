@@ -116,13 +116,6 @@ void CombatantStateExecutingAbility::ApplyAbilityEffect()
 {
 	AbilityEffect *selfEffect = nullptr;
 
-	context->battle->GetGameStatus()->AddFatigue(ability->fatigue);
-	if (ability->fatigue != 0)
-	{
-		auto notificationPos = sf::Vector2f(context->engine->GetWindowSize().x / 2 + context->engine->GetViewPosition().x, 20);
-		context->notificationRenderer->AddNotification(std::to_string(ability->fatigue), g_pFonts->f_kingArthur, notificationPos, 1.0f, sf::Color(70, 44, 108), sf::Color::Black, 30, false);
-	}
-
 	for (Combatant *t : context->selectedTargets)
 	{
 		AbilityEffect* effect = nullptr;
@@ -140,9 +133,23 @@ void CombatantStateExecutingAbility::ApplyAbilityEffect()
 	}
 
 	// Handle self effects
+	int criticalEffectFactor = 1;
+	float criticalDurationFactor = 1;
+	bool isCriticalHit = rand() % 100 < context->status.GetAttribute("criticalHit") + ability->effectHostile.criticalHitModificator;
+	if (isCriticalHit)
+	{
+		context->notificationRenderer->AddNotification("Kritisch!", g_pFonts->f_blackwoodCastle, sf::Vector2f(context->GetRect().left + context->GetRect().width / 2.0f, context->GetRect().top - 40), 1.0f);
+		g_pSounds->PlaySound(CRITICAL_HIT);
+		criticalEffectFactor = 2;
+		criticalDurationFactor = 1.5;
+	}
+
+	if (ability->fatigue != 0)
+		context->battle->GetGameStatus()->AddFatigue(ability->fatigue * criticalEffectFactor);
+
 	if (selfEffect && selfEffect->healSelf != 0)
 	{
-		float healingModificator = 1.0f + static_cast<float>(context->Status().GetAttribute("healing")) / 100.0f;
+		float healingModificator = 1.0f + static_cast<float>(context->Status().GetAttribute("healing")) / 100.0f + criticalEffectFactor;
 
 		if (context->actsInConfusion) {
 			context->selectedTargets.front()->status.GainHealth(ability->effectFriendly.healSelf * healingModificator);

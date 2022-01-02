@@ -75,17 +75,21 @@ void Bar::SetPos(float _x, float _y)
 
 
 
-void Bar::Update(double _elapsedTime)
+int Bar::Update(double _elapsedTime)
 {
+	int returnValue = 0;
 	if (baseAnimationTime > 0.0)
 	{
-		if (lastValue != *m_pValue)
+		if (lastValue != *m_pValue) {
+			returnValue = *m_pValue - lastValue;
 			StartAnimation();
+		}
 
 		HandleAnimation(_elapsedTime);
 	}
 	else
 		valueToRender = (float)*m_pValue;
+	return returnValue;
 }
 
 

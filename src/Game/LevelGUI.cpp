@@ -2,14 +2,14 @@
 
 
 
-void LevelGUI::Init(CGameEngine * _engine, GameStatus *_gameStatus, AdventureGroup *_adventureGroup, LevelType _levelType)
+void LevelGUI::Init(CGameEngine * _engine, GameStatus *_gameStatus, AdventureGroup *_adventureGroup, LevelType _levelType, NotificationRenderer *_notificationRenderer)
 {
 	engine = _engine;
 	gameStatus = _gameStatus;
 
 	levelType = _levelType;
 
-	commonGUIParts.Init(_engine, _gameStatus);
+	commonGUIParts.Init(_engine, _gameStatus, _notificationRenderer);
 	consumablePanel.Init(engine, _gameStatus, _adventureGroup);
 
 	levelFinishedPanel = nullptr;

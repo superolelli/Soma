@@ -25,6 +25,7 @@ void AdventureGroup::Init(CGameEngine *_engine, NotificationRenderer *_notificat
 		adventurer[i]->SetEquipment(_gameStatus->GetEquipmentStats(i).stats);
 		adventurer[i]->SetEquipment(_gameStatus->GetDiamondStats(i));
 		adventurer[i]->Status().SetMissOnHighDamage(_gameStatus->GetEquipmentStats(i).missOnHighDamage);
+		adventurer[i]->Status().SetHealOnPass(_gameStatus->GetEquipmentStats(i).healOnPass);
 		x += PLAYER_SPACING;
 	}
 }

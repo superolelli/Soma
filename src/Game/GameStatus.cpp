@@ -130,6 +130,9 @@ void GameStatus::AddEquipment(int _player, int _slot, Item _item)
 
 	if (g_pObjectProperties->equipmentStats[_item.id].missOnHighDamage)
 		equipmentStats[_player].missOnHighDamage = true;
+
+	if (g_pObjectProperties->equipmentStats[_item.id].healOnPass)
+		equipmentStats[_player].healOnPass = true;
 }
 
 void GameStatus::RemoveEquipment(int _player, int _slot)
@@ -144,6 +147,16 @@ void GameStatus::RemoveEquipment(int _player, int _slot)
 				equipmentStats[_player].missOnHighDamage = true;
 		}
 	}
+	if (g_pObjectProperties->equipmentStats[equipment[_player][_slot].id].healOnPass)
+	{
+		equipmentStats[_player].healOnPass = false;
+		for (int i = 0; i < 4; i++)
+		{
+			if (equipment[_player][i].id != ItemID::empty && i != _slot && g_pObjectProperties->equipmentStats[equipment[_player][i].id].healOnPass)
+				equipmentStats[_player].healOnPass = true;
+		}
+	}
+
 	equipment[_player][_slot].id = ItemID::empty;
 }
 

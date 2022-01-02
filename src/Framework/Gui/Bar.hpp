@@ -34,7 +34,8 @@ public:
 	//sets the character size
 	void SetCharacterSize(int _size) { m_text.setCharacterSize(_size); }
 
-	void Update(double _elapsedTime);
+	// returns the change value
+	int Update(double _elapsedTime);
 
 	//Renders the beam
 	void Render(sf::RenderTarget &_target, bool _withNumbers = false);

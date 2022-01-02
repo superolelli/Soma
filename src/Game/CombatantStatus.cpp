@@ -405,6 +405,7 @@ void CombatantStatus::Reset()
 	bounty = 0;
 	dynamite = false;
 	missOnHighDamage = false;
+	healOnPass = false;
 }
 
 

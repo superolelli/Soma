@@ -210,6 +210,7 @@ void CTextureManager::LoadTextures()
 			"Data/Sprites/Items/Kutschfahrt/crystal_ball.png",
 			"Data/Sprites/Items/Kutschfahrt/black_pearl.png",
 			"Data/Sprites/Items/Kutschfahrt/gloves.png",
+			"Data/Sprites/Items/Kutschfahrt/broken_mirror.png",
 			"Data/Sprites/Items/Bang/beer.png",
 			"Data/Sprites/Items/Bang/tequila.png",
 			"Data/Sprites/Items/Bang/whisky.png",

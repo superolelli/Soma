@@ -2,6 +2,7 @@
 #include "CombatantStateIdle.hpp"
 #include "CombatantStateExecutingAbility.hpp"
 #include "Markus.hpp"
+#include "Battle.hpp"
 
 PlayerStatePrepareAbility::PlayerStatePrepareAbility(Player * _context)
 	:CombatantStatePrepareAbility(_context)
@@ -26,6 +27,12 @@ void PlayerStatePrepareAbility::Update()
 
 		if (playerContext->gui->ShouldSkipTurn())
 		{
+			if (playerContext->Status().HasHealOnPass()) 
+			{
+				playerContext->battle->GetGameStatus()->AddFatigue(3);
+				playerContext->Status().GainHealth(3);
+			}
+
 			playerContext->selectedTargets.clear();
 			ChangeState();
 		}

@@ -46,7 +46,7 @@ void Game::Init(CGameEngine * _engine)
 void Game::InitLevelGUI()
 {
 	LevelGUI *newGui = new LevelGUI;
-	newGui->Init(m_pGameEngine, gameStatus, &adventureGroup, levelType);
+	newGui->Init(m_pGameEngine, gameStatus, &adventureGroup, levelType, &notificationRenderer);
 	newGui->SetOnLevelExitedCallback([&]() {HandleFinishedLevel(); });
 	currentGUI = newGui;
 }
@@ -269,7 +269,7 @@ void Game::InitNewBattle()
 {
 	SAFE_DELETE(currentGUI);
 	BattleGUI *newGui = new BattleGUI;
-	newGui->Init(m_pGameEngine, gameStatus);
+	newGui->Init(m_pGameEngine, gameStatus, &notificationRenderer);
 	currentGUI = newGui;
 
 	speechBubbleManager.DeactivateSpeechBubbles();

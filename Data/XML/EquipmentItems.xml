@@ -20,6 +20,7 @@
     <LevelType>0</LevelType>  <!-- 0=all, 1=Bang, 2=Kutschfahrt, 3=Tichu -->
     <AdditionalEffects>
         <MissOnHighDamage>false</MissOnHighDamage>
+        <HealOnPass>false</HealOnPass>
     </AdditionalEffects>
   </Default>
 
@@ -199,5 +200,12 @@
      >
       <LevelType>2</LevelType>
     </Gloves>
+
+    <BrokenMirror id="28" name="Zerbrochener Spiegel">
+        <LevelType>2</LevelType>
+        <AdditionalEffects>
+            <HealOnPass>true</HealOnPass>
+        </AdditionalEffects>
+    </BrokenMirror>
   
 </Items>
