@@ -408,13 +408,13 @@
                 </key>
             </soundline>
             <soundline id="-1" name="shot">
-                <key id="0" time="1295">
-                    <object folder="1" file="1" volume="0.215"/>
+                <key id="0" time="1294">
+                    <object folder="1" file="1" volume="0.161"/>
                 </key>
             </soundline>
             <soundline id="-1" name="jingle">
                 <key id="0">
-                    <object folder="1" file="2" volume="0.215"/>
+                    <object folder="1" file="2" volume="0.172"/>
                 </key>
             </soundline>
         </animation>

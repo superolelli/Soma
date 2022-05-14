@@ -34,4 +34,7 @@ enum class enemyAbilities {
     throwing_knives,
     crystal_ball,
     psychic,
+    whip,
+    gloves,
+    grandmaster,
     number_of_abilities };

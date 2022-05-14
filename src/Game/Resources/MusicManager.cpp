@@ -36,7 +36,7 @@ void MusicManager::LoadMusic()
 	bangBattleMusic.openFromFile("Data/Music/Bang_battle.ogg");
 	bangBattleMusic.setRelativeToListener(true);
 	bangBattleMusic.setLoop(true);
-	bangBattleMusic.setVolume(50);
+	bangBattleMusic.setVolume(30);
 
 	currentEnvironment = MusicEnvironment::mainRoomEnvironment;
 	currentMusic = &mainRoomMusic;
@@ -124,7 +124,7 @@ void MusicManager::SetBattleStarted()
 	{
 		currentMusic->pause();
 		currentBattleMusic = &bangBattleMusic;
-		currentBattleMusic->setVolume(50.0f);
+		currentBattleMusic->setVolume(30.0f);
 		currentBattleMusic->play();
 	}
 }

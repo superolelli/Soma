@@ -557,4 +557,51 @@
         </effect>
     </ability>
 
+    <ability id="32" name="Peitschenschlag">
+        <animation>whip</animation>
+        <effectAnimation>empty</effectAnimation>
+
+        <positions>
+            <value id="0">true</value>
+            <value id="1">true</value>
+            <value id="2">true</value>
+            <value id="3">true</value>
+        </positions>
+
+
+        <effect>
+            <damageFactor>1.0</damageFactor>
+        </effect>
+    </ability>
+
+    <ability id="33" name="Handschuhe">
+        <animation>gloves</animation>
+        <effectAnimation>empty</effectAnimation>
+        <attackSelf>true</attackSelf>
+
+        <effect>
+            <buff>
+                <duration>6</duration>
+                <isPositive>true</isPositive>
+                <armour>10</armour>
+            </buff>
+        </effect>
+    </ability>
+
+    <ability id="34" name="Großmeister">
+        <animation>gloves</animation>
+        <effectAnimation>empty</effectAnimation>
+        <attackSelf>true</attackSelf>
+
+        <effect>
+            <buff>
+                <duration>6</duration>
+                <isPositive>true</isPositive>
+                <criticalHit>5</criticalHit>
+                <decayResistance>10</decayResistance>
+                <debuffResistance>10</debuffResistance>
+            </buff>
+        </effect>
+    </ability>
+
 </Abilities>

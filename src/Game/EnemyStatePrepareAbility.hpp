@@ -41,6 +41,7 @@ private:
 	void ChooseAbilityMarieSaunier();
 	void ChooseAbilityBruderZacharias();
 	void ChooseAbilityTheodoraKrayenborg();
+	void ChooseAbilityBasiliusKartov();
 
 	void ChooseTargetIf(std::function<bool(Combatant *)> predicate);
 	void ChooseTargetForDoctor();

@@ -157,13 +157,8 @@ um 2 Runden.</description>
 
         <skill id="8" name="Mehr Leute zulabern II">
             <howMany>1</howMany>
-            <positions>
-                <value id="5">true</value>
-            </positions>
                 <description>*#ffa500 Mehr Leute zulabern II*
-#white Es wird ein zusätzlicher Gegner getroffen.
-Auch der Gegner auf der Gegner auf der zweiten
-Position kann als Ziel gewählt werden.</description>
+#white Es wird ein zusätzlicher Gegner getroffen.</description>
         </skill>
     </word_gush>
 

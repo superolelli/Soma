@@ -21,5 +21,6 @@ enum CombatantID {
 	MarieSaunier,
 	BruderZacharias,
 	TheodoraKrayenborg,
+	BasiliusKartov,
     number_of_combatants
 };

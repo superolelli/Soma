@@ -215,5 +215,22 @@
       </Loot>
         <Model>./Data/Sprites/Enemies/Kutschfahrt/TheodoraKrayenborg/TheodoraKrayenborg.scml</Model>
     </TheodoraKrayenborg>
+
+    <BasiliusKartov id="17"
+      armour ="5"
+      maxHealth ="20"
+      damageMin ="5"
+      damageMax = "10"
+      initiative ="1"
+      criticalHit="9"
+      dodge="5"
+      precision="10"
+      >
+      <Loot>
+          <Item>Handschuhe</Item>
+          <Item>Monokel</Item>
+      </Loot>
+        <Model>./Data/Sprites/Enemies/Kutschfahrt/BasiliusKartov/BasiliusKartov.scml</Model>
+    </BasiliusKartov>
   
 </EnemyAttributes>

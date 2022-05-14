@@ -10,6 +10,7 @@
             <background>kutschfahrt_gang_4</background>
             <background>kutschfahrt_gang_5</background>
             <background>kutschfahrt_gang_6</background>
+            <background>kutschfahrt_gang_7</background>
         </backgrounds>
         <endBackground>kutschfahrt_gang_ende</endBackground>
         <reward>
@@ -58,6 +59,83 @@
             <enemy>Juan Tirador</enemy>
             <enemy>Bruder Zacharias</enemy>
             <enemy>Marie Saunière</enemy>
+        </bossGroup>
+    </level>
+
+    <level id="2">
+        <numberOfRooms>6</numberOfRooms>
+        <backgrounds>
+            <background>kutschfahrt_gang_1</background>
+            <background>kutschfahrt_gang_2</background>
+            <background>kutschfahrt_gang_3</background>
+            <background>kutschfahrt_gang_4</background>
+            <background>kutschfahrt_gang_5</background>
+            <background>kutschfahrt_gang_6</background>
+            <background>kutschfahrt_gang_7</background>
+        </backgrounds>
+        <endBackground>kutschfahrt_raum_2</endBackground>
+        <reward>
+            <dice>2</dice>
+            <cards>35</cards>
+        </reward>
+        <battleProbability>0.3</battleProbability>
+        <lootableProbability>0.4</lootableProbability>
+        <enemyGroups>
+            <group>
+                <enemy>Juan Tirador</enemy>
+                <enemy>Juan Tirador</enemy>
+            </group>
+            <group>
+                <enemy>Juan Tirador</enemy>
+                <enemy>Marie Saunière</enemy>
+            </group>
+            <group>
+                <enemy>Marie Saunière</enemy>
+                <enemy>Juan Tirador</enemy>
+                <enemy>Juan Tirador</enemy>
+            </group>
+            <group>
+                <enemy>Juan Tirador</enemy>
+                <enemy>Bruder Zacharias</enemy>
+            </group>
+            <group>
+                <enemy>Marie Saunière</enemy>
+                <enemy>Bruder Zacharias</enemy>
+            </group>
+            <group>
+                <enemy>Bruder Zacharias</enemy>
+                <enemy>Theodora Krayenborg</enemy>
+            </group>
+            <group>
+                <enemy>Theodora Krayenborg</enemy>
+                <enemy>Marie Saunière</enemy>
+            </group>
+            <group>
+                <enemy>Theodora Krayenborg</enemy>
+                <enemy>Theodora Krayenborg</enemy>
+                <enemy>Bruder Zacharias</enemy>
+            </group>
+            <group>
+                <enemy>Marie Saunière</enemy>
+                <enemy>Theodora Krayenborg</enemy>
+                <enemy>Bruder Zacharias</enemy>
+            </group>
+            <group>
+                <enemy>Juan Tirador</enemy>
+                <enemy>Theodora Krayenborg</enemy>
+            </group>
+            <group>
+                <enemy>Juan Tirador</enemy>
+                <enemy>Juan Tirador</enemy>
+                <enemy>Bruder Zacharias</enemy>
+                <enemy>Marie Saunière</enemy>
+            </group>
+        </enemyGroups>
+        <bossGroup>
+            <enemy>Juan Tirador</enemy>
+            <enemy>Bruder Zacharias</enemy>
+            <enemy>Bruder Zacharias</enemy>
+            <enemy>Basilius Kartov</enemy>
         </bossGroup>
     </level>
 </LevelSpecs>

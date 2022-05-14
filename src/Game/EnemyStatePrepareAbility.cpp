@@ -139,6 +139,9 @@ void EnemyStatePrepareAbility::ChooseAbility()
 	case CombatantID::TheodoraKrayenborg:
 		ChooseAbilityTheodoraKrayenborg();
 		break;
+	case CombatantID::BasiliusKartov:
+		ChooseAbilityBasiliusKartov();
+		break;
 	}
 }
 
@@ -400,6 +403,23 @@ void EnemyStatePrepareAbility::ChooseAbilityTheodoraKrayenborg()
 			chosenAbility = enemyAbilities::psychic;
 		else
 			chosenAbility = enemyAbilities::throwing_knives;
+	}
+}
+
+
+void EnemyStatePrepareAbility::ChooseAbilityBasiliusKartov()
+{
+	int randomNumber = rand() % 3;
+	switch (randomNumber) {
+	case 0:
+		chosenAbility = enemyAbilities::whip;
+		break;
+	case 1:
+		chosenAbility = enemyAbilities::gloves;
+		break;
+	case 2:
+		chosenAbility = enemyAbilities::grandmaster;
+		break;
 	}
 }
 
