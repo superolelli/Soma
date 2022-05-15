@@ -104,7 +104,7 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 	currentPlayerName.setCharacterSize(47);
 	currentPlayerName.setFont(g_pFonts->f_blackwoodCastle);
 	currentPlayerName.setFillColor(sf::Color::Black);
-	currentPlayerName.setString(g_pStringContainer->combatantNames[currentPlayer]);
+	currentPlayerName.setString(g_pObjectProperties->combatantNames[currentPlayer]);
 	currentPlayerName.setPosition(skillPanel.GetGlobalRect().left + 52 + (162 - currentPlayerName.getLocalBounds().width)/2, skillPanel.GetGlobalRect().top + 55);
 
 	panelTitle.setCharacterSize(70);
@@ -227,7 +227,7 @@ void SkillPanel::UpdateGUIForChosenSkill()
 
 void SkillPanel::UpdateGUIForChosenPlayer()
 {
-	currentPlayerName.setString(g_pStringContainer->combatantNames[currentPlayer]);
+	currentPlayerName.setString(g_pObjectProperties->combatantNames[currentPlayer]);
 	currentPlayerName.setPosition(skillPanel.GetGlobalRect().left + 52 + (162 - currentPlayerName.getLocalBounds().width) / 2, skillPanel.GetGlobalRect().top + 55);
 
 	UpdateAbilityNames();

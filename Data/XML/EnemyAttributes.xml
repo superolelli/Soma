@@ -15,6 +15,7 @@
 		  <Item>Patronen</Item>
 	  </Loot>
       <Model>./Data/Sprites/Enemies/Bang/Gesetzloser/gesetzloser.scml</Model>
+      <Name>Gesetzloser</Name>
   </Gesetzloser>
 
   <Abtruenniger id="5" 
@@ -34,6 +35,7 @@
 		  <Item>Patronen</Item>
 	  </Loot>
       <Model>./Data/Sprites/Enemies/Bang/Abtruenniger/abtruenniger.scml</Model>
+      <Name>Abtrünniger</Name>
   </Abtruenniger>
 
   <Indianer id="6" 
@@ -51,6 +53,7 @@
 		  <Item>Tomahawk</Item>
 	  </Loot>
       <Model>./Data/Sprites/Enemies/Bang/Indianer/indianer.scml</Model>
+      <Name>Indianer</Name>
   </Indianer>
 
   <Hilfssheriff id="7"
@@ -69,6 +72,7 @@
 		  <Item>Patronen</Item>
 	  </Loot>
       <Model>./Data/Sprites/Enemies/Bang/Hilfssheriff/hilfssheriff.scml</Model>
+      <Name>Hilfssheriff</Name>
   </Hilfssheriff>
 
   <Greg id="8" 
@@ -84,6 +88,7 @@
 	  <Loot>
 	  </Loot>
       <Model>./Data/Sprites/Enemies/Bang/Greg Digger/greg.scml</Model>
+      <Name>Greg Digger</Name>
   </Greg>
 
     <ApacheKid id="9" 
@@ -103,6 +108,7 @@
 			<Item>Tomahawk</Item>
 		</Loot>
         <Model>./Data/Sprites/Enemies/Bang/Apache Kid/ApacheKid.scml</Model>
+        <Name>Apache Kid</Name>
 	</ApacheKid>
 	
    <BigSpencer id="10" 
@@ -120,6 +126,7 @@
 			<Item>Bier</Item>
 		</Loot>
        <Model>./Data/Sprites/Enemies/Bang/Big Spencer/BigSpencer.scml</Model>
+       <Name>Big Spencer</Name>
 	</BigSpencer>
 
   <TequilaJoe id="11" 
@@ -137,6 +144,7 @@
       <Item>Tequila</Item>
 		</Loot>
       <Model>./Data/Sprites/Enemies/Bang/Tequila Joe/TequilaJoe.scml</Model>
+      <Name>Tequila Joe</Name>
 	</TequilaJoe>
 
     <BillNoface id="12"
@@ -154,6 +162,7 @@
           <Item>Patronen</Item>
       </Loot>
         <Model>./Data/Sprites/Enemies/Bang/Bill Noface/BillNoface.scml</Model>
+        <Name>Bill Noface</Name>
     </BillNoface>
 
     <JuanTirador id="13"
@@ -170,6 +179,7 @@
           <Item>Duellpistole</Item>
       </Loot>
         <Model>./Data/Sprites/Enemies/Kutschfahrt/JuanTirador/JuanTirador.scml</Model>
+        <Name>Juan Tirador</Name>
     </JuanTirador>
     
     <MarieSaunier id="14"
@@ -183,6 +193,7 @@
 	      precision="6"
     >
         <Model>./Data/Sprites/Enemies/Kutschfahrt/MarieSaunier/MarieSaunier.scml</Model>
+        <Name>Marie Saunière</Name>
     </MarieSaunier>
 
     <BruderZacharias id="15"
@@ -197,6 +208,7 @@
     confusionResistanc="30"
     >
         <Model>./Data/Sprites/Enemies/Kutschfahrt/BruderZacharias/BruderZacharias.scml</Model>
+        <Name>Bruder Zacharias</Name>
     </BruderZacharias>
 
     <TheodoraKrayenborg id="16"
@@ -214,6 +226,7 @@
           <Item>Wurfmesser</Item>
       </Loot>
         <Model>./Data/Sprites/Enemies/Kutschfahrt/TheodoraKrayenborg/TheodoraKrayenborg.scml</Model>
+        <Name>Theodora Krayenborg</Name>
     </TheodoraKrayenborg>
 
     <BasiliusKartov id="17"
@@ -231,6 +244,7 @@
           <Item>Monokel</Item>
       </Loot>
         <Model>./Data/Sprites/Enemies/Kutschfahrt/BasiliusKartov/BasiliusKartov.scml</Model>
+        <Name>Basilius Kartov</Name>
     </BasiliusKartov>
   
 </EnemyAttributes>

@@ -32,6 +32,7 @@ public:
 	CombatantAttributes playerStats[4];
 	std::map<int, CombatantAttributes> enemyStats;
 	std::unordered_map<int, std::vector<ItemID>> enemyLoot;
+	std::vector<sf::String> combatantNames;
 
 	Ability enemyAbilities[int(enemyAbilities::number_of_abilities)];
 

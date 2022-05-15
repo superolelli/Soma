@@ -16,7 +16,5 @@ public:
 	//loads all strings for the specific language
 	void LoadStrings();
 
-	std::vector<sf::String> combatantNames;
-
 	std::vector<sf::String> speechBubbleContents[4];
 };

@@ -12,6 +12,7 @@
 		precision="6"
   >
       <Model>./Data/Sprites/Players/Simon2/simon.scml</Model>
+      <Name>Simon</Name>
   </Simon>
 
   <Ole id="1"
@@ -25,6 +26,7 @@
 	precision="6"
   >
       <Model>./Data/Sprites/Players/Ole2/ole2.scml</Model>
+      <Name>Ole</Name>
   </Ole>
 
   <Anna id="2"
@@ -38,6 +40,7 @@
 	precision="5"
   >
       <Model>./Data/Sprites/Players/Anna2/anna.scml</Model>
+      <Name>Anna</Name>
   </Anna>
 
   <Markus id="3"
@@ -51,6 +54,7 @@
 		precision="4"
   >
       <Model>./Data/Sprites/Players/Markus2/markus.scml</Model>
+      <Name>Markus</Name>
   </Markus>
   
 </PlayerAttributes>

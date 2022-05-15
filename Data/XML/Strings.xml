@@ -1,27 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Strings>
-  <CombatantNames>
-    <Name id="0">Simon</Name>
-    <Name id="1">Ole</Name>
-    <Name id="2">Anna</Name>
-    <Name id="3">Markus</Name>
-    <Name id="4">Gesetzloser</Name>
-    <Name id="5">Abtrünniger</Name>
-    <Name id="6">Indianer</Name>
-    <Name id="7">Hilfssheriff</Name>
-    <Name id="8">Greg Digger</Name>
-    <Name id="9">Apache Kid</Name>
-	<Name id="10">Big Spencer</Name>
-    <Name id="11">Tequila Joe</Name>
-    <Name id="12">Bill Noface</Name>
-    <Name id="13">Juan Tirador</Name>
-    <Name id="14">Marie Saunière</Name>
-    <Name id="15">Bruder Zacharias</Name>
-    <Name id="16">Theodora Krayenborg</Name>
-    <Name id="17">Basilius Kartov</Name>
-  </CombatantNames>
-
   <SpeechBubbles>
       <Simon id="0">
           <speech>Ihr Wixxas!</speech>

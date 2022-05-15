@@ -80,6 +80,8 @@ void ObjectPropertiesManager::LoadPlayerAttributes()
 	{
 		int playerID = player.attribute("id").as_int();
 		loadAttributesFromXML(player, playerStats[playerID]);
+		std::string tempString = player.child("Name").text().as_string();
+		combatantNames.push_back(sf::String::fromUtf8(tempString.begin(), tempString.end()));
 	}
 }
 
@@ -161,6 +163,8 @@ void ObjectPropertiesManager::LoadEnemyAttributes()
 		int enemyID = enemy.attribute("id").as_int();
 		loadAttributesFromXML(enemy, enemyStats[enemyID]);
 		loadPossibleLootFromXML(enemy, enemyLoot[enemyID]);
+		std::string tempString = enemy.child("Name").text().as_string();
+		combatantNames.push_back(sf::String::fromUtf8(tempString.begin(), tempString.end()));
 	}
 }
 

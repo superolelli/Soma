@@ -41,7 +41,7 @@ void Inventory::Init(GameStatus * _gameStatus, CGameEngine * _engine)
 	currentPlayerName.setCharacterSize(47);
 	currentPlayerName.setFont(g_pFonts->f_blackwoodCastle);
 	currentPlayerName.setFillColor(sf::Color::Black);
-	currentPlayerName.setString(g_pStringContainer->combatantNames[currentPlayer]);
+	currentPlayerName.setString(g_pObjectProperties->combatantNames[currentPlayer]);
 	currentPlayerName.setPosition(inventoryPanel.GetGlobalRect().left + 52 + (162 - currentPlayerName.getLocalBounds().width) / 2, inventoryPanel.GetGlobalRect().top + 55);
 
 	panelTitle.setCharacterSize(70);
@@ -126,7 +126,7 @@ InventoryItemWrapper * Inventory::OnItemFromEquipmentPanelReceived(InventoryItem
 
 void Inventory::UpdateGUIForChosenPlayer()
 {
-	currentPlayerName.setString(g_pStringContainer->combatantNames[currentPlayer]);
+	currentPlayerName.setString(g_pObjectProperties->combatantNames[currentPlayer]);
 	currentPlayerName.setPosition(inventoryPanel.GetGlobalRect().left + 52 + (162 - currentPlayerName.getLocalBounds().width) / 2, inventoryPanel.GetGlobalRect().top + 55);
 	equipmentPanel.SetCurrentPlayer(currentPlayer);
 }

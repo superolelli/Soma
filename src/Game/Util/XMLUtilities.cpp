@@ -2,6 +2,7 @@
 #include <SFML\System\String.hpp>
 #include "../Resources/BackgroundIDs.hpp"
 #include "../Resources/StringManager.hpp"
+#include "../Resources/ObjectPropertiesManager.hpp"
 
 namespace pugi {
 
@@ -270,8 +271,8 @@ namespace pugi {
 		for (xml_node &enemy : enemyGroupNode)
 		{
 			std::string str(enemy.text().as_string());
-			auto it = std::find(g_pStringContainer->combatantNames.begin(), g_pStringContainer->combatantNames.end(), sf::String::fromUtf8(str.begin(), str.end()));
-			auto index = std::distance(g_pStringContainer->combatantNames.begin(), it);
+			auto it = std::find(g_pObjectProperties->combatantNames.begin(), g_pObjectProperties->combatantNames.end(), sf::String::fromUtf8(str.begin(), str.end()));
+			auto index = std::distance(g_pObjectProperties->combatantNames.begin(), it);
 			newGroup[currentEnemy++] = CombatantID(index);
 		}
 	}

@@ -184,7 +184,7 @@ void BattleGUI::SetCombatantToDisplay(Combatant *_combatant)
 		combatantToDisplay = _combatant;
 		currentCombatantHealthBar.SetMaxValuePtr(_combatant->Status().GetMaxHealthPointer());
 		currentCombatantHealthBar.SetValuePtr(_combatant->Status().GetCurrentHealthPointer());
-		currentCombatantName.setString(g_pStringContainer->combatantNames[_combatant->GetID()]);
+		currentCombatantName.setString(g_pObjectProperties->combatantNames[_combatant->GetID()]);
 
 		int nameXPos = currentCombatantHealthBar.GetRect().left + (currentCombatantHealthBar.GetRect().width - currentCombatantName.getLocalBounds().width) / 2;
 		currentCombatantName.setPosition(nameXPos, currentCombatantHealthBar.GetRect().top - currentCombatantName.getLocalBounds().height - 10);
