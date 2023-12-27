@@ -589,7 +589,7 @@
     </ability>
 
     <ability id="34" name="Großmeister">
-        <animation>gloves</animation>
+        <animation>grandmaster</animation>
         <effectAnimation>empty</effectAnimation>
         <attackSelf>true</attackSelf>
 

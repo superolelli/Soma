@@ -19,11 +19,12 @@ void EquipmentPanelDiamond::Init(CGameEngine *_engine, int _xPos, int _yPos)
 
 void EquipmentPanelDiamond::Update()
 {
-	if (recolorTime > 0.0)
+	if (recolorTime >= 0.0)
 	{
-		double t = (4.0 - recolorTime) / 4.0;
 		recolorTime -= g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds();
-
+		recolorTime = std::max(0.0, recolorTime);
+		double t = std::clamp((3.0 - recolorTime) / 3.0, 0.0, 1.0);
+		
 		//lerp
 		int r = (1.0 - t) * oldColor.r + t * newColor.r;
 		int g = (1.0 - t) * oldColor.g + t * newColor.g;
@@ -43,7 +44,7 @@ void EquipmentPanelDiamond::Render()
 
 void EquipmentPanelDiamond::RecolorDiamond(EquipmentConnections _connections[4])
 {
-	recolorTime = 4.0;
+	recolorTime = 3.0;
 
 	int r = 0;
 	int g = 0;

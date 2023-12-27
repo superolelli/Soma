@@ -1,9 +1,9 @@
-uniform sampler2D u_baseTexture;
 uniform vec2 u_resolution;
+uniform sampler2D u_baseTexture;
 uniform float u_progress;
 
 uniform vec4 u_emitterColor;
-uniform vec2 u_emitter;
+uniform vec2 u_emitter[2];
 
 float quarticOut(float t) {
   return pow(t - 1.0, 3.0) * (1.0 - t) + 1.0;
@@ -18,14 +18,14 @@ float manhattanDistance(vec2 p1, vec2 p2)
 
 const float MAX_DISTANCE = 1.5; // manhatten distance of one emitter and the end point
 
-void main()
+void main( )
 {
     vec2 uv = gl_FragCoord.xy / u_resolution.xy;
 
-    float relativeDistance = manhattanDistance(uv, u_emitter) / MAX_DISTANCE;
-    float progress = (1.0 - quarticOut(u_progress));
+    float relativeDistance = min(manhattanDistance(uv, u_emitter[0]), manhattanDistance(uv, u_emitter[1])) / MAX_DISTANCE;
+    float progress = quarticOut(u_progress);
     vec3 color = u_emitterColor.rgb * step(relativeDistance, progress);
-    
+
     vec4 textureColor = texture2D(u_baseTexture, uv);
     gl_FragColor = vec4(color, textureColor.w);
 }

@@ -1,6 +1,7 @@
 #include "MainRoom.hpp"
 #include "Game.hpp"
 #include "SavegameManager.hpp"
+#include "ItemFactory.hpp"
 
 
 MainRoom::MainRoom(GameStatus* _status)
@@ -34,6 +35,11 @@ void MainRoom::Init(CGameEngine * _engine)
 	m_pGameEngine->GetRenderTarget().setView(view);
 
 	xMovement = 0.0f;
+
+	/*for (int i = 0; i < 20; i++) {
+		gameStatus->AddItem(ItemFactory::CreateShopItem(3,3));
+	}*/
+	
 }
 
 

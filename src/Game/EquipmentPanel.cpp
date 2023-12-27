@@ -197,22 +197,12 @@ void EquipmentPanel::CheckConnections(int _slot)
 
 int EquipmentPanel::RightNeighbourSlot(int _slot)
 {
-	_slot += 1;
-
-	if (_slot > 3)
-		_slot = 0;
-
-	return _slot;
+	return (_slot + 1) % 4;
 }
 
 int EquipmentPanel::LeftNeighbourSlot(int _slot)
 {
-	_slot -= 1;
-
-	if (_slot < 0)
-		_slot = 3;
-
-	return _slot;
+	return (_slot + 3) % 4;
 }
 
 

@@ -15,29 +15,29 @@ public:
 	void ActivateConnection(sf::Color _color);
 	void DeactivateConnection(int _deactivatedEmitter);
 
-	sf::Color &GetColor() { return color; }
-
-	void Restart();
+	const sf::Color& GetColor();
 
 private:
 
 	sf::Sprite connection;
 
-	sf::Shader velocityPassShader;
-	sf::Shader colorPassShader;
+	sf::Shader activationShader;
 	sf::Shader deactivationShader;
 
-	sf::RenderTexture velocityPassTexture;
-	sf::RenderTexture colorPassTexture;
+	sf::RenderTexture resultTexture;
 
 	sf::Glsl::Vec2 emitter[2];
-	sf::Glsl::Vec2 emitterDirection[2];
 	sf::Color color;
 
-	double elapsedTime;
-	int frame;
+	float elapsedTime;
 
-	double deactivationTime;
+	const float ACTIVATION_TIME = 3.0;
+	const float DEACTIVATION_TIME = 1.0;
+
+	bool performingActivation;
+	bool performingDeactivation;
+
+	bool currentlyActive;
 
 	sf::Vector2f position;
 };
