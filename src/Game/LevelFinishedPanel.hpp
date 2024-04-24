@@ -4,6 +4,7 @@
 #include "Resources\TextureManager.hpp"
 #include "Resources\FontManager.hpp"
 #include "LevelSpecs.hpp"
+#include "LevelReward.hpp"
 
 class LevelFinishedPanel
 {
@@ -13,8 +14,7 @@ public:
 	void Update();
 	void Render();
 
-	void SetPos(int _x, int _y);
-	void SetReward(LevelReward &_reward);
+	void SetReward(LevelRewards &_rewards);
 
 	bool ContinueButtonClicked() {return continueButtonClicked;}
 
@@ -24,12 +24,18 @@ private:
 	CSprite panel;
 	CButton continueButton;
 	sf::Text levelFinishedText;
-	sf::Text rewardDiceText;
+
+	sf::Text unlockedItemsText;
+
+	sf::Text rewardFinalDiceText;
+	sf::Text rewardFinalCardsText;
+
+	sf::Text rewardDescriptionText;
 	sf::Text rewardCardsText;
+	sf::Text rewardDiceText;
 
 	bool continueButtonClicked;
-	bool levelFailed;
 
-	void PositionComponentsRelativeToPanel();
+	void UpdatePositions();
 
 };

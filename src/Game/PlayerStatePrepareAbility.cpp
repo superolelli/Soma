@@ -29,7 +29,7 @@ void PlayerStatePrepareAbility::Update()
 		{
 			if (playerContext->Status().HasHealOnPass()) 
 			{
-				playerContext->battle->GetGameStatus()->AddFatigue(3);
+				playerContext->battle->GetLevelStatus()->AddFatigue(3);
 				playerContext->Status().GainHealth(3);
 			}
 

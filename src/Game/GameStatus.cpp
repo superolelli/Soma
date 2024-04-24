@@ -31,9 +31,6 @@ void GameStatus::Init()
 
 	//consumablesAvailability[ItemID::beer] = true;
 
-	fatigue = 0;
-	maxFatigue = MAX_FATIGUE_VALUE;
-
 	path = "empty";
 }
 
@@ -203,19 +200,4 @@ void GameStatus::RemoveDice(int _amount)
 void GameStatus::RemoveCards(int _amount)
 {
 	cards = std::max(0, cards - _amount);
-}
-
-void GameStatus::AddFatigue(int _fatigue)
-{
-	fatigue = std::min(fatigue + _fatigue, maxFatigue);
-}
-
-void GameStatus::RemoveFatigue(int _fatigue)
-{
-	fatigue = std::max(0, fatigue - _fatigue);
-}
-
-void GameStatus::ResetFatigue()
-{
-	fatigue = 0;
 }

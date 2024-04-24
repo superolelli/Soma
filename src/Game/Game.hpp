@@ -12,6 +12,7 @@
 #include "GameStatus.hpp"
 #include "DialogManager.hpp"
 #include "SpeechBubbleManager.hpp"
+#include "LevelReward.hpp"
 
 class Game : public GameState
 {
@@ -36,6 +37,7 @@ public:
 private:
 
 	LevelType levelType;
+	LevelRewards levelRewards;
 
 	sf::View view;
 	Level *level;

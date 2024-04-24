@@ -13,10 +13,6 @@
             <background>kutschfahrt_gang_7</background>
         </backgrounds>
         <endBackground>kutschfahrt_gang_ende</endBackground>
-        <reward>
-            <dice>1</dice>
-            <cards>25</cards>
-        </reward>
         <battleProbability>1.0</battleProbability>
         <lootableProbability>0.4</lootableProbability>
         <enemyGroups>
@@ -74,10 +70,6 @@
             <background>kutschfahrt_gang_7</background>
         </backgrounds>
         <endBackground>kutschfahrt_raum_2</endBackground>
-        <reward>
-            <dice>2</dice>
-            <cards>35</cards>
-        </reward>
         <battleProbability>0.3</battleProbability>
         <lootableProbability>0.4</lootableProbability>
         <enemyGroups>

@@ -5,6 +5,7 @@
 #include "Enemy.hpp"
 #include "../Framework/Graphics/NotificationRenderer.hpp"
 #include "LootableDialog.hpp"
+#include "LevelStatus.hpp"
 
 const int ENEMY_X_OFFSET = 20;
 const int ENEMY_Y_POS = 750;
@@ -14,7 +15,7 @@ class Battle
 {
 public:
 
-	void Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss, GameStatus *_gameStatus);
+	void Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss, GameStatus *_gameStatus, LevelStatus *_levelStatus);
 	void Update();
 	void Render();
 	void RenderAbilityAnimations();
@@ -29,7 +30,7 @@ public:
 	bool isBossBattle;
 
 	std::array<Enemy*, 4> &GetEnemies() {return enemies;}
-	GameStatus* GetGameStatus() { return gameStatus; }
+	LevelStatus* GetLevelStatus() { return levelStatus; }
 
 private:
 
@@ -38,7 +39,7 @@ private:
 	CGameEngine *engine;
 	NotificationRenderer *notificationRenderer;
 	GameStatus* gameStatus;
-
+	LevelStatus* levelStatus;
 
 	std::array<Enemy*, 4> enemies;
 	std::vector<Combatant*> combatants;

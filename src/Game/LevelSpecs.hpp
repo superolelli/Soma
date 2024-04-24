@@ -4,10 +4,6 @@
 #include "CombatantID.hpp"
 #include <array>
 
-struct LevelReward {
-	int dice;
-	int cards;
-};
 
 enum LevelType {bang, kutschfahrt, tichu};
 
@@ -21,5 +17,4 @@ struct LevelSpecs {
 	std::array<CombatantID, 4> bossGroup;
 	int endBackground;
 	std::vector<int> possibleBackgrounds;
-	LevelReward reward;
 };

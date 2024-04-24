@@ -145,7 +145,7 @@ void CombatantStateExecutingAbility::ApplyAbilityEffect()
 	}
 
 	if (ability->fatigue != 0)
-		context->battle->GetGameStatus()->AddFatigue(ability->fatigue * criticalEffectFactor);
+		context->battle->GetLevelStatus()->AddFatigue(ability->fatigue * criticalEffectFactor);
 
 	if (selfEffect && selfEffect->healSelf != 0)
 	{

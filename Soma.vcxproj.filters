@@ -738,6 +738,9 @@
     <ClCompile Include="src\Game\ExitDialog.cpp">
       <Filter>Quelldateien\Game\MainRoom\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\LevelStatus.cpp">
+      <Filter>Quelldateien\Game\Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework\Animations\objectinfo\angleinfo.h">
@@ -1360,6 +1363,12 @@
     </ClInclude>
     <ClInclude Include="src\Game\ExitDialog.hpp">
       <Filter>Headerdateien\Game\MainRoom\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\LevelReward.hpp">
+      <Filter>Headerdateien\Game\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\LevelStatus.hpp">
+      <Filter>Headerdateien\Game\Level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

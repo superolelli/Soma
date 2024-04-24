@@ -14,8 +14,6 @@ void Game::Init(CGameEngine * _engine)
 {
 	m_pGameEngine = _engine;
 
-	gameStatus->ResetFatigue();
-
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetRenderTarget().setView(view);
 
@@ -46,7 +44,7 @@ void Game::Init(CGameEngine * _engine)
 void Game::InitLevelGUI()
 {
 	LevelGUI *newGui = new LevelGUI;
-	newGui->Init(m_pGameEngine, gameStatus, &adventureGroup, levelType, &notificationRenderer);
+	newGui->Init(m_pGameEngine, gameStatus, &level->GetLevelStatus(), &adventureGroup, levelType, &notificationRenderer);
 	newGui->SetOnLevelExitedCallback([&]() {HandleFinishedLevel(); });
 	currentGUI = newGui;
 }
@@ -133,9 +131,9 @@ void Game::Update()
 
 void Game::HandlePlayerFatigue()
 {
-	if (gameStatus->GetRelativeFatigue() <= 0.33)
+	if (level->GetLevelStatus().GetRelativeFatigue() <= 0.33)
 		adventureGroup.SetFatigueLevelOfAllPlayers(CombatantStatus::FatigueLevel::awake);
-	else if (gameStatus->GetRelativeFatigue() <= 0.66)
+	else if (level->GetLevelStatus().GetRelativeFatigue() <= 0.66)
 		adventureGroup.SetFatigueLevelOfAllPlayers(CombatantStatus::FatigueLevel::tired);
 	else
 		adventureGroup.SetFatigueLevelOfAllPlayers(CombatantStatus::FatigueLevel::stupid);
@@ -153,7 +151,7 @@ void Game::HandleBattleIntro()
 			isPlayingBattleIntro = false;
 			g_pMusic->SetBattleStarted();
 
-			if (currentBattle->isBossBattle)
+			if (currentBattle->isBossBattle && currentBattle->GetEnemies()[3] != nullptr)
 			{
 				if (currentBattle->GetEnemies()[3]->GetID() == CombatantID::Greg)
 					g_pVideos->PlayVideo(videoId::introGreg);
@@ -176,10 +174,15 @@ void Game::HandleFinishedLevel()
 {
 	if (!adventureGroup.IsDead())
 	{
-		gameStatus->AddDice(level->GetReward().dice);
-		gameStatus->AddCards(level->GetReward().cards);
 		gameStatus->levels[levelType]++;
 	}
+
+	for (auto& [cards, dice, description] : levelRewards)
+	{
+		gameStatus->AddCards(cards);
+		gameStatus->AddDice(dice);
+	}
+
 	OnGameFinished();
 	g_pMusic->SetCurrentEnvironment(MusicEnvironment::mainRoomEnvironment);
 	m_pGameEngine->PopState();
@@ -227,12 +230,14 @@ void Game::UpdateBattle()
 		if (adventureGroup.IsDead())
 		{
 			levelFinished = true;
-			dynamic_cast<LevelGUI*>(currentGUI)->OpenLevelFailedPanel();
+			GetLevelRewards(levelRewards, level->GetLevelStatus(), false);
+			dynamic_cast<LevelGUI*>(currentGUI)->OpenLevelFailedPanel(levelRewards);
 		}
 		else if (currentBattle->isBossBattle)
 		{
 			levelFinished = true;
-			dynamic_cast<LevelGUI*>(currentGUI)->OpenLevelFinishedPanel(level->GetReward());
+			GetLevelRewards(levelRewards, level->GetLevelStatus(), true);
+			dynamic_cast<LevelGUI*>(currentGUI)->OpenLevelFinishedPanel(levelRewards);
 		}
 		else
 			OpenBattleRewardDialog();
@@ -269,13 +274,13 @@ void Game::InitNewBattle()
 {
 	SAFE_DELETE(currentGUI);
 	BattleGUI *newGui = new BattleGUI;
-	newGui->Init(m_pGameEngine, gameStatus, &notificationRenderer);
+	newGui->Init(m_pGameEngine, gameStatus, &level->GetLevelStatus(), &notificationRenderer);
 	currentGUI = newGui;
 
 	speechBubbleManager.DeactivateSpeechBubbles();
 
 	currentBattle = new Battle;
-	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer, level->GetEnemyIDs(), level->IsBossBattle(), gameStatus);
+	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer, level->GetEnemyIDs(), level->IsBossBattle(), gameStatus, &level->GetLevelStatus());
 
 	isPlayingBattleIntro = true;
 	afterIntroWaitingTime = 2.0;

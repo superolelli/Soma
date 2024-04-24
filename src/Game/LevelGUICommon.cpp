@@ -2,13 +2,13 @@
 #include "GameStatus.hpp"
 
 
-void LevelGUICommon::Init(CGameEngine* _engine, GameStatus* _gameStatus, NotificationRenderer* _notificationRenderer)
+void LevelGUICommon::Init(CGameEngine* _engine, GameStatus* _gameStatus, LevelStatus *_levelStatus, NotificationRenderer* _notificationRenderer)
 {
 	engine = _engine;
 	gameStatus = _gameStatus;
 	notificationRenderer = _notificationRenderer;
 
-	fatigueBar.Load(g_pTextures->fatigueBar, g_pTextures->fatigueBarFrame, _gameStatus->GetFatiguePtr(), _gameStatus->GetMaxFatiguePtr());
+	fatigueBar.Load(g_pTextures->fatigueBar, g_pTextures->fatigueBarFrame, _levelStatus->GetFatiguePtr(), _levelStatus->GetMaxFatiguePtr());
 	fatigueBar.SetSmoothTransformationTime(0.7);
 	fatigueBar.SetOffsetForInnerPart(6, 15);
 	fatigueBar.SetPos(engine->GetWindowSize().x / 2 - fatigueBar.GetRect().width / 2, 3);

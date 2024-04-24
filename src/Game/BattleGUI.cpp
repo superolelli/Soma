@@ -5,11 +5,11 @@
 #include "GameStatus.hpp"
 
 
-void BattleGUI::Init(CGameEngine *_engine, GameStatus *_gameStatus, NotificationRenderer *_notificationRenderer)
+void BattleGUI::Init(CGameEngine *_engine, GameStatus *_gameStatus, LevelStatus *_levelStatus, NotificationRenderer *_notificationRenderer)
 {
 	engine = _engine;
 
-	commonGUIParts.Init(_engine, _gameStatus, _notificationRenderer);
+	commonGUIParts.Init(_engine, _gameStatus, _levelStatus, _notificationRenderer);
 
 	abilityPanel.Load(g_pTextures->abilityPanel);
 	abilityPanel.SetPos(100, 860);

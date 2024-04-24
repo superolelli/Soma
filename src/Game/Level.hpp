@@ -5,6 +5,8 @@
 #include "CombatantID.hpp"
 #include "Lootable.hpp"
 
+#include "LevelStatus.hpp"
+
 struct Room {
 	CSprite background;
 	bool battle;
@@ -17,16 +19,15 @@ class Level
 {
 public:
 
-	Level(LevelType _levelType);
+	Level(LevelType _levelType, int _levelID);
 	~Level();
 
 	void Update(int _playerPos, CGameEngine *_engine);
 	void Render(sf::RenderTarget &_target, int _viewX);
 
-	void AddRoom(Room *_room);
+	LevelStatus& GetLevelStatus() { return levelStatus; }
 
-	void SetReward(LevelReward _reward) { reward = _reward; };
-	LevelReward &GetReward() { return reward; }
+	void AddRoom(Room *_room);
 
 	bool InBattle() { return battle; }
 	bool IsBossBattle() { return bossBattle; }
@@ -54,5 +55,5 @@ private:
 	int currentSecondLayer1;
 	int currentSecondLayer2;
 
-	LevelReward reward;
+	LevelStatus levelStatus;
 };

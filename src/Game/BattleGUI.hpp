@@ -15,7 +15,7 @@ class BattleGUI : public GUI
 {
 public:
 
-	virtual void Init(CGameEngine *_engine, GameStatus *_gameStatus, NotificationRenderer *_notificationRenderer);
+	virtual void Init(CGameEngine *_engine, GameStatus *_gameStatus, LevelStatus *_levelStatus, NotificationRenderer *_notificationRenderer);
 	virtual void Update() override;
 	virtual void Render() override;
 

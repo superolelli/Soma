@@ -14,7 +14,6 @@
 #include <functional>
 
 const int CONSUMABLE_ITEMS_LIMIT = 5;
-const int MAX_FATIGUE_VALUE = 100;
 
 class GameStatus : public CSubject
 {
@@ -30,15 +29,6 @@ public:
 	void AddCards(int _amount);
 	void RemoveDice(int _amount);
 	void RemoveCards(int _amount);
-
-	void AddFatigue(int _fatigue);
-	void RemoveFatigue(int _fatigue);
-	void ResetFatigue();
-
-	int* GetFatiguePtr() { return &fatigue; }
-	int* GetMaxFatiguePtr() { return &maxFatigue; }
-
-	float GetRelativeFatigue() { return static_cast<float>(fatigue) / static_cast<float>(maxFatigue); }
 
 	bool IsSkillAcquired(int player, int ability, int skill);
 	void AcquireSkill(int player, int ability, int skill);
@@ -67,9 +57,6 @@ private:
 
 	int dice;
 	int cards;
-
-	int fatigue;
-	int maxFatigue;
 
 	bool skillAcquired[4][4][8];
 

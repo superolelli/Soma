@@ -9,7 +9,7 @@ Level *LevelBuilder::buildLevel(LevelType _levelType, int _levelID, DialogManage
 	lootableFactory.SetLevel(_levelID);
 
 	srand(time(0));
-	Level *newLevel = new Level(_levelType);
+	Level *newLevel = new Level(_levelType, _levelID);
 
 	int position = 0;
 	for (int i = 0; i < g_pObjectProperties->levelSpecs[_levelType][_levelID - 1].numberOfRooms - 1; i++)
@@ -50,8 +50,6 @@ Level *LevelBuilder::buildLevel(LevelType _levelType, int _levelID, DialogManage
 	for(int i = 0; i < 4; i++)
 		newRoom->enemyIds[i] = g_pObjectProperties->levelSpecs[_levelType][_levelID - 1].bossGroup[i];
 	newLevel->AddRoom(newRoom);
-
-	newLevel->SetReward(g_pObjectProperties->levelSpecs[_levelType][_levelID - 1].reward);
 
 	return newLevel;
 }

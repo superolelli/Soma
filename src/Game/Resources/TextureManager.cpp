@@ -9,11 +9,9 @@ void CTextureManager::LoadTextures()
 	statusBar.loadFromFile("Data/Sprites/Panels & Buttons/status_bar.png");
 
 	levelFinishedPanel[0].loadFromFile("Data/Sprites/Panels & Buttons/Bang/level_finished.png");
-	levelFailedPanel[0].loadFromFile("Data/Sprites/Panels & Buttons/Bang/level_failed.png");
-	bangGenericButton.loadFromFile("Data/Sprites/Panels & Buttons/Bang/generic_button.png");
-
 	levelFinishedPanel[1].loadFromFile("Data/Sprites/Panels & Buttons/Kutschfahrt/level_finished.png");
-	levelFailedPanel[1].loadFromFile("Data/Sprites/Panels & Buttons/Kutschfahrt/level_failed.png");
+	levelFinishedButton.loadFromFile("Data/Sprites/Panels & Buttons/Bang/level_finished_button.png");
+	bangGenericButton.loadFromFile("Data/Sprites/Panels & Buttons/Bang/generic_button.png");
 
 	/** MAIN MENU**/
 	mainMenuBackground.loadFromFile("Data/Sprites/MainMenu/background.png");

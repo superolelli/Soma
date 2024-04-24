@@ -17,7 +17,7 @@ public:
 	sf::Texture statusBar;
 
 	sf::Texture levelFinishedPanel[2];
-	sf::Texture levelFailedPanel[2];
+	sf::Texture levelFinishedButton;
 	sf::Texture bangGenericButton;
 
 	/** MAIN MENU **/

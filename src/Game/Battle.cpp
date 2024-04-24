@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <random>
 
-void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss, GameStatus *_gameStatus)
+void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss, GameStatus *_gameStatus, LevelStatus *_levelStatus)
 {
 	g_pMusic->StopMusic();
 
@@ -14,6 +14,7 @@ void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, 
 	turnsSinceLastEnemyDied = -1;
 	isBossBattle = _boss;
 	gameStatus = _gameStatus;
+	levelStatus = _levelStatus;
 
 	InitCombatants(_xView, enemyIDs);
 
@@ -194,8 +195,13 @@ void Battle::HandleDeaths()
 			if (!(*i)->IsDying()) 
 			{
 				(*i)->SetAbilityStatus(dying);
-				if (!(*i)->IsPlayer())
+				if ((*i)->IsPlayer())
+					levelStatus->PlayerDied();
+				else
+				{
+					levelStatus->OpponentKilled();
 					turnsSinceLastEnemyDied = 0;
+				}
 			}
 			else if ((*i)->AnimationFinished())
 			{
