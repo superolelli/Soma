@@ -8,7 +8,7 @@ void LevelFinishedPanel::Init(CGameEngine *_engine, LevelType _levelType, bool _
 	panel.Load(g_pTextures->levelFinishedPanel[_levelType]);
 
 	continueButton.Load(g_pTextures->levelFinishedButton, Buttontypes::Motion_Up, "Weiter");
-	continueButton.SetButtontextCharactersize(35);
+	continueButton.SetButtontextCharactersize(40);
 	continueButton.SetButtontextColor(sf::Color::White);
 	continueButton.SetButtontextFont(g_pFonts->f_blackwoodCastle);
 	continueButton.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
@@ -24,11 +24,11 @@ void LevelFinishedPanel::Init(CGameEngine *_engine, LevelType _levelType, bool _
 	else
 		levelFinishedText.setString("Level beendet!");
 
-	unlockedItemsText.setCharacterSize(40);
+	unlockedItemsText.setCharacterSize(41);
 	unlockedItemsText.setFillColor(sf::Color::White);
 	unlockedItemsText.setOutlineColor(sf::Color::Black);
 	unlockedItemsText.setOutlineThickness(4);
-	unlockedItemsText.setFont(g_pFonts->f_kingArthur);
+	unlockedItemsText.setFont(g_pFonts->f_blackwoodCastle);
 
 	rewardFinalDiceText.setCharacterSize(40);
 	rewardFinalDiceText.setFillColor(sf::Color::White);
@@ -81,6 +81,9 @@ void LevelFinishedPanel::Render()
 	engine->GetRenderTarget().draw(rewardDiceText);
 	engine->GetRenderTarget().draw(rewardFinalDiceText);
 	engine->GetRenderTarget().draw(rewardFinalCardsText);
+
+	for (auto& unlockedItems : unlockedItemsSprites)
+		unlockedItems.Render(engine->GetRenderTarget());
 	
 	continueButton.Render(engine->GetRenderTarget());
 }
@@ -104,7 +107,16 @@ void LevelFinishedPanel::SetReward(LevelRewards &_rewards)
 		diceString += std::to_string(dice) + "\n";
 	}
 
-	// TODO: Unlocked items
+	if(!_rewards.unlockedItems.empty())
+		unlockedItemsText.setString("Items freigeschaltet!");
+
+	unlockedItemsSprites.clear();
+	for (int i = 0; i < _rewards.unlockedItems.size(); i++)
+	{
+		unlockedItemsSprites.emplace_back();
+		unlockedItemsSprites.back().Load(g_pTextures->item[_rewards.unlockedItems[i]]);
+		unlockedItemsSprites.back().SetPos(static_cast<float>(1445 + (i % 2) * 150), static_cast<float>(300 + (i / 2) * 115));
+	}
 
 	rewardDescriptionText.setString(descriptionString);
 	rewardCardsText.setString(cardsString);
@@ -112,9 +124,6 @@ void LevelFinishedPanel::SetReward(LevelRewards &_rewards)
 
 	rewardFinalDiceText.setString(std::to_string(finalDice) + "x");
 	rewardFinalCardsText.setString(std::to_string(finalCards) + "x");
-
-	// TODO
-	// unlockedItemsText.setString("Items freigeschaltet!");
 }
 
 void LevelFinishedPanel::UpdatePositions()
@@ -123,8 +132,8 @@ void LevelFinishedPanel::UpdatePositions()
 	levelFinishedText.setPosition(330, 230);
 	unlockedItemsText.setPosition(1410, 220);
 	rewardDescriptionText.setPosition(330, 360);
-	rewardCardsText.setPosition(1050, 360);
-	rewardDiceText.setPosition(1250, 360);
-	rewardFinalCardsText.setPosition(410, 880);
+	rewardCardsText.setPosition(1070, 360);
+	rewardDiceText.setPosition(1260, 360);
+	rewardFinalCardsText.setPosition(430, 880);
 	rewardFinalDiceText.setPosition(920, 880);
 }

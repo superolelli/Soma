@@ -78,13 +78,20 @@ void GameStatus::AddItem(Item _item)
 		if (consumables.size() < CONSUMABLE_ITEMS_LIMIT)
 		{
 			consumables.push_back(_item);
-			consumablesAvailability[_item.id] = true;
 			Notify(ObserverNotificationGameStatus{ gameStatusEvents::consumableAdded, _item });
+
+			if(consumablesAvailability[_item.id] == false)
+				Notify(ObserverNotificationGameStatus{ gameStatusEvents::itemUnlocked, _item });
+			consumablesAvailability[_item.id] = true;
 		}
 	}
 	else {
 		items.push_back(_item);
 		Notify(ObserverNotificationGameStatus{ gameStatusEvents::equipmentAdded, _item });
+
+		if (itemAvailability.find(_item.id) == itemAvailability.end())
+			Notify(ObserverNotificationGameStatus{ gameStatusEvents::itemUnlocked, _item });
+		itemAvailability.insert(_item.id);
 	}
 }
 

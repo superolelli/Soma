@@ -3,7 +3,7 @@
 #include "../Framework/Patterns/Observer.hpp"
 #include "Item.hpp"
 
-enum class gameStatusEvents { equipmentAdded, consumableAdded };
+enum class gameStatusEvents { equipmentAdded, consumableAdded, itemUnlocked };
 
 class ObserverNotificationGameStatus : public ObserverNotification {
 public:

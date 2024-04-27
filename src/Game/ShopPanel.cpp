@@ -1,11 +1,11 @@
 #include "ShopPanel.hpp"
 #include "ItemFactory.hpp"
 
-void ShopPanel::Init(CGameEngine *_engine, std::unordered_map<ItemID, bool> *_consumablesAvailability)
+void ShopPanel::Init(CGameEngine *_engine, GameStatus *_gameStatus)
 {
 	engine = _engine;
-	consumablesAvailability = _consumablesAvailability;
-
+	gameStatus = _gameStatus;
+	
 	tooltip.Init();
 
 	shopPanel.Load(g_pTextures->shopPanel);
@@ -29,7 +29,7 @@ void ShopPanel::Init(CGameEngine *_engine, std::unordered_map<ItemID, bool> *_co
 	for (int i = 5; i < 15; i++)
 	{
 		ItemID itemID = static_cast<ItemID>(CONSUMABLE_ITEMS_START + (i - 5));
-		if (consumablesAvailability->count(itemID) > 0)
+		if (gameStatus->GetConsumablesAvailability().count(itemID) > 0)
 		{
 			InventoryItemWrapper *newItem = new InventoryItemWrapper;
 
@@ -40,7 +40,7 @@ void ShopPanel::Init(CGameEngine *_engine, std::unordered_map<ItemID, bool> *_co
 			CSprite newSprite;
 			newSprite.Load(g_pTextures->item[itemID]);
 
-			if (consumablesAvailability->at(itemID) == false)
+			if (gameStatus->GetConsumablesAvailability().at(itemID) == false)
 				newSprite.SetColor(40, 40, 40);
 
 			newItem->Init(std::move(rawItem), std::move(newSprite));
@@ -105,7 +105,7 @@ void ShopPanel::Render()
 
 			if (items[i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
 			{
-				if(i < 5 || consumablesAvailability->at(items[i]->GetItem().id))
+				if(i < 5 || gameStatus->GetConsumablesAvailability().at(items[i]->GetItem().id))
 					showTooltipForItem = i;
 			}
 		}
@@ -160,11 +160,25 @@ void ShopPanel::SetPos(int _x, int _y)
 
 void ShopPanel::ChooseNewRandomItems(int _bangLevel, int _kutschfahrtLevel, int _tichuLevel)
 {
+	for (int i = 5; i < 15; i++)
+	{
+		if (items[i] != nullptr)
+		{
+			if (gameStatus->GetConsumablesAvailability().at(items[i]->GetItem().id) == true)
+				items[i]->SetSpriteColor(255, 255, 255);
+			else
+				items[i]->SetSpriteColor(40, 40, 40);
+		}
+	}
+
+	if (gameStatus->GetItemAvailability().empty())
+		return;
+
 	for (int i = 0; i < 5; i++)
 	{
 		InventoryItemWrapper *newItem = new InventoryItemWrapper;
 
-		Item rawItem = ItemFactory::CreateShopItem(_bangLevel, _kutschfahrtLevel);
+		Item rawItem = ItemFactory::CreateShopItem(gameStatus->GetItemAvailability());
 
 		CSprite newSprite;
 		newSprite.Load(g_pTextures->item[rawItem.id]);
@@ -177,17 +191,6 @@ void ShopPanel::ChooseNewRandomItems(int _bangLevel, int _kutschfahrtLevel, int 
 
 		items[i] = newItem;
 	}
-
-	for (int i = 5; i < 15; i++)
-	{
-		if (items[i] != nullptr)
-		{
-			if (consumablesAvailability->at(items[i]->GetItem().id) == true)
-				items[i]->SetSpriteColor(255, 255, 255);
-			else
-				items[i]->SetSpriteColor(40, 40, 40);
-		}
-	}
 }
 
 
@@ -195,7 +198,7 @@ Item ShopPanel::RetrieveCurrentlySelectedItem()
 {
 	if (currentlySelectedItem != -1)
 	{
-		if (items[currentlySelectedItem]->GetItem().id < CONSUMABLE_ITEMS_START || consumablesAvailability->at(items[currentlySelectedItem]->GetItem().id))
+		if (items[currentlySelectedItem]->GetItem().id < CONSUMABLE_ITEMS_START || gameStatus->GetConsumablesAvailability().at(items[currentlySelectedItem]->GetItem().id))
 		{
 			auto item = items[currentlySelectedItem]->GetItem();
 
@@ -220,7 +223,7 @@ bool ShopPanel::IsItemSelected()
 {
 	if (currentlySelectedItem != -1)
 	{
-		if (items[currentlySelectedItem]->GetItem().id < CONSUMABLE_ITEMS_START || consumablesAvailability->at(items[currentlySelectedItem]->GetItem().id))
+		if (items[currentlySelectedItem]->GetItem().id < CONSUMABLE_ITEMS_START || gameStatus->GetConsumablesAvailability().at(items[currentlySelectedItem]->GetItem().id))
 			return true;
 	}
 	return false;

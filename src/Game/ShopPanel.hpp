@@ -9,7 +9,7 @@ class ShopPanel
 {
 public:
 
-	void Init(CGameEngine *_engine, std::unordered_map<ItemID, bool> *_consumablesAvailability);
+	void Init(CGameEngine *_engine, GameStatus *_gameStatus);
 	void Update();
 	void Render();
 	void Quit();
@@ -29,6 +29,7 @@ public:
 
 private:
 	CGameEngine *engine;
+	GameStatus* gameStatus;
 
 	CSprite shopPanel;
 	CSprite selectedItemFrame;
@@ -41,8 +42,6 @@ private:
 	sf::Text title;
 
 	int currentlySelectedItem;
-
-	std::unordered_map<ItemID, bool> *consumablesAvailability;
 
 	std::function<void(Item &)> OnItemSelected;
 };

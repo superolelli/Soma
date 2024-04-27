@@ -12,6 +12,7 @@
 #include "ObserverNotificationGameStatus.h"
 
 #include <functional>
+#include <set>
 
 const int CONSUMABLE_ITEMS_LIMIT = 5;
 
@@ -47,6 +48,7 @@ public:
 	CombatantAttributes &GetDiamondStats(int _player);
 
 	std::unordered_map<ItemID, bool> &GetConsumablesAvailability() { return consumablesAvailability; }
+	std::set<ItemID>& GetItemAvailability() { return itemAvailability; }
 
 	void SetFilepath(const std::string& _path) { path = _path; }
 
@@ -68,5 +70,6 @@ private:
 
 	CombatantAttributes diamondStats[4];
 
+	std::set<ItemID> itemAvailability;
 	std::unordered_map<ItemID, bool> consumablesAvailability;
 };

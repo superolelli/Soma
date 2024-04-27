@@ -89,6 +89,14 @@ GameStatus* SavegameManager::LoadSavegame(int _index)
 
     input >> currentID;
     while (currentID != ItemID::empty) {
+        int available;
+        input >> available;
+        status->itemAvailability.insert(static_cast<ItemID>(available));
+        input >> currentID;
+    }
+
+    input >> currentID;
+    while (currentID != ItemID::empty) {
         bool available;
         input >> available;
         status->consumablesAvailability[static_cast<ItemID>(currentID)] = available;
@@ -140,6 +148,12 @@ void SavegameManager::StoreSavegame(GameStatus* _status)
             output << item.number << "\n";
         }
     }
+
+    for (auto& item : _status->itemAvailability) {
+        output << static_cast<int>(item) << "\n";
+    }
+
+    output << static_cast<int>(ItemID::empty) << "\n";
 
     for (auto& item : _status->consumablesAvailability) {
         output << static_cast<int>(item.first) << "\n";

@@ -6,13 +6,13 @@
 
 struct LevelRewards {
     std::vector<std::tuple<int, int, std::string>> achievements;
-    std::vector<int> unlockedItems;
+    std::vector<ItemID> unlockedItems;
 };
 
 
 static void GetLevelRewards(LevelRewards& rewards, const LevelStatus& _status, bool _levelFinished)
 {
-    // TODO: Unlocked items
+    rewards.unlockedItems.assign(_status.GetUnlockedItems().begin(), _status.GetUnlockedItems().end());
 
     if (_levelFinished)
     {

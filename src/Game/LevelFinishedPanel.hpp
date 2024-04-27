@@ -23,16 +23,17 @@ private:
 
 	CSprite panel;
 	CButton continueButton;
-	sf::Text levelFinishedText;
 
-	sf::Text unlockedItemsText;
+	sf::Text levelFinishedText;
 
 	sf::Text rewardFinalDiceText;
 	sf::Text rewardFinalCardsText;
-
 	sf::Text rewardDescriptionText;
 	sf::Text rewardCardsText;
 	sf::Text rewardDiceText;
+
+	sf::Text unlockedItemsText;
+	std::vector<CSprite> unlockedItemsSprites;
 
 	bool continueButtonClicked;
 

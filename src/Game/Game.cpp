@@ -177,7 +177,7 @@ void Game::HandleFinishedLevel()
 		gameStatus->levels[levelType]++;
 	}
 
-	for (auto& [cards, dice, description] : levelRewards)
+	for (auto& [cards, dice, description] : levelRewards.achievements)
 	{
 		gameStatus->AddCards(cards);
 		gameStatus->AddDice(dice);

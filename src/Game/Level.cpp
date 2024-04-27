@@ -2,12 +2,12 @@
 
 
 Level::Level(LevelType _levelType, int _levelID)
+	: levelStatus(_levelID)
 {	
 	levelType = _levelType;
 	battle = false;
 	bossBattle = false;
 	currentRoomNumber = 0;
-	levelStatus.Reset(_levelID);
 	currentThirdLayer1 = rand() % g_pSpritePool->backgroundThirdLayers[_levelType].size();
 	currentThirdLayer2 = rand() % g_pSpritePool->backgroundThirdLayers[_levelType].size();
 	currentSecondLayer1 = rand() % g_pSpritePool->backgroundSecondLayers[_levelType].size();
