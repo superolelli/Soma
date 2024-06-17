@@ -4,9 +4,14 @@
 #include <GL\glew.h>
 
 
-void EquipmentConnections::Init(int _id)
+EquipmentConnections::EquipmentConnections(int _id)
+	: elapsedTime(0.0)
+	, color(sf::Color::Black)
+	, performingActivation(false)
+	, performingDeactivation(false)
+	, currentlyActive(false)
 {
-	glewInit();
+	glewInit();  // TODO: Does this have to happen every time? Probably not.
 
 	if (_id == 0)
 	{
@@ -50,12 +55,6 @@ void EquipmentConnections::Init(int _id)
 	deactivationShader.loadFromFile("Data/Shader/equipment_connections_deactivate.frag", sf::Shader::Fragment);
 	deactivationShader.setUniform("u_resolution", sf::Glsl::Vec2(connection.getGlobalBounds().width, connection.getGlobalBounds().height));
 	deactivationShader.setUniform("u_baseTexture", g_pTextures->inventoryConnection[_id]);
-
-	elapsedTime = 0.0;
-	color = sf::Color::Black;
-	performingActivation = false;
-	performingDeactivation = false;
-	currentlyActive = false;
 
 	resultTexture.draw(connection, &deactivationShader);
 	resultTexture.display();

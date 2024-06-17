@@ -13,8 +13,7 @@ class MainMenu : public GameState
 {
 public:
 
-	void Init(CGameEngine* _engine) override;
-	void Cleanup() override;
+	MainMenu(CGameEngine* _engine);
 
 	void Pause() override;
 	void Resume() override;

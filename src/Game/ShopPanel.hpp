@@ -9,10 +9,10 @@ class ShopPanel
 {
 public:
 
-	void Init(CGameEngine *_engine, GameStatus *_gameStatus);
+	ShopPanel(CGameEngine* _engine);
+	~ShopPanel();
 	void Update();
 	void Render();
-	void Quit();
 
 	void SetOnItemSelectedCallback(std::function<void(Item &)> _onItemSelected);
 
@@ -29,7 +29,6 @@ public:
 
 private:
 	CGameEngine *engine;
-	GameStatus* gameStatus;
 
 	CSprite shopPanel;
 	CSprite selectedItemFrame;

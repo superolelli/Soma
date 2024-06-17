@@ -7,7 +7,7 @@ class SpriteWithText
 {
 public:
 
-	void Load(sf::Texture const &_texture);
+	SpriteWithText(sf::Texture const& _texture);
 
 	//adds text to the sprite and returns the index
 	int AddText(const sf::String &_str);

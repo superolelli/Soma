@@ -8,10 +8,11 @@ class LootableDialog
 {
 public:
 
-	void Init(CGameEngine *_engine, GameStatus *_gameStatus,  int _lootableID);
+	LootableDialog(CGameEngine *_engine,  int _lootableID);
+	~LootableDialog();
+
 	void Update();
 	void Render();
-	void Quit();
 
 	void AddItem(Item _item);
 
@@ -22,7 +23,6 @@ public:
 
 private:
 	CGameEngine *engine;
-	GameStatus *gameStatus;
 
 	bool isOpen;
 

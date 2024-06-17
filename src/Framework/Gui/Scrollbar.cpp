@@ -1,15 +1,15 @@
 #include "Scrollbar.hpp"
 
 
-void VerticalScrollbar::Init(int _width, int _maximumHeight)
+VerticalScrollbar::VerticalScrollbar(int _width, int _maximumHeight)
+	: numberOfSteps(1)
+	, currentStep(0)
+	, maximumHeight(_maximumHeight)
+	, isScrolling(false)
 {
 	scrollbarShape.setSize(sf::Vector2f(_width, _maximumHeight - 10));
 	scrollbarShape.setOutlineColor(sf::Color::Black);
 	scrollbarShape.setOutlineThickness(5);
-	numberOfSteps = 1;
-	currentStep = 0;
-	maximumHeight = _maximumHeight;
-	isScrolling = false;
 }
 
 void VerticalScrollbar::Update(CGameEngine & _engine)

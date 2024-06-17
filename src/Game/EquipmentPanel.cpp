@@ -2,45 +2,22 @@
 #include "Resources\SoundManager.hpp"
 
 
-void EquipmentPanel::Init(CGameEngine * _engine, GameStatus *_gameStatus, int _xPos, int _yPos)
+EquipmentPanel::EquipmentPanel(CGameEngine * _engine)
+	: engine(_engine)
+	, equipmentField {{g_pTextures->inventoryEquipmentField},
+		{g_pTextures->inventoryEquipmentField}, 
+		{g_pTextures->inventoryEquipmentField}, 
+		{g_pTextures->inventoryEquipmentField}}
+	, connectionsBackground(g_pTextures->inventoryConnectionsBackground)
+	, connections{ {{0},{1},{2},{3}}, {{0},{1},{2},{3}}, {{0},{1},{2},{3}}, {{0},{1},{2},{3}}}
+	, diamond{ {engine}, {engine}, {engine}, {engine} }
+	, currentPlayer(0)
+	, currentDraggedItem(-1)
 {
-	engine = _engine;
-	gameStatus = _gameStatus;
-
-	for (auto &e : equipmentField)
-		e.Load(g_pTextures->inventoryEquipmentField);
-
-	equipmentField[0].SetPos(_xPos, _yPos);
-	equipmentField[1].SetPos(_xPos + 365, _yPos);
-	equipmentField[2].SetPos(_xPos + 365, _yPos + 300);
-	equipmentField[3].SetPos(_xPos, _yPos + 300);
-
-	connectionsBackground.Load(g_pTextures->inventoryConnectionsBackground);
-	connectionsBackground.SetPos(_xPos + 45, _yPos + 30);
-
-	for(auto &d : diamond)
-		d.Init(engine, _xPos + 185, _yPos + 158);
-
-	for (auto &c : connections)
-	{
-		c[0].Init(0);
-		c[0].SetPos(_xPos + 104, _yPos + 36);
-		c[1].Init(1);
-		c[1].SetPos(_xPos + 285, _yPos + 78);
-		c[2].Init(2);
-		c[2].SetPos(_xPos + 104, _yPos + 252);
-		c[3].Init(3);
-		c[3].SetPos(_xPos + 50, _yPos + 79);
-	}
-
-	tooltip.Init();
-
-	currentPlayer = 0;
-	currentDraggedItem = -1;
 }
 
 
-void EquipmentPanel::Quit()
+EquipmentPanel::~EquipmentPanel()
 {
 	Clear();
 }
@@ -50,6 +27,26 @@ void EquipmentPanel::SetOnItemDroppedCallback(std::function<InventoryItemWrapper
 	OnItemDropped = _onItemDropped;
 }
 
+void EquipmentPanel::SetPos(int _xPos, int _yPos)
+{
+	equipmentField[0].SetPos(_xPos, _yPos);
+	equipmentField[1].SetPos(_xPos + 365, _yPos);
+	equipmentField[2].SetPos(_xPos + 365, _yPos + 300);
+	equipmentField[3].SetPos(_xPos, _yPos + 300);
+
+	connectionsBackground.SetPos(_xPos + 45, _yPos + 30);
+
+	for (auto& d : diamond) 
+		d.SetPos(_xPos + 185, _yPos + 158);
+
+	for (auto& c : connections)
+	{
+		c[0].SetPos(_xPos + 104, _yPos + 36);
+		c[1].SetPos(_xPos + 285, _yPos + 78);
+		c[2].SetPos(_xPos + 104, _yPos + 252);
+		c[3].SetPos(_xPos + 50, _yPos + 79);
+	}
+}
 
 void EquipmentPanel::Update()
 {
@@ -105,7 +102,7 @@ void EquipmentPanel::HandleDrop()
 			connections[currentPlayer][LeftNeighbourSlot(currentDraggedItem)].DeactivateConnection(1);
 
 			diamond[currentPlayer].RecolorDiamond(connections[currentPlayer]);
-			gameStatus->SetDiamondStats(currentPlayer, diamond[currentPlayer].GetStats());
+			g_pGameStatus->SetDiamondStats(currentPlayer, diamond[currentPlayer].GetStats());
 		}
 		else
 			items[currentPlayer][currentDraggedItem]->SetPos(currentDraggedItemOldX, currentDraggedItemOldY);
@@ -165,11 +162,11 @@ InventoryItemWrapper * EquipmentPanel::PlaceItem(InventoryItemWrapper *_item)
 			items[currentPlayer][i] = _item;
 			items[currentPlayer][i]->SetPos(equipmentField[i].GetGlobalRect().left + 10, equipmentField[i].GetGlobalRect().top + 10);
 
-			gameStatus->AddEquipment(currentPlayer, i, _item->GetItem());
+			g_pGameStatus->AddEquipment(currentPlayer, i, _item->GetItem());
 
 			CheckConnections(i);
 			diamond[currentPlayer].RecolorDiamond(connections[currentPlayer]);
-			gameStatus->SetDiamondStats(currentPlayer, diamond[currentPlayer].GetStats());
+			g_pGameStatus->SetDiamondStats(currentPlayer, diamond[currentPlayer].GetStats());
 
 			return oldItem;
 		}
@@ -235,11 +232,7 @@ void EquipmentPanel::AddItem(Item& _item, int player, int slot)
 
 	SAFE_DELETE(items[player][slot]);
 
-	auto newItem = new InventoryItemWrapper;
-
-	CSprite newSprite;
-	newSprite.Load(g_pTextures->item[_item.id]);
-	newItem->Init(std::move(_item), std::move(newSprite));
+	auto newItem = new InventoryItemWrapper(std::move(_item), CSprite(g_pTextures->item[_item.id]));
 	newItem->SetPos(equipmentField[slot].GetGlobalRect().left + 10, equipmentField[slot].GetGlobalRect().top + 10);
 
 	items[player][slot] = newItem;
@@ -248,7 +241,7 @@ void EquipmentPanel::AddItem(Item& _item, int player, int slot)
 	SetCurrentPlayer(player);
 	CheckConnections(slot);
 	diamond[player].RecolorDiamond(connections[player]);
-	gameStatus->SetDiamondStats(player, diamond[player].GetStats());
+	g_pGameStatus->SetDiamondStats(player, diamond[player].GetStats());
 	SetCurrentPlayer(tempCurrentPlayer);
 }
 

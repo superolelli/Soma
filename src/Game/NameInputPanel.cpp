@@ -2,16 +2,15 @@
 #include "Resources/FontManager.hpp"
 #include "Resources/TextureManager.hpp"
 
-void NameInputPanel::Init(const std::string &_initialString)
+NameInputPanel::NameInputPanel(const std::string &_initialString)
+    : nameInput(g_pFonts->f_blackwoodCastle, 50)
+    , finishedButton(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Fertig")
+    , backgroundSprite(g_pTextures->nameInputBackground)
 {
-    nameInput.Init(g_pFonts->f_blackwoodCastle, 50);
     nameInput.SetString(_initialString);
     nameInput.SetMaximumCharacters(20);
 
-    finishedButton.Load(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Fertig");
     finishedButton.SetButtontextFont(g_pFonts->f_blackwoodCastle);
-
-    backgroundSprite.Load(g_pTextures->nameInputBackground);
 
     visible = false;
 }

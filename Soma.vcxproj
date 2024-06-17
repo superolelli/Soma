@@ -316,7 +316,7 @@
     <ClCompile Include="src\Game\Resources\StringManager.cpp" />
     <ClCompile Include="src\Game\Resources\TextureManager.cpp" />
     <ClCompile Include="src\Game\Resources\VideoManager.cpp" />
-    <ClCompile Include="src\Game\SavegameManager.cpp" />
+    <ClCompile Include="src\Game\SavegameUtils.cpp" />
     <ClCompile Include="src\Game\SavegamePanel.cpp" />
     <ClCompile Include="src\Game\ScrollableItemPanel.cpp" />
     <ClCompile Include="src\Game\SellMultipleDialog.cpp" />
@@ -528,7 +528,7 @@
     <ClInclude Include="src\Game\Resources\StringManager.hpp" />
     <ClInclude Include="src\Game\Resources\TextureManager.hpp" />
     <ClInclude Include="src\Game\Resources\VideoManager.hpp" />
-    <ClInclude Include="src\Game\SavegameManager.hpp" />
+    <ClInclude Include="src\Game\SavegameUtils.hpp" />
     <ClInclude Include="src\Game\SavegamePanel.hpp" />
     <ClInclude Include="src\Game\ScrollableItemPanel.hpp" />
     <ClInclude Include="src\Game\SellMultipleDialog.hpp" />

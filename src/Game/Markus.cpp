@@ -1,19 +1,10 @@
 #include "Markus.hpp"
 
 
-PlayerMarkus::PlayerMarkus(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
-	: Player(_id, _engine, _notificationRenderer)
+PlayerMarkus::PlayerMarkus(CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
+	: Player(CombatantID::Markus, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID::Markus))
+	, wasAttackedLastRoundBy{false, false, false, false}
 {
-}
-
-void PlayerMarkus::Init()
-{
-	combatantObject = g_pModels->GetNewCombatantModelInstance(CombatantID::Markus);
-
-	this->Player::Init();
-
-	for (auto &b : wasAttackedLastRoundBy)
-		b = false;
 }
 
 

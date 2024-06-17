@@ -1,35 +1,24 @@
 #include "MainRoomGui.hpp"
 #include "Resources\SoundManager.hpp"
 
-void MainRoomGUI::Init(CGameEngine * _engine, GameStatus *_gameStatus)
+MainRoomGUI::MainRoomGUI(CGameEngine* _engine)
+	: engine(_engine)
+	, resourcesStatusBar(_engine)
+	, skillPanel(_engine)
+	, inventory(_engine)
+	, vendingMachinePanel(_engine)
+	, inventoryButton(g_pTextures->mainRoomButtonInventory, Buttontypes::Up)
+	, skillpanelButton(g_pTextures->mainRoomButtonSkillPanel, Buttontypes::Up)
+	, shopButton(g_pTextures->mainRoomButtonShop, Buttontypes::Up)
 {
-	engine = _engine;
-	gameStatus = _gameStatus;
-	resourcesStatusBar.Init(engine);
-
-	skillPanel.Init(gameStatus, engine);
-	inventory.Init(gameStatus, engine);
-	vendingMachinePanel.Init(gameStatus, engine);
-
-	inventoryButton.Load(g_pTextures->mainRoomButtonInventory, Buttontypes::Up);
 	inventoryButton.SetPos(0, 0);
 	inventoryButton.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
-	skillpanelButton.Load(g_pTextures->mainRoomButtonSkillPanel, Buttontypes::Up);
 	skillpanelButton.SetPos(53, 0);
 	skillpanelButton.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
-	shopButton.Load(g_pTextures->mainRoomButtonShop, Buttontypes::Up);
 	shopButton.SetPos(106, 0);
 	shopButton.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
-
-}
-
-void MainRoomGUI::Quit()
-{
-	resourcesStatusBar.Quit();
-	inventory.Quit();
-	vendingMachinePanel.Quit();
 }
 
 void MainRoomGUI::PlayerClicked(int _id)
@@ -52,7 +41,7 @@ void MainRoomGUI::Update()
 	skillPanel.Update();
 	inventory.Update();
 	vendingMachinePanel.Update();
-	resourcesStatusBar.Update(gameStatus->GetCardsAmount(), gameStatus->GetDiceAmount());
+	resourcesStatusBar.Update(g_pGameStatus->GetCardsAmount(), g_pGameStatus->GetDiceAmount());
 
 	if (inventoryButton.Update(*engine) == true)
 	{

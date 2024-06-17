@@ -10,10 +10,10 @@ class MainRoomGUI : public GUI
 {
 public:
 
-	virtual void Init(CGameEngine *_engine, GameStatus *_gameStatus);
+	MainRoomGUI(CGameEngine* _engine);
+
 	virtual void Update() override;
 	virtual void Render() override;
-	void Quit();
 
 	void PlayerClicked(int _id);
 	void VendingMachineClicked();
@@ -24,7 +24,6 @@ public:
 
 private:
 	CGameEngine *engine;
-	GameStatus *gameStatus;
 
 	SkillPanel skillPanel;
 	Inventory inventory;

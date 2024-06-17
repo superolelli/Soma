@@ -1,12 +1,11 @@
 #include "ItemTooltip.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
 
-void ItemTooltip::Init()
+ItemTooltip::ItemTooltip()
+	: Tooltip()
+	, itemId(ItemID::empty)
+	, equipmentStats(nullptr)
 {
-	Tooltip::Init();
-
-	itemId = ItemID::empty;
-	equipmentStats = nullptr;
 }
 
 void ItemTooltip::SetItem(ItemID _id)

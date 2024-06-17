@@ -6,9 +6,7 @@
 class Slider {
 public:
 
-	Slider();
-
-	void Load(sf::Texture const &_barTexture, sf::Texture const &_knobTexture);
+	Slider(sf::Texture const& _barTexture, sf::Texture const& _knobTexture);
 
 	void SetMinimum(int _minimum);
 	void SetMaximum(int _maximum);

@@ -8,6 +8,7 @@
 #include "LevelStatus.hpp"
 
 struct Room {
+	Room(sf::Texture const &_backgroundTexture) : background(_backgroundTexture){}
 	CSprite background;
 	bool battle;
 	bool boss;

@@ -1,14 +1,13 @@
 #include "ItemPanelDecorator.hpp"
 
-void ItemPanelDecorator::Init(CGameEngine *_engine, ItemPanel *_itemPanel)
+ItemPanelDecorator::ItemPanelDecorator(CGameEngine *_engine, ItemPanel *_itemPanel)
+	: engine(_engine)
+	, itemPanel(_itemPanel)
 {
-	engine = _engine;
-	itemPanel = _itemPanel;
 }
 
-void ItemPanelDecorator::Quit()
+ItemPanelDecorator::~ItemPanelDecorator()
 {
-	itemPanel->Clear();
 	SAFE_DELETE(itemPanel);
 }
 

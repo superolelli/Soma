@@ -1,14 +1,7 @@
 #include "Ole.hpp"
 
 
-PlayerOle::PlayerOle(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
-	: Player(_id, _engine, _notificationRenderer)
+PlayerOle::PlayerOle(CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
+	: Player(CombatantID::Ole, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID::Ole))
 {
-}
-
-void PlayerOle::Init()
-{
-	combatantObject = g_pModels->GetNewCombatantModelInstance(CombatantID::Ole);
-
-	this->Player::Init();
 }

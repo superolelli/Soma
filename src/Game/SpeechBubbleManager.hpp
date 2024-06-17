@@ -9,7 +9,7 @@
 class SpeechBubbleManager {
 public:
 
-    void Init(CGameEngine* _engine, AdventureGroup* _adventureGroup);
+    SpeechBubbleManager(CGameEngine* _engine, AdventureGroup* _adventureGroup);
     void Update();
     void Render();
 

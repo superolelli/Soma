@@ -6,5 +6,5 @@
 class LevelBuilder {
 public:
 
-	static Level *buildLevel (LevelType _levelType, int _levelID, DialogManager *_dialogManager, GameStatus *_gameStatus);
+	static Level *buildLevel (LevelType _levelType, int _levelID, DialogManager *_dialogManager);
 };

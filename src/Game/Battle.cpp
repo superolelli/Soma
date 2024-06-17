@@ -2,22 +2,19 @@
 #include <algorithm>
 #include <random>
 
-void Battle::Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss, GameStatus *_gameStatus, LevelStatus *_levelStatus)
+Battle::Battle(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss, LevelStatus *_levelStatus)
+	: players(_adventureGroup)
+	, gui(_gui)
+	, engine(_engine)
+	, notificationRenderer(_notificationRenderer)
+	, isBattleFinished(false)
+	, turnsSinceLastEnemyDied(-1)
+	, isBossBattle(_boss)
+	, levelStatus(_levelStatus)
 {
 	g_pMusic->StopMusic();
 
-	players = _adventureGroup;
-	gui = _gui;
-	engine = _engine;
-	notificationRenderer = _notificationRenderer;
-	isBattleFinished = false;
-	turnsSinceLastEnemyDied = -1;
-	isBossBattle = _boss;
-	gameStatus = _gameStatus;
-	levelStatus = _levelStatus;
-
 	InitCombatants(_xView, enemyIDs);
-
 	InitNewRound();
 
 	gui->SetCombatantToDisplay(combatants[currentCombatant]);
@@ -59,7 +56,7 @@ void Battle::InitCombatants(int _xView, int enemyIDs[4])
 }
 
 
-void Battle::Quit()
+Battle::~Battle()
 {
 	for (Combatant *c : combatants)
 	{
@@ -68,7 +65,6 @@ void Battle::Quit()
 		c->SetBattlePtr(nullptr);
 
 		if (!c->IsPlayer()) {
-			c->Quit();
 			SAFE_DELETE(c);
 		}
 	}
@@ -92,10 +88,7 @@ void Battle::AddEnemy(int enemyID)
 
 Enemy *Battle::CreateEnemy(int _enemyID)
 {
-	Enemy *enemy;
-	enemy = new Enemy(_enemyID, engine, notificationRenderer);
-	enemy->Init();
-	return enemy;
+	return new Enemy(_enemyID, engine, notificationRenderer);
 }
 
 

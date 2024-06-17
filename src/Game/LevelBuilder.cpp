@@ -2,11 +2,9 @@
 #include "LootableFactory.hpp"
 
 
-Level *LevelBuilder::buildLevel(LevelType _levelType, int _levelID, DialogManager *_dialogManager, GameStatus *_gameStatus)
+Level *LevelBuilder::buildLevel(LevelType _levelType, int _levelID, DialogManager *_dialogManager)
 {
-	LootableFactory lootableFactory;
-	lootableFactory.Init(_dialogManager, _gameStatus);
-	lootableFactory.SetLevel(_levelID);
+	LootableFactory lootableFactory(_dialogManager, _levelID);
 
 	srand(time(0));
 	Level *newLevel = new Level(_levelType, _levelID);
@@ -15,7 +13,8 @@ Level *LevelBuilder::buildLevel(LevelType _levelType, int _levelID, DialogManage
 	for (int i = 0; i < g_pObjectProperties->levelSpecs[_levelType][_levelID - 1].numberOfRooms - 1; i++)
 	{
 		//battle
-		Room *newRoom = new Room;
+		auto backgroundID = rand() % g_pObjectProperties->levelSpecs[_levelType][_levelID - 1].possibleBackgrounds.size();
+		Room* newRoom = new Room(g_pTextures->firstLayerBackgrounds[_levelType][g_pObjectProperties->levelSpecs[_levelType][_levelID - 1].possibleBackgrounds[backgroundID]]);
 		newRoom->battle = rand() % 100 < g_pObjectProperties->levelSpecs[_levelType][_levelID - 1].battleProbability * 100.0f;
 		if (newRoom->battle)
 		{
@@ -25,8 +24,6 @@ Level *LevelBuilder::buildLevel(LevelType _levelType, int _levelID, DialogManage
 		}
 
 		//background
-		auto backgroundID = rand() % g_pObjectProperties->levelSpecs[_levelType][_levelID - 1].possibleBackgrounds.size();
-		newRoom->background.Load(g_pTextures->firstLayerBackgrounds[_levelType][g_pObjectProperties->levelSpecs[_levelType][_levelID - 1].possibleBackgrounds[backgroundID]]);
 		newRoom->background.SetPos(position, 0);
 		newRoom->boss = false;
 		position += newRoom->background.GetRect().width;
@@ -41,9 +38,8 @@ Level *LevelBuilder::buildLevel(LevelType _levelType, int _levelID, DialogManage
 	}
 
 	//add end room
-	Room *newRoom = new Room;
+	Room *newRoom = new Room(g_pTextures->firstLayerBackgrounds[_levelType][g_pObjectProperties->levelSpecs[_levelType][_levelID - 1].endBackground]);
 	newRoom->battle = true;
-	newRoom->background.Load(g_pTextures->firstLayerBackgrounds[_levelType][g_pObjectProperties->levelSpecs[_levelType][_levelID - 1].endBackground]);
 	newRoom->background.SetPos(position, 0);
 	newRoom->boss = true;
 	newRoom->lootable = nullptr;

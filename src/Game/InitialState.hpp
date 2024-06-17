@@ -15,8 +15,8 @@ class CInitialState : public GameState
 {
 public:
 
-	void Init(CGameEngine *_engine) override;
-	void Cleanup() override;
+	CInitialState(CGameEngine* _engine);
+	~CInitialState();
 
 	void Pause() override;
 	void Resume() override;

@@ -7,10 +7,9 @@ class ExitDialog
 {
 public:
 
-	void Init(CGameEngine* _engine);
+	ExitDialog(CGameEngine* _engine);
 	bool Update();
 	void Render();
-	void Quit();
 
 	void SetPos(int _x, int _y);
 

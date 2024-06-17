@@ -5,11 +5,10 @@
 
 
 EnemyStatePrepareAbility::EnemyStatePrepareAbility(Enemy *_context)
-	:CombatantStatePrepareAbility(_context)
+	: CombatantStatePrepareAbility(_context)
+	, enemyContext(_context)
+	, abilityAnnouncementTime(1.5)
 {
-	enemyContext = _context;
-	abilityAnnouncementTime = 1.5;
-
 	ChooseAbility();
 
 	if(enemyContext->actsInConfusion)
@@ -623,11 +622,11 @@ void EnemyStatePrepareAbility::Render()
 
 void EnemyStatePrepareAbility::RenderAbilityAnnouncement()
 {
-	g_pSpritePool->abilityAnnouncementBanner.SetPos(enemyContext->engine->GetRenderTarget().getView().getCenter().x + 100.0f, 150.0f);
-	g_pSpritePool->abilityAnnouncementBanner.ChangeString(0, GetChosenAbilityName());
-	g_pSpritePool->abilityAnnouncementBanner.SetTextPosCentered(0);
-	g_pSpritePool->abilityAnnouncementBanner.MoveText(0, 0, -20);
-	g_pSpritePool->abilityAnnouncementBanner.Render(enemyContext->engine->GetRenderTarget());
+	g_pSpritePool->abilityAnnouncementBanner->SetPos(enemyContext->engine->GetRenderTarget().getView().getCenter().x + 100.0f, 150.0f);
+	g_pSpritePool->abilityAnnouncementBanner->ChangeString(0, GetChosenAbilityName());
+	g_pSpritePool->abilityAnnouncementBanner->SetTextPosCentered(0);
+	g_pSpritePool->abilityAnnouncementBanner->MoveText(0, 0, -20);
+	g_pSpritePool->abilityAnnouncementBanner->Render(enemyContext->engine->GetRenderTarget());
 }
 
 

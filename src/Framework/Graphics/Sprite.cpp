@@ -1,31 +1,17 @@
 #include "Sprite.hpp"
 
 
-
-
-CSprite::CSprite()
-{
-	m_NumFrames = 0;
-}
-
-
-
-
-CSprite::~CSprite()
-{
-
-}
-
-
-
-
-void CSprite::Load(sf::Texture const &_texture)
+CSprite::CSprite(sf::Texture const& _texture)
+	: m_NumFrames(0)
+	, m_FrameHeight(0)
+	, m_FrameWidth(0)
+	, m_NumFramesX(0)
 {
 	//Set the texture
 	m_Sprite.setTexture(_texture);
 
 	//Check, if the texture was set
-	if (m_Sprite.getTexture() == NULL)
+	if (m_Sprite.getTexture() == nullptr)
 	{
 		std::cout << "Couldn't apply texture" << std::endl;
 	}
@@ -37,13 +23,9 @@ void CSprite::Load(sf::Texture const &_texture)
 	m_Rect.width = m_Sprite.getTextureRect().width;
 }
 
-
-
-void CSprite::Load(sf::Texture const &_texture, int _numFrames, int _frameWidth, int _frameHeight)
+CSprite::CSprite(sf::Texture const& _texture, int _numFrames, int _frameWidth, int _frameHeight)
+	: CSprite(_texture)
 {
-	//Set the texture
-	Load(_texture);
-
 	//set the frame rect
 	m_NumFrames = _numFrames;
 	m_FrameHeight = _frameHeight;
@@ -56,7 +38,10 @@ void CSprite::Load(sf::Texture const &_texture, int _numFrames, int _frameWidth,
 	m_Rect.width = _frameWidth;
 }
 
+CSprite::~CSprite()
+{
 
+}
 
 void CSprite::SetPos(int _x, int _y)
 {

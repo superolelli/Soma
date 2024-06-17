@@ -12,11 +12,8 @@ class CButton
 {
 public:
 
-	CButton();
+	CButton(sf::Texture const& _texture, Buttontypes _type, std::string const& _str = "");
     ~CButton();
-
-	//Loads the button, defines the type and sets the position
-	void Load(sf::Texture const &_texture, Buttontypes _type, std::string const &_str = "");
 
 	//Sets the button's position
 	void SetPos(int _x, int _y);

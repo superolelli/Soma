@@ -6,9 +6,6 @@
 class GameState
 {
 public:
-	virtual void Init(CGameEngine*_engine) = 0;
-	virtual void Cleanup() = 0;
-
 	virtual void Pause() = 0;
 	virtual void Resume() = 0;
 
@@ -17,6 +14,6 @@ public:
 	virtual void Render(double _normalizedTimestep) = 0;
 
 protected: 
-	GameState() { }
+	GameState(CGameEngine *_engine) : m_pGameEngine(_engine) { }
 	CGameEngine *m_pGameEngine;   //a pointer to the game engine
 };

@@ -9,7 +9,8 @@ class ItemPanel
 
 public:
 
-	virtual void Init(CGameEngine *_engine);
+	ItemPanel(CGameEngine* _engine, sf::Texture const &_itemPanelTexture);
+
 	virtual void Update() = 0;
 	virtual void Render(int _excludeItemNumber = -1) = 0;
 	virtual void AddItem(Item _item) = 0;

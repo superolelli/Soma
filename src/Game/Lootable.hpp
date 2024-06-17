@@ -32,7 +32,8 @@ soundID::DEAD_TREE
 class Lootable
 {
 public:
-	void Init(LootableID _id, DialogManager *_dialogManager, GameStatus *_gameStatus);
+	Lootable(LootableID _id, DialogManager *_dialogManager);
+
 	void Render(sf::RenderTarget &_target);
 	void Update(CGameEngine *_engine);
 	void SetPos(int _x, int _y);
@@ -42,7 +43,6 @@ public:
 private:
 
 	DialogManager *dialogManager;
-	GameStatus *gameStatus;
 
 	CSprite sprite;
 	bool wasLooted;

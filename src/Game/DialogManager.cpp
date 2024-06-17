@@ -24,7 +24,7 @@ void DialogManager::RenderDialogs()
 		d->Render();
 }
 
-void DialogManager::Quit()
+DialogManager::~DialogManager()
 {
 	for (auto d : dialogs)
 		SAFE_DELETE(d);

@@ -1,30 +1,23 @@
 #include "Slider.hpp"
 
-Slider::Slider()
+Slider::Slider(sf::Texture const& _barTexture, sf::Texture const& _knobTexture)
+	: knob(_knobTexture)
+	, sliderBar(_barTexture)
+	, stepsize(1)
+	, minimum(1)
+	, maximum(100)
+	, currentValue(1)
+	, knobActive(false)
+	, showText(false)
 {
-	stepsize = 1;
-	minimum = 1;
-	maximum = 100;
-	currentValue = 1;
-	knobActive = false;
-	showText = false;
-
 	amountText.setString(std::to_string(currentValue));
 	amountText.setCharacterSize(18);
 }
-
-void Slider::Load(sf::Texture const & _barTexture, sf::Texture const &_knobTexture)
-{
-	knob.Load(_knobTexture);
-	sliderBar.Load(_barTexture);
-}
-
 
 void Slider::SetFont(sf::Font &_font)
 {
 	amountText.setFont(_font);
 }
-
 
 void Slider::ShowText(bool _showText)
 {

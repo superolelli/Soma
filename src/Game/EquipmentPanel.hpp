@@ -11,11 +11,14 @@ class EquipmentPanel
 {
 public:
 
-	void Init(CGameEngine *_engine, GameStatus *_gameStatus, int _xPos, int _yPos);
+	EquipmentPanel(CGameEngine* _engine);
+	~EquipmentPanel();
+
 	void Update();
 	void Render();
 	void RenderCurrentDraggedItem();
-	void Quit();
+
+	void SetPos(int _xPos, int _yPos);
 
 	void SetOnItemDroppedCallback(std::function<InventoryItemWrapper*(InventoryItemWrapper*, int, int)> _onItemDropped);
 
@@ -30,7 +33,6 @@ public:
 private:
 
 	CGameEngine *engine;
-	GameStatus *gameStatus;
 
 	CSprite equipmentField[4];
 	CSprite connectionsBackground;

@@ -6,8 +6,7 @@
 class PlayerMarkus : public Player
 {
 public:
-	PlayerMarkus(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
-	virtual void Init() override;
+	PlayerMarkus(CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
 
 	virtual int GetID() override { return CombatantID::Markus; }
 

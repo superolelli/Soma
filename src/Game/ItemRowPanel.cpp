@@ -2,10 +2,9 @@
 #include "Resources\SoundManager.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
 
-void ItemRowPanel::Init(CGameEngine *_engine)
+ItemRowPanel::ItemRowPanel(CGameEngine *_engine)
+	: ItemPanel(_engine, g_pTextures->itemRowPanel)
 {
-	ItemPanel::Init(_engine);
-	itemPanel.Load(g_pTextures->itemRowPanel);
 	items.resize(5);
 }
 
@@ -49,11 +48,8 @@ void ItemRowPanel::AddItem(Item _item)
 		}
 	}
 
-	InventoryItemWrapper *newItem = new InventoryItemWrapper;
-
-	CSprite newSprite;
-	newSprite.Load(g_pTextures->item[_item.id]);
-	newItem->Init(std::move(_item), std::move(newSprite));
+	CSprite newSprite(g_pTextures->item[_item.id]);
+	InventoryItemWrapper *newItem = new InventoryItemWrapper(std::move(_item), std::move(newSprite));
 
 	int freeSlot = GetFirstFreeSlot();
 	int xPos = freeSlot * 116 + itemPanel.GetGlobalRect().left + 10;

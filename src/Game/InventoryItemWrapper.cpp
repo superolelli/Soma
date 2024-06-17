@@ -1,10 +1,9 @@
 #include "InventoryItemWrapper.hpp"
 
-void InventoryItemWrapper::Init(Item && _item, CSprite && _sprite)
+InventoryItemWrapper::InventoryItemWrapper(Item && _item, CSprite && _sprite)
+	: item(_item)
+	, sprite(_sprite)
 {
-	item = std::move(_item);
-	sprite = std::move(_sprite);
-
 	colorRectangle.setFillColor(_item.color);
 	colorRectangle.setSize(sf::Vector2f(97, 97));
 

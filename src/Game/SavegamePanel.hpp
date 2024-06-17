@@ -10,7 +10,7 @@ public:
 
     enum class SavegameState { Nothing, Create, Continue, Delete };
 
-    void Init(CGameEngine* _engine, const std::string& _name = "");
+    SavegamePanel(CGameEngine* _engine, const std::string& _name = "");
     SavegameState Update();
     void Render();
 

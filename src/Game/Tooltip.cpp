@@ -2,7 +2,8 @@
 #include "Resources\FontManager.hpp"
 #include <deque>
 
-void Tooltip::Init()
+Tooltip::Tooltip(bool _showAboveY)
+	: showTooltipAboveY(_showAboveY)
 {
 	tooltipText.setCharacterSize(18);
 	tooltipText.setFont(g_pFonts->f_arial);
@@ -12,14 +13,6 @@ void Tooltip::Init()
 	tooltipBackground.setOutlineColor(sf::Color(40, 40, 40));
 	tooltipBackground.setCornerPointCount(20);
 	tooltipBackground.setCornersRadius(8);
-
-	showTooltipAboveY = true;
-}
-
-
-void Tooltip::SetShowAboveY(bool _aboveY)
-{
-	showTooltipAboveY = _aboveY;
 }
 
 

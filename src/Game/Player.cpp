@@ -7,16 +7,11 @@
 #include "CombatantStateDying.hpp"
 #include "PlayerStatePrepareAbility.hpp"
 
-Player::Player(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
-	: Combatant(_id, _engine, _notificationRenderer)
-{
-}
-
-void Player::Init()
+Player::Player(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer, SpriterEngine::EntityInstance* _combatantObject)
+	: Combatant(_id, _engine, _notificationRenderer, _combatantObject)
+	, is_walking(false)
 {
 	status.SetStats(g_pObjectProperties->playerStats[GetID()]);
-	Combatant::Init();
-	is_walking = false;
 }
 
 

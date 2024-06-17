@@ -1,43 +1,30 @@
 #include "AdventureGroup.hpp"
 
 
-
-
-void AdventureGroup::Init(CGameEngine *_engine, NotificationRenderer *_notificationRenderer, GameStatus *_gameStatus)
+AdventureGroup::AdventureGroup(CGameEngine* _engine, NotificationRenderer* _notificationRenderer)
 {
-	adventurer[CombatantID::Ole] = new PlayerOle(CombatantID::Ole, _engine, _notificationRenderer);
-	adventurer[CombatantID::Ole]->Init();
-
-	adventurer[CombatantID::Anna] = new PlayerAnna(CombatantID::Anna, _engine, _notificationRenderer);
-	adventurer[CombatantID::Anna]->Init();
-
-	adventurer[CombatantID::Simon] = new PlayerSimon(CombatantID::Simon, _engine, _notificationRenderer);
-	adventurer[CombatantID::Simon]->Init();
-
-	adventurer[CombatantID::Markus] = new PlayerMarkus(CombatantID::Markus, _engine, _notificationRenderer);
-	adventurer[CombatantID::Markus]->Init();
-
+	adventurer[CombatantID::Ole] = new PlayerOle(_engine, _notificationRenderer);
+	adventurer[CombatantID::Anna] = new PlayerAnna(_engine, _notificationRenderer);
+	adventurer[CombatantID::Simon] = new PlayerSimon(_engine, _notificationRenderer);
+	adventurer[CombatantID::Markus] = new PlayerMarkus(_engine, _notificationRenderer);
 
 	int x = GROUP_OFFSET_LEFT;
 	for (int i = 0; i < 4; i++)
 	{
 		adventurer[i]->SetPos(x, GROUP_Y_POS);
-		adventurer[i]->SetEquipment(_gameStatus->GetEquipmentStats(i).stats);
-		adventurer[i]->SetEquipment(_gameStatus->GetDiamondStats(i));
-		adventurer[i]->Status().SetMissOnHighDamage(_gameStatus->GetEquipmentStats(i).missOnHighDamage);
-		adventurer[i]->Status().SetHealOnPass(_gameStatus->GetEquipmentStats(i).healOnPass);
+		adventurer[i]->SetEquipment(g_pGameStatus->GetEquipmentStats(i).stats);
+		adventurer[i]->SetEquipment(g_pGameStatus->GetDiamondStats(i));
+		adventurer[i]->Status().SetMissOnHighDamage(g_pGameStatus->GetEquipmentStats(i).missOnHighDamage);
+		adventurer[i]->Status().SetHealOnPass(g_pGameStatus->GetEquipmentStats(i).healOnPass);
 		x += PLAYER_SPACING;
 	}
 }
 
 
-void AdventureGroup::Quit()
+AdventureGroup::~AdventureGroup()
 {
 	for (auto &a : adventurer)
-	{
-		a->Quit();
 		SAFE_DELETE(a);
-	}
 }
 
 void AdventureGroup::Update(int xMove)

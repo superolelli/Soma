@@ -11,9 +11,9 @@ class LevelGUI : public GUI
 {
 public:
 
+	LevelGUI(CGameEngine* _engine, LevelStatus* _levelStatus, AdventureGroup* _adventureGroup, LevelType _levelType, NotificationRenderer* _notificationRenderer);
 	~LevelGUI();
 
-	virtual void Init(CGameEngine *_engine, GameStatus *_gameStatus, LevelStatus *_levelStatus, AdventureGroup *_adventureGroup, LevelType _levelType, NotificationRenderer *_notificationRenderer);
 	virtual void Update() override;
 	virtual void Render() override;
 
@@ -24,7 +24,6 @@ public:
 
 private:
 	CGameEngine *engine;
-	GameStatus *gameStatus;
 
 	LevelType levelType;
 

@@ -6,12 +6,11 @@ class DialogManager
 {
 public:
 
+	~DialogManager();
+
 	void Update();
 	void RenderDialogs();
-	void Quit();
-
 	void AddLootableDialog(LootableDialog *_dialog);
-
 	bool IsDialogOpen();
 
 private:

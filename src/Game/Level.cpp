@@ -102,10 +102,10 @@ int Level::IsAtEnd(int _playerPos)
 void Level::RenderBackground(sf::RenderTarget &_target, int _viewX)
 {
 	//Render fourth Layer
-	g_pSpritePool->backgroundFourthLayer[levelType].SetPos(_viewX - (_viewX / 9) % g_pSpritePool->backgroundFourthLayer[levelType].GetRect().width, 0);
-	g_pSpritePool->backgroundFourthLayer[levelType].Render(_target);
-	g_pSpritePool->backgroundFourthLayer[levelType].SetPos(g_pSpritePool->backgroundFourthLayer[levelType].GetRect().left + g_pSpritePool->backgroundFourthLayer[levelType].GetRect().width, 0);
-	g_pSpritePool->backgroundFourthLayer[levelType].Render(_target);
+	g_pSpritePool->backgroundFourthLayer[levelType]->SetPos(_viewX - (_viewX / 9) % g_pSpritePool->backgroundFourthLayer[levelType]->GetRect().width, 0);
+	g_pSpritePool->backgroundFourthLayer[levelType]->Render(_target);
+	g_pSpritePool->backgroundFourthLayer[levelType]->SetPos(g_pSpritePool->backgroundFourthLayer[levelType]->GetRect().left + g_pSpritePool->backgroundFourthLayer[levelType]->GetRect().width, 0);
+	g_pSpritePool->backgroundFourthLayer[levelType]->Render(_target);
 
 	//Render third Layer
 	int newX = _viewX - (_viewX / 6) % g_pSpritePool->backgroundThirdLayers[levelType][currentThirdLayer1].GetRect().width;

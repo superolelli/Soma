@@ -2,23 +2,18 @@
 
 
 
-void LevelGUI::Init(CGameEngine * _engine, GameStatus *_gameStatus, LevelStatus *_levelStatus, AdventureGroup *_adventureGroup, LevelType _levelType, NotificationRenderer *_notificationRenderer)
+LevelGUI::LevelGUI(CGameEngine * _engine, LevelStatus *_levelStatus, AdventureGroup *_adventureGroup, LevelType _levelType, NotificationRenderer *_notificationRenderer)
+	: engine(_engine)
+	, levelType(_levelType)
+	, commonGUIParts(_engine, _levelStatus, _notificationRenderer)
+	, consumablePanel(_engine, _adventureGroup)
+	, levelFinishedPanel(nullptr)
 {
-	engine = _engine;
-	gameStatus = _gameStatus;
-
-	levelType = _levelType;
-
-	commonGUIParts.Init(_engine, _gameStatus, _levelStatus, _notificationRenderer);
-	consumablePanel.Init(engine, _gameStatus, _adventureGroup);
-
-	levelFinishedPanel = nullptr;
 }
 
 
 LevelGUI::~LevelGUI()
 {
-	consumablePanel.Quit();
 	SAFE_DELETE(levelFinishedPanel);
 }
 
@@ -50,16 +45,14 @@ void LevelGUI::Render()
 
 void LevelGUI::OpenLevelFailedPanel(LevelRewards &_rewards)
 {
-	levelFinishedPanel = new LevelFinishedPanel;
-	levelFinishedPanel->Init(engine, levelType, true);
+	levelFinishedPanel = new LevelFinishedPanel(engine, levelType, true);
 	levelFinishedPanel->SetReward(_rewards);
 }
 
 
 void LevelGUI::OpenLevelFinishedPanel(LevelRewards &_rewards)
 {
-	levelFinishedPanel = new LevelFinishedPanel;
-	levelFinishedPanel->Init(engine, levelType, false);
+	levelFinishedPanel = new LevelFinishedPanel(engine, levelType, false);
 	levelFinishedPanel->SetReward(_rewards);
 }
 

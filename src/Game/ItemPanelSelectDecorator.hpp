@@ -6,7 +6,8 @@ class ItemPanelSelectDecorator : public ItemPanelDecorator
 {
 public:
 
-	void Init(CGameEngine *_engine, ItemPanel *_itemPanel) override;
+	ItemPanelSelectDecorator(CGameEngine* _engine, ItemPanel* _itemPanel);
+
 	void Update() override;
 	void Render() override;
 	void SetOnItemSelectedCallback(std::function<void(Item &)> _onItemSelected);

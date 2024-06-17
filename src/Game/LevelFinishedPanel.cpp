@@ -1,13 +1,12 @@
 #include "LevelFinishedPanel.hpp"
 #include "Resources\SoundManager.hpp"
 
-void LevelFinishedPanel::Init(CGameEngine *_engine, LevelType _levelType, bool _levelFailed)
+LevelFinishedPanel::LevelFinishedPanel(CGameEngine *_engine, LevelType _levelType, bool _levelFailed)
+	: engine(_engine)
+	, panel(g_pTextures->levelFinishedPanel[_levelType])
+	, continueButton(g_pTextures->levelFinishedButton, Buttontypes::Motion_Up, "Weiter")
+	, continueButtonClicked(false)
 {
-	engine = _engine;
-
-	panel.Load(g_pTextures->levelFinishedPanel[_levelType]);
-
-	continueButton.Load(g_pTextures->levelFinishedButton, Buttontypes::Motion_Up, "Weiter");
 	continueButton.SetButtontextCharactersize(40);
 	continueButton.SetButtontextColor(sf::Color::White);
 	continueButton.SetButtontextFont(g_pFonts->f_blackwoodCastle);
@@ -61,8 +60,6 @@ void LevelFinishedPanel::Init(CGameEngine *_engine, LevelType _levelType, bool _
 	rewardDiceText.setFont(g_pFonts->f_blackwoodCastle);
 
 	UpdatePositions();
-
-	continueButtonClicked = false;
 }
 
 void LevelFinishedPanel::Update()
@@ -113,8 +110,7 @@ void LevelFinishedPanel::SetReward(LevelRewards &_rewards)
 	unlockedItemsSprites.clear();
 	for (int i = 0; i < _rewards.unlockedItems.size(); i++)
 	{
-		unlockedItemsSprites.emplace_back();
-		unlockedItemsSprites.back().Load(g_pTextures->item[_rewards.unlockedItems[i]]);
+		unlockedItemsSprites.emplace_back(g_pTextures->item[_rewards.unlockedItems[i]]);
 		unlockedItemsSprites.back().SetPos(static_cast<float>(1445 + (i % 2) * 150), static_cast<float>(300 + (i / 2) * 115));
 	}
 

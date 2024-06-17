@@ -16,13 +16,16 @@
 
 const int CONSUMABLE_ITEMS_LIMIT = 5;
 
-class GameStatus : public CSubject
+#define g_pGameStatus GameStatus::Get()
+class GameStatus : public CSubject, public TSingleton<GameStatus>
 {
-	friend class SavegameManager;
-
 public:
 
-	void Init();
+	GameStatus();
+
+	void Reset(const std::string &filepath);
+	void LoadFromFile(const std::string &filepath);
+	void StoreToFile();
 
 	int GetDiceAmount();
 	int GetCardsAmount();
@@ -50,12 +53,11 @@ public:
 	std::unordered_map<ItemID, bool> &GetConsumablesAvailability() { return consumablesAvailability; }
 	std::set<ItemID>& GetItemAvailability() { return itemAvailability; }
 
-	void SetFilepath(const std::string& _path) { path = _path; }
 
 	int levels[3];
 
 private:
-	std::string path;
+	std::string savegamePath;
 
 	int dice;
 	int cards;

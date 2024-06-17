@@ -1,23 +1,17 @@
 #include "ShopPanel.hpp"
 #include "ItemFactory.hpp"
 
-void ShopPanel::Init(CGameEngine *_engine, GameStatus *_gameStatus)
+ShopPanel::ShopPanel(CGameEngine *_engine)
+	: engine(_engine)
+	, shopPanel(g_pTextures->shopPanel)
+	, selectedItemFrame(g_pTextures->selectedItemFrame)
+	, priceSign(g_pTextures->priceSign)
 {
-	engine = _engine;
-	gameStatus = _gameStatus;
-	
-	tooltip.Init();
-
-	shopPanel.Load(g_pTextures->shopPanel);
-
-	selectedItemFrame.Load(g_pTextures->selectedItemFrame);
-
 	title.setCharacterSize(50);
 	title.setFont(g_pFonts->f_blackwoodCastle);
 	title.setFillColor(sf::Color::Black);
 	title.setString("Nur für kurze Zeit!");
 
-	priceSign.Load(g_pTextures->priceSign);
 	priceSign.AddText("");
 	priceSign.SetTextCharacterSize(0, 14);
 	priceSign.SetTextFont(0, g_pFonts->f_kingArthur);
@@ -29,21 +23,18 @@ void ShopPanel::Init(CGameEngine *_engine, GameStatus *_gameStatus)
 	for (int i = 5; i < 15; i++)
 	{
 		ItemID itemID = static_cast<ItemID>(CONSUMABLE_ITEMS_START + (i - 5));
-		if (gameStatus->GetConsumablesAvailability().count(itemID) > 0)
+		if (g_pGameStatus->GetConsumablesAvailability().count(itemID) > 0)
 		{
-			InventoryItemWrapper *newItem = new InventoryItemWrapper;
-
 			Item rawItem;
 			rawItem.id = itemID;
 			rawItem.number = -1;
 
-			CSprite newSprite;
-			newSprite.Load(g_pTextures->item[itemID]);
+			CSprite newSprite(g_pTextures->item[itemID]);
 
-			if (gameStatus->GetConsumablesAvailability().at(itemID) == false)
+			if (g_pGameStatus->GetConsumablesAvailability().at(itemID) == false)
 				newSprite.SetColor(40, 40, 40);
 
-			newItem->Init(std::move(rawItem), std::move(newSprite));
+			InventoryItemWrapper* newItem = new InventoryItemWrapper(std::move(rawItem), std::move(newSprite));
 
 			int xPos = ((i-5) % 5) * 116 + shopPanel.GetGlobalRect().left + 33;
 			int yPos = shopPanel.GetGlobalRect().top + 297 + 144 * ((i-5) / 5);
@@ -54,6 +45,13 @@ void ShopPanel::Init(CGameEngine *_engine, GameStatus *_gameStatus)
 	}
 
 	currentlySelectedItem = -1;
+}
+
+
+ShopPanel::~ShopPanel()
+{
+	for (auto i : items)
+		SAFE_DELETE(i);
 }
 
 
@@ -105,7 +103,7 @@ void ShopPanel::Render()
 
 			if (items[i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
 			{
-				if(i < 5 || gameStatus->GetConsumablesAvailability().at(items[i]->GetItem().id))
+				if(i < 5 || g_pGameStatus->GetConsumablesAvailability().at(items[i]->GetItem().id))
 					showTooltipForItem = i;
 			}
 		}
@@ -116,13 +114,6 @@ void ShopPanel::Render()
 		tooltip.SetItem(items[showTooltipForItem]->GetItem().id);
 		tooltip.ShowTooltip(engine->GetRenderTarget(), engine->GetMousePos().x - 10, engine->GetMousePos().y - 10);
 	}
-}
-
-
-void ShopPanel::Quit()
-{
-	for (auto i : items)
-		SAFE_DELETE(i);
 }
 
 void ShopPanel::SetOnItemSelectedCallback(std::function<void(Item&)> _onItemSelected)
@@ -164,26 +155,23 @@ void ShopPanel::ChooseNewRandomItems(int _bangLevel, int _kutschfahrtLevel, int 
 	{
 		if (items[i] != nullptr)
 		{
-			if (gameStatus->GetConsumablesAvailability().at(items[i]->GetItem().id) == true)
+			if (g_pGameStatus->GetConsumablesAvailability().at(items[i]->GetItem().id) == true)
 				items[i]->SetSpriteColor(255, 255, 255);
 			else
 				items[i]->SetSpriteColor(40, 40, 40);
 		}
 	}
 
-	if (gameStatus->GetItemAvailability().empty())
+	if (g_pGameStatus->GetItemAvailability().empty())
 		return;
 
 	for (int i = 0; i < 5; i++)
 	{
-		InventoryItemWrapper *newItem = new InventoryItemWrapper;
+		Item rawItem = ItemFactory::CreateShopItem(g_pGameStatus->GetItemAvailability());
 
-		Item rawItem = ItemFactory::CreateShopItem(gameStatus->GetItemAvailability());
+		CSprite newSprite(g_pTextures->item[rawItem.id]);
 
-		CSprite newSprite;
-		newSprite.Load(g_pTextures->item[rawItem.id]);
-
-		newItem->Init(std::move(rawItem), std::move(newSprite));
+		InventoryItemWrapper* newItem = new InventoryItemWrapper(std::move(rawItem), std::move(newSprite));
 
 		int xPos = i * 116 + shopPanel.GetGlobalRect().left + 33;
 		int yPos = shopPanel.GetGlobalRect().top + 114;
@@ -198,7 +186,7 @@ Item ShopPanel::RetrieveCurrentlySelectedItem()
 {
 	if (currentlySelectedItem != -1)
 	{
-		if (items[currentlySelectedItem]->GetItem().id < CONSUMABLE_ITEMS_START || gameStatus->GetConsumablesAvailability().at(items[currentlySelectedItem]->GetItem().id))
+		if (items[currentlySelectedItem]->GetItem().id < CONSUMABLE_ITEMS_START || g_pGameStatus->GetConsumablesAvailability().at(items[currentlySelectedItem]->GetItem().id))
 		{
 			auto item = items[currentlySelectedItem]->GetItem();
 
@@ -223,7 +211,7 @@ bool ShopPanel::IsItemSelected()
 {
 	if (currentlySelectedItem != -1)
 	{
-		if (items[currentlySelectedItem]->GetItem().id < CONSUMABLE_ITEMS_START || gameStatus->GetConsumablesAvailability().at(items[currentlySelectedItem]->GetItem().id))
+		if (items[currentlySelectedItem]->GetItem().id < CONSUMABLE_ITEMS_START || g_pGameStatus->GetConsumablesAvailability().at(items[currentlySelectedItem]->GetItem().id))
 			return true;
 	}
 	return false;

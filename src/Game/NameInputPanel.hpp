@@ -6,7 +6,8 @@
 class NameInputPanel {
 public:
 
-    void Init(const std::string &_initialString);
+    NameInputPanel(const std::string& _initialString);
+
     bool Update(CGameEngine *_engine);
     void Render(sf::RenderTarget &_target);
 

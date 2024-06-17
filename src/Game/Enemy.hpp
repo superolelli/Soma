@@ -10,9 +10,8 @@ class Battle;
 class Enemy : public Combatant
 {
 public:
-	Enemy(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
 
-	virtual void Init() override;
+	Enemy(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
 
 	virtual int GetID() override { return enemyID; }
 	bool IsPlayer() override { return false; }

@@ -9,10 +9,11 @@ class SellMultipleDialog
 {
 public:
 
-	void Init(CGameEngine *_engine);
+	SellMultipleDialog(CGameEngine* _engine);
+	~SellMultipleDialog();
+
 	void Update();
 	void Render();
-	void Quit();
 
 	void SetItem(Item const &_item);
 

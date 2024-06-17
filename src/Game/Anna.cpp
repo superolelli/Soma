@@ -1,12 +1,6 @@
 #include "Anna.hpp"
 
-PlayerAnna::PlayerAnna(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
-	: Player(_id, _engine, _notificationRenderer)
+PlayerAnna::PlayerAnna(CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
+	: Player(CombatantID::Anna, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID::Anna))
 {
-}
-
-void PlayerAnna::Init()
-{
-	combatantObject = g_pModels->GetNewCombatantModelInstance(CombatantID::Anna);
-	this->Player::Init();
 }

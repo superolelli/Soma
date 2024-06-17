@@ -9,9 +9,8 @@ class Tooltip
 {
 public:
 
-	virtual void Init();
+	Tooltip(bool _showAboveY=true);
 
-	void SetShowAboveY(bool _aboveY);
 	void ShowTooltip(sf::RenderTarget &_target, int _x, int _y);
 
 protected:

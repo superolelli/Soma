@@ -17,9 +17,11 @@ void LoadAllData(std::atomic<bool> *_everythingLoaded, CGameEngine *_engine)
 }
 
 
-void CInitialState::Init(CGameEngine *_engine)
+CInitialState::CInitialState(CGameEngine *_engine)
+	: GameState(_engine)
+	, everythingLoaded(false)
 {
-	m_pGameEngine = _engine;
+	srand(time(0));
 
 	_engine->UseSimpleRenderLoop(true);
 
@@ -28,17 +30,15 @@ void CInitialState::Init(CGameEngine *_engine)
 	loadingScreen->setCurrentAnimation("loading");
 	loadingScreen->setPlaybackSpeedRatio(0.65);
 	loadingScreen->setPosition(SpriterEngine::point(0, 1080));
-	everythingLoaded = false;
 	loadingThread = new std::thread(&LoadAllData, &everythingLoaded, m_pGameEngine);
 }
 
 
-void CInitialState::Cleanup()
+CInitialState::~CInitialState()
 {
 	m_pGameEngine->UseSimpleRenderLoop(false);
 	SAFE_DELETE(modelLoadingScreen);
 	SAFE_DELETE(loadingScreen);
-	m_pGameEngine = nullptr;
 }
 
 
@@ -74,7 +74,7 @@ void CInitialState::Update()
 		SAFE_DELETE(modelLoadingScreen);
 		SAFE_DELETE(loadingScreen);
 
-		m_pGameEngine->ChangeStateImmediately(new MainMenu);
+		m_pGameEngine->ChangeStateImmediately(new MainMenu(m_pGameEngine));
 	}
 }
 

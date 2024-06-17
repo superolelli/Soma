@@ -18,12 +18,8 @@ class Game : public GameState
 {
 public:
 
-	Game(LevelType _levelType);
-
-	void SetGameStatusPtr(GameStatus *_statusPtr) { gameStatus = _statusPtr; } //has to be called before Game::Init()
-
-	void Init(CGameEngine *_engine) override;
-	void Cleanup() override;
+	Game(CGameEngine *_engine, LevelType _levelType);
+	~Game();
 
 	void Pause() override;
 	void Resume() override;
@@ -43,7 +39,6 @@ private:
 	Level *level;
 	AdventureGroup adventureGroup;
 	GUI *currentGUI;
-	GameStatus *gameStatus;
 
 	Battle *currentBattle;
 

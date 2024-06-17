@@ -6,36 +6,40 @@
 #include "Resources\SoundManager.hpp"
 
 
-void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
+SkillPanel::SkillPanel(CGameEngine *_engine)
+	: engine(_engine)
+	, currentPlayer(0)
+	, currentAbility(0)
+	, currentSkill(0)
+	, closed(true)
+	, skillPanel(g_pTextures->skillPanel)
+	, bridgePiece(g_pTextures->skillPanelBridgePiece)
+	, skilledIndicator(g_pTextures->skillPanelSkilledIndicator)
+	, abilityPlaceholders(g_pTextures->skillPanelAbilityPlaceholder)
+	, connectionsNotSkilled{ 
+		  {g_pTextures->skillPanelConnectionsNotSkilled[0]}
+		, {g_pTextures->skillPanelConnectionsNotSkilled[1]}
+		, {g_pTextures->skillPanelConnectionsNotSkilled[2]}
+		, {g_pTextures->skillPanelConnectionsNotSkilled[3]}
+		, {g_pTextures->skillPanelConnectionsNotSkilled[2]}
+		, {g_pTextures->skillPanelConnectionsNotSkilled[2]}}
+	, connectionsSkilled{
+		  {g_pTextures->skillPanelConnectionsSkilled[0]}
+		, {g_pTextures->skillPanelConnectionsSkilled[1]}
+		, {g_pTextures->skillPanelConnectionsSkilled[2]}
+		, {g_pTextures->skillPanelConnectionsSkilled[3]}
+		, {g_pTextures->skillPanelConnectionsSkilled[2]}
+		, {g_pTextures->skillPanelConnectionsSkilled[2]} }
+	, currentSkillFrame(g_pTextures->skillPanelSelectedSkillFrame)
+	, diceSymbol(g_pTextures->skillPanelDice)
+	, buttonNext(g_pTextures->skillPanelButtonNext, Buttontypes::Up)
+	, buttonPrevious(g_pTextures->skillPanelButtonPrevious, Buttontypes::Up)
+	, buttonClose(g_pTextures->skillPanelButtonClose, Buttontypes::Motion_Up)
+	, buttonBuy(g_pTextures->bangGenericButton, Buttontypes::Motion_Up)
 {
-	gameStatus = _gameStatus;
-	engine = _engine;
-
-	currentPlayer = 0;
-	currentAbility = 0;
-	currentSkill = 0;
-
-	closed = true;
-
-	abilityTooltip.Init();
-
-	skillPanel.Load(g_pTextures->skillPanel);
 	skillPanel.SetPos(150, 70);
-
-	bridgePiece.Load(g_pTextures->skillPanelBridgePiece);
 	bridgePiece.SetPos(skillPanel.GetGlobalRect().left + 525, skillPanel.GetGlobalRect().top + 176);
-
-	skilledIndicator.Load(g_pTextures->skillPanelSkilledIndicator);
-
-	abilityPlaceholders.Load(g_pTextures->skillPanelAbilityPlaceholder);
 	abilityPlaceholders.SetPos(skillPanel.GetGlobalRect().left + 623, skillPanel.GetGlobalRect().top + 190);
-
-	connectionsNotSkilled[0].Load(g_pTextures->skillPanelConnectionsNotSkilled[0]);
-	connectionsNotSkilled[1].Load(g_pTextures->skillPanelConnectionsNotSkilled[1]);
-	connectionsNotSkilled[2].Load(g_pTextures->skillPanelConnectionsNotSkilled[2]);
-	connectionsNotSkilled[3].Load(g_pTextures->skillPanelConnectionsNotSkilled[3]);
-	connectionsNotSkilled[4].Load(g_pTextures->skillPanelConnectionsNotSkilled[2]);
-	connectionsNotSkilled[5].Load(g_pTextures->skillPanelConnectionsNotSkilled[2]);
 
 	connectionsNotSkilled[0].SetPos(skillPanel.GetGlobalRect().left + 874, skillPanel.GetGlobalRect().top + 270);
 	connectionsNotSkilled[1].SetPos(skillPanel.GetGlobalRect().left + 681, skillPanel.GetGlobalRect().top + 406);
@@ -44,13 +48,6 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 	connectionsNotSkilled[4].SetPos(skillPanel.GetGlobalRect().left + 1377, skillPanel.GetGlobalRect().top + 453);
 	connectionsNotSkilled[5].SetPos(skillPanel.GetGlobalRect().left + 1036, skillPanel.GetGlobalRect().top + 534);
 
-	connectionsSkilled[0].Load(g_pTextures->skillPanelConnectionsSkilled[0]);
-	connectionsSkilled[1].Load(g_pTextures->skillPanelConnectionsSkilled[1]);
-	connectionsSkilled[2].Load(g_pTextures->skillPanelConnectionsSkilled[2]);
-	connectionsSkilled[3].Load(g_pTextures->skillPanelConnectionsSkilled[3]);
-	connectionsSkilled[4].Load(g_pTextures->skillPanelConnectionsSkilled[2]);
-	connectionsSkilled[5].Load(g_pTextures->skillPanelConnectionsSkilled[2]);
-
 	connectionsSkilled[0].SetPos(skillPanel.GetGlobalRect().left + 874, skillPanel.GetGlobalRect().top + 270);
 	connectionsSkilled[1].SetPos(skillPanel.GetGlobalRect().left + 681, skillPanel.GetGlobalRect().top + 406);
 	connectionsSkilled[2].SetPos(skillPanel.GetGlobalRect().left + 671, skillPanel.GetGlobalRect().top + 463);
@@ -58,15 +55,12 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 	connectionsSkilled[4].SetPos(skillPanel.GetGlobalRect().left + 1377, skillPanel.GetGlobalRect().top + 453);
 	connectionsSkilled[5].SetPos(skillPanel.GetGlobalRect().left + 1036, skillPanel.GetGlobalRect().top + 534);
 
-
-	abilities[4][4];
-
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			abilities[i][j].Load(g_pTextures->abilities[i][j]);
-			abilities[i][j].SetPos(skillPanel.GetGlobalRect().left + 398, skillPanel.GetGlobalRect().top + 195 + j * 155);
+			abilities[i][j] = new CSprite(g_pTextures->abilities[i][j]);
+			abilities[i][j]->SetPos(skillPanel.GetGlobalRect().left + 398, skillPanel.GetGlobalRect().top + 195 + j * 155);
 		}
 	}
 
@@ -78,27 +72,23 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 
 			for (int a = 0; a < 8; a++)
 			{
-				skills[i][j][a].Load(g_pTextures->skills[i][j][a]);
-				if(gameStatus->IsSkillAcquired(i, j, a) == false && SkillCanBeAcquired(i, j, a) == false)
-					skills[i][j][a].SetColor(40, 40, 40);
+				skills[i][j][a] = new CSprite(g_pTextures->skills[i][j][a]);
+				if(g_pGameStatus->IsSkillAcquired(i, j, a) == false && SkillCanBeAcquired(i, j, a) == false)
+					skills[i][j][a]->SetColor(40, 40, 40);
 			}
 
-			skills[i][j][0].SetPos(abilityPlaceholders.GetGlobalRect().left + 233, abilityPlaceholders.GetGlobalRect().top + 180);
-			skills[i][j][1].SetPos(abilityPlaceholders.GetGlobalRect().left + 12, abilityPlaceholders.GetGlobalRect().top + 182);
-			skills[i][j][2].SetPos(abilityPlaceholders.GetGlobalRect().left + 11, abilityPlaceholders.GetGlobalRect().top + 468);
-			skills[i][j][3].SetPos(abilityPlaceholders.GetGlobalRect().left + 517, abilityPlaceholders.GetGlobalRect().top + 179);
-			skills[i][j][4].SetPos(abilityPlaceholders.GetGlobalRect().left + 718, abilityPlaceholders.GetGlobalRect().top + 181);
-			skills[i][j][5].SetPos(abilityPlaceholders.GetGlobalRect().left + 716, abilityPlaceholders.GetGlobalRect().top + 468);
-			skills[i][j][6].SetPos(abilityPlaceholders.GetGlobalRect().left + 378, abilityPlaceholders.GetGlobalRect().top + 330);
-			skills[i][j][7].SetPos(abilityPlaceholders.GetGlobalRect().left + 378, abilityPlaceholders.GetGlobalRect().top + 467);
+			skills[i][j][0]->SetPos(abilityPlaceholders.GetGlobalRect().left + 233, abilityPlaceholders.GetGlobalRect().top + 180);
+			skills[i][j][1]->SetPos(abilityPlaceholders.GetGlobalRect().left + 12, abilityPlaceholders.GetGlobalRect().top + 182);
+			skills[i][j][2]->SetPos(abilityPlaceholders.GetGlobalRect().left + 11, abilityPlaceholders.GetGlobalRect().top + 468);
+			skills[i][j][3]->SetPos(abilityPlaceholders.GetGlobalRect().left + 517, abilityPlaceholders.GetGlobalRect().top + 179);
+			skills[i][j][4]->SetPos(abilityPlaceholders.GetGlobalRect().left + 718, abilityPlaceholders.GetGlobalRect().top + 181);
+			skills[i][j][5]->SetPos(abilityPlaceholders.GetGlobalRect().left + 716, abilityPlaceholders.GetGlobalRect().top + 468);
+			skills[i][j][6]->SetPos(abilityPlaceholders.GetGlobalRect().left + 378, abilityPlaceholders.GetGlobalRect().top + 330);
+			skills[i][j][7]->SetPos(abilityPlaceholders.GetGlobalRect().left + 378, abilityPlaceholders.GetGlobalRect().top + 467);
 		}
 	}
 
-
-	currentSkillFrame.Load(g_pTextures->skillPanelSelectedSkillFrame);
-	currentSkillFrame.SetPos(skills[currentPlayer][currentAbility][currentSkill].GetGlobalRect().left - 36, skills[currentPlayer][currentAbility][currentSkill].GetGlobalRect().top - 37);
-
-	diceSymbol.Load(g_pTextures->skillPanelDice);
+	currentSkillFrame.SetPos(skills[currentPlayer][currentAbility][currentSkill]->GetGlobalRect().left - 36, skills[currentPlayer][currentAbility][currentSkill]->GetGlobalRect().top - 37);
 	diceSymbol.SetPos(skillPanel.GetGlobalRect().left + 1240, skillPanel.GetGlobalRect().top + 795);
 
 	currentPlayerName.setCharacterSize(47);
@@ -136,19 +126,15 @@ void SkillPanel::Init(GameStatus *_gameStatus, CGameEngine *_engine)
 	chosenSkillPrice.setString(std::to_string(skillCost[currentSkill]));
 	chosenSkillPrice.setPosition(diceSymbol.GetGlobalRect().left + 65, diceSymbol.GetGlobalRect().top + 20);
 
-	buttonNext.Load(g_pTextures->skillPanelButtonNext, Buttontypes::Up);
 	buttonNext.SetPos(skillPanel.GetGlobalRect().left + 217, skillPanel.GetGlobalRect().top + 66);
 	buttonNext.SetCallback([](){g_pSounds->PlaySound(soundID::CLICK);});
 
-	buttonPrevious.Load(g_pTextures->skillPanelButtonPrevious, Buttontypes::Up);
 	buttonPrevious.SetPos(skillPanel.GetGlobalRect().left + 15, skillPanel.GetGlobalRect().top + 66);
 	buttonPrevious.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
-	buttonClose.Load(g_pTextures->skillPanelButtonClose, Buttontypes::Motion_Up);
 	buttonClose.SetPos(skillPanel.GetGlobalRect().left + 1475, skillPanel.GetGlobalRect().top + 66);
 	buttonClose.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
-	buttonBuy.Load(g_pTextures->bangGenericButton, Buttontypes::Motion_Up);
 	buttonBuy.SetButtonstring("Kaufen");
 	buttonBuy.SetButtontextFont(g_pFonts->f_trajan);
 	buttonBuy.SetButtontextCharactersize(30);
@@ -207,10 +193,10 @@ void SkillPanel::Update()
 
 		for (int i = 0; i < 8; i++)
 		{
-			if (skills[currentPlayer][currentAbility][i].GetGlobalRect().contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) == Keystates::Pressed)
+			if (skills[currentPlayer][currentAbility][i]->GetGlobalRect().contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) == Keystates::Pressed)
 			{
 				currentSkill = i;
-				currentSkillFrame.SetPos(skills[currentPlayer][currentAbility][currentSkill].GetGlobalRect().left - 36, skills[currentPlayer][currentAbility][currentSkill].GetGlobalRect().top - 37);
+				currentSkillFrame.SetPos(skills[currentPlayer][currentAbility][currentSkill]->GetGlobalRect().left - 36, skills[currentPlayer][currentAbility][currentSkill]->GetGlobalRect().top - 37);
 				UpdateGUIForChosenSkill();
 			}
 		}
@@ -261,10 +247,10 @@ void SkillPanel::CheckBuyButton()
 {
 	if (buttonBuy.Update(*engine) == true && SkillCanBeAcquired(currentPlayer, currentAbility, currentSkill))
 	{
-		if (gameStatus->GetDiceAmount() >= skillCost[currentSkill])
+		if (g_pGameStatus->GetDiceAmount() >= skillCost[currentSkill])
 		{
-			gameStatus->RemoveDice(skillCost[currentSkill]);
-			gameStatus->AcquireSkill(currentPlayer, currentAbility, currentSkill);
+			g_pGameStatus->RemoveDice(skillCost[currentSkill]);
+			g_pGameStatus->AcquireSkill(currentPlayer, currentAbility, currentSkill);
 			g_pSounds->PlaySound(soundID::SKILL_ACQUIRED);
 			RecolorSkills();
 			UpdateCurrentSkillFrame();
@@ -276,7 +262,7 @@ void SkillPanel::CheckBuyButton()
 
 void SkillPanel::UpdateBuyButton()
 {
-	if (SkillCanBeAcquired(currentPlayer, currentAbility, currentSkill) && skillCost[currentSkill] <= gameStatus->GetDiceAmount())
+	if (SkillCanBeAcquired(currentPlayer, currentAbility, currentSkill) && skillCost[currentSkill] <= g_pGameStatus->GetDiceAmount())
 		buttonBuy.SetEnabled();
 	else
 		buttonBuy.SetDisabled();
@@ -293,7 +279,7 @@ void SkillPanel::UpdateChosenSkillName()
 void SkillPanel::UpdateCurrentSkillFrame()
 {
 	if (!SkillCanBeAcquired(currentPlayer, currentAbility, currentSkill) &&
-		!gameStatus->IsSkillAcquired(currentPlayer, currentAbility, currentSkill))
+		!g_pGameStatus->IsSkillAcquired(currentPlayer, currentAbility, currentSkill))
 	{
 		currentSkillFrame.SetColor(180, 150, 150);
 	}
@@ -339,19 +325,19 @@ void SkillPanel::Render()
 		RenderSkilledIndicators();
 
 		for (auto &a : abilities[currentPlayer])
-			a.Render(engine->GetRenderTarget());
+			a->Render(engine->GetRenderTarget());
 
-		auto xPos = abilities[currentPlayer][currentAbility].GetGlobalRect().left;
-		auto yPos = abilities[currentPlayer][currentAbility].GetGlobalRect().top;
-		abilities[currentPlayer][currentAbility].SetPos(abilityPlaceholders.GetGlobalRect().left + 378, abilityPlaceholders.GetGlobalRect().top + 12);
-		abilities[currentPlayer][currentAbility].Render(engine->GetRenderTarget());
+		auto xPos = abilities[currentPlayer][currentAbility]->GetGlobalRect().left;
+		auto yPos = abilities[currentPlayer][currentAbility]->GetGlobalRect().top;
+		abilities[currentPlayer][currentAbility]->SetPos(abilityPlaceholders.GetGlobalRect().left + 378, abilityPlaceholders.GetGlobalRect().top + 12);
+		abilities[currentPlayer][currentAbility]->Render(engine->GetRenderTarget());
 
-		auto abilityRect = abilities[currentPlayer][currentAbility].GetGlobalRect();
-		abilities[currentPlayer][currentAbility].SetPos(xPos, yPos);
+		auto abilityRect = abilities[currentPlayer][currentAbility]->GetGlobalRect();
+		abilities[currentPlayer][currentAbility]->SetPos(xPos, yPos);
 		
 
 		for (auto &s : skills[currentPlayer][currentAbility])
-			s.Render(engine->GetRenderTarget());
+			s->Render(engine->GetRenderTarget());
 
 		currentSkillFrame.Render(engine->GetRenderTarget());
 
@@ -362,7 +348,7 @@ void SkillPanel::Render()
 		for(auto &n : abilityName)
 			engine->GetRenderTarget().draw(n);
 
-		if (!gameStatus->IsSkillAcquired(currentPlayer, currentAbility, currentSkill))
+		if (!g_pGameStatus->IsSkillAcquired(currentPlayer, currentAbility, currentSkill))
 		{
 			diceSymbol.Render(engine->GetRenderTarget());
 			engine->GetRenderTarget().draw(chosenSkillPrice);
@@ -375,7 +361,7 @@ void SkillPanel::Render()
 
 		for (int i = 0; i < 8; i++)
 		{
-			if (skills[currentPlayer][currentAbility][i].GetGlobalRect().contains(engine->GetMousePos()))
+			if (skills[currentPlayer][currentAbility][i]->GetGlobalRect().contains(engine->GetMousePos()))
 				ShowTooltip(i);
 		}
 
@@ -388,7 +374,7 @@ void SkillPanel::Render()
 
 void SkillPanel::RenderConnection(int connection, int parentSkill)
 {
-	if (gameStatus->IsSkillAcquired(currentPlayer, currentAbility, parentSkill))
+	if (g_pGameStatus->IsSkillAcquired(currentPlayer, currentAbility, parentSkill))
 		connectionsSkilled[connection].Render(engine->GetRenderTarget());
 	else
 		connectionsNotSkilled[connection].Render(engine->GetRenderTarget());
@@ -403,9 +389,9 @@ void SkillPanel::RenderSkilledIndicators()
 
 	for (int i = 0; i < 8; i++)
 	{
-		if (gameStatus->IsSkillAcquired(currentPlayer, currentAbility, i))
+		if (g_pGameStatus->IsSkillAcquired(currentPlayer, currentAbility, i))
 		{
-			skilledIndicator.SetPos(skills[currentPlayer][currentAbility][i].GetGlobalRect().left - 9, skills[currentPlayer][currentAbility][i].GetGlobalRect().top - 9);
+			skilledIndicator.SetPos(skills[currentPlayer][currentAbility][i]->GetGlobalRect().left - 9, skills[currentPlayer][currentAbility][i]->GetGlobalRect().top - 9);
 			skilledIndicator.Render(engine->GetRenderTarget());
 		}
 	}
@@ -443,7 +429,7 @@ void SkillPanel::ShowAbilityTooltip(sf::IntRect &_abilityRect)
 
 bool SkillPanel::SkillCanBeAcquired(int _player, int _ability, int _skill)
 {
-	if (gameStatus->IsSkillAcquired(_player, _ability, _skill))
+	if (g_pGameStatus->IsSkillAcquired(_player, _ability, _skill))
 		return false;
 
 	if (_skill == 0 || _skill == 3)
@@ -452,21 +438,21 @@ bool SkillPanel::SkillCanBeAcquired(int _player, int _ability, int _skill)
 	switch (_skill)
 	{
 	case 1:
-		return gameStatus->IsSkillAcquired(_player, _ability, 0);
+		return g_pGameStatus->IsSkillAcquired(_player, _ability, 0);
 		break;
 	case 2: 
-		return gameStatus->IsSkillAcquired(_player, _ability, 1);
+		return g_pGameStatus->IsSkillAcquired(_player, _ability, 1);
 		break;
 	case 4:
-		return gameStatus->IsSkillAcquired(_player, _ability, 3);
+		return g_pGameStatus->IsSkillAcquired(_player, _ability, 3);
 	case 5:
-		return gameStatus->IsSkillAcquired(_player, _ability, 4);
+		return g_pGameStatus->IsSkillAcquired(_player, _ability, 4);
 	case 6:
-		return gameStatus->IsSkillAcquired(_player, _ability, 0)
-			   && gameStatus->IsSkillAcquired(_player, _ability, 3);
+		return g_pGameStatus->IsSkillAcquired(_player, _ability, 0)
+			   && g_pGameStatus->IsSkillAcquired(_player, _ability, 3);
 		break;
 	case 7:
-		return gameStatus->IsSkillAcquired(_player, _ability, 6);
+		return g_pGameStatus->IsSkillAcquired(_player, _ability, 6);
 		break;
 	default:
 		return false;
@@ -478,9 +464,9 @@ void SkillPanel::RecolorSkills()
 {
 	for (int i = 0; i < 8; i++)
 	{
-		if (gameStatus->IsSkillAcquired(currentPlayer, currentAbility, i) == false && SkillCanBeAcquired(currentPlayer, currentAbility, i) == false)
-			skills[currentPlayer][currentAbility][i].SetColor(40, 40, 40);
+		if (g_pGameStatus->IsSkillAcquired(currentPlayer, currentAbility, i) == false && SkillCanBeAcquired(currentPlayer, currentAbility, i) == false)
+			skills[currentPlayer][currentAbility][i]->SetColor(40, 40, 40);
 		else
-			skills[currentPlayer][currentAbility][i].SetColor(255, 255, 255);
+			skills[currentPlayer][currentAbility][i]->SetColor(255, 255, 255);
 	}
 }

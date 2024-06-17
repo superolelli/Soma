@@ -4,11 +4,10 @@
 
 
 
-void CombatantStatus::Init(Combatant *_combatant, NotificationRenderer *_notificationRenderer)
+CombatantStatus::CombatantStatus(Combatant *_combatant, NotificationRenderer *_notificationRenderer)
+	: combatant(_combatant)
+	, notificationRenderer(_notificationRenderer)
 {
-	combatant = _combatant;
-	notificationRenderer = _notificationRenderer;
-
 	fatigueDebuff["damageMin"] = -3;
 	fatigueDebuff["damageMax"] = -3;
 	fatigueDebuff["dodge"] = -5;

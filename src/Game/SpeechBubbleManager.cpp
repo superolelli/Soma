@@ -2,12 +2,12 @@
 #include "Resources/StringManager.hpp"
 
 
-void SpeechBubbleManager::Init(CGameEngine* _engine, AdventureGroup* _adventureGroup)
+SpeechBubbleManager::SpeechBubbleManager(CGameEngine* _engine, AdventureGroup* _adventureGroup)
+    : engine(_engine)
+    , adventureGroup(_adventureGroup)
+    , speechBubblesActive(true)
+    , speechBubbleTimer(1.0f)
 {
-    engine = _engine;
-    adventureGroup = _adventureGroup;
-    speechBubblesActive = true;
-    speechBubbleTimer = 1.0f;
 }
 
 

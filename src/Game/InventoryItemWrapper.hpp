@@ -7,7 +7,7 @@ class InventoryItemWrapper
 {
 public:
 
-	void Init(Item &&_item, CSprite &&_sprite);
+	InventoryItemWrapper(Item&& _item, CSprite&& _sprite);
 	void Render(sf::RenderTarget &_target);
 
 	void SetPos(int _x, int _y);

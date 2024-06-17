@@ -2,8 +2,20 @@
 
 
 
-CButton::CButton()
+CButton::CButton(sf::Texture const& _texture, Buttontypes _type, std::string const& _str)
+	: m_ButtonSprite(_texture, 2 + static_cast<int>(_type) / 2, _texture.getSize().x / (2 + static_cast<int>(_type) / 2), _texture.getSize().y) //(int)(type/2) is 2 for up/down and 3 for motion_up/motion_down buttons
+	, m_Buttontype(_type)
+	, nextFrame(0.0f)
+	, isEnabled(true)
+	, m_Buttonstring(_str)
 {
+	//set the button's position and type
+	m_ButtonSprite.SetPos(0, 0);
+
+	m_Buttontext.setString(m_Buttonstring);
+	SetDefaultButtontext();
+	m_Buttontext.setPosition(m_ButtonSprite.GetRect().left + (m_ButtonSprite.GetRect().width - m_Buttontext.getGlobalBounds().width) / 2, m_ButtonSprite.GetRect().top + (m_ButtonSprite.GetRect().height - m_Buttontext.getGlobalBounds().height) / 2);
+
 }
 
 
@@ -28,29 +40,6 @@ void CButton::SetEnabled()
 void CButton::SetCallback(std::function<void()> _callback)
 {
 	m_Callback = _callback;
-}
-
-//Loads the texture, sets the position and type of the button
-void CButton::Load(sf::Texture const &_texture, Buttontypes _type, std::string const &_str)
-{
-	//(int)(type/2) is 2 for up/down and 3 for motion_up/motion_down buttons
-	m_ButtonSprite.Load(_texture, 2 + (int)(static_cast<int>(_type) / 2), _texture.getSize().x / (2 + (int)(static_cast<int>(_type) / 2)), _texture.getSize().y);
-
-	//set the button's position and type
-	m_ButtonSprite.SetPos(0, 0);
-	m_Buttontype = _type;
-
-	nextFrame = 0.0f;
-
-	isEnabled = true;
-
-	//sets the buttonstring
-	m_Buttonstring = _str;
-	m_Buttontext.setString(m_Buttonstring);
-
-	SetDefaultButtontext();
-
-	m_Buttontext.setPosition(m_ButtonSprite.GetRect().left + (m_ButtonSprite.GetRect().width - m_Buttontext.getGlobalBounds().width) / 2, m_ButtonSprite.GetRect().top + (m_ButtonSprite.GetRect().height - m_Buttontext.getGlobalBounds().height) / 2);
 }
 
 

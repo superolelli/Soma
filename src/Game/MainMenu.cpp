@@ -1,33 +1,28 @@
 #include "MainMenu.hpp"
 #include "MainRoom.hpp"
-#include "SavegameManager.hpp"
+#include "SavegameUtils.hpp"
 
 
-void MainMenu::Init(CGameEngine* _engine)
+MainMenu::MainMenu(CGameEngine* _engine)
+	: GameState(_engine)
+	, activeGameslot(-1)
+	, background(g_pTextures->mainMenuBackground)
+	, buttonClose(g_pTextures->lootablePanelCloseButton, Buttontypes::Motion_Up)
+	, savegamePanels{ {_engine}, {_engine}, {_engine}}
+	, nameInputPanel("Neues Spiel")
 {
-	SavegameManager::InitSavegameDirectory();
-	m_pGameEngine = _engine;
-
-	activeGameslot = -1;
-
-	background.Load(g_pTextures->mainMenuBackground);
-
-	buttonClose.Load(g_pTextures->lootablePanelCloseButton, Buttontypes::Motion_Up);
+	SavegameUtils::InitSavegameDirectory();
 	buttonClose.SetPos(1824, 19);
 
-	for (auto& s : savegamePanels)
-		s.Init(m_pGameEngine);
-
 	savegamePanels[0].SetPos(50, 500);
-	savegamePanels[0].SetName(SavegameManager::GetSavegameName(0));
+	savegamePanels[0].SetName(SavegameUtils::GetSavegameName(0));
 
 	savegamePanels[1].SetPos(650, 500);
-	savegamePanels[1].SetName(SavegameManager::GetSavegameName(1));
+	savegamePanels[1].SetName(SavegameUtils::GetSavegameName(1));
 
 	savegamePanels[2].SetPos(1250, 500);
-	savegamePanels[2].SetName(SavegameManager::GetSavegameName(2));
+	savegamePanels[2].SetName(SavegameUtils::GetSavegameName(2));
 
-	nameInputPanel.Init("Neues Spiel");
 	nameInputPanel.SetVisible(false);
 	nameInputPanel.SetPos(_engine->GetWindowSize().x / 2 - nameInputPanel.GetRect().width / 2, _engine->GetWindowSize().y / 2 - nameInputPanel.GetRect().height / 2);
 
@@ -36,11 +31,6 @@ void MainMenu::Init(CGameEngine* _engine)
 	blurShader.setUniform("u_texture", sf::Shader::CurrentTexture);
 	blurShader.setUniform("u_kernelSize", 5.0f);
 	blurShader.setUniform("u_blurringRect", sf::Glsl::Vec4(0.0f, 0.0f, m_pGameEngine->GetWindowSize().x, m_pGameEngine->GetWindowSize().y));
-}
-
-void MainMenu::Cleanup()
-{
-	m_pGameEngine = nullptr;
 }
 
 void MainMenu::Pause()
@@ -72,11 +62,9 @@ void MainMenu::Update()
 		nameInputPanel.SetVisible(false);
 		savegamePanels[activeGameslot].SetName(nameInputPanel.GetString());
 
-		auto gameStatus = new GameStatus();
-		gameStatus->Init();
-		gameStatus->SetFilepath(SavegameManager::SAVEGAME_PATH + std::to_string(activeGameslot) + "_" + nameInputPanel.GetString());
-		SavegameManager::StoreSavegame(gameStatus);
-		m_pGameEngine->PushStateImmediately(new MainRoom(gameStatus));
+		g_pGameStatus->Reset(SavegameUtils::SAVEGAME_PATH + std::to_string(activeGameslot) + "_" + nameInputPanel.GetString());
+		g_pGameStatus->StoreToFile();
+		m_pGameEngine->PushStateImmediately(new MainRoom(m_pGameEngine));
 		return;
 	}
 
@@ -85,8 +73,8 @@ void MainMenu::Update()
 		{
 			auto updateResult = savegamePanels[i].Update();
 			if (updateResult == SavegamePanel::SavegameState::Continue) {
-				auto gameStatus = SavegameManager::LoadSavegame(i);
-				m_pGameEngine->PushStateImmediately(new MainRoom(gameStatus));
+				g_pGameStatus->LoadFromFile(SavegameUtils::GetSavegamePath(i));
+				m_pGameEngine->PushStateImmediately(new MainRoom(m_pGameEngine));
 				return;
 			}	
 			else if (updateResult == SavegamePanel::SavegameState::Create) {
@@ -94,7 +82,7 @@ void MainMenu::Update()
 				nameInputPanel.SetVisible(true);
 			}
 			else if(updateResult == SavegamePanel::SavegameState::Delete){
-				SavegameManager::DeleteSavegame(i);
+				SavegameUtils::DeleteSavegame(i);
 			}
 		}
 			

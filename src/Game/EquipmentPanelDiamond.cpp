@@ -1,20 +1,23 @@
 #include "EquipmentPanelDiamond.hpp"
 
 
-void EquipmentPanelDiamond::Init(CGameEngine *_engine, int _xPos, int _yPos)
+EquipmentPanelDiamond::EquipmentPanelDiamond(CGameEngine *_engine)
+	: engine(_engine)
+	, diamond(g_pTextures->inventoryDiamond)
+	, recolorTime(0.0)
 {
-	engine = _engine;
-	diamond.Load(g_pTextures->inventoryDiamond);
-	diamond.SetPos(_xPos, _yPos);
 	diamond.SetColor(0, 0, 0);
 
-	recolorTime = 0.0;
 	diamondStats.stats.Reset();
 	diamondStats.level = 0;
 	diamondStats.name = "Edelstein der Macht  ";
 
-	tooltip.Init();
 	tooltip.SetEquipmentStats(&diamondStats);
+}
+
+void EquipmentPanelDiamond::SetPos(int _xPos, int _yPos)
+{
+	diamond.SetPos(_xPos, _yPos);
 }
 
 void EquipmentPanelDiamond::Update()

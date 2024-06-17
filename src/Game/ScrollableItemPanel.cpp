@@ -3,14 +3,11 @@
 #include "Resources\StringManager.hpp"
 #include "Resources/ObjectPropertiesManager.hpp"
 
-void ScrollableItemPanel::Init(CGameEngine * _engine)
+ScrollableItemPanel::ScrollableItemPanel(CGameEngine * _engine)
+	: ItemPanel(_engine, g_pTextures->scrollableItemPanel)
+	, currentUpperRow(0)
+	, scrollbar(35, 566)
 {
-	ItemPanel::Init(_engine);
-
-	currentUpperRow = 0;
-	itemPanel.Load(g_pTextures->scrollableItemPanel);
-
-	scrollbar.Init(35, 566);
 	scrollbar.SetColor(sf::Color(28, 28, 28));
 }
 
@@ -71,11 +68,8 @@ void ScrollableItemPanel::Render(int _excludeItemNumber)
 
 void ScrollableItemPanel::AddItem(Item _item)
 {
-	InventoryItemWrapper *newItem = new InventoryItemWrapper;
-
-	CSprite newSprite;
-	newSprite.Load(g_pTextures->item[_item.id]);
-	newItem->Init(std::move(_item), std::move(newSprite));
+	CSprite newSprite(g_pTextures->item[_item.id]);
+	InventoryItemWrapper *newItem = new InventoryItemWrapper(std::move(_item), std::move(newSprite));
 
 	int freeSlot = GetFirstFreeSlot();
 	if (freeSlot == -1)

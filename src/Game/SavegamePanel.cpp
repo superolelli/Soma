@@ -2,26 +2,22 @@
 #include "Resources/TextureManager.hpp"
 #include "Resources/FontManager.hpp"
 
-void SavegamePanel::Init(CGameEngine *_engine, const std::string &_name)
+SavegamePanel::SavegamePanel(CGameEngine *_engine, const std::string &_name)
+    : engine(_engine)
+    , clicked(false)
+    , empty(_name == "")
+    , panel(g_pTextures->savegamePanel)
+    , continueGameButton(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Fortsetzen")
+    , deleteGameButton(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Löschen")
+    , newGameButton(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Neues Spiel")
 {
-    engine = _engine;
-    clicked = false;
-
-    empty = (_name == "");
-
-    panel.Load(g_pTextures->savegamePanel);
     auto textID = panel.AddText(empty ? "Empty" : _name);
     panel.SetTextFont(textID, g_pFonts->f_blackwoodCastle);
     panel.SetTextCharacterSize(textID, 40);
     panel.SetTextPosCentered(textID);
 
-    continueGameButton.Load(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Fortsetzen");
     continueGameButton.SetButtontextFont(g_pFonts->f_blackwoodCastle);
-
-    deleteGameButton.Load(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Löschen");
     deleteGameButton.SetButtontextFont(g_pFonts->f_blackwoodCastle);
-
-    newGameButton.Load(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Neues Spiel");
     newGameButton.SetButtontextFont(g_pFonts->f_blackwoodCastle);
 }
 

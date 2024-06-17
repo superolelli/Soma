@@ -14,18 +14,17 @@
 class Inventory
 {
 public:
+	
+	Inventory(CGameEngine* _engine);
 
-	void Init(GameStatus *_gameStatus, CGameEngine *_engine);
 	void Update();
 	void Render();
-	void Quit();
 
 	void Open(int _player = 0);
 	void Close() { closed = true; }
 	bool IsOpen() { return !closed; }
 
 private:
-	GameStatus *gameStatus;
 	CGameEngine *engine;
 
 	bool closed;
@@ -42,7 +41,6 @@ private:
 	CButton buttonNext;
 	CButton buttonPrevious;
 	CButton buttonClose;
-
 
 	void CheckButtonsForPlayerChoosing();
 	void UpdateGUIForChosenPlayer();

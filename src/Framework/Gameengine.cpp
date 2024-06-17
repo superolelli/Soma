@@ -26,9 +26,6 @@ void CGameEngine::Quit()
 {
 	ClearStates();
 
-	if(nextGameState)
-		nextGameState->Cleanup();
-
 	SAFE_DELETE(nextGameState);
 
 	m_Window.Quit();
@@ -84,7 +81,6 @@ void CGameEngine::PushState(GameState * _state)
 
 void CGameEngine::PushStateImmediately(GameState * _state)
 {
-	_state->Init(this);
 	m_pStates.push_back(_state);
 }
 
@@ -98,7 +94,6 @@ void CGameEngine::PopState()
 
 void CGameEngine::PopStateImmediately()
 {
-	m_pStates.back()->Cleanup();
 	SAFE_DELETE(m_pStates.back());
 	m_pStates.pop_back();
 }
@@ -130,7 +125,6 @@ void CGameEngine::ChangeState(GameState * _state)
 void CGameEngine::ChangeStateImmediately(GameState * _state)
 {
 	ClearStates();
-	_state->Init(this);
 	m_pStates.push_back(_state);
 }
 
@@ -141,7 +135,6 @@ void CGameEngine::ClearStates()
 	//delete every state on the stack
 	for (auto it = m_pStates.rbegin(); it != m_pStates.rend(); it++)
 	{
-		(*it)->Cleanup();
 		SAFE_DELETE(*it);
 	}
 
@@ -160,7 +153,6 @@ void CGameEngine::CheckStates()
 	case action::pop:
 		for (int i = 0; i < nextActionCount; i++)
 		{
-			m_pStates.back()->Cleanup();
 			SAFE_DELETE(m_pStates.back());
 			m_pStates.pop_back();
 		}

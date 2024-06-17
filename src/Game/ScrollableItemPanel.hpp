@@ -9,7 +9,9 @@
 class ScrollableItemPanel : public ItemPanel
 {
 public:
-	void Init(CGameEngine *_engine) override;
+
+	ScrollableItemPanel(CGameEngine* _engine);
+
 	void Update() override;
 	void Render(int _excludeItemNumber = -1) override;
 	void SetPos(int _x, int _y) override;

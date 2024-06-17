@@ -6,7 +6,7 @@ class ItemRowPanel : public ItemPanel
 {
 public:
 
-	void Init(CGameEngine *_engine) override;
+	ItemRowPanel(CGameEngine* _engine);
 	void Update() override;
 	void Render(int _excludeItemNumber = -1) override;
 	void AddItem(Item _item) override;

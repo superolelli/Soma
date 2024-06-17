@@ -13,10 +13,9 @@ class VendingMachinePanel
 {
 public:
 
-	void Init(GameStatus *_gameStatus, CGameEngine *_engine);
+	VendingMachinePanel(CGameEngine* _engine);
 	void Update();
 	void Render();
-	void Quit();
 
 	void Open();
 	void Close() { closed = true; }
@@ -25,7 +24,6 @@ public:
 	void ChooseNewShopItems();
 
 private:
-	GameStatus *gameStatus;
 	CGameEngine *engine;
 
 	CSprite vendingMachinePanel;

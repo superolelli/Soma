@@ -2,24 +2,21 @@
 #include "GameStatus.hpp"
 
 
-void LevelGUICommon::Init(CGameEngine* _engine, GameStatus* _gameStatus, LevelStatus *_levelStatus, NotificationRenderer* _notificationRenderer)
+LevelGUICommon::LevelGUICommon(CGameEngine* _engine, LevelStatus *_levelStatus, NotificationRenderer* _notificationRenderer)
+	: engine(_engine)
+	, notificationRenderer(_notificationRenderer)
+	, fatigueBar(g_pTextures->fatigueBar, g_pTextures->fatigueBarFrame, _levelStatus->GetFatiguePtr(), _levelStatus->GetMaxFatiguePtr())
+	, resourcesStatusBar(engine)
 {
-	engine = _engine;
-	gameStatus = _gameStatus;
-	notificationRenderer = _notificationRenderer;
-
-	fatigueBar.Load(g_pTextures->fatigueBar, g_pTextures->fatigueBarFrame, _levelStatus->GetFatiguePtr(), _levelStatus->GetMaxFatiguePtr());
 	fatigueBar.SetSmoothTransformationTime(0.7);
 	fatigueBar.SetOffsetForInnerPart(6, 15);
 	fatigueBar.SetPos(engine->GetWindowSize().x / 2 - fatigueBar.GetRect().width / 2, 3);
 	fatigueBar.SetText(g_pFonts->f_kingArthur, sf::Color(200,200,200), 10);
-
-	resourcesStatusBar.Init(engine);
 }
 
 void LevelGUICommon::Update()
 {
-	resourcesStatusBar.Update(gameStatus->GetCardsAmount(), gameStatus->GetDiceAmount());
+	resourcesStatusBar.Update(g_pGameStatus->GetCardsAmount(), g_pGameStatus->GetDiceAmount());
 
 	auto fatigueChange = fatigueBar.Update(g_pTimer->GetElapsedTimeSinceLastUpdateAsSeconds());
 	if (fatigueChange != 0)

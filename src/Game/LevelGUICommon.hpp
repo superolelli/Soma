@@ -13,13 +13,12 @@ class LevelGUICommon
 {
 public:
 
-	void Init(CGameEngine* _engine, GameStatus *_gameStatus, LevelStatus *_levelStatus, NotificationRenderer *_notificationRenderer);
+	LevelGUICommon(CGameEngine* _engine, LevelStatus *_levelStatus, NotificationRenderer *_notificationRenderer);
 	void Update();
 	void Render();
 
 private:
 	CGameEngine* engine;
-	GameStatus* gameStatus;
 	NotificationRenderer* notificationRenderer;
 
 	Bar fatigueBar;

@@ -5,7 +5,8 @@
 class ItemPanelDragAndDropDecorator : public ItemPanelDecorator
 {
 public:
-	void Init(CGameEngine *_engine, ItemPanel *_itemPanel) override;
+	ItemPanelDragAndDropDecorator(CGameEngine* _engine, ItemPanel* _itemPanel);
+
 	void SetOnItemDroppedCallback(std::function<InventoryItemWrapper*(InventoryItemWrapper*)> _onItemDropped);
 	void Update() override;
 	void RenderCurrentlyDraggedItem();

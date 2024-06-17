@@ -3,10 +3,19 @@
 #include "Resources\TextureManager.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
 
-void AbilityTooltip::Init()
+AbilityTooltip::AbilityTooltip()
+	: Tooltip(false)
+	, possibleTargets{{g_pTextures->possibleTargetSimon},
+		{g_pTextures->possibleTargetOle},
+		{g_pTextures->possibleTargetAnna},
+		{g_pTextures->possibleTargetMarkus},
+		{g_pTextures->possibleTargetEnemy},
+		{g_pTextures->possibleTargetEnemy}, 
+		{g_pTextures->possibleTargetEnemy}, 
+		{g_pTextures->possibleTargetEnemy}}
+	, playerID(0)
+	, abilityID(0)
 {
-	Tooltip::Init();
-
 	targetsInformationText.setCharacterSize(16);
 	targetsInformationText.setFont(g_pFonts->f_trajan);
 	targetsInformationText.setFillColor(sf::Color::White);
@@ -14,20 +23,6 @@ void AbilityTooltip::Init()
 	targetsBackground.setFillColor(sf::Color(0, 0, 0, 220));
 	targetsBackground.setOutlineThickness(2.0f);
 	targetsBackground.setOutlineColor(sf::Color(40, 40, 40));
-
-	possibleTargets[0].Load(g_pTextures->possibleTargetSimon);
-	possibleTargets[1].Load(g_pTextures->possibleTargetOle);
-	possibleTargets[2].Load(g_pTextures->possibleTargetAnna);
-	possibleTargets[3].Load(g_pTextures->possibleTargetMarkus);
-	possibleTargets[4].Load(g_pTextures->possibleTargetEnemy);
-	possibleTargets[5].Load(g_pTextures->possibleTargetEnemy);
-	possibleTargets[6].Load(g_pTextures->possibleTargetEnemy);
-	possibleTargets[7].Load(g_pTextures->possibleTargetEnemy);
-
-	playerID = 0;
-	abilityID = 0;
-
-	showTooltipAboveY = false;
 }
 
 

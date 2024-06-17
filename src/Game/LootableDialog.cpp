@@ -2,17 +2,15 @@
 #include "Resources\SoundManager.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
 
-void LootableDialog::Init(CGameEngine *_engine, GameStatus * _gameStatus, int _lootableID)
+LootableDialog::LootableDialog(CGameEngine *_engine, int _lootableID)
+	: engine(_engine)
+	, lootablePanel(g_pTextures->lootablePanel)
+	, buttonClose(g_pTextures->lootablePanelCloseButton, Buttontypes::Motion_Up)
+	, buttonTakeAll(g_pTextures->lootablePanelButton, Buttontypes::Motion_Up, "  Alles\nnehmen")
+	, isOpen(true)
 {
-	engine = _engine;
-	gameStatus = _gameStatus;
-
-	lootablePanel.Load(g_pTextures->lootablePanel);
-
-	buttonClose.Load(g_pTextures->lootablePanelCloseButton, Buttontypes::Motion_Up);
 	buttonClose.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
-	buttonTakeAll.Load(g_pTextures->lootablePanelButton, Buttontypes::Motion_Up, "  Alles\nnehmen");
 	buttonTakeAll.SetButtontextFont(g_pFonts->f_trajan);
 	buttonTakeAll.SetButtontextCharactersize(23);
 	buttonTakeAll.SetButtontextStyle(sf::Text::Bold);
@@ -25,14 +23,10 @@ void LootableDialog::Init(CGameEngine *_engine, GameStatus * _gameStatus, int _l
 	lootableNameText.setString(g_pObjectProperties->lootableProperties[_lootableID].name);
 
 	SetPos(engine->GetWindowSize().x / 2 - lootablePanel.GetGlobalRect().width / 2, 200);
-
-	tooltip.Init();
-
-	isOpen = true;
 }
 
 
-void LootableDialog::Quit()
+LootableDialog::~LootableDialog()
 {
 	for (int i = 0; i < 9; i++)
 		SAFE_DELETE(items[i]);
@@ -122,11 +116,8 @@ void LootableDialog::AddItem(Item _item)
 	if (freeSlot == -1)
 		return;
 	
-	CSprite newSprite;
-	newSprite.Load(g_pTextures->item[_item.id]);
-
-	InventoryItemWrapper *newItem = new InventoryItemWrapper;
-	newItem->Init(std::move(_item), std::move(newSprite));
+	CSprite newSprite(g_pTextures->item[_item.id]);
+	InventoryItemWrapper *newItem = new InventoryItemWrapper(std::move(_item), std::move(newSprite));
 
 	int xPos = (freeSlot % 3) * 116 + lootablePanel.GetGlobalRect().left + 46;
 	int yPos = (freeSlot / 3) * 116 + lootablePanel.GetGlobalRect().top + 92;
@@ -149,7 +140,7 @@ void LootableDialog::TakeAllItems()
 
 void LootableDialog::TakeItem(int _id)
 {
-	gameStatus->AddItem(items[_id]->GetItem());
+	g_pGameStatus->AddItem(items[_id]->GetItem());
 	SAFE_DELETE(items[_id]);
 }
 

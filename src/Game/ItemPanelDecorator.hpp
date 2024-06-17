@@ -5,11 +5,13 @@
 class ItemPanelDecorator
 {
 public:
-	virtual void Init(CGameEngine *_engine, ItemPanel *_itemPanel);
+
+	ItemPanelDecorator(CGameEngine* _engine, ItemPanel* _itemPanel);
+	~ItemPanelDecorator();
+
 	virtual void Update() = 0;
 	virtual void Render() = 0;
 
-	void Quit();
 	void Clear();
 	void AddItem(Item _item);
 	void SetPos(int _x, int _y);

@@ -2,9 +2,9 @@
 
 
 
-void SpriteWithText::Load(sf::Texture const & _texture)
+SpriteWithText::SpriteWithText(sf::Texture const & _texture)
+	: sprite(_texture)
 {
-	sprite.Load(_texture);
 	allTextsOnSprite.clear();
 }
 

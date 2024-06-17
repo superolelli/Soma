@@ -13,7 +13,7 @@ class ItemTooltip : public Tooltip
 {
 public:
 
-	void Init() override;
+	ItemTooltip();
 
 	void SetItem(ItemID _id);
 

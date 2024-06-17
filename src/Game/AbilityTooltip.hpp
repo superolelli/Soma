@@ -11,7 +11,7 @@ class AbilityTooltip : public Tooltip
 {
 public:
 
-	void Init() override;
+	AbilityTooltip();
 
 	void SetPlayerID(int _player);
 	void SetAbilityID(int _ability);

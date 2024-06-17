@@ -4,24 +4,22 @@
 #include "Resources\SoundManager.hpp"
 
 
-void ExitDialog::Init(CGameEngine* _engine)
+ExitDialog::ExitDialog(CGameEngine* _engine)
+	: engine(_engine)
+	, isOpen(false)
+	, panel(g_pTextures->sellMultiplePanel)
+	, buttonYes(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Ja")
+	, buttonNo(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Nein")
 {
-	engine = _engine;
-
-	isOpen = false;
-
-	panel.Load(g_pTextures->sellMultiplePanel);
 	panel.AddText("Speichern und ins Hauptmenü?");
 	panel.SetTextFont(0, g_pFonts->f_blackwoodCastle);
 	panel.SetTextCharacterSize(0, 40);
 
-	buttonYes.Load(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Ja");
 	buttonYes.SetButtontextFont(g_pFonts->f_trajan);
 	buttonYes.SetButtontextCharactersize(23);
 	buttonYes.SetButtontextStyle(sf::Text::Bold);
 	buttonYes.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
-	buttonNo.Load(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Nein");
 	buttonNo.SetButtontextFont(g_pFonts->f_trajan);
 	buttonNo.SetButtontextCharactersize(23);
 	buttonNo.SetButtontextStyle(sf::Text::Bold);
@@ -56,10 +54,6 @@ void ExitDialog::Render()
 	}
 }
 
-void ExitDialog::Quit()
-{
-
-}
 
 void ExitDialog::SetPos(int _x, int _y)
 {

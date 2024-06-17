@@ -1,23 +1,25 @@
 #include "MainRoom.hpp"
 #include "Game.hpp"
-#include "SavegameManager.hpp"
 #include "ItemFactory.hpp"
 
 
-MainRoom::MainRoom(GameStatus* _status)
+MainRoom::MainRoom(CGameEngine* _engine)
+	: GameState (_engine)
+	, gui(_engine)
+	, exitDialog(_engine)
+	, background{ {g_pTextures->mainRoomBackgrounds[0]},
+		{g_pTextures->mainRoomBackgrounds[1]},
+		{g_pTextures->mainRoomBackgrounds[2]},
+		{g_pTextures->mainRoomBackgrounds[3]} }
+	, vendingMachine(g_pTextures->mainRoomVendingMachine)
+	, doors{ {g_pTextures->mainRoomDoors[0]}, {g_pTextures->mainRoomDoors[1]}, {g_pTextures->mainRoomDoors[2]} }
+	, signs{ {g_pTextures->mainRoomSigns[0]}, {g_pTextures->mainRoomSigns[1]}, {g_pTextures->mainRoomSigns[2]} }
+	, roots(g_pTextures->mainRoomRoots)
+	, xMovement(0.0f)
 {
-	gameStatus = _status;
-}
-
-void MainRoom::Init(CGameEngine * _engine)
-{
-	m_pGameEngine = _engine;
-	srand(time(0));
-
 	int xPos = 0;
-	for (int i = 0; i < 4; i++) 
+	for (int i = 0; i < 4; i++)
 	{
-		background[i].Load(g_pTextures->mainRoomBackgrounds[i]);
 		background[i].SetPos(xPos, 0);
 		xPos += background[i].GetGlobalRect().width;
 	}
@@ -25,21 +27,17 @@ void MainRoom::Init(CGameEngine * _engine)
 	InitDoors();
 	InitPlayers();
 
-	vendingMachine.Load(g_pTextures->mainRoomVendingMachine);
 	vendingMachine.SetPos(g_pObjectProperties->mainRoomVendingMachinePosition.x, g_pObjectProperties->mainRoomVendingMachinePosition.y);
-
-	gui.Init(m_pGameEngine, gameStatus);
-	exitDialog.Init(m_pGameEngine);
 
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetRenderTarget().setView(view);
+}
 
-	xMovement = 0.0f;
 
-	/*for (int i = 0; i < 20; i++) {
-		gameStatus->AddItem(ItemFactory::CreateShopItem(3,3));
-	}*/
-	
+MainRoom::~MainRoom()
+{
+	for (auto p : players)
+		SAFE_DELETE(p);
 }
 
 
@@ -47,10 +45,7 @@ void MainRoom::InitDoors()
 {
 	for (int i = 0; i < 3; i++)
 	{
-		doors[i].Load(g_pTextures->mainRoomDoors[i]);
 		doors[i].SetPos(g_pObjectProperties->mainRoomDoorPositions[i].x, g_pObjectProperties->mainRoomDoorPositions[i].y);
-
-		signs[i].Load(g_pTextures->mainRoomSigns[i]);
 		signs[i].SetPos(g_pObjectProperties->mainRoomSignPositions[i].x, g_pObjectProperties->mainRoomSignPositions[i].y);
 		auto textID = signs[i].AddText("1");
 	}
@@ -70,7 +65,6 @@ void MainRoom::InitDoors()
 	signs[2].SetTextPosCentered(0);
 	signs[2].MoveText(0, -55, -40);
 
-	roots.Load(g_pTextures->mainRoomRoots);
 	roots.SetPos(g_pObjectProperties->mainRoomRootsPosition.x, g_pObjectProperties->mainRoomRootsPosition.y);
 }
 
@@ -115,19 +109,6 @@ void MainRoom::UpdatePlayerHitboxes()
 	}
 }
 
-void MainRoom::Cleanup()
-{
-	m_pGameEngine = nullptr;
-
-	for(auto p : players)
-		SAFE_DELETE(p);
-
-	SAFE_DELETE(gameStatus);
-
-	gui.Quit();
-	exitDialog.Quit();
-}
-
 
 void MainRoom::Pause()
 {
@@ -155,7 +136,7 @@ void MainRoom::Update()
 		exitDialog.Open();
 
 	if (m_pGameEngine->GetKeystates(KeyID::F5) == Keystates::Released)
-		SavegameManager::StoreSavegame(gameStatus);
+		g_pGameStatus->StoreToFile();
 
 	g_pSounds->Update();
 	HandleGUI();
@@ -188,7 +169,7 @@ void MainRoom::HandleGUI()
 
 	if (exitDialog.Update() == true)
 	{
-		SavegameManager::StoreSavegame(gameStatus);
+		g_pGameStatus->StoreToFile();
 		m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());
 		m_pGameEngine->PopState();
 		return;
@@ -226,9 +207,9 @@ void MainRoom::CheckForClickedVendingMachine()
 
 void MainRoom::UpdateLevelSigns()
 {
-	signs[0].ChangeString(0, std::to_string(gameStatus->levels[LevelType::bang]));
-	signs[1].ChangeString(0, std::to_string(gameStatus->levels[LevelType::kutschfahrt]));
-	signs[2].ChangeString(0, std::to_string(gameStatus->levels[LevelType::tichu]));
+	signs[0].ChangeString(0, std::to_string(g_pGameStatus->levels[LevelType::bang]));
+	signs[1].ChangeString(0, std::to_string(g_pGameStatus->levels[LevelType::kutschfahrt]));
+	signs[2].ChangeString(0, std::to_string(g_pGameStatus->levels[LevelType::tichu]));
 }
 
 
@@ -277,9 +258,8 @@ void MainRoom::HandleDoors()
 				else
 					g_pSounds->PlaySound(soundID::DOOR_KUTSCHFAHRT);
 
-				auto newGame = new Game(static_cast<LevelType>(i));
-				newGame->SetGameStatusPtr(gameStatus);
-				newGame->SetOnGameFinishedCallback([&]() {	SavegameManager::StoreSavegame(gameStatus); gui.ChooseNewShopItems(); });
+				auto newGame = new Game(m_pGameEngine, static_cast<LevelType>(i));
+				newGame->SetOnGameFinishedCallback([&]() {	g_pGameStatus->StoreToFile(); gui.ChooseNewShopItems(); });
 				m_pGameEngine->PushState(newGame);
 			}
 		}

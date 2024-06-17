@@ -7,9 +7,12 @@
 class EquipmentPanelDiamond
 {
 public:
-	void Init(CGameEngine *_engine, int _xPos, int _yPos);
+
+	EquipmentPanelDiamond(CGameEngine* _engine);
 	void Update();
 	void Render();
+
+	void SetPos(int _xPos, int _yPos);
 
 	void RecolorDiamond(EquipmentConnections _connections[4]);
 	CombatantAttributes &GetStats() { return diamondStats.stats; }

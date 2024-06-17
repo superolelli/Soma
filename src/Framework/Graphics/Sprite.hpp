@@ -1,20 +1,17 @@
 #pragma once
 
-
 #include "SFML\Graphics.hpp"
 #include <iostream>
 
 class CSprite
 {
 public:
-	CSprite();
+	CSprite(sf::Texture const &_texture);
+
+	// for animated sprite
+	CSprite(sf::Texture const& _texture, int _numFrames, int _frameWidth, int _frameHeight);
+
 	~CSprite();
-
-	//Textures the sprite
-	void Load(sf::Texture const &_texture);
-
-	//Textures a animated sprite
-	void Load(sf::Texture const &_texture, int _numFrames, int _frameWidth, int _frameHeight);
 
 	//sets the part of the texture to render
 	void SetTextureRect(sf::IntRect const &_rect);

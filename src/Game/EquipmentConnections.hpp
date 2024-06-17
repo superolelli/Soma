@@ -6,7 +6,7 @@ class EquipmentConnections
 {
 public:
 
-	void Init(int _id);
+	EquipmentConnections(int _id);
 	void Update();
 	void Render(sf::RenderTarget &_target);
 
@@ -19,6 +19,9 @@ public:
 
 private:
 
+	const float ACTIVATION_TIME = 3.0;
+	const float DEACTIVATION_TIME = 1.0;
+
 	sf::Sprite connection;
 
 	sf::Shader activationShader;
@@ -30,9 +33,6 @@ private:
 	sf::Color color;
 
 	float elapsedTime;
-
-	const float ACTIVATION_TIME = 3.0;
-	const float DEACTIVATION_TIME = 1.0;
 
 	bool performingActivation;
 	bool performingDeactivation;

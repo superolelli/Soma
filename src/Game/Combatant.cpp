@@ -10,33 +10,27 @@ bool Combatant::setElapsedTimeForAbilityEffect;
 
 
 
-Combatant::Combatant(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
+Combatant::Combatant(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer, SpriterEngine::EntityInstance* _combatantObject)
+	: engine(_engine)
+	, notificationRenderer(_notificationRenderer)
+	, status(this, notificationRenderer)
+	, actsInConfusion(false)
+	, turnMarkerScale(1.0)
+	, battle(nullptr)
+	, statusBar(&status, _engine)
+	, currentState(new CombatantStateIdle(this))
+	, combatantObject(_combatantObject)
 {
-	engine = _engine;
-	notificationRenderer = _notificationRenderer;
-
-	status.Init(this, notificationRenderer);
 	status.Reset();
 
-	actsInConfusion = false;
-	turnMarkerScale = 1.0;
-	battle = nullptr;
-}
-
-void Combatant::Init()
-{
 	Scale(COMBATANT_NORMAL_SCALE, COMBATANT_NORMAL_SCALE);
 	combatantObject->reprocessCurrentTime();
-
 	ReloadHitbox();
-
-	statusBar.Init(&status, engine);
-
-	currentState = new CombatantStateIdle(this);
 }
 
 
-void Combatant::Quit()
+
+Combatant::~Combatant()
 {
 	SAFE_DELETE(combatantObject);
 }
@@ -148,19 +142,19 @@ void Combatant::RenderShadow()
 
 void Combatant::RenderAbilityTargetMarker()
 {
-	int xPos = GetRect().left + (GetRect().width - g_pSpritePool->abilityTargetMarker.GetRect().width) / 2;
+	int xPos = GetRect().left + (GetRect().width - g_pSpritePool->abilityTargetMarker->GetRect().width) / 2;
 	int yPos = statusBar.GetRect().top + statusBar.GetRect().height + 5;
-	g_pSpritePool->abilityTargetMarker.SetPos(xPos, yPos);
-	g_pSpritePool->abilityTargetMarker.Render(engine->GetRenderTarget());
+	g_pSpritePool->abilityTargetMarker->SetPos(xPos, yPos);
+	g_pSpritePool->abilityTargetMarker->Render(engine->GetRenderTarget());
 }
 
 void Combatant::RenderTurnMarker()
 {
-	g_pSpritePool->turnMarker.SetScale(turnMarkerScale, turnMarkerScale);
-	int xPos = GetRect().left + (GetRect().width - g_pSpritePool->turnMarker.GetRect().width) / 2;
+	g_pSpritePool->turnMarker->SetScale(turnMarkerScale, turnMarkerScale);
+	int xPos = GetRect().left + (GetRect().width - g_pSpritePool->turnMarker->GetRect().width) / 2;
 	int yPos = statusBar.GetRect().top + statusBar.GetRect().height + 5;
-	g_pSpritePool->turnMarker.SetPos(xPos, yPos);
-	g_pSpritePool->turnMarker.Render(engine->GetRenderTarget());
+	g_pSpritePool->turnMarker->SetPos(xPos, yPos);
+	g_pSpritePool->turnMarker->Render(engine->GetRenderTarget());
 
 	if (turnMarkerScale > 1.0)
 	{

@@ -7,10 +7,9 @@ class ResourcesStatusBar
 {
 public:
 
-	void Init(CGameEngine *_engine);
+	ResourcesStatusBar(CGameEngine *_engine);
 	void Update(int _cards, int _dice);
 	void Render();
-	void Quit();
 
 	void SetPos(int _x, int _y);
 

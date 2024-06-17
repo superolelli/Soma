@@ -12,10 +12,11 @@ class ConsumablePanel : CObserver
 {
 public:
 
-	void Init(CGameEngine *_engine, GameStatus *_gameStatus, AdventureGroup *_adventureGroup);
+	ConsumablePanel(CGameEngine *_engine, AdventureGroup *_adventureGroup);
+	~ConsumablePanel();
+
 	void Update();
 	void Render();
-	void Quit();
 
 	void AddItem(Item _item);
 
@@ -25,7 +26,6 @@ public:
 
 private:
 	CGameEngine *engine;
-	GameStatus *gameStatus;
 	AdventureGroup *adventureGroup;
 
 	CSprite consumablePanel;

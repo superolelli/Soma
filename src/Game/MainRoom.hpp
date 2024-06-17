@@ -4,7 +4,6 @@
 #include "../Game/Resources/Resources.hpp"
 
 #include "ExitDialog.hpp"
-
 #include "MainRoomGui.hpp"
 
 
@@ -12,10 +11,8 @@ class MainRoom : public GameState
 {
 public:
 
-	MainRoom(GameStatus *_status);
-
-	void Init(CGameEngine *_engine) override;
-	void Cleanup() override;
+	MainRoom(CGameEngine* _engine);
+	~MainRoom();
 
 	void Pause() override;
 	void Resume() override;
@@ -37,7 +34,6 @@ private:
 
 	MainRoomGUI gui;
 	ExitDialog exitDialog;
-	GameStatus *gameStatus;
 
 	sf::View view;
 

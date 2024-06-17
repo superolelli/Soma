@@ -8,7 +8,7 @@ class SkillPanel
 {
 public:
 
-	void Init(GameStatus *_gameStatus, CGameEngine *_engine);
+	SkillPanel(CGameEngine* _engine);
 	void Update();
 	void Render();
 
@@ -19,7 +19,6 @@ public:
 private:
 	bool closed;
 
-	GameStatus *gameStatus;
 	CGameEngine *engine;
 
 	int currentPlayer;
@@ -36,8 +35,8 @@ private:
 	CSprite connectionsSkilled[6];
 	CSprite diceSymbol;
 
-	CSprite abilities[4][4];
-	CSprite skills[4][4][8];
+	CSprite *abilities[4][4];
+	CSprite *skills[4][4][8];
 	CSprite currentSkillFrame;
 
 	int skillCost[8] = {1, 3, 5, 1, 3, 5, 7, 8};

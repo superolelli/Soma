@@ -2,10 +2,10 @@
 #include "Resources\SoundManager.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
 
-void ItemPanel::Init(CGameEngine *_engine)
+ItemPanel::ItemPanel(CGameEngine *_engine, sf::Texture const &_itemPanelTexture)
+	: engine(_engine)
+	, itemPanel(_itemPanelTexture)
 {
-	engine = _engine;
-	tooltip.Init();
 }
 
 

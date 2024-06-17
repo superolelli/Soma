@@ -5,13 +5,19 @@
 #include "GameStatus.hpp"
 
 
-void BattleGUI::Init(CGameEngine *_engine, GameStatus *_gameStatus, LevelStatus *_levelStatus, NotificationRenderer *_notificationRenderer)
+BattleGUI::BattleGUI(CGameEngine *_engine, LevelStatus *_levelStatus, NotificationRenderer *_notificationRenderer)
+	: engine(_engine)
+	, commonGUIParts(_engine, _levelStatus, _notificationRenderer)
+	, abilityPanel(g_pTextures->abilityPanel)
+	, currentAbilityFrame(g_pTextures->currentAbilityFrame)
+	, combatantInformationPanel(g_pTextures->combatantInformationPanel)
+	, skipTurnButton(g_pTextures->skipTurnButton, Buttontypes::Up)
+	, currentCombatantHealthBar(g_pTextures->healthBarBig, g_pTextures->healthBarBigFrame, nullptr, nullptr)
+	, currentAbility(0)
+	, skipTurn(false)
+	, combatantToDisplay(nullptr)
+	, currentPlayer(nullptr)
 {
-	engine = _engine;
-
-	commonGUIParts.Init(_engine, _gameStatus, _levelStatus, _notificationRenderer);
-
-	abilityPanel.Load(g_pTextures->abilityPanel);
 	abilityPanel.SetPos(100, 860);
 
 	int x = 0;
@@ -20,22 +26,16 @@ void BattleGUI::Init(CGameEngine *_engine, GameStatus *_gameStatus, LevelStatus 
 		 x = abilityPanel.GetGlobalRect().left + 40;
 		for (int i = 0; i < 4; i++)
 		{
-			abilities[j][i].Load(g_pTextures->abilities[j][i]);
-			abilities[j][i].SetPos(x, abilityPanel.GetGlobalRect().top + 32);
+			abilities[j][i] = std::make_unique<CSprite>(g_pTextures->abilities[j][i]);
+			abilities[j][i]->SetPos(x, abilityPanel.GetGlobalRect().top + 32);
 			x += 132;
 		}
 	}
 
-	currentAbilityFrame.Load(g_pTextures->currentAbilityFrame);
-	currentAbilityFrame.SetPos(abilities[0][0].GetRect().left - 10, abilities[0][0].GetRect().top - 10);
-
-	combatantInformationPanel.Load(g_pTextures->combatantInformationPanel);
+	currentAbilityFrame.SetPos(abilities[0][0]->GetRect().left - 10, abilities[0][0]->GetRect().top - 10);
 	combatantInformationPanel.SetPos(820, 850);
-
-	skipTurnButton.Load(g_pTextures->skipTurnButton, Buttontypes::Up);
 	skipTurnButton.SetPos(abilityPanel.GetRect().left + abilityPanel.GetRect().width, abilityPanel.GetRect().top + abilityPanel.GetRect().height / 2 - skipTurnButton.GetRect().height / 2);
 
-	currentCombatantHealthBar.Load(g_pTextures->healthBarBig, g_pTextures->healthBarBigFrame, nullptr, nullptr);
 	currentCombatantHealthBar.SetSmoothTransformationTime(0.7);
 	currentCombatantHealthBar.SetOffsetForInnerPart(17, 20);
 	currentCombatantHealthBar.SetPos(combatantInformationPanel.GetGlobalRect().left + 40, combatantInformationPanel.GetGlobalRect().top + 70);
@@ -53,14 +53,6 @@ void BattleGUI::Init(CGameEngine *_engine, GameStatus *_gameStatus, LevelStatus 
 	abilityInformationText.setFillColor(sf::Color(200, 200, 130));
 	//abilityInformationText.setOutlineColor(sf::Color::Black);
 	//abilityInformationText.setOutlineThickness(2.0);
-	
-	tooltip.Init();
-	tooltip.SetShowAboveY(true);
-
-	currentAbility = 0;
-	skipTurn = false;
-	combatantToDisplay = nullptr;
-	currentPlayer = nullptr;
 }
 
 
@@ -87,10 +79,10 @@ void BattleGUI::Update()
 		{
 			for (int i = 0; i < 4; i++)
 			{
-				if (abilities[currentPlayer->GetID()][i].GetRect().contains(engine->GetMousePos()))
+				if (abilities[currentPlayer->GetID()][i]->GetRect().contains(engine->GetMousePos()))
 				{
 					currentAbility = i;
-					currentAbilityFrame.SetPos(abilities[currentPlayer->GetID()][i].GetRect().left - 10, abilities[currentPlayer->GetID()][i].GetRect().top - 10);
+					currentAbilityFrame.SetPos(abilities[currentPlayer->GetID()][i]->GetRect().left - 10, abilities[currentPlayer->GetID()][i]->GetRect().top - 10);
 				}
 			}
 		}
@@ -107,7 +99,7 @@ void BattleGUI::Update()
 void BattleGUI::SetCurrentAbility(int _ability)
 {
 	currentAbility = _ability;
-	currentAbilityFrame.SetPos(abilities[currentPlayer->GetID()][_ability].GetRect().left - 10, abilities[currentPlayer->GetID()][_ability].GetRect().top - 10);
+	currentAbilityFrame.SetPos(abilities[currentPlayer->GetID()][_ability]->GetRect().left - 10, abilities[currentPlayer->GetID()][_ability]->GetRect().top - 10);
 }
 
 
@@ -137,14 +129,14 @@ void BattleGUI::Render()
 		abilityPanel.Render(engine->GetRenderTarget());
 		currentAbilityFrame.Render(engine->GetRenderTarget());
 
-		for (CSprite &a : abilities[currentPlayer->GetID()])
-			a.Render(engine->GetRenderTarget());
+		for (auto &a : abilities[currentPlayer->GetID()])
+			a->Render(engine->GetRenderTarget());
 
 		skipTurnButton.Render(engine->GetRenderTarget());
 
 		for (int i = 0; i < 4; i++)
 		{
-			if (abilities[currentPlayer->GetID()][i].GetRect().contains(engine->GetMousePos()))
+			if (abilities[currentPlayer->GetID()][i]->GetRect().contains(engine->GetMousePos()))
 			{
 				ShowTooltip(i);
 			}
@@ -172,7 +164,7 @@ void BattleGUI::RenderCombatantInformation()
 void BattleGUI::ShowTooltip(int _ability)
 {
 	tooltip.SetAbilityID(_ability);
-	tooltip.ShowTooltip(engine->GetRenderTarget(), abilities[combatantToDisplay->GetID()][_ability].GetRect().left, abilities[combatantToDisplay->GetID()][_ability].GetRect().top - 35.0f);
+	tooltip.ShowTooltip(engine->GetRenderTarget(), abilities[combatantToDisplay->GetID()][_ability]->GetRect().left, abilities[combatantToDisplay->GetID()][_ability]->GetRect().top - 35.0f);
 	tooltip.ShowPossibleTargets(engine->GetRenderTarget(), abilityPanel.GetGlobalRect().left + 65, abilityPanel.GetGlobalRect().top + abilityPanel.GetGlobalRect().height + 5);
 }
 

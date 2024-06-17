@@ -5,20 +5,21 @@
 #include "LevelGUI.hpp"
 
 
-Game::Game(LevelType _levelType)
+Game::Game(CGameEngine* _engine, LevelType _levelType)
+	: GameState(_engine)
+	, levelType(_levelType)
+	, adventureGroup(_engine, &notificationRenderer)
+	, currentBattle(nullptr)
+	, inBattle(false)
+	, isPlayingBattleIntro(false)
+	, afterIntroWaitingTime(2.0)
+	, levelFinished(false)
+	, speechBubbleManager(m_pGameEngine, &adventureGroup)
 {
-	levelType = _levelType;
-}
-
-void Game::Init(CGameEngine * _engine)
-{
-	m_pGameEngine = _engine;
-
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetRenderTarget().setView(view);
 
-	level = LevelBuilder::buildLevel(levelType, gameStatus->levels[levelType], &dialogManager, gameStatus);
-	adventureGroup.Init(_engine, &notificationRenderer, gameStatus);
+	level = LevelBuilder::buildLevel(levelType, g_pGameStatus->levels[levelType], &dialogManager);
 
 	InitLevelGUI();
 
@@ -28,33 +29,20 @@ void Game::Init(CGameEngine * _engine)
 	blurShader.setUniform("u_kernelSize", 5.0f);
 	blurShader.setUniform("u_blurringRect", sf::Glsl::Vec4(0.0f, 243.0f, m_pGameEngine->GetWindowSize().x, 785.0f));
 
-	currentBattle = nullptr;
-	inBattle = false;
-	isPlayingBattleIntro = false;
-	afterIntroWaitingTime = 2.0;
-	levelFinished = false;
-
-	g_pMusic->SetCurrentEnvironment(MusicEnvironment(levelType+1));
+	g_pMusic->SetCurrentEnvironment(MusicEnvironment(levelType + 1));
 	g_pMusic->PlayMusic();
-
-	speechBubbleManager.Init(m_pGameEngine, &adventureGroup);
 }
-
 
 void Game::InitLevelGUI()
 {
-	LevelGUI *newGui = new LevelGUI;
-	newGui->Init(m_pGameEngine, gameStatus, &level->GetLevelStatus(), &adventureGroup, levelType, &notificationRenderer);
+	LevelGUI *newGui = new LevelGUI(m_pGameEngine, &level->GetLevelStatus(), &adventureGroup, levelType, &notificationRenderer);
 	newGui->SetOnLevelExitedCallback([&]() {HandleFinishedLevel(); });
 	currentGUI = newGui;
 }
 
 
-void Game::Cleanup()
+Game::~Game()
 {
-	adventureGroup.Quit();
-	dialogManager.Quit();
-	m_pGameEngine = nullptr;
 	SAFE_DELETE(currentGUI);
 	SAFE_DELETE(level);
 }
@@ -82,7 +70,6 @@ void Game::Update()
 	{
 		if (inBattle)
 		{
-			currentBattle->Quit();
 			SAFE_DELETE(currentBattle);
 			inBattle = false;
 		}
@@ -174,13 +161,13 @@ void Game::HandleFinishedLevel()
 {
 	if (!adventureGroup.IsDead())
 	{
-		gameStatus->levels[levelType]++;
+		g_pGameStatus->levels[levelType]++;
 	}
 
 	for (auto& [cards, dice, description] : levelRewards.achievements)
 	{
-		gameStatus->AddCards(cards);
-		gameStatus->AddDice(dice);
+		g_pGameStatus->AddCards(cards);
+		g_pGameStatus->AddDice(dice);
 	}
 
 	OnGameFinished();
@@ -198,7 +185,6 @@ void Game::UpdateLevel()
 
 	if (m_pGameEngine->GetKeystates(KeyID::Right) == Keystates::Held)
 		xMove = 2;
-
 
 	if (level->IsAtEnd(view.getCenter().x) || view.getCenter().x - view.getSize().x / 2 + xMove <= 0)
 		xMove = 0;
@@ -243,7 +229,6 @@ void Game::UpdateBattle()
 			OpenBattleRewardDialog();
 
 		inBattle = false;
-		currentBattle->Quit();
 		SAFE_DELETE(currentBattle);
 
 		g_pMusic->SetBattleEnded();
@@ -254,13 +239,12 @@ void Game::UpdateBattle()
 
 void Game::OpenBattleRewardDialog()
 {
-	LootableDialog *dialog = new LootableDialog;
-	dialog->Init(m_pGameEngine, gameStatus, 0);
+	LootableDialog *dialog = new LootableDialog(m_pGameEngine, 0);
 	dialog->SetTitle(std::string("Kampf gewonnen!"));
 
 	for (int i = 0; i < 9; i++)
 	{
-		dialog->AddItem(ItemFactory::CreateBattleRewardItem(gameStatus->levels[levelType], currentBattle->GetEnemies()));
+		dialog->AddItem(ItemFactory::CreateBattleRewardItem(g_pGameStatus->levels[levelType], currentBattle->GetEnemies()));
 
 		if (rand() % 5 != 0)
 			break;
@@ -273,14 +257,11 @@ void Game::OpenBattleRewardDialog()
 void Game::InitNewBattle()
 {
 	SAFE_DELETE(currentGUI);
-	BattleGUI *newGui = new BattleGUI;
-	newGui->Init(m_pGameEngine, gameStatus, &level->GetLevelStatus(), &notificationRenderer);
-	currentGUI = newGui;
+	currentGUI = new BattleGUI(m_pGameEngine, &level->GetLevelStatus(), &notificationRenderer);
 
 	speechBubbleManager.DeactivateSpeechBubbles();
 
-	currentBattle = new Battle;
-	currentBattle->Init(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer, level->GetEnemyIDs(), level->IsBossBattle(), gameStatus, &level->GetLevelStatus());
+	currentBattle = new Battle(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer, level->GetEnemyIDs(), level->IsBossBattle(), &level->GetLevelStatus());
 
 	isPlayingBattleIntro = true;
 	afterIntroWaitingTime = 2.0;

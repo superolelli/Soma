@@ -84,15 +84,15 @@ void CombatantResistancesPanel::Render(sf::RenderTarget& _target)
 	for (auto& text : resistancesText)
 		_target.draw(text);
 
-	g_pSpritePool->sleeping.SetPos(title.getGlobalBounds().left + 40, resistancesText[0].getGlobalBounds().top - 2);
-	g_pSpritePool->sleeping.Render(_target);
+	g_pSpritePool->sleeping->SetPos(title.getGlobalBounds().left + 40, resistancesText[0].getGlobalBounds().top - 2);
+	g_pSpritePool->sleeping->Render(_target);
 
-	g_pSpritePool->confused.SetPos(title.getGlobalBounds().left + 40, resistancesText[1].getGlobalBounds().top - 2);
-	g_pSpritePool->confused.Render(_target);
+	g_pSpritePool->confused->SetPos(title.getGlobalBounds().left + 40, resistancesText[1].getGlobalBounds().top - 2);
+	g_pSpritePool->confused->Render(_target);
 
-	g_pSpritePool->debuff.SetPos(title.getGlobalBounds().left + 40, resistancesText[2].getGlobalBounds().top - 2);
-	g_pSpritePool->debuff.Render(_target);
+	g_pSpritePool->debuff->SetPos(title.getGlobalBounds().left + 40, resistancesText[2].getGlobalBounds().top - 2);
+	g_pSpritePool->debuff->Render(_target);
 
-	g_pSpritePool->decay.SetPos(title.getGlobalBounds().left + 40, resistancesText[3].getGlobalBounds().top - 2);
-	g_pSpritePool->decay.Render(_target);
+	g_pSpritePool->decay->SetPos(title.getGlobalBounds().left + 40, resistancesText[3].getGlobalBounds().top - 2);
+	g_pSpritePool->decay->Render(_target);
 }

@@ -12,7 +12,7 @@ public:
 
 	enum class FatigueLevel { awake, tired, stupid };
 
-	void Init(Combatant *_combatant, NotificationRenderer *_notificationRenderer);
+	CombatantStatus(Combatant *_combatant, NotificationRenderer *_notificationRenderer);
 
 	void UpdateStatusForNewTurn(double _initialWaitingTime = 0.0);
 	void ExecuteStatusChanges();

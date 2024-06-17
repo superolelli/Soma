@@ -16,8 +16,9 @@ class AdventureGroup
 {
 public:
 
-	void Init(CGameEngine *_engine, NotificationRenderer *_notificationRenderer, GameStatus *_gameStatus);
-	void Quit();
+	AdventureGroup(CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
+	~AdventureGroup();
+
 	void Update(int xMove);
 	void Render();
 

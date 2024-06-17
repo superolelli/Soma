@@ -6,8 +6,7 @@
 class PlayerOle : public Player
 {
 public:
-	PlayerOle(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
-	virtual void Init() override;
+	PlayerOle(CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
 
 	virtual int GetID() override { return CombatantID::Ole; }
 

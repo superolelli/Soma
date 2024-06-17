@@ -2,12 +2,12 @@
 #include "Resources\SoundManager.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
 
-void ItemPanelDragAndDropDecorator::Init(CGameEngine *_engine, ItemPanel *_itemPanel)
+ItemPanelDragAndDropDecorator::ItemPanelDragAndDropDecorator(CGameEngine *_engine, ItemPanel *_itemPanel)
+	: ItemPanelDecorator(_engine, _itemPanel)
+	, currentDraggedItem(-1)
+	, currentDraggedItemOldX(0)
+	, currentDraggedItemOldY(0)
 {
-	ItemPanelDecorator::Init(_engine, _itemPanel);
-	currentDraggedItem = -1;
-	currentDraggedItemOldX = 0;
-	currentDraggedItemOldY = 0;
 }
 
 

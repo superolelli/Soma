@@ -7,11 +7,8 @@
 class Bar
 {
 public:
-	Bar();
+	Bar(sf::Texture const& _beamTexture, sf::Texture const& _frameTexture, int* _value, int* _maxValue);
 	~Bar();
-
-	//Textures the sprite
-	void Load(sf::Texture const &_beamTexture, sf::Texture const &_frameTexture, int *_value, int *_maxValue);
 
 	//Sets the Position for float values
 	void SetPos(float _x, float _y);

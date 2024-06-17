@@ -7,8 +7,7 @@ class CStringInput
 {
 public:
 
-	//initializes the input field with all the data
-	void Init(sf::Font const &_font, int _characterSize = 20, sf::Color _colour = sf::Color::Black);
+	CStringInput(sf::Font const& _font, int _characterSize = 20, sf::Color _colour = sf::Color::Black);
 
 	//renders the input field
 	void Render(sf::RenderTarget &_target);

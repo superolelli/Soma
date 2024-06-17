@@ -1,11 +1,11 @@
 #include "ItemPanelSelectDecorator.hpp"
 #include "Resources/ObjectPropertiesManager.hpp"
 
-void ItemPanelSelectDecorator::Init(CGameEngine *_engine, ItemPanel *_itemPanel)
+ItemPanelSelectDecorator::ItemPanelSelectDecorator(CGameEngine *_engine, ItemPanel *_itemPanel)
+	: ItemPanelDecorator(_engine, _itemPanel)
+	, selectedItemFrame(g_pTextures->selectedItemFrame)
+	, currentlySelectedItem(-1)
 {
-	ItemPanelDecorator::Init(_engine, _itemPanel);
-	selectedItemFrame.Load(g_pTextures->selectedItemFrame);
-	currentlySelectedItem = -1;
 }
 
 void ItemPanelSelectDecorator::Update()

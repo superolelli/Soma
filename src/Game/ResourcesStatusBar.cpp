@@ -2,10 +2,10 @@
 #include "Resources\TextureManager.hpp"
 #include "Resources\FontManager.hpp"
 
-void ResourcesStatusBar::Init(CGameEngine *_engine)
+ResourcesStatusBar::ResourcesStatusBar(CGameEngine *_engine)
+	: engine(_engine)
+	, statusBar(g_pTextures->statusBar)
 {
-	engine = _engine;
-	statusBar.Load(g_pTextures->statusBar);
 	statusBar.SetPos(1732, 0);
 
 	diceAmountText.setCharacterSize(14);
@@ -17,10 +17,6 @@ void ResourcesStatusBar::Init(CGameEngine *_engine)
 	cardsAmountText.setFont(g_pFonts->f_kingArthur);
 
 	PositionComponentsRelativeToPanel();
-}
-
-void ResourcesStatusBar::Quit()
-{
 }
 
 void ResourcesStatusBar::Update(int _cards, int _dice)

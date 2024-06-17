@@ -15,12 +15,13 @@ class Battle
 {
 public:
 
-	void Init(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss, GameStatus *_gameStatus, LevelStatus *_levelStatus);
+	Battle(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss, LevelStatus *_levelStatus);
+	~Battle();
+
 	void Update();
 	void Render();
 	void RenderAbilityAnimations();
 	bool CurrentlyExecutingAbility();
-	void Quit();
 
 	void AddEnemy(int enemyID);
 
@@ -38,7 +39,6 @@ private:
 	BattleGUI *gui;
 	CGameEngine *engine;
 	NotificationRenderer *notificationRenderer;
-	GameStatus* gameStatus;
 	LevelStatus* levelStatus;
 
 	std::array<Enemy*, 4> enemies;

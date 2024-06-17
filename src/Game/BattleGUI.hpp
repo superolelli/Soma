@@ -15,7 +15,7 @@ class BattleGUI : public GUI
 {
 public:
 
-	virtual void Init(CGameEngine *_engine, GameStatus *_gameStatus, LevelStatus *_levelStatus, NotificationRenderer *_notificationRenderer);
+	BattleGUI(CGameEngine *_engine, LevelStatus *_levelStatus, NotificationRenderer *_notificationRenderer);
 	virtual void Update() override;
 	virtual void Render() override;
 
@@ -37,7 +37,7 @@ private:
 	AdventureGroup *players;
 
 	CSprite abilityPanel;
-	CSprite abilities[4][4];
+	std::unique_ptr<CSprite> abilities[4][4];
 	CSprite currentAbilityFrame;
 	CButton skipTurnButton;
 

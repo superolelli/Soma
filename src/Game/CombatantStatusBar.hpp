@@ -8,7 +8,7 @@ class CombatantStatusBar
 {
 public:
 
-	void Init(CombatantStatus *_status, CGameEngine *_engine);
+	CombatantStatusBar(CombatantStatus *_status, CGameEngine *_engine);
 	void Render();
 	void Update(sf::IntRect &_combatantRect);
 
@@ -27,7 +27,7 @@ private:
 	bool isTurnPending;
 
 	void RenderStatusSymbols();
-	void RenderStatusSymbol(bool _isActive, statusType _type, CSprite &_sprite, int &_x);
+	void RenderStatusSymbol(bool _isActive, statusType _type, std::unique_ptr<CSprite> &_sprite, int &_x);
 	void RenderStatusSymbolsTooltips();
 	void RenderBuffTooltip(Buff &_buff, bool _positive);
 	void RenderTooltip(const std::string &_tooltip, float _x, float _y);

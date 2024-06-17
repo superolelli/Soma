@@ -6,7 +6,7 @@ int main()
 	CGameEngine engine;
 
 	engine.Init("Soma");
-	engine.PushStateImmediately(new CInitialState());
+	engine.PushStateImmediately(new CInitialState(&engine));
 	engine.Run();
 
 	engine.Quit();

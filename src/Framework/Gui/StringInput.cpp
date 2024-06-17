@@ -2,27 +2,24 @@
 
 
 
-void CStringInput::Init(sf::Font const &_font, int _characterSize, sf::Color _colour)
+CStringInput::CStringInput(sf::Font const &_font, int _characterSize, sf::Color _colour)
+	: m_backspaceTimer(0.5)
+	, m_cursorTimer(0.5)
+	, m_showCursor(true)
+	, m_maximumCharacters(-1)
+	, m_xPos(0)
+	, m_yPos(0)
 {
 	//set the text's attributes
 	m_text.setCharacterSize(_characterSize);
 	m_text.setFillColor(_colour);
 	m_text.setFont(_font);
 
-	//set the backspace Timer
-	m_backspaceTimer = 0.5;
-	m_cursorTimer = 0.5;
-
-	m_showCursor = true;
-
-	//clear the string
 	m_str.clear();
 
 	//set up the cursor
 	m_line[0].color = _colour;
 	m_line[1].color = _colour;
-
-	m_maximumCharacters = -1;
 }
 
 void CStringInput::SetPos(int _x, int _y)

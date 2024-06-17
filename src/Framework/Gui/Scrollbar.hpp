@@ -8,7 +8,7 @@ class VerticalScrollbar
 {
 public:
 
-	void Init(int _width, int _maximumHeight);
+	VerticalScrollbar(int _width, int _maximumHeight);
 	void Update(CGameEngine &_engine);
 	void Render(sf::RenderTarget &_target);
 

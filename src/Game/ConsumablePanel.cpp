@@ -3,32 +3,27 @@
 #include "Resources\ObjectPropertiesManager.hpp"
 #include "../Framework/Patterns/Subject.hpp"
 
-void ConsumablePanel::Init(CGameEngine *_engine, GameStatus * _gameStatus, AdventureGroup *_adventureGroup)
+ConsumablePanel::ConsumablePanel(CGameEngine* _engine, AdventureGroup* _adventureGroup)
+	: engine(_engine)
+	, adventureGroup(_adventureGroup)
+	, consumablePanel(g_pTextures->consumablePanel)
+	, itemRowPanel(_engine, new ItemRowPanel(_engine))
 {
-	engine = _engine;
-	gameStatus = _gameStatus;
-	adventureGroup = _adventureGroup;
-
-	consumablePanel.Load(g_pTextures->consumablePanel);
 	consumablePanel.SetPos(1200, 855);
 
-	ItemRowPanel *newRowPanel = new ItemRowPanel;
-	newRowPanel->Init(engine);
-	itemRowPanel.Init(engine, newRowPanel);
 	itemRowPanel.SetOnItemDroppedCallback([&](InventoryItemWrapper* _item) {return OnItemFromItemPanelReceived(_item); });
 	itemRowPanel.SetPos(consumablePanel.GetRect().left + 49, consumablePanel.GetRect().top + 44);
 
-	for (auto &c : gameStatus->GetConsumables())
+	for (auto &c : g_pGameStatus->GetConsumables())
 		AddItem(c);
 
-	gameStatus->AddObserver(this);
+	g_pGameStatus->AddObserver(this);
 }
 
 
-void ConsumablePanel::Quit()
+ConsumablePanel::~ConsumablePanel()
 {
-	itemRowPanel.Quit();
-	gameStatus->RemoveObserver(this);
+	g_pGameStatus->RemoveObserver(this);
 }
 
 
@@ -76,7 +71,7 @@ InventoryItemWrapper * ConsumablePanel::OnItemFromItemPanelReceived(InventoryIte
 
 				g_pSounds->PlaySound(soundID::DRINK);
 				_receivedItem->SetItemAmount(_receivedItem->GetItem().number-1);
-				gameStatus->RemoveItem(_receivedItem->GetItem());
+				g_pGameStatus->RemoveItem(_receivedItem->GetItem());
 				break;
 			}
 		}

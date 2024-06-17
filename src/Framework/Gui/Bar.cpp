@@ -2,43 +2,29 @@
 
 
 
-Bar::Bar()
+Bar::Bar(sf::Texture const& _beamTexture, sf::Texture const& _frameTexture, int* _value, int* _maxValue)
+	: m_bar(_beamTexture, 2, _beamTexture.getSize().x / 2, _beamTexture.getSize().y)
+	, m_frame(_frameTexture)
+	, m_pValue(_value)
+	, m_pMaxValue(_maxValue)
+	, baseAnimationTime(0.0)
+	, currentAnimationTime(0.0)
+	, smoothAnimationBaseValue(0)
+	, xOffset(0)
+	, yOffset(0)
 {
-}
-
-
-Bar::~Bar()
-{
-
-}
-
-
-void Bar::Load(sf::Texture const &_beamTexture, sf::Texture const &_frameTexture, int *_value, int *_maxValue)
-{
-	//Set the texture
-	m_bar.Load(_beamTexture, 2, _beamTexture.getSize().x / 2, _beamTexture.getSize().y);
-
-	m_frame.Load(_frameTexture);
-
-	m_pValue = _value;
-	m_pMaxValue = _maxValue;
-
 	m_text.setCharacterSize(12);
 	m_text.setFillColor(sf::Color::Black);
-
-	baseAnimationTime = 0.0;
-	currentAnimationTime = 0.0;
-
-	smoothAnimationBaseValue = 0;
-
-	xOffset = 0;
-	yOffset = 0;
 
 	if (_value != nullptr)
 	{
 		lastValue = *_value;
 		valueToRender = (float)*_value;
 	}
+}
+
+Bar::~Bar()
+{
 }
 
 void Bar::SetValuePtr(int *_value)

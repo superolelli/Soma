@@ -8,20 +8,13 @@
 
 
 Enemy::Enemy(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
-	: Combatant(_id, _engine, _notificationRenderer)
+	: Combatant(_id, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID(_id)))
+	, enemyID(_id)
 {
-	enemyID = _id;
-}
-
-void Enemy::Init()
-{
-    combatantObject = g_pModels->GetNewCombatantModelInstance(CombatantID(enemyID));
 	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);
 
-    if (enemyID == CombatantID::BillNoface)
-        status.SetNofaceBuffLevel(0);
-
-	Combatant::Init();
+	if (enemyID == CombatantID::BillNoface)
+		status.SetNofaceBuffLevel(0);
 }
 
 
