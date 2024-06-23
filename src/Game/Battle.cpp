@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <random>
 
-Battle::Battle(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss, LevelStatus *_levelStatus)
+Battle::Battle(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, CombatantID enemyIDs[4], bool _boss, LevelStatus *_levelStatus)
 	: players(_adventureGroup)
 	, gui(_gui)
 	, engine(_engine)
@@ -27,7 +27,7 @@ Battle::Battle(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGa
 
 
 
-void Battle::InitCombatants(int _xView, int enemyIDs[4])
+void Battle::InitCombatants(int _xView, CombatantID enemyIDs[4])
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -71,7 +71,7 @@ Battle::~Battle()
 }
 
 
-void Battle::AddEnemy(int enemyID)
+void Battle::AddEnemy(CombatantID enemyID)
 {
 	int battlePosition = GetEmptyEnemyBattlePosition();
 	if (battlePosition != -1)
@@ -86,7 +86,7 @@ void Battle::AddEnemy(int enemyID)
 }
 
 
-Enemy *Battle::CreateEnemy(int _enemyID)
+Enemy *Battle::CreateEnemy(CombatantID _enemyID)
 {
 	return new Enemy(_enemyID, engine, notificationRenderer);
 }

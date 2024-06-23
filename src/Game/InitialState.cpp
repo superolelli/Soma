@@ -36,7 +36,6 @@ CInitialState::CInitialState(CGameEngine *_engine)
 
 CInitialState::~CInitialState()
 {
-	m_pGameEngine->UseSimpleRenderLoop(false);
 	SAFE_DELETE(modelLoadingScreen);
 	SAFE_DELETE(loadingScreen);
 }
@@ -74,6 +73,7 @@ void CInitialState::Update()
 		SAFE_DELETE(modelLoadingScreen);
 		SAFE_DELETE(loadingScreen);
 
+		m_pGameEngine->UseSimpleRenderLoop(false);
 		m_pGameEngine->ChangeStateImmediately(new MainMenu(m_pGameEngine));
 	}
 }

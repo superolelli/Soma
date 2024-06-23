@@ -1,11 +1,7 @@
 #pragma once
 
-#include "Ole.hpp"
-#include "Anna.hpp"
-#include "Markus.hpp"
-#include "Simon.hpp"
-
 #include "GameStatus.hpp"
+#include "Player.hpp"
 
 const int PLAYER_SPACING = 160;
 const int GROUP_Y_POS = 750;

@@ -1,7 +1,7 @@
 #include "CombatantStateExecutingAbility.hpp"
 #include "CombatantStateIdle.hpp"
 #include "Battle.hpp"
-
+#include "Markus.hpp"
 
 CombatantStateExecutingAbility::CombatantStateExecutingAbility(Combatant * _context, Ability * _ability)
 	:CombatantState(_context)

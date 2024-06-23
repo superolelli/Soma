@@ -1,11 +1,11 @@
 #include "AdventureGroup.hpp"
-
+#include "Markus.hpp"
 
 AdventureGroup::AdventureGroup(CGameEngine* _engine, NotificationRenderer* _notificationRenderer)
 {
-	adventurer[CombatantID::Ole] = new PlayerOle(_engine, _notificationRenderer);
-	adventurer[CombatantID::Anna] = new PlayerAnna(_engine, _notificationRenderer);
-	adventurer[CombatantID::Simon] = new PlayerSimon(_engine, _notificationRenderer);
+	adventurer[CombatantID::Ole] = new Player(CombatantID::Ole, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID::Ole));
+	adventurer[CombatantID::Anna] = new Player(CombatantID::Anna, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID::Anna));
+	adventurer[CombatantID::Simon] = new Player(CombatantID::Simon, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID::Simon));
 	adventurer[CombatantID::Markus] = new PlayerMarkus(_engine, _notificationRenderer);
 
 	int x = GROUP_OFFSET_LEFT;

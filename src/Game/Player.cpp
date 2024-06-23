@@ -7,7 +7,7 @@
 #include "CombatantStateDying.hpp"
 #include "PlayerStatePrepareAbility.hpp"
 
-Player::Player(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer, SpriterEngine::EntityInstance* _combatantObject)
+Player::Player(CombatantID _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer, SpriterEngine::EntityInstance* _combatantObject)
 	: Combatant(_id, _engine, _notificationRenderer, _combatantObject)
 	, is_walking(false)
 {

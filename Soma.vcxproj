@@ -251,7 +251,6 @@
     <ClCompile Include="src\Game\Ability.cpp" />
     <ClCompile Include="src\Game\AbilityTooltip.cpp" />
     <ClCompile Include="src\Game\AdventureGroup.cpp" />
-    <ClCompile Include="src\Game\Anna.cpp" />
     <ClCompile Include="src\Game\Battle.cpp" />
     <ClCompile Include="src\Game\BattleGUI.cpp" />
     <ClCompile Include="src\Game\Buff.cpp" />
@@ -302,7 +301,6 @@
     <ClCompile Include="src\Game\MainRoomGui.cpp" />
     <ClCompile Include="src\Game\Markus.cpp" />
     <ClCompile Include="src\Game\NameInputPanel.cpp" />
-    <ClCompile Include="src\Game\Ole.cpp" />
     <ClCompile Include="src\Game\Player.cpp" />
     <ClCompile Include="src\Game\PlayerAttributesText.cpp" />
     <ClCompile Include="src\Game\PlayerStatePrepareAbility.cpp" />
@@ -321,7 +319,6 @@
     <ClCompile Include="src\Game\ScrollableItemPanel.cpp" />
     <ClCompile Include="src\Game\SellMultipleDialog.cpp" />
     <ClCompile Include="src\Game\ShopPanel.cpp" />
-    <ClCompile Include="src\Game\Simon.cpp" />
     <ClCompile Include="src\Game\GameStatus.cpp" />
     <ClCompile Include="src\Game\SkillPanel.cpp" />
     <ClCompile Include="src\Game\SpeechBubble.cpp" />
@@ -501,7 +498,6 @@
     <ClInclude Include="src\Framework\Time.hpp" />
     <ClInclude Include="src\Framework\Window.hpp" />
     <ClInclude Include="src\Game\AdventureGroup.hpp" />
-    <ClInclude Include="src\Game\Anna.hpp" />
     <ClInclude Include="src\Game\Battle.hpp" />
     <ClInclude Include="src\Game\BattleGUI.hpp" />
     <ClInclude Include="src\Game\Buff.hpp" />
@@ -515,7 +511,6 @@
     <ClInclude Include="src\Game\Level.hpp" />
     <ClInclude Include="src\Game\LevelGUI.hpp" />
     <ClInclude Include="src\Game\Markus.hpp" />
-    <ClInclude Include="src\Game\Ole.hpp" />
     <ClInclude Include="src\Game\Player.hpp" />
     <ClInclude Include="src\Game\Resources\BackgroundIDs.hpp" />
     <ClInclude Include="src\Game\Resources\FontManager.hpp" />
@@ -533,7 +528,6 @@
     <ClInclude Include="src\Game\ScrollableItemPanel.hpp" />
     <ClInclude Include="src\Game\SellMultipleDialog.hpp" />
     <ClInclude Include="src\Game\ShopPanel.hpp" />
-    <ClInclude Include="src\Game\Simon.hpp" />
     <ClInclude Include="src\Game\GameStatus.hpp" />
     <ClInclude Include="src\Game\SkillPanel.hpp" />
     <ClInclude Include="src\Game\SpeechBubble.h" />

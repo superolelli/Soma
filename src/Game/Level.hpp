@@ -12,7 +12,7 @@ struct Room {
 	CSprite background;
 	bool battle;
 	bool boss;
-	int enemyIds[4];
+	CombatantID enemyIds[4];
 	Lootable *lootable;
 };
 
@@ -33,7 +33,7 @@ public:
 	bool InBattle() { return battle; }
 	bool IsBossBattle() { return bossBattle; }
 
-	int *GetEnemyIDs();
+	CombatantID *GetEnemyIDs();
 	int IsAtEnd(int _playerPos);
 
 private:
@@ -47,7 +47,7 @@ private:
 
 	bool battle;
 	bool bossBattle;
-	int currentEnemyIDs[4];
+	CombatantID currentEnemyIDs[4];
 
 	int currentRoomNumber;
 

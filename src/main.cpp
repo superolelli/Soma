@@ -3,13 +3,9 @@
 
 int main()
 {
-	CGameEngine engine;
-
-	engine.Init("Soma");
+	CGameEngine engine("Soma");
 	engine.PushStateImmediately(new CInitialState(&engine));
 	engine.Run();
-
-	engine.Quit();
 
 	return 0;
 }

@@ -609,9 +609,6 @@
     <ClCompile Include="src\Game\Enemy.cpp">
       <Filter>Quelldateien\Game\Level\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\Anna.cpp">
-      <Filter>Quelldateien\Game\Level\Players</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\AdventureGroup.cpp">
       <Filter>Quelldateien\Game\Level\Players</Filter>
     </ClCompile>
@@ -648,13 +645,7 @@
     <ClCompile Include="src\Game\Markus.cpp">
       <Filter>Quelldateien\Game\Level\Players</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\Ole.cpp">
-      <Filter>Quelldateien\Game\Level\Players</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\Player.cpp">
-      <Filter>Quelldateien\Game\Level\Players</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Simon.cpp">
       <Filter>Quelldateien\Game\Level\Players</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\ItemPanel.cpp">
@@ -1202,19 +1193,10 @@
     <ClInclude Include="src\Game\LevelSpecs.hpp">
       <Filter>Headerdateien\Game\Level</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\Anna.hpp">
-      <Filter>Headerdateien\Game\Level\Players</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\Enemy.hpp">
       <Filter>Headerdateien\Game\Level\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\Markus.hpp">
-      <Filter>Headerdateien\Game\Level\Players</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Simon.hpp">
-      <Filter>Headerdateien\Game\Level\Players</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Ole.hpp">
       <Filter>Headerdateien\Game\Level\Players</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\Player.hpp">

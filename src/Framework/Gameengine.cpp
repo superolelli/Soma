@@ -2,32 +2,26 @@
 #include "Gamestate.hpp"
 
 
-void CGameEngine::Init(std::string const &_name)
+CGameEngine::CGameEngine(std::string const &_name)
+	: currentRenderTexture(0)
+	, nextGameState(nullptr)
+	, nextAction(action::hold)
+	, nextActionCount(0)
+	, m_running(true)
+	, m_simpleRenderLoop(false)
 {
 	m_Window.Init(_name);
+	m_CursorManager.Init(&m_Window);
 	m_RenderTextures[0].create(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height);
 	m_RenderTextures[1].create(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height);
-
-	currentRenderTexture = 0;
-
-	m_CursorManager.Init(&m_Window);
-
-	nextGameState = NULL;
-
-	nextAction = action::hold;
-	nextActionCount = 0;
-	m_running = true;
-	m_simpleRenderLoop = false;
 }
 
 
 
-void CGameEngine::Quit()
+CGameEngine::~CGameEngine()
 {
 	ClearStates();
-
 	SAFE_DELETE(nextGameState);
-
 	m_Window.Quit();
 }
 

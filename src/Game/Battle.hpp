@@ -15,7 +15,7 @@ class Battle
 {
 public:
 
-	Battle(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, int enemyIDs[4], bool _boss, LevelStatus *_levelStatus);
+	Battle(int _xView, AdventureGroup *_adventureGroup, BattleGUI *_gui, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, CombatantID enemyIDs[4], bool _boss, LevelStatus *_levelStatus);
 	~Battle();
 
 	void Update();
@@ -23,7 +23,7 @@ public:
 	void RenderAbilityAnimations();
 	bool CurrentlyExecutingAbility();
 
-	void AddEnemy(int enemyID);
+	void AddEnemy(CombatantID enemyID);
 
 	bool EnemyDiedLastRound();
 
@@ -50,7 +50,7 @@ private:
 
 	bool isBattleFinished;
 
-	void InitCombatants(int _xView, int enemyIDs[4]);
+	void InitCombatants(int _xView, CombatantID enemyIDs[4]);
 	
 	void InitNewRound();
 	void CalculateTurnOrder();
@@ -66,5 +66,5 @@ private:
 	int GetEmptyEnemyBattlePosition();
 	void RecalculateEnemyPositions();
 
-	Enemy *CreateEnemy(int _enemyID);
+	Enemy *CreateEnemy(CombatantID _enemyID);
 };

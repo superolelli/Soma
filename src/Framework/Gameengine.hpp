@@ -17,9 +17,10 @@ class CGameEngine
 {
 public:
 
-	void Init(std::string const &_name);
+	CGameEngine(std::string const &_name);
+	~CGameEngine();
+
 	void Run();
-	void Quit();
 
 	//changes the current state and deletes the whole stack
 	void ChangeState(GameState* _state);

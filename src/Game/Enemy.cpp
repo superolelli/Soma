@@ -7,13 +7,12 @@
 #include "Battle.hpp"
 
 
-Enemy::Enemy(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
+Enemy::Enemy(CombatantID _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
 	: Combatant(_id, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID(_id)))
-	, enemyID(_id)
 {
-	status.SetStats(g_pObjectProperties->enemyStats[enemyID]);
+	status.SetStats(g_pObjectProperties->enemyStats[combatantID]);
 
-	if (enemyID == CombatantID::BillNoface)
+	if (combatantID == CombatantID::BillNoface)
 		status.SetNofaceBuffLevel(0);
 }
 

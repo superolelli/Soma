@@ -50,14 +50,14 @@ class Combatant : public CObserver
 public:
 	static bool setElapsedTimeForAbilityEffect;
 
-	Combatant(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, SpriterEngine::EntityInstance* _combatantObject);
+	Combatant(CombatantID _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, SpriterEngine::EntityInstance* _combatantObject);
 	~Combatant();
 
 	virtual void Update();
 
 	void Render();
 	void RenderStatusBar();
-	virtual int GetID() = 0;
+	CombatantID GetID() { return combatantID; }
 	virtual bool IsPlayer() = 0;
 	virtual void SetAbilityStatus(abilityPhase _status) = 0;
 
@@ -101,6 +101,7 @@ public:
 
 protected:
 
+	CombatantID combatantID;
 	CombatantState *currentState;
 	CombatantStatus status;
 	CombatantStatusBar statusBar;

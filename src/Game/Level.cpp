@@ -61,7 +61,7 @@ void Level::UpdateLootables(CGameEngine *_engine)
 }
 
 
-int *Level::GetEnemyIDs()
+CombatantID *Level::GetEnemyIDs()
 {
 	return currentEnemyIDs;
 }

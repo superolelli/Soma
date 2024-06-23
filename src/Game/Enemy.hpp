@@ -11,9 +11,8 @@ class Enemy : public Combatant
 {
 public:
 
-	Enemy(int _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
+	Enemy(CombatantID _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
 
-	virtual int GetID() override { return enemyID; }
 	bool IsPlayer() override { return false; }
 
 	void Update() override;
@@ -23,6 +22,4 @@ public:
 	void SetAbilityStatus(abilityPhase _status) override;
 
 protected:
-
-	int enemyID;
 };

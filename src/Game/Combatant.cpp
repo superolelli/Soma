@@ -10,22 +10,22 @@ bool Combatant::setElapsedTimeForAbilityEffect;
 
 
 
-Combatant::Combatant(int _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer, SpriterEngine::EntityInstance* _combatantObject)
+Combatant::Combatant(CombatantID _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer, SpriterEngine::EntityInstance* _combatantObject)
 	: engine(_engine)
+	, combatantID(_id)
 	, notificationRenderer(_notificationRenderer)
-	, status(this, notificationRenderer)
+	, combatantObject(_combatantObject)
+	, status(this, _notificationRenderer)
 	, actsInConfusion(false)
 	, turnMarkerScale(1.0)
 	, battle(nullptr)
 	, statusBar(&status, _engine)
-	, currentState(new CombatantStateIdle(this))
-	, combatantObject(_combatantObject)
 {
+	currentState = new CombatantStateIdle(this);
 	status.Reset();
 
 	Scale(COMBATANT_NORMAL_SCALE, COMBATANT_NORMAL_SCALE);
-	combatantObject->reprocessCurrentTime();
-	ReloadHitbox();
+	Update();
 }
 
 
