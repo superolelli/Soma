@@ -264,7 +264,7 @@ void Game::InitNewBattle()
 	currentBattle = new Battle(view.getCenter().x, &adventureGroup, (BattleGUI*)currentGUI, m_pGameEngine, &notificationRenderer, level->GetEnemyIDs(), level->IsBossBattle(), &level->GetLevelStatus());
 
 	isPlayingBattleIntro = true;
-	afterIntroWaitingTime = 2.0;
+	afterIntroWaitingTime = 1.0;
 	g_pSpritePool->newBattleAnimation->setCurrentAnimation("new_battle");
 	g_pSpritePool->newBattleAnimation->setCurrentTime(0);
 	g_pSpritePool->newBattleAnimation->reprocessCurrentTime();

@@ -10,7 +10,7 @@
 CombatantStatusBar::CombatantStatusBar(CombatantStatus *_status, CGameEngine *_engine)
 	: engine(_engine)
 	, status(_status)
-	, healthBar(g_pTextures->healthBar, g_pTextures->healthBarFrame, status->GetCurrentHealthPointer(), status->GetMaxHealthPointer())
+	, healthBar(g_pTextures->healthBar, g_pTextures->healthBarFrame, _status->GetCurrentHealthPointer(), _status->GetMaxHealthPointer())
 	, isTurnPending(false)
 {
 	healthBar.SetSmoothTransformationTime(0.7);

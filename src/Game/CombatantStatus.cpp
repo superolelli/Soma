@@ -4,8 +4,9 @@
 
 
 
-CombatantStatus::CombatantStatus(Combatant *_combatant, NotificationRenderer *_notificationRenderer)
+CombatantStatus::CombatantStatus(Combatant *_combatant, CombatantAttributes& _stats, NotificationRenderer *_notificationRenderer)
 	: combatant(_combatant)
+	, currentStats(_stats)
 	, notificationRenderer(_notificationRenderer)
 {
 	fatigueDebuff["damageMin"] = -3;
@@ -19,6 +20,8 @@ CombatantStatus::CombatantStatus(Combatant *_combatant, NotificationRenderer *_n
 	nofaceBuff["criticalHit"] = 1;
 	nofaceBuff["precision"] = 2;
 	nofaceBuff["initiative"] = 1;
+
+	Reset();
 }
 
 

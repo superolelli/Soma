@@ -7,10 +7,9 @@
 #include "PlayerStatePrepareAbility.hpp"
 
 Player::Player(CombatantID _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer, SpriterEngine::EntityInstance* _combatantObject)
-	: Combatant(_id, _engine, _notificationRenderer, _combatantObject)
+	: Combatant(_id, _engine, _notificationRenderer, _combatantObject, g_pObjectProperties->playerStats[_id])
 	, is_walking(false)
 {
-	status.SetStats(g_pObjectProperties->playerStats[GetID()]);
 }
 
 

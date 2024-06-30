@@ -50,7 +50,7 @@ class Combatant : public CObserver
 public:
 	static bool setElapsedTimeForAbilityEffect;
 
-	Combatant(CombatantID _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, SpriterEngine::EntityInstance* _combatantObject);
+	Combatant(CombatantID _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, SpriterEngine::EntityInstance* _combatantObject, CombatantAttributes& _attributes);
 	~Combatant();
 
 	virtual void Update();

@@ -23,6 +23,7 @@ $RECYCLE.BIN/
 #Builds
 /Debug/*
 /Release/*
+/x64/*
 
 #VS config files
 /.vs/*

@@ -8,10 +8,8 @@
 
 
 Enemy::Enemy(CombatantID _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer)
-	: Combatant(_id, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID(_id)))
+	: Combatant(_id, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID(_id)), g_pObjectProperties->enemyStats[_id])
 {
-	status.SetStats(g_pObjectProperties->enemyStats[combatantID]);
-
 	if (combatantID == CombatantID::BillNoface)
 		status.SetNofaceBuffLevel(0);
 }

@@ -13,7 +13,7 @@ public:
 	enum class FatigueLevel { awake, tired, stupid };
 	enum class Type { sleeping, decay, confused, buffed, debuffed, marked, fist_of_revenge_debuff, fatigue_tired, fatigue_stupid, noface_buff, miss, dynamite, bounty, number_of_states };
 
-	CombatantStatus(Combatant *_combatant, NotificationRenderer *_notificationRenderer);
+	CombatantStatus(Combatant *_combatant, CombatantAttributes& _stats, NotificationRenderer *_notificationRenderer);
 
 	void UpdateStatusForNewTurn(double _initialWaitingTime = 0.0);
 	void ExecuteStatusChanges();
@@ -79,7 +79,6 @@ public:
 	int *GetCurrentHealthPointer() { return &currentStats["currentHealth"]; }
 	int *GetMaxHealthPointer() { return &currentStats["maxHealth"]; }
 
-	void SetStats(CombatantAttributes &_stats) { currentStats = _stats; }
 	void AddStats(CombatantAttributes &_stats) { currentStats += _stats; }
 	void Reset();
 
