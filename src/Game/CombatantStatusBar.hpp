@@ -2,7 +2,7 @@
 
 #include "../Framework/Gui/Bar.hpp"
 #include "CombatantStatus.hpp"
-
+#include "CombatantStatusTooltip.hpp"
 
 class CombatantStatusBar
 {
@@ -18,22 +18,18 @@ public:
 
 private:
 
-	enum statusType {sleeping, decay, confused, buffed, debuffed, marked, fatigue_tired, fatigue_stupid, noface_buff, miss, dynamite, bounty, number_of_states};
-
 	CGameEngine *engine;
 	CombatantStatus *status;
 	Bar healthBar;
+	CombatantStatusTooltip tooltip;
 
 	bool isTurnPending;
 
 	void RenderStatusSymbols();
-	void RenderStatusSymbol(bool _isActive, statusType _type, std::unique_ptr<CSprite> &_sprite, int &_x);
+	void RenderStatusSymbol(bool _isActive, CombatantStatus::Type _type, std::unique_ptr<CSprite> &_sprite, int &_x);
 	void RenderStatusSymbolsTooltips();
-	void RenderBuffTooltip(Buff &_buff, bool _positive);
-	void RenderTooltip(const std::string &_tooltip, float _x, float _y);
+	CombatantStatus::Type GetTooltipStatusType();
 
-	void AddStatsToTooltip(std::string& _tooltip, const std::string& _prefix, const CombatantAttributes &_stats);
-
-	double statusRemoveTime[statusType::number_of_states];
-	double statusAddTime[statusType::number_of_states];
+	double statusRemoveTime[static_cast<int>(CombatantStatus::Type::number_of_states)];
+	double statusAddTime[static_cast<int>(CombatantStatus::Type::number_of_states)];
 };

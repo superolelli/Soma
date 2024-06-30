@@ -642,9 +642,6 @@
     <ClCompile Include="src\Game\LootableFactory.cpp">
       <Filter>Quelldateien\Game\Level\Loot</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\Markus.cpp">
-      <Filter>Quelldateien\Game\Level\Players</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\Player.cpp">
       <Filter>Quelldateien\Game\Level\Players</Filter>
     </ClCompile>
@@ -731,6 +728,9 @@
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\CombatantStatusTooltip.cpp">
+      <Filter>Quelldateien\Game\CommonGUI\Tooltips</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1196,9 +1196,6 @@
     <ClInclude Include="src\Game\Enemy.hpp">
       <Filter>Headerdateien\Game\Level\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game\Markus.hpp">
-      <Filter>Headerdateien\Game\Level\Players</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\Player.hpp">
       <Filter>Headerdateien\Game\Level\Players</Filter>
     </ClInclude>
@@ -1351,6 +1348,12 @@
     </ClInclude>
     <ClInclude Include="src\Game\LevelStatus.hpp">
       <Filter>Headerdateien\Game\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Resources\Colors.hpp">
+      <Filter>Headerdateien\Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\CombatantStatusTooltip.hpp">
+      <Filter>Headerdateien\Game\CommonGUI\Tooltips</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

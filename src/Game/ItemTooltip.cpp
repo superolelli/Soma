@@ -1,5 +1,6 @@
 #include "ItemTooltip.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
+#include "Resources/Colors.hpp"
 
 ItemTooltip::ItemTooltip()
 	: Tooltip()
@@ -40,7 +41,7 @@ void ItemTooltip::GenerateTooltipStringEquipment(std::string & _tooltip)
 	else
 		itemProperties = g_pObjectProperties->equipmentStats[itemId];
 
-	_tooltip.append("*#ffa500 " + itemProperties.name + "*");
+	_tooltip.append("*" + Colors::NAME + itemProperties.name + "*");
 
 	if (itemProperties.name == "Karten" || itemProperties.name == "Würfel")
 		return;
@@ -53,7 +54,7 @@ void ItemTooltip::GenerateTooltipStringEquipment(std::string & _tooltip)
 	if (itemProperties.healOnPass)
 		_tooltip.append("Heile 3 Leben und 3 Müdigkeit beim Passen");
 
-	AppendCombatantAttributesTooltip(_tooltip, itemProperties.stats, "", "", "#white ");
+	AppendCombatantAttributesTooltip(_tooltip, itemProperties.stats, "", "", Colors::DEFAULT);
 
 	if (_tooltip.back() == '\n')
 		_tooltip.pop_back();
@@ -68,14 +69,14 @@ void ItemTooltip::GenerateTooltipStringConsumable(std::string & _tooltip)
 
 	auto itemProperties = g_pObjectProperties->consumableStats[itemId - CONSUMABLE_ITEMS_START];
 
-	_tooltip.append("*#ffa500 " + itemProperties.name + "*\n");
+	_tooltip.append("*" + Colors::NAME + itemProperties.name + "*\n");
 
 	if (itemProperties.heal != 0)
-		_tooltip.append("#00aa00 Heilt " + std::to_string(itemProperties.heal) + " Leben\n");
+		_tooltip.append(Colors::HEALING + "Heilt " + std::to_string(itemProperties.heal) + " Leben\n");
 
 	if (itemProperties.buff.duration != 0)
 	{
-		_tooltip.append("#white Für " + std::to_string(itemProperties.buff.duration) + " Runden:\n");
+		_tooltip.append(Colors::DEFAULT + "Für " + DurationString(itemProperties.buff.duration) + ":\n");
 		AppendCombatantAttributesTooltip(_tooltip, itemProperties.buff.stats, "\t", "+");
 	}
 

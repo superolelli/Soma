@@ -10,6 +10,7 @@ void SpritePool::LoadSprites()
 	confused = std::make_unique<CSprite>(g_pTextures->confused);
 	marked = std::make_unique<CSprite>(g_pTextures->marked);
 	sleeping = std::make_unique<CSprite>(g_pTextures->sleeping);
+	fistOfRevengeDebuff = std::make_unique<CSprite>(g_pTextures->fistOfRevengeDebuff);
 	decay = std::make_unique<CSprite>(g_pTextures->decay);
 	fatigue_tired = std::make_unique<CSprite>(g_pTextures->fatigueTired);
 	fatigue_stupid = std::make_unique<CSprite>(g_pTextures->fatigueStupid);

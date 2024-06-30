@@ -1,5 +1,4 @@
 #include "Player.hpp"
-#include "Markus.hpp"
 #include <numeric>
 #include "CombatantStateAttacked.hpp"
 #include "CombatantStateIdle.hpp"

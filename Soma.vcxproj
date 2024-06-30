@@ -264,6 +264,7 @@
     <ClCompile Include="src\Game\CombatantStatePrepareAbility.cpp" />
     <ClCompile Include="src\Game\CombatantStatus.cpp" />
     <ClCompile Include="src\Game\CombatantStatusBar.cpp" />
+    <ClCompile Include="src\Game\CombatantStatusTooltip.cpp" />
     <ClCompile Include="src\Game\ConsumablePanel.cpp" />
     <ClCompile Include="src\Game\DialogManager.cpp" />
     <ClCompile Include="src\Game\Enemy.cpp" />
@@ -299,7 +300,6 @@
     <ClCompile Include="src\Game\MainMenu.cpp" />
     <ClCompile Include="src\Game\MainRoom.cpp" />
     <ClCompile Include="src\Game\MainRoomGui.cpp" />
-    <ClCompile Include="src\Game\Markus.cpp" />
     <ClCompile Include="src\Game\NameInputPanel.cpp" />
     <ClCompile Include="src\Game\Player.cpp" />
     <ClCompile Include="src\Game\PlayerAttributesText.cpp" />
@@ -348,6 +348,7 @@
     <ClInclude Include="src\Game\CombatantStateExecutingAbility.hpp" />
     <ClInclude Include="src\Game\CombatantStatePrepareAbility.hpp" />
     <ClInclude Include="src\Game\CombatantStatusBar.hpp" />
+    <ClInclude Include="src\Game\CombatantStatusTooltip.hpp" />
     <ClInclude Include="src\Game\ConsumablePanel.hpp" />
     <ClInclude Include="src\Game\DialogManager.hpp" />
     <ClInclude Include="src\Game\CombatantStateAttacked.hpp" />
@@ -385,6 +386,7 @@
     <ClInclude Include="src\Game\PlayerAttributesText.hpp" />
     <ClInclude Include="src\Game\PlayerStatePrepareAbility.hpp" />
     <ClInclude Include="src\Game\ResourcesStatusBar.hpp" />
+    <ClInclude Include="src\Game\Resources\Colors.hpp" />
     <ClInclude Include="src\Game\Resources\EnemyAbilities.hpp" />
     <ClInclude Include="src\Framework\Animations\animation\animation.h" />
     <ClInclude Include="src\Framework\Animations\animation\animationinstance.h" />
@@ -510,7 +512,6 @@
     <ClInclude Include="src\Game\InitialState.hpp" />
     <ClInclude Include="src\Game\Level.hpp" />
     <ClInclude Include="src\Game\LevelGUI.hpp" />
-    <ClInclude Include="src\Game\Markus.hpp" />
     <ClInclude Include="src\Game\Player.hpp" />
     <ClInclude Include="src\Game\Resources\BackgroundIDs.hpp" />
     <ClInclude Include="src\Game\Resources\FontManager.hpp" />

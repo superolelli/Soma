@@ -20,5 +20,6 @@ protected:
 	sf::RoundedRectangleShape tooltipBackground;
 
 	virtual void GenerateTooltipString(std::string &_tooltip) {}
-	void AppendCombatantAttributesTooltip(std::string& _tooltip, CombatantAttributes& _stats, std::string _indentation = "", std::string _sign = "", std::string _color="#aaaadd ");
+	void AppendCombatantAttributesTooltip(std::string& _tooltip, const CombatantAttributes& _stats, const std::string &_indentation = "", const std::string &_sign = "", const std::string &_color="#aaaadd ");
+	inline const std::string DurationString(int duration) { return duration == 1 ? "1 Runde" : std::to_string(duration) + " Runden"; }
 };

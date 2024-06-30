@@ -37,7 +37,7 @@ void Tooltip::ShowTooltip(sf::RenderTarget &_target, int _x, int _y)
 }
 
 
-void Tooltip::AppendCombatantAttributesTooltip(std::string& _tooltip, CombatantAttributes& _stats, std::string _indentation, std::string _sign, std::string _color)
+void Tooltip::AppendCombatantAttributesTooltip(std::string& _tooltip, const CombatantAttributes& _stats, const std::string &_indentation, const std::string &_sign, const std::string &_color)
 {
 	std::deque<std::string> toShow = { "damageMin", "damageMax", "armour", "maxHealth", "initiative", "criticalHit", "dodge", "precision", 
 									   "healing", "sleepResistance", "confusionResistance", "debuffResistance", "decayResistance"};

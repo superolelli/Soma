@@ -1,5 +1,4 @@
 #include "Combatant.hpp"
-#include "Markus.hpp"
 #include "../Framework/Graphics/RichText.hpp"
 #include "../Framework/Graphics/RoundedRectangleShape.hpp"
 #include <numeric>

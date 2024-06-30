@@ -39,6 +39,8 @@ void CombatantStatus::UpdateStatusForNewTurn(double _initialWaitingTime)
 	if (bounty > 0)
 		bounty--;
 
+	fistOfRevengeDebuff = false;
+
 	HandleBuffDurations(buffs);
 	HandleBuffDurations(debuffs);
 }
@@ -241,7 +243,6 @@ void CombatantStatus::AddDebuff(Buff _buff)
 void CombatantStatus::AddMiss(int _number)
 {
 	misses += _number;
-	std::cout << misses << std::endl;
 }
 
 void CombatantStatus::RemoveMiss()
@@ -287,7 +288,7 @@ void CombatantStatus::SetNofaceBuffLevel(int _level)
 	nofaceBuffLevel = _level;
 }
 
-CombatantAttributes CombatantStatus::GetNofaceStats()
+const CombatantAttributes CombatantStatus::GetNofaceStats()
 {
 	CombatantAttributes attributes;
 	attributes.Reset();
@@ -394,6 +395,7 @@ void CombatantStatus::Reset()
 {
 	confused = 0;
 	sleeping = false;
+	fistOfRevengeDebuff = false;
 	marked = 0;
 	decay.clear();
 	buffs.clear();

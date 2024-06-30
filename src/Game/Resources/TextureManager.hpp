@@ -113,6 +113,7 @@ public:
 	sf::Texture confused;
 	sf::Texture marked;
 	sf::Texture sleeping;
+	sf::Texture fistOfRevengeDebuff;
 	sf::Texture decay;
 	sf::Texture fatigueTired;
 	sf::Texture fatigueStupid;

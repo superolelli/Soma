@@ -24,6 +24,7 @@ public:
 	std::unique_ptr<CSprite> confused;
 	std::unique_ptr<CSprite> marked;
 	std::unique_ptr<CSprite> sleeping;
+	std::unique_ptr<CSprite> fistOfRevengeDebuff;
 	std::unique_ptr<CSprite> decay;
 	std::unique_ptr<CSprite> fatigue_tired;
 	std::unique_ptr<CSprite> fatigue_stupid;

@@ -11,6 +11,7 @@ class CombatantStatus
 public:
 
 	enum class FatigueLevel { awake, tired, stupid };
+	enum class Type { sleeping, decay, confused, buffed, debuffed, marked, fist_of_revenge_debuff, fatigue_tired, fatigue_stupid, noface_buff, miss, dynamite, bounty, number_of_states };
 
 	CombatantStatus(Combatant *_combatant, NotificationRenderer *_notificationRenderer);
 
@@ -30,6 +31,7 @@ public:
 	void AddBountyBuff();
 	void AddBuff(Buff _buff);
 	void AddDebuff(Buff _buff);
+	void AddFistOfRevengeDebuff() { fistOfRevengeDebuff = true; }
 	void SetFatigueLevel(FatigueLevel _level);
 	void SetNofaceBuffLevel(int _level);
 	void AddMiss(int _number = 1);
@@ -47,13 +49,14 @@ public:
 	bool IsConfused() { return confused > 0; }
 	bool IsBuffed() { return buffs.size() > 0; }
 	bool IsDebuffed() { return debuffs.size() > 0; }
+	bool HasFistOfRevengeDebuff() { return fistOfRevengeDebuff; }
 	bool HasBounty() { return bounty > 0; }
 	int GetNofaceBuffLevel() { return nofaceBuffLevel; }
 	void RemoveMiss();
 	int NumberOfMisses();
 	bool HasDynamite() { return dynamite; }
 	bool HasHealOnPass() { return healOnPass; }
-	CombatantAttributes GetNofaceStats();
+	const CombatantAttributes GetNofaceStats();
 
 	void CheckNofaceBuff();
 
@@ -88,6 +91,7 @@ private:
 
 	int confused;
 	bool sleeping;
+	bool fistOfRevengeDebuff;
 	int marked;
 	int misses;
 	int bounty;

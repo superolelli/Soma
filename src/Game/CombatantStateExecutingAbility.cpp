@@ -1,7 +1,6 @@
 #include "CombatantStateExecutingAbility.hpp"
 #include "CombatantStateIdle.hpp"
 #include "Battle.hpp"
-#include "Markus.hpp"
 
 CombatantStateExecutingAbility::CombatantStateExecutingAbility(Combatant * _context, Ability * _ability)
 	:CombatantState(_context)
@@ -104,9 +103,6 @@ void CombatantStateExecutingAbility::ExecuteAbility()
 	context->ReverseScaleForAbilityAnimation();
 	StopTargetsAttackedAnimation();
 
-	if (dynamic_cast<PlayerMarkus*>(context))
-		dynamic_cast<PlayerMarkus*>(context)->ResetFistOfRevenge();
-
 	CombatantStateIdle *newState = new CombatantStateIdle(context);
 	context->ChangeState(newState);
 }
@@ -188,8 +184,9 @@ void CombatantStateExecutingAbility::AttackTargets()
 		if (context->selectedTargets[i] == context)
 			continue;
 
-		if (dynamic_cast<PlayerMarkus*>(context->selectedTargets[i]) != nullptr)
-			dynamic_cast<PlayerMarkus*>(context->selectedTargets[i])->AttackedBy(context->battlePosition);
+		if (context->selectedTargets[i]->combatantID == CombatantID::Markus && 
+			(!context->IsAlly(context->selectedTargets[i]) || context->actsInConfusion))
+			context->Status().AddFistOfRevengeDebuff();
 
 		StartAttackedAnimation(context->selectedTargets[i], combatantAnimationPositions[context->selectedTargets[i]->GetBattlePos()]);
 	}

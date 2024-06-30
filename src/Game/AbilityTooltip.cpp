@@ -2,6 +2,7 @@
 #include "Resources\FontManager.hpp"
 #include "Resources\TextureManager.hpp"
 #include "Resources\ObjectPropertiesManager.hpp"
+#include "Resources/Colors.hpp"
 
 AbilityTooltip::AbilityTooltip()
 	: Tooltip(false)
@@ -42,30 +43,30 @@ void AbilityTooltip::GenerateTooltipString(std::string & _tooltip)
 {
 	Ability &currentAbility = GetCurrentAbility();
 
-	_tooltip.append("*#ffa500 " + currentAbility.name + "*\n");
+	_tooltip.append("*" + Colors::NAME + currentAbility.name + "*\n");
 
 	if (currentAbility.possibleAims.attackAll == true)
-		_tooltip.append("#aa5000 Trifft alle (Gegner und Freunde)\n");
+		_tooltip.append(Colors::INFO_HIGHLIGHT + "Trifft alle (Gegner und Freunde)\n");
 
 	//fist of revenge special text
 	if (abilityID == 0 && playerID == CombatantID::Markus)
-		_tooltip.append("#aa5000 Geht nur auf Gegner, die\nMarkus letze Runde angegriffen haben\n");
+		_tooltip.append(Colors::INFO_HIGHLIGHT + "Geht nur auf Gegner, die\nMarkus letze Runde angegriffen haben\n");
 
 	if (currentAbility.fatigue != 0)
-		_tooltip.append("#503380 Müdigkeit: " + std::to_string(currentAbility.fatigue) + "\n");
+		_tooltip.append(Colors::FATIGUE + "Müdigkeit: " + std::to_string(currentAbility.fatigue) + "\n");
 
 	if (currentAbility.precisionModificator != 0)
-		_tooltip.append("#white Präzision: " + std::to_string(currentAbility.precisionModificator) + "\n");
+		_tooltip.append(Colors::DEFAULT + "Präzision: " + std::to_string(currentAbility.precisionModificator) + "\n");
 
 	if (currentAbility.canTargetEnemiesOrFriends)
 	{
 		if (currentAbility.possibleAims.attackAllPlayers)
-			_tooltip.append("#888888 Auf Heldengruppe\n");
+			_tooltip.append(Colors::INFO + "Auf Heldengruppe\n");
 		else
-			_tooltip.append("#888888 Auf Freund\n");
+			_tooltip.append(Colors::INFO + "Auf Freund\n");
 
 		AppendTooltipStringForOneTarget(_tooltip, false, true);
-		_tooltip.append("#888888 Auf Gegner\n");
+		_tooltip.append(Colors::INFO  + "Auf Gegner\n");
 		AppendTooltipStringForOneTarget(_tooltip, true, true);
 	}
 	else
@@ -91,42 +92,42 @@ void AbilityTooltip::AppendTooltipStringForOneTarget(std::string & _tooltip, boo
 		indentation = "\t";
 
 	if (effect->criticalHitModificator != 0)
-		_tooltip.append("#white Kritische Trefferchance: " + std::to_string(effect->criticalHitModificator) + "\n");
+		_tooltip.append(Colors::DEFAULT + "Kritische Trefferchance: " + std::to_string(effect->criticalHitModificator) + "\n");
 
 	if (effect->damageFactor != 0)
-		_tooltip.append(indentation + "#white Schadensfaktor: " + std::to_string(static_cast<int>(effect->damageFactor * 100)) + "%\n");
+		_tooltip.append(indentation + Colors::DEFAULT + "Schadensfaktor: " + std::to_string(static_cast<int>(effect->damageFactor * 100)) + "%\n");
 
 	if (effect->lessTargetsMoreDamage != 0)
-		_tooltip.append("#aa5000 Werden weniger als " + std::to_string(currentAbility.possibleAims.howMany) + " Gegner attackiert,\n"
+		_tooltip.append(Colors::INFO_HIGHLIGHT + "Werden weniger als " + std::to_string(currentAbility.possibleAims.howMany) + " Gegner attackiert,\n"
 			+ "steigt der Schadensfaktor pro fehlendem\nGegner um " + std::to_string(static_cast<int>(effect->lessTargetsMoreDamage * 100)) + " Prozentpunkte\n");
 
 	if (effect->decayRounds != 0)
-		_tooltip.append(indentation + "#aa0000 Verfall (" + std::to_string(effect->decayRounds) + " Runden): " + std::to_string(effect->decay) + " Schaden\n");
+		_tooltip.append(indentation + Colors::DECAY  + "Verfall (" + DurationString(effect->decayRounds) + "): " + std::to_string(effect->decay) + " Schaden\n");
 
 	if (effect->confusion != 0)
-		_tooltip.append(indentation + "#bb77bb Verwirrung (" + std::to_string(effect->confusion) + " Runden): " + std::to_string(static_cast<int>(effect->confusionProbability * 100)) + "%\n");
+		_tooltip.append(indentation + Colors::CONFUSION + "Verwirrung (" + DurationString(effect->confusion) + "): " + std::to_string(static_cast<int>(effect->confusionProbability * 100)) + "%\n");
 
 	if (effect->heal != 0)
-		_tooltip.append(indentation + "#00aa00 Heilung: " + std::to_string(effect->heal) + "\n");
+		_tooltip.append(indentation + Colors::HEALING + "Heilung: " + std::to_string(effect->heal) + "\n");
 
 	if (effect->healSelf != 0)
-		_tooltip.append(indentation + "#00aa00 Heilung (selbst): " + std::to_string(effect->healSelf) + "\n");
+		_tooltip.append(indentation + Colors::HEALING + "Heilung (selbst): " + std::to_string(effect->healSelf) + "\n");
 
 	if (effect->removeDebuffs != false)
-		_tooltip.append(indentation + "#white Entfernt Debuffs\n");
+		_tooltip.append(indentation + Colors::DEFAULT + "Entfernt Debuffs\n");
 
 	if (effect->removeBuffs != false)
-		_tooltip.append(indentation + "#white Entfernt Buffs\n");
+		_tooltip.append(indentation + Colors::DEFAULT + "Entfernt Buffs\n");
 
 	if (effect->mark != 0)
-		_tooltip.append(indentation + "#white Markiert (" + std::to_string(effect->mark) + " Runden)\n");
+		_tooltip.append(indentation + Colors::DEFAULT + "Markiert (" + DurationString(effect->mark) + ")\n");
 
 	if (effect->putToSleepProbability != 0)
-		_tooltip.append(indentation + "#white Schlaf: " + std::to_string(static_cast<int>(effect->putToSleepProbability * 100)) + "%\n");
+		_tooltip.append(indentation + Colors::DEFAULT + "Schlaf: " + std::to_string(static_cast<int>(effect->putToSleepProbability * 100)) + "%\n");
 
 	if (effect->buff.duration != 0)
 	{
-		_tooltip.append(indentation + "#white Für " + std::to_string(effect->buff.duration) + " Runden:\n");
+		_tooltip.append(indentation + Colors::DEFAULT + "Für " + DurationString(effect->buff.duration) + ":\n");
 
 		std::string sign("");
 		if (effect->buff.isPositive)

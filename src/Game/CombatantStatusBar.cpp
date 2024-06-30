@@ -15,7 +15,7 @@ CombatantStatusBar::CombatantStatusBar(CombatantStatus *_status, CGameEngine *_e
 {
 	healthBar.SetSmoothTransformationTime(0.7);
 
-	for (int i = 0; i < statusType::number_of_states; i++)
+	for (int i = 0; i < static_cast<int>(CombatantStatus::Type::number_of_states); i++)
 	{
 		statusRemoveTime[i] = -1.0;
 		statusAddTime[i] = -1.0;
@@ -60,53 +60,56 @@ void CombatantStatusBar::RenderStatusSymbols()
 	int x = healthBar.GetRect().left;
 	int y = healthBar.GetRect().top + healthBar.GetRect().height;
 
-	RenderStatusSymbol(status->HasDynamite(), dynamite, g_pSpritePool->dynamite, x);
-	RenderStatusSymbol(status->IsAsleep(), sleeping, g_pSpritePool->sleeping, x);
-	RenderStatusSymbol(status->GetNofaceBuffLevel() >= 0, noface_buff, g_pSpritePool->noface_buff, x);
-	RenderStatusSymbol(status->GetFatigueLevel() == CombatantStatus::FatigueLevel::tired, fatigue_tired, g_pSpritePool->fatigue_tired, x);
-	RenderStatusSymbol(status->GetFatigueLevel() == CombatantStatus::FatigueLevel::stupid, fatigue_stupid, g_pSpritePool->fatigue_stupid, x);
-	RenderStatusSymbol(status->GetDecay() > 0.0f, decay, g_pSpritePool->decay, x);
-	RenderStatusSymbol(status->IsConfused(), confused, g_pSpritePool->confused, x);
-	RenderStatusSymbol(status->IsBuffed(), buffed, g_pSpritePool->buff, x);
-	RenderStatusSymbol(status->IsDebuffed(), debuffed, g_pSpritePool->debuff, x);
-	RenderStatusSymbol(status->IsMarked(), marked, g_pSpritePool->marked, x);
-	RenderStatusSymbol(status->NumberOfMisses() > 0, miss, g_pSpritePool->missed, x);
-	RenderStatusSymbol(status->HasBounty(), bounty, g_pSpritePool->bounty, x);
+	RenderStatusSymbol(status->HasDynamite(), CombatantStatus::Type::dynamite, g_pSpritePool->dynamite, x);
+	RenderStatusSymbol(status->IsAsleep(), CombatantStatus::Type::sleeping, g_pSpritePool->sleeping, x);
+	RenderStatusSymbol(status->HasFistOfRevengeDebuff(), CombatantStatus::Type::fist_of_revenge_debuff, g_pSpritePool->fistOfRevengeDebuff, x);
+	RenderStatusSymbol(status->GetNofaceBuffLevel() >= 0, CombatantStatus::Type::noface_buff, g_pSpritePool->noface_buff, x);
+	RenderStatusSymbol(status->GetFatigueLevel() == CombatantStatus::FatigueLevel::tired, CombatantStatus::Type::fatigue_tired, g_pSpritePool->fatigue_tired, x);
+	RenderStatusSymbol(status->GetFatigueLevel() == CombatantStatus::FatigueLevel::stupid, CombatantStatus::Type::fatigue_stupid, g_pSpritePool->fatigue_stupid, x);
+	RenderStatusSymbol(status->GetDecay() > 0.0f, CombatantStatus::Type::decay, g_pSpritePool->decay, x);
+	RenderStatusSymbol(status->IsConfused(), CombatantStatus::Type::confused, g_pSpritePool->confused, x);
+	RenderStatusSymbol(status->IsBuffed(), CombatantStatus::Type::buffed, g_pSpritePool->buff, x);
+	RenderStatusSymbol(status->IsDebuffed(), CombatantStatus::Type::debuffed, g_pSpritePool->debuff, x);
+	RenderStatusSymbol(status->IsMarked(), CombatantStatus::Type::marked, g_pSpritePool->marked, x);
+	RenderStatusSymbol(status->NumberOfMisses() > 0, CombatantStatus::Type::miss, g_pSpritePool->missed, x);
+	RenderStatusSymbol(status->HasBounty(), CombatantStatus::Type::bounty, g_pSpritePool->bounty, x);
 
 	RenderStatusSymbolsTooltips();
 }
 
-void CombatantStatusBar::RenderStatusSymbol(bool _isActive, statusType _type, std::unique_ptr<CSprite> & _sprite, int & _x)
+void CombatantStatusBar::RenderStatusSymbol(bool _isActive, CombatantStatus::Type _type, std::unique_ptr<CSprite> & _sprite, int & _x)
 {
+	int type = static_cast<int>(_type);
+
 	int y = healthBar.GetRect().top + healthBar.GetRect().height;
 
-	if (_isActive && statusAddTime[_type] == -1.0)
+	if (_isActive && statusAddTime[type] == -1.0)
 	{
-		statusAddTime[_type] = 0.5;
-		statusRemoveTime[_type] = 0.0;
+		statusAddTime[type] = 0.5;
+		statusRemoveTime[type] = 0.0;
 	}
-	else if (!_isActive && statusAddTime[_type] > -1.0)
+	else if (!_isActive && statusAddTime[type] > -1.0)
 	{
-		statusRemoveTime[_type] = 0.5;
-		statusAddTime[_type] = -1.0;
+		statusRemoveTime[type] = 0.5;
+		statusAddTime[type] = -1.0;
 	}
 
 	_sprite->SetScale(1.0f, 1.0f);
-	if (statusAddTime[_type] > 0.0)
+	if (statusAddTime[type] > 0.0)
 	{
-		float t = 1.0 - statusAddTime[_type] * 2.0;
+		float t = 1.0 - statusAddTime[type] * 2.0;
 		float scaleFactor = std::pow((1.0 - t), 3) * 1.5 + 3.0 * t*std::pow((1.0 - t), 2) * 0.64 + 3.0 * t*t* (1.0 - t)*0.635 + t*t*t; //cubic bezier for popping in
 		_sprite->SetScale(scaleFactor, scaleFactor);
-		statusAddTime[_type] -= g_pTimer->GetElapsedTimeAsSeconds();
+		statusAddTime[type] -= g_pTimer->GetElapsedTimeAsSeconds();
 	}
-	else if (statusRemoveTime[_type] > 0.0)
+	else if (statusRemoveTime[type] > 0.0)
 	{
-		float scaleFactor = -2.4 * std::pow(1.0 - (2.0 * statusRemoveTime[_type]), 2.0) + 1.4 * (1.0 - (2.0 * statusRemoveTime[_type])) + 1.0; //quadratic curve for popping out
+		float scaleFactor = -2.4 * std::pow(1.0 - (2.0 * statusRemoveTime[type]), 2.0) + 1.4 * (1.0 - (2.0 * statusRemoveTime[type])) + 1.0; //quadratic curve for popping out
 		_sprite->SetScale(scaleFactor, scaleFactor);
-		statusRemoveTime[_type] -= g_pTimer->GetElapsedTimeAsSeconds();
+		statusRemoveTime[type] -= g_pTimer->GetElapsedTimeAsSeconds();
 	}
 
-	if (_isActive || statusRemoveTime[_type] > 0.0)
+	if (_isActive || statusRemoveTime[type] > 0.0)
 	{
 		_sprite->SetPos(_x, y);
 		_sprite->Render(engine->GetRenderTarget());
@@ -114,143 +117,55 @@ void CombatantStatusBar::RenderStatusSymbol(bool _isActive, statusType _type, st
 	}
 }
 
+CombatantStatus::Type CombatantStatusBar::GetTooltipStatusType()
+{
+	if (status->HasDynamite() && g_pSpritePool->dynamite->GetRect().contains(engine->GetWorldMousePos()))
+		return CombatantStatus::Type::dynamite;
+
+	if (status->IsAsleep() && g_pSpritePool->sleeping->GetRect().contains(engine->GetWorldMousePos()))
+		return CombatantStatus::Type::sleeping;
+
+	if (status->HasFistOfRevengeDebuff() && g_pSpritePool->fistOfRevengeDebuff->GetRect().contains(engine->GetWorldMousePos()))
+		return CombatantStatus::Type::fist_of_revenge_debuff;
+
+	if (status->GetNofaceBuffLevel() >= 0 && g_pSpritePool->noface_buff->GetRect().contains(engine->GetWorldMousePos()))
+		return CombatantStatus::Type::noface_buff;
+
+	if (status->RoundsDecay() > 0 && g_pSpritePool->decay->GetRect().contains(engine->GetWorldMousePos()))
+		return CombatantStatus::Type::decay;
+
+	if (status->IsConfused() && g_pSpritePool->confused->GetRect().contains(engine->GetWorldMousePos()))
+		return CombatantStatus::Type::confused;
+
+	if (status->IsMarked() && g_pSpritePool->marked->GetRect().contains(engine->GetWorldMousePos()))
+		return CombatantStatus::Type::marked;
+
+	if (status->HasBounty() && g_pSpritePool->bounty->GetRect().contains(engine->GetWorldMousePos()))
+		return CombatantStatus::Type::bounty;
+
+	if (status->NumberOfMisses() > 0 && g_pSpritePool->missed->GetRect().contains(engine->GetWorldMousePos()))
+		return CombatantStatus::Type::miss;
+
+	if (status->IsBuffed() && g_pSpritePool->buff->GetRect().contains(engine->GetWorldMousePos()))
+		return CombatantStatus::Type::buffed;
+
+	if (status->IsDebuffed() && g_pSpritePool->debuff->GetRect().contains(engine->GetWorldMousePos()))
+		return CombatantStatus::Type::debuffed;
+
+	if (status->GetFatigueLevel() == CombatantStatus::FatigueLevel::tired && g_pSpritePool->fatigue_tired->GetRect().contains(engine->GetWorldMousePos()))
+		return CombatantStatus::Type::fatigue_tired;
+
+	if (status->GetFatigueLevel() == CombatantStatus::FatigueLevel::stupid && g_pSpritePool->fatigue_stupid->GetRect().contains(engine->GetWorldMousePos()))
+		return CombatantStatus::Type::fatigue_stupid;
+
+	return CombatantStatus::Type::number_of_states;
+}
 
 void CombatantStatusBar::RenderStatusSymbolsTooltips()
 {
-	if (status->HasDynamite() && g_pSpritePool->dynamite->GetRect().contains(engine->GetWorldMousePos()))
-		RenderTooltip("*#dd3333 Dynamit*\nExplodiert zu 20%\n#888888 Falls ja: 15 Schaden\nFalls nein: Weiter an Nächsten", g_pSpritePool->dynamite->GetRect().left, g_pSpritePool->dynamite->GetRect().top);
-
-	if (status->IsAsleep() && g_pSpritePool->sleeping->GetRect().contains(engine->GetWorldMousePos()))
-		RenderTooltip("Schläft", g_pSpritePool->sleeping->GetRect().left, g_pSpritePool->sleeping->GetRect().top);
-
-	if (status->GetNofaceBuffLevel() >= 0 && g_pSpritePool->noface_buff->GetRect().contains(engine->GetWorldMousePos()))
-	{
-		std::string tooltip("*#dd3333 Seine Wunden machen\nihn stärker*\n#white ");
-		if(status->GetNofaceBuffLevel() > 0)
-			AddStatsToTooltip(tooltip, " ", status->GetNofaceStats());
-		RenderTooltip(tooltip, g_pSpritePool->noface_buff->GetRect().left, g_pSpritePool->noface_buff->GetRect().top);
+	auto type = GetTooltipStatusType();
+	if (type != CombatantStatus::Type::number_of_states) {
+		tooltip.SetCombatantStatusType(type, status);
+		tooltip.ShowTooltip(engine->GetRenderTarget(), healthBar.GetRect().left, healthBar.GetRect().top - 30);
 	}
-
-	if (status->RoundsDecay() > 0 && g_pSpritePool->decay->GetRect().contains(engine->GetWorldMousePos()))
-	{
-		if(status->RoundsDecay() > 1)
-			RenderTooltip("#dd3333 " + std::to_string(status->GetDecay()) + " Verfall (" + std::to_string(status->RoundsDecay()) + " Runden)", g_pSpritePool->decay->GetRect().left, g_pSpritePool->decay->GetRect().top);
-		else
-			RenderTooltip("#dd3333 " + std::to_string(status->GetDecay()) + " Verfall (1 Runde)", g_pSpritePool->decay->GetRect().left, g_pSpritePool->decay->GetRect().top);
-	}
-
-
-	if (status->IsConfused() && g_pSpritePool->confused->GetRect().contains(engine->GetWorldMousePos()))
-	{
-		if (status->RoundsConfused() > 1)
-			RenderTooltip("#bb77bb Verwirrt (" + std::to_string(status->RoundsConfused()) + " Runden)", g_pSpritePool->confused->GetRect().left, g_pSpritePool->confused->GetRect().top);
-		else
-			RenderTooltip("#bb77bb Verwirrt (1 Runde)", g_pSpritePool->confused->GetRect().left, g_pSpritePool->confused->GetRect().top);
-	}
-
-	if (status->IsMarked() && g_pSpritePool->marked->GetRect().contains(engine->GetWorldMousePos()))
-	{
-		if (status->RoundsMarked() > 1)
-			RenderTooltip("Markiert (" + std::to_string(status->RoundsMarked()) + " Runden)", g_pSpritePool->marked->GetRect().left, g_pSpritePool->marked->GetRect().top);
-		else
-			RenderTooltip("Markiert (1 Runde)", g_pSpritePool->marked->GetRect().left, g_pSpritePool->marked->GetRect().top);
-	}
-
-	if (status->HasBounty() && g_pSpritePool->bounty->GetRect().contains(engine->GetWorldMousePos()))
-	{
-		if (status->RoundsBounty() > 1)
-			RenderTooltip("Kopfgeld (" + std::to_string(status->RoundsBounty()) + " Runden)\n#888888 Bei Schaden:\n+2 Schaden für Angreifer", g_pSpritePool->bounty->GetRect().left, g_pSpritePool->bounty->GetRect().top);
-		else
-			RenderTooltip("Kopfgeld (1 Runde)\n#888888 Bei Schaden:\n+2 Schaden für Angreifer", g_pSpritePool->bounty->GetRect().left, g_pSpritePool->bounty->GetRect().top);
-	}
-
-	if (status->NumberOfMisses() > 0 && g_pSpritePool->missed->GetRect().contains(engine->GetWorldMousePos()))
-	{
-		if(status->NumberOfMisses() == 1)
-			RenderTooltip("1 Fehlschuss ", g_pSpritePool->missed->GetRect().left, g_pSpritePool->missed->GetRect().top);
-		else
-			RenderTooltip(std::to_string(status->NumberOfMisses()) + " Fehlschüsse ", g_pSpritePool->missed->GetRect().left, g_pSpritePool->missed->GetRect().top);
-	}
-
-	if (status->IsBuffed() && g_pSpritePool->buff->GetRect().contains(engine->GetWorldMousePos()))
-		RenderBuffTooltip(status->GetBuff(), true);
-	
-	if (status->IsDebuffed() && g_pSpritePool->debuff->GetRect().contains(engine->GetWorldMousePos()))
-		RenderBuffTooltip(status->GetDebuff(), false);
-
-	if (status->GetFatigueLevel() == CombatantStatus::FatigueLevel::tired && g_pSpritePool->fatigue_tired->GetRect().contains(engine->GetWorldMousePos()))
-	{
-		std::string tooltip("*#503380 Müde*\n#white ");
-		AddStatsToTooltip(tooltip, " ", status->fatigueDebuff);
-		RenderTooltip(tooltip, g_pSpritePool->fatigue_tired->GetRect().left, g_pSpritePool->fatigue_tired->GetRect().top);
-	}
-
-	if (status->GetFatigueLevel() == CombatantStatus::FatigueLevel::stupid && g_pSpritePool->fatigue_stupid->GetRect().contains(engine->GetWorldMousePos()))
-		RenderTooltip("#503380 Nach müde kommt doof", g_pSpritePool->fatigue_stupid->GetRect().left, g_pSpritePool->fatigue_stupid->GetRect().top);
-}
-
-
-void CombatantStatusBar::RenderBuffTooltip(Buff &_buff, bool _positive)
-{
-	std::string prefix(" ");
-
-	if (_positive)
-		prefix = " +";
-
-	std::string tooltip("");
-
-	if (_buff.duration > 1)
-		tooltip.append(std::to_string(_buff.duration) + " Runden:\n#aaaadd ");
-	else
-		tooltip.append(std::to_string(_buff.duration) + " Runde:\n#aaaadd ");
-
-	AddStatsToTooltip(tooltip, prefix, _buff.stats);
-
-	if(_positive)
-		RenderTooltip(tooltip, g_pSpritePool->buff->GetRect().left, g_pSpritePool->buff->GetRect().top);
-	else
-		RenderTooltip(tooltip, g_pSpritePool->debuff->GetRect().left, g_pSpritePool->debuff->GetRect().top);
-}
-
-
-
-void CombatantStatusBar::RenderTooltip(const std::string &_tooltip, float _x, float _y)
-{
-	sfe::RichText tooltip;
-	tooltip.setCharacterSize(18);
-	tooltip.setFont(g_pFonts->f_arial);
-	tooltip.setString(_tooltip);
-	tooltip.setPosition(_x, _y - tooltip.getLocalBounds().height - 30.0f);
-
-	sf::FloatRect backgroundRect = tooltip.getLocalBounds();
-	sf::RoundedRectangleShape background(sf::Vector2f(backgroundRect.width + 10.0f, backgroundRect.height + 16.0f), 8, 10);
-	background.setFillColor(sf::Color(0, 0, 0, 200));
-	background.setOutlineThickness(2.0f);
-	background.setOutlineColor(sf::Color(60, 60, 60));
-	background.setPosition(tooltip.getPosition() + sf::Vector2f(-5.0f, -4.0f));
-
-	engine->GetRenderTarget().draw(background);
-	engine->GetRenderTarget().draw(tooltip);
-}
-
-
-void CombatantStatusBar::AddStatsToTooltip(std::string& _tooltip, const std::string& _prefix, const CombatantAttributes& _stats)
-{
-	std::deque<std::string> toShow = { "damageMin", "damageMax", "armour", "maxHealth", "initiative", "criticalHit", "dodge", "precision",
-									   "healing", "sleepResistance", "confusionResistance", "debuffResistance", "decayResistance" };
-
-	if (_stats["damageMin"] != 0 && _stats["damageMin"] == _stats["damageMax"])
-	{
-		_tooltip.append(_prefix + std::to_string(_stats["damageMin"]) + " " + "Schaden" + "\n");
-		toShow.pop_front();
-		toShow.pop_front();
-	}
-
-	for (auto& s : toShow)
-	{
-		if(_stats[s] != 0)
-			_tooltip.append(_prefix + std::to_string(_stats[s]) + " " + CombatantAttributes::attributeDisplayNames.at(s) + "\n");
-	}
-
-	_tooltip.pop_back();
 }

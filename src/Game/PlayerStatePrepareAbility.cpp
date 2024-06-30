@@ -1,7 +1,6 @@
 #include "PlayerStatePrepareAbility.hpp"
 #include "CombatantStateIdle.hpp"
 #include "CombatantStateExecutingAbility.hpp"
-#include "Markus.hpp"
 #include "Battle.hpp"
 
 PlayerStatePrepareAbility::PlayerStatePrepareAbility(Player * _context)
@@ -65,13 +64,12 @@ void PlayerStatePrepareAbility::ChangeState()
 
 bool PlayerStatePrepareAbility::CurrentAbilityCanAimAtCombatant(Combatant* _combatant)
 {
-	bool canAim = g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()].possibleAims.position[_combatant->GetBattlePos()] && !_combatant->IsDying() ||
-		g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()].possibleAims.attackSelf && _combatant == context;
+	auto &currentAbility = g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()];
+	bool canAim = currentAbility.possibleAims.position[_combatant->GetBattlePos()] && !_combatant->IsDying() ||
+		currentAbility.possibleAims.attackSelf && _combatant == context;
 
-	if (dynamic_cast<PlayerMarkus*>(playerContext) != nullptr && playerContext->gui->GetCurrentAbility() == 0) {
-		auto *markus = dynamic_cast<PlayerMarkus*>(playerContext);
-		return (canAim && markus->CanAimFistOfRevengeAt(_combatant->GetBattlePos()));
-	}
+	if (currentAbility.name == "Fist of Revenge")
+		canAim = canAim && _combatant->Status().HasFistOfRevengeDebuff();
 
 	return canAim;
 }
