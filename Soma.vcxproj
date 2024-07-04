@@ -79,7 +79,7 @@
     <IntDir>$(Configuration)\temps\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>C:\Soma\Dependencies\SFML-2.6.1\lib;C:\Soma\Dependencies\boost_1_61_0\libs;C:\Soma\Dependencies\sfeMovie\install\lib;C:\Soma\Dependencies\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Soma\Dependencies\SFML-2.6.1\lib\;C:\Soma\Dependencies\boost_1_61_0\libs;C:\Soma\Dependencies\sfeMovie\install\lib;C:\Soma\Dependencies\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LibraryPath>C:\Soma\Dependencies\SFML-2.6.1\lib;C:\Soma\Dependencies\boost_1_61_0\libs;C:\Soma\Dependencies\sfeMovie\install\lib;C:\Soma\Dependencies\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
@@ -100,10 +100,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Soma\Dependencies\SFML-2.6.1\include;C:\Soma\Dependencies\boost_1_61_0;C:\Soma\Dependencies\sfeMovie\install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Soma\Dependencies\SFML-2.6.1\include;C:\Soma\Dependencies\boost_1_61_0;C:\Soma\Dependencies\sfeMovie\install\include;C:\Soma\Dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>smfl-audio-d.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfeMovie-d.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfeMovie-d.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
