@@ -35,14 +35,17 @@ ShopPanel::ShopPanel(CGameEngine *_engine)
 				newSprite.SetColor(40, 40, 40);
 
 			InventoryItemWrapper* newItem = new InventoryItemWrapper(std::move(rawItem), std::move(newSprite));
-
-			int xPos = ((i-5) % 5) * 116 + shopPanel.GetGlobalRect().left + 33;
-			int yPos = shopPanel.GetGlobalRect().top + 297 + 144 * ((i-5) / 5);
-			newItem->SetPos(xPos, yPos);
-
 			items[i] = newItem;
 		}
 	}
+
+	Item diceItem;
+	diceItem.id = ItemID::dice;
+	diceItem.number = -1;
+	CSprite diceSprite(g_pTextures->item[ItemID::dice]);
+	InventoryItemWrapper* newItem = new InventoryItemWrapper(std::move(diceItem), std::move(diceSprite));
+	items[15] = newItem;
+
 
 	currentlySelectedItem = -1;
 }
@@ -59,7 +62,7 @@ void ShopPanel::Update()
 {
 	if (engine->GetButtonstates(ButtonID::Left) == Pressed)
 	{
-		for (int i = 0; i < 15; i++)
+		for (int i = 0; i < 16; i++)
 		{
 			if (items[i] != nullptr)
 			{
@@ -87,25 +90,35 @@ void ShopPanel::Render()
 	engine->GetRenderTarget().draw(title);
 
 	int showTooltipForItem = -1;
-	for (int i = 0; i < 15; i++)
+	for (int i = 0; i < 16; i++)
 	{
 		if (items[i] != nullptr)
 		{
 			items[i]->Render(engine->GetRenderTarget());
 
-			if(currentlySelectedItem == i)
-				selectedItemFrame.Render(engine->GetRenderTarget());
+			if (items[i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
+			{
+				if(i < 5 || i == 15 || g_pGameStatus->GetConsumablesAvailability().at(items[i]->GetItem().id))
+					showTooltipForItem = i;
+			}
+		}
+	}
 
-			priceSign.ChangeString(0, std::to_string(g_pObjectProperties->getItemStats(items[i]->GetItem().id).price));
+	if(currentlySelectedItem != -1)
+		selectedItemFrame.Render(engine->GetRenderTarget());
+
+	for (int i = 0; i < 16; i++)
+	{
+		if (items[i] != nullptr)
+		{
+			if (i == 15)
+				priceSign.ChangeString(0, std::to_string(g_pGameStatus->GetShopDicePrice()));
+			else
+				priceSign.ChangeString(0, std::to_string(g_pObjectProperties->getItemStats(items[i]->GetItem().id).price));
+
 			priceSign.SetPos(items[i]->GetGlobalBounds().left + 18, items[i]->GetGlobalBounds().top + 90);
 			priceSign.SetTextPosCentered(0);
 			priceSign.Render(engine->GetRenderTarget());
-
-			if (items[i]->Contains(engine->GetMousePos()) && engine->GetButtonstates(ButtonID::Left) != Held)
-			{
-				if(i < 5 || g_pGameStatus->GetConsumablesAvailability().at(items[i]->GetItem().id))
-					showTooltipForItem = i;
-			}
 		}
 	}
 
@@ -146,6 +159,10 @@ void ShopPanel::SetPos(int _x, int _y)
 			items[i]->SetPos(xPos, yPos);
 		}
 	}
+
+	int xPos = shopPanel.GetGlobalRect().left + 671;
+	int yPos = shopPanel.GetGlobalRect().top + 114;
+	items[15]->SetPos(xPos, yPos);
 }
 
 
@@ -186,7 +203,7 @@ Item ShopPanel::RetrieveCurrentlySelectedItem()
 {
 	if (currentlySelectedItem != -1)
 	{
-		if (items[currentlySelectedItem]->GetItem().id < CONSUMABLE_ITEMS_START || g_pGameStatus->GetConsumablesAvailability().at(items[currentlySelectedItem]->GetItem().id))
+		if (!IsConsumable(items[currentlySelectedItem]->GetItem().id) || g_pGameStatus->GetConsumablesAvailability().at(items[currentlySelectedItem]->GetItem().id))
 		{
 			auto item = items[currentlySelectedItem]->GetItem();
 
@@ -211,7 +228,7 @@ bool ShopPanel::IsItemSelected()
 {
 	if (currentlySelectedItem != -1)
 	{
-		if (items[currentlySelectedItem]->GetItem().id < CONSUMABLE_ITEMS_START || g_pGameStatus->GetConsumablesAvailability().at(items[currentlySelectedItem]->GetItem().id))
+		if (!IsConsumable(items[currentlySelectedItem]->GetItem().id) || g_pGameStatus->GetConsumablesAvailability().at(items[currentlySelectedItem]->GetItem().id))
 			return true;
 	}
 	return false;
@@ -219,8 +236,10 @@ bool ShopPanel::IsItemSelected()
 
 int ShopPanel::CurrentItemPrice()
 {
-	if (currentlySelectedItem != -1)
-		return g_pObjectProperties->getItemStats(items[currentlySelectedItem]->GetItem().id).price;
-	else
+	if (currentlySelectedItem == -1)
 		return 0;
+	else if (currentlySelectedItem == 15)
+		return g_pGameStatus->GetShopDicePrice();
+	else
+		return g_pObjectProperties->getItemStats(items[currentlySelectedItem]->GetItem().id).price;
 }

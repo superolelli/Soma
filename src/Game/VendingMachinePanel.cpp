@@ -16,7 +16,7 @@ VendingMachinePanel::VendingMachinePanel(CGameEngine * _engine)
 	, buttonClose(g_pTextures->lootablePanelCloseButton, Buttontypes::Motion_Up)
 	, buttonBuy(g_pTextures->bangGenericButton, Buttontypes::Motion_Up)
 {
-	vendingMachinePanel.SetPos(150, 70);
+	vendingMachinePanel.SetPos(125, 70);
 
 	scrollableItemPanel.SetPos(vendingMachinePanel.GetRect().left + 75, vendingMachinePanel.GetRect().top + 60);
 	scrollableItemPanel.SetOnItemSelectedCallback([&](Item &_item) {return OnItemOfScrollablePanelSelected(_item); });
@@ -25,15 +25,15 @@ VendingMachinePanel::VendingMachinePanel(CGameEngine * _engine)
 	itemRowPanel.SetOnItemSelectedCallback([&](Item &_item) {return OnItemOfRowPanelSelected(_item); });
 
 	shopPanel.SetOnItemSelectedCallback([&](Item &_item) {return OnItemOfShopPanelSelected(_item); });
-	shopPanel.SetPos(vendingMachinePanel.GetRect().left + 840, vendingMachinePanel.GetRect().top + 130);
+	shopPanel.SetPos(vendingMachinePanel.GetRect().left + 810, vendingMachinePanel.GetRect().top + 130);
 
-	buttonSortNames.SetPos(scrollableItemPanel.GetRect().left + scrollableItemPanel.GetRect().width + 25, scrollableItemPanel.GetRect().top - 21);
+	buttonSortNames.SetPos(scrollableItemPanel.GetRect().left + scrollableItemPanel.GetRect().width + 18, scrollableItemPanel.GetRect().top - 21);
 	buttonSortNames.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
-	buttonSortColors.SetPos(scrollableItemPanel.GetRect().left + scrollableItemPanel.GetRect().width + 25, buttonSortNames.GetRect().top + buttonSortNames.GetRect().height - 2);
+	buttonSortColors.SetPos(scrollableItemPanel.GetRect().left + scrollableItemPanel.GetRect().width + 18, buttonSortNames.GetRect().top + buttonSortNames.GetRect().height - 2);
 	buttonSortColors.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
-	buttonClose.SetPos(vendingMachinePanel.GetGlobalRect().left + 1472, vendingMachinePanel.GetGlobalRect().top + 26);
+	buttonClose.SetPos(vendingMachinePanel.GetGlobalRect().left + 1559, vendingMachinePanel.GetGlobalRect().top + 26);
 	buttonClose.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
 	buttonBuy.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
@@ -128,7 +128,12 @@ void VendingMachinePanel::BuyCurrentItemFromShop()
 	{
 		g_pGameStatus->AddItem(item);
 
-		if (item.id < CONSUMABLE_ITEMS_START)
+		if (IsCurrency(item.id))
+		{
+			if (shopPanel.CurrentItemPrice() > g_pGameStatus->GetCardsAmount())
+				buttonBuy.SetDisabled();
+		}
+		else if (IsEquipment(item.id))
 			scrollableItemPanel.AddItem(item);
 		else
 		{
@@ -220,14 +225,14 @@ void VendingMachinePanel::OnItemOfShopPanelSelected(Item &_item)
 {
 	buttonBuy.SetButtonstring("Kaufen");
 
-	if ((_item.id < CONSUMABLE_ITEMS_START || g_pGameStatus->GetConsumablesAvailability().at(_item.id)) && g_pObjectProperties->getItemStats(_item.id).price <= g_pGameStatus->GetCardsAmount())
+	if ((!IsConsumable(_item.id) || g_pGameStatus->GetConsumablesAvailability().at(_item.id)) && shopPanel.CurrentItemPrice() <= g_pGameStatus->GetCardsAmount())
 		buttonBuy.SetEnabled();
 	else
 		buttonBuy.SetDisabled();
 
 	itemRowPanel.UnselectSelectedItem();
 	scrollableItemPanel.UnselectSelectedItem();
-	priceText.setString("Für " + std::to_string(g_pObjectProperties->getItemStats(_item.id).price));
+	priceText.setString("Für " + std::to_string(shopPanel.CurrentItemPrice()));
 	priceText.setPosition(buttonBuy.GetRect().left + buttonBuy.GetRect().width / 2 - priceText.getGlobalBounds().width / 2 - 20, priceText.getPosition().y);
 	cardsSymbol.SetPos(priceText.getGlobalBounds().left + priceText.getGlobalBounds().width + 10, priceText.getGlobalBounds().top - 9);
 }

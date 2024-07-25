@@ -10,7 +10,7 @@ GameStatus::GameStatus()
 void GameStatus::Reset(const std::string &filepath)
 {
 	dice = 0;
-	cards = 0;
+	cards = 300;
 	items.clear();
 	consumables.clear();
 
@@ -35,6 +35,8 @@ void GameStatus::Reset(const std::string &filepath)
 	for (int i = CONSUMABLE_ITEMS_START; i < ItemID::numberOfItems; i++)
 		consumablesAvailability[static_cast<ItemID>(i)] = false;
 
+	shopDicePrice = 100;
+
 	savegamePath = filepath;
 }
 
@@ -48,6 +50,7 @@ void GameStatus::LoadFromFile(const std::string &filepath)
 	input >> levels[0];
 	input >> levels[1];
 	input >> levels[2];
+	input >> shopDicePrice;
 
 	bool skill;
 	for (int p = 0; p < 4; p++) {
@@ -123,6 +126,7 @@ void GameStatus::StoreToFile()
 	output << levels[0] << "\n";
 	output << levels[1] << "\n";
 	output << levels[2] << "\n";
+	output << shopDicePrice << "\n";
 
 	for (auto& player : skillAcquired)
 		for (auto& ability : player)

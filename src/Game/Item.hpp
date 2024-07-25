@@ -12,6 +12,10 @@ enum ItemID { empty = -1, cards, dice, iron_plate, sombrero, binocular, bible, c
 const int EQUIPMENT_ITEMS_START = 2;
 const int CONSUMABLE_ITEMS_START = int(beer);
 
+static bool IsCurrency(ItemID _id) { return _id == cards || _id == dice; }
+static bool IsEquipment(ItemID _id) { return _id >= EQUIPMENT_ITEMS_START && _id < CONSUMABLE_ITEMS_START; }
+static bool IsConsumable(ItemID _id) { return _id >= CONSUMABLE_ITEMS_START; }
+
 //just for convenience
 const int NUMBER_OF_EQUIPMENT_ITEMS = CONSUMABLE_ITEMS_START;
 const int NUMBER_OF_CONSUMABLE_ITEMS = numberOfItems - CONSUMABLE_ITEMS_START;

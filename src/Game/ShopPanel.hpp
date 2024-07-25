@@ -34,7 +34,7 @@ private:
 	CSprite selectedItemFrame;
 	SpriteWithText priceSign;
 
-	InventoryItemWrapper *items[15];
+	InventoryItemWrapper *items[16];
 
 	ItemTooltip tooltip;
 

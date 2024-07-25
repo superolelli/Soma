@@ -52,6 +52,7 @@ public:
 
 	std::unordered_map<ItemID, bool> &GetConsumablesAvailability() { return consumablesAvailability; }
 	std::set<ItemID>& GetItemAvailability() { return itemAvailability; }
+	int GetShopDicePrice() { return shopDicePrice; }
 
 
 	int levels[3];
@@ -74,4 +75,5 @@ private:
 
 	std::set<ItemID> itemAvailability;
 	std::unordered_map<ItemID, bool> consumablesAvailability;
+	int shopDicePrice;
 };
