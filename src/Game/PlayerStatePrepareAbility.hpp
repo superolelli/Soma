@@ -8,7 +8,7 @@ class Player;
 class PlayerStatePrepareAbility : public CombatantStatePrepareAbility
 {
 public:
-	PlayerStatePrepareAbility(Player *_context);
+	PlayerStatePrepareAbility(Player *_context, LevelStatus *_levelStatus);
 
 	void Update() override;
 	void Render() override;
@@ -18,6 +18,7 @@ public:
 
 private:
 	Player *playerContext;
+	LevelStatus* levelStatus;
 
 	double notificationWaitingTime;
 

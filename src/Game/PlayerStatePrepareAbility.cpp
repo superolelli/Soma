@@ -3,11 +3,12 @@
 #include "CombatantStateExecutingAbility.hpp"
 #include "Battle.hpp"
 
-PlayerStatePrepareAbility::PlayerStatePrepareAbility(Player * _context)
+PlayerStatePrepareAbility::PlayerStatePrepareAbility(Player * _context, LevelStatus *_levelStatus)
 	:CombatantStatePrepareAbility(_context)
+	, playerContext(_context)
+	, notificationWaitingTime(0.0)
+	, levelStatus(_levelStatus)
 {
-	playerContext = _context;
-	notificationWaitingTime = 0.0;
 }
 
 
@@ -58,6 +59,7 @@ void PlayerStatePrepareAbility::ChangeState()
 		return;
 	}
 
+	levelStatus->SetAbilityUsed(playerContext->GetID(), playerContext->gui->GetCurrentAbility());
 	CombatantStateExecutingAbility *newState = new CombatantStateExecutingAbility(playerContext, &g_pObjectProperties->playerAbilities[playerContext->GetID()][playerContext->gui->GetCurrentAbility()]);
 	context->ChangeState(newState);
 }

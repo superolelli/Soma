@@ -6,9 +6,10 @@
 #include "CombatantStateDying.hpp"
 #include "PlayerStatePrepareAbility.hpp"
 
-Player::Player(CombatantID _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer, SpriterEngine::EntityInstance* _combatantObject)
+Player::Player(CombatantID _id, CGameEngine * _engine, NotificationRenderer * _notificationRenderer, LevelStatus *_levelStatus, SpriterEngine::EntityInstance* _combatantObject)
 	: Combatant(_id, _engine, _notificationRenderer, _combatantObject, g_pObjectProperties->playerStats[_id])
 	, is_walking(false)
+	, levelStatus(_levelStatus)
 {
 }
 
@@ -50,27 +51,25 @@ void Player::Update(int _xMove, bool _is_walking)
 
 void Player::SetAbilityStatus(abilityPhase _status)
 {
-	SAFE_DELETE(currentState);
-
 	switch (_status)
 	{
 	case finished:
-		currentState = new CombatantStateIdle(this);
+		ChangeState(new CombatantStateIdle(this));
 		break;
 	case dodging:
-		currentState = new CombatantStateAttacked(this, true);
+		ChangeState(new CombatantStateAttacked(this, true));
 		break;
 	case attacked:
-		currentState = new CombatantStateAttacked(this, false);
+		ChangeState(new CombatantStateAttacked(this, false));
 		break;
 	case ready:
-		currentState = new PlayerStatePrepareAbility(this);
+		ChangeState(new PlayerStatePrepareAbility(this, levelStatus));
 		break;
 	case handlingStatus:
-		currentState = new CombatantStateUpdateStatus(this);
+		ChangeState(new CombatantStateUpdateStatus(this));
 		break;
 	case dying:
-		currentState = new CombatantStateDying(this);
+		ChangeState(new CombatantStateDying(this));
 	}
 }
 

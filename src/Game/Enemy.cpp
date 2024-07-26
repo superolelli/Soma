@@ -28,27 +28,25 @@ abilityPhase Enemy::GetAbilityStatus()
 
 void Enemy::SetAbilityStatus(abilityPhase _status)
 {
-	SAFE_DELETE(currentState);
-
 	switch (_status)
 	{
 	case finished:
-		currentState = new CombatantStateIdle(this);
+		ChangeState(new CombatantStateIdle(this));
 		break;
 	case dodging:
-		currentState = new CombatantStateAttacked(this, true);
+		ChangeState(new CombatantStateAttacked(this, true));
 		break;
 	case attacked:
-		currentState = new CombatantStateAttacked(this, false);
+		ChangeState(new CombatantStateAttacked(this, false));
 		break;
 	case ready:
-		currentState = new EnemyStatePrepareAbility(this);
+		ChangeState(new EnemyStatePrepareAbility(this));
 		break;
 	case handlingStatus:
-		currentState = new CombatantStateUpdateStatus(this);
+		ChangeState(new CombatantStateUpdateStatus(this));
 		break;
 	case dying:
-		currentState = new CombatantStateDying(this);
+		ChangeState(new CombatantStateDying(this));
 	}
 }
 

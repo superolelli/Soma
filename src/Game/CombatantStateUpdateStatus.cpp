@@ -26,17 +26,7 @@ void CombatantStateUpdateStatus::Update()
 		else
 		{
 			CheckForConfusion();
-
-			if (context->IsPlayer())
-			{
-				PlayerStatePrepareAbility *newState = new PlayerStatePrepareAbility(dynamic_cast<Player*>(context));
-				context->ChangeState(newState);
-			}
-			else 
-			{
-				EnemyStatePrepareAbility *newState = new EnemyStatePrepareAbility(dynamic_cast<Enemy*>(context));
-				context->ChangeState(newState);
-			}
+			context->SetAbilityStatus(ready);
 		}
 
 	}

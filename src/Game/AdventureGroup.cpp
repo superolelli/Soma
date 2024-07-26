@@ -1,11 +1,11 @@
 #include "AdventureGroup.hpp"
 
-AdventureGroup::AdventureGroup(CGameEngine* _engine, NotificationRenderer* _notificationRenderer)
+AdventureGroup::AdventureGroup(CGameEngine* _engine, NotificationRenderer* _notificationRenderer, LevelStatus *_levelStatus)
 {
-	adventurer[CombatantID::Ole] = new Player(CombatantID::Ole, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID::Ole));
-	adventurer[CombatantID::Anna] = new Player(CombatantID::Anna, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID::Anna));
-	adventurer[CombatantID::Simon] = new Player(CombatantID::Simon, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID::Simon));
-	adventurer[CombatantID::Markus] = new Player(CombatantID::Markus, _engine, _notificationRenderer, g_pModels->GetNewCombatantModelInstance(CombatantID::Markus));
+	adventurer[CombatantID::Ole] = new Player(CombatantID::Ole, _engine, _notificationRenderer, _levelStatus, g_pModels->GetNewCombatantModelInstance(CombatantID::Ole));
+	adventurer[CombatantID::Anna] = new Player(CombatantID::Anna, _engine, _notificationRenderer, _levelStatus, g_pModels->GetNewCombatantModelInstance(CombatantID::Anna));
+	adventurer[CombatantID::Simon] = new Player(CombatantID::Simon, _engine, _notificationRenderer, _levelStatus, g_pModels->GetNewCombatantModelInstance(CombatantID::Simon));
+	adventurer[CombatantID::Markus] = new Player(CombatantID::Markus, _engine, _notificationRenderer, _levelStatus, g_pModels->GetNewCombatantModelInstance(CombatantID::Markus));
 
 	int x = GROUP_OFFSET_LEFT;
 	for (int i = 0; i < 4; i++)

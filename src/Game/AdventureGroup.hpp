@@ -12,7 +12,7 @@ class AdventureGroup
 {
 public:
 
-	AdventureGroup(CGameEngine *_engine, NotificationRenderer *_notificationRenderer);
+	AdventureGroup(CGameEngine *_engine, NotificationRenderer *_notificationRenderer, LevelStatus *_levelStatus);
 	~AdventureGroup();
 
 	void Update(int xMove);

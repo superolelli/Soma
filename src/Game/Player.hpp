@@ -10,7 +10,7 @@ const float WALKING_ANIMATION_SPEED = 0.85f;
 class Player : public Combatant
 {
 public:
-	Player(CombatantID _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, SpriterEngine::EntityInstance *_combatantObject);
+	Player(CombatantID _id, CGameEngine *_engine, NotificationRenderer *_notificationRenderer, LevelStatus *_levelStatus, SpriterEngine::EntityInstance *_combatantObject);
 
 	void Update(int _xMove, bool _is_walking);
 
@@ -28,4 +28,5 @@ public:
 protected:
 
 	bool is_walking;
+	LevelStatus* levelStatus;
 };

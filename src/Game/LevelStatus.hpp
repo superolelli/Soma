@@ -2,6 +2,7 @@
 
 #include "../Framework/Patterns/Observer.hpp"
 #include <set>
+#include <array>
 #include "Item.hpp"
 
 const int MAX_FATIGUE_VALUE = 100;
@@ -17,6 +18,8 @@ public:
 
 	void OpponentKilled();
 	void PlayerDied();
+	void SetAbilityUsed(int _player, int _ability);
+	bool AllAbilitiesUsed() const;
 
 	// For fatigue bar
 	int* GetFatiguePtr() { return &fatigue; }
@@ -36,4 +39,5 @@ public:
 
 	int opponentsKilled;
 	int playersDied;
+	std::array<bool,16> abilityUsed;
 };

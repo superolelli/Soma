@@ -9,6 +9,8 @@ LevelStatus::LevelStatus(int _difficulty)
     , fatigue(0)
     , maxFatigue(MAX_FATIGUE_VALUE)
 {
+    for (auto& ability : abilityUsed)
+        ability = false;
 }
 
 
@@ -31,6 +33,18 @@ void LevelStatus::PlayerDied()
 {
     playersDied++;
 }
+
+void LevelStatus::SetAbilityUsed(int _player, int _ability)
+{
+    abilityUsed[_player * 4 + _ability] = true;
+}
+
+
+bool LevelStatus::AllAbilitiesUsed() const
+{
+    return std::all_of(abilityUsed.begin(), abilityUsed.end(), [](bool used) {return used; });
+}
+
 
 
 float LevelStatus::GetRelativeFatigue() const

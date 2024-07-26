@@ -34,6 +34,11 @@ static void GetLevelRewards(LevelRewards& rewards, const LevelStatus& _status, b
         rewards.achievements.emplace_back(2 * _status.opponentsKilled, 0, std::to_string(_status.opponentsKilled) + " besiegte Gegner");
     }
 
+    if (_status.AllAbilitiesUsed())
+    {
+        rewards.achievements.emplace_back(25, 0, "Jede Fähigkeit ist nützlich");
+    }
+
     if (_status.GetRelativeFatigue() > 0.66)
     {
         rewards.achievements.emplace_back(30, 0, "Der Müdigkeit zum Trotz");

@@ -8,7 +8,8 @@
 Game::Game(CGameEngine* _engine, LevelType _levelType)
 	: GameState(_engine)
 	, levelType(_levelType)
-	, adventureGroup(_engine, &notificationRenderer)
+	, level(LevelBuilder::buildLevel(_levelType, g_pGameStatus->levels[_levelType], &dialogManager))
+	, adventureGroup(_engine, &notificationRenderer, &level->GetLevelStatus())
 	, currentBattle(nullptr)
 	, inBattle(false)
 	, isPlayingBattleIntro(false)
@@ -19,7 +20,7 @@ Game::Game(CGameEngine* _engine, LevelType _levelType)
 	view.reset(sf::FloatRect(0.0f, 0.0f, (float)_engine->GetWindowSize().x, (float)_engine->GetWindowSize().y));
 	m_pGameEngine->GetRenderTarget().setView(view);
 
-	level = LevelBuilder::buildLevel(levelType, g_pGameStatus->levels[levelType], &dialogManager);
+	//level = LevelBuilder::buildLevel(levelType, g_pGameStatus->levels[levelType], &dialogManager);
 
 	InitLevelGUI();
 
