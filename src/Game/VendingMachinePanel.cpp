@@ -161,13 +161,13 @@ void VendingMachinePanel::Render()
 
 		engine->GetRenderTarget().draw(title);
 
-		shopPanel.Render();
-
 		buttonSortColors.Render(engine->GetRenderTarget());
 		buttonSortNames.Render(engine->GetRenderTarget());
 
 		scrollableItemPanel.Render();
 		itemRowPanel.Render();
+
+		shopPanel.Render();
 
 		if (shopPanel.IsItemSelected() || scrollableItemPanel.IsItemSelected() || itemRowPanel.IsItemSelected())
 		{

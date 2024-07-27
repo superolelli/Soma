@@ -19,6 +19,7 @@ public:
 	sf::Texture levelFinishedPanel[2];
 	sf::Texture levelFinishedButton;
 	sf::Texture bangGenericButton;
+	sf::Texture confirmationDialogPanel;
 
 	/** MAIN MENU **/
 	sf::Texture mainMenuBackground;
@@ -76,6 +77,8 @@ public:
 	sf::Texture sellMultiplePanel;
 	sf::Texture sellMultipleSlider;
 	sf::Texture sellMultipleKnob;
+	sf::Texture shopSlotLock;
+	sf::Texture priceLock;
 
 	/** SKILLING **/
 	sf::Texture skills[4][4][8];

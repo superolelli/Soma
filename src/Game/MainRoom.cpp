@@ -6,7 +6,7 @@
 MainRoom::MainRoom(CGameEngine* _engine)
 	: GameState (_engine)
 	, gui(_engine)
-	, exitDialog(_engine)
+	, exitDialog(_engine, "Speichern und ins Hauptmenü?", 30)
 	, background{ {g_pTextures->mainRoomBackgrounds[0]},
 		{g_pTextures->mainRoomBackgrounds[1]},
 		{g_pTextures->mainRoomBackgrounds[2]},
@@ -133,7 +133,7 @@ void MainRoom::Update()
 	m_pGameEngine->GetRenderTarget().setView(view);
 
 	if (m_pGameEngine->GetKeystates(KeyID::Escape) == Keystates::Pressed)
-		exitDialog.Open();
+		exitDialog.SetOpen(true);
 
 	if (m_pGameEngine->GetKeystates(KeyID::F5) == Keystates::Released)
 		g_pGameStatus->StoreToFile();
@@ -167,7 +167,8 @@ void MainRoom::HandleGUI()
 
 	m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());
 
-	if (exitDialog.Update() == true)
+	exitDialog.Update();
+	if (exitDialog.YesChosen())
 	{
 		g_pGameStatus->StoreToFile();
 		m_pGameEngine->GetRenderTarget().setView(m_pGameEngine->GetRenderTarget().getDefaultView());

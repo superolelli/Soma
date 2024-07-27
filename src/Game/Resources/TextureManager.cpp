@@ -12,6 +12,7 @@ void CTextureManager::LoadTextures()
 	levelFinishedPanel[1].loadFromFile("Data/Sprites/Panels & Buttons/Kutschfahrt/level_finished.png");
 	levelFinishedButton.loadFromFile("Data/Sprites/Panels & Buttons/Bang/level_finished_button.png");
 	bangGenericButton.loadFromFile("Data/Sprites/Panels & Buttons/Bang/generic_button.png");
+	confirmationDialogPanel.loadFromFile("Data/Sprites/Panels & Buttons/confirmation_dialog.png");
 
 	/** MAIN MENU**/
 	mainMenuBackground.loadFromFile("Data/Sprites/MainMenu/background.png");
@@ -232,6 +233,8 @@ void CTextureManager::LoadTextures()
 	sellMultiplePanel.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/sell_multiple_dialog.png");
 	sellMultipleSlider.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/slider_bar.png");
 	sellMultipleKnob.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/slider_knob.png");
+	shopSlotLock.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/slot_lock.png");
+	priceLock.loadFromFile("Data/Sprites/Panels & Buttons/VendingMachinePanel/price_lock.png");
 
 	/** SKILLING **/
 	LoadSkillTextures("Data/Sprites/Abilities/Simon/marshmallow_flash/marshmallow_flash_skill", 0, 0);

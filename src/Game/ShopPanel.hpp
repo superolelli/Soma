@@ -3,6 +3,7 @@
 #include "InventoryItemWrapper.hpp"
 #include "ItemTooltip.hpp"
 #include "../Framework/Graphics/SpriteWithText.hpp"
+#include "ConfirmationDialog.hpp"
 #include <unordered_map>
 
 class ShopPanel
@@ -28,11 +29,22 @@ public:
 	int CurrentItemPrice();
 
 private:
+	static const int SLOT_UNLOCK_COST = 200;
+	static const int DICE_PRICE_REDUCE_COST = 200;
+	static const int DICE_PRICE_REDUCE_STEP = 10;
+	static const int MINIMUM_DICE_PRICE = 50;
+	enum UnlockID {ShopSlot, DicePrice};
+
 	CGameEngine *engine;
 
 	CSprite shopPanel;
 	CSprite selectedItemFrame;
 	SpriteWithText priceSign;
+
+	SpriteWithText shopSlotLock;
+	SpriteWithText dicePriceLock;
+
+	ConfirmationDialog *confirmationDialog;
 
 	InventoryItemWrapper *items[16];
 
@@ -43,4 +55,6 @@ private:
 	int currentlySelectedItem;
 
 	std::function<void(Item &)> OnItemSelected;
+
+	void HandleConfirmationDialog();
 };

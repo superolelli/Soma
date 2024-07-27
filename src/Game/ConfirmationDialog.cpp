@@ -1,20 +1,17 @@
-#include "ExitDialog.hpp"
+#include "ConfirmationDialog.hpp"
 #include "Resources\TextureManager.hpp"
 #include "Resources\FontManager.hpp"
 #include "Resources\SoundManager.hpp"
 
-
-ExitDialog::ExitDialog(CGameEngine* _engine)
+ConfirmationDialog::ConfirmationDialog(CGameEngine* _engine, const sf::String &_text, int _fontSize, int _id)
 	: engine(_engine)
 	, isOpen(false)
-	, panel(g_pTextures->sellMultiplePanel)
+	, yesChosen(false)
+	, confirmationID(_id)
+	, panel(g_pTextures->confirmationDialogPanel)
 	, buttonYes(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Ja")
 	, buttonNo(g_pTextures->bangGenericButton, Buttontypes::Motion_Up, "Nein")
 {
-	panel.AddText("Speichern und ins Hauptmenü?");
-	panel.SetTextFont(0, g_pFonts->f_blackwoodCastle);
-	panel.SetTextCharacterSize(0, 40);
-
 	buttonYes.SetButtontextFont(g_pFonts->f_trajan);
 	buttonYes.SetButtontextCharactersize(23);
 	buttonYes.SetButtontextStyle(sf::Text::Bold);
@@ -25,26 +22,37 @@ ExitDialog::ExitDialog(CGameEngine* _engine)
 	buttonNo.SetButtontextStyle(sf::Text::Bold);
 	buttonNo.SetCallback([]() {g_pSounds->PlaySound(soundID::CLICK); });
 
+	panel.AddText(_text);
+	panel.SetTextCharacterSize(0, _fontSize);
+	panel.SetTextFont(0, g_pFonts->f_trajan);
+	panel.SetTextStyle(0, sf::Text::Style::Bold);
+	panel.SetTextColor(0, sf::Color::Black);
+	panel.SetTextPos(0, 50, 40);
+	panel.SetTextPosXCentered(0);
+
 	SetPos(engine->GetWindowSize().x / 2 - panel.GetRect().width / 2, engine->GetWindowSize().y / 2 - panel.GetRect().height / 2);
 }
 
-bool ExitDialog::Update()
+
+void ConfirmationDialog::Update()
 {
 	if (isOpen)
 	{
-		if (buttonYes.Update(*engine))
-			return true;
-
 		if (buttonNo.Update(*engine))
 		{
+			yesChosen = false;
+			isOpen = false;
+		}
+
+		if (buttonYes.Update(*engine))
+		{
+			yesChosen = true;
 			isOpen = false;
 		}
 	}
-
-	return false;
 }
 
-void ExitDialog::Render()
+void ConfirmationDialog::Render()
 {
 	if (isOpen)
 	{
@@ -54,13 +62,9 @@ void ExitDialog::Render()
 	}
 }
 
-
-void ExitDialog::SetPos(int _x, int _y)
+void ConfirmationDialog::SetPos(int _x, int _y)
 {
 	panel.SetPos(_x, _y);
-	buttonYes.SetPos(_x + 50, _y + 205);
-	buttonNo.SetPos(_x + 334, _y + 205);
-
-	panel.SetTextPos(0, 0, 100);
-	panel.SetTextPosXCentered(0);
+	buttonYes.SetPos(_x + 40, _y + 132);
+	buttonNo.SetPos(_x + 334, _y + 132);
 }

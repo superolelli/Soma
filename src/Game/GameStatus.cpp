@@ -10,7 +10,7 @@ GameStatus::GameStatus()
 void GameStatus::Reset(const std::string &filepath)
 {
 	dice = 0;
-	cards = 300;
+	cards = 1000;
 	items.clear();
 	consumables.clear();
 
@@ -26,6 +26,7 @@ void GameStatus::Reset(const std::string &filepath)
 		equipmentStats[i].stats.Reset();
 		equipmentStats[i].missOnHighDamage = false;
 		diamondStats[i].Reset();
+		diamondsUnlocked[i] = false;
 	}
 
 	levels[0] = 1;
@@ -36,6 +37,8 @@ void GameStatus::Reset(const std::string &filepath)
 		consumablesAvailability[static_cast<ItemID>(i)] = false;
 
 	shopDicePrice = 100;
+	shopSlotsUnlocked = 1;
+
 
 	savegamePath = filepath;
 }
@@ -51,6 +54,7 @@ void GameStatus::LoadFromFile(const std::string &filepath)
 	input >> levels[1];
 	input >> levels[2];
 	input >> shopDicePrice;
+	input >> shopSlotsUnlocked;
 
 	bool skill;
 	for (int p = 0; p < 4; p++) {
@@ -62,6 +66,9 @@ void GameStatus::LoadFromFile(const std::string &filepath)
 			}
 		}
 	}
+
+	for (int i = 0; i < 4; i++)
+		input >> diamondsUnlocked[i];
 
 	int currentID, r, g, b;
 	input >> currentID;
@@ -127,11 +134,15 @@ void GameStatus::StoreToFile()
 	output << levels[1] << "\n";
 	output << levels[2] << "\n";
 	output << shopDicePrice << "\n";
+	output << shopSlotsUnlocked << "\n";
 
 	for (auto& player : skillAcquired)
 		for (auto& ability : player)
 			for (auto& skill : ability)
 				output << skill << "\n";
+
+	for (int i = 0; i < 4; i++)
+		output << diamondsUnlocked[i];
 
 	for (auto& item : items) {
 		output << static_cast<int>(item.id) << "\n";

@@ -3,7 +3,7 @@
 #include "../Framework/Gamestate.hpp"
 #include "../Game/Resources/Resources.hpp"
 
-#include "ExitDialog.hpp"
+#include "ConfirmationDialog.hpp"
 #include "MainRoomGui.hpp"
 
 
@@ -33,7 +33,7 @@ private:
 	sf::IntRect playerHitbox[4];
 
 	MainRoomGUI gui;
-	ExitDialog exitDialog;
+	ConfirmationDialog exitDialog;
 
 	sf::View view;
 

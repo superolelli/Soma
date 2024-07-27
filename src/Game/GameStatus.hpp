@@ -13,6 +13,7 @@
 
 #include <functional>
 #include <set>
+#include <array>
 
 const int CONSUMABLE_ITEMS_LIMIT = 5;
 
@@ -49,11 +50,14 @@ public:
 
 	void SetDiamondStats(int _player, CombatantAttributes &_stats);
 	CombatantAttributes &GetDiamondStats(int _player);
+	bool GetDiamondAvailability(int _player) { return diamondsUnlocked[_player]; }
 
 	std::unordered_map<ItemID, bool> &GetConsumablesAvailability() { return consumablesAvailability; }
 	std::set<ItemID>& GetItemAvailability() { return itemAvailability; }
 	int GetShopDicePrice() { return shopDicePrice; }
-
+	void SetShopDicePrice(int _price) { shopDicePrice = _price; }
+	int GetNumberOfShopSlots() { return shopSlotsUnlocked; }
+	void UnlockShopSlot() { shopSlotsUnlocked++; }
 
 	int levels[3];
 
@@ -72,8 +76,10 @@ private:
 	EquipmentProperties equipmentStats[4];
 
 	CombatantAttributes diamondStats[4];
+	std::array<bool, 4> diamondsUnlocked;
 
 	std::set<ItemID> itemAvailability;
 	std::unordered_map<ItemID, bool> consumablesAvailability;
 	int shopDicePrice;
+	int shopSlotsUnlocked;
 };

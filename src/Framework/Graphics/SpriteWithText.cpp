@@ -94,7 +94,7 @@ void SpriteWithText::SetPos(int _x, int _y)
 	sprite.SetPos(_x, _y);
 
 	//change the position of the texts
-	for (auto t : allTextsOnSprite)
+	for (auto &t : allTextsOnSprite)
 		t.setPosition(_x + (t.getPosition().x - xSprite), _y + (t.getPosition().y - ySprite));
 }
 
@@ -105,7 +105,7 @@ void SpriteWithText::Scale(float _x, float _y)
 	sprite.SetScale(_x, _y);
 
 	//scale the texts
-	for (auto t : allTextsOnSprite)
+	for (auto &t : allTextsOnSprite)
 		t.setCharacterSize(static_cast<int>(t.getCharacterSize() * _x));
 }
 
@@ -116,6 +116,6 @@ void SpriteWithText::Render(sf::RenderTarget & _target, sf::IntRect * _clip)
 	sprite.Render(_target, _clip);
 
 	//renders all texts
-	for (auto t : allTextsOnSprite)
+	for (auto &t : allTextsOnSprite)
 		_target.draw(t);
 }
