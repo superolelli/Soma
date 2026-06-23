@@ -1,4 +1,4 @@
-#include"Game\InitialState.hpp"
+#include"game/InitialState.hpp"
 
 
 int main()

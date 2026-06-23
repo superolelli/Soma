@@ -27,26 +27,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -69,20 +69,21 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\SFML-2.5.1\include;$(SolutionDir)\Dependencies\sfe-movie\include;$(SolutionDir)\Dependencies\glew-2.1.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.5.1\lib;$(SolutionDir)\Dependencies\sfe-movie\lib;$(SolutionDir)\Dependencies\glew-2.1.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\SFML-3.1.0\include;$(SolutionDir)\Dependencies\sfe-movie\include;$(SolutionDir)\Dependencies\glew-2.1.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\SFML-3.1.0\lib;$(SolutionDir)\Dependencies\sfe-movie\lib;$(SolutionDir)\Dependencies\glew-2.1.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
     <IntDir>$(Configuration)\temps\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\SFML-2.5.1\include;$(SolutionDir)\Dependencies\sfe-movie\include;$(SolutionDir)\Dependencies\glew-2.1.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SFML-2.5.1\lib;$(SolutionDir)\Dependencies\sfe-movie\lib;$(SolutionDir)\Dependencies\glew-2.1.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\SFML-3.1.0\include;$(SolutionDir)\Dependencies\sfe-movie\include;$(SolutionDir)\Dependencies\glew-2.3.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\SFML-3.1.0\lib;$(SolutionDir)\Dependencies\sfe-movie\lib;$(SolutionDir)\Dependencies\glew-2.3.1\lib\Release\Win32;$(LibraryPath)</LibraryPath>
     <IntDir>$(Configuration)\temps\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LibraryPath>C:\Soma\Dependencies\SFML-2.6.1\lib\;C:\Soma\Dependencies\boost_1_61_0\libs;C:\Soma\Dependencies\sfeMovie\install\lib;C:\Soma\Dependencies\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LibraryPath>C:\Soma\Dependencies\SFML-2.6.1\lib;C:\Soma\Dependencies\boost_1_61_0\libs;C:\Soma\Dependencies\sfeMovie\install\lib;C:\Soma\Dependencies\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Projects\Soma\Dependencies\SFML-3.1.0\lib;C:\Projects\Soma\Dependencies\sfe-movie\install\lib;C:\Projects\Soma\Dependencies\glew-2.3.1\lib\Release\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Projects\Soma\Dependencies\SFML-3.1.0\include;C:\Projects\Soma\Dependencies\glew-2.3.1\include;C:\Projects\Soma\Dependencies\sfe-movie\install\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -114,7 +115,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -129,8 +131,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Soma\Dependencies\SFML-2.6.1\include;C:\Soma\Dependencies\boost_1_61_0;C:\Soma\Dependencies\sfeMovie\install\include;C:\Soma\Dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

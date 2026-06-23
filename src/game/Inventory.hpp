@@ -1,0 +1,52 @@
+#pragma once
+
+#include "GameStatus.hpp"
+#include "../engine/Gui/Button.hpp"
+#include "EquipmentPanel.hpp"
+#include "InventoryItemWrapper.hpp"
+
+#include "ScrollableItemPanel.hpp"
+#include "ItemPanelDragAndDropDecorator.hpp"
+#include "PlayerAttributesText.hpp"
+
+
+
+class Inventory
+{
+public:
+	
+	Inventory(CGameEngine* _engine);
+
+	void Update();
+	void Render();
+
+	void Open(int _player = 0);
+	void Close() { closed = true; }
+	bool IsOpen() { return !closed; }
+
+private:
+	CGameEngine *engine;
+
+	bool closed;
+	int currentPlayer;
+
+	CSprite inventoryPanel;
+	EquipmentPanel equipmentPanel;
+	ItemPanelDragAndDropDecorator scrollableItemPanel;
+	PlayerAttributesText playerAttributesText;
+	sf::Text currentPlayerName{SfmlCompat::defaultFont()};
+	sf::Text panelTitle{SfmlCompat::defaultFont()};
+	CButton buttonSortColors;
+	CButton buttonSortNames;
+	CButton buttonNext;
+	CButton buttonPrevious;
+	CButton buttonClose;
+
+	void CheckButtonsForPlayerChoosing();
+	void UpdateGUIForChosenPlayer();
+
+	void OnItemAdded(Item _item);
+
+	InventoryItemWrapper* OnItemFromItemPanelReceived(InventoryItemWrapper* _receivedItem);
+	InventoryItemWrapper* OnItemFromEquipmentPanelReceived(InventoryItemWrapper *_receivedItem, int _currentPlayer, int _equipmentId);
+};

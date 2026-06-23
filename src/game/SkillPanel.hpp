@@ -1,0 +1,77 @@
+#pragma once
+
+#include "GameStatus.hpp"
+#include "../engine/Gui/Button.hpp"
+#include "AbilityTooltip.hpp"
+
+class SkillPanel
+{
+public:
+
+	SkillPanel(CGameEngine* _engine);
+	void Update();
+	void Render();
+
+	void Open(int _player = 0);
+	void Close() { closed = true; }
+	bool IsOpen() { return !closed; }
+
+private:
+	bool closed;
+
+	CGameEngine *engine;
+
+	int currentPlayer;
+	int currentAbility;
+	int currentSkill;
+
+	sf::IntRect abilityPanelRect[4];
+
+	CSprite skillPanel;
+	CSprite bridgePiece;
+	CSprite skilledIndicator;
+	CSprite abilityPlaceholders;
+	CSprite connectionsNotSkilled[6];
+	CSprite connectionsSkilled[6];
+	CSprite diceSymbol;
+
+	CSprite *abilities[4][4];
+	CSprite *skills[4][4][8];
+	CSprite currentSkillFrame;
+
+	int skillCost[8] = {1, 3, 5, 1, 3, 5, 7, 8};
+
+	sf::Text currentPlayerName{SfmlCompat::defaultFont()};
+	sf::Text panelTitle{SfmlCompat::defaultFont()};
+	std::vector<sf::Text> abilityName = std::vector<sf::Text>(4, sf::Text(SfmlCompat::defaultFont()));
+	sf::Text chosenSkillName{SfmlCompat::defaultFont()};
+	sf::Text chosenSkillPrice{SfmlCompat::defaultFont()};
+
+	AbilityTooltip abilityTooltip;
+
+	CButton buttonNext;
+	CButton buttonPrevious;
+	CButton buttonClose;
+	CButton buttonBuy;
+
+	void RenderConnection(int connection, int parentSkill);
+	void RenderSkilledIndicators();
+	void ShowTooltip(int _skill);
+
+	void ShowAbilityTooltip(sf::IntRect &_abilityRect);
+
+	void UpdateGUIForChosenSkill();
+	void UpdateGUIForChosenPlayer();
+
+	void UpdateChosenSkillName();
+	void UpdateAbilityNames();
+	void UpdateCurrentSkillFrame();
+	void UpdateBuyButton();
+
+	void CheckButtonsForPlayerChoosing();
+	void CheckBuyButton();
+
+	void RecolorSkills();
+
+	bool SkillCanBeAcquired(int _player, int _ability, int _skill);
+};

@@ -57,3 +57,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 *.db
+# CMake
+/build/
+/out/
+/CMakeUserPresets.json
