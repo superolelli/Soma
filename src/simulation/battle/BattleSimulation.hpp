@@ -8,6 +8,8 @@
 #include "gameplay/items/ItemTypes.hpp"
 #include "gameplay/random/IRandom.hpp"
 #include "gameplay/rules/ComposedRule.hpp"
+#include "simulation/battle/BattleCommand.hpp"
+#include "simulation/battle/BattleState.hpp"
 
 #include <optional>
 #include <unordered_set>
@@ -15,80 +17,6 @@
 
 namespace soma::simulation
 {
-    struct ActiveBuff
-    {
-        content::AttributeDelta attributes;
-        int remainingTurns{};
-        bool positive{};
-        double healingReceived{};
-        double damageAgainstMarked{};
-        double damagePerNegativeStatus{};
-        int negativeStatusCountAtApplication{};
-        bool damageFromFatigue{};
-        bool blocksFatigueStageOne{};
-        bool blocksFatigueStageTwo{};
-    };
-
-    struct BattleSpawn
-    {
-        gameplay::ContentDefinitionId definition;
-        int slot{};
-        std::optional<int> initialHealth;
-        std::vector<ActiveBuff> initialBuffs;
-        int initialFatigue{};
-    };
-
-    struct ActiveDecay
-    {
-        int remainingTurns{};
-        int damage{};
-    };
-
-    struct ActiveTransfusion
-    {
-        int healing{};
-    };
-
-    struct CombatantState
-    {
-        gameplay::EntityId id;
-        gameplay::ContentDefinitionId definition;
-        std::string name;
-        gameplay::Team team{};
-        int slot{};
-        gameplay::CombatantAttributes attributes;
-        content::AttributeDelta secondaryAttributes;
-        int health{};
-        std::vector<ActiveBuff> buffs;
-        std::vector<ActiveBuff> debuffs;
-        std::vector<ActiveDecay> decay;
-        std::vector<ActiveTransfusion> transfusions;
-        int confusedTurns{};
-        int markedTurns{};
-        int bountyTurns{};
-        int misses{};
-        bool sleeping{};
-        bool dynamite{};
-        bool fistOfRevengeTarget{};
-        bool confusedThisTurn{};
-        int nofaceBuffLevel{-1};
-        int fatigue{};
-        int riposteTurns{};
-        int rageTurns{};
-        int hackedTurns{};
-        int panicStacks{};
-        int appliedFatiguePenaltyStages{};
-
-        [[nodiscard]] bool alive() const noexcept;
-    };
-
-    struct BattleActionCommand
-    {
-        gameplay::EntityId actor;
-        gameplay::AbilityId ability;
-        gameplay::EntityId primaryTarget;
-    };
-
     /// Owns authoritative combat state and resolves commands into ordered gameplay events.
     class BattleSimulation
     {
@@ -130,14 +58,9 @@ namespace soma::simulation
                                    std::vector<gameplay::GameplayEvent>& events);
         void moveTargetsRandomly(const std::vector<CombatantState*>& targets);
         [[nodiscard]] CombatantState* nextLivingTeamMember(const CombatantState& combatant);
-        void resolveRiposte(CombatantState& counteringCombatant,
-                            CombatantState& attacker,
-                            std::vector<gameplay::GameplayEvent>& events);
+        void resolveRiposte(CombatantState& counteringCombatant, CombatantState& attacker, std::vector<gameplay::GameplayEvent>& events);
         void resolveEquipmentEffects(std::vector<gameplay::GameplayEvent>& events);
-        void applyUnavoidableDamage(CombatantState& source,
-                                    CombatantState& target,
-                                    int damage,
-                                    std::vector<gameplay::GameplayEvent>& events);
+        void applyUnavoidableDamage(CombatantState& source, CombatantState& target, int damage, std::vector<gameplay::GameplayEvent>& events);
         void recordDamageApplied(const gameplay::EntityId& source,
                                  CombatantState& target,
                                  int damage,
@@ -171,11 +94,8 @@ namespace soma::simulation
                                 const content::AbilityEffect& effect,
                                 int durationBonus,
                                 std::vector<gameplay::GameplayEvent>& events);
-        [[nodiscard]] bool tryApplyDecay(CombatantState& target,
-                                         int damage,
-                                         int duration,
-                                         bool ignoreResistance,
-                                         std::vector<gameplay::GameplayEvent>& events);
+        [[nodiscard]] bool tryApplyDecay(
+            CombatantState& target, int damage, int duration, bool ignoreResistance, std::vector<gameplay::GameplayEvent>& events);
         void applyRandomNegativeStatus(CombatantState& target,
                                        const content::AbilityEffect& effect,
                                        int durationBonus,
@@ -185,9 +105,7 @@ namespace soma::simulation
         void transferDecayAfterDefeat(CombatantState& actor, CombatantState& defeated, std::vector<gameplay::GameplayEvent>& events);
         void triggerTransfusions(CombatantState& source, std::vector<gameplay::GameplayEvent>& events);
         void expireTransfusionsWhenDecayEnds(CombatantState& target, std::vector<gameplay::GameplayEvent>& events);
-        void removeDecayAndHealLivingPlayers(CombatantState& actor,
-                                             CombatantState& target,
-                                             std::vector<gameplay::GameplayEvent>& events);
+        void removeDecayAndHealLivingPlayers(CombatantState& actor, CombatantState& target, std::vector<gameplay::GameplayEvent>& events);
         void applyUtilityEffects(CombatantState& actor,
                                  CombatantState& target,
                                  const content::AbilityEffect& effect,
@@ -198,14 +116,9 @@ namespace soma::simulation
                        int duration,
                        std::vector<gameplay::GameplayEvent>& events,
                        bool ignoresHacked = false);
-        void applyHealing(const gameplay::EntityId& source,
-                          CombatantState& target,
-                          int baseHealing,
-                          std::vector<gameplay::GameplayEvent>& events);
+        void applyHealing(const gameplay::EntityId& source, CombatantState& target, int baseHealing, std::vector<gameplay::GameplayEvent>& events);
         void changePanic(CombatantState& target, int amount, std::vector<gameplay::GameplayEvent>& events);
-        void recordStatusGained(CombatantState& target,
-                                const gameplay::StatusId& status,
-                                std::vector<gameplay::GameplayEvent>& events);
+        void recordStatusGained(CombatantState& target, const gameplay::StatusId& status, std::vector<gameplay::GameplayEvent>& events);
         [[nodiscard]] int negativeStatusCategoryCount(const CombatantState& target) const;
         [[nodiscard]] int modifiedHealingReceived(const CombatantState& target, int baseHealing) const;
         [[nodiscard]] double damageAgainstMarkedBonus(const CombatantState& source) const;

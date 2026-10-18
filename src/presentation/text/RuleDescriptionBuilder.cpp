@@ -40,4 +40,32 @@ namespace soma::presentation
         }
         return "Unvollständige Regel";
     }
+
+    std::optional<content::RuleMode> completedRuleMode(const game::ComposedRule& rule)
+    {
+        if (rule.trigger && rule.subject && rule.effect && !rule.modifier)
+        {
+            return content::RuleMode::triggered;
+        }
+        if (!rule.trigger && rule.subject && !rule.effect && rule.modifier)
+        {
+            return content::RuleMode::standing;
+        }
+        return std::nullopt;
+    }
+
+    std::vector<std::string> buildGermanActiveRuleDescriptions(const game::ComposedRules& rules,
+                                                                const content::RuleContent& content)
+    {
+        std::vector<std::string> result;
+        for (const auto& rule : rules)
+        {
+            const auto mode = completedRuleMode(rule);
+            if (mode)
+            {
+                result.push_back(buildGermanRuleDescription(rule, mode, content));
+            }
+        }
+        return result;
+    }
 }

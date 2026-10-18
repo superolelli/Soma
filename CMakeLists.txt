@@ -41,6 +41,11 @@ target_include_directories(soma_gameplay PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src
 
 add_library(soma_simulation STATIC
     src/simulation/battle/BattleSimulation.cpp
+    src/simulation/battle/BattleEffects.cpp
+    src/simulation/battle/BattleDecayEffects.cpp
+    src/simulation/battle/BattleStatusEffects.cpp
+    src/simulation/battle/BattleTargeting.cpp
+    src/simulation/battle/BattleTurnFlow.cpp
     src/simulation/battle/AbilityTargets.cpp
     src/simulation/battle/BattleRules.cpp
     src/simulation/battle/EnemyPolicy.cpp
@@ -58,6 +63,9 @@ target_link_libraries(soma_simulation PUBLIC Soma::Gameplay)
 add_library(soma_content STATIC
     src/content/BattleContentLoader.cpp
     src/content/EconomyContentLoader.cpp
+    src/content/EconomyItemContentLoader.cpp
+    src/content/EconomySkillContentLoader.cpp
+    src/content/EconomyPresentationContentLoader.cpp
     src/content/GameFlowContentLoader.cpp
     src/content/RuleContentLoader.cpp
     src/content/WorldContentLoader.cpp
@@ -104,6 +112,7 @@ target_compile_options(SpriterPlusPlus PRIVATE /W0 /WX-)
 set_target_properties(SpriterPlusPlus PROPERTIES FOLDER "ThirdParty")
 
 add_library(soma_presentation_sfml STATIC
+    src/presentation/sfml/ActiveRulesPanel.cpp
     src/presentation/sfml/BattleActionPresentation.cpp
     src/presentation/sfml/BattleActionStarter.cpp
     src/presentation/sfml/BattleActionTimeline.cpp
@@ -111,6 +120,8 @@ add_library(soma_presentation_sfml STATIC
     src/presentation/sfml/BattleInteractionController.cpp
     src/presentation/sfml/BattleSceneBlur.cpp
     src/presentation/sfml/BattleScreenRenderer.cpp
+    src/presentation/sfml/BattleScreenOverlays.cpp
+    src/presentation/sfml/BattleScreenActionRendering.cpp
     src/presentation/sfml/BattleSoundPlayer.cpp
     src/presentation/sfml/EconomyTextures.cpp
     src/presentation/sfml/EconomyTooltip.cpp
@@ -122,12 +133,15 @@ add_library(soma_presentation_sfml STATIC
     src/presentation/sfml/MainMenuScreen.cpp
     src/presentation/sfml/MainRoomScreen.cpp
     src/presentation/sfml/ShopPanel.cpp
+    src/presentation/sfml/ShopPanelRendering.cpp
     src/presentation/sfml/SkillPanel.cpp
     src/presentation/sfml/NinePatch.cpp
     src/presentation/sfml/PauseMenu.cpp
     src/presentation/sfml/UiCursor.cpp
     src/presentation/sfml/ResourceCounter.cpp
     src/presentation/sfml/RuleBuilderPanel.cpp
+    src/presentation/sfml/RuleBuilderPanelLayout.cpp
+    src/presentation/sfml/RuleBuilderPanelRendering.cpp
     src/presentation/sfml/SpriterAnimationPlayer.cpp
     src/presentation/sfml/StartupScreen.cpp
     src/presentation/sfml/StatusGlossary.cpp
@@ -150,6 +164,9 @@ add_executable(Soma
       src/presentation/sfml/GameApplication.cpp
       src/presentation/sfml/ExplorationConsumablePanel.cpp
       src/presentation/sfml/ExplorationSession.cpp
+      src/presentation/sfml/ExplorationInput.cpp
+      src/presentation/sfml/ExplorationBattle.cpp
+      src/presentation/sfml/ExplorationRendering.cpp
       src/presentation/sfml/ExplorationMusicPlayer.cpp
       src/presentation/sfml/ExplorationHud.cpp
       src/presentation/sfml/ExplorationPartyStatus.cpp

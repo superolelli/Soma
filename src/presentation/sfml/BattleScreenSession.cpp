@@ -5,6 +5,7 @@
 #include "presentation/sfml/UiCursor.hpp"
 
 #include "gameplay/random/SeededRandom.hpp"
+#include "presentation/sfml/ActiveRulesPanel.hpp"
 #include "presentation/sfml/BattleActionStarter.hpp"
 #include "presentation/sfml/BattleActionTimeline.hpp"
 #include "presentation/sfml/BattleInteractionController.hpp"
@@ -287,6 +288,7 @@ namespace soma::presentation
         BattleInteractionController interaction{
             window, battleContent, battle, enemyPolicy, actionStarter, launchOptions, views, action, skipTurnBounds};
         ResourceCounter resources{economyContent, campaignState};
+        ActiveRulesPanel activeRules{ruleContent, campaignState.rules(), interfaceFont};
         BattleScreenRenderer renderer{window,
                                       battleContent,
                                       battle,
@@ -341,11 +343,16 @@ namespace soma::presentation
             const auto elapsed = frameClock.restart();
             if (!pauseMenu || !pauseMenu->isOpen()) interaction.prepareTurn();
             interaction.processEvents([&](const sf::Event& event) {
-                if (!pauseMenu) return false;
-                const auto menuAction = pauseMenu->handleEvent(event, window);
-                if (menuAction == PauseMenuAction::saveAndMainMenu) pauseResult = BattleScreenResult::saveAndMainRoom;
-                if (menuAction == PauseMenuAction::abandonAndMainMenu) pauseResult = BattleScreenResult::abandonAndMainRoom;
-                return menuAction.has_value() || pauseMenu->isOpen();
+                if (pauseMenu)
+                {
+                    const auto menuAction = pauseMenu->handleEvent(event, window);
+                    if (menuAction == PauseMenuAction::saveAndMainMenu) pauseResult = BattleScreenResult::saveAndMainRoom;
+                    if (menuAction == PauseMenuAction::abandonAndMainMenu) pauseResult = BattleScreenResult::abandonAndMainRoom;
+                    if (menuAction.has_value() || pauseMenu->isOpen()) return true;
+                }
+                const auto* click = event.getIf<sf::Event::MouseButtonPressed>();
+                return click != nullptr && click->button == sf::Mouse::Button::Left &&
+                       activeRules.handleClick(window.mapPixelToCoords(click->position));
             });
             if (pauseResult) return outcome(*pauseResult, battle);
             if (!pauseMenu || !pauseMenu->isOpen())
@@ -358,13 +365,16 @@ namespace soma::presentation
             if (pauseMenu && pauseMenu->isOpen())
             {
                 renderer.draw(mouse);
+                activeRules.render(window, mouse);
                 pauseMenu->render(window, mouse);
                 window.display();
             }
             else
             {
-                setUiCursor(window, interaction.clickableAt(mouse));
-                renderer.render(mouse);
+                setUiCursor(window, interaction.clickableAt(mouse) || activeRules.clickableAt(mouse));
+                renderer.draw(mouse);
+                activeRules.render(window, mouse);
+                window.display();
             }
             if (request.returnWhenResolved && battle.finished() && !action.has_value())
             {

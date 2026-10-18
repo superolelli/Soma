@@ -11,6 +11,16 @@
     "close_button": "Data/Sprites/Panels & Buttons/Inventory/lootable_panel_close_button.png",
     "confirmation_dialog": "Data/Sprites/Panels & Buttons/confirmation_dialog.png",
     "confirmation_button": "Data/Sprites/Panels & Buttons/Bang/generic_button.png",
+    "active_rules_toggle": "Data/Sprites/Panels & Buttons/rules_button.png",
+    "active_rules": {
+      "toggle_position": [0, 60],
+      "list_position": [30, 60],
+      "text_inset": [32, 18],
+      "text_width": 458,
+      "text_size": 18,
+      "row_spacing": 93,
+      "empty_text": "Keine aktiven Spielregeln"
+    },
     "layout": {
       "panel_x": 171, "panel_y": 120,
       "fragment_list_x": 227, "fragment_list_y": 259, "fragment_list_width": 522,

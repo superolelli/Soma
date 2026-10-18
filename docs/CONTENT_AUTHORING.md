@@ -223,7 +223,7 @@ Coordinates, scales, hitboxes, spacings, font sizes, playback delays, and asset 
 - Inventory, skill, shop, and shared counters: `economy/presentation.json`
 - Exploration, loot, rewards, speech bubbles, and campaign presentation: `world/content.json`
 - Main menu, main room, toolbar, loading, and pause settings: `flow/presentation.json`
-- Rule builder art/layout: `rules/content.json`
+- Rule builder and active-rule drawer art/layout: `rules/content.json`
 
 Spriter animation names referenced by abilities must exist on the selected entity. Spriter soundlines are played automatically and obey the global sound-effects volume. Non-Spriter one-shot cues are registered by their presentation/application sound player.
 

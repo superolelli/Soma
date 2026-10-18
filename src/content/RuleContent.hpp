@@ -198,6 +198,17 @@ namespace soma::content
             int confirmationButtonTextSize{};
         } presentation;
 
+        struct ActiveRulesPresentation
+        {
+            Point togglePosition;
+            Point listPosition;
+            Point textInset;
+            int textWidth{};
+            int textSize{};
+            int rowSpacing{};
+            std::string emptyText;
+        } activeRulesPresentation;
+
         std::unordered_map<gameplay::RuleFragmentId, RuleFragmentDefinition> fragments;
         std::unordered_map<RuleFragmentType, std::filesystem::path> fragmentSprites;
         std::unordered_map<RuleFragmentType, std::filesystem::path> fragmentSigils;
@@ -207,6 +218,7 @@ namespace soma::content
         std::filesystem::path closeButton;
         std::filesystem::path confirmationDialog;
         std::filesystem::path confirmationButton;
+        std::filesystem::path activeRulesToggle;
         double lootChance{};
         int shopPrice{};
         std::array<int, 3> slotUnlockCosts{};

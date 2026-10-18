@@ -56,6 +56,12 @@ int main(int argc, char** argv)
     check(service.assign(0, effect).hasValue());
     check(soma::presentation::buildGermanRuleDescription(state.rules().at(0), service.mode(0), loaded.content) ==
           "Wenn ein Kämpfer Leben verliert, verliert dieser Kämpfer 1 Leben.");
+    check(soma::presentation::completedRuleMode(state.rules().at(0)) == soma::content::RuleMode::triggered);
+    const auto activeDescriptions = soma::presentation::buildGermanActiveRuleDescriptions(state.rules(), loaded.content);
+    check(activeDescriptions.size() == 1U);
+    check(activeDescriptions.front() == "Wenn ein Kämpfer Leben verliert, verliert dieser Kämpfer 1 Leben.");
+    check(!loaded.content.activeRulesToggle.empty());
+    check(loaded.content.activeRulesPresentation.textWidth > 0);
 
     soma::game::ComposedRule pluralRule;
     pluralRule.trigger = trigger;
@@ -82,4 +88,6 @@ int main(int argc, char** argv)
     check(service.grant(absoluteSubject).hasValue());
     check(service.assign(1, absoluteSubject).hasValue());
     check(service.assign(1, modifier).hasValue());
+    check(soma::presentation::completedRuleMode(state.rules().at(1)) == soma::content::RuleMode::standing);
+    check(soma::presentation::buildGermanActiveRuleDescriptions(state.rules(), loaded.content).size() == 2U);
 }

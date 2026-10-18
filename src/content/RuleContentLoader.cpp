@@ -9,6 +9,11 @@ namespace soma::content
     {
         using json = nlohmann::json;
 
+        Point point(const json& value)
+        {
+            return {value.at(0).get<int>(), value.at(1).get<int>()};
+        }
+
         RuleFragmentType fragmentType(std::string_view value)
         {
             if (value == "trigger")
@@ -365,6 +370,7 @@ namespace soma::content
             result.content.closeButton = checkedPath(presentation.at("close_button"));
             result.content.confirmationDialog = checkedPath(presentation.at("confirmation_dialog"));
             result.content.confirmationButton = checkedPath(presentation.at("confirmation_button"));
+            result.content.activeRulesToggle = checkedPath(presentation.at("active_rules_toggle"));
             const auto& layout = presentation.at("layout");
             result.content.presentation = {layout.at("panel_x").get<int>(),
                                            layout.at("panel_y").get<int>(),
@@ -413,6 +419,14 @@ namespace soma::content
                                            layout.at("confirmation_message_width").get<int>(),
                                            layout.at("confirmation_text_size").get<int>(),
                                            layout.at("confirmation_button_text_size").get<int>()};
+            const auto& activeRules = presentation.at("active_rules");
+            result.content.activeRulesPresentation = {point(activeRules.at("toggle_position")),
+                                                       point(activeRules.at("list_position")),
+                                                       point(activeRules.at("text_inset")),
+                                                       activeRules.at("text_width").get<int>(),
+                                                       activeRules.at("text_size").get<int>(),
+                                                       activeRules.at("row_spacing").get<int>(),
+                                                       activeRules.at("empty_text").get<std::string>()};
             for (const auto type : {RuleFragmentType::trigger, RuleFragmentType::subject, RuleFragmentType::effect, RuleFragmentType::modifier})
             {
                 static constexpr std::array names{"trigger", "subject", "effect", "modifier"};

@@ -2,6 +2,7 @@
 
 ## Grundlegend
 - Regel-/Fragment-System
+- Einklappbare Anzeige der aktiven Regeln in Leveln und Kämpfen
 - Fähigkeiten und Skills grundlegend überarbeitet
 - Bessere Tooltips und neue Statustooltips
 - Geteilte Müdigkeit durch Müdigkeit pro Spieler ersetzt
