@@ -1,0 +1,80 @@
+type,text,Vorkommen
+trigger,Kämpfer verliert Leben
+trigger,Kämpfer heilt Leben
+trigger,Kämpfer wird markiert
+trigger,Kämpfer bekommt Verfall
+trigger,Kämpfer bekommt Stärkung
+trigger,Kämpfer bekommt Schwächung
+trigger,Kämpfer stirbt
+trigger,Kämpfer ist verwirrt
+trigger,Kämpfer verursacht mehr als 10 Schaden
+trigger,Kämpfer ist an der Reihe
+trigger,Kämpfer wacht auf
+trigger,Kämpfer markiert
+trigger,Kämpfer fügt Verfall zu
+trigger,Kämpfer heilt jemanden
+trigger,Kämpfer stärkt jemanden
+trigger,Kämpfer schwächt jemanden
+trigger,Kämpfer tötet jemanden
+trigger,Kämpfer verwirrt jemanden
+trigger,Kämpfer fügt Schlaf zu
+trigger,Kämpfer erhält mehr als 10 Schaden
+trigger,Kämpfer fügt kritischen Treffer zu
+subject,Dieser Kämpfer
+subject,Alle anderen
+subject,Alle Freunde
+subject,Alle Gegner
+subject,Ein zufälliger Kämpfer
+subject,Ein zufälliger Gegner
+subject,Ein zufälliger Freund
+effect,wird 3 Runden markiert
+effect,bekommt 3 Runden Kopfgeld,Bang-Lootables oder Hilfssherrif im Kampf
+effect,bekommt 3 Runden 1 Verfall
+effect,heilt 1 Leben
+effect,verliert 1 Leben
+effect,wird 1 Runde verwirrt
+effect,bekommt 2 Runden +10 Rüstung
+effect,bekommt 2 Runden -10 Rüstung
+effect,bekommt 2 Runden +5 Kritische Trefferchance
+effect,bekommt 2 Runden -2 Schaden
+effect,bekommt 2 Runden +2 Schaden
+effect,bekommt 2 Runden +5 Ausweichen
+effect,bekommt 2 Runden -5 Ausweichen
+effect,bekommt Dynamit,Bang-Lootable oder Big Spencer im Kampf
+modifier,fügt +1 Schaden zu
+modifier,erleidet +1 Schaden
+modifier,fügt -1 Schaden zu
+modifier,hat +10 Rüstung
+modifier,hat +5 Ausweichen
+modifier,hat +5 kritische Trefferchance
+modifier,hat einen Noface-Buff,Bang-Lootable oder Bill Noface im Kampf
+----
+effect,verliert 1 Müdigkeit
+trigger,Kämpfer erreicht 9 Müdigkeit
+----
+trigger,Kämpfer weicht aus
+effect,bekommt 2 Runden +10 Präzision
+effect,bekommt 2 Runden +5 Initiative
+effect,bekommt 2 Runden -10 Präzision
+effect,bekommt 2 Runden -5 Initiative
+subject,Alle Markierten
+subject,Alle Verwirrten
+subject,Alle Schlafenden
+subject,Alle Verfallenden
+subject,Alle mit vollem Leben
+subject,Alle mit Stärkung
+subject,Alle mit Schwächung
+modifier,hat +10 Präzision
+modifier,hat -10 Präzision
+modifier,hat +5 Initiative
+modifier,hat -5 Initiative
+----
+trigger,Kämpfer erhält Schaden durch Verfall
+subject,Alle mit weniger als 9 Müdigkeit
+subject,Alle mit mehr als 8 Müdigkeit
+effect,Verfällt für 2 Runden in Rage
+---
+trigger,Kämpfer verfällt in Panik
+effect,Verfällt für 2 Runden in Panik
+effect,Erleidet für 2 Runden Transfusion
+subject,Alle mit Panik

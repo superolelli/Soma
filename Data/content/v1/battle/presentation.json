@@ -1,0 +1,292 @@
+{
+    "schema_version":  1,
+    "content_kind":  "battle_presentation",
+    "assets":  {
+                   "ability_panel":  "Data/Sprites/Abilities/ability_panel.png",
+                   "current_ability_frame":  "Data/Sprites/Abilities/currentAbilityFrame.png",
+                   "skip_turn":  "Data/Sprites/Abilities/skip_turn.png",
+                   "combatant_information_panel":  "Data/Sprites/Battle/combatant_information_panel.png",
+                   "health_bar":  "Data/Sprites/Battle/health_bar.png",
+                   "health_bar_frame":  "Data/Sprites/Battle/health_bar_frame.png",
+                   "health_bar_big":  "Data/Sprites/Battle/health_bar_big.png",
+                   "health_bar_big_frame":  "Data/Sprites/Battle/health_bar_big_frame.png",
+                   "fatigue_bar":  "Data/Sprites/Battle/fatigue_bar.png",
+                   "fatigue_bar_frame":  "Data/Sprites/Battle/fatigue_bar_frame.png",
+                   "fatigue_bar_big":  "Data/Sprites/Battle/fatigue_bar_big.png",
+                   "fatigue_bar_big_frame":  "Data/Sprites/Battle/fatigue_bar_big_frame.png",
+                   "target_marker":  "Data/Sprites/Battle/battle_marker.png",
+                   "turn_marker":  "Data/Sprites/Battle/turn_marker.png",
+                   "announcement":  "Data/Sprites/Battle/ability_announcement.png",
+                   "status_buff":  "Data/Sprites/Battle/buff.png",
+                   "status_debuff":  "Data/Sprites/Battle/debuff.png",
+                   "status_confused":  "Data/Sprites/Battle/confused.png",
+                   "status_marked":  "Data/Sprites/Battle/marked.png",
+                   "status_sleeping":  "Data/Sprites/Battle/sleeping.png",
+                   "status_missed":  "Data/Sprites/Battle/missed.png",
+                   "status_dynamite":  "Data/Sprites/Battle/dynamite.png",
+                   "status_bounty":  "Data/Sprites/Battle/bounty.png",
+                   "status_decay":  "Data/Sprites/Battle/decay.png",
+                   "status_fist_of_revenge":  "Data/Sprites/Battle/fist_of_revenge_target.png",
+                   "status_noface":  "Data/Sprites/Battle/noface_buff.png",
+                   "status_fatigue_tired":  "Data/Sprites/Battle/fatigue_debuff.png",
+                   "status_fatigue_stupid":  "Data/Sprites/Battle/fatigue_debuff2.png",
+                   "status_riposte":  "Data/Sprites/Battle/riposte.png",
+                   "status_rage":  "Data/Sprites/Battle/rage.png",
+                   "status_hacked":  "Data/Sprites/Battle/hacked.png",
+                   "status_transfusion":  "Data/Sprites/Battle/transfusion.png",
+                   "status_panic":  "Data/Sprites/Battle/panic.png",
+                   "item_speech_bubble":  "Data/Sprites/speech_bubble.png",
+                   "ability_effect_model":  "Data/Sprites/Ability Effects/ability_effects.scml",
+                   "interface_font":  "Data/Fonts/trajan.ttf",
+                   "notification_font":  "Data/Fonts/kingArthur.ttf",
+                   "blur_shader":  "Data/Shader/blur.frag"
+               },
+    "sounds":  {
+                   "critical_hit":  "Data/Sound/critical_hit.wav",
+                   "attack_dodged":  "Data/Sound/dodged.wav",
+                   "status.decay":  "Data/Sound/damage_over_time.wav",
+                   "status.dynamite":  "Data/Sound/dynamite.ogg"
+               },
+    "reference_resolution":  {
+                                 "width":  1920,
+                                 "height":  1080
+                             },
+    "layout":  {
+                   "normal_scale":  0.6,
+                   "ability_scale":  0.8,
+                   "ground_y":  750,
+                   "player_start_x":  100,
+                   "player_spacing":  160,
+                   "enemy_start_x_from_view_center":  20,
+                   "enemy_spacing":  40,
+                   "ability_stage_y":  800,
+                   "ability_attacker_x_player":  480,
+                   "ability_target_x_player":  1200,
+                   "ability_group_padding":  50,
+                   "ability_panel":  {
+                                         "x":  100,
+                                         "y":  860
+                                     },
+                   "ability_buttons":  {
+                                           "start_x":  140,
+                                           "y":  892,
+                                           "spacing":  132
+                                       },
+                   "combatant_information_panel":  {
+                                                       "x":  820,
+                                                       "y":  850
+                                                   },
+                   "enemy_announcement":  {
+                                              "x":  1060,
+                                              "y":  150,
+                                              "text_x":  1110,
+                                              "text_y":  168
+                                          },
+                   "battle_result":  {
+                                         "x":  820,
+                                         "y":  420
+                                     },
+                   "turn_order_numbers":  {
+                                               "offset_y":  5,
+                                               "character_size":  20
+                                           },
+                   "expected_attack":  {
+                                           "center_x":  1080,
+                                           "single_line_y":  1015,
+                                           "multiple_lines_y":  1003,
+                                           "line_spacing":  22,
+                                           "character_size":  16
+                                       },
+                   "timing":  {
+                                  "announcement_seconds":  1.5,
+                                  "execution_timeout_seconds":  5.0,
+                                  "reaction_seconds":  0.8,
+                                  "result_seconds":  1.0,
+                                  "wake_result_seconds":  2.0,
+                                  "defeat_seconds":  2.0
+                              },
+                   "item_activation":  {
+                                           "speech_duration_seconds":  2.5,
+                                           "maximum_text_width":  380,
+                                           "character_size":  22,
+                                           "padding":  [56, 38],
+                                           "speaker_offset":  [-10, -10],
+                                           "text_vertical_offset":  -17
+                                     }
+               },
+    "item_activations":  [
+                              {
+                                  "item":  "item.kutschfahrt.lodge_ring",
+                                  "speech":  "Ein echter Sieg ist nur alleine möglich!",
+                                  "notification":  "Wappen der Loge aktiviert"
+                              }
+                          ],
+    "combatants":  [
+                       {
+                           "id":  "player.simon",
+                           "slot":  0,
+                           "model":  "Data/Sprites/Players/Simon2/simon.scml",
+                           "entity":  "Simon",
+                           "scale_adjustment":  0.0,
+                           "ability_icons":  {
+                                                 "ability.simon.0":  "Data/Sprites/Abilities/Simon/marshmallow_flash/marshmallow_flash.png",
+                                                 "ability.simon.0.alternative":  "Data/Sprites/Abilities/Simon/marshmallow_flash/marshmallow_flash.png",
+                                                 "ability.simon.1":  "Data/Sprites/Abilities/Simon/mess_around/mess_around.png",
+                                                 "ability.simon.1.alternative":  "Data/Sprites/Abilities/Simon/mess_around/mess_around.png",
+                                                 "ability.simon.2":  "Data/Sprites/Abilities/Simon/repair/repair.png",
+                                                 "ability.simon.2.alternative":  "Data/Sprites/Abilities/Simon/repair/repair.png",
+                                                 "ability.simon.3":  "Data/Sprites/Abilities/Simon/all_on_one/all_on_one.png",
+                                                 "ability.simon.3.alternative":  "Data/Sprites/Abilities/Simon/all_on_one/all_on_one.png"
+                                             }
+                       },
+                       {
+                           "id":  "player.ole",
+                           "slot":  1,
+                           "model":  "Data/Sprites/Players/Ole2/ole2.scml",
+                           "entity":  "Ole",
+                           "scale_adjustment":  0.0,
+                           "ability_icons":  {
+                                                 "ability.ole.0":  "Data/Sprites/Abilities/Ole/gummi_arm/gummi_arm.png",
+                                                 "ability.ole.0.alternative":  "Data/Sprites/Abilities/Ole/gummi_arm/gummi_arm.png",
+                                                 "ability.ole.1":  "Data/Sprites/Abilities/Ole/whole_body_kick/whole_body_kick.png",
+                                                 "ability.ole.1.alternative":  "Data/Sprites/Abilities/Ole/whole_body_kick/whole_body_kick.png",
+                                                 "ability.ole.2":  "Data/Sprites/Abilities/Ole/hack_into_the_system/hack_into_the_system.png",
+                                                 "ability.ole.2.alternative":  "Data/Sprites/Abilities/Ole/hack_into_the_system/hack_into_the_system.png",
+                                                 "ability.ole.3":  "Data/Sprites/Abilities/Ole/poetry_slam/poetry_slam.png",
+                                                 "ability.ole.3.alternative":  "Data/Sprites/Abilities/Ole/poetry_slam/poetry_slam.png"
+                                             }
+                       },
+                       {
+                           "id":  "player.anna",
+                           "slot":  2,
+                           "model":  "Data/Sprites/Players/Anna2/anna.scml",
+                           "entity":  "Anna",
+                           "scale_adjustment":  0.0,
+                           "ability_icons":  {
+                                                 "ability.anna.0":  "Data/Sprites/Abilities/Anna/indomitable_happiness/indomitable_happiness.png",
+                                                 "ability.anna.0.alternative":  "Data/Sprites/Abilities/Anna/indomitable_happiness/indomitable_happiness.png",
+                                                 "ability.anna.1":  "Data/Sprites/Abilities/Anna/word_gush/word_gush.png",
+                                                 "ability.anna.1.alternative":  "Data/Sprites/Abilities/Anna/word_gush/word_gush.png",
+                                                 "ability.anna.2":  "Data/Sprites/Abilities/Anna/side_of_nose_blow/side_of_nose_blow.png",
+                                                 "ability.anna.2.alternative":  "Data/Sprites/Abilities/Anna/side_of_nose_blow/side_of_nose_blow.png",
+                                                 "ability.anna.3":  "Data/Sprites/Abilities/Anna/deathhug/deathhug.png",
+                                                 "ability.anna.3.alternative":  "Data/Sprites/Abilities/Anna/deathhug/deathhug.png"
+                                             }
+                       },
+                       {
+                           "id":  "player.markus",
+                           "slot":  3,
+                           "model":  "Data/Sprites/Players/Markus2/markus.scml",
+                           "entity":  "Markus",
+                           "scale_adjustment":  0.0,
+                           "ability_icons":  {
+                                                 "ability.markus.0":  "Data/Sprites/Abilities/Markus/fist_of_revenge/fist_of_revenge.png",
+                                                 "ability.markus.0.alternative":  "Data/Sprites/Abilities/Markus/fist_of_revenge/fist_of_revenge.png",
+                                                 "ability.markus.1":  "Data/Sprites/Abilities/Markus/nose_ram/nose_ram.png",
+                                                 "ability.markus.1.alternative":  "Data/Sprites/Abilities/Markus/nose_ram/nose_ram.png",
+                                                 "ability.markus.2":  "Data/Sprites/Abilities/Markus/hard_destruction/hard_destruction.png",
+                                                 "ability.markus.2.alternative":  "Data/Sprites/Abilities/Markus/hard_destruction/hard_destruction.png",
+                                                 "ability.markus.3":  "Data/Sprites/Abilities/Markus/horrible_grin/horrible_grin.png",
+                                                 "ability.markus.3.alternative":  "Data/Sprites/Abilities/Markus/horrible_grin/horrible_grin.png"
+                                             }
+                       },
+                       {
+                           "id":  "enemy.gesetzloser",
+                           "slot":  4,
+                           "model":  "Data/Sprites/Enemies/Bang/Gesetzloser/gesetzloser.scml",
+                           "entity":  "Gesetzloser",
+                           "scale_adjustment":  0.0
+                       },
+                       {
+                           "id":  "enemy.abtruenniger",
+                           "slot":  5,
+                           "model":  "Data/Sprites/Enemies/Bang/Abtruenniger/abtruenniger.scml",
+                           "entity":  "Abtruenniger",
+                           "scale_adjustment":  0.0
+                       },
+                       {
+                           "id":  "enemy.indianer",
+                           "slot":  6,
+                           "model":  "Data/Sprites/Enemies/Bang/Indianer/indianer.scml",
+                           "entity":  "Indianer",
+                           "scale_adjustment":  0.1
+                       },
+                       {
+                           "id":  "enemy.hilfssheriff",
+                           "slot":  7,
+                           "model":  "Data/Sprites/Enemies/Bang/Hilfssheriff/hilfssheriff.scml",
+                           "entity":  "Hilfssheriff",
+                           "scale_adjustment":  0.05
+                       },
+                       {
+                           "id":  "enemy.greg",
+                           "slot":  4,
+                           "model":  "Data/Sprites/Enemies/Bang/Greg Digger/greg.scml",
+                           "entity":  "Greg",
+                           "scale_adjustment":  0.1
+                       },
+                       {
+                           "id":  "enemy.apache_kid",
+                           "slot":  4,
+                           "model":  "Data/Sprites/Enemies/Bang/Apache Kid/ApacheKid.scml",
+                           "entity":  "ApacheKid",
+                           "scale_adjustment":  0.15
+                       },
+                       {
+                           "id":  "enemy.big_spencer",
+                           "slot":  4,
+                           "model":  "Data/Sprites/Enemies/Bang/Big Spencer/BigSpencer.scml",
+                           "entity":  "BigSpencer",
+                           "scale_adjustment":  -0.02
+                       },
+                       {
+                           "id":  "enemy.tequila_joe",
+                           "slot":  4,
+                           "model":  "Data/Sprites/Enemies/Bang/Tequila Joe/TequilaJoe.scml",
+                           "entity":  "TequilaJoe",
+                           "scale_adjustment":  0.0
+                       },
+                       {
+                           "id":  "enemy.bill_noface",
+                           "slot":  4,
+                           "model":  "Data/Sprites/Enemies/Bang/Bill Noface/BillNoface.scml",
+                           "entity":  "BillNoface",
+                           "scale_adjustment":  -0.05
+                       },
+                       {
+                           "id":  "enemy.juan_tirador",
+                           "slot":  4,
+                           "model":  "Data/Sprites/Enemies/Kutschfahrt/JuanTirador/JuanTirador.scml",
+                           "entity":  "JuanTirador",
+                           "scale_adjustment":  0.0
+                       },
+                       {
+                           "id":  "enemy.marie_saunier",
+                           "slot":  4,
+                           "model":  "Data/Sprites/Enemies/Kutschfahrt/MarieSaunier/MarieSaunier.scml",
+                           "entity":  "MarieSaunier",
+                           "scale_adjustment":  0.0
+                       },
+                       {
+                           "id":  "enemy.bruder_zacharias",
+                           "slot":  4,
+                           "model":  "Data/Sprites/Enemies/Kutschfahrt/BruderZacharias/BruderZacharias.scml",
+                           "entity":  "BruderZacharias",
+                           "scale_adjustment":  0.0
+                       },
+                       {
+                           "id":  "enemy.theodora_krayenborg",
+                           "slot":  4,
+                           "model":  "Data/Sprites/Enemies/Kutschfahrt/TheodoraKrayenborg/TheodoraKrayenborg.scml",
+                           "entity":  "TheodoraKrayenborg",
+                           "scale_adjustment":  0.0
+                       },
+                       {
+                           "id":  "enemy.basilius_kartov",
+                           "slot":  4,
+                           "model":  "Data/Sprites/Enemies/Kutschfahrt/BasiliusKartov/BasiliusKartov.scml",
+                           "entity":  "BasiliusKartov",
+                           "scale_adjustment":  0.0
+                       }
+                   ]
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "content_kind": "game_flow_presentation",
+  "reference_size": [1920, 1080],
+  "assets": {
+    "background": "Data/Sprites/MainMenu/background.png",
+    "save_panel": "Data/Sprites/MainMenu/savegame.png",
+    "name_input": "Data/Sprites/MainMenu/name_input.png",
+    "button": "Data/Sprites/Panels & Buttons/Bang/generic_button.png",
+    "close_button": "Data/Sprites/Panels & Buttons/Inventory/lootable_panel_close_button.png",
+    "font": "Data/Fonts/blackwoodCastle.ttf"
+  },
+  "startup": {
+    "model": "Data/Sprites/LoadingScreen/loadingScreen.scml",
+    "entity": "LoadingScreen",
+    "animation": "loading",
+    "position": [0, 1080],
+    "speed": 0.65,
+    "minimum_display_seconds": 0.8
+  },
+  "pause_menu": {
+    "panel_position": [670, 180],
+    "panel_size": [580, 675],
+    "title_center": [960, 275],
+    "first_button": [835, 330],
+    "music_slider": [810, 390],
+    "sound_slider": [810, 500],
+    "battle_speed_slider": [810, 610],
+    "settings_back_button": [835, 745],
+    "slider_width": 300,
+    "button_spacing": 100,
+    "title_size": 42,
+    "text_size": 20
+  },
+  "menu": {
+    "save_panel_positions": [[50, 500], [650, 500], [1250, 500]],
+    "close_button_position": [1824, 19],
+    "first_action_offset_y": 210,
+    "action_spacing_y": 90,
+    "name_input_position": [610, 485],
+    "name_text_center": [960, 540],
+    "name_button_position": [835, 605],
+    "feedback_text_center": [960, 980],
+    "panel_text_size": 40,
+    "button_text_size": 30,
+    "name_text_size": 50,
+    "feedback_text_size": 24,
+    "maximum_name_characters": 20
+  },
+  "main_room": {
+    "backgrounds": [
+      "Data/Sprites/Backgrounds/Main Room/main_room_1.png",
+      "Data/Sprites/Backgrounds/Main Room/main_room_2.png",
+      "Data/Sprites/Backgrounds/Main Room/main_room_3.png",
+      "Data/Sprites/Backgrounds/Main Room/main_room_4.png"
+    ],
+    "doors": [
+      {"campaign": "bang", "texture": "Data/Sprites/Backgrounds/Main Room/door_wood.png", "position": [3992, 240], "sound": "Data/Sound/door.ogg"},
+      {"campaign": "kutschfahrt", "texture": "Data/Sprites/Backgrounds/Main Room/door_stone.png", "position": [4651, 250], "sound": "Data/Sound/door_kutschfahrt.ogg"},
+      {"campaign": "tichu", "texture": "Data/Sprites/Backgrounds/Main Room/door_tichu.png", "position": [5299, 247], "sound": "Data/Sound/door_kutschfahrt.ogg", "enabled": false}
+    ],
+    "signs": [
+      {"texture": "Data/Sprites/Backgrounds/Main Room/level_sign_1.png", "position": [4090, 105], "font": "Data/Fonts/tiza.ttf", "text_offset": [0, 0]},
+      {"texture": "Data/Sprites/Backgrounds/Main Room/level_sign_2.png", "position": [4750, 165], "font": "Data/Fonts/blackwoodCastle.ttf", "text_offset": [0, 0]},
+      {"texture": "Data/Sprites/Backgrounds/Main Room/level_sign_3.png", "position": [5385, 137], "font": "Data/Fonts/shanghai.ttf", "text_offset": [0, 0]}
+    ],
+    "roots": {"texture": "Data/Sprites/Backgrounds/Main Room/roots.png", "position": [4572, 120]},
+    "vending_machine": {"texture": "Data/Sprites/Backgrounds/Main Room/vending_machine.png", "position": [6750, 150]},
+    "players": [
+      {"model": "Data/Sprites/Players/Simon2/simonMainRoom.scml", "entity": "Simon", "position": [2040, 770],
+       "idle_animation": "idle", "ambient_animations": ["busy"], "minimum_ambient_delay": 7.0, "maximum_ambient_delay": 16.0},
+      {"model": "Data/Sprites/Players/Ole2/oleMainRoom.scml", "entity": "Ole", "position": [177, 850],
+       "idle_animation": "idle", "ambient_animations": ["busy"], "minimum_ambient_delay": 9.0, "maximum_ambient_delay": 20.0},
+      {"model": "Data/Sprites/Players/Anna2/annaMainRoom.scml", "entity": "Anna", "position": [3040, 830],
+       "idle_animation": "idle", "ambient_animations": ["busy"], "minimum_ambient_delay": 6.0, "maximum_ambient_delay": 15.0},
+      {"model": "Data/Sprites/Players/Markus2/markusMainRoom.scml", "entity": "Markus", "position": [1006, 760],
+       "idle_animation": "idle", "ambient_animations": [], "minimum_ambient_delay": 10.0, "maximum_ambient_delay": 22.0}
+    ],
+    "inventory_button": "Data/Sprites/Panels & Buttons/inventory_button.png",
+    "skills_button": "Data/Sprites/Panels & Buttons/skillpanel_button.png",
+    "shop_button": "Data/Sprites/Panels & Buttons/shop_button.png",
+    "rules_button": "Data/Sprites/Panels & Buttons/rules_button.png",
+    "dice_icon": "Data/Sprites/Panels & Buttons/Skill_Panel/dice.png",
+    "cards_icon": "Data/Sprites/Panels & Buttons/VendingMachinePanel/cards_symbol.png",
+    "resource_font": "Data/Fonts/kingArthur.ttf",
+    "outline_shader": "Data/Shader/lootable_outline.frag",
+    "cursor_normal": "Data/Cursors/brown/left_ptr.png",
+    "cursor_hand": "Data/Cursors/brown/pointing_hand.png",
+    "music": "Data/Music/MainRoom.ogg",
+    "music_volume": 20,
+    "edge_scroll_width": 100,
+    "edge_scroll_speed": 3000,
+    "initial_view_left": 0,
+    "toolbar_positions": [[0, 0], [53, 0], [106, 0], [159, 0]],
+    "dice_icon_position": [1690, 5],
+    "dice_text_center": [1760, 24],
+    "cards_icon_position": [1800, 6],
+    "cards_text_center": [1865, 24],
+    "dice_icon_scale": 0.65,
+    "cards_icon_scale": 0.85,
+    "resource_text_size": 18,
+    "outline_samples": 20,
+    "outline_radius": 3.0
+  }
+}

@@ -11,10 +11,7 @@
       "displayName": "Windows - Visual Studio 2022",
       "generator": "Visual Studio 17 2022",
       "architecture": "x64",
-      "binaryDir": "${sourceDir}/build",
-      "cacheVariables": {
-        "SOMA_USE_BUNDLED_DEPENDENCIES": "ON"
-      }
+      "binaryDir": "${sourceDir}/build"
     }
   ],
   "buildPresets": [

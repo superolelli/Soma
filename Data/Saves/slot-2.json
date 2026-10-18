@@ -1,0 +1,107 @@
+{
+    "campaign":  {
+                     "acquired_skills":  [
+                                             "skill.ole.0.1"
+                                         ],
+                     "consumables":  [
+
+                                     ],
+                     "currencies":  {
+                                        "cards":  468,
+                                        "dice":  0
+                                    },
+                     "equipment":  [
+
+                                   ],
+                     "inventory":  [
+
+                                   ],
+                     "rule_fragments":  [
+                                            {
+                                                "id":  "rule.effect.lose_one_fatigue",
+                                                "quantity":  1
+                                            },
+                                            {
+                                                "id":  "rule.effect.marked_three",
+                                                "quantity":  1
+                                            },
+                                            {
+                                                "id":  "rule.effect.damage_one",
+                                                "quantity":  1
+                                            }
+                                        ],
+                     "rule_slots_unlocked":  2,
+                     "rules":  [
+                                   {
+                                       "effect":  "rule.effect.lose_one_fatigue"
+                                   },
+                                   {
+
+                                   },
+                                   {
+
+                                   },
+                                   {
+
+                                   }
+                               ],
+                     "shop_dice_price":  100,
+                     "shop_slots_unlocked":  2,
+                     "shop_stock":  [
+                                        {
+                                            "item":  {
+                                                         "color":  [
+                                                                       0,
+                                                                       0,
+                                                                       0
+                                                                   ],
+                                                         "id":  "item.bang.knife"
+                                                     }
+                                        },
+                                        {
+                                            "item":  {
+                                                         "color":  [
+                                                                       0,
+                                                                       128,
+                                                                       0
+                                                                   ],
+                                                         "id":  "item.bang.tomahawk"
+                                                     }
+                                        },
+                                        {
+                                            "item":  {
+                                                         "color":  [
+                                                                       0,
+                                                                       0,
+                                                                       0
+                                                                   ],
+                                                         "id":  "item.bang.canteen"
+                                                     }
+                                        },
+                                        {
+                                            "item":  {
+                                                         "color":  [
+                                                                       0,
+                                                                       0,
+                                                                       0
+                                                                   ],
+                                                         "id":  "item.bang.sombrero"
+                                                     }
+                                        },
+                                        {
+                                            "fragment":  "rule.effect.armour_up"
+                                        }
+                                    ],
+                     "unlocked_items":  [
+
+                                        ],
+                     "active_ability_versions":  [
+
+                                                 ]
+                 },
+    "completed_levels":  [
+                             "level.bang.1"
+                         ],
+    "player_name":  "Ole",
+    "schema_version":  4
+}

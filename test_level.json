@@ -1,0 +1,14 @@
+{
+  "rooms": [
+    { "background": "background.bang_gang_1", "lootable": "lootable.chest" },
+    { "background": "background.bang_gang_ende", "encounter": "encounter.bang.5.boss", "boss": true }
+  ],
+  "parallax": {
+    "second_layer_tiles": ["parallax.bang.second.1", "parallax.bang.second.2"],
+    "third_layer_tiles": ["parallax.bang.third.1", "parallax.bang.third.2"],
+    "fourth_layer": "parallax.bang.fourth",
+    "second_layer_divisor": 3,
+    "third_layer_divisor": 6,
+    "fourth_layer_divisor": 9
+  }
+}

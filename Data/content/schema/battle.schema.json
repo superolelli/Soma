@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soma.local/schema/battle-v1.json",
+  "title": "Soma battle content v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "content_kind", "combatants", "abilities", "encounters"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "content_kind": {"const": "battle"},
+    "combatants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "team", "name", "abilities", "attributes", "resistances"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "team": {"enum": ["players", "enemies"]},
+          "name": {"type": "string"},
+          "abilities": {"type": "array", "items": {"type": "string"}},
+          "marks_attackers_for_revenge": {"type": "boolean"}
+        }
+      }
+    },
+    "abilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "data"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "data": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": {"type": "string"},
+              "requires_revenge_marker": {"type": "boolean"},
+              "summon": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["combatant", "count", "allowed_slots"],
+                "properties": {
+                  "combatant": {"type": "string", "minLength": 1},
+                  "count": {"type": "integer", "minimum": 1},
+                  "allowed_slots": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {"type": "integer", "minimum": 0, "maximum": 7}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "encounters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "background", "music", "combatants"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "background": {"type": "string", "minLength": 1},
+          "music": {"type": "string", "minLength": 1},
+          "combatants": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "slot"],
+              "properties": {
+                "id": {"type": "string", "minLength": 1},
+                "slot": {"type": "integer", "minimum": 0, "maximum": 7}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

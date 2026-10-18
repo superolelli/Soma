@@ -1,0 +1,1968 @@
+{
+    "schema_version":  1,
+    "content_kind":  "battle",
+    "combatants":  [
+                       {
+                           "id":  "player.simon",
+                           "team":  "players",
+                           "name":  "Simon",
+                           "abilities":  [
+                                             "ability.simon.0",
+                                             "ability.simon.1",
+                                             "ability.simon.2",
+                                             "ability.simon.3"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  25,
+                                              "damage_minimum":  5,
+                                              "damage_maximum":  8,
+                                              "armour":  1,
+                                              "critical_hit_chance":  6,
+                                              "dodge":  3,
+                                              "initiative":  1,
+                                              "precision":  6
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "player.ole",
+                           "team":  "players",
+                           "name":  "Ole",
+                           "abilities":  [
+                                             "ability.ole.0",
+                                             "ability.ole.1",
+                                             "ability.ole.2",
+                                             "ability.ole.3"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  20,
+                                              "damage_minimum":  5,
+                                              "damage_maximum":  8,
+                                              "armour":  1,
+                                              "critical_hit_chance":  6,
+                                              "dodge":  6,
+                                              "initiative":  2,
+                                              "precision":  6
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "player.anna",
+                           "team":  "players",
+                           "name":  "Anna",
+                           "abilities":  [
+                                             "ability.anna.0",
+                                             "ability.anna.1",
+                                             "ability.anna.2",
+                                             "ability.anna.3"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  20,
+                                              "damage_minimum":  5,
+                                              "damage_maximum":  8,
+                                              "armour":  1,
+                                              "critical_hit_chance":  5,
+                                              "dodge":  9,
+                                              "initiative":  3,
+                                              "precision":  5
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "player.markus",
+                           "team":  "players",
+                           "name":  "Markus",
+                           "marks_attackers_for_revenge":  true,
+                           "abilities":  [
+                                             "ability.markus.0",
+                                             "ability.markus.1",
+                                             "ability.markus.2",
+                                             "ability.markus.3"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  30,
+                                              "damage_minimum":  9,
+                                              "damage_maximum":  12,
+                                              "armour":  1,
+                                              "critical_hit_chance":  4,
+                                              "dodge":  3,
+                                              "initiative":  1,
+                                              "precision":  4
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "enemy.gesetzloser",
+                           "ai_policy":  "miss_shooter",
+                           "team":  "enemies",
+                           "encounter_cost":  2,
+                           "name":  "Gesetzloser",
+                           "abilities":  [
+                                             "ability.enemy.springfield",
+                                             "ability.enemy.miss"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  20,
+                                              "damage_minimum":  7,
+                                              "damage_maximum":  10,
+                                              "armour":  1,
+                                              "critical_hit_chance":  5,
+                                              "dodge":  3,
+                                              "initiative":  1,
+                                              "precision":  5
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "enemy.abtruenniger",
+                           "ai_policy":  "fanning",
+                           "team":  "enemies",
+                           "encounter_cost":  1,
+                           "name":  "Abtrünniger",
+                           "abilities":  [
+                                             "ability.enemy.bang",
+                                             "ability.enemy.fanning"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  20,
+                                              "damage_minimum":  5,
+                                              "damage_maximum":  8,
+                                              "armour":  1,
+                                              "critical_hit_chance":  5,
+                                              "dodge":  3,
+                                              "initiative":  1,
+                                              "precision":  5
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "enemy.indianer",
+                           "ai_policy":  "sleep",
+                           "team":  "enemies",
+                           "encounter_cost":  1,
+                           "name":  "Indianer",
+                           "abilities":  [
+                                             "ability.enemy.tomahawk",
+                                             "ability.enemy.knock_out"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  20,
+                                              "damage_minimum":  3,
+                                              "damage_maximum":  5,
+                                              "armour":  1,
+                                              "critical_hit_chance":  5,
+                                              "dodge":  8,
+                                              "initiative":  2,
+                                              "precision":  5
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  20,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "enemy.hilfssheriff",
+                           "ai_policy":  "deputy_support",
+                           "team":  "enemies",
+                           "encounter_cost":  2,
+                           "name":  "Hilfssheriff",
+                           "abilities":  [
+                                             "ability.enemy.bang",
+                                             "ability.enemy.bounty",
+                                             "ability.enemy.deputy"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  20,
+                                              "damage_minimum":  5,
+                                              "damage_maximum":  8,
+                                              "armour":  1,
+                                              "critical_hit_chance":  5,
+                                              "dodge":  3,
+                                              "initiative":  1,
+                                              "precision":  5
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "enemy.greg",
+                           "ai_policy":  "gravedigger",
+                           "team":  "enemies",
+                           "encounter_cost":  4,
+                           "name":  "Greg Digger",
+                           "abilities":  [
+                                             "ability.enemy.shovel_hit",
+                                             "ability.enemy.bury_the_dead",
+                                             "ability.enemy.gravedigger_gaze"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  35,
+                                              "damage_minimum":  7,
+                                              "damage_maximum":  10,
+                                              "armour":  5,
+                                              "critical_hit_chance":  10,
+                                              "dodge":  10,
+                                              "initiative":  5,
+                                              "precision":  10
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "enemy.apache_kid",
+                           "ai_policy":  "apache_kid",
+                           "team":  "enemies",
+                           "encounter_cost":  5,
+                           "name":  "Apache Kid",
+                           "abilities":  [
+                                             "ability.enemy.indians",
+                                             "ability.enemy.knife",
+                                             "ability.enemy.no_pain"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  35,
+                                              "damage_minimum":  9,
+                                              "damage_maximum":  12,
+                                              "armour":  1,
+                                              "critical_hit_chance":  9,
+                                              "dodge":  24,
+                                              "initiative":  8,
+                                              "precision":  9
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  30,
+                                               "debuff":  0,
+                                               "decay":  30
+                                           }
+                       },
+                       {
+                           "id":  "enemy.big_spencer",
+                           "ai_policy":  "big_spencer",
+                           "team":  "enemies",
+                           "encounter_cost":  10,
+                           "name":  "Big Spencer",
+                           "abilities":  [
+                                             "ability.enemy.punch",
+                                             "ability.enemy.brawl",
+                                             "ability.enemy.dynamite"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  100,
+                                              "damage_minimum":  9,
+                                              "damage_maximum":  12,
+                                              "armour":  10,
+                                              "critical_hit_chance":  5,
+                                              "dodge":  0,
+                                              "initiative":  3,
+                                              "precision":  5
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  40,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "enemy.tequila_joe",
+                           "ai_policy":  "tequila_joe",
+                           "team":  "enemies",
+                           "encounter_cost":  4,
+                           "name":  "Tequila Joe",
+                           "abilities":  [
+                                             "ability.enemy.beer",
+                                             "ability.enemy.spend_a_round",
+                                             "ability.enemy.jabbering"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  30,
+                                              "damage_minimum":  3,
+                                              "damage_maximum":  6,
+                                              "armour":  5,
+                                              "critical_hit_chance":  5,
+                                              "dodge":  10,
+                                              "initiative":  1,
+                                              "precision":  5
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "enemy.bill_noface",
+                           "ai_policy":  "bill_noface",
+                           "team":  "enemies",
+                           "encounter_cost":  5,
+                           "name":  "Bill Noface",
+                           "abilities":  [
+                                             "ability.enemy.shotgun",
+                                             "ability.enemy.panic",
+                                             "ability.enemy.rattlesnake"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  30,
+                                              "damage_minimum":  3,
+                                              "damage_maximum":  6,
+                                              "armour":  5,
+                                              "critical_hit_chance":  5,
+                                              "dodge":  10,
+                                              "initiative":  1,
+                                              "precision":  5
+                                          },
+                           "resistances":  {
+                                               "sleep":  30,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "enemy.juan_tirador",
+                           "ai_policy":  "duelist",
+                           "team":  "enemies",
+                           "encounter_cost":  2,
+                           "name":  "Juan Tirador",
+                           "abilities":  [
+                                             "ability.enemy.duelpistol",
+                                             "ability.enemy.thug"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  20,
+                                              "damage_minimum":  6,
+                                              "damage_maximum":  9,
+                                              "armour":  4,
+                                              "critical_hit_chance":  5,
+                                              "dodge":  2,
+                                              "initiative":  1,
+                                              "precision":  5
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "enemy.marie_saunier",
+                           "ai_policy":  "spy",
+                           "team":  "enemies",
+                           "encounter_cost":  2,
+                           "name":  "Marie Saunière",
+                           "abilities":  [
+                                             "ability.enemy.distraction",
+                                             "ability.enemy.spy"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  15,
+                                              "damage_minimum":  0,
+                                              "damage_maximum":  2,
+                                              "armour":  3,
+                                              "critical_hit_chance":  8,
+                                              "dodge":  10,
+                                              "initiative":  3,
+                                              "precision":  6
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "enemy.bruder_zacharias",
+                           "ai_policy":  "doctor",
+                           "team":  "enemies",
+                           "encounter_cost":  3,
+                           "name":  "Bruder Zacharias",
+                           "abilities":  [
+                                             "ability.enemy.doctor",
+                                             "ability.enemy.staff"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  20,
+                                              "damage_minimum":  5,
+                                              "damage_maximum":  8,
+                                              "armour":  0,
+                                              "critical_hit_chance":  5,
+                                              "dodge":  4,
+                                              "initiative":  2,
+                                              "precision":  5
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "enemy.theodora_krayenborg",
+                           "ai_policy":  "psychic",
+                           "team":  "enemies",
+                           "encounter_cost":  3,
+                           "name":  "Theodora Krayenborg",
+                           "abilities":  [
+                                             "ability.enemy.throwing_knives",
+                                             "ability.enemy.crystal_ball",
+                                             "ability.enemy.psychic"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  15,
+                                              "damage_minimum":  4,
+                                              "damage_maximum":  6,
+                                              "armour":  0,
+                                              "critical_hit_chance":  5,
+                                              "dodge":  5,
+                                              "initiative":  3,
+                                              "precision":  5
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       },
+                       {
+                           "id":  "enemy.basilius_kartov",
+                           "ai_policy":  "grandmaster",
+                           "team":  "enemies",
+                           "encounter_cost":  6,
+                           "name":  "Basilius Kartov",
+                           "abilities":  [
+                                             "ability.enemy.whip",
+                                             "ability.enemy.gloves",
+                                             "ability.enemy.grandmaster"
+                                         ],
+                           "attributes":  {
+                                              "maximum_health":  20,
+                                              "damage_minimum":  5,
+                                              "damage_maximum":  10,
+                                              "armour":  5,
+                                              "critical_hit_chance":  9,
+                                              "dodge":  5,
+                                              "initiative":  1,
+                                              "precision":  10
+                                          },
+                           "resistances":  {
+                                               "sleep":  0,
+                                               "confusion":  0,
+                                               "debuff":  0,
+                                               "decay":  0
+                                           }
+                       }
+                   ],
+    "abilities":  [
+                      {
+                          "id":  "ability.simon.0",
+                          "data":  {
+                                       "id":  0,
+                                       "name":  "Marshmallowflash",
+                                       "animation":  "marshmallow_flash",
+                                       "fatigue":  -2,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "heal":  5,
+                                                      "mark": 3,
+                                                      "buff":  {
+                                                                   "duration":  3,
+                                                                   "isPositive":  true,
+                                                                   "onSelf":  true,
+                                                                   "armour":  10
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "self",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                                            {
+                          "id":  "ability.simon.0.alternative",
+                          "data":  {
+                                       "id":  0,
+                                       "name":  "Marshmallowflash",
+                                       "animation":  "marshmallow_flash",
+                                       "fatigue":  -1,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "heal":  2,
+                                                      "buff":  {
+                                                                   "duration":  3,
+                                                                   "isPositive":  true,
+                                                                   "onSelf":  true,
+                                                                   "damage":  3,
+                                                                   "initiative": 2
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "self",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.simon.1",
+                          "data":  {
+                                       "id":  1,
+                                       "name":  "Verarschen",
+                                       "animation":  "mess_around",
+                                       "effectAnimation":  "mess_around",
+                                       "fatigue":  1,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "damageFactor":  0.3,
+                                                      "confusion":  {
+                                                                        "probability":  0.6,
+                                                                        "rounds":  3
+                                                                    }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                                            {
+                          "id":  "ability.simon.1.alternative",
+                          "data":  {
+                                       "id":  1,
+                                       "name":  "Verarschen",
+                                       "animation":  "mess_around",
+                                       "effectAnimation":  "mess_around",
+                                       "effect":  {
+                                                      "damageFactor":  0.3,
+                                                      "mark": 2,
+                                                      "rage": 2
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.simon.2",
+                          "data":  {
+                                       "id":  2,
+                                       "name":  "Reparieren",
+                                       "animation":  "repair",
+                                       "effectAnimation":  "repair_friendly",
+                                       "effect":  {
+                                                    "heal":  3
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "own_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                                            {
+                          "id":  "ability.simon.2.alternative",
+                          "data":  {
+                                       "id":  2,
+                                       "name":  "Reparieren",
+                                       "animation":  "repair",
+                                       "effectAnimation":  "repair_hostile",
+                                       "fatigue": 1,
+                                       "fatigue_target": "actor",
+                                       "effect":  {
+                                                    "damageFactor":  0.7
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.simon.3",
+                          "data":  {
+                                       "id":  3,
+                                       "name":  "Alle auf Einen",
+                                       "animation":  "all_on_one",
+                                       "effectAnimation":  "all_on_one",
+                                       "fatigue":  1,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "mark":  2,
+                                                      "buff":  {
+                                                                   "duration":  2,
+                                                                   "isPositive":  true,
+                                                                   "onSelf":  false,
+                                                                   "armour":  20
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "own_team",
+                                                         "scope":  "single",
+                                                         "count":  1,
+                                                         "exclude_actor": true
+                                                     }
+                                   }
+                      },
+                                            {
+                          "id":  "ability.simon.3.alternative",
+                          "data":  {
+                                       "id":  3,
+                                       "name":  "Alle auf Einen",
+                                       "animation":  "all_on_one",
+                                       "effectAnimation":  "all_on_one",
+                                       "fatigue":  1,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "mark":  2,
+                                                      "damageFactor": 0.5
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.ole.0",
+                          "data":  {
+                                       "id":  0,
+                                       "name":  "Gummiarm",
+                                       "animation":  "gummi_arm",
+                                       "effectAnimation":  "gummi_arm",
+                                       "fatigue": 1,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "damageFactor":  0.2
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "count",
+                                                         "count":  2
+                                                     }
+                                   }
+                      },
+                                            {
+                          "id":  "ability.ole.0.alternative",
+                          "data":  {
+                                       "id":  0,
+                                       "name":  "Gummiarm",
+                                       "animation":  "gummi_arm",
+                                       "effectAnimation":  "gummi_arm",
+                                       "fatigue":  1,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "damageFactor":  0.15,
+                                                      "criticalHit": 5
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "count",
+                                                         "count":  2
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.ole.1",
+                          "data":  {
+                                       "id":  1,
+                                       "name":  "Ganzkörpertritt",
+                                       "animation":  "whole_body_kick",
+                                       "effectAnimation":  "whole_body_kick",
+                                       "fatigue":  1,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "damageFactor":  0.2,
+                                                      "decay":  {
+                                                                    "rounds":  4,
+                                                                    "damage":  1
+                                                                }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                                            {
+                          "id":  "ability.ole.1.alternative",
+                          "data":  {
+                                       "id":  1,
+                                       "name":  "Ganzkörpertritt",
+                                       "animation":  "whole_body_kick",
+                                       "effectAnimation":  "whole_body_kick",
+                                       "fatigue":  1,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "damageFactor":  0.4,
+                                                      "decay":  {
+                                                                    "rounds":  2,
+                                                                    "damage":  1
+                                                                }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.ole.2",
+                          "data":  {
+                                       "id":  2,
+                                       "name":  "Ins System hacken",
+                                       "animation":  "hack_into_the_system",
+                                       "effectAnimation":  "hack_into_the_system",
+                                       "effect":  {
+                                                      "buff":  {
+                                                                   "duration":  2,
+                                                                   "isPositive":  false,
+                                                                   "dodge":  -10,
+                                                                   "debuffResistance": -25,
+                                                                   "confusionResistance": -25,
+                                                                   "decayResistance": -25,
+                                                                   "sleepResistance": -25
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                       "scope":  "count",
+                                       "count":  2
+                                                     }
+                                   }
+                      },
+                                            {
+                          "id":  "ability.ole.2.alternative",
+                          "data":  {
+                                       "id":  2,
+                                       "name":  "Ins System hacken",
+                                       "animation":  "hack_into_the_system",
+                                       "effectAnimation":  "hack_into_the_system",
+                                       "effect":  {
+                                                      "buff":  {
+                                                                   "duration":  2,
+                                                                   "isPositive":  true,
+                                                                   "dodge": 10,
+                                                                   "debuffResistance": 15,
+                                                                   "confusionResistance": 15,
+                                                                   "decayResistance": 15,
+                                                                   "sleepResistance": 15
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "own_team",
+                                                         "scope":  "team"
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.ole.3",
+                          "data":  {
+                                       "id":  3,
+                                       "name":  "Poetry Slam",
+                                       "animation":  "poetry_slam",
+                                       "fatigue":  1,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "damageFactor":  0.3,
+                                                      "putToSleepProbability":  0.6
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                                            {
+                          "id":  "ability.ole.3.alternative",
+                          "data":  {
+                                       "id":  3,
+                                       "name":  "Poetry Slam",
+                                       "animation":  "poetry_slam",
+                                       "fatigue":  1,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "putToSleepProbability":  0.3
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                       "scope":  "count",
+                                       "count":  2
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.anna.0",
+                          "data":  {
+                                       "id":  0,
+                                       "name":  "Unbezwingbare Fröhlichkeit",
+                                       "animation":  "indomitable_happiness",
+                                       "effectAnimation":  "indomitable_happiness_friendly",
+                     "effect":  {
+                                    "heal":  1
+                                },
+                                       "targeting":  {
+                                                         "relation":  "own_team",
+                                                         "scope":  "team",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                                            {
+                          "id":  "ability.anna.0.alternative",
+                          "data":  {
+                                       "id":  0,
+                                       "name":  "Unbezwingbare Fröhlichkeit",
+                                       "animation":  "indomitable_happiness",
+                                       "effectAnimation":  "indomitable_happiness_hostile",
+                                       "fatigue":1,
+                                       "fatigue_target": "actor",
+                                       "effect":  [
+                                                      {
+                                                          "confusion" : {
+                                                            "probability": 0.3,
+                                                            "rounds": 2
+                                                          }
+                                                      }
+                                                  ],
+                                       "targeting":  {
+                                                         "relation": "opposing_team",
+                                                         "scope":  "count",
+                                                         "count":  2
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.anna.1",
+                          "data":  {
+                                       "id":  1,
+                                       "name":  "Wortschwall",
+                                       "animation":  "word_gush",
+                                       "effectAnimation":  "word_gush",
+                                       "fatigue":1,
+                                       "fatigue_target":"actor",
+                                       "effect":  {
+                                                      "damageFactor":  0.2,
+                                                      "putToSleepProbability":  0.3,
+                                                      "buff":{
+                                                        "isPositive": true,
+                                                        "duration": 3,
+                                                        "onSelf": true,
+                                                        "healing": 20
+                                                      }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                       "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                                            {
+                          "id":  "ability.anna.1.alternative",
+                          "data":  {
+                                       "id":  1,
+                                       "name":  "Wortschwall",
+                                       "animation":  "word_gush",
+                                       "effectAnimation":  "word_gush",
+                                       "fatigue": 2,
+                                       "fatigue_target":"random_player",
+                                       "effect":  {
+                                                      "damageFactor":  0.7
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single_random",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.anna.2",
+                          "data":  {
+                                       "id":  2,
+                                       "name":  "Nasenflügelschlag",
+                                       "animation":  "side_of_nose_blow",
+                                       "effectAnimation":  "side_of_nose_blow",
+                                       "fatigue":  1,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "decay":  {
+                                                                    "rounds":  3,
+                                                                    "damage":  2
+                                                                }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                    {
+                          "id":  "ability.anna.2.alternative",
+                          "data":  {
+                                       "id":  2,
+                                       "name":  "Nasenflügelschlag",
+                                       "animation":  "side_of_nose_blow",
+                                       "effectAnimation":  "side_of_nose_blow",
+                                       "fatigue":  1,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "decay":  {
+                                                                    "rounds":  3,
+                                                                    "damage":  1
+                                                                },
+                                                      "transfusion": 1
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.anna.3",
+                          "data":  {
+                                       "id":  3,
+                                       "name":  "Todesumarmung",
+                                       "animation":  "death_hug",
+                                       "effectAnimation":  "death_hug",
+                                       "effect":  {
+                                                      "damageFactor":  0.5,
+                                                      "buff": {
+                                                        "duration":2,
+                                                        "damage":-2,
+                                                        "isPositive":false
+                                                      }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                                            {
+                          "id":  "ability.anna.3.alternative",
+                          "data":  {
+                                       "id":  3,
+                                       "name":  "Todesumarmung",
+                                       "animation":  "death_hug",
+                                       "effectAnimation":  "death_hug",
+                                       "fatigue":-1,
+                                       "fatigue_target":"actor",
+                                       "effect":  {
+                                                      "damageFactor":  0.6
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.markus.0",
+                          "data":  {
+                                       "id":  0,
+                                       "name":  "Fist of Revenge",
+                                       "requires_revenge_marker":  true,
+                                       "animation":  "fist_of_revenge",
+                                       "effectAnimation":  "fist_of_revenge",
+                                       "fatigue":  2,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "damageFactor": 1.0
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.markus.0.alternative",
+                          "data":  {
+                                       "id":  0,
+                                       "name":  "Fist of Revenge",
+                                       "requires_revenge_marker": false,
+                                       "animation":  "fist_of_revenge",
+                                       "effectAnimation":  "fist_of_revenge",
+                                       "fatigue":  2,
+                                       "fatigue_target":  "actor",
+                                       "effect":  {
+                                                      "damageFactor": 0.5,
+                                                      "riposteSelf": 2
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.markus.1",
+                          "data":  {
+                                       "id":  1,
+                                       "name":  "Nasenrammbock",
+                                       "animation":  "nose_ram",
+                                       "effectAnimation":  "nose_ram",
+                                       "effect":  {
+                                                      "damageFactor":  0.7,
+                                                      "transferHealthToNext": {
+                                                            "shareOfMissingHealthAsDamage": 0.25,
+                                                            "shareOfMissingHealthAsHeal": 0.25
+                                                      }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.markus.1.alternative",
+                          "data":  {
+                                       "id":  1,
+                                       "name":  "Nasenrammbock",
+                                       "animation":  "nose_ram",
+                                       "effectAnimation":  "nose_ram",
+                                       "effect":  {
+                                                      "damageFactor":  0.3,
+                                                      "lessDamageForEachSuccessiveTarget":0.75
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "count",
+                                                         "count":  3
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.markus.2",
+                          "data":  {
+                                       "id":  2,
+                                       "name":  "Harte Zerstörung",
+                                       "animation":  "hard_destruction",
+                                       "effectAnimation":  "hard_destruction",
+                                       "fatigue": 1,
+                                       "fatigue_target": "actor",
+                                       "effect":  [
+                                                      {
+                                                          "target":  "enemy",
+                                                          "damageFactor":  0.4
+                                                      },
+                                                      {
+                                                          "target":  "friend",
+                                                          "damageFactor":  0.4
+                                                      }
+                                                  ],
+                                       "targeting":  {
+                                                         "relation":  "everyone_else",
+                                                         "scope":  "team",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.markus.2.alternative",
+                          "data":  {
+                                       "id":  2,
+                                       "name":  "Harte Zerstörung",
+                                       "animation":  "hard_destruction",
+                                       "effectAnimation":  "hard_destruction",
+                                       "effect":  [
+                                                      {
+                                                          "target":  "enemy",
+                                                          "damageFactor":  0.2
+                                                      },
+                                                      {
+                                                          "target":  "friend",
+                                                          "buff": {
+                                                            "duration" : 2,
+                                                            "isPositive": false,
+                                                            "precision": -20
+                                                          }
+                                                      }
+                                                  ],
+                                       "targeting":  {
+                                                         "relation":  "everyone_else",
+                                                         "scope":  "team",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.markus.3",
+                          "data":  {
+                                       "id":  3,
+                                       "name":  "Fürchterliches Grinsen",
+                                       "animation":  "horrible_grin",
+                                       "effectAnimation":  "horrible_grin",
+                                       "fatigue": 1,
+                                       "fatigue_target": "actor",
+                                       "effect":  {
+                                                      "panic": 2
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.markus.3.alternative",
+                          "data":  {
+                                       "id":  3,
+                                       "name":  "Fürchterliches Grinsen",
+                                       "animation":  "horrible_grin",
+                                       "effectAnimation":  "horrible_grin",
+                                       "effect":  {
+                                                      "buff":  {
+                                                                   "duration":  2,
+                                                                   "isPositive":  false,
+                                                                   "healing": -15,
+                                                                   "damagePerNegativeStatus": -0.05
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.bang",
+                          "data":  {
+                                       "id":  0,
+                                       "name":  "Bang!",
+                                       "animation":  "bang",
+                                       "effectAnimation":  "bang",
+                                       "effect":  {
+                                                      "damageFactor":  1
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.springfield",
+                          "data":  {
+                                       "id":  1,
+                                       "name":  "Springfield",
+                                       "animation":  "springfield",
+                                       "effectAnimation":  "springfield",
+                                       "effect":  {
+                                                      "damageFactor":  1
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.tomahawk",
+                          "data":  {
+                                       "id":  2,
+                                       "name":  "Tomahawk",
+                                       "animation":  "tomahawk",
+                                       "effectAnimation":  "tomahawk",
+                                       "effect":  {
+                                                      "damageFactor":  1,
+                                                      "decay":  {
+                                                                    "rounds":  3,
+                                                                    "damage":  1
+                                                                }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.shovel_hit",
+                          "data":  {
+                                       "id":  3,
+                                       "name":  "Schaufelschlag",
+                                       "animation":  "shovel_hit",
+                                       "effectAnimation":  "shovel_hit",
+                                       "effect":  {
+                                                      "damageFactor":  1
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.bury_the_dead",
+                          "data":  {
+                                       "id":  4,
+                                       "name":  "Die Toten begraben",
+                                       "animation":  "bury_the_dead",
+                                       "effect":  {
+                                                      "healSelf":  20
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "self",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.gravedigger_gaze",
+                          "data":  {
+                                       "id":  5,
+                                       "name":  "Totengräberblick",
+                                       "animation":  "gravedigger_gaze",
+                                       "fatigue":  2,
+                                       "fatigue_target":  "targets",
+                                       "effect":  {
+                                                      "buff":  {
+                                                                   "duration":  3,
+                                                                   "isPositive":  false,
+                                                                   "damage":  -5
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.indians",
+                          "data":  {
+                                       "id":  6,
+                                       "name":  "Indianer!",
+                                       "animation":  "indians",
+                                       "summon":  {
+                                                      "combatant":  "enemy.indianer",
+                                                      "count":  3,
+                                                      "allowed_slots":  [
+                                                                            4,
+                                                                            5,
+                                                                            6,
+                                                                            7
+                                                                        ]
+                                                  },
+                                       "effect":  {
+
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "self",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.knife",
+                          "data":  {
+                                       "id":  7,
+                                       "name":  "Messer",
+                                       "animation":  "knife",
+                                       "effectAnimation":  "knife",
+                                       "effect":  {
+                                                      "damageFactor":  1,
+                                                      "decay":  {
+                                                                    "rounds":  3,
+                                                                    "damage":  1
+                                                                }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.fanning",
+                          "data":  {
+                                       "id":  8,
+                                       "name":  "Fanning",
+                                       "animation":  "fanning",
+                                       "effectAnimation":  "bang",
+                                       "effect":  {
+                                                      "damageFactor":  0.4
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "count",
+                                                         "count":  2
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.bounty",
+                          "data":  {
+                                       "id":  9,
+                                       "name":  "Kopfgeld",
+                                       "animation":  "bounty",
+                                       "effectAnimation":  "bounty",
+                                       "fatigue":  1,
+                                       "fatigue_target":  "targets",
+                                       "effect":  {
+                                                      "mark":  3,
+                                                      "bounty":  3
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.punch",
+                          "data":  {
+                                       "id":  10,
+                                       "name":  "Hieb",
+                                       "animation":  "punch",
+                                       "effectAnimation":  "punch",
+                                       "effect":  {
+                                                      "damageFactor":  1
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.brawl",
+                          "data":  {
+                                       "id":  11,
+                                       "name":  "Schlägerei",
+                                       "animation":  "brawl",
+                                       "effectAnimation":  "brawl",
+                                       "effect":  {
+                                                      "damageFactor":  0.2,
+                                                      "removeBuffs":  true
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "team",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.beer",
+                          "data":  {
+                                       "id":  12,
+                                       "name":  "Bier",
+                                       "animation":  "beer",
+                                       "effectAnimation":  "empty",
+                                       "effect":  {
+                                                      "heal":  8,
+                                                      "buff":  {
+                                                                   "duration":  3,
+                                                                   "isPositive":  true,
+                                                                   "onSelf":  true,
+                                                                   "armour":  5,
+                                                                   "damage":  2
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "self",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.spend_a_round",
+                          "data":  {
+                                       "id":  13,
+                                       "name":  "Eine Runde ausgeben",
+                                       "animation":  "spend_a_round",
+                                       "effectAnimation":  "spend_a_round",
+                                       "effect":  {
+                                                      "heal":  3,
+                                                      "buff":  {
+                                                                   "duration":  3,
+                                                                   "isPositive":  true,
+                                                                   "armour":  3,
+                                                                   "damage":  2
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "own_team",
+                                                         "scope":  "team",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.jabbering",
+                          "data":  {
+                                       "id":  14,
+                                       "name":  "Geplapper",
+                                       "animation":  "jabbering",
+                                       "effectAnimation":  "jabbering",
+                                       "fatigue":  2,
+                                       "fatigue_target":  "targets",
+                                       "effect":  {
+                                                      "damageFactor":  1,
+                                                      "confusion":  {
+                                                                        "probability":  0.9,
+                                                                        "rounds":  3
+                                                                    }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.shotgun",
+                          "data":  {
+                                       "id":  15,
+                                       "name":  "Shotgun",
+                                       "animation":  "shotgun",
+                                       "effectAnimation":  "shotgun",
+                                       "effect":  {
+                                                      "damageFactor":  1
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "team",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.panic",
+                          "data":  {
+                                       "id":  16,
+                                       "name":  "Panik",
+                                       "animation":  "panic",
+                                       "effectAnimation":  "panic",
+                                       "effect":  {
+                                                      "damageFactor":  0.5,
+                                                      "buff":  {
+                                                                   "isPositive":  false,
+                                                                   "duration":  2,
+                                                                   "precision":  -5,
+                                                                   "criticalHit":  -3
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.rattlesnake",
+                          "data":  {
+                                       "id":  17,
+                                       "name":  "Klapperschlange",
+                                       "animation":  "rattlesnake",
+                                       "effectAnimation":  "rattlesnake",
+                                       "effect":  {
+                                                      "damageFactor":  0.1,
+                                                      "decay":  {
+                                                                    "rounds":  3,
+                                                                    "damage":  3
+                                                                }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.duelpistol",
+                          "data":  {
+                                       "id":  18,
+                                       "name":  "Duellpistole",
+                                       "animation":  "duelpistol",
+                                       "effectAnimation":  "duelpistol",
+                                       "effect":  {
+                                                      "damageFactor":  1
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.thug",
+                          "data":  {
+                                       "id":  19,
+                                       "name":  "Schläger",
+                                       "animation":  "thug",
+                                       "effectAnimation":  "empty",
+                                       "effect":  {
+                                                      "buff":  {
+                                                                   "duration":  3,
+                                                                   "isPositive":  true,
+                                                                   "onSelf":  true,
+                                                                   "damage":  3
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "self",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.distraction",
+                          "data":  {
+                                       "id":  20,
+                                       "name":  "Ablenkung",
+                                       "animation":  "distraction",
+                                       "effectAnimation":  "distraction",
+                                       "effect":  {
+                                                      "damageFactor":  1,
+                                                      "confusion":  {
+                                                                        "probability":  0.7,
+                                                                        "rounds":  2
+                                                                    }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.spy",
+                          "data":  {
+                                       "id":  21,
+                                       "name":  "Spionin",
+                                       "animation":  "spy",
+                                       "effectAnimation":  "empty",
+                                       "effect":  {
+                                                      "buff":  {
+                                                                   "duration":  1,
+                                                                   "isPositive":  true,
+                                                                   "onSelf":  true,
+                                                                   "armour":  40
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "self",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.doctor",
+                          "data":  {
+                                       "id":  22,
+                                       "name":  "Doktor",
+                                       "animation":  "doctor",
+                                       "effectAnimation":  "spend_a_round",
+                                       "effect":  {
+                                                      "heal":  6
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "self",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.staff",
+                          "data":  {
+                                       "id":  23,
+                                       "name":  "Stabschlag",
+                                       "animation":  "staff",
+                                       "effectAnimation":  "gummi_arm",
+                                       "effect":  {
+                                                      "damageFactor":  1
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.miss",
+                          "data":  {
+                                       "id":  24,
+                                       "name":  "Fehlschuss",
+                                       "animation":  "miss",
+                                       "effectAnimation":  "empty",
+                                       "effect":  {
+                                                      "addMissSelf":  1
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "self",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.knock_out",
+                          "data":  {
+                                       "id":  25,
+                                       "name":  "Knock Out",
+                                       "animation":  "knock_out",
+                                       "effectAnimation":  "knock_out",
+                                       "effect":  {
+                                                      "damageFactor":  1,
+                                                      "putToSleepProbability":  0.9
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.deputy",
+                          "data":  {
+                                       "id":  26,
+                                       "name":  "Hilfssherriff",
+                                       "animation":  "deputy",
+                                       "effectAnimation":  "indomitable_happiness_friendly",
+                                       "effect":  {
+                                                      "addMiss":  1,
+                                                      "buff":  {
+                                                                   "duration":  3,
+                                                                   "criticalHit":  5,
+                                                                   "precision":  10
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "own_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.no_pain",
+                          "data":  {
+                                       "id":  27,
+                                       "name":  "Kein Schmerz",
+                                       "animation":  "no_pain",
+                                       "effectAnimation":  "indomitable_happiness_friendly",
+                                       "effect":  {
+                                                      "buff":  {
+                                                                   "duration":  3,
+                                                                   "armour":  10,
+                                                                   "sleepResistance":  20,
+                                                                   "confusionResistance":  20,
+                                                                   "decayResistance":  20,
+                                                                   "debuffResistance":  20
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "own_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.dynamite",
+                          "data":  {
+                                       "id":  28,
+                                       "name":  "Dynamit",
+                                       "animation":  "dynamite",
+                                       "effectAnimation":  "dynamite",
+                                       "effect":  {
+                                                      "dynamite":  true
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.throwing_knives",
+                          "data":  {
+                                       "id":  29,
+                                       "name":  "Wurfmesser",
+                                       "animation":  "throwing_knives",
+                                       "effectAnimation":  "throwing_knives",
+                                       "effect":  {
+                                                      "damageFactor":  1
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.crystal_ball",
+                          "data":  {
+                                       "id":  30,
+                                       "name":  "Kristallkugel",
+                                       "animation":  "crystal_ball",
+                                       "effectAnimation":  "crystal_ball",
+                                       "effect":  {
+                                                      "stealBuffs":  true
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.psychic",
+                          "data":  {
+                                       "id":  31,
+                                       "name":  "Hellseher",
+                                       "animation":  "psychic",
+                                       "effectAnimation":  "psychic",
+                                       "fatigue":  1,
+                                       "fatigue_target":  "all_players",
+                                       "effect":  {
+                                                      "buff":  {
+                                                                   "duration":  3,
+                                                                   "isPositive":  true,
+                                                                   "dodge":  10,
+                                                                   "criticalHit":  3
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "own_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.whip",
+                          "data":  {
+                                       "id":  32,
+                                       "name":  "Peitschenschlag",
+                                       "animation":  "whip",
+                                       "effectAnimation":  "empty",
+                                       "effect":  {
+                                                      "damageFactor":  1
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.gloves",
+                          "data":  {
+                                       "id":  33,
+                                       "name":  "Handschuhe",
+                                       "animation":  "gloves",
+                                       "effectAnimation":  "empty",
+                                       "effect":  {
+                                                      "buff":  {
+                                                                   "duration":  6,
+                                                                   "isPositive":  true,
+                                                                   "armour":  10
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "self",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                      {
+                          "id":  "ability.enemy.grandmaster",
+                          "data":  {
+                                       "id":  34,
+                                       "name":  "Großmeister",
+                                       "animation":  "grandmaster",
+                                       "effectAnimation":  "empty",
+                                       "effect":  {
+                                                      "buff":  {
+                                                                   "duration":  6,
+                                                                   "isPositive":  true,
+                                                                   "criticalHit":  5,
+                                                                   "decayResistance":  10,
+                                                                   "debuffResistance":  10
+                                                               }
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "self",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      }
+                  ],
+    "encounters":  [
+                       {
+                           "id":  "encounter.bang.default",
+                           "background":  "Data/Sprites/Backgrounds/Bang/bang_raum1.png",
+                           "music":  "Data/Music/Bang_battle.ogg",
+                           "combatants":  [
+                                              {
+                                                  "id":  "player.simon",
+                                                  "slot":  0
+                                              },
+                                              {
+                                                  "id":  "player.ole",
+                                                  "slot":  1
+                                              },
+                                              {
+                                                  "id":  "player.anna",
+                                                  "slot":  2
+                                              },
+                                              {
+                                                  "id":  "player.markus",
+                                                  "slot":  3
+                                              },
+                                              {
+                                                  "id":  "enemy.gesetzloser",
+                                                  "slot":  4
+                                              },
+                                              {
+                                                  "id":  "enemy.abtruenniger",
+                                                  "slot":  5
+                                              },
+                                              {
+                                                  "id":  "enemy.indianer",
+                                                  "slot":  6
+                                              },
+                                              {
+                                                  "id":  "enemy.hilfssheriff",
+                                                  "slot":  7
+                                              }
+                                          ]
+                       },
+                       {
+                           "id":  "encounter.kutschfahrt.default",
+                           "background":  "Data/Sprites/Backgrounds/Kutschfahrt/kutschfahrt_raum1.png",
+                           "music":  "Data/Music/Bang_battle.ogg",
+                           "combatants":  [
+                                              {
+                                                  "id":  "player.simon",
+                                                  "slot":  0
+                                              },
+                                              {
+                                                  "id":  "player.ole",
+                                                  "slot":  1
+                                              },
+                                              {
+                                                  "id":  "player.anna",
+                                                  "slot":  2
+                                              },
+                                              {
+                                                  "id":  "player.markus",
+                                                  "slot":  3
+                                              },
+                                              {
+                                                  "id":  "enemy.juan_tirador",
+                                                  "slot":  4
+                                              },
+                                              {
+                                                  "id":  "enemy.marie_saunier",
+                                                  "slot":  5
+                                              },
+                                              {
+                                                  "id":  "enemy.bruder_zacharias",
+                                                  "slot":  6
+                                              },
+                                              {
+                                                  "id":  "enemy.theodora_krayenborg",
+                                                  "slot":  7
+                                              }
+                                          ]
+                       }
+                   ]
+}

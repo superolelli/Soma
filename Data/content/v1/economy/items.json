@@ -1,0 +1,618 @@
+﻿{
+    "schema_version":  1,
+    "content_kind":  "economy_items",
+    "diamond_bonuses": [
+        { "color": [64, 0, 0], "bonuses": { "damageMin": 2, "damageMax": 2 } },
+        { "color": [128, 0, 0], "bonuses": { "damageMin": 8, "damageMax": 8 } },
+        { "color": [255, 0, 0], "bonuses": { "damageMin": 16, "damageMax": 16 } },
+        { "color": [0, 64, 0], "bonuses": { "maxHealth": 5 } },
+        { "color": [0, 128, 0], "bonuses": { "maxHealth": 15 } },
+        { "color": [0, 255, 0], "bonuses": { "maxHealth": 30 } },
+        { "color": [0, 0, 64], "bonuses": { "dodge": 3, "initiative": 1 } },
+        { "color": [0, 0, 128], "bonuses": { "dodge": 9, "initiative": 3 } },
+        { "color": [0, 0, 255], "bonuses": { "dodge": 18, "initiative": 6 } },
+        { "color": [64, 64, 0], "requires_connection_color": [128, 128, 0], "bonuses": { "precision": 1, "criticalHit": 1 } },
+        { "color": [64, 64, 0], "requires_connection_color": [128, 0, 0], "bonuses": { "damageMin": 2, "damageMax": 2, "maxHealth": 5 } },
+        { "color": [128, 128, 0], "bonuses": { "precision": 4, "criticalHit": 4 } },
+        { "color": [255, 255, 0], "bonuses": { "precision": 8, "criticalHit": 8 } },
+        { "color": [64, 0, 64], "bonuses": { "damageMin": 2, "damageMax": 2, "initiative": 1, "dodge": 3 } },
+        { "color": [128, 64, 0], "bonuses": { "damageMin": 2, "damageMax": 2, "initiative": 1, "dodge": 3 } },
+        { "color": [0, 64, 64], "bonuses": { "maxHealth": 5, "initiative": 1, "dodge": 3 } },
+        { "color": [64, 128, 0], "bonuses": { "precision": 1, "criticalHit": 1, "maxHealth": 5 } },
+        { "color": [64, 64, 64], "bonuses": { "precision": 1, "criticalHit": 1, "initiative": 1, "dodge": 3 } }
+    ],
+    "items":  [
+                  {
+                      "id":  "currency.cards",
+                      "name":  "Karten",
+                      "category":  "currency",
+                      "level":  1,
+                      "price":  0,
+                      "icon":  "Data/Sprites/Items/Bang/cards.png",
+                      "campaigns":  [
+                                        "bang",
+                                        "kutschfahrt"
+                                    ],
+                      "currency":  "cards"
+                  },
+                  {
+                      "id":  "currency.dice",
+                      "name":  "Würfel",
+                      "category":  "currency",
+                      "level":  1,
+                      "price":  0,
+                      "icon":  "Data/Sprites/Items/Bang/dice.png",
+                      "campaigns":  [
+                                        "bang",
+                                        "kutschfahrt"
+                                    ],
+                      "currency":  "dice"
+                  },
+                  {
+                      "id":  "item.bang.iron_plate",
+                      "name":  "Eisenplatte",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Bang/iron_plate.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "armour":  10
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.sombrero",
+                      "name":  "Sombrero",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Bang/sombrero.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+
+                                  },
+                      "miss_on_high_damage":  true,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.binocular",
+                      "name":  "Fernglas",
+                      "category":  "equipment",
+                      "level":  1,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Bang/binocular.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "precision":  5
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.bible",
+                      "name":  "Bibel",
+                      "category":  "equipment",
+                      "level":  1,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Bang/bible.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "maxHealth":  5,
+                                      "debuffResistance":  5
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.cowboyhat",
+                      "name":  "Cowboyhut",
+                      "category":  "equipment",
+                      "level":  1,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Bang/cowboyhat.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "dodge":  5
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.lasso",
+                      "name":  "Lasso",
+                      "category":  "equipment",
+                      "level":  1,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Bang/lasso.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "initiative":  2
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.ammo",
+                      "name":  "Patronen",
+                      "category":  "equipment",
+                      "level":  1,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Bang/ammo.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "criticalHit":  2
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.knife",
+                      "name":  "Messer",
+                      "category":  "equipment",
+                      "level":  1,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Bang/knife.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "damageMin":  1,
+                                      "damageMax":  1
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.tomahawk",
+                      "name":  "Tomahawk",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Bang/tomahawk.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "damageMin":  2,
+                                      "damageMax":  2
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.sheriff_star",
+                      "name":  "Sherrifstern",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Bang/sherrif_star.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "initiative":  2,
+                                      "confusionResistance":  10
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.boot",
+                      "name":  "Stiefel",
+                      "category":  "equipment",
+                      "level":  1,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Bang/boot.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "armour":  5
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.horseshoe",
+                      "name":  "Hufeisen",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Bang/horseshoe.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "criticalHit":  5
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.canteen",
+                      "name":  "Feldflasche",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Bang/canteen.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "healing":  20
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.pepperbox",
+                      "name":  "Pepperbox",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Bang/pepperbox.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "damageMin":  3,
+                                      "damageMax":  3,
+                                      "initiative":  -2
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.bang.scope",
+                      "name":  "Zielfernrohr",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Bang/scope.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "bonuses":  {
+                                      "precision":  10
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.kutschfahrt.iron_mask",
+                      "name":  "Stählerne Maske",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/iron_mask.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "bonuses":  {
+                                      "armour":  15
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.kutschfahrt.casting_knives",
+                      "name":  "Wurfmesser",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/casting_knives.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "bonuses":  {
+                                      "damageMin":  1,
+                                      "damageMax":  1,
+                                      "initiative":  1,
+                                      "criticalHit":  2
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.kutschfahrt.duel_pistol",
+                      "name":  "Duellpistole",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/duel_pistol.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "bonuses":  {
+                                      "damageMin":  2,
+                                      "damageMax":  2
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.kutschfahrt.monocle",
+                      "name":  "Monokel",
+                      "category":  "equipment",
+                      "level":  1,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/monocle.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "bonuses":  {
+                                      "sleepResistance":  10
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.kutschfahrt.poison_ring",
+                      "name":  "Giftring",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/poison_ring.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "bonuses":  {
+                                      "criticalHit":  4
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.kutschfahrt.pocket_watch",
+                      "name":  "Taschenuhr",
+                      "category":  "equipment",
+                      "level":  1,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/pocket_watch.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "bonuses":  {
+                                      "confusionResistance":  10
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.kutschfahrt.tome",
+                      "name":  "Foliant",
+                      "category":  "equipment",
+                      "level":  1,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/tome.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "bonuses":  {
+                                      "decayResistance":  10
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.kutschfahrt.top_hat",
+                      "name":  "Zylinder",
+                      "category":  "equipment",
+                      "level":  1,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/top_hat.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "bonuses":  {
+                                      "armour":  5
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.kutschfahrt.crystal_ball",
+                      "name":  "Kristallkugel",
+                      "category":  "equipment",
+                      "level":  1,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/crystal_ball.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "bonuses":  {
+                                      "dodge":  7
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.kutschfahrt.black_pearl",
+                      "name":  "Schwarze Perle",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/black_pearl.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "bonuses":  {
+                                      "maxHealth":  -7,
+                                      "damageMin":  5,
+                                      "damageMax":  5
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.kutschfahrt.gloves",
+                      "name":  "Handschuhe",
+                      "category":  "equipment",
+                      "level":  2,
+                      "price":  80,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/gloves.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "bonuses":  {
+                                      "armour":  5,
+                                      "debuffResistance":  10
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false
+                  },
+                  {
+                      "id":  "item.kutschfahrt.broken_mirror",
+                      "name":  "Zerbrochener Spiegel",
+                      "category":  "equipment",
+                      "level":  1,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/broken_mirror.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "bonuses":  {
+
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  true
+                  },
+                  {
+                      "id":  "item.kutschfahrt.lodge_ring",
+                      "name":  "Wappen der Loge",
+                      "description":  "???",
+                      "category":  "equipment",
+                      "level":  3,
+                      "price":  120,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/lodge_ring.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "bonuses":  {
+
+                                  },
+                      "miss_on_high_damage":  false,
+                      "heal_on_pass":  false,
+                      "battle_effect":  {
+                                            "type":  "lone_victory",
+                                            "other_party_health_threshold":  10,
+                                            "damage":  10
+                                        }
+                  },
+                  {
+                      "id":  "item.bang.beer",
+                      "name":  "Bier",
+                      "category":  "consumable",
+                      "level":  1,
+                      "price":  10,
+                      "icon":  "Data/Sprites/Items/Bang/beer.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "healing":  5,
+                      "duration":  0,
+                      "bonuses":  {
+
+                                  }
+                  },
+                  {
+                      "id":  "item.bang.tequila",
+                      "name":  "Tequila",
+                      "category":  "consumable",
+                      "level":  2,
+                      "price":  25,
+                      "icon":  "Data/Sprites/Items/Bang/tequila.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "healing":  10,
+                      "duration":  0,
+                      "bonuses":  {
+
+                                  }
+                  },
+                  {
+                      "id":  "item.bang.whisky",
+                      "name":  "Whisky",
+                      "category":  "consumable",
+                      "level":  3,
+                      "price":  50,
+                      "icon":  "Data/Sprites/Items/Bang/whisky.png",
+                      "campaigns":  [
+                                        "bang"
+                                    ],
+                      "healing":  20,
+                      "duration":  0,
+                      "bonuses":  {
+
+                                  }
+                  },
+                  {
+                      "id":  "item.kutschfahrt.drink_of_power",
+                      "name":  "Trank der Macht",
+                      "category":  "consumable",
+                      "level":  1,
+                      "price":  15,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/drink_of_power.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "healing":  0,
+                      "duration":  10,
+                      "bonuses":  {
+                                      "criticalHit":  5,
+                                      "precision":  5
+                                  }
+                  },
+                  {
+                      "id":  "item.kutschfahrt.absinth",
+                      "name":  "Absinth",
+                      "category":  "consumable",
+                      "level":  2,
+                      "price":  30,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/absinth.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "healing":  5,
+                      "duration":  10,
+                      "bonuses":  {
+                                      "armour":  5
+                                  }
+                  },
+                  {
+                      "id":  "item.kutschfahrt.flash_powder",
+                      "name":  "Blitzpulver",
+                      "category":  "consumable",
+                      "level":  3,
+                      "price":  40,
+                      "icon":  "Data/Sprites/Items/Kutschfahrt/flash_powder.png",
+                      "campaigns":  [
+                                        "kutschfahrt"
+                                    ],
+                      "healing":  0,
+                      "duration":  10,
+                      "bonuses":  {
+                                      "criticalHit":  4,
+                                      "damageMin":  2,
+                                      "damageMax":  2
+                                  }
+                  }
+              ]
+}

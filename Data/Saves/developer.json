@@ -1,0 +1,957 @@
+{
+  "campaign": {
+    "acquired_skills": [
+      "skill.anna.0.1",
+      "skill.anna.0.2",
+      "skill.anna.0.3",
+      "skill.anna.0.4",
+      "skill.anna.0.5",
+      "skill.anna.0.alternative.1",
+      "skill.anna.0.alternative.2",
+      "skill.anna.0.alternative.3",
+      "skill.anna.0.alternative.4",
+      "skill.anna.0.alternative.5",
+      "skill.anna.1.1",
+      "skill.anna.1.2",
+      "skill.anna.1.3",
+      "skill.anna.1.4",
+      "skill.anna.1.5",
+      "skill.anna.1.alternative.1",
+      "skill.anna.1.alternative.2",
+      "skill.anna.1.alternative.3",
+      "skill.anna.1.alternative.4",
+      "skill.anna.1.alternative.5",
+      "skill.anna.2.1",
+      "skill.anna.2.2",
+      "skill.anna.2.3",
+      "skill.anna.2.4",
+      "skill.anna.2.5",
+      "skill.anna.2.alternative.1",
+      "skill.anna.2.alternative.2",
+      "skill.anna.2.alternative.3",
+      "skill.anna.2.alternative.4",
+      "skill.anna.2.alternative.5",
+      "skill.anna.3.1",
+      "skill.anna.3.2",
+      "skill.anna.3.3",
+      "skill.anna.3.4",
+      "skill.anna.3.5",
+      "skill.anna.3.alternative.1",
+      "skill.anna.3.alternative.2",
+      "skill.anna.3.alternative.3",
+      "skill.anna.3.alternative.4",
+      "skill.anna.3.alternative.5",
+      "skill.markus.0.1",
+      "skill.markus.0.2",
+      "skill.markus.0.3",
+      "skill.markus.0.4",
+      "skill.markus.0.5",
+      "skill.markus.0.alternative.1",
+      "skill.markus.0.alternative.2",
+      "skill.markus.0.alternative.3",
+      "skill.markus.0.alternative.4",
+      "skill.markus.0.alternative.5",
+      "skill.markus.1.1",
+      "skill.markus.1.2",
+      "skill.markus.1.3",
+      "skill.markus.1.4",
+      "skill.markus.1.5",
+      "skill.markus.1.alternative.1",
+      "skill.markus.1.alternative.2",
+      "skill.markus.1.alternative.3",
+      "skill.markus.1.alternative.4",
+      "skill.markus.1.alternative.5",
+      "skill.markus.2.1",
+      "skill.markus.2.2",
+      "skill.markus.2.3",
+      "skill.markus.2.4",
+      "skill.markus.2.5",
+      "skill.markus.2.alternative.1",
+      "skill.markus.2.alternative.2",
+      "skill.markus.2.alternative.3",
+      "skill.markus.2.alternative.4",
+      "skill.markus.2.alternative.5",
+      "skill.markus.3.1",
+      "skill.markus.3.2",
+      "skill.markus.3.3",
+      "skill.markus.3.4",
+      "skill.markus.3.5",
+      "skill.markus.3.alternative.1",
+      "skill.markus.3.alternative.2",
+      "skill.markus.3.alternative.3",
+      "skill.markus.3.alternative.4",
+      "skill.markus.3.alternative.5",
+      "skill.ole.0.1",
+      "skill.ole.0.2",
+      "skill.ole.0.3",
+      "skill.ole.0.4",
+      "skill.ole.0.5",
+      "skill.ole.0.alternative.1",
+      "skill.ole.0.alternative.2",
+      "skill.ole.0.alternative.3",
+      "skill.ole.0.alternative.4",
+      "skill.ole.0.alternative.5",
+      "skill.ole.1.1",
+      "skill.ole.1.2",
+      "skill.ole.1.3",
+      "skill.ole.1.4",
+      "skill.ole.1.5",
+      "skill.ole.1.alternative.1",
+      "skill.ole.1.alternative.2",
+      "skill.ole.1.alternative.3",
+      "skill.ole.1.alternative.4",
+      "skill.ole.1.alternative.5",
+      "skill.ole.2.1",
+      "skill.ole.2.2",
+      "skill.ole.2.3",
+      "skill.ole.2.4",
+      "skill.ole.2.5",
+      "skill.ole.2.alternative.1",
+      "skill.ole.2.alternative.2",
+      "skill.ole.2.alternative.3",
+      "skill.ole.2.alternative.4",
+      "skill.ole.2.alternative.5",
+      "skill.ole.3.1",
+      "skill.ole.3.2",
+      "skill.ole.3.3",
+      "skill.ole.3.4",
+      "skill.ole.3.5",
+      "skill.ole.3.alternative.1",
+      "skill.ole.3.alternative.2",
+      "skill.ole.3.alternative.3",
+      "skill.ole.3.alternative.4",
+      "skill.ole.3.alternative.5",
+      "skill.simon.0.1",
+      "skill.simon.0.2",
+      "skill.simon.0.3",
+      "skill.simon.0.4",
+      "skill.simon.0.5",
+      "skill.simon.0.alternative.1",
+      "skill.simon.0.alternative.2",
+      "skill.simon.0.alternative.3",
+      "skill.simon.0.alternative.4",
+      "skill.simon.0.alternative.5",
+      "skill.simon.1.1",
+      "skill.simon.1.2",
+      "skill.simon.1.3",
+      "skill.simon.1.4",
+      "skill.simon.1.5",
+      "skill.simon.1.alternative.1",
+      "skill.simon.1.alternative.2",
+      "skill.simon.1.alternative.3",
+      "skill.simon.1.alternative.4",
+      "skill.simon.1.alternative.5",
+      "skill.simon.2.1",
+      "skill.simon.2.2",
+      "skill.simon.2.3",
+      "skill.simon.2.4",
+      "skill.simon.2.5",
+      "skill.simon.2.alternative.1",
+      "skill.simon.2.alternative.2",
+      "skill.simon.2.alternative.3",
+      "skill.simon.2.alternative.4",
+      "skill.simon.2.alternative.5",
+      "skill.simon.3.1",
+      "skill.simon.3.2",
+      "skill.simon.3.3",
+      "skill.simon.3.4",
+      "skill.simon.3.5",
+      "skill.simon.3.alternative.1",
+      "skill.simon.3.alternative.2",
+      "skill.simon.3.alternative.3",
+      "skill.simon.3.alternative.4",
+      "skill.simon.3.alternative.5"
+    ],
+    "active_ability_versions": [
+      {
+        "player": "player.simon",
+        "slot": 0,
+        "version": 1
+      },
+      {
+        "player": "player.ole",
+        "slot": 0,
+        "version": 1
+      },
+      {
+        "player": "player.simon",
+        "slot": 1,
+        "version": 1
+      },
+      {
+        "player": "player.ole",
+        "slot": 1,
+        "version": 1
+      },
+      {
+        "player": "player.simon",
+        "slot": 2,
+        "version": 1
+      },
+      {
+        "player": "player.ole",
+        "slot": 2,
+        "version": 1
+      },
+      {
+        "player": "player.simon",
+        "slot": 3,
+        "version": 1
+      },
+      {
+        "player": "player.ole",
+        "slot": 3,
+        "version": 1
+      },
+      {
+        "player": "player.anna",
+        "slot": 0,
+        "version": 1
+      },
+      {
+        "player": "player.anna",
+        "slot": 1,
+        "version": 1
+      },
+      {
+        "player": "player.anna",
+        "slot": 2,
+        "version": 1
+      },
+      {
+        "player": "player.anna",
+        "slot": 3,
+        "version": 1
+      },
+      {
+        "player": "player.markus",
+        "slot": 0,
+        "version": 1
+      },
+      {
+        "player": "player.markus",
+        "slot": 1,
+        "version": 1
+      },
+      {
+        "player": "player.markus",
+        "slot": 2,
+        "version": 1
+      },
+      {
+        "player": "player.markus",
+        "slot": 3,
+        "version": 1
+      }
+    ],
+    "consumables": [
+      {
+        "id": "item.kutschfahrt.absinth",
+        "quantity": 10
+      },
+      {
+        "id": "item.bang.beer",
+        "quantity": 10
+      },
+      {
+        "id": "item.bang.tequila",
+        "quantity": 10
+      },
+      {
+        "id": "item.kutschfahrt.drink_of_power",
+        "quantity": 10
+      },
+      {
+        "id": "item.bang.whisky",
+        "quantity": 10
+      }
+    ],
+    "currencies": {
+      "cards": 10000,
+      "dice": 847
+    },
+    "equipment": [
+      {
+        "item": {
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "id": "item.kutschfahrt.gloves"
+        },
+        "player": "player.simon",
+        "slot": "equipment.east"
+      },
+      {
+        "item": {
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "id": "item.bang.lasso"
+        },
+        "player": "player.simon",
+        "slot": "equipment.south"
+      }
+    ],
+    "inventory": [
+      {
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "id": "item.bang.iron_plate"
+      },
+      {
+        "color": [
+          128,
+          0,
+          0
+        ],
+        "id": "item.bang.sombrero"
+      },
+      {
+        "color": [
+          0,
+          128,
+          0
+        ],
+        "id": "item.bang.binocular"
+      },
+      {
+        "color": [
+          0,
+          0,
+          128
+        ],
+        "id": "item.bang.bible"
+      },
+      {
+        "color": [
+          128,
+          128,
+          0
+        ],
+        "id": "item.bang.cowboyhat"
+      },
+      {
+        "color": [
+          128,
+          0,
+          0
+        ],
+        "id": "item.bang.ammo"
+      },
+      {
+        "color": [
+          0,
+          128,
+          0
+        ],
+        "id": "item.bang.knife"
+      },
+      {
+        "color": [
+          0,
+          0,
+          128
+        ],
+        "id": "item.bang.tomahawk"
+      },
+      {
+        "color": [
+          128,
+          128,
+          0
+        ],
+        "id": "item.bang.sheriff_star"
+      },
+      {
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "id": "item.bang.boot"
+      },
+      {
+        "color": [
+          128,
+          0,
+          0
+        ],
+        "id": "item.bang.horseshoe"
+      },
+      {
+        "color": [
+          0,
+          128,
+          0
+        ],
+        "id": "item.bang.canteen"
+      },
+      {
+        "color": [
+          0,
+          0,
+          128
+        ],
+        "id": "item.bang.pepperbox"
+      },
+      {
+        "color": [
+          128,
+          128,
+          0
+        ],
+        "id": "item.bang.scope"
+      },
+      {
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "id": "item.kutschfahrt.iron_mask"
+      },
+      {
+        "color": [
+          128,
+          0,
+          0
+        ],
+        "id": "item.kutschfahrt.casting_knives"
+      },
+      {
+        "color": [
+          0,
+          128,
+          0
+        ],
+        "id": "item.kutschfahrt.duel_pistol"
+      },
+      {
+        "color": [
+          0,
+          0,
+          128
+        ],
+        "id": "item.kutschfahrt.monocle"
+      },
+      {
+        "color": [
+          128,
+          128,
+          0
+        ],
+        "id": "item.kutschfahrt.poison_ring"
+      },
+      {
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "id": "item.kutschfahrt.pocket_watch"
+      },
+      {
+        "color": [
+          128,
+          0,
+          0
+        ],
+        "id": "item.kutschfahrt.tome"
+      },
+      {
+        "color": [
+          0,
+          128,
+          0
+        ],
+        "id": "item.kutschfahrt.top_hat"
+      },
+      {
+        "color": [
+          0,
+          0,
+          128
+        ],
+        "id": "item.kutschfahrt.crystal_ball"
+      },
+      {
+        "color": [
+          128,
+          128,
+          0
+        ],
+        "id": "item.kutschfahrt.black_pearl"
+      },
+      {
+        "color": [
+          128,
+          0,
+          0
+        ],
+        "id": "item.kutschfahrt.broken_mirror"
+      },
+      {
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "id": "item.kutschfahrt.lodge_ring"
+      },
+      {
+        "color": [
+          128,
+          0,
+          0
+        ],
+        "id": "item.bang.iron_plate"
+      },
+      {
+        "color": [
+          0,
+          128,
+          0
+        ],
+        "id": "item.bang.sombrero"
+      },
+      {
+        "color": [
+          0,
+          0,
+          128
+        ],
+        "id": "item.bang.binocular"
+      },
+      {
+        "color": [
+          128,
+          128,
+          0
+        ],
+        "id": "item.bang.bible"
+      },
+      {
+        "color": [
+          128,
+          0,
+          0
+        ],
+        "id": "item.bang.cowboyhat"
+      },
+      {
+        "color": [
+          0,
+          128,
+          0
+        ],
+        "id": "item.bang.lasso"
+      },
+      {
+        "color": [
+          0,
+          0,
+          128
+        ],
+        "id": "item.bang.ammo"
+      },
+      {
+        "color": [
+          128,
+          128,
+          0
+        ],
+        "id": "item.bang.knife"
+      }
+    ],
+    "rule_fragments": [
+      {
+        "id": "rule.effect.initiative_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.confused",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.buff_received",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.all_debuffed",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.health_lost",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.debuff_received",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.healed_other",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.health_healed",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.dodge_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.combatant_died",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.marked_received",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.decay_received",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.high_damage_dealt",
+        "quantity": 3
+      },
+      {
+        "id": "rule.modifier.precision_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.turn_started",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.fatigue_reached_nine",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.armour_down",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.woke_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.marked_other",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.critical_hit_dealt",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.decay_applied",
+        "quantity": 3
+      },
+      {
+        "id": "rule.modifier.armour_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.random_combatant",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.buffed_other",
+        "quantity": 3
+      },
+      {
+        "id": "rule.modifier.critical_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.high_damage_received",
+        "quantity": 3
+      },
+      {
+        "id": "rule.modifier.damage_received_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.initiative_down",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.debuffed_other",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.killed_other",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.confused_other",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.sleep_applied",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.dynamite",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.marked_three",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.attack_dodged",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.this_combatant",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.random_opponent",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.all_others",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.all_friends",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.all_opponents",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.random_friend",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.all_marked",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.all_confused",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.all_sleeping",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.damage_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.critical_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.all_decaying",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.all_full_health",
+        "quantity": 3
+      },
+      {
+        "id": "rule.modifier.dodge_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.all_buffed",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.bounty_three",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.decay_three",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.heal_one",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.damage_one",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.armour_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.confused_one",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.damage_down",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.dodge_down",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.lose_one_fatigue",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.precision_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.precision_down",
+        "quantity": 3
+      },
+      {
+        "id": "rule.modifier.damage_dealt_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.modifier.damage_dealt_down",
+        "quantity": 3
+      },
+      {
+        "id": "rule.modifier.noface_buff",
+        "quantity": 3
+      },
+      {
+        "id": "rule.modifier.precision_down",
+        "quantity": 3
+      },
+      {
+        "id": "rule.modifier.initiative_up",
+        "quantity": 3
+      },
+      {
+        "id": "rule.modifier.initiative_down",
+        "quantity": 3
+      },
+      {
+        "id": "rule.trigger.decay_damage_received",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.all_below_nine_fatigue",
+        "quantity": 3
+      },
+      {
+        "id": "rule.subject.all_above_eight_fatigue",
+        "quantity": 3
+      },
+      {
+        "id": "rule.effect.rage_two",
+        "quantity": 3
+      }
+    ],
+    "rule_slots_unlocked": 4,
+    "rules": [
+      {
+        "effect": "rule.effect.critical_up",
+        "subject": "rule.subject.all_friends",
+        "trigger": "rule.trigger.healed_other"
+      },
+      {
+        "effect": "rule.effect.damage_one",
+        "subject": "rule.subject.this_combatant",
+        "trigger": "rule.trigger.decay_received"
+      },
+      {
+        "modifier": "rule.modifier.damage_dealt_up",
+        "subject": "rule.subject.all_marked"
+      },
+      {}
+    ],
+    "shop_dice_price": 50,
+    "shop_slots_unlocked": 5,
+    "shop_stock": [
+      {
+        "item": {
+          "color": [
+            0,
+            0,
+            128
+          ],
+          "id": "item.bang.sombrero"
+        }
+      },
+      {
+        "fragment": "rule.effect.damage_one"
+      },
+      {
+        "item": {
+          "color": [
+            0,
+            128,
+            0
+          ],
+          "id": "item.bang.binocular"
+        }
+      },
+      {
+        "fragment": "rule.modifier.critical_up"
+      },
+      {
+        "item": {
+          "color": [
+            0,
+            0,
+            128
+          ],
+          "id": "item.bang.scope"
+        }
+      }
+    ],
+    "unlocked_items": [
+      "item.bang.ammo",
+      "item.bang.beer",
+      "item.bang.bible",
+      "item.bang.binocular",
+      "item.bang.boot",
+      "item.bang.canteen",
+      "item.bang.cowboyhat",
+      "item.bang.horseshoe",
+      "item.bang.iron_plate",
+      "item.bang.knife",
+      "item.bang.lasso",
+      "item.bang.pepperbox",
+      "item.bang.scope",
+      "item.bang.sheriff_star",
+      "item.bang.sombrero",
+      "item.bang.tequila",
+      "item.bang.tomahawk",
+      "item.bang.whisky",
+      "item.kutschfahrt.absinth",
+      "item.kutschfahrt.black_pearl",
+      "item.kutschfahrt.broken_mirror",
+      "item.kutschfahrt.casting_knives",
+      "item.kutschfahrt.crystal_ball",
+      "item.kutschfahrt.drink_of_power",
+      "item.kutschfahrt.duel_pistol",
+      "item.kutschfahrt.flash_powder",
+      "item.kutschfahrt.gloves",
+      "item.kutschfahrt.iron_mask",
+      "item.kutschfahrt.lodge_ring",
+      "item.kutschfahrt.monocle",
+      "item.kutschfahrt.pocket_watch",
+      "item.kutschfahrt.poison_ring",
+      "item.kutschfahrt.tome",
+      "item.kutschfahrt.top_hat"
+    ]
+  },
+  "completed_levels": [],
+  "player_name": "Entwicklung",
+  "schema_version": 4
+}

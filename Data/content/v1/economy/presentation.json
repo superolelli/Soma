@@ -1,0 +1,188 @@
+{
+    "schema_version": 1,
+    "content_kind": "economy_presentation",
+    "reference_size": [1920, 1080],
+    "assets": {
+        "inventory.panel": "Data/Sprites/Panels & Buttons/Inventory/inventory_panel.png",
+        "inventory.items_panel": "Data/Sprites/Panels & Buttons/Inventory/scrollable_item_panel.png",
+        "inventory.equipment_field": "Data/Sprites/Panels & Buttons/Inventory/equipment_field.png",
+        "inventory.equipment_background": "Data/Sprites/Panels & Buttons/Inventory/equipment_connection_background.png",
+        "inventory.diamond": "Data/Sprites/Panels & Buttons/Inventory/diamond.png",
+        "inventory.connection_lower": "Data/Sprites/Panels & Buttons/Inventory/connection_lower.png",
+        "inventory.connection_right": "Data/Sprites/Panels & Buttons/Inventory/connection_right.png",
+        "inventory.connection_upper": "Data/Sprites/Panels & Buttons/Inventory/connection_upper.png",
+        "inventory.connection_left": "Data/Sprites/Panels & Buttons/Inventory/connection_left.png",
+        "inventory.sort_name": "Data/Sprites/Panels & Buttons/sort_names_button.png",
+        "inventory.sort_color": "Data/Sprites/Panels & Buttons/sort_color_button.png",
+        "inventory.item_row": "Data/Sprites/Panels & Buttons/Inventory/item_row_panel.png",
+        "battle.consumables_panel": "Data/Sprites/Panels & Buttons/Inventory/consumables_panel.png",
+        "exploration.consumable_sound": "Data/Sound/drink.wav",
+        "shop.vending_panel": "Data/Sprites/Panels & Buttons/VendingMachinePanel/vending_machine_panel.png",
+        "shop.panel": "Data/Sprites/Panels & Buttons/VendingMachinePanel/shop_panel.png",
+        "shop.selection": "Data/Sprites/Panels & Buttons/VendingMachinePanel/selected_item_frame.png",
+        "shop.price": "Data/Sprites/Panels & Buttons/VendingMachinePanel/price_sign.png",
+        "shop.cards": "Data/Sprites/Panels & Buttons/VendingMachinePanel/cards_symbol.png",
+        "shop.slot_lock": "Data/Sprites/Panels & Buttons/VendingMachinePanel/slot_lock.png",
+        "shop.price_lock": "Data/Sprites/Panels & Buttons/VendingMachinePanel/price_lock.png",
+        "shop.close": "Data/Sprites/Panels & Buttons/Inventory/lootable_panel_close_button.png",
+        "shop.confirmation": "Data/Sprites/Panels & Buttons/confirmation_dialog.png",
+        "shop.sell_multiple": "Data/Sprites/Panels & Buttons/VendingMachinePanel/sell_multiple_dialog.png",
+        "shop.slider": "Data/Sprites/Panels & Buttons/VendingMachinePanel/slider_bar.png",
+        "shop.slider_knob": "Data/Sprites/Panels & Buttons/VendingMachinePanel/slider_knob.png",
+        "skills.panel": "Data/Sprites/Panels & Buttons/Skill_Panel/skill_panel.png",
+        "skills.bridge": "Data/Sprites/Panels & Buttons/Skill_Panel/bridge_piece.png",
+        "skills.placeholders": "Data/Sprites/Panels & Buttons/Skill_Panel/ability_placeholders.png",
+        "skills.ability_active": "Data/Sprites/Panels & Buttons/Skill_Panel/ability_active.png",
+        "skills.ability_inactive": "Data/Sprites/Panels & Buttons/Skill_Panel/ability_inactive.png",
+        "skills.acquired": "Data/Sprites/Panels & Buttons/Skill_Panel/skilled_indicator.png",
+        "skills.selection": "Data/Sprites/Panels & Buttons/Skill_Panel/selected_skill_frame.png",
+        "skills.dice": "Data/Sprites/Panels & Buttons/Skill_Panel/dice.png",
+        "skills.previous": "Data/Sprites/Panels & Buttons/Skill_Panel/button_previous.png",
+        "skills.next": "Data/Sprites/Panels & Buttons/Skill_Panel/button_next.png",
+        "skills.close": "Data/Sprites/Panels & Buttons/Skill_Panel/close_button.png",
+        "skills.connection.0.acquired": "Data/Sprites/Panels & Buttons/Skill_Panel/connection_0_skilled.png",
+        "skills.connection.0.locked": "Data/Sprites/Panels & Buttons/Skill_Panel/connection_0_not_skilled.png",
+        "skills.connection.1.acquired": "Data/Sprites/Panels & Buttons/Skill_Panel/connection_1_skilled.png",
+        "skills.connection.1.locked": "Data/Sprites/Panels & Buttons/Skill_Panel/connection_1_not_skilled.png",
+        "skills.connection.2.acquired": "Data/Sprites/Panels & Buttons/Skill_Panel/connection_2_skilled.png",
+        "skills.connection.2.locked": "Data/Sprites/Panels & Buttons/Skill_Panel/connection_2_not_skilled.png",
+        "skills.buy": "Data/Sprites/Panels & Buttons/Bang/generic_button.png"
+        ,"font.interface": "Data/Fonts/trajan.ttf"
+        ,"font.title": "Data/Fonts/blackwoodCastle.ttf"
+        ,"font.ability": "Data/Fonts/showcard.ttf"
+        ,"font.price": "Data/Fonts/kingArthur.ttf"
+        ,"ability.simon.0": "Data/Sprites/Abilities/Simon/marshmallow_flash/marshmallow_flash.png"
+        ,"ability.simon.1": "Data/Sprites/Abilities/Simon/mess_around/mess_around.png"
+        ,"ability.simon.2": "Data/Sprites/Abilities/Simon/repair/repair.png"
+        ,"ability.simon.3": "Data/Sprites/Abilities/Simon/all_on_one/all_on_one.png"
+        ,"ability.ole.0": "Data/Sprites/Abilities/Ole/gummi_arm/gummi_arm.png"
+        ,"ability.ole.1": "Data/Sprites/Abilities/Ole/whole_body_kick/whole_body_kick.png"
+        ,"ability.ole.2": "Data/Sprites/Abilities/Ole/hack_into_the_system/hack_into_the_system.png"
+        ,"ability.ole.3": "Data/Sprites/Abilities/Ole/poetry_slam/poetry_slam.png"
+        ,"ability.anna.0": "Data/Sprites/Abilities/Anna/indomitable_happiness/indomitable_happiness.png"
+        ,"ability.anna.1": "Data/Sprites/Abilities/Anna/word_gush/word_gush.png"
+        ,"ability.anna.2": "Data/Sprites/Abilities/Anna/side_of_nose_blow/side_of_nose_blow.png"
+        ,"ability.anna.3": "Data/Sprites/Abilities/Anna/deathhug/deathhug.png"
+        ,"ability.markus.0": "Data/Sprites/Abilities/Markus/fist_of_revenge/fist_of_revenge.png"
+        ,"ability.markus.1": "Data/Sprites/Abilities/Markus/nose_ram/nose_ram.png"
+        ,"ability.markus.2": "Data/Sprites/Abilities/Markus/hard_destruction/hard_destruction.png"
+        ,"ability.markus.3": "Data/Sprites/Abilities/Markus/horrible_grin/horrible_grin.png"
+        ,"ability.simon.0.alternative": "Data/Sprites/Abilities/Simon/marshmallow_flash/marshmallow_flash.png"
+        ,"ability.simon.1.alternative": "Data/Sprites/Abilities/Simon/mess_around/mess_around.png"
+        ,"ability.simon.2.alternative": "Data/Sprites/Abilities/Simon/repair/repair.png"
+        ,"ability.simon.3.alternative": "Data/Sprites/Abilities/Simon/all_on_one/all_on_one.png"
+        ,"ability.ole.0.alternative": "Data/Sprites/Abilities/Ole/gummi_arm/gummi_arm.png"
+        ,"ability.ole.1.alternative": "Data/Sprites/Abilities/Ole/whole_body_kick/whole_body_kick.png"
+        ,"ability.ole.2.alternative": "Data/Sprites/Abilities/Ole/hack_into_the_system/hack_into_the_system.png"
+        ,"ability.ole.3.alternative": "Data/Sprites/Abilities/Ole/poetry_slam/poetry_slam.png"
+        ,"ability.anna.0.alternative": "Data/Sprites/Abilities/Anna/indomitable_happiness/indomitable_happiness.png"
+        ,"ability.anna.1.alternative": "Data/Sprites/Abilities/Anna/word_gush/word_gush.png"
+        ,"ability.anna.2.alternative": "Data/Sprites/Abilities/Anna/side_of_nose_blow/side_of_nose_blow.png"
+        ,"ability.anna.3.alternative": "Data/Sprites/Abilities/Anna/deathhug/deathhug.png"
+        ,"ability.markus.0.alternative": "Data/Sprites/Abilities/Markus/fist_of_revenge/fist_of_revenge.png"
+        ,"ability.markus.1.alternative": "Data/Sprites/Abilities/Markus/nose_ram/nose_ram.png"
+        ,"ability.markus.2.alternative": "Data/Sprites/Abilities/Markus/hard_destruction/hard_destruction.png"
+        ,"ability.markus.3.alternative": "Data/Sprites/Abilities/Markus/horrible_grin/horrible_grin.png"
+    },
+    "resource_counter": {
+        "dice_icon": [1690, 5],
+        "dice_text_center": [1760, 24],
+        "cards_icon": [1800, 6],
+        "cards_text_center": [1865, 24],
+        "dice_scale": 0.65,
+        "cards_scale": 0.85,
+        "text_size": 18
+    },
+    "inventory": {
+        "origin": [143, 69],
+        "items_panel": [843, 212],
+        "equipment_panel": [309, 287],
+        "attributes": [65, 330],
+        "previous_button": [15, 66],
+        "next_button": [217, 66],
+        "close_button": [1475, 66],
+        "equipment_fields": [[0, 0], [365, 0], [365, 300], [0, 300]],
+        "equipment_item_inset": [10, 10],
+        "equipment_background": [45, 30],
+        "equipment_diamond": [185, 158],
+        "equipment_connections": [[104, 36], [285, 78], [104, 252], [50, 79]],
+        "items_scrollbar": [600, 12, 35, 566]
+    },
+    "shop": {
+        "vending_origin": [125, 70],
+        "inventory_panel": [75, 60],
+        "consumables_row": [100, 700],
+        "shop_panel": [810, 130],
+        "shop_item_origin": [33, 114],
+        "shop_item_spacing": [116, 0],
+        "consumable_origin": [33, 297],
+        "consumable_spacing": [116, 144],
+        "dice": [671, 114],
+        "dice_price_lock": [685, 255],
+        "buy_button": [1050, 725],
+        "close_button": [1559, 26],
+        "title": [1050, 40],
+        "offer_title": [140, 25],
+        "selection_inset": [-7, -7],
+        "price_sign_offset": [18, 90],
+        "slot_lock_offset": [-10, -9],
+        "slot_unlock_price": [27, 112, 62, 28],
+        "reduced_price_sign_offset": [5, 20],
+        "dice_unlock_price": [10, 75, 61, 29],
+        "action_price": [55, 82],
+        "action_cards": [175, 75],
+        "confirmation_message": [50, 35],
+        "confirmation_message_width": 500,
+        "confirmation_yes_button": [40, 132],
+        "confirmation_no_button": [334, 132],
+        "sell_slider": [50, 100],
+        "sell_confirm_button": [50, 205],
+        "sell_cancel_button": [334, 205],
+        "sell_quantity_bounds": [529, 100, 55, 30],
+        "owned_item_inset": [11, 11],
+        "owned_item_spacing": [116, 116],
+        "item_size": [100, 100],
+        "quantity_offset": [45, 72]
+    },
+    "skills": {
+        "origin": [150, 70],
+        "player_name_bounds": [52, 52, 162, 62],
+        "panel_title_bounds": [570, 62, 880, 125],
+        "ability_hitboxes": [[51, 176, 517, 145], [51, 328, 517, 145], [51, 483, 517, 145], [51, 636, 517, 145]],
+        "ability_name_bounds": [68, 176, 310, 145],
+        "ability_icon_bounds": [378, 176, 180, 145],
+        "ability_bridges": [[525, 176], [525, 328], [525, 483], [525, 636]],
+        "tree_origins": [[643, 190], [1130, 190]],
+        "version_ability_icon": [104, 12],
+        "version_selectors": [[0, 31], [186, 31]],
+        "skill_icons": [[11, 159], [202, 159], [11, 307], [202, 307], [106, 453]],
+        "connection_offsets": [[52, 84], [48, 235], [239, 235], [52, 381]],
+        "connection_types": [0, 1, 1, 2],
+        "acquired_inset": [-9, -9],
+        "selection_inset": [-36, -37],
+        "dice": [1240, 795],
+        "buy_button": [967, 786],
+        "previous_button": [15, 66],
+        "next_button": [217, 66],
+        "close_button": [1475, 66],
+        "selected_skill_title_bounds": [390, 787, 555, 68],
+        "dice_cost_offset": [65, 20]
+    },
+    "consumable_drawer": {
+        "open_position": [1200, 600],
+        "closed_x": 1920,
+        "toggle_size": [130, 42],
+        "toggle_inset": [-130, -10],
+        "row_inset": [49, 44],
+        "first_item_inset": [10, 10],
+        "item_spacing": 116
+    },
+    "exploration_consumables": {
+        "position": [1200, 855],
+        "row_inset": [49, 44],
+        "first_item_inset": [10, 10],
+        "quantity_offset": [70, 68],
+        "item_spacing": 116,
+        "item_size": 100
+    }
+}

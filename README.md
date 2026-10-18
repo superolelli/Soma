@@ -1,54 +1,78 @@
 # Soma
 
-Soma is a 2D game and a small SFML-based game framework. The project now builds with CMake and targets SFML 3.
+Soma is a German-language 2D party RPG built with modern C++20, SFML 3, SpriterPlusPlus, and sfeMovie. Game definitions and presentation layout are loaded from JSON; simulation, application state, persistence, and SFML presentation are separate modules.
 
-## Building on Windows
+A concise overview of gameplay and player-facing differences from the original version is available in the [changelog](CHANGELOG.md).
 
-The repository currently includes prebuilt x64 dependencies under `Dependencies`, so Visual Studio 2022 and CMake 3.24 or newer are sufficient for the bundled build.
+The supported platform is Windows x64 with Visual Studio 2022/MSVC.
+
+## Build
+
+Run these commands from the repository root:
 
 ```powershell
 cmake --preset windows-vs2022
-cmake --build --preset windows-debug
+cmake --build --preset windows-debug --parallel
+ctest --test-dir build -C Debug --output-on-failure
+cmake --build build --config Debug --target validate_content
 ```
 
-The executable, runtime libraries, and copied `Data` directory are written to `build/bin`. Run the game with `build/bin/Soma.exe` so its relative asset paths resolve correctly.
+For an optimized build:
 
-The generated Visual Studio target sets its debugger working directory to `build/bin`, so launching `Soma` from the IDE resolves the same assets and DLLs as a direct launch.
+```powershell
+cmake --build --preset windows-release --parallel
+```
 
-sfeMovie is built from its bundled source and requires FFmpeg development files as well as its runtime DLLs. CMake looks for an FFmpeg prefix in `Dependencies/ffmpeg` and then `C:/ffmpeg`; set `FFMPEG_ROOT` when it is elsewhere. Runtime DLLs are copied from `Dependencies/ffmpeg/bin`, `C:/ffmpeg/bin`, or `SOMA_FFMPEG_RUNTIME_DIR`.
+The executables are written to `build/bin/Debug` and `build/bin/Release`. Run Soma from the repository root so development tools and relative asset paths are easy to understand:
 
-The build applies a local compatibility patch for AAC streams whose FFmpeg channel layout is unspecified. The generated source lives in the build tree; the ignored dependency checkout is not modified by a clean build.
+```powershell
+.\build\bin\Debug\Soma.exe
+```
 
-Set `SOMA_USE_BUNDLED_DEPENDENCIES=OFF` to use installed packages instead. CMake then expects discoverable SFML 3, GLEW, OpenGL, and sfeMovie installations. Because sfeMovie does not install a CMake package configuration, its prefix can be supplied as `SFEMOVIE_ROOT`.
+The application also searches upward from the executable for `Data/content/v1`, so it can locate the repository when started from Visual Studio or directly from the build directory.
+
+## Development launchers
+
+Soma normally opens the save-slot menu. Development flags can directly open a battle, level, or economy panel. The complete reference is in [Command-line options](docs/COMMAND_LINE.md).
+
+Common examples:
+
+```powershell
+.\build\bin\Debug\Soma.exe --savegame .\Data\Saves\developer.json
+.\build\bin\Debug\Soma.exe --explore level.bang.1 --seed 1234
+.\build\bin\Debug\Soma.exe --enemies enemy.greg enemy.apache_kid --auto --exit-on-finish
+.\build\bin\Debug\Soma.exe --skills
+.\build\bin\Debug\Soma.exe --inventory
+.\build\bin\Debug\Soma.exe --shop
+.\build\bin\Debug\Soma.exe --rules
+```
+
+## Content
+
+Runtime content lives in `Data/content/v1`. See [Content authoring](docs/CONTENT_AUTHORING.md) for the file map and workflows for adding or changing items, enemies, abilities, skills, encounters, levels, lootables, rule fragments, assets, and presentation layout.
+
+After every content change, run:
+
+```powershell
+cmake --build build --config Debug --target validate_content
+```
 
 ## Repository structure
 
-- `src/engine`: first-party windowing, rendering, GUI, timing, and game-state framework code.
-- `src/game`: Soma-specific gameplay, UI, state, and resource-management code.
-- `third_party/SpriterPlusPlus`: vendored SpriterPlusPlus sources and its XML/JSON adapters.
-- `third_party/json.hpp`: legacy standalone nlohmann/json header retained from the original project.
-- `Dependencies`: binary development packages for SFML 3.1, GLEW, and the `jowie94/sfeMovie` fork.
-- `Data`: runtime fonts, music, sounds, video, shaders, textures, and game definitions.
-- `cmake`: package discovery modules for GLEW and sfeMovie.
+- `src/gameplay`: shared IDs, events, item/combat value types, clocks, and random interfaces.
+- `src/content`: typed JSON catalogs and validation.
+- `src/simulation`: battle rules, enemy decisions, level generation, rules, loot, and rewards; no SFML dependency.
+- `src/game`: campaign state and application services for economy, equipment, skills, progression, and rules.
+- `src/persistence`: save serialization, validation, and save slots.
+- `src/presentation`: renderer-neutral descriptions plus the SFML application and screens.
+- `src/thirdparty`: the retained SpriterPlusPlus adapter sources.
+- `Data`: JSON content and runtime fonts, music, sounds, videos, shaders, and sprites.
+- `Dependencies`: bundled SFML, FFmpeg, and sfeMovie dependencies.
+- `tools/content_validator`: standalone validation for all shipped JSON catalogs.
+- `tests`: permanent simulation, content, economy, presentation, rules, world, and persistence regression tests.
 
-CMake exposes separate `soma_engine`, `spriterplusplus`, and `Soma` targets. This keeps application, engine, and vendored compilation boundaries visible in IDEs and build diagnostics.
+## Dependencies
 
-## Migration notes
+The default CMake preset uses the bundled SFML package and sfeMovie source. sfeMovie requires FFmpeg development files and runtime DLLs. CMake checks `Dependencies/ffmpeg` and then `C:/ffmpeg`; use `FFMPEG_ROOT` and `SOMA_FFMPEG_RUNTIME_DIR` when FFmpeg is installed elsewhere.
 
-The code has been updated for SFML 3's event variants, scoped enums, vector-valued coordinate APIs, angle type, `Rect` layout, resource constructors, renamed functions, and CMake targets. The old nine-patch quad geometry is rendered as triangle fans because SFML 3 removed the quad primitive. Obsolete source files that were not part of the original Visual Studio target remain in `src/game`, but are explicitly excluded from the CMake target.
-
-## Open issues
-
-- Replace `SfmlCompat` placeholder resources by passing real fonts, textures, and sound buffers into constructors. It is a migration bridge for SFML 2 classes that relied on removed default constructors.
-- Remove global singleton resource managers and clarify resource ownership and initialization order.
-- Replace owning raw pointers and `SAFE_DELETE` with `std::unique_ptr` or value semantics.
-- Split the large game target into gameplay, UI, resources, and state libraries; add unit tests for non-rendering logic.
-- Decide whether to repair or delete the obsolete `PlayerState`, `ItemRowPanel*`, and `ScrollableItemPanel*` variants excluded by CMake.
-- Initialize GLEW once after context creation and report `glewInit` failures instead of initializing it in every `EquipmentConnections` object.
-- Add explicit failure handling and logging for asset, shader, font, sound, music, video, XML, and Spriter file loading.
-- Replace hard-coded `Data/...` paths with a configurable asset root and add install/package rules.
-- Audit numeric narrowing warnings in layout and animation code, and use fixed-width types consistently.
-- Fix mojibake already present in several German strings and normalize source/data encoding to UTF-8.
-- Vendor or reproducibly acquire the exact FFmpeg runtime used by the prebuilt sfeMovie binary; CMake currently copies it from a configured local installation.
-- Remove duplicate vendored JSON/XML implementations where possible and record exact third-party versions and licenses.
-- Add continuous integration builds for Debug and Release on Windows, plus supported non-Windows platforms.
+Set `SOMA_USE_BUNDLED_DEPENDENCIES=OFF` to use an installed SFML package. The project intentionally supports only Windows and MSVC.

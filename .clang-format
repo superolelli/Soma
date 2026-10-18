@@ -1,0 +1,29 @@
+BasedOnStyle: Microsoft
+Language: Cpp
+Standard: c++20
+ColumnLimit: 150
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty
+AllowShortLoopsOnASingleLine: false
+
+BinPackArguments: false
+BinPackParameters: false
+BreakTemplateDeclarations: Yes
+BreakConstructorInitializers: BeforeComma
+IncludeBlocks: Regroup
+InsertBraces: true
+NamespaceIndentation: All
+PackConstructorInitializers: Never
+PointerAlignment: Left
+ReferenceAlignment: Left
+SortIncludes: CaseSensitive
+SpaceBeforeParens: ControlStatements
+SeparateDefinitionBlocks: Always
