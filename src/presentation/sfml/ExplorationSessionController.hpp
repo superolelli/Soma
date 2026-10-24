@@ -17,6 +17,7 @@
 #include "presentation/sfml/ExplorationSpeechBubbles.hpp"
 #include "presentation/sfml/LevelResultDialog.hpp"
 #include "presentation/sfml/LootDialog.hpp"
+#include "presentation/sfml/ParticleSystem.hpp"
 #include "presentation/sfml/PauseMenu.hpp"
 #include "presentation/sfml/SfeMovieVideoPlayer.hpp"
 #include "presentation/sfml/SpriterAnimationPlayer.hpp"
@@ -130,6 +131,7 @@ namespace soma::presentation::detail
         gameplay::SeededRandom random_;
         gameplay::SeededRandom speechRandom_;
         simulation::LevelRun levelRun_;
+        ParticleSystem particles_;
         ExplorationMusicPlayer music_;
         SfeMovieVideoPlayer videoPlayer_;
         const content::WorldContent::Presentation& layout_;

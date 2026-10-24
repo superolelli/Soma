@@ -145,6 +145,7 @@ namespace soma::content
                                                        checkedPath(room.at("skills_button")),
                                                        checkedPath(room.at("shop_button")),
                                                        checkedPath(room.at("rules_button"))};
+            result.content.mainRoom.statusBarBackground = checkedPath(room.at("status_bar_background"));
             result.content.mainRoom.diceIcon = checkedPath(room.at("dice_icon"));
             result.content.mainRoom.cardsIcon = checkedPath(room.at("cards_icon"));
             result.content.mainRoom.resourceFont = checkedPath(room.at("resource_font"));
@@ -160,6 +161,7 @@ namespace soma::content
             {
                 result.content.mainRoom.toolbarPositions.at(index) = point(room.at("toolbar_positions").at(index));
             }
+            result.content.mainRoom.statusBarBackgroundPosition = point(room.at("status_bar_background_position"));
             result.content.mainRoom.diceIconPosition = point(room.at("dice_icon_position"));
             result.content.mainRoom.diceTextCenter = point(room.at("dice_text_center"));
             result.content.mainRoom.cardsIconPosition = point(room.at("cards_icon_position"));

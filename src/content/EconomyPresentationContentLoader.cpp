@@ -24,7 +24,9 @@ namespace soma::content::detail
         auto& presentation = content.presentation;
         presentation.referenceSize = readPoint(document.at("reference_size"));
         const auto& resources = document.at("resource_counter");
-        presentation.resourceCounter = {readPoint(resources.at("dice_icon")),
+        presentation.resourceCounter = {gameplay::AssetId{resources.at("background").get<std::string>()},
+                                        readPoint(resources.at("background_position")),
+                                        readPoint(resources.at("dice_icon")),
                                         readPoint(resources.at("dice_text_center")),
                                         readPoint(resources.at("cards_icon")),
                                         readPoint(resources.at("cards_text_center")),

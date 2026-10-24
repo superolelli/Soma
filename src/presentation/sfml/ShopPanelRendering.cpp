@@ -361,11 +361,12 @@ namespace soma::presentation
     void ShopPanel::drawItem(const gameplay::ItemInstance& item, sf::Vector2f position, bool dimmed) const
     {
         const auto itemColor = gameplay::normalizedItemColor(item.color);
-        sf::RectangleShape color{{97.0F, 97.0F}};
-        color.setPosition(position + sf::Vector2f{2.0F, 2.0F});
+        const auto& texture = textures_.at(content_.items.at(item.definition).icon);
+        sf::RectangleShape color{sf::Vector2f{texture.getSize()}};
+        color.setPosition(position);
         color.setFillColor({itemColor.red, itemColor.green, itemColor.blue});
         window_.draw(color);
-        sf::Sprite sprite{textures_.at(content_.items.at(item.definition).icon)};
+        sf::Sprite sprite{texture};
         sprite.setPosition(position);
         if (dimmed)
         {

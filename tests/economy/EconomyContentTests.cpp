@@ -43,8 +43,9 @@ int main(int argc, char** argv)
     check(std::get<soma::gameplay::EquipmentItem>(lodgeRing.properties).battleEffect.has_value());
     check(result.content.skills.size() == 160);
     check(result.content.abilitySets.size() == 16);
-    check(result.content.assets.size() == result.content.items.size() + result.content.skills.size() + 80);
+    check(result.content.assets.size() == result.content.items.size() + result.content.skills.size() + 81);
     check(result.content.assets.contains(soma::gameplay::AssetId{"font.price"}));
+    check(result.content.presentation.resourceCounter.background == soma::gameplay::AssetId{"status_bar.background"});
     check(result.content.presentation.referenceSize == soma::content::Point{1920, 1080});
     check(result.content.presentation.resourceCounter.textSize == 18);
     check(result.content.presentation.inventory.origin == soma::content::Point{143, 69});

@@ -93,6 +93,7 @@ namespace soma::content
             PositionedAsset vendingMachine;
             std::array<Player, 4> players;
             std::array<std::filesystem::path, 4> toolbarButtons;
+            std::filesystem::path statusBarBackground;
             std::filesystem::path diceIcon;
             std::filesystem::path cardsIcon;
             std::filesystem::path resourceFont;
@@ -105,6 +106,7 @@ namespace soma::content
             int edgeScrollSpeed{};
             int initialViewLeft{};
             std::array<Point, 4> toolbarPositions;
+            Point statusBarBackgroundPosition;
             Point diceIconPosition;
             Point diceTextCenter;
             Point cardsIconPosition;

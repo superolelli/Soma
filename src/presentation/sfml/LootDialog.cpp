@@ -163,8 +163,8 @@ namespace soma::presentation
             const auto& grant = *items_.at(index);
             const auto& definition = economy_.items.at(grant.item.definition);
             const auto bounds = itemBounds(index);
-            sf::RectangleShape color{bounds.size - sf::Vector2f{3.0F, 3.0F}};
-            color.setPosition(bounds.position + sf::Vector2f{2.0F, 2.0F});
+            sf::RectangleShape color{bounds.size};
+            color.setPosition(bounds.position);
             const auto itemColor = gameplay::normalizedItemColor(grant.item.color);
             color.setFillColor({itemColor.red, itemColor.green, itemColor.blue});
             window.draw(color);

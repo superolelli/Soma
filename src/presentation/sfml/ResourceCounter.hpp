@@ -19,6 +19,7 @@ namespace soma::presentation
 
         const content::EconomyPresentation::ResourceCounterLayout& layout_;
         const game::CampaignState& state_;
+        sf::Texture background_;
         sf::Texture dice_;
         sf::Texture cards_;
         sf::Font font_;

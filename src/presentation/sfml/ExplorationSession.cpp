@@ -90,6 +90,8 @@ namespace soma::presentation::detail
         , levelRun_(savedLevel      ? savedLevel->run
                     : authoredLevel ? std::move(*authoredLevel)
                                     : simulation::LevelGenerator{world, random_}.generate(levelId_))
+        , particles_(resolveParticleEmitters(world.campaignPresentation.at(world.levels.at(levelId_).campaign).particles, world.assets),
+                     randomSeed + 2U)
         , music_(campaignMusicTracks(world, world.levels.at(levelId_)),
                  random_,
                  static_cast<float>(world.campaignPresentation.at(world.levels.at(levelId_).campaign).musicVolume),

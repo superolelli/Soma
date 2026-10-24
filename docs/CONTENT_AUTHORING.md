@@ -176,6 +176,32 @@ Every integer in the budget range must be achievable with the eligible encounter
 
 Boss video/music presentation is attached through the corresponding battle encounter and campaign assets. Add the video file under `Data/Videos` and reference it using the same pattern as existing bosses.
 
+### Ambient particles
+
+Campaign-specific ambient particle emitters are configured in `world/content.json` under `campaign_presentation.<campaign>.particles`. The same emitters are used during exploration and battles in that campaign. Particle images are transparent sprite atlases registered in the world asset list.
+
+```json
+{
+  "texture": "particle.dust",
+  "layer": "behind_characters",
+  "atlas": [2, 2],
+  "maximum_particles": 34,
+  "emission_rate": 3.0,
+  "lifetime_seconds": [18.0, 24.0],
+  "spawn_area": [0, 80, 1920, 760],
+  "velocity_x": [-8.0, 8.0],
+  "velocity_y": [-5.0, 5.0],
+  "acceleration": [0.0, 0.0],
+  "scale": [0.20, 0.27],
+  "angular_velocity": [-10.0, 10.0],
+  "oscillation_amplitude": 12.0,
+  "oscillation_frequency": 0.65,
+  "opacity": 145
+}
+```
+
+`layer` is either `behind_characters` or `foreground`. Coordinates use the 1920x1080 reference viewport and the spawn area follows the exploration camera. Ranges are inclusive minimum/maximum values; velocities and acceleration are pixels per second. Give both signs to a velocity range and use zero acceleration for particles that should drift in place instead of rising or falling. Atlas cells must be uniformly arranged and contain transparent padding.
+
 ## Loot tables and lootables
 
 Loot tables in `world/content.json` contain weighted/repeated item and currency choices. A lootable references one table plus asset IDs for its two-state sprite and opening sound. Its sprite contains the full and looted states side by side; `hitbox` and `position` are exploration-space values.

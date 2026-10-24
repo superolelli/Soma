@@ -1,8 +1,8 @@
 #include "content/WorldContentLoader.hpp"
 
+#include <algorithm>
 #include <fstream>
 #include <json.hpp>
-#include <algorithm>
 #include <stdexcept>
 
 namespace soma::content
@@ -37,6 +37,28 @@ namespace soma::content
                 throw std::runtime_error("Expected a four-component rectangle");
             }
             return {value.at(0).get<int>(), value.at(1).get<int>(), value.at(2).get<int>(), value.at(3).get<int>()};
+        }
+
+        ParticleRange particleRange(const json& value)
+        {
+            if (!value.is_array() || value.size() != 2)
+            {
+                throw std::runtime_error("Expected a two-component particle range");
+            }
+            return {value.at(0).get<double>(), value.at(1).get<double>()};
+        }
+
+        ParticleLayer particleLayer(const std::string& value)
+        {
+            if (value == "behind_characters")
+            {
+                return ParticleLayer::behindCharacters;
+            }
+            if (value == "foreground")
+            {
+                return ParticleLayer::foreground;
+            }
+            throw std::runtime_error("Unknown particle layer: " + value);
         }
 
         template <typename Id>
@@ -85,7 +107,9 @@ namespace soma::content
                         });
                 }
             }
-            return std::ranges::any_of(reachable, [budget](const auto& totals) { return totals.at(static_cast<std::size_t>(budget)); });
+            return std::ranges::any_of(reachable, [budget](const auto& totals) {
+                return totals.at(static_cast<std::size_t>(budget));
+            });
         }
 
         void validateReferences(const WorldContent& world,
@@ -127,8 +151,8 @@ namespace soma::content
             for (const auto& [id, table] : world.lootTables)
             {
                 static_cast<void>(id);
-                if (table.entries.empty() || table.minimumRolls < 0 || table.maximumRolls < table.minimumRolls ||
-                    table.additionalRollChance < 0.0 || table.additionalRollChance > 1.0)
+                if (table.entries.empty() || table.minimumRolls < 0 || table.maximumRolls < table.minimumRolls || table.additionalRollChance < 0.0 ||
+                    table.additionalRollChance > 1.0)
                 {
                     throw std::runtime_error("Invalid loot table roll configuration");
                 }
@@ -156,9 +180,9 @@ namespace soma::content
             {
                 static_cast<void>(campaign);
                 if (presentation.secondLayers.empty() || presentation.thirdLayers.empty() || presentation.musicTracks.empty() ||
-                    presentation.secondLayerDivisor <= 0 || presentation.thirdLayerDivisor <= 0 ||
-                    presentation.fourthLayerDivisor <= 0 || presentation.musicVolume < 0.0 || presentation.battleMusicVolume < 0.0 ||
-                    presentation.battleCrossfadeSeconds <= 0.0 || !world.assets.contains(presentation.fourthLayer))
+                    presentation.secondLayerDivisor <= 0 || presentation.thirdLayerDivisor <= 0 || presentation.fourthLayerDivisor <= 0 ||
+                    presentation.musicVolume < 0.0 || presentation.battleMusicVolume < 0.0 || presentation.battleCrossfadeSeconds <= 0.0 ||
+                    !world.assets.contains(presentation.fourthLayer))
                 {
                     throw std::runtime_error("Invalid campaign parallax presentation");
                 }
@@ -183,6 +207,21 @@ namespace soma::content
                         throw std::runtime_error("Campaign presentation references a missing music asset");
                     }
                 }
+                for (const auto& emitter : presentation.particles)
+                {
+                    const auto validRange = [](const ParticleRange& range) {
+                        return range.minimum <= range.maximum;
+                    };
+                    if (!world.assets.contains(emitter.texture) || emitter.atlasColumns <= 0 || emitter.atlasRows <= 0 ||
+                        emitter.maximumParticles <= 0 || emitter.emissionRate < 0.0 || emitter.lifetimeSeconds.minimum <= 0.0 ||
+                        !validRange(emitter.lifetimeSeconds) || !validRange(emitter.velocityX) || !validRange(emitter.velocityY) ||
+                        emitter.scale.minimum <= 0.0 || !validRange(emitter.scale) || !validRange(emitter.angularVelocity) ||
+                        emitter.oscillationFrequency < 0.0 || emitter.opacity < 0 || emitter.opacity > 255 || emitter.spawnArea.width <= 0 ||
+                        emitter.spawnArea.height <= 0)
+                    {
+                        throw std::runtime_error("Invalid campaign particle emitter");
+                    }
+                }
             }
             for (const auto& [id, level] : world.levels)
             {
@@ -192,8 +231,7 @@ namespace soma::content
                     throw std::runtime_error("Level references missing campaign presentation");
                 }
                 if (level.roomCount < 2 || level.roomBackgrounds.empty() || level.minimumEncounterBudget <= 0 ||
-                    level.maximumEncounterBudget < level.minimumEncounterBudget || level.lootableProbability < 0.0 ||
-                    level.lootableProbability > 1.0)
+                    level.maximumEncounterBudget < level.minimumEncounterBudget || level.lootableProbability < 0.0 || level.lootableProbability > 1.0)
                 {
                     throw std::runtime_error("Invalid level generation parameters");
                 }
@@ -230,8 +268,8 @@ namespace soma::content
             }
             const auto& speech = world.presentation.speechBubbles;
             if (!world.assets.contains(speech.texture) || speech.lines.empty() || speech.checkIntervalSeconds <= 0.0 ||
-                speech.appearanceChance < 0.0 || speech.appearanceChance > 1.0 || speech.durationSeconds <= 0.0 ||
-                speech.maximumTextWidth <= 0 || speech.characterSize <= 0)
+                speech.appearanceChance < 0.0 || speech.appearanceChance > 1.0 || speech.durationSeconds <= 0.0 || speech.maximumTextWidth <= 0 ||
+                speech.characterSize <= 0)
             {
                 throw std::runtime_error("Invalid speech-bubble presentation");
             }
@@ -248,8 +286,7 @@ namespace soma::content
                 party.idleAnimationSpeed <= 0.0 || party.walkAnimationSpeed <= 0.0 || status.verticalOffset < 0 || status.statusGap < 0 ||
                 !world.assets.contains(status.healthBar) || !world.assets.contains(status.healthBarFrame) ||
                 !world.assets.contains(status.fatigueBar) || !world.assets.contains(status.fatigueBarFrame) ||
-                !world.assets.contains(status.fatigueTired) || !world.assets.contains(status.fatigueStupid) ||
-                !world.assets.contains(status.buff))
+                !world.assets.contains(status.fatigueTired) || !world.assets.contains(status.fatigueStupid) || !world.assets.contains(status.buff))
             {
                 throw std::runtime_error("Invalid exploration party presentation");
             }
@@ -262,8 +299,8 @@ namespace soma::content
     }
 
     WorldContentLoadResult WorldContentLoader::load(const std::filesystem::path& contentRoot,
-                                                     const BattleContent& battle,
-                                                     const EconomyContent& economy) const
+                                                    const BattleContent& battle,
+                                                    const EconomyContent& economy) const
     {
         WorldContentLoadResult result;
         const auto path = contentRoot / "world" / "content.json";
@@ -276,8 +313,7 @@ namespace soma::content
             }
             for (const auto& value : document.at("assets"))
             {
-                result.content.assets.emplace(gameplay::AssetId{value.at("id").get<std::string>()},
-                                              value.at("path").get<std::string>());
+                result.content.assets.emplace(gameplay::AssetId{value.at("id").get<std::string>()}, value.at("path").get<std::string>());
             }
             for (const auto& value : document.at("encounters"))
             {
@@ -334,6 +370,28 @@ namespace soma::content
                 definition.musicVolume = value.at("music_volume").get<double>();
                 definition.battleMusicVolume = value.at("battle_music_volume").get<double>();
                 definition.battleCrossfadeSeconds = value.at("battle_crossfade_seconds").get<double>();
+                for (const auto& particle : value.value("particles", json::array()))
+                {
+                    const auto acceleration = particleRange(particle.at("acceleration"));
+                    const auto atlas = point(particle.at("atlas"));
+                    definition.particles.push_back({gameplay::AssetId{particle.at("texture").get<std::string>()},
+                                                    particleLayer(particle.value("layer", "behind_characters")),
+                                                    atlas.x,
+                                                    atlas.y,
+                                                    particle.at("maximum_particles").get<int>(),
+                                                    particle.at("emission_rate").get<double>(),
+                                                    particleRange(particle.at("lifetime_seconds")),
+                                                    rectangle(particle.at("spawn_area")),
+                                                    particleRange(particle.at("velocity_x")),
+                                                    particleRange(particle.at("velocity_y")),
+                                                    acceleration.minimum,
+                                                    acceleration.maximum,
+                                                    particleRange(particle.at("scale")),
+                                                    particleRange(particle.at("angular_velocity")),
+                                                    particle.value("oscillation_amplitude", 0.0),
+                                                    particle.value("oscillation_frequency", 1.0),
+                                                    particle.value("opacity", 255)});
+                }
                 result.content.campaignPresentation.emplace(campaign, std::move(definition));
             }
             for (const auto& value : document.at("levels"))
@@ -365,11 +423,9 @@ namespace soma::content
             result.content.presentation.walkAnimationSpeed = presentation.at("walk_animation_speed").get<double>();
             const auto& partyStatus = presentation.at("party_status");
             result.content.presentation.partyStatus.healthBar = gameplay::AssetId{partyStatus.at("health_bar").get<std::string>()};
-            result.content.presentation.partyStatus.healthBarFrame =
-                gameplay::AssetId{partyStatus.at("health_bar_frame").get<std::string>()};
+            result.content.presentation.partyStatus.healthBarFrame = gameplay::AssetId{partyStatus.at("health_bar_frame").get<std::string>()};
             result.content.presentation.partyStatus.fatigueBar = gameplay::AssetId{partyStatus.at("fatigue_bar").get<std::string>()};
-            result.content.presentation.partyStatus.fatigueBarFrame =
-                gameplay::AssetId{partyStatus.at("fatigue_bar_frame").get<std::string>()};
+            result.content.presentation.partyStatus.fatigueBarFrame = gameplay::AssetId{partyStatus.at("fatigue_bar_frame").get<std::string>()};
             result.content.presentation.partyStatus.fatigueTired = gameplay::AssetId{partyStatus.at("fatigue_tired").get<std::string>()};
             result.content.presentation.partyStatus.fatigueStupid = gameplay::AssetId{partyStatus.at("fatigue_stupid").get<std::string>()};
             result.content.presentation.partyStatus.buff = gameplay::AssetId{partyStatus.at("buff").get<std::string>()};

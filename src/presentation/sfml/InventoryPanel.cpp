@@ -451,14 +451,17 @@ namespace soma::presentation
             const auto* equipped = state_.equipped(equipmentLocation(slot));
             if (equipped && (!dragged_ || dragged_->equipmentSlot != slot))
             {
-                sf::RectangleShape color{{97.0F, 97.0F}};
-                color.setPosition(equipmentBounds(slot).position + sf::Vector2f{12.0F, 12.0F});
+                const auto& texture = textures_.at(content_.items.at(equipped->definition).icon);
+                const auto itemPosition = equipmentBounds(slot).position +
+                                          sf::Vector2f{static_cast<float>(layout.equipmentItemInset.x),
+                                                       static_cast<float>(layout.equipmentItemInset.y)};
+                sf::RectangleShape color{sf::Vector2f{texture.getSize()}};
+                color.setPosition(itemPosition);
                 const auto itemColor = gameplay::normalizedItemColor(equipped->color);
                 color.setFillColor({itemColor.red, itemColor.green, itemColor.blue});
                 window_.draw(color);
-                sf::Sprite item{textures_.at(content_.items.at(equipped->definition).icon)};
-                item.setPosition(equipmentBounds(slot).position + sf::Vector2f{static_cast<float>(layout.equipmentItemInset.x),
-                                                                               static_cast<float>(layout.equipmentItemInset.y)});
+                sf::Sprite item{texture};
+                item.setPosition(itemPosition);
                 window_.draw(item);
             }
         }
@@ -546,8 +549,8 @@ namespace soma::presentation
             const auto visibleIndex = index - first;
             const auto position = panelPosition + sf::Vector2f{11.0F + static_cast<float>(visibleIndex % 5) * 116.0F,
                                                                11.0F + static_cast<float>(visibleIndex / 5) * 116.0F};
-            sf::RectangleShape color{{97.0F, 97.0F}};
-            color.setPosition(position + sf::Vector2f{2.0F, 2.0F});
+            sf::RectangleShape color{sf::Vector2f{item.getTexture().getSize()}};
+            color.setPosition(position);
             const auto itemColor = gameplay::normalizedItemColor(entries.at(index).item.color);
             color.setFillColor({itemColor.red, itemColor.green, itemColor.blue});
             window_.draw(color);
@@ -577,8 +580,8 @@ namespace soma::presentation
         }
         sf::Sprite item{textures_.at(content_.items.at(dragged_->item.definition).icon)};
         item.setPosition(mousePosition_ - sf::Vector2f{50.0F, 50.0F});
-        sf::RectangleShape color{{97.0F, 97.0F}};
-        color.setPosition(item.getPosition() + sf::Vector2f{2.0F, 2.0F});
+        sf::RectangleShape color{sf::Vector2f{item.getTexture().getSize()}};
+        color.setPosition(item.getPosition());
         const auto itemColor = gameplay::normalizedItemColor(dragged_->item.color);
         color.setFillColor({itemColor.red, itemColor.green, itemColor.blue});
         window_.draw(color);

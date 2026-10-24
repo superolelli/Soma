@@ -14,6 +14,7 @@ namespace soma::presentation::detail
                        maximumViewLeft_);
         view_.setCenter({viewLeft + view_.getSize().x / 2.0F, view_.getCenter().y});
         window_.setView(view_);
+        particles_.update(elapsed, {{viewLeft, view_.getCenter().y - view_.getSize().y / 2.0F}, view_.getSize()});
         enterVisibleRoom(viewLeft);
         updateParty(elapsed, direction, viewLeft);
         updateSpeechBubbles(elapsed);
@@ -132,7 +133,9 @@ namespace soma::presentation::detail
         window_.clear(sf::Color::Black);
         renderParallax();
         renderRooms();
+        particles_.draw(window_, content::ParticleLayer::behindCharacters);
         renderParty();
+        particles_.draw(window_, content::ParticleLayer::foreground);
         renderPartyStatus();
         speechBubbles_->render(window_);
         window_.setView(hudView_);

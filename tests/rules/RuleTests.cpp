@@ -62,6 +62,7 @@ int main(int argc, char** argv)
     check(activeDescriptions.front() == "Wenn ein Kämpfer Leben verliert, verliert dieser Kämpfer 1 Leben.");
     check(!loaded.content.activeRulesToggle.empty());
     check(loaded.content.activeRulesPresentation.textWidth > 0);
+    check(loaded.content.activeRulesPresentation.togglePosition.y < 52);
 
     soma::game::ComposedRule pluralRule;
     pluralRule.trigger = trigger;

@@ -113,6 +113,8 @@ namespace soma::content
         Point referenceSize{1920, 1080};
         struct ResourceCounterLayout
         {
+            gameplay::AssetId background;
+            Point backgroundPosition;
             Point diceIcon;
             Point diceTextCenter;
             Point cardsIcon;

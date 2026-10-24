@@ -5,6 +5,7 @@ namespace soma::presentation
     ResourceCounter::ResourceCounter(const content::EconomyContent& content, const game::CampaignState& state)
         : layout_(content.presentation.resourceCounter)
         , state_(state)
+        , background_(content.assets.at(layout_.background))
         , dice_(content.assets.at(gameplay::AssetId{"skills.dice"}))
         , cards_(content.assets.at(gameplay::AssetId{"shop.cards"}))
         , font_(content.assets.at(gameplay::AssetId{"font.price"}))
@@ -13,6 +14,10 @@ namespace soma::presentation
 
     void ResourceCounter::render(sf::RenderTarget& target) const
     {
+        sf::Sprite background{background_};
+        background.setPosition({static_cast<float>(layout_.backgroundPosition.x), static_cast<float>(layout_.backgroundPosition.y)});
+        target.draw(background);
+
         sf::Sprite dice{dice_};
         dice.setPosition({static_cast<float>(layout_.diceIcon.x), static_cast<float>(layout_.diceIcon.y)});
         const auto diceScale = static_cast<float>(layout_.diceScale);

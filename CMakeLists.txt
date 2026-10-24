@@ -137,6 +137,7 @@ add_library(soma_presentation_sfml STATIC
     src/presentation/sfml/SkillPanel.cpp
     src/presentation/sfml/NinePatch.cpp
     src/presentation/sfml/PauseMenu.cpp
+    src/presentation/sfml/ParticleSystem.cpp
     src/presentation/sfml/UiCursor.cpp
     src/presentation/sfml/ResourceCounter.cpp
     src/presentation/sfml/RuleBuilderPanel.cpp

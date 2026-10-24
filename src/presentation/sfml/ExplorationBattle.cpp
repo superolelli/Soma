@@ -19,6 +19,7 @@ namespace soma::presentation::detail
         request.enemies = worldEncounter.combatants;
         request.background = world_.assets.at(levelRun_.room().background);
         appendBattleParallaxLayers(request);
+        request.particles = resolveParticleEmitters(world_.campaignPresentation.at(level.campaign).particles, world_.assets);
         request.music.clear();
         request.onBattleTransition = [this, music = battleEncounter.music]() {
             music_.pauseForBattle(music);

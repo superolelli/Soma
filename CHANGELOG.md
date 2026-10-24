@@ -18,6 +18,7 @@
 - Introvideo Basilius Kartov
 
 ## Kleinere Änderungen
+- Kampagnenspezifische Umgebungspartikel in Leveln und Kämpfen
 - Schlafresistenz nach Schlaf
 - Klarerer Kampfablauf (Notifications, Zugreihenfolge, Effect-Wahrscheinlichkeiten etc.)
 - Outlines für klickbare Objekte

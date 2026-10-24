@@ -4,6 +4,7 @@
 #include "presentation/sfml/BattleActionPresentation.hpp"
 #include "presentation/sfml/BattleInteractionController.hpp"
 #include "presentation/sfml/BattleSceneBlur.hpp"
+#include "presentation/sfml/ParticleSystem.hpp"
 #include "presentation/sfml/ResourceCounter.hpp"
 #include "simulation/battle/BattleSimulation.hpp"
 
@@ -26,6 +27,7 @@ namespace soma::presentation
                              const sf::Font& interfaceFont,
                              const sf::Font& notificationFont,
                              const std::vector<sf::Sprite>& backgrounds,
+                             ParticleSystem& particles,
                              BattleSceneBlur& sceneBlur,
                              const std::optional<PresentedAction>& action,
                              const std::vector<FloatingText>& floatingTexts,
@@ -51,7 +53,7 @@ namespace soma::presentation
                                  const CombatantView& view,
                                  const std::vector<gameplay::EntityId>& initiativeOrder);
         [[nodiscard]] std::optional<std::pair<std::string, sf::Vector2f>> drawCombatantOverlays(sf::Vector2f mousePosition,
-                                                                                               bool skipActionParticipants = false);
+                                                                                                bool skipActionParticipants = false);
         void drawPlayerControls(sf::Vector2f mousePosition);
         void drawHoveredTargetMarkers(sf::Vector2f mousePosition);
         void drawAbilityTooltip(sf::Vector2f mousePosition);
@@ -72,6 +74,7 @@ namespace soma::presentation
         const sf::Font& interfaceFont_;
         const sf::Font& notificationFont_;
         const std::vector<sf::Sprite>& backgrounds_;
+        ParticleSystem& particles_;
         BattleSceneBlur& sceneBlur_;
         const std::optional<PresentedAction>& action_;
         const std::vector<FloatingText>& floatingTexts_;

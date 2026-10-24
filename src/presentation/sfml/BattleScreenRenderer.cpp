@@ -82,6 +82,7 @@ namespace soma::presentation
                                                const sf::Font& interfaceFont,
                                                const sf::Font& notificationFont,
                                                const std::vector<sf::Sprite>& backgrounds,
+                                               ParticleSystem& particles,
                                                BattleSceneBlur& sceneBlur,
                                                const std::optional<PresentedAction>& action,
                                                const std::vector<FloatingText>& floatingTexts,
@@ -99,6 +100,7 @@ namespace soma::presentation
         , interfaceFont_(interfaceFont)
         , notificationFont_(notificationFont)
         , backgrounds_(backgrounds)
+        , particles_(particles)
         , sceneBlur_(sceneBlur)
         , action_(action)
         , floatingTexts_(floatingTexts)
@@ -123,6 +125,7 @@ namespace soma::presentation
         {
             window_.draw(background);
         }
+        particles_.draw(window_, content::ParticleLayer::behindCharacters);
         drawRestingCombatants();
         std::optional<std::pair<std::string, sf::Vector2f>> statusTooltip;
         if (isExecutingAbility())
@@ -134,6 +137,7 @@ namespace soma::presentation
         {
             statusTooltip = drawCombatantOverlays(mousePosition);
         }
+        particles_.draw(window_, content::ParticleLayer::foreground);
         drawPlayerControls(mousePosition);
         drawAnnouncement();
         drawInformationPanel();

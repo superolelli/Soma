@@ -1,6 +1,7 @@
 #pragma once
 
 #include "content/EconomyContent.hpp"
+#include "content/ParticleDefinition.hpp"
 
 #include <unordered_map>
 
@@ -72,6 +73,7 @@ namespace soma::content
             double musicVolume{50.0};
             double battleMusicVolume{30.0};
             double battleCrossfadeSeconds{4.0};
+            std::vector<ParticleEmitterDefinition> particles;
         };
 
         std::unordered_map<gameplay::EncounterId, EncounterDefinition> encounters;
@@ -80,6 +82,7 @@ namespace soma::content
         std::unordered_map<gameplay::LevelId, LevelDefinition> levels;
         std::unordered_map<gameplay::AssetId, std::filesystem::path> assets;
         std::unordered_map<std::string, CampaignPresentation> campaignPresentation;
+
         struct Presentation
         {
             struct LootDialog
@@ -95,6 +98,7 @@ namespace soma::content
                 Point errorCenter;
                 int columns{3};
             } lootDialog;
+
             struct LevelResultDialog
             {
                 Point title;
@@ -108,6 +112,7 @@ namespace soma::content
                 Point firstUnlockedItem;
                 Point unlockedItemSpacing;
             } levelResultDialog;
+
             struct BattleTransition
             {
                 gameplay::AssetId model;
@@ -117,6 +122,7 @@ namespace soma::content
                 double scale{0.7};
                 double delayAfterSeconds{1.0};
             } battleTransition;
+
             struct SpeechBubbles
             {
                 gameplay::AssetId texture;
@@ -139,6 +145,7 @@ namespace soma::content
             std::string walkAnimation{"walk"};
             double idleAnimationSpeed{1.0};
             double walkAnimationSpeed{0.85};
+
             struct PartyStatus
             {
                 gameplay::AssetId healthBar;

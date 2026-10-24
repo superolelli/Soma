@@ -13,7 +13,7 @@
     "confirmation_button": "Data/Sprites/Panels & Buttons/Bang/generic_button.png",
     "active_rules_toggle": "Data/Sprites/Panels & Buttons/rules_button.png",
     "active_rules": {
-      "toggle_position": [0, 60],
+      "toggle_position": [0, 2],
       "list_position": [30, 60],
       "text_inset": [32, 18],
       "text_width": 458,

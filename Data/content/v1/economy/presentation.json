@@ -46,7 +46,8 @@
         "skills.connection.1.locked": "Data/Sprites/Panels & Buttons/Skill_Panel/connection_1_not_skilled.png",
         "skills.connection.2.acquired": "Data/Sprites/Panels & Buttons/Skill_Panel/connection_2_skilled.png",
         "skills.connection.2.locked": "Data/Sprites/Panels & Buttons/Skill_Panel/connection_2_not_skilled.png",
-        "skills.buy": "Data/Sprites/Panels & Buttons/Bang/generic_button.png"
+        "skills.buy": "Data/Sprites/Panels & Buttons/Bang/generic_button.png",
+        "status_bar.background": "Data/Sprites/Panels & Buttons/status_bar_background.png"
         ,"font.interface": "Data/Fonts/trajan.ttf"
         ,"font.title": "Data/Fonts/blackwoodCastle.ttf"
         ,"font.ability": "Data/Fonts/showcard.ttf"
@@ -85,6 +86,8 @@
         ,"ability.markus.3.alternative": "Data/Sprites/Abilities/Markus/horrible_grin/horrible_grin.png"
     },
     "resource_counter": {
+        "background": "status_bar.background",
+        "background_position": [-1, 0],
         "dice_icon": [1690, 5],
         "dice_text_center": [1760, 24],
         "cards_icon": [1800, 6],

@@ -79,6 +79,7 @@ namespace soma::presentation
         sf::Texture rootsTexture_;
         sf::Texture vendingTexture_;
         std::array<sf::Texture, 4> toolbarTextures_;
+        sf::Texture statusBarBackgroundTexture_;
         sf::Texture diceIconTexture_;
         sf::Texture cardsIconTexture_;
         sf::Font resourceFont_;

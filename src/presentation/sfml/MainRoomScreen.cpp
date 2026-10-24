@@ -48,6 +48,7 @@ namespace soma::presentation
         , hudView_(sf::FloatRect{{0.0F, 0.0F}, {static_cast<float>(flow.referenceSize.x), static_cast<float>(flow.referenceSize.y)}})
         , rootsTexture_(flow.mainRoom.roots.texture)
         , vendingTexture_(flow.mainRoom.vendingMachine.texture)
+        , statusBarBackgroundTexture_(flow.mainRoom.statusBarBackground)
         , diceIconTexture_(flow.mainRoom.diceIcon)
         , cardsIconTexture_(flow.mainRoom.cardsIcon)
         , resourceFont_(flow.mainRoom.resourceFont)
@@ -418,6 +419,7 @@ namespace soma::presentation
     {
         const auto mouse = window_.mapPixelToCoords(sf::Mouse::getPosition(window_), hudView_);
         const auto pressed = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
+        window_.draw(positioned(statusBarBackgroundTexture_, flow_.mainRoom.statusBarBackgroundPosition));
         for (std::size_t index = 0; index < toolbarTextures_.size(); ++index)
         {
             sf::Sprite button{toolbarTextures_.at(index)};
