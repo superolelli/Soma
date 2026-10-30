@@ -471,7 +471,6 @@ namespace soma::presentation
                                   const BattleTextures& textures,
                                   const sf::Font& font,
                                   const CombatantState& state,
-                                  const soma::content::CombatantDefinition& baseDefinition,
                                   const soma::content::BattleLayoutDefinition& layout,
                                   const CombatantView& view)
     {
@@ -511,12 +510,12 @@ namespace soma::presentation
             std::to_string(nonNegative(state.attributes.criticalHitChance)),
             std::to_string(nonNegative(state.attributes.dodge)),
             std::to_string(nonNegative(state.attributes.precision))};
-        const std::array attributeColors{changedValueColor(state.attributes.armour, baseDefinition.attributes.armour),
-                                         changedValueColor(state.attributes.damageMinimum, baseDefinition.attributes.damageMinimum),
-                                         changedValueColor(state.attributes.initiative, baseDefinition.attributes.initiative),
-                                         changedValueColor(state.attributes.criticalHitChance, baseDefinition.attributes.criticalHitChance),
-                                         changedValueColor(state.attributes.dodge, baseDefinition.attributes.dodge),
-                                         changedValueColor(state.attributes.precision, baseDefinition.attributes.precision)};
+        const std::array attributeColors{changedValueColor(state.attributes.armour, state.baseAttributes.armour),
+                                         changedValueColor(state.attributes.damageMinimum, state.baseAttributes.damageMinimum),
+                                         changedValueColor(state.attributes.initiative, state.baseAttributes.initiative),
+                                         changedValueColor(state.attributes.criticalHitChance, state.baseAttributes.criticalHitChance),
+                                         changedValueColor(state.attributes.dodge, state.baseAttributes.dodge),
+                                         changedValueColor(state.attributes.precision, state.baseAttributes.precision)};
         sf::RectangleShape attributeBackground{{390.0F, 145.0F}};
         attributeBackground.setPosition(panelPosition + sf::Vector2f{648.0F, 16.0F});
         attributeBackground.setFillColor(sf::Color{0, 0, 0, 220});

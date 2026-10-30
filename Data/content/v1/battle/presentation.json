@@ -47,6 +47,19 @@
                    "status.decay":  "Data/Sound/damage_over_time.wav",
                    "status.dynamite":  "Data/Sound/dynamite.ogg"
                },
+    "stat_tooltips": {
+                         "armour": "#d6b45c Rüstung\n#ffffff Verringert direkten Schaden um diesen Prozentsatz. 25 Rüstung machen aus 20 Schaden 15.",
+                         "damage": "#d6b45c Schaden\n#ffffff Bereich des Grundschadens normaler Angriffe. Fähigkeiten multiplizieren diesen Wert; danach wirkt Rüstung.",
+                         "initiative": "#d6b45c Initiative\n#ffffff Bestimmt die Zugreihenfolge. Höhere Initiative handelt früher. Änderungen wirken auf die noch offenen Züge der aktuellen Runde.",
+                         "critical_hit": "#d6b45c Kritische Trefferchance\n#ffffff Prozentchance auf einen kritischen Effekt. Schaden und Heilung werden verdoppelt; Statusdauer steigt um 2 Runden.",
+                         "dodge": "#d6b45c Ausweichen\n#ffffff Wird mit der Präzision des Angreifers verglichen. Jeder positive Punkt Unterschied gibt 2% Ausweichchance.",
+                         "precision": "#d6b45c Präzision\n#ffffff Wirkt gegnerischem Ausweichen entgegen. Ist Präzision mindestens so hoch wie Ausweichen, entsteht dadurch keine Ausweichchance.",
+                         "healing": "#d6b45c Heilungsmodifikator\n#ffffff Erhöht verursachte Heilung pro Punkt um 1%.",
+                         "sleep_resistance": "#d6b45c Schlafresistenz\n#ffffff Prozentchance, Schlaf vollständig zu widerstehen.",
+                         "confusion_resistance": "#d6b45c Verwirrungsresistenz\n#ffffff Prozentchance, Verwirrung vollständig zu widerstehen.",
+                         "debuff_resistance": "#d6b45c Schwächungsresistenz\n#ffffff Prozentchance, einer gewöhnlichen Schwächung vollständig zu widerstehen.",
+                         "decay_resistance": "#d6b45c Verfallsresistenz\n#ffffff Prozentchance, Verfall vollständig zu widerstehen. Manche Fähigkeiten können diese Resistenz ignorieren."
+                     },
     "reference_resolution":  {
                                  "width":  1920,
                                  "height":  1080

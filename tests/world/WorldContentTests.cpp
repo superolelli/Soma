@@ -14,6 +14,7 @@
 #include <iostream>
 #include <source_location>
 #include <string>
+#include <tuple>
 
 namespace
 {
@@ -76,18 +77,20 @@ int main(int argc, char** argv)
               return entry.second.introCue.has_value();
           }) == 6);
     constexpr std::array bossVideos{
-        std::pair{"encounter.bang.2.boss", "video.intro.greg"},
-        std::pair{"encounter.bang.3.boss", "video.intro.apache_kid"},
-        std::pair{"encounter.bang.4.boss", "video.intro.tequila_joe"},
-        std::pair{"encounter.bang.5.boss", "video.intro.big_spencer"},
-        std::pair{"encounter.bang.6.boss", "video.intro.bill_noface"},
-        std::pair{"encounter.kutschfahrt.2.boss", "video.intro.basilius_kartov"},
+        std::tuple{"encounter.bang.2.boss", "video.intro.greg", "enemy.greg"},
+        std::tuple{"encounter.bang.3.boss", "video.intro.apache_kid", "enemy.apache_kid"},
+        std::tuple{"encounter.bang.4.boss", "video.intro.tequila_joe", "enemy.tequila_joe"},
+        std::tuple{"encounter.bang.5.boss", "video.intro.big_spencer", "enemy.big_spencer"},
+        std::tuple{"encounter.bang.6.boss", "video.intro.bill_noface", "enemy.bill_noface"},
+        std::tuple{"encounter.kutschfahrt.2.boss", "video.intro.basilius_kartov", "enemy.basilius_kartov"},
     };
-    for (const auto& [encounterId, videoId] : bossVideos)
+    for (const auto& [encounterId, videoId, combatantId] : bossVideos)
     {
-        const auto& cue = world.content.encounters.at(soma::gameplay::EncounterId{encounterId}).introCue;
-        check(cue == soma::gameplay::AssetId{videoId});
+        const auto& encounter = world.content.encounters.at(soma::gameplay::EncounterId{encounterId});
+        check(encounter.introCue == soma::gameplay::AssetId{videoId});
+        check(encounter.bossCombatant == soma::gameplay::ContentDefinitionId{combatantId});
     }
+    check(!world.content.encounters.at(soma::gameplay::EncounterId{"encounter.bang.1.boss"}).bossCombatant.has_value());
     check(world.content.presentation.speechBubbles.lines.size() == 4);
     check(world.content.presentation.speechBubbles.lines.at(soma::gameplay::ContentDefinitionId{"player.simon"}).size() == 4);
     check(world.content.presentation.speechBubbles.lines.at(soma::gameplay::ContentDefinitionId{"player.ole"}).size() == 6);

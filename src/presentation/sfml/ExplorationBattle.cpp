@@ -31,6 +31,8 @@ namespace soma::presentation::detail
         request.playerHealth = playerHealth_;
         request.playerFatigue = playerFatigue_;
         request.playerBuffs = playerBuffs_;
+        request.bossCombatant = worldEncounter.bossCombatant;
+        request.bossAttributeMultiplier = campaignBattle_.bossAttributeMultiplier;
         const auto& transition = layout_.battleTransition;
         request.transition = BattleTransitionRequest{world_.assets.at(transition.model),
                                                      transition.entity,
@@ -104,8 +106,17 @@ namespace soma::presentation::detail
         const auto& battleEncounter = campaignBattle_.encounters.at(battleEncounterFor(level));
         const auto& enemies = world_.encounters.at(*encounter).combatants;
         gameplay::SeededRandom preparationRandom{0U};
+        const auto& worldEncounter = world_.encounters.at(*encounter);
         simulation::BattleSimulation preparationBattle{
-            campaignBattle_, createBattleSpawns(battleEncounter, enemies, playerHealth_, playerFatigue_, playerBuffs_), preparationRandom};
+            campaignBattle_,
+            createBattleSpawns(battleEncounter,
+                               enemies,
+                               playerHealth_,
+                               playerFatigue_,
+                               playerBuffs_,
+                               worldEncounter.bossCombatant,
+                               campaignBattle_.bossAttributeMultiplier),
+            preparationRandom};
         preparedBattleViews_ = createCombatantViews(window_, campaignBattle_, preparationBattle);
         preparedEncounter_ = encounter;
     }

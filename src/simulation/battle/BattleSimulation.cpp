@@ -3,11 +3,51 @@
 #include "simulation/battle/AbilityTargets.hpp"
 
 #include <algorithm>
+#include <cmath>
 #include <ranges>
 #include <stdexcept>
 
 namespace soma::simulation
 {
+    namespace
+    {
+        int scaled(int value, double multiplier)
+        {
+            return static_cast<int>(std::round(static_cast<double>(value) * multiplier));
+        }
+
+        gameplay::CombatantAttributes scaled(gameplay::CombatantAttributes value, double multiplier)
+        {
+            value.maximumHealth = scaled(value.maximumHealth, multiplier);
+            value.damageMinimum = scaled(value.damageMinimum, multiplier);
+            value.damageMaximum = scaled(value.damageMaximum, multiplier);
+            value.armour = scaled(value.armour, multiplier);
+            value.criticalHitChance = scaled(value.criticalHitChance, multiplier);
+            value.dodge = scaled(value.dodge, multiplier);
+            value.initiative = scaled(value.initiative, multiplier);
+            value.precision = scaled(value.precision, multiplier);
+            return value;
+        }
+
+        content::AttributeDelta scaled(content::AttributeDelta value, double multiplier)
+        {
+            value.armour = scaled(value.armour, multiplier);
+            value.damageMinimum = scaled(value.damageMinimum, multiplier);
+            value.damageMaximum = scaled(value.damageMaximum, multiplier);
+            value.initiative = scaled(value.initiative, multiplier);
+            value.maximumHealth = scaled(value.maximumHealth, multiplier);
+            value.criticalHitChance = scaled(value.criticalHitChance, multiplier);
+            value.precision = scaled(value.precision, multiplier);
+            value.dodge = scaled(value.dodge, multiplier);
+            value.healing = scaled(value.healing, multiplier);
+            value.sleepResistance = scaled(value.sleepResistance, multiplier);
+            value.confusionResistance = scaled(value.confusionResistance, multiplier);
+            value.debuffResistance = scaled(value.debuffResistance, multiplier);
+            value.decayResistance = scaled(value.decayResistance, multiplier);
+            return value;
+        }
+    } // namespace
+
     bool CombatantState::alive() const noexcept
     {
         return health > 0;
@@ -32,14 +72,16 @@ namespace soma::simulation
             }
             const auto& definition = found->second;
             auto id = definition.id.value() + ".slot" + std::to_string(spawn.slot);
+            const auto attributes = scaled(definition.attributes, spawn.attributeMultiplier);
             combatants_.push_back({gameplay::EntityId{std::move(id)},
                                    definition.id,
                                    definition.name,
                                    definition.team,
                                    spawn.slot,
-                                   definition.attributes,
-                                   definition.resistances,
+                                   attributes,
+                                   scaled(definition.resistances, spawn.attributeMultiplier),
                                    0});
+            combatants_.back().baseAttributes = attributes;
             for (const auto& buff : spawn.initialBuffs)
             {
                 addAttributes(combatants_.back(), buff.attributes, 1);

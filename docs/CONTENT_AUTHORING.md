@@ -155,6 +155,24 @@ World encounters in `world/content.json` list enemy IDs, whether the encounter i
 }
 ```
 
+An encounter with an intro video also identifies the enemy featured by that video. This is the combatant that receives the boss stat multiplier;
+other enemies in the same encounter remain unchanged.
+
+```json
+{
+  "id": "encounter.bang.example.boss",
+  "combatants": ["enemy.example", "enemy.helper"],
+  "boss": true,
+  "boss_combatant": "enemy.example",
+  "intro_cue": "video.intro.example",
+  "reward_table": "reward.bang.example.boss"
+}
+```
+
+`boss_combatant` and `intro_cue` must be supplied together, and the featured combatant must occur in the encounter. The multiplier is configured as
+`boss_attribute_multiplier` in `battle/content.json` (currently `1.5`). It scales the featured enemy's base combat attributes and resistances,
+rounding each result to the nearest integer. Boss encounters without an intro video do not receive this multiplier.
+
 Generated levels specify their campaign, difficulty, room count, encounter budget, lootable probability, backgrounds, eligible regular encounters, and one boss encounter. Generation draws a target budget within the inclusive range, selects encounters whose enemy costs exactly satisfy it, distributes them across available rooms, and reserves the last room for the authored boss. Loot placement is independent.
 
 ```json
@@ -252,5 +270,8 @@ Coordinates, scales, hitboxes, spacings, font sizes, playback delays, and asset 
 - Rule builder and active-rule drawer art/layout: `rules/content.json`
 
 Spriter animation names referenced by abilities must exist on the selected entity. Spriter soundlines are played automatically and obey the global sound-effects volume. Non-Spriter one-shot cues are registered by their presentation/application sound player.
+
+The `stat_tooltips` object in `battle/presentation.json` owns the German explanations shown when hovering statistics in the inventory or battle combatant
+panel. Keep an entry for every displayed attribute and resistance when changing those panels.
 
 Keep source and JSON files UTF-8. German text can contain `ä`, `ö`, `ü`, and `ß` directly.

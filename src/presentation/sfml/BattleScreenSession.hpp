@@ -50,6 +50,8 @@ namespace soma::presentation
         std::unordered_map<gameplay::ContentDefinitionId, int> playerHealth;
         std::unordered_map<gameplay::ContentDefinitionId, int> playerFatigue;
         std::unordered_map<gameplay::ContentDefinitionId, std::vector<simulation::ActiveBuff>> playerBuffs;
+        std::optional<gameplay::ContentDefinitionId> bossCombatant;
+        double bossAttributeMultiplier{1.0};
         std::optional<BattleTransitionRequest> transition;
         IAnimationPlayer* preparedTransitionAnimation{};
         IAnimationPlayer* preparedEffectAnimation{};
@@ -86,7 +88,9 @@ namespace soma::presentation
         const std::vector<gameplay::ContentDefinitionId>& enemies,
         const std::unordered_map<gameplay::ContentDefinitionId, int>& playerHealth,
         const std::unordered_map<gameplay::ContentDefinitionId, int>& playerFatigue,
-        const std::unordered_map<gameplay::ContentDefinitionId, std::vector<simulation::ActiveBuff>>& playerBuffs);
+        const std::unordered_map<gameplay::ContentDefinitionId, std::vector<simulation::ActiveBuff>>& playerBuffs,
+        const std::optional<gameplay::ContentDefinitionId>& bossCombatant = std::nullopt,
+        double bossAttributeMultiplier = 1.0);
 
     [[nodiscard]] BattleScreenOutcome runBattleScreenSession(sf::RenderWindow& window,
                                                              const content::BattleContent& battleContent,

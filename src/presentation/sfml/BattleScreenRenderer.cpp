@@ -150,6 +150,7 @@ namespace soma::presentation
         {
             static_cast<void>(drawTooltip(window_, interfaceFont_, statusTooltip->first, statusTooltip->second, true));
         }
+        drawInformationStatTooltip(mousePosition);
     }
 
     bool BattleScreenRenderer::isExecutingAbility() const

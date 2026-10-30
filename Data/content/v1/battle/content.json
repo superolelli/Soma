@@ -1,6 +1,7 @@
 {
     "schema_version":  1,
     "content_kind":  "battle",
+    "boss_attribute_multiplier":  1.5,
     "combatants":  [
                        {
                            "id":  "player.simon",
@@ -115,19 +116,20 @@
                            "id":  "enemy.gesetzloser",
                            "ai_policy":  "miss_shooter",
                            "team":  "enemies",
-                           "encounter_cost":  2,
+                           "encounter_cost":  1,
                            "name":  "Gesetzloser",
                            "abilities":  [
                                              "ability.enemy.springfield",
-                                             "ability.enemy.miss"
+                                             "ability.enemy.miss",
+                                             "ability.enemy.aim"
                                          ],
                            "attributes":  {
-                                              "maximum_health":  20,
+                                              "maximum_health":  15,
                                               "damage_minimum":  7,
                                               "damage_maximum":  10,
-                                              "armour":  1,
+                                              "armour": 0,
                                               "critical_hit_chance":  5,
-                                              "dodge":  3,
+                                              "dodge": 5,
                                               "initiative":  1,
                                               "precision":  5
                                           },
@@ -152,10 +154,10 @@
                                               "maximum_health":  20,
                                               "damage_minimum":  5,
                                               "damage_maximum":  8,
-                                              "armour":  1,
+                                              "armour": 5,
                                               "critical_hit_chance":  5,
-                                              "dodge":  3,
-                                              "initiative":  1,
+                                              "dodge": 5,
+                                              "initiative":  2,
                                               "precision":  5
                                           },
                            "resistances":  {
@@ -179,17 +181,17 @@
                                               "maximum_health":  20,
                                               "damage_minimum":  3,
                                               "damage_maximum":  5,
-                                              "armour":  1,
+                                              "armour":  0,
                                               "critical_hit_chance":  5,
-                                              "dodge":  8,
+                                              "dodge":  10,
                                               "initiative":  2,
                                               "precision":  5
                                           },
                            "resistances":  {
-                                               "sleep":  0,
-                                               "confusion":  20,
+                                               "sleep":  25,
+                                               "confusion":  0,
                                                "debuff":  0,
-                                               "decay":  0
+                                               "decay":  25
                                            }
                        },
                        {
@@ -1235,7 +1237,7 @@
                                        "effect":  {
                                                       "damageFactor":  1,
                                                       "decay":  {
-                                                                    "rounds":  3,
+                                                                    "rounds":  4,
                                                                     "damage":  1
                                                                 }
                                                   },
@@ -1356,7 +1358,7 @@
                                        "animation":  "fanning",
                                        "effectAnimation":  "bang",
                                        "effect":  {
-                                                      "damageFactor":  0.4
+                                                      "damageFactor":  0.5
                                                   },
                                        "targeting":  {
                                                          "relation":  "opposing_team",
@@ -1675,7 +1677,13 @@
                                        "animation":  "miss",
                                        "effectAnimation":  "empty",
                                        "effect":  {
-                                                      "addMissSelf":  1
+                                                      "addMissSelf":  1,
+                                                      "buff" : {
+                                                        "duration": 2,
+                                                        "precision": 15,
+                                                        "isPositive": true,
+                                                        "onSelf": true
+                                                      }
                                                   },
                                        "targeting":  {
                                                          "relation":  "self",
@@ -1879,6 +1887,23 @@
                                                   },
                                        "targeting":  {
                                                          "relation":  "self",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                                            {
+                          "id":  "ability.enemy.aim",
+                          "data":  {
+                                       "id":  35,
+                                       "name":  "Zielen",
+                                       "animation":  "aim",
+                                       "effectAnimation":  "springfield",
+                                       "effect":  {
+                                                      "damageAgainstMarked": 1.5
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "opposing_team",
                                                          "scope":  "single",
                                                          "count":  1
                                                      }

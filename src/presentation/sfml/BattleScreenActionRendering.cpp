@@ -2,6 +2,7 @@
 #include "presentation/sfml/BattleScreenRenderer.hpp"
 #include "presentation/sfml/NinePatch.hpp"
 
+#include <array>
 #include <ranges>
 #include <sstream>
 #include <unordered_map>
@@ -130,8 +131,7 @@ namespace soma::presentation
         }
 
         const auto displayed = displayedState(*state);
-        drawCombatantInformation(
-            window_, textures_, interfaceFont_, displayed, content_.combatants.at(state->definition), content_.layout, views_.at(state->id));
+        drawCombatantInformation(window_, textures_, interfaceFont_, displayed, content_.layout, views_.at(state->id));
         const auto& selectedAbility = interaction_.selectedAbility();
         if (!selectedAbility.has_value() || battle_.finished())
         {
@@ -142,6 +142,45 @@ namespace soma::presentation
         if (actor != nullptr && std::ranges::find(validTargets, state->id) != validTargets.end())
         {
             drawExpectedAttack(window_, interfaceFont_, battle_, *actor, *state, content_.abilities.at(*selectedAbility), content_.layout);
+        }
+    }
+
+    void BattleScreenRenderer::drawInformationStatTooltip(sf::Vector2f mousePosition)
+    {
+        auto informationCombatant = interaction_.inspectedCombatant();
+        if (!informationCombatant.has_value() && !battle_.finished())
+        {
+            informationCombatant = battle_.currentActor();
+        }
+        if (!informationCombatant.has_value() || battle_.find(*informationCombatant) == nullptr)
+        {
+            return;
+        }
+
+        static constexpr std::array attributeKeys{"armour", "damage", "initiative", "critical_hit", "dodge", "precision"};
+        static constexpr std::array resistanceKeys{
+            "sleep_resistance", "confusion_resistance", "debuff_resistance", "decay_resistance"};
+        const sf::Vector2f panelPosition{static_cast<float>(content_.layout.informationPanelX),
+                                         static_cast<float>(content_.layout.informationPanelY)};
+        for (std::size_t index = 0; index < attributeKeys.size(); ++index)
+        {
+            const auto rowPosition = panelPosition + sf::Vector2f{648.0F, 21.0F + static_cast<float>(index) * 20.0F};
+            if (sf::FloatRect{rowPosition, {390.0F, 20.0F}}.contains(mousePosition))
+            {
+                const auto& value = content_.statTooltips.at(attributeKeys.at(index));
+                static_cast<void>(drawTooltip(window_, interfaceFont_, value, mousePosition + sf::Vector2f{12.0F, -8.0F}, true, 430.0F));
+                return;
+            }
+        }
+        for (std::size_t index = 0; index < resistanceKeys.size(); ++index)
+        {
+            const auto rowPosition = panelPosition + sf::Vector2f{525.0F, 56.0F + static_cast<float>(index) * 25.0F};
+            if (sf::FloatRect{rowPosition, {115.0F, 25.0F}}.contains(mousePosition))
+            {
+                const auto& value = content_.statTooltips.at(resistanceKeys.at(index));
+                static_cast<void>(drawTooltip(window_, interfaceFont_, value, mousePosition + sf::Vector2f{12.0F, -8.0F}, true, 430.0F));
+                return;
+            }
         }
     }
 

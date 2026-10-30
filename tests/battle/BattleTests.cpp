@@ -6,6 +6,7 @@
 #include "simulation/battle/EnemyPolicy.hpp"
 
 #include <cstdlib>
+#include <cmath>
 #include <filesystem>
 #include <iostream>
 #include <set>
@@ -35,6 +36,26 @@ int main(int argc, char** argv)
     check(loaded.valid());
     const auto rules = soma::content::RuleContentLoader{}.load(std::filesystem::absolute(argv[1]));
     check(rules.valid());
+
+    const auto gregId = soma::gameplay::ContentDefinitionId{"enemy.greg"};
+    const auto& gregDefinition = loaded.content.combatants.at(gregId);
+    soma::gameplay::SeededRandom bossRandom{0};
+    soma::simulation::BattleSimulation bossBattle{
+        loaded.content,
+        {{soma::gameplay::ContentDefinitionId{"player.simon"}, 0},
+         {gregId, 4, std::nullopt, {}, 0, loaded.content.bossAttributeMultiplier}},
+        bossRandom};
+    const auto* scaledBoss = bossBattle.find(entity("enemy.greg", 4));
+    check(scaledBoss != nullptr);
+    const auto scaled = [](int value) {
+        return static_cast<int>(std::round(static_cast<double>(value) * 1.5));
+    };
+    check(scaledBoss->attributes.maximumHealth == scaled(gregDefinition.attributes.maximumHealth));
+    check(scaledBoss->attributes.damageMinimum == scaled(gregDefinition.attributes.damageMinimum));
+    check(scaledBoss->attributes.armour == scaled(gregDefinition.attributes.armour));
+    check(scaledBoss->secondaryAttributes.sleepResistance == scaled(gregDefinition.resistances.sleepResistance));
+    check(scaledBoss->health == scaledBoss->attributes.maximumHealth);
+    check(scaledBoss->baseAttributes.maximumHealth == scaledBoss->attributes.maximumHealth);
 
     check(soma::gameplay::fatigueStage(8) == 0);
     check(soma::gameplay::fatigueStage(9) == 1);

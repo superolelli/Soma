@@ -42,7 +42,6 @@ namespace soma::presentation
                                   const BattleTextures& textures,
                                   const sf::Font& font,
                                   const simulation::CombatantState& state,
-                                  const content::CombatantDefinition& baseDefinition,
                                   const content::BattleLayoutDefinition& layout,
                                   const CombatantView& view);
     void drawExpectedAttack(sf::RenderWindow& window,

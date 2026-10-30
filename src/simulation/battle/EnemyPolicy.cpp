@@ -65,7 +65,11 @@ namespace soma::simulation
 
         if (id == "miss_shooter")
         {
-            return actor.misses >= 2 || coin() ? enemyAbility("springfield") : enemyAbility("miss");
+            const auto canAim = std::ranges::any_of(battle.combatants(), [](const auto& player){
+                return player.team == gameplay::Team::players && player.alive() && player.markedTurns >= 1;
+            });
+
+            return actor.misses >= 1 || coin() ? (canAim ? enemyAbility("aim") : enemyAbility("springfield")) : enemyAbility("miss");
         }
         if (id == "fanning")
         {
@@ -234,6 +238,12 @@ namespace soma::simulation
         {
             std::erase_if(targets, [&battle](const auto& id) {
                 return battle.find(id)->bountyTurns > 0;
+            });
+        }
+        if (ability == enemyAbility("aim"))
+        {
+            std::erase_if(targets, [&battle](const auto& id) {
+                return battle.find(id)->markedTurns == 0;
             });
         }
         if (ability == enemyAbility("crystal_ball"))

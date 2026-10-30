@@ -26,6 +26,10 @@ int main(int argc, char** argv)
         std::cerr << diagnostic.message << '\n';
     }
     check(result.valid());
+    check(result.content.bossAttributeMultiplier == 1.5);
+    check(result.content.statTooltips.size() == 11);
+    check(result.content.statTooltips.contains("armour"));
+    check(result.content.statTooltips.contains("decay_resistance"));
     check(result.content.combatants.size() == 18);
     check(result.content.abilities.size() == 67);
     check(result.content.presentation.size() == 18);
@@ -34,7 +38,6 @@ int main(int argc, char** argv)
     check(result.content.sounds.contains("critical_hit"));
     check(result.content.sounds.contains("status.decay"));
     check(result.content.sounds.contains("status.dynamite"));
-
     const auto& simon = result.content.combatants.at(soma::gameplay::ContentDefinitionId{"player.simon"});
     check(simon.abilities.size() == 4);
     check(simon.attributes.maximumHealth == 25);

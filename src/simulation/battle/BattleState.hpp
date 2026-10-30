@@ -30,6 +30,7 @@ namespace soma::simulation
         std::optional<int> initialHealth;
         std::vector<ActiveBuff> initialBuffs;
         int initialFatigue{};
+        double attributeMultiplier{1.0};
     };
 
     /// Tracks one independently expiring application of decay.
@@ -75,6 +76,7 @@ namespace soma::simulation
         int hackedTurns{};
         int panicStacks{};
         int appliedFatiguePenaltyStages{};
+        gameplay::CombatantAttributes baseAttributes;
 
         [[nodiscard]] bool alive() const noexcept;
     };

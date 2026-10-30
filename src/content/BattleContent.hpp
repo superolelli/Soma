@@ -256,7 +256,9 @@ namespace soma::content
         std::unordered_map<gameplay::ContentDefinitionId, Encounter> encounters;
         std::unordered_map<std::string, std::filesystem::path> assets;
         std::unordered_map<std::string, std::filesystem::path> sounds;
+        std::unordered_map<std::string, std::string> statTooltips;
         std::unordered_map<gameplay::ItemId, ItemActivationPresentation> itemActivations;
+        double bossAttributeMultiplier{1.0};
         BattleLayoutDefinition layout;
     };
 } // namespace soma::content

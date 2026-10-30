@@ -240,6 +240,11 @@ namespace soma::content
 
         void loadDefinitions(const json& document, BattleContent& content)
         {
+            content.bossAttributeMultiplier = document.value("boss_attribute_multiplier", 1.0);
+            if (content.bossAttributeMultiplier <= 0.0)
+            {
+                throw std::runtime_error("Boss attribute multiplier must be positive");
+            }
             for (const auto& value : document.at("combatants"))
             {
                 CombatantDefinition combatant;
@@ -328,6 +333,13 @@ namespace soma::content
             for (const auto& [id, path] : document.at("sounds").items())
             {
                 content.sounds.emplace(id, path.get<std::string>());
+            }
+            for (const auto& [id, description] : document.at("stat_tooltips").items())
+            {
+                if (!content.statTooltips.emplace(id, description.get<std::string>()).second || content.statTooltips.at(id).empty())
+                {
+                    throw std::runtime_error("Invalid or duplicate stat tooltip: " + id);
+                }
             }
             content.layout.referenceWidth = document.at("reference_resolution").at("width");
             content.layout.referenceHeight = document.at("reference_resolution").at("height");

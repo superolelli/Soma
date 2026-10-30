@@ -327,10 +327,27 @@ namespace soma::content
                                                combatants,
                                                budgetCost,
                                                value.value("boss", false),
+                                               value.contains("boss_combatant")
+                                                   ? std::optional<gameplay::ContentDefinitionId>{
+                                                         gameplay::ContentDefinitionId{value.at("boss_combatant").get<std::string>()}}
+                                                   : std::nullopt,
                                                value.contains("intro_cue")
                                                    ? std::optional<gameplay::AssetId>{gameplay::AssetId{value.at("intro_cue").get<std::string>()}}
                                                    : std::nullopt,
                                                gameplay::LootTableId{value.at("reward_table").get<std::string>()}};
+                if (definition.bossCombatant &&
+                    std::ranges::find(definition.combatants, *definition.bossCombatant) == definition.combatants.end())
+                {
+                    throw std::runtime_error("Boss combatant is not part of encounter: " + definition.id.value());
+                }
+                if (definition.bossCombatant && !definition.boss)
+                {
+                    throw std::runtime_error("A featured boss combatant requires a boss encounter: " + definition.id.value());
+                }
+                if (definition.introCue.has_value() != definition.bossCombatant.has_value())
+                {
+                    throw std::runtime_error("An encounter intro and boss combatant must be specified together: " + definition.id.value());
+                }
                 insertUnique(result.content.encounters, std::move(definition));
             }
             for (const auto& value : document.at("loot_tables"))

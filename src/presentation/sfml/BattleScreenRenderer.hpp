@@ -60,6 +60,7 @@ namespace soma::presentation
         void drawAnnouncement();
         void drawItemInterruption();
         void drawInformationPanel();
+        void drawInformationStatTooltip(sf::Vector2f mousePosition);
         void drawFloatingTexts();
         void drawBattleResult();
         void drawTargetMarker(const gameplay::EntityId& target);

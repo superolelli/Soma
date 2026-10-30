@@ -36,7 +36,9 @@ namespace soma::presentation
             const std::vector<gameplay::ContentDefinitionId>& enemies,
             const std::unordered_map<gameplay::ContentDefinitionId, int>& playerHealth,
             const std::unordered_map<gameplay::ContentDefinitionId, int>& playerFatigue,
-            const std::unordered_map<gameplay::ContentDefinitionId, std::vector<simulation::ActiveBuff>>& playerBuffs)
+            const std::unordered_map<gameplay::ContentDefinitionId, std::vector<simulation::ActiveBuff>>& playerBuffs,
+            const std::optional<gameplay::ContentDefinitionId>& bossCombatant,
+            double bossAttributeMultiplier)
         {
             std::vector<simulation::BattleSpawn> spawns;
             for (const auto& [combatant, slot] : encounter.combatants)
@@ -53,9 +55,17 @@ namespace soma::presentation
                                       fatigue == playerFatigue.end() ? 0 : fatigue->second});
                 }
             }
+            auto bossSpawned = false;
             for (std::size_t index = 0; index < enemies.size(); ++index)
             {
-                spawns.push_back({enemies.at(index), static_cast<int>(index) + 4, std::nullopt});
+                const auto isBoss = !bossSpawned && bossCombatant && enemies.at(index) == *bossCombatant;
+                spawns.push_back({enemies.at(index),
+                                  static_cast<int>(index) + 4,
+                                  std::nullopt,
+                                  {},
+                                  0,
+                                  isBoss ? bossAttributeMultiplier : 1.0});
+                bossSpawned = bossSpawned || isBoss;
             }
             return spawns;
         }
@@ -144,9 +154,11 @@ namespace soma::presentation
         const std::vector<gameplay::ContentDefinitionId>& enemies,
         const std::unordered_map<gameplay::ContentDefinitionId, int>& playerHealth,
         const std::unordered_map<gameplay::ContentDefinitionId, int>& playerFatigue,
-        const std::unordered_map<gameplay::ContentDefinitionId, std::vector<simulation::ActiveBuff>>& playerBuffs)
+        const std::unordered_map<gameplay::ContentDefinitionId, std::vector<simulation::ActiveBuff>>& playerBuffs,
+        const std::optional<gameplay::ContentDefinitionId>& bossCombatant,
+        double bossAttributeMultiplier)
     {
-        return buildBattleSpawns(encounter, enemies, playerHealth, playerFatigue, playerBuffs);
+        return buildBattleSpawns(encounter, enemies, playerHealth, playerFatigue, playerBuffs, bossCombatant, bossAttributeMultiplier);
     }
 
     BattleScreenOutcome runBattleScreenSession(sf::RenderWindow& window,
@@ -199,7 +211,13 @@ namespace soma::presentation
         gameplay::SeededRandom random{request.randomSeed};
         simulation::BattleSimulation battle{
             battleContent,
-            createBattleSpawns(request.encounter, request.enemies, request.playerHealth, request.playerFatigue, request.playerBuffs),
+            createBattleSpawns(request.encounter,
+                               request.enemies,
+                               request.playerHealth,
+                               request.playerFatigue,
+                               request.playerBuffs,
+                               request.bossCombatant,
+                               request.bossAttributeMultiplier),
             random,
             &ruleContent,
             &campaignState.rules()};

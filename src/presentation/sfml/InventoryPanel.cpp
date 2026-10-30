@@ -1,6 +1,7 @@
 #include "presentation/sfml/InventoryPanel.hpp"
 
 #include "game/EquipmentBonusCalculator.hpp"
+#include "presentation/sfml/BattleHud.hpp"
 #include "presentation/sfml/EconomyTooltip.hpp"
 #include "presentation/sfml/EconomyButton.hpp"
 #include "presentation/sfml/UiCursor.hpp"
@@ -155,6 +156,7 @@ namespace soma::presentation
         drawInventory();
         drawDraggedItem();
         drawTooltip();
+        drawStatTooltip();
         const auto& layout = content_.presentation.inventory;
         const auto panel = absolute(layout.itemsPanel);
         const auto panelWidth = textures_.at("inventory.items_panel").getSize().x;
@@ -611,5 +613,36 @@ namespace soma::presentation
             return;
         }
         drawItemTooltip(window_, interfaceFont_, content_.items.at(*hovered), mousePosition_);
+    }
+
+    void InventoryPanel::drawStatTooltip() const
+    {
+        static constexpr std::array keys{"armour",
+                                         "damage",
+                                         "initiative",
+                                         "critical_hit",
+                                         "dodge",
+                                         "precision",
+                                         "healing",
+                                         "sleep_resistance",
+                                         "confusion_resistance",
+                                         "debuff_resistance",
+                                         "decay_resistance"};
+        const auto statsPosition = absolute(content_.presentation.inventory.attributes);
+        for (std::size_t index = 0; index < keys.size(); ++index)
+        {
+            const auto rowPosition = statsPosition + sf::Vector2f{0.0F, static_cast<float>(index) * 32.4F - 4.0F};
+            if (!sf::FloatRect{rowPosition, {310.0F, 28.0F}}.contains(mousePosition_))
+            {
+                continue;
+            }
+            const auto tooltip = battleContent_.statTooltips.find(keys.at(index));
+            if (tooltip != battleContent_.statTooltips.end())
+            {
+                static_cast<void>(soma::presentation::drawTooltip(
+                    window_, interfaceFont_, tooltip->second, mousePosition_ + sf::Vector2f{12.0F, -8.0F}, true, 430.0F));
+            }
+            return;
+        }
     }
 } // namespace soma::presentation

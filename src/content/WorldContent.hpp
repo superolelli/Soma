@@ -13,6 +13,7 @@ namespace soma::content
         std::vector<gameplay::ContentDefinitionId> combatants;
         int budgetCost{};
         bool boss{};
+        std::optional<gameplay::ContentDefinitionId> bossCombatant;
         std::optional<gameplay::AssetId> introCue;
         gameplay::LootTableId rewardTable;
     };

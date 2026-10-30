@@ -71,6 +71,7 @@ namespace soma::presentation
         void drawInventory() const;
         void drawDraggedItem() const;
         void drawTooltip() const;
+        void drawStatTooltip() const;
 
         sf::RenderWindow& window_;
         const content::BattleContent& battleContent_;
