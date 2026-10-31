@@ -1,6 +1,6 @@
 #pragma once
 
-#include "content/EconomyContent.hpp"
+#include "content/economy/EconomyContent.hpp"
 #include "game/EconomyService.hpp"
 #include "simulation/battle/BattleSimulation.hpp"
 

@@ -59,24 +59,6 @@ namespace soma::game
         return result;
     }
 
-    std::vector<ShopOffer> EconomyQueries::shopOffers(std::span<const gameplay::ItemInstance> stock) const
-    {
-        std::vector<ShopOffer> result;
-        result.reserve(stock.size());
-        for (const auto& item : stock)
-        {
-            const auto& definition = content_.items.at(item.definition);
-            const auto available = definition.category != gameplay::ItemCategory::consumable || state_.itemUnlocked(item.definition);
-            result.push_back({item,
-                              definition.name,
-                              definition.icon,
-                              definition.price,
-                              available,
-                              available && state_.currency(gameplay::Currency::cards) >= definition.price});
-        }
-        return result;
-    }
-
     const content::AbilitySetDefinition* EconomyQueries::abilitySet(const gameplay::ContentDefinitionId& player,
                                                                      std::size_t abilitySlot) const
     {

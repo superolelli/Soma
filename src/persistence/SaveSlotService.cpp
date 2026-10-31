@@ -17,7 +17,15 @@ namespace soma::persistence
             auto& slot = result.at(static_cast<std::size_t>(index));
             slot.index = index;
             const auto path = pathFor(index);
-            if (!std::filesystem::exists(path))
+            std::error_code probeError;
+            const auto exists = std::filesystem::exists(path, probeError);
+            if (probeError)
+            {
+                slot.state = SaveSlotState::invalid;
+                slot.error = "Save slot could not be inspected: " + probeError.message();
+                continue;
+            }
+            if (!exists)
             {
                 continue;
             }
@@ -52,7 +60,13 @@ namespace soma::persistence
             return gameplay::Result<SaveGame>::failure("Save slot index is outside 0..2");
         }
         const auto path = pathFor(index);
-        if (!overwrite && std::filesystem::exists(path))
+        std::error_code probeError;
+        const auto exists = std::filesystem::exists(path, probeError);
+        if (probeError)
+        {
+            return gameplay::Result<SaveGame>::failure("Save slot could not be inspected: " + probeError.message());
+        }
+        if (!overwrite && exists)
         {
             return gameplay::Result<SaveGame>::failure("Save slot is already occupied");
         }

@@ -5,6 +5,30 @@
 
 namespace soma::simulation
 {
+    CombatantState* BattleSimulation::nextLivingCombatantBySlot(const CombatantState& current)
+    {
+        CombatantState* next = nullptr;
+        for (auto& candidate : combatants_)
+        {
+            if (candidate.alive() && candidate.slot > current.slot && (next == nullptr || candidate.slot < next->slot))
+            {
+                next = &candidate;
+            }
+        }
+        if (next != nullptr)
+        {
+            return next;
+        }
+        for (auto& candidate : combatants_)
+        {
+            if (candidate.alive() && (next == nullptr || candidate.slot < next->slot))
+            {
+                next = &candidate;
+            }
+        }
+        return next;
+    }
+
     namespace
     {
         constexpr int wakeSleepResistanceDuration = 3;
@@ -87,7 +111,7 @@ namespace soma::simulation
             recordDamageApplied(combatant.id, combatant, decayDamage, gameplay::DamageKind::decay, events);
             triggerTransfusions(combatant, events);
             expireTransfusionsWhenDecayEnds(combatant, events);
-            emitDefeatIfNeeded(combatant, events);
+            emitDefeatIfNeeded(combatant, combatant.id, events);
         }
 
         if (combatant.dynamite)
@@ -104,20 +128,11 @@ namespace soma::simulation
                 combatant.health = std::max(0, combatant.health - damage);
                 updateNofaceBuff(combatant);
                 recordDamageApplied(combatant.id, combatant, damage, gameplay::DamageKind::direct, events);
-                emitDefeatIfNeeded(combatant, events);
+                emitDefeatIfNeeded(combatant, combatant.id, events);
             }
             else
             {
-                auto next = std::ranges::find_if(combatants_, [&combatant](const auto& candidate) {
-                    return candidate.alive() && candidate.slot > combatant.slot;
-                });
-                if (next == combatants_.end())
-                {
-                    next = std::ranges::min_element(combatants_, {}, [](const auto& candidate) {
-                        return candidate.alive() ? candidate.slot : 100;
-                    });
-                }
-                if (next != combatants_.end())
+                if (auto* next = nextLivingCombatantBySlot(combatant))
                 {
                     next->dynamite = true;
                     recordStatusGained(*next, statusId("dynamite"), events);
@@ -233,11 +248,13 @@ namespace soma::simulation
         }
     }
 
-    void BattleSimulation::emitDefeatIfNeeded(CombatantState& target, std::vector<gameplay::GameplayEvent>& events)
+    void BattleSimulation::emitDefeatIfNeeded(CombatantState& target,
+                                              const gameplay::EntityId& source,
+                                              std::vector<gameplay::GameplayEvent>& events)
     {
         if (!target.alive())
         {
-            events.emplace_back(gameplay::CombatantDefeated{target.id});
+            events.emplace_back(gameplay::CombatantDefeated{target.id, source});
             if (target.team == gameplay::Team::enemies)
             {
                 roundsSinceEnemyDefeat_ = 0;

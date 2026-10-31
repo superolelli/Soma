@@ -1,41 +1,40 @@
 {
   "campaign": {
-    "acquired_skills": [
-      "skill.ole.0.1"
-    ],
+    "acquired_skills": [],
     "active_ability_versions": [],
     "consumables": [],
     "currencies": {
-      "cards": 468,
-      "dice": 0
+      "cards": 1006,
+      "dice": 2
     },
     "equipment": [],
-    "inventory": [],
+    "inventory": [
+      {
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "id": "item.bang.cowboyhat"
+      }
+    ],
     "rule_fragments": [
       {
-        "id": "rule.effect.lose_one_fatigue",
-        "quantity": 1
-      },
-      {
-        "id": "rule.effect.marked_three",
-        "quantity": 1
-      },
-      {
-        "id": "rule.effect.damage_one",
+        "id": "rule.effect.dynamite",
         "quantity": 1
       }
     ],
-    "rule_slots_unlocked": 2,
+    "rule_slots_unlocked": 1,
     "rules": [
       {
-        "effect": "rule.effect.lose_one_fatigue"
+        "effect": "rule.effect.dynamite"
       },
       {},
       {},
       {}
     ],
     "shop_dice_price": 100,
-    "shop_slots_unlocked": 2,
+    "shop_slots_unlocked": 1,
     "shop_stock": [
       {
         "item": {
@@ -44,7 +43,7 @@
             0,
             0
           ],
-          "id": "item.bang.knife"
+          "id": "item.bang.binocular"
         }
       },
       {
@@ -54,7 +53,20 @@
             128,
             0
           ],
-          "id": "item.bang.tomahawk"
+          "id": "item.bang.knife"
+        }
+      },
+      {
+        "fragment": "rule.effect.bounty_three"
+      },
+      {
+        "item": {
+          "color": [
+            0,
+            128,
+            0
+          ],
+          "id": "item.bang.sheriff_star"
         }
       },
       {
@@ -64,28 +76,16 @@
             0,
             0
           ],
-          "id": "item.bang.canteen"
+          "id": "item.bang.bible"
         }
-      },
-      {
-        "item": {
-          "color": [
-            0,
-            0,
-            0
-          ],
-          "id": "item.bang.sombrero"
-        }
-      },
-      {
-        "fragment": "rule.effect.armour_up"
       }
     ],
-    "unlocked_items": []
+    "unlocked_items": [
+      "item.bang.beer",
+      "item.bang.cowboyhat"
+    ]
   },
-  "completed_levels": [
-    "level.bang.1"
-  ],
-  "player_name": "Ole",
-  "schema_version": 4
+  "completed_levels": [],
+  "player_name": "ole",
+  "schema_version": 5
 }

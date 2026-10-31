@@ -1,7 +1,7 @@
 #pragma once
 
-#include "content/EconomyContent.hpp"
-#include "content/RuleContent.hpp"
+#include "content/economy/EconomyContent.hpp"
+#include "content/rules/RuleContent.hpp"
 #include "game/CampaignState.hpp"
 
 #include <cstddef>

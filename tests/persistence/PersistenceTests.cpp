@@ -1,8 +1,8 @@
-#include "content/BattleContentLoader.hpp"
-#include "content/EconomyContentLoader.hpp"
-#include "content/GameFlowContentLoader.hpp"
-#include "content/RuleContentLoader.hpp"
-#include "content/WorldContentLoader.hpp"
+#include "content/battle/BattleContentLoader.hpp"
+#include "content/economy/EconomyContentLoader.hpp"
+#include "content/flow/GameFlowContentLoader.hpp"
+#include "content/rules/RuleContentLoader.hpp"
+#include "content/world/WorldContentLoader.hpp"
 #include "game/EconomyService.hpp"
 #include "game/CampaignProgression.hpp"
 #include "persistence/SaveRepository.hpp"
@@ -57,8 +57,12 @@ int main(int argc, char** argv)
         soma::simulation::LevelGenerator{world.content, levelRandom}.generate(soma::gameplay::LevelId{"level.bang.1"});
     check(activeRun.restoreProgress(1));
     original.activeLevel = soma::game::ActiveLevelState{std::move(activeRun),
-                                                        {{soma::gameplay::ContentDefinitionId{"player.simon"}, 42}},
-                                                        {{soma::gameplay::ContentDefinitionId{"player.simon"}, 23}},
+                                                        {.enemiesDefeated = 4,
+                                                         .usedPlayerAbilities = {soma::gameplay::AbilityId{"ability.simon.1.primary"}},
+                                                         .playerHealth = {{soma::gameplay::ContentDefinitionId{"player.simon"}, 42}},
+                                                         .playerFatigue = {{soma::gameplay::ContentDefinitionId{"player.simon"}, 23}},
+                                                         .playerBuffs = {{soma::gameplay::ContentDefinitionId{"player.simon"},
+                                                                          {{{.armour = 2, .precision = 5}, 3, true}}}}},
                                                         1550.0F,
                                                         original.campaign.data()};
 
@@ -76,9 +80,15 @@ int main(int argc, char** argv)
     check(loaded.value().completedLevels == original.completedLevels);
     check(loaded.value().activeLevel.has_value());
     check(loaded.value().activeLevel->run.currentRoom() == 1);
-    check(loaded.value().activeLevel->playerFatigue.at(soma::gameplay::ContentDefinitionId{"player.simon"}) == 23);
+    check(loaded.value().activeLevel->progress.playerFatigue.at(soma::gameplay::ContentDefinitionId{"player.simon"}) == 23);
     check(loaded.value().activeLevel->viewLeft == 1550.0F);
-    check(loaded.value().activeLevel->playerHealth.at(soma::gameplay::ContentDefinitionId{"player.simon"}) == 42);
+    check(loaded.value().activeLevel->progress.playerHealth.at(soma::gameplay::ContentDefinitionId{"player.simon"}) == 42);
+    check(loaded.value().activeLevel->progress.enemiesDefeated == 4);
+    check(loaded.value().activeLevel->progress.usedPlayerAbilities.contains(soma::gameplay::AbilityId{"ability.simon.1.primary"}));
+    const auto& loadedBuff = loaded.value().activeLevel->progress.playerBuffs.at(soma::gameplay::ContentDefinitionId{"player.simon"}).front();
+    check(loadedBuff.attributes.armour == 2);
+    check(loadedBuff.attributes.precision == 5);
+    check(loadedBuff.remainingTurns == 3);
     check(loaded.value().activeLevel->baseline.currencies.at(soma::gameplay::Currency::dice) == 7);
 
     const auto developerSave = repository.load(std::filesystem::absolute(argv[3]));

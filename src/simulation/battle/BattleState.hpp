@@ -1,6 +1,6 @@
 #pragma once
 
-#include "content/BattleContent.hpp"
+#include "content/battle/BattleContent.hpp"
 
 #include <optional>
 #include <vector>
@@ -30,7 +30,7 @@ namespace soma::simulation
         std::optional<int> initialHealth;
         std::vector<ActiveBuff> initialBuffs;
         int initialFatigue{};
-        double attributeMultiplier{1.0};
+        double healthAndDamageMultiplier{1.0};
     };
 
     /// Tracks one independently expiring application of decay.

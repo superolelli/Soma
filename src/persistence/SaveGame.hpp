@@ -9,7 +9,7 @@
 
 namespace soma::persistence
 {
-    inline constexpr int currentSaveVersion = 4;
+    inline constexpr int currentSaveVersion = 5;
 
     struct SaveGame
     {

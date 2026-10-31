@@ -1,4 +1,5 @@
 #include "simulation/battle/BattleSimulation.hpp"
+#include "simulation/battle/StatusResistance.hpp"
 
 #include <algorithm>
 #include <bit>
@@ -15,22 +16,6 @@ namespace soma::simulation
             return gameplay::StatusId{"status." + std::move(value)};
         }
 
-        int resistance(const CombatantState& target, const std::string& kind)
-        {
-            if (kind == "sleep")
-            {
-                return target.secondaryAttributes.sleepResistance;
-            }
-            if (kind == "confusion")
-            {
-                return target.secondaryAttributes.confusionResistance;
-            }
-            if (kind == "decay")
-            {
-                return target.secondaryAttributes.decayResistance;
-            }
-            return target.secondaryAttributes.debuffResistance;
-        }
     } // namespace
 
     void BattleSimulation::applyEffect(CombatantState& actor,
@@ -109,7 +94,7 @@ namespace soma::simulation
                 applyBuff(actor, bounty, bounty.duration, events);
             }
             const auto defeatedByAttack = !target.alive();
-            emitDefeatIfNeeded(target, events);
+            emitDefeatIfNeeded(target, actor.id, events);
             if (defeatedByAttack && effect.transferDecayOnKill)
             {
                 transferDecayAfterDefeat(actor, target, events);
@@ -167,12 +152,12 @@ namespace soma::simulation
                                               std::vector<gameplay::GameplayEvent>& events)
     {
         const auto applyResistedStatus =
-            [this, &target, &events](double probability, const std::string& kind, const gameplay::StatusId& status, auto apply) {
+            [this, &target, &events](double probability, StatusResistance category, const gameplay::StatusId& status, auto apply) {
                 if (!random_.chance(std::min(probability, 1.0)))
                 {
                     return false;
                 }
-                if (random_.between(1, 100) <= resistance(target, kind))
+                if (random_.between(1, 100) <= resistance(target, category))
                 {
                     events.emplace_back(gameplay::EffectResisted{target.id, status});
                     return false;
@@ -183,7 +168,7 @@ namespace soma::simulation
 
         if (effect.confusionRounds > 0)
         {
-            applyResistedStatus(effect.confusionProbability, "confusion", statusId("confused"), [&] {
+            applyResistedStatus(effect.confusionProbability, StatusResistance::confusion, statusId("confused"), [&] {
                 const auto duration = std::max(0, effect.confusionRounds + durationBonus);
                 if (duration > 0)
                 {
@@ -199,7 +184,7 @@ namespace soma::simulation
             {
                 sleepProbability += static_cast<double>(actor.fatigue) / gameplay::maximumFatigue;
             }
-            const auto sleepApplied = applyResistedStatus(sleepProbability, "sleep", statusId("sleeping"), [&] {
+            const auto sleepApplied = applyResistedStatus(sleepProbability, StatusResistance::sleep, statusId("sleeping"), [&] {
                 target.sleeping = true;
                 recordStatusGained(target, statusId("sleeping"), events);
             });
@@ -248,7 +233,7 @@ namespace soma::simulation
         }
         if (effect.hackedRounds > 0)
         {
-            applyResistedStatus(1.0, "debuff", statusId("hacked"), [&] {
+            applyResistedStatus(1.0, StatusResistance::debuff, statusId("hacked"), [&] {
                 target.hackedTurns += std::max(0, effect.hackedRounds + durationBonus);
                 recordStatusGained(target, statusId("hacked"), events);
             });
@@ -312,7 +297,7 @@ namespace soma::simulation
         {
             return false;
         }
-        if (!ignoreResistance && random_.between(1, 100) <= resistance(target, "decay"))
+        if (!ignoreResistance && random_.between(1, 100) <= resistance(target, StatusResistance::decay))
         {
             events.emplace_back(gameplay::EffectResisted{target.id, statusId("decay")});
             return false;
@@ -333,8 +318,8 @@ namespace soma::simulation
         }
 
         const auto duration = std::max(1, effect.randomNegativeStatusDuration + durationBonus);
-        const auto resisted = [this, &target, &events](const std::string& kind, const gameplay::StatusId& status) {
-            if (random_.between(1, 100) > resistance(target, kind))
+        const auto resisted = [this, &target, &events](StatusResistance category, const gameplay::StatusId& status) {
+            if (random_.between(1, 100) > resistance(target, category))
             {
                 return false;
             }
@@ -345,7 +330,7 @@ namespace soma::simulation
         switch (random_.between(0, 6))
         {
         case 0: {
-            if (resisted("debuff", statusId("debuffed")))
+            if (resisted(StatusResistance::debuff, statusId("debuffed")))
             {
                 return;
             }
@@ -383,14 +368,14 @@ namespace soma::simulation
             break;
         }
         case 1:
-            if (!resisted("sleep", statusId("sleeping")))
+            if (!resisted(StatusResistance::sleep, statusId("sleeping")))
             {
                 target.sleeping = true;
                 recordStatusGained(target, statusId("sleeping"), events);
             }
             break;
         case 2:
-            if (!resisted("confusion", statusId("confused")))
+            if (!resisted(StatusResistance::confusion, statusId("confused")))
             {
                 target.confusedTurns += duration;
                 recordStatusGained(target, statusId("confused"), events);
@@ -400,21 +385,21 @@ namespace soma::simulation
             static_cast<void>(tryApplyDecay(target, random_.between(1, 2), duration, false, events));
             break;
         case 4:
-            if (!resisted("debuff", statusId("bounty")))
+            if (!resisted(StatusResistance::debuff, statusId("bounty")))
             {
                 target.bountyTurns += duration;
                 recordStatusGained(target, statusId("bounty"), events);
             }
             break;
         case 5:
-            if (!resisted("debuff", statusId("marked")))
+            if (!resisted(StatusResistance::debuff, statusId("marked")))
             {
                 target.markedTurns += duration;
                 recordStatusGained(target, statusId("marked"), events);
             }
             break;
         default:
-            if (!resisted("debuff", statusId("hacked")))
+            if (!resisted(StatusResistance::debuff, statusId("hacked")))
             {
                 target.hackedTurns += duration;
                 recordStatusGained(target, statusId("hacked"), events);

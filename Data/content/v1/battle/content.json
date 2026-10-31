@@ -1,7 +1,7 @@
 {
     "schema_version":  1,
     "content_kind":  "battle",
-    "boss_attribute_multiplier":  1.5,
+    "boss_health_and_damage_multiplier":  1.5,
     "combatants":  [
                        {
                            "id":  "player.simon",
@@ -124,7 +124,7 @@
                                              "ability.enemy.aim"
                                          ],
                            "attributes":  {
-                                              "maximum_health":  15,
+                                              "maximum_health":  10,
                                               "damage_minimum":  7,
                                               "damage_maximum":  10,
                                               "armour": 0,
@@ -151,7 +151,7 @@
                                              "ability.enemy.fanning"
                                          ],
                            "attributes":  {
-                                              "maximum_health":  20,
+                                              "maximum_health":  15,
                                               "damage_minimum":  5,
                                               "damage_maximum":  8,
                                               "armour": 5,
@@ -178,7 +178,7 @@
                                              "ability.enemy.knock_out"
                                          ],
                            "attributes":  {
-                                              "maximum_health":  20,
+                                              "maximum_health":  15,
                                               "damage_minimum":  3,
                                               "damage_maximum":  5,
                                               "armour":  0,
@@ -198,7 +198,7 @@
                            "id":  "enemy.hilfssheriff",
                            "ai_policy":  "deputy_support",
                            "team":  "enemies",
-                           "encounter_cost":  2,
+                           "encounter_cost":  1,
                            "name":  "Hilfssheriff",
                            "abilities":  [
                                              "ability.enemy.bang",
@@ -206,13 +206,13 @@
                                              "ability.enemy.deputy"
                                          ],
                            "attributes":  {
-                                              "maximum_health":  20,
+                                              "maximum_health":  15,
                                               "damage_minimum":  5,
                                               "damage_maximum":  8,
-                                              "armour":  1,
+                                              "armour":  0,
                                               "critical_hit_chance":  5,
-                                              "dodge":  3,
-                                              "initiative":  1,
+                                              "dodge":  5,
+                                              "initiative":  3,
                                               "precision":  5
                                           },
                            "resistances":  {
@@ -226,7 +226,7 @@
                            "id":  "enemy.greg",
                            "ai_policy":  "gravedigger",
                            "team":  "enemies",
-                           "encounter_cost":  4,
+                           "encounter_cost": 2,
                            "name":  "Greg Digger",
                            "abilities":  [
                                              "ability.enemy.shovel_hit",
@@ -234,14 +234,14 @@
                                              "ability.enemy.gravedigger_gaze"
                                          ],
                            "attributes":  {
-                                              "maximum_health":  35,
-                                              "damage_minimum":  7,
+                                              "maximum_health":  20,
+                                              "damage_minimum":  4,
                                               "damage_maximum":  10,
                                               "armour":  5,
                                               "critical_hit_chance":  10,
-                                              "dodge":  10,
-                                              "initiative":  5,
-                                              "precision":  10
+                                              "dodge":  5,
+                                              "initiative":  2,
+                                              "precision":  5
                                           },
                            "resistances":  {
                                                "sleep":  0,
@@ -254,7 +254,7 @@
                            "id":  "enemy.apache_kid",
                            "ai_policy":  "apache_kid",
                            "team":  "enemies",
-                           "encounter_cost":  5,
+                           "encounter_cost":  3,
                            "name":  "Apache Kid",
                            "abilities":  [
                                              "ability.enemy.indians",
@@ -262,20 +262,20 @@
                                              "ability.enemy.no_pain"
                                          ],
                            "attributes":  {
-                                              "maximum_health":  35,
-                                              "damage_minimum":  9,
-                                              "damage_maximum":  12,
-                                              "armour":  1,
-                                              "critical_hit_chance":  9,
-                                              "dodge":  24,
-                                              "initiative":  8,
-                                              "precision":  9
+                                              "maximum_health":  30,
+                                              "damage_minimum":  3,
+                                              "damage_maximum":  5,
+                                              "armour":  0,
+                                              "critical_hit_chance":  5,
+                                              "dodge":  25,
+                                              "initiative":  5,
+                                              "precision":  10
                                           },
                            "resistances":  {
                                                "sleep":  0,
-                                               "confusion":  30,
+                                               "confusion":  0,
                                                "debuff":  0,
-                                               "decay":  30
+                                               "decay":  50
                                            }
                        },
                        {
@@ -1256,7 +1256,8 @@
                                        "animation":  "shovel_hit",
                                        "effectAnimation":  "shovel_hit",
                                        "effect":  {
-                                                      "damageFactor":  1
+                                                      "damageFactor":  1,
+                                                      "rage": 3
                                                   },
                                        "targeting":  {
                                                          "relation":  "opposing_team",
@@ -1272,7 +1273,8 @@
                                        "name":  "Die Toten begraben",
                                        "animation":  "bury_the_dead",
                                        "effect":  {
-                                                      "healSelf":  20
+                                                      "healSelf":  15,
+                                                      "removeDebuffs":true
                                                   },
                                        "targeting":  {
                                                          "relation":  "self",
@@ -1293,12 +1295,12 @@
                                                       "buff":  {
                                                                    "duration":  3,
                                                                    "isPositive":  false,
-                                                                   "damage":  -5
+                                                                   "precision": -10
                                                                }
                                                   },
                                        "targeting":  {
                                                          "relation":  "opposing_team",
-                                                         "scope":  "single",
+                                                         "scope":  "team",
                                                          "count":  1
                                                      }
                                    }
@@ -1340,7 +1342,7 @@
                                                       "damageFactor":  1,
                                                       "decay":  {
                                                                     "rounds":  3,
-                                                                    "damage":  1
+                                                                    "damage":  2
                                                                 }
                                                   },
                                        "targeting":  {
@@ -1374,8 +1376,6 @@
                                        "name":  "Kopfgeld",
                                        "animation":  "bounty",
                                        "effectAnimation":  "bounty",
-                                       "fatigue":  1,
-                                       "fatigue_target":  "targets",
                                        "effect":  {
                                                       "mark":  3,
                                                       "bounty":  3
@@ -1714,20 +1714,19 @@
                           "id":  "ability.enemy.deputy",
                           "data":  {
                                        "id":  26,
-                                       "name":  "Hilfssherriff",
+                                       "name":  "Hilfssherriff zur Stelle",
                                        "animation":  "deputy",
                                        "effectAnimation":  "indomitable_happiness_friendly",
                                        "effect":  {
-                                                      "addMiss":  1,
                                                       "buff":  {
                                                                    "duration":  3,
-                                                                   "criticalHit":  5,
+                                                                   "criticalHit":  10,
                                                                    "precision":  10
                                                                }
                                                   },
                                        "targeting":  {
                                                          "relation":  "own_team",
-                                                         "scope":  "single",
+                                                         "scope":  "team",
                                                          "count":  1
                                                      }
                                    }
@@ -1741,16 +1740,19 @@
                                        "effectAnimation":  "indomitable_happiness_friendly",
                                        "effect":  {
                                                       "buff":  {
-                                                                   "duration":  3,
-                                                                   "armour":  10,
+                                                                   "isPositive": true,
+                                                                   "onSelf": true,
+                                                                   "duration": 3,
+                                                                   "armour": 20,
                                                                    "sleepResistance":  20,
                                                                    "confusionResistance":  20,
                                                                    "decayResistance":  20,
                                                                    "debuffResistance":  20
-                                                               }
+                                                               },
+                                                    "transfusion": 3
                                                   },
                                        "targeting":  {
-                                                         "relation":  "own_team",
+                                                         "relation":  "opposing_team",
                                                          "scope":  "single",
                                                          "count":  1
                                                      }

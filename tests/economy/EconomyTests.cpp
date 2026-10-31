@@ -152,6 +152,8 @@ int main()
     check(health == 10);
     check(buffs.size() == 1 && buffs.front().remainingTurns == 10);
     check(runConsumables.use(tonic, health, 10, buffs).hasValue());
-    check(buffs.size() == 1 && buffs.front().remainingTurns == 20);
+    check(buffs.size() == 2);
+    check(buffs.front().remainingTurns == 10);
+    check(buffs.back().remainingTurns == 10);
     check(runState.consumableCount(tonic.id) == 0);
 }

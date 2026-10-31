@@ -1,6 +1,6 @@
-#include "content/BattleContentLoader.hpp"
-#include "content/EconomyContentLoader.hpp"
-#include "content/RuleContentLoader.hpp"
+#include "content/battle/BattleContentLoader.hpp"
+#include "content/economy/EconomyContentLoader.hpp"
+#include "content/rules/RuleContentLoader.hpp"
 #include "game/CampaignBattleContentBuilder.hpp"
 #include "game/EconomyQueries.hpp"
 #include "game/EconomyService.hpp"
@@ -159,12 +159,6 @@ int main(int argc, char** argv)
     check(inventory.front().name == "Eisenplatte");
     check(inventory.front().salePrice == 16);
     check(inventory.front().item.color == soma::gameplay::ItemColor{});
-
-    const std::vector stock{soma::gameplay::ItemInstance{ironPlate.id, {}}, soma::gameplay::ItemInstance{flashPowder.id, {}}};
-    const auto offers = queries.shopOffers(stock);
-    check(offers.size() == 2);
-    check(offers[0].available && offers[0].affordable);
-    check(!offers[1].available);
 
     const auto skills = queries.skills(soma::gameplay::ContentDefinitionId{"player.simon"}, 0, 0);
     check(skills.size() == 5);

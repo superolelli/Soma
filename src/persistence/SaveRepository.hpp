@@ -1,8 +1,8 @@
 #pragma once
 
-#include "content/EconomyContent.hpp"
-#include "content/WorldContent.hpp"
-#include "content/RuleContent.hpp"
+#include "content/economy/EconomyContent.hpp"
+#include "content/world/WorldContent.hpp"
+#include "content/rules/RuleContent.hpp"
 #include "gameplay/common/Result.hpp"
 #include "persistence/SaveGame.hpp"
 

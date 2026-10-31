@@ -1,8 +1,8 @@
-#include "content/BattleContentLoader.hpp"
-#include "content/EconomyContentLoader.hpp"
-#include "content/GameFlowContentLoader.hpp"
-#include "content/RuleContentLoader.hpp"
-#include "content/WorldContentLoader.hpp"
+#include "content/battle/BattleContentLoader.hpp"
+#include "content/economy/EconomyContentLoader.hpp"
+#include "content/flow/GameFlowContentLoader.hpp"
+#include "content/rules/RuleContentLoader.hpp"
+#include "content/world/WorldContentLoader.hpp"
 
 #include <filesystem>
 #include <iostream>
@@ -109,8 +109,8 @@ int main(int argc, char** argv)
         battleResult.content.combatants.size() + battleResult.content.abilities.size() + battleResult.content.encounters.size();
     const auto economyDefinitions =
         economyResult.content.items.size() + economyResult.content.skills.size() + economyResult.content.abilitySets.size();
-    const auto worldDefinitions = worldResult.content.levels.size() + worldResult.content.encounters.size() +
-                                  worldResult.content.lootables.size() + worldResult.content.lootTables.size();
+    const auto worldDefinitions =
+        worldResult.content.levels.size() + worldResult.content.encounters.size() + worldResult.content.lootables.size();
     const auto definitionCount = battleDefinitions + economyDefinitions + worldDefinitions + ruleResult.content.fragments.size();
     std::cout << "Validated " << definitionCount << " definitions from " << contentRoot.generic_string() << '\n';
     return battleResult.valid() && economyResult.valid() && ruleResult.valid() && flowResult.valid() && worldResult.valid() && crossContentValid ? 0

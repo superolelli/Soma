@@ -1,5 +1,7 @@
 #include "simulation/battle/EnemyPolicy.hpp"
 
+#include "simulation/battle/AbilityTargets.hpp"
+
 #include <algorithm>
 #include <ranges>
 
@@ -15,6 +17,18 @@ namespace soma::simulation
         bool woundedByAtLeast(const CombatantState& combatant, int amount)
         {
             return combatant.health <= combatant.attributes.maximumHealth - amount;
+        }
+
+        bool fillsTargetCount(const BattleSimulation& battle,
+                              const CombatantState& actor,
+                              const gameplay::AbilityId& abilityId,
+                              const gameplay::EntityId& primaryTarget)
+        {
+            const auto* primary = battle.find(primaryTarget);
+            const auto& targeting = battle.content().abilities.at(abilityId).targeting;
+            return primary != nullptr &&
+                   abilityTargets(targeting, actor, *primary, battle.combatants()).size() >=
+                       static_cast<std::size_t>(targeting.targetCount);
         }
     } // namespace
 
@@ -73,10 +87,11 @@ namespace soma::simulation
         }
         if (id == "fanning")
         {
-            const auto canFan = std::ranges::any_of(battle.combatants(), [](const auto& target) {
-                return target.team == gameplay::Team::players && target.alive() && target.slot > 0;
+            const auto fanning = enemyAbility("fanning");
+            const auto canFan = std::ranges::any_of(battle.validPrimaryTargets(fanning), [&](const auto& target) {
+                return fillsTargetCount(battle, actor, fanning, target);
             });
-            return coin() || !canFan ? enemyAbility("bang") : enemyAbility("fanning");
+            return coin() || !canFan ? enemyAbility("bang") : fanning;
         }
         if (id == "sleep")
         {
@@ -122,11 +137,15 @@ namespace soma::simulation
             const auto allies = std::ranges::count_if(battle.combatants(), [](const auto& ally) {
                 return ally.team == gameplay::Team::enemies && ally.alive();
             });
+
+            const auto playerWithoutTransfusion = std::ranges::any_of(battle.combatants(), [](const auto& c) {
+                return c.team == gameplay::Team::players && c.alive() && c.transfusions.empty();
+            });
             if (allies <= 2)
             {
                 return enemyAbility("indians");
             }
-            return coin() ? enemyAbility("knife") : enemyAbility("no_pain");
+            return playerWithoutTransfusion && coin() ? enemyAbility("no_pain") : enemyAbility("knife");
         }
         if (id == "big_spencer")
         {
@@ -246,10 +265,22 @@ namespace soma::simulation
                 return battle.find(id)->markedTurns == 0;
             });
         }
+        if(ability == enemyAbility("no_pain"))
+        {
+            std::erase_if(targets, [&battle](const auto& id) {
+                return !battle.find(id)->transfusions.empty();
+            });
+        }
         if (ability == enemyAbility("crystal_ball"))
         {
             std::erase_if(targets, [&battle](const auto& id) {
                 return battle.find(id)->buffs.empty();
+            });
+        }
+        if (ability == enemyAbility("fanning"))
+        {
+            std::erase_if(targets, [&battle, &actor, &ability](const auto& id) {
+                return !fillsTargetCount(battle, actor, ability, id);
             });
         }
         if (targets.empty())

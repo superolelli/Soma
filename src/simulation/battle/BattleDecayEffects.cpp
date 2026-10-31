@@ -39,7 +39,7 @@ namespace soma::simulation
         recordDamageApplied(actor.id, target, damage, gameplay::DamageKind::decay, events);
         triggerTransfusions(target, events);
         expireTransfusionsWhenDecayEnds(target, events);
-        emitDefeatIfNeeded(target, events);
+        emitDefeatIfNeeded(target, actor.id, events);
     }
 
     void BattleSimulation::transferDecayAfterDefeat(CombatantState& actor, CombatantState& defeated, std::vector<gameplay::GameplayEvent>& events)

@@ -48,7 +48,6 @@ namespace soma::gameplay
     struct EncounterTag;
     struct LevelTag;
     struct LootableTag;
-    struct LootTableTag;
     struct StatusTag;
     struct EquipmentSlotTag;
     struct SkillTag;
@@ -63,7 +62,6 @@ namespace soma::gameplay
     using EncounterId = StrongId<EncounterTag>;
     using LevelId = StrongId<LevelTag>;
     using LootableId = StrongId<LootableTag>;
-    using LootTableId = StrongId<LootTableTag>;
     using StatusId = StrongId<StatusTag>;
     using EquipmentSlotId = StrongId<EquipmentSlotTag>;
     using SkillId = StrongId<SkillTag>;

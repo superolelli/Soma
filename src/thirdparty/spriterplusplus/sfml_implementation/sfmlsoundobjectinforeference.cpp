@@ -1,6 +1,6 @@
 #include "sfmlsoundobjectinforeference.h"
 
-#include "presentation/sfml/AudioSettings.hpp"
+#include "presentation/sfml/common/AudioSettings.hpp"
 
 namespace SpriterEngine
 {

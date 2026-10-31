@@ -1,7 +1,7 @@
 #pragma once
 
 #include "gameplay/items/ItemTypes.hpp"
-#include "game/RuleState.hpp"
+#include "gameplay/rules/ComposedRule.hpp"
 
 #include <optional>
 #include <set>
@@ -54,7 +54,7 @@ namespace soma::game
         std::set<gameplay::SkillId> acquiredSkills;
         std::unordered_map<AbilitySetLocation, std::size_t, AbilitySetLocationHash> activeAbilityVersions;
         std::unordered_map<gameplay::RuleFragmentId, int> ruleFragments;
-        ComposedRules rules;
+        gameplay::ComposedRules rules;
         std::vector<ShopStockEntry> shopStock;
         int ruleSlotsUnlocked{1};
         int shopSlotsUnlocked{1};
@@ -76,7 +76,7 @@ namespace soma::game
         [[nodiscard]] std::size_t activeAbilityVersion(const gameplay::ContentDefinitionId& player,
                                                        std::size_t abilitySlot) const noexcept;
         [[nodiscard]] int ruleFragmentCount(const gameplay::RuleFragmentId& fragment) const noexcept;
-        [[nodiscard]] const ComposedRules& rules() const noexcept;
+        [[nodiscard]] const gameplay::ComposedRules& rules() const noexcept;
         [[nodiscard]] const std::vector<ShopStockEntry>& shopStock() const noexcept;
         [[nodiscard]] int ruleSlotsUnlocked() const noexcept;
         [[nodiscard]] int shopSlotsUnlocked() const noexcept;
@@ -96,7 +96,7 @@ namespace soma::game
         std::set<gameplay::SkillId> acquiredSkills_;
         std::unordered_map<AbilitySetLocation, std::size_t, AbilitySetLocationHash> activeAbilityVersions_;
         std::unordered_map<gameplay::RuleFragmentId, int> ruleFragments_;
-        ComposedRules rules_;
+        gameplay::ComposedRules rules_;
         std::vector<ShopStockEntry> shopStock_;
         int ruleSlotsUnlocked_{1};
         int shopSlotsUnlocked_{1};

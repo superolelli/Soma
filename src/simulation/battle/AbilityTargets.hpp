@@ -1,6 +1,6 @@
 #pragma once
 
-#include "content/BattleContent.hpp"
+#include "content/battle/BattleContent.hpp"
 #include "simulation/battle/BattleSimulation.hpp"
 
 #include <vector>

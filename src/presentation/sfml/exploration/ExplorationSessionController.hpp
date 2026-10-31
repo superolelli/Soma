@@ -1,0 +1,177 @@
+#pragma once
+
+#include "game/ExplorationConsumableUseService.hpp"
+#include "game/ExplorationOutcomeService.hpp"
+#include "game/RuleBuilderService.hpp"
+#include "gameplay/random/SeededRandom.hpp"
+#include "presentation/sfml/common/ActiveRulesPanel.hpp"
+#include "presentation/sfml/battle/BattleActionPresentation.hpp"
+#include "presentation/sfml/battle/BattleScreenSession.hpp"
+#include "presentation/sfml/battle/BattleScreenView.hpp"
+#include "presentation/sfml/economy/EconomySoundPlayer.hpp"
+#include "presentation/sfml/economy/EconomyTextures.hpp"
+#include "presentation/sfml/exploration/ExplorationConsumablePanel.hpp"
+#include "presentation/sfml/exploration/ExplorationHud.hpp"
+#include "presentation/sfml/exploration/ExplorationMusicPlayer.hpp"
+#include "presentation/sfml/exploration/ExplorationPartyStatus.hpp"
+#include "presentation/sfml/exploration/ExplorationSession.hpp"
+#include "presentation/sfml/exploration/ExplorationSpeechBubbles.hpp"
+#include "presentation/sfml/exploration/LevelResultDialog.hpp"
+#include "presentation/sfml/exploration/LootDialog.hpp"
+#include "presentation/sfml/common/ParticleSystem.hpp"
+#include "presentation/sfml/common/PauseMenu.hpp"
+#include "presentation/sfml/common/SfeMovieVideoPlayer.hpp"
+#include "presentation/sfml/common/SpriterAnimationPlayer.hpp"
+#include "simulation/rewards/LevelRewardCalculator.hpp"
+#include "simulation/rewards/LootGenerator.hpp"
+
+#include <SFML/Graphics.hpp>
+#include <array>
+#include <filesystem>
+#include <functional>
+#include <memory>
+#include <optional>
+#include <set>
+#include <span>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+
+namespace soma::presentation::detail
+{
+    /// Owns the runtime state of one exploration level and coordinates traversal, encounters, rewards, persistence, and presentation.
+    class ExplorationSession
+    {
+      public:
+        ExplorationSession(const content::BattleContent& battle,
+                           const content::EconomyContent& economy,
+                           const content::WorldContent& world,
+                           const content::RuleContent& rules,
+                           gameplay::LevelId level,
+                           game::CampaignState& campaignState,
+                           game::EconomyService& economyService,
+                           std::uint64_t randomSeed,
+                           std::optional<simulation::LevelRun> authoredLevel,
+                           sf::RenderWindow* sharedWindow = nullptr,
+                           const content::GameFlowContent* flow = nullptr,
+                           std::function<void()> loadingFrame = {},
+                           std::optional<game::ActiveLevelState> savedLevel = std::nullopt);
+
+        game::LevelSessionResult run();
+        [[nodiscard]] game::ActiveLevelState activeLevelState() const;
+
+      private:
+        static const std::array<gameplay::ContentDefinitionId, 4>& playerDefinitions();
+        static gameplay::ContentDefinitionId battleEncounterFor(const content::LevelDefinition& level);
+        static std::vector<std::filesystem::path> campaignMusicTracks(const content::WorldContent& world, const content::LevelDefinition& level);
+        void showLoadingFrame();
+        void rememberLevelBeforePendingEncounter();
+        void requestSessionClose();
+        void initializePlayerHealth();
+        void initializePlayerFatigue();
+        void loadWorldTextures();
+        void loadCursors();
+        void createParty();
+
+        bool processEvents();
+        void handleConsumableRelease(sf::Vector2i pixel);
+        bool handleKey(const sf::Event::KeyPressed& key);
+        void handleClick(sf::Vector2i pixel);
+        void tryOpenLootable(sf::Vector2f mouse);
+        void updateCursor();
+        [[nodiscard]] bool isHoveringLootable(sf::Vector2f mouse) const;
+        [[nodiscard]] sf::FloatRect lootableHitbox(std::size_t roomIndex) const;
+        bool tryOpenLootable(std::size_t roomIndex, sf::Vector2f mouse);
+
+        bool runBattle();
+        void prepareUpcomingBattleViews();
+        void appendBattleParallaxLayers(BattleScreenRequest& request) const;
+        void appendBattleParallaxLayer(BattleScreenRequest& request, std::span<const gameplay::AssetId> tiles, int scrollDivisor) const;
+        void presentBattleOutcome(const content::EncounterDefinition& encounter,
+                                  const content::LevelDefinition& level,
+                                  BattleScreenOutcome outcome);
+        void openBattleRewards(const content::EncounterDefinition& encounter, const content::LevelDefinition& level);
+        void openLevelResult(const content::LevelDefinition& level, bool completed);
+
+        void update(sf::Time elapsed);
+        void updatePartyStatus(sf::Time elapsed);
+        void updateSpeechBubbles(sf::Time elapsed);
+        [[nodiscard]] std::array<AnimationBounds, 4> partyBounds();
+        [[nodiscard]] std::array<bool, 4> livingPartyMembers() const;
+        [[nodiscard]] int effectiveMaximumHealth(const gameplay::ContentDefinitionId& id) const;
+        [[nodiscard]] float movementDirection() const;
+        void enterVisibleRoom(float viewLeft);
+        void updateParty(sf::Time elapsed, float direction, float viewLeft);
+        void render();
+        void drawExplorationFrame();
+        void renderParallax();
+        void renderParallaxLayer(std::span<const gameplay::AssetId> tiles, int scrollDivisor);
+        void renderRooms();
+        void renderParty();
+        void renderPartyStatus();
+        void renderHud();
+
+        const content::BattleContent& battle_;
+        const content::EconomyContent& economy_;
+        const content::WorldContent& world_;
+        const content::RuleContent& rules_;
+        gameplay::LevelId levelId_;
+        game::CampaignState& campaignState_;
+        game::EconomyService& economyService_;
+        game::RuleBuilderService ruleService_;
+        game::CampaignStateData baselineCampaign_;
+        std::set<gameplay::ItemId> initiallyUnlockedItems_;
+        std::set<content::RuleFragmentType> initiallyDiscoveredRuleTypes_;
+        content::BattleContent campaignBattle_;
+        gameplay::SeededRandom random_;
+        gameplay::SeededRandom speechRandom_;
+        simulation::LevelRun levelRun_;
+        ParticleSystem particles_;
+        ExplorationMusicPlayer music_;
+        SfeMovieVideoPlayer videoPlayer_;
+        const content::WorldContent::Presentation& layout_;
+        std::unique_ptr<sf::RenderWindow> ownedWindow_;
+        sf::RenderWindow& window_;
+        bool embedded_{};
+        std::function<void()> loadingFrame_;
+        const content::GameFlowContent* flow_{};
+        bool returnRequested_{};
+        std::unique_ptr<PauseMenu> pauseMenu_;
+        sf::View view_;
+        sf::View hudView_;
+        sf::Font font_;
+        EconomySoundPlayer sounds_;
+        EconomyTextures economyTextures_;
+        BattleTextures battleTextures_;
+        std::unordered_map<gameplay::AssetId, sf::Texture> textures_;
+        float roomWidth_{};
+        float maximumViewLeft_{};
+        std::vector<std::unique_ptr<SpriterAnimationPlayer>> party_;
+        std::unique_ptr<SpriterAnimationPlayer> battleTransition_;
+        std::unique_ptr<SpriterAnimationPlayer> battleEffect_;
+        CombatantViews preparedBattleViews_;
+        std::optional<gameplay::EncounterId> preparedEncounter_;
+        std::unique_ptr<ExplorationSpeechBubbles> speechBubbles_;
+        std::unique_ptr<ExplorationPartyStatus> partyStatus_;
+        std::unique_ptr<ExplorationHud> explorationHud_;
+        std::unique_ptr<ExplorationConsumablePanel> explorationConsumables_;
+        std::unique_ptr<ActiveRulesPanel> activeRules_;
+        std::optional<sf::Image> arrowCursorImage_;
+        std::optional<sf::Image> handCursorImage_;
+        std::optional<sf::Cursor> arrowCursor_;
+        std::optional<sf::Cursor> handCursor_;
+        sf::Shader lootableOutlineShader_;
+        bool lootableOutlineAvailable_{};
+        sf::Clock clock_;
+        bool walking_{};
+        std::optional<gameplay::EncounterId> pendingEncounter_;
+        std::optional<simulation::LevelRun> levelRunBeforeBattle_;
+        std::unique_ptr<LootDialog> lootDialog_;
+        std::unique_ptr<LevelResultDialog> levelResultDialog_;
+        bool completeLevelAfterLoot_{};
+        simulation::LootGenerator lootGenerator_;
+        game::ExplorationConsumableUseService explorationConsumableUse_;
+        game::LevelSessionResult result_{game::LevelSessionResult::abandoned};
+        game::ExplorationProgress progress_;
+    };
+} // namespace soma::presentation::detail

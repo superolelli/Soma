@@ -1,6 +1,6 @@
 #pragma once
 
-#include "content/WorldContent.hpp"
+#include "content/world/WorldContent.hpp"
 
 #include <optional>
 
@@ -34,6 +34,8 @@ namespace soma::simulation
     class LevelRun
     {
       public:
+        /// Constructs a traversable level containing at least one regular room followed by a boss room.
+        /// @throws std::invalid_argument if there are fewer than two rooms or the final room is not a boss room.
         LevelRun(gameplay::LevelId level, std::vector<GeneratedRoom> rooms, GeneratedParallax parallax = {});
 
         [[nodiscard]] const gameplay::LevelId& level() const noexcept;

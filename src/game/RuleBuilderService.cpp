@@ -55,7 +55,7 @@ namespace soma::game
 
     gameplay::Result<RuleChange> RuleBuilderService::unlockNextSlot()
     {
-        if (state_.ruleSlotsUnlocked_ >= static_cast<int>(maximumRuleSlots))
+        if (state_.ruleSlotsUnlocked_ >= static_cast<int>(gameplay::maximumRuleSlots))
             return gameplay::Result<RuleChange>::failure("All rule slots are already unlocked");
         const auto cost = content_.slotUnlockCosts.at(static_cast<std::size_t>(state_.ruleSlotsUnlocked_ - 1));
         auto& cards = state_.currencies_[gameplay::Currency::cards];
@@ -75,8 +75,8 @@ namespace soma::game
         {
             if (!id) continue;
             const auto* fragment = definition(*id);
-            triggered = triggered && fragment->allowedModes.at(0);
-            standing = standing && fragment->allowedModes.at(1);
+            triggered = triggered && fragment->allowedModes.supports(content::RuleMode::triggered);
+            standing = standing && fragment->allowedModes.supports(content::RuleMode::standing);
         }
         if (triggered == standing) return std::nullopt;
         return triggered ? content::RuleMode::triggered : content::RuleMode::standing;
@@ -117,7 +117,8 @@ namespace soma::game
         return found == content_.fragments.end() ? nullptr : &found->second;
     }
 
-    std::optional<gameplay::RuleFragmentId>& RuleBuilderService::field(ComposedRule& rule, content::RuleFragmentType type)
+    std::optional<gameplay::RuleFragmentId>& RuleBuilderService::field(gameplay::ComposedRule& rule,
+                                                                       content::RuleFragmentType type)
     {
         switch (type)
         {
@@ -129,12 +130,13 @@ namespace soma::game
         return rule.trigger;
     }
 
-    const std::optional<gameplay::RuleFragmentId>& RuleBuilderService::field(const ComposedRule& rule, content::RuleFragmentType type)
+    const std::optional<gameplay::RuleFragmentId>& RuleBuilderService::field(const gameplay::ComposedRule& rule,
+                                                                             content::RuleFragmentType type)
     {
-        return field(const_cast<ComposedRule&>(rule), type);
+        return field(const_cast<gameplay::ComposedRule&>(rule), type);
     }
 
-    bool RuleBuilderService::validCombination(const ComposedRule& rule) const
+    bool RuleBuilderService::validCombination(const gameplay::ComposedRule& rule) const
     {
         bool triggered = true;
         bool standing = true;
@@ -143,8 +145,8 @@ namespace soma::game
             if (!id) continue;
             const auto* fragment = definition(*id);
             if (!fragment) return false;
-            triggered = triggered && fragment->allowedModes.at(0);
-            standing = standing && fragment->allowedModes.at(1);
+            triggered = triggered && fragment->allowedModes.supports(content::RuleMode::triggered);
+            standing = standing && fragment->allowedModes.supports(content::RuleMode::standing);
         }
         if (!triggered && !standing) return false;
         if (triggered && rule.modifier) return false;

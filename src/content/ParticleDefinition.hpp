@@ -1,6 +1,7 @@
 #pragma once
 
-#include "content/EconomyContent.hpp"
+#include "content/Geometry.hpp"
+#include "gameplay/common/StrongId.hpp"
 
 namespace soma::content
 {

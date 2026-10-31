@@ -1,8 +1,10 @@
 #pragma once
 
-#include "content/RuleContent.hpp"
+#include "content/rules/RuleContent.hpp"
 #include "game/CampaignState.hpp"
 #include "gameplay/common/Result.hpp"
+#include "gameplay/rules/ComposedRule.hpp"
+#include "gameplay/rules/ComposedRule.hpp"
 
 namespace soma::game
 {
@@ -26,10 +28,11 @@ namespace soma::game
 
       private:
         [[nodiscard]] const content::RuleFragmentDefinition* definition(const gameplay::RuleFragmentId& id) const;
-        [[nodiscard]] static std::optional<gameplay::RuleFragmentId>& field(ComposedRule& rule, content::RuleFragmentType type);
-        [[nodiscard]] static const std::optional<gameplay::RuleFragmentId>& field(const ComposedRule& rule,
+        [[nodiscard]] static std::optional<gameplay::RuleFragmentId>& field(gameplay::ComposedRule& rule,
+                                                                           content::RuleFragmentType type);
+        [[nodiscard]] static const std::optional<gameplay::RuleFragmentId>& field(const gameplay::ComposedRule& rule,
                                                                                  content::RuleFragmentType type);
-        [[nodiscard]] bool validCombination(const ComposedRule& rule) const;
+        [[nodiscard]] bool validCombination(const gameplay::ComposedRule& rule) const;
 
         CampaignState& state_;
         const content::RuleContent& content_;

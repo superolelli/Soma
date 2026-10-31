@@ -1,7 +1,7 @@
 #pragma once
 
-#include "content/BattleContent.hpp"
-#include "content/EconomyContent.hpp"
+#include "content/battle/BattleContent.hpp"
+#include "content/economy/EconomyContent.hpp"
 
 #include <string>
 #include <vector>

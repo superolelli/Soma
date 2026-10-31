@@ -1,5 +1,6 @@
-#include "content/RuleContentLoader.hpp"
+#include "content/rules/RuleContentLoader.hpp"
 #include "game/RuleBuilderService.hpp"
+#include "gameplay/rules/ComposedRule.hpp"
 #include "presentation/text/RuleDescriptionBuilder.hpp"
 
 #include <algorithm>
@@ -64,13 +65,13 @@ int main(int argc, char** argv)
     check(loaded.content.activeRulesPresentation.textWidth > 0);
     check(loaded.content.activeRulesPresentation.togglePosition.y < 52);
 
-    soma::game::ComposedRule pluralRule;
+    soma::gameplay::ComposedRule pluralRule;
     pluralRule.trigger = trigger;
     pluralRule.subject = otherSubject;
     pluralRule.effect = effect;
     check(soma::presentation::buildGermanRuleDescription(pluralRule, soma::content::RuleMode::triggered, loaded.content) ==
           "Wenn ein Kämpfer Leben verliert, verlieren alle Freunde jeweils 1 Leben.");
-    soma::game::ComposedRule decayRageRule;
+    soma::gameplay::ComposedRule decayRageRule;
     decayRageRule.trigger = soma::gameplay::RuleFragmentId{"rule.trigger.decay_damage_received"};
     decayRageRule.subject = subject;
     decayRageRule.effect = soma::gameplay::RuleFragmentId{"rule.effect.rage_two"};

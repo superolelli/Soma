@@ -80,6 +80,7 @@ namespace soma::gameplay
     struct CombatantDefeated
     {
         EntityId combatant;
+        EntityId source;
     };
 
     struct CriticalHit
