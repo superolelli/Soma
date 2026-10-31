@@ -18,7 +18,7 @@ namespace soma::presentation
         }
     }
 
-    std::string buildGermanRuleDescription(const game::ComposedRule& rule,
+    std::string buildGermanRuleDescription(const gameplay::ComposedRule& rule,
                                            std::optional<content::RuleMode> mode,
                                            const content::RuleContent& content)
     {
@@ -41,7 +41,7 @@ namespace soma::presentation
         return "Unvollständige Regel";
     }
 
-    std::optional<content::RuleMode> completedRuleMode(const game::ComposedRule& rule)
+    std::optional<content::RuleMode> completedRuleMode(const gameplay::ComposedRule& rule)
     {
         if (rule.trigger && rule.subject && rule.effect && !rule.modifier)
         {
@@ -54,7 +54,7 @@ namespace soma::presentation
         return std::nullopt;
     }
 
-    std::vector<std::string> buildGermanActiveRuleDescriptions(const game::ComposedRules& rules,
+    std::vector<std::string> buildGermanActiveRuleDescriptions(const gameplay::ComposedRules& rules,
                                                                 const content::RuleContent& content)
     {
         std::vector<std::string> result;

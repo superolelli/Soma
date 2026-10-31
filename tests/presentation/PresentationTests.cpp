@@ -1,7 +1,7 @@
 #include "presentation/battle/BattleEventPresentation.hpp"
 #include "presentation/battle/BattlePresentation.hpp"
 #include "presentation/battle/BattlePresentationSequence.hpp"
-#include "presentation/sfml/BattleLaunchOptions.hpp"
+#include "presentation/sfml/app/BattleLaunchOptions.hpp"
 #include "presentation/text/AbilityDescription.hpp"
 #include "presentation/text/FormattedText.hpp"
 #include "presentation/text/SkillDescription.hpp"
@@ -30,7 +30,7 @@ int main()
     const std::vector<soma::gameplay::GameplayEvent> events{
         soma::gameplay::AbilityUsed{simon, soma::gameplay::AbilityId{"ability.simon.basic_attack"}},
         soma::gameplay::DamageApplied{simon, outlaw, 7},
-        soma::gameplay::CombatantDefeated{outlaw},
+        soma::gameplay::CombatantDefeated{outlaw, simon},
         soma::gameplay::BattleFinished{soma::gameplay::Team::players}};
 
     const auto cues = soma::presentation::BattlePresentation{}.map(events);
@@ -219,4 +219,13 @@ int main()
     check(options.randomSeed == 123456U);
     check(options.enemies.size() == 1);
     check(options.enemies.front() == soma::gameplay::ContentDefinitionId{"enemy.apache_kid"});
+
+    char invalidSeed[] = "12invalid";
+    char* invalidArguments[]{executable, seedFlag, invalidSeed};
+    const auto invalidOptions = soma::presentation::parseBattleLaunchOptions(3, invalidArguments);
+    check(invalidOptions.error == "Invalid --seed value: 12invalid");
+
+    char* missingArguments[]{executable, seedFlag};
+    const auto missingOptions = soma::presentation::parseBattleLaunchOptions(2, missingArguments);
+    check(missingOptions.error == "Missing value for --seed");
 }

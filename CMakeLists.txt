@@ -15,8 +15,12 @@ endif()
 
 find_package(SFML 3.0 REQUIRED COMPONENTS Graphics Audio)
 
-if(NOT FFMPEG_ROOT AND EXISTS "C:/ffmpeg")
-    set(FFMPEG_ROOT "C:/ffmpeg" CACHE PATH "Location of FFmpeg" FORCE)
+if(NOT FFMPEG_ROOT)
+    if(SOMA_USE_BUNDLED_DEPENDENCIES AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/ffmpeg/include")
+        set(FFMPEG_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/ffmpeg" CACHE PATH "Location of FFmpeg" FORCE)
+    elseif(EXISTS "C:/ffmpeg/include")
+        set(FFMPEG_ROOT "C:/ffmpeg" CACHE PATH "Location of FFmpeg" FORCE)
+    endif()
 endif()
 set(SFEMOVIE_BUILD_STATIC FALSE CACHE BOOL "Build sfeMovie as a shared library" FORCE)
 set(SFEMOVIE_BUILD_UNIT_TESTS FALSE CACHE BOOL "Disable sfeMovie's own test suite" FORCE)
@@ -48,6 +52,7 @@ add_library(soma_simulation STATIC
     src/simulation/battle/BattleTurnFlow.cpp
     src/simulation/battle/AbilityTargets.cpp
     src/simulation/battle/BattleRules.cpp
+    src/simulation/battle/BattleStandingRules.cpp
     src/simulation/battle/EnemyPolicy.cpp
     src/simulation/exploration/LevelGenerator.cpp
     src/simulation/exploration/LevelRun.cpp
@@ -61,14 +66,19 @@ target_include_directories(soma_simulation PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/s
 target_link_libraries(soma_simulation PUBLIC Soma::Gameplay)
 
 add_library(soma_content STATIC
-    src/content/BattleContentLoader.cpp
-    src/content/EconomyContentLoader.cpp
-    src/content/EconomyItemContentLoader.cpp
-    src/content/EconomySkillContentLoader.cpp
-    src/content/EconomyPresentationContentLoader.cpp
-    src/content/GameFlowContentLoader.cpp
-    src/content/RuleContentLoader.cpp
-    src/content/WorldContentLoader.cpp
+    src/content/battle/BattleContentLoader.cpp
+    src/content/battle/BattleContentValidation.cpp
+    src/content/battle/BattleDefinitionReader.cpp
+    src/content/battle/BattlePresentationReader.cpp
+    src/content/economy/EconomyContentLoader.cpp
+    src/content/economy/EconomyItemContentLoader.cpp
+    src/content/economy/EconomySkillContentLoader.cpp
+    src/content/economy/EconomyPresentationContentLoader.cpp
+    src/content/flow/GameFlowContentLoader.cpp
+    src/content/JsonFileReader.cpp
+    src/content/rules/RuleContentLoader.cpp
+    src/content/world/WorldContentLoader.cpp
+    src/content/world/WorldContentValidation.cpp
 )
 add_library(Soma::Content ALIAS soma_content)
 target_include_directories(soma_content PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src" PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src/thirdparty/spriterplusplus/nlohmann-json")
@@ -77,11 +87,13 @@ target_link_libraries(soma_content PUBLIC Soma::Gameplay)
 add_library(soma_game STATIC
     src/game/AuthoredLevelLoader.cpp
     src/game/CampaignBattleContentBuilder.cpp
+    src/game/CampaignLifecycleService.cpp
     src/game/CampaignProgression.cpp
     src/game/CampaignState.cpp
     src/game/EconomyQueries.cpp
     src/game/EconomyService.cpp
     src/game/EquipmentBonusCalculator.cpp
+    src/game/ExplorationOutcomeService.cpp
     src/game/ExplorationConsumableUseService.cpp
     src/game/ShopStockGenerator.cpp
     src/game/RuleBuilderService.cpp
@@ -95,7 +107,8 @@ target_link_libraries(soma_game PUBLIC Soma::Content Soma::Simulation)
 
 add_library(soma_presentation STATIC
     src/presentation/battle/BattleEventPresentation.cpp
-    src/presentation/sfml/BattleLaunchOptions.cpp
+    src/presentation/battle/BattleEventBatcher.cpp
+    src/presentation/sfml/app/BattleLaunchOptions.cpp
     src/presentation/battle/BattlePresentation.cpp
     src/presentation/battle/BattlePresentationSequence.cpp
     src/presentation/text/AbilityDescription.cpp
@@ -112,40 +125,46 @@ target_compile_options(SpriterPlusPlus PRIVATE /W0 /WX-)
 set_target_properties(SpriterPlusPlus PROPERTIES FOLDER "ThirdParty")
 
 add_library(soma_presentation_sfml STATIC
-    src/presentation/sfml/ActiveRulesPanel.cpp
-    src/presentation/sfml/BattleActionPresentation.cpp
-    src/presentation/sfml/BattleActionStarter.cpp
-    src/presentation/sfml/BattleActionTimeline.cpp
-    src/presentation/sfml/BattleHud.cpp
-    src/presentation/sfml/BattleInteractionController.cpp
-    src/presentation/sfml/BattleSceneBlur.cpp
-    src/presentation/sfml/BattleScreenRenderer.cpp
-    src/presentation/sfml/BattleScreenOverlays.cpp
-    src/presentation/sfml/BattleScreenActionRendering.cpp
-    src/presentation/sfml/BattleSoundPlayer.cpp
-    src/presentation/sfml/EconomyTextures.cpp
-    src/presentation/sfml/EconomyTooltip.cpp
-    src/presentation/sfml/EconomySoundPlayer.cpp
-    src/presentation/sfml/EquipmentTransition.cpp
-    src/presentation/sfml/EquipmentConnectionRenderer.cpp
-    src/presentation/sfml/FormattedTextLayout.cpp
-    src/presentation/sfml/InventoryPanel.cpp
-    src/presentation/sfml/MainMenuScreen.cpp
-    src/presentation/sfml/MainRoomScreen.cpp
-    src/presentation/sfml/ShopPanel.cpp
-    src/presentation/sfml/ShopPanelRendering.cpp
-    src/presentation/sfml/SkillPanel.cpp
-    src/presentation/sfml/NinePatch.cpp
-    src/presentation/sfml/PauseMenu.cpp
-    src/presentation/sfml/ParticleSystem.cpp
-    src/presentation/sfml/UiCursor.cpp
-    src/presentation/sfml/ResourceCounter.cpp
-    src/presentation/sfml/RuleBuilderPanel.cpp
-    src/presentation/sfml/RuleBuilderPanelLayout.cpp
-    src/presentation/sfml/RuleBuilderPanelRendering.cpp
-    src/presentation/sfml/SpriterAnimationPlayer.cpp
-    src/presentation/sfml/StartupScreen.cpp
-    src/presentation/sfml/StatusGlossary.cpp
+    src/presentation/sfml/common/ActiveRulesPanel.cpp
+    src/presentation/sfml/battle/BattleActionPresentation.cpp
+    src/presentation/sfml/battle/BattleActionStarter.cpp
+    src/presentation/sfml/battle/BattleActionTimeline.cpp
+    src/presentation/sfml/battle/BattleCombatantInformation.cpp
+    src/presentation/sfml/battle/BattleHud.cpp
+    src/presentation/sfml/battle/BattleStatusHud.cpp
+    src/presentation/sfml/battle/BattleTooltip.cpp
+    src/presentation/sfml/battle/BattleInteractionController.cpp
+    src/presentation/sfml/battle/BattleSceneBlur.cpp
+    src/presentation/sfml/battle/BattleScreenRenderer.cpp
+    src/presentation/sfml/battle/BattleScreenOverlays.cpp
+    src/presentation/sfml/battle/BattleScreenActionRendering.cpp
+    src/presentation/sfml/battle/BattleSoundPlayer.cpp
+    src/presentation/sfml/economy/EconomyTextures.cpp
+    src/presentation/sfml/economy/EconomyTooltip.cpp
+    src/presentation/sfml/economy/EconomySoundPlayer.cpp
+    src/presentation/sfml/economy/EquipmentTransition.cpp
+    src/presentation/sfml/economy/EquipmentConnectionRenderer.cpp
+    src/presentation/sfml/common/FormattedTextLayout.cpp
+    src/presentation/sfml/economy/InventoryPanel.cpp
+    src/presentation/sfml/economy/InventoryPanelRendering.cpp
+    src/presentation/sfml/app/MainMenuScreen.cpp
+    src/presentation/sfml/app/MainRoomScreen.cpp
+    src/presentation/sfml/economy/ShopPanel.cpp
+    src/presentation/sfml/economy/ShopPanelRendering.cpp
+    src/presentation/sfml/economy/ShopPanelSelection.cpp
+    src/presentation/sfml/economy/SkillPanel.cpp
+    src/presentation/sfml/economy/SkillPanelRendering.cpp
+    src/presentation/sfml/common/NinePatch.cpp
+    src/presentation/sfml/common/PauseMenu.cpp
+    src/presentation/sfml/common/ParticleSystem.cpp
+    src/presentation/sfml/common/UiCursor.cpp
+    src/presentation/sfml/common/ResourceCounter.cpp
+    src/presentation/sfml/economy/RuleBuilderPanel.cpp
+    src/presentation/sfml/economy/RuleBuilderPanelLayout.cpp
+    src/presentation/sfml/economy/RuleBuilderPanelRendering.cpp
+    src/presentation/sfml/common/SpriterAnimationPlayer.cpp
+    src/presentation/sfml/app/StartupScreen.cpp
+    src/presentation/sfml/common/StatusGlossary.cpp
 )
 add_library(Soma::PresentationSfml ALIAS soma_presentation_sfml)
 target_include_directories(soma_presentation_sfml PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -155,25 +174,25 @@ target_link_libraries(soma_presentation_sfml
 )
 
 add_executable(Soma
-      src/presentation/sfml/BattleMain.cpp
-      src/presentation/sfml/BattleApplication.cpp
-      src/presentation/sfml/BattleScreenSession.cpp
-      src/presentation/sfml/BattleTransitionPlayer.cpp
-      src/presentation/sfml/SfeMovieVideoPlayer.cpp
-      src/presentation/sfml/EconomyApplication.cpp
-      src/presentation/sfml/ExplorationApplication.cpp
-      src/presentation/sfml/GameApplication.cpp
-      src/presentation/sfml/ExplorationConsumablePanel.cpp
-      src/presentation/sfml/ExplorationSession.cpp
-      src/presentation/sfml/ExplorationInput.cpp
-      src/presentation/sfml/ExplorationBattle.cpp
-      src/presentation/sfml/ExplorationRendering.cpp
-      src/presentation/sfml/ExplorationMusicPlayer.cpp
-      src/presentation/sfml/ExplorationHud.cpp
-      src/presentation/sfml/ExplorationPartyStatus.cpp
-      src/presentation/sfml/ExplorationSpeechBubbles.cpp
-      src/presentation/sfml/LootDialog.cpp
-      src/presentation/sfml/LevelResultDialog.cpp
+      src/presentation/sfml/app/BattleMain.cpp
+      src/presentation/sfml/app/BattleApplication.cpp
+      src/presentation/sfml/battle/BattleScreenSession.cpp
+      src/presentation/sfml/battle/BattleTransitionPlayer.cpp
+      src/presentation/sfml/common/SfeMovieVideoPlayer.cpp
+      src/presentation/sfml/app/EconomyApplication.cpp
+      src/presentation/sfml/app/ExplorationApplication.cpp
+      src/presentation/sfml/app/GameApplication.cpp
+      src/presentation/sfml/exploration/ExplorationConsumablePanel.cpp
+      src/presentation/sfml/exploration/ExplorationSession.cpp
+      src/presentation/sfml/exploration/ExplorationInput.cpp
+      src/presentation/sfml/exploration/ExplorationBattle.cpp
+      src/presentation/sfml/exploration/ExplorationRendering.cpp
+      src/presentation/sfml/exploration/ExplorationMusicPlayer.cpp
+      src/presentation/sfml/exploration/ExplorationHud.cpp
+      src/presentation/sfml/exploration/ExplorationPartyStatus.cpp
+      src/presentation/sfml/exploration/ExplorationSpeechBubbles.cpp
+      src/presentation/sfml/exploration/LootDialog.cpp
+      src/presentation/sfml/exploration/LevelResultDialog.cpp
   )
 target_include_directories(Soma PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_link_libraries(Soma PRIVATE sfeMovie
@@ -189,12 +208,8 @@ add_custom_command(TARGET Soma POST_BUILD
 )
 
 set(SOMA_FFMPEG_RUNTIME_DIR "" CACHE PATH "Directory containing the FFmpeg runtime DLLs required by sfeMovie")
-if(NOT SOMA_FFMPEG_RUNTIME_DIR)
-    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/ffmpeg/bin")
-        set(SOMA_FFMPEG_RUNTIME_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/ffmpeg/bin")
-    elseif(EXISTS "C:/ffmpeg/bin")
-        set(SOMA_FFMPEG_RUNTIME_DIR "C:/ffmpeg/bin")
-    endif()
+if(NOT SOMA_FFMPEG_RUNTIME_DIR AND FFMPEG_ROOT AND EXISTS "${FFMPEG_ROOT}/bin")
+    set(SOMA_FFMPEG_RUNTIME_DIR "${FFMPEG_ROOT}/bin")
 endif()
 if(SOMA_FFMPEG_RUNTIME_DIR)
     file(GLOB SOMA_FFMPEG_RUNTIME_DLLS CONFIGURE_DEPENDS "${SOMA_FFMPEG_RUNTIME_DIR}/*.dll")
@@ -243,16 +258,50 @@ if(BUILD_TESTING)
     add_test(NAME soma_battle_content
              COMMAND soma_battle_content_tests "${CMAKE_CURRENT_SOURCE_DIR}/Data/content/v1")
 
-    add_executable(soma_battle_tests tests/battle/BattleTests.cpp)
+    add_executable(soma_content_validation_tests tests/content/ContentValidationTests.cpp)
+    target_include_directories(soma_content_validation_tests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(soma_content_validation_tests PRIVATE Soma::Content)
+    add_test(NAME soma_content_validation COMMAND soma_content_validation_tests)
+
+    add_executable(soma_battle_tests
+        tests/battle/AdvancedBattleMechanicTests.cpp
+        tests/battle/BattleCoreTests.cpp
+        tests/battle/BattleStatusEffectTests.cpp
+        tests/battle/BattleTests.cpp
+    )
     target_include_directories(soma_battle_tests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(soma_battle_tests PRIVATE Soma::Content Soma::Simulation)
-    add_test(NAME soma_battle
-             COMMAND soma_battle_tests "${CMAKE_CURRENT_SOURCE_DIR}/Data/content/v1")
+    add_test(NAME soma_battle_core
+             COMMAND soma_battle_tests "${CMAKE_CURRENT_SOURCE_DIR}/Data/content/v1" core)
+    add_test(NAME soma_battle_status
+             COMMAND soma_battle_tests "${CMAKE_CURRENT_SOURCE_DIR}/Data/content/v1" status)
+    add_test(NAME soma_battle_advanced
+             COMMAND soma_battle_tests "${CMAKE_CURRENT_SOURCE_DIR}/Data/content/v1" advanced)
+
+    add_executable(soma_enemy_policy_tests tests/battle/EnemyPolicyTests.cpp)
+    target_include_directories(soma_enemy_policy_tests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(soma_enemy_policy_tests PRIVATE Soma::Simulation)
+    add_test(NAME soma_enemy_policy COMMAND soma_enemy_policy_tests)
 
     add_executable(soma_presentation_tests tests/presentation/PresentationTests.cpp)
     target_include_directories(soma_presentation_tests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(soma_presentation_tests PRIVATE Soma::Presentation)
     add_test(NAME soma_presentation COMMAND soma_presentation_tests)
+
+    add_executable(soma_battle_event_batcher_tests tests/presentation/BattleEventBatcherTests.cpp)
+    target_include_directories(soma_battle_event_batcher_tests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(soma_battle_event_batcher_tests PRIVATE Soma::Presentation)
+    add_test(NAME soma_battle_event_batcher COMMAND soma_battle_event_batcher_tests)
+
+    add_executable(soma_battle_action_timeline_tests tests/presentation/BattleActionTimelineTests.cpp)
+    target_include_directories(soma_battle_action_timeline_tests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(soma_battle_action_timeline_tests PRIVATE Soma::PresentationSfml Soma::Simulation SFML::Graphics)
+    add_test(NAME soma_battle_action_timeline COMMAND soma_battle_action_timeline_tests)
+
+    add_executable(soma_battle_interaction_tests tests/presentation/BattleInteractionControllerTests.cpp)
+    target_include_directories(soma_battle_interaction_tests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(soma_battle_interaction_tests PRIVATE Soma::PresentationSfml Soma::Simulation SFML::Graphics)
+    add_test(NAME soma_battle_interaction COMMAND soma_battle_interaction_tests)
 
     add_executable(soma_economy_tests tests/economy/EconomyTests.cpp)
     target_include_directories(soma_economy_tests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -282,4 +331,18 @@ if(BUILD_TESTING)
                      "${CMAKE_CURRENT_SOURCE_DIR}/Data/content/v1"
                      "${CMAKE_CURRENT_BINARY_DIR}/test-saves"
                      "${CMAKE_CURRENT_SOURCE_DIR}/Data/Saves/developer.json")
+
+    add_executable(soma_save_failure_tests tests/persistence/SaveRepositoryFailureTests.cpp)
+    target_include_directories(soma_save_failure_tests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(soma_save_failure_tests PRIVATE Soma::Game)
+    add_test(NAME soma_save_failure_preservation
+             COMMAND soma_save_failure_tests "${CMAKE_CURRENT_BINARY_DIR}/test-save-failures")
+
+    add_executable(soma_campaign_lifecycle_tests tests/game/CampaignLifecycleTests.cpp)
+    target_include_directories(soma_campaign_lifecycle_tests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(soma_campaign_lifecycle_tests PRIVATE Soma::Game)
+    add_test(NAME soma_campaign_lifecycle
+             COMMAND soma_campaign_lifecycle_tests
+                     "${CMAKE_CURRENT_SOURCE_DIR}/Data/content/v1"
+                     "${CMAKE_CURRENT_BINARY_DIR}/campaign-lifecycle-saves")
 endif()

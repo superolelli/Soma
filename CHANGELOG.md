@@ -2,7 +2,6 @@
 
 ## Grundlegend
 - Regel-/Fragment-System
-- Einklappbare Anzeige der aktiven Regeln in Leveln und Kämpfen
 - Fähigkeiten und Skills grundlegend überarbeitet
 - Bessere Tooltips und neue Statustooltips
 - Geteilte Müdigkeit durch Müdigkeit pro Spieler ersetzt
@@ -18,7 +17,7 @@
 - Introvideo Basilius Kartov
 
 ## Kleinere Änderungen
-- Kampagnenspezifische Umgebungspartikel in Leveln und Kämpfen
+- Umgebungspartikel in Leveln und Kämpfen
 - Schlafresistenz nach Schlaf
 - Klarerer Kampfablauf (Notifications, Zugreihenfolge, Effect-Wahrscheinlichkeiten etc.)
 - Outlines für klickbare Objekte

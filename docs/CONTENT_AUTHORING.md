@@ -11,11 +11,11 @@ Soma loads all game definitions from `Data/content/v1`. JSON is the canonical so
 | `economy/items.json` | Equipment, consumables, currencies, rarity, prices, and diamond bonuses |
 | `economy/skills.json` | Skills, upgrades, ability versions, and five-skill trees |
 | `economy/presentation.json` | Shared economy assets and inventory/skill/shop layout |
-| `world/content.json` | Campaign assets, generated levels, world encounters, loot tables, lootables, rewards, and exploration layout |
+| `world/content.json` | Campaign assets, generated levels, world encounters with inline rewards, lootables, and exploration layout |
 | `rules/content.json` | Rule fragments, acquisition constraints, rule economy, sprites, and rule-panel layout |
 | `flow/presentation.json` | Startup, main menu, main room, pause menu, toolbar, doors, music, and cursors |
 
-All IDs are stable strings. Prefer the existing namespaces: `player.*`, `enemy.*`, `ability.*`, `skill.*`, `item.*`, `encounter.*`, `level.*`, `lootable.*`, `loot.*`, `reward.*`, and `rule.*`. Changing an ID is a breaking content change because saves and other definitions reference it.
+All IDs are stable strings. Prefer the existing namespaces: `player.*`, `enemy.*`, `ability.*`, `skill.*`, `item.*`, `encounter.*`, `level.*`, `lootable.*`, and `rule.*`. Changing an ID is a breaking content change because saves and other definitions reference it.
 
 ## Validation workflow
 
@@ -144,14 +144,22 @@ When adding a player ability version, also add its battle-panel icon mapping in 
 
 ## Encounters and levels
 
-World encounters in `world/content.json` list enemy IDs, whether the encounter is a boss, and its reward table:
+World encounters in `world/content.json` list enemy IDs, whether the encounter is a boss, and their loot definition together in one entry:
 
 ```json
 {
   "id": "encounter.bang.example",
   "combatants": ["enemy.example", "enemy.example"],
   "boss": false,
-  "reward_table": "reward.bang.example"
+  "loot": {
+    "minimum_rolls": 1,
+    "maximum_rolls": 9,
+    "additional_roll_chance": 0.2,
+    "entries": [
+      { "item": "item.bang.example", "weight": 1 },
+      { "item": "currency.cards", "weight": 1 }
+    ]
+  }
 }
 ```
 
@@ -165,15 +173,19 @@ other enemies in the same encounter remain unchanged.
   "boss": true,
   "boss_combatant": "enemy.example",
   "intro_cue": "video.intro.example",
-  "reward_table": "reward.bang.example.boss"
+  "loot": {
+    "minimum_rolls": 1,
+    "maximum_rolls": 1,
+    "entries": [{ "item": "currency.cards", "weight": 1 }]
+  }
 }
 ```
 
 `boss_combatant` and `intro_cue` must be supplied together, and the featured combatant must occur in the encounter. The multiplier is configured as
-`boss_attribute_multiplier` in `battle/content.json` (currently `1.5`). It scales the featured enemy's base combat attributes and resistances,
-rounding each result to the nearest integer. Boss encounters without an intro video do not receive this multiplier.
+`boss_health_and_damage_multiplier` in `battle/content.json` (currently `1.5`). It scales only the featured enemy's maximum health and minimum/maximum
+damage, rounding each result to the nearest integer. Boss encounters without an intro video do not receive this multiplier.
 
-Generated levels specify their campaign, difficulty, room count, encounter budget, lootable probability, backgrounds, eligible regular encounters, and one boss encounter. Generation draws a target budget within the inclusive range, selects encounters whose enemy costs exactly satisfy it, distributes them across available rooms, and reserves the last room for the authored boss. Loot placement is independent.
+Generated levels specify their campaign, difficulty, room count, encounter budget, lootable probability, backgrounds, eligible regular encounters, and one boss encounter. Generation computes the budget totals that are actually achievable within the inclusive range and available room count, randomly chooses one of those totals, distributes matching encounters across the rooms, and reserves the last room for the authored boss. Loot placement is independent.
 
 ```json
 {
@@ -190,7 +202,7 @@ Generated levels specify their campaign, difficulty, room count, encounter budge
 }
 ```
 
-Every integer in the budget range must be achievable with the eligible encounters and available non-boss rooms; validation reports impossible ranges.
+At least one integer in the budget range must be achievable with the eligible encounters and available non-boss rooms. Gaps are allowed; unreachable totals are simply not selected. Validation reports a range only when none of its totals can be filled.
 
 Boss video/music presentation is attached through the corresponding battle encounter and campaign assets. Add the video file under `Data/Videos` and reference it using the same pattern as existing bosses.
 
@@ -220,16 +232,33 @@ Campaign-specific ambient particle emitters are configured in `world/content.jso
 
 `layer` is either `behind_characters` or `foreground`. Coordinates use the 1920x1080 reference viewport and the spawn area follows the exploration camera. Ranges are inclusive minimum/maximum values; velocities and acceleration are pixels per second. Give both signs to a velocity range and use zero acceleration for particles that should drift in place instead of rising or falling. Atlas cells must be uniformly arranged and contain transparent padding.
 
-## Loot tables and lootables
+## Loot and lootables
 
-Loot tables in `world/content.json` contain weighted/repeated item and currency choices. A lootable references one table plus asset IDs for its two-state sprite and opening sound. Its sprite contains the full and looted states side by side; `hitbox` and `position` are exploration-space values.
+Loot is defined at the object that grants it instead of in a separate registry. Encounter loot is stored in the encounter's `loot` object as shown above.
+
+A lootable normally omits `loot`. Its pool is then generated automatically from every equipment item and consumable whose `campaigns` contains the current world, plus cards and dice. Adding a new item to `economy/items.json` therefore makes it available from ordinary lootables without changing world content. A lootable shared by multiple worlds still uses only the items belonging to the world currently being played.
+
+Only lootables with intentionally restricted contents specify a `loot` object with explicit `entries`. The cup and goblet are current examples. Entry `weight` values influence selection within that restricted pool; normal item rarity probabilities still apply to eligible non-currency items.
+
+```json
+{
+  "id": "lootable.example",
+  "name": "Behälter",
+  "campaigns": ["bang"],
+  "sprite": "lootable.example.sprite",
+  "sound": "lootable.example.sound",
+  "hitbox": [0, 0, 200, 200],
+  "position": [850, 500]
+}
+```
+
+Its sprite contains the full and looted states side by side; `hitbox` and `position` are exploration-space values.
 
 To add a lootable:
 
 1. Register its sprite and sound in the world `assets` object.
-2. Add or reuse a loot table.
-3. Add the lootable definition with campaign eligibility, table, sprite/sound IDs, hitbox, and position.
-4. Include its campaign in the relevant level generation content.
+2. Add the lootable definition with campaign eligibility, sprite/sound IDs, hitbox, and position.
+3. Add an inline `loot` override only if the lootable needs a restricted pool or different roll settings.
 
 Rule fragments are rolled independently using their own global probability and acquisition constraints.
 

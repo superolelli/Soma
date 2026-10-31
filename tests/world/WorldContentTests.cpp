@@ -1,7 +1,7 @@
-#include "content/BattleContentLoader.hpp"
-#include "content/EconomyContentLoader.hpp"
-#include "content/WorldContentLoader.hpp"
-#include "content/RuleContentLoader.hpp"
+#include "content/battle/BattleContentLoader.hpp"
+#include "content/economy/EconomyContentLoader.hpp"
+#include "content/world/WorldContentLoader.hpp"
+#include "content/rules/RuleContentLoader.hpp"
 #include "gameplay/random/SeededRandom.hpp"
 #include "simulation/exploration/LevelGenerator.hpp"
 #include "simulation/rewards/LootGenerator.hpp"
@@ -45,7 +45,6 @@ int main(int argc, char** argv)
     check(world.content.levels.size() == 8);
     check(world.content.encounters.size() == 95);
     check(world.content.lootables.size() == 17);
-    check(world.content.lootTables.size() == 112);
     struct ExpectedLevel
     {
         const char* id;
@@ -118,7 +117,7 @@ int main(int argc, char** argv)
     check(first.encounters.size() == 6);
     check(world.content.encounters.at(first.bossEncounter).boss);
     const auto& firstEncounter = world.content.encounters.at(first.encounters.front());
-    check(world.content.lootTables.contains(firstEncounter.rewardTable));
+    check(!firstEncounter.loot.entries.empty());
 
     soma::gameplay::SeededRandom firstRandom{42};
     soma::gameplay::SeededRandom secondRandom{42};
@@ -156,16 +155,19 @@ int main(int argc, char** argv)
     check(rules.valid());
     soma::gameplay::SeededRandom firstLootRandom{7};
     soma::gameplay::SeededRandom secondLootRandom{7};
-    const soma::simulation::LootGenerator firstLoot{world.content, economy.content, rules.content, firstLootRandom};
-    const soma::simulation::LootGenerator secondLoot{world.content, economy.content, rules.content, secondLootRandom};
+    const soma::simulation::LootGenerator firstLoot{economy.content, rules.content, firstLootRandom};
+    const soma::simulation::LootGenerator secondLoot{economy.content, rules.content, secondLootRandom};
     const soma::simulation::RuleLootContext bangLootable{
         soma::simulation::RuleRewardSource::lootable, "bang", first.id, {}};
-    const auto firstGrants = firstLoot.generate(soma::gameplay::LootTableId{"loot.cup"}, "bang", 3, bangLootable);
-    const auto secondGrants = secondLoot.generate(soma::gameplay::LootTableId{"loot.cup"}, "bang", 3, bangLootable);
+    const auto& cupLoot = world.content.lootables.at(soma::gameplay::LootableId{"lootable.cup"}).loot;
+    const auto firstGrants = firstLoot.generate(cupLoot, "bang", 3, bangLootable);
+    const auto secondGrants = secondLoot.generate(cupLoot, "bang", 3, bangLootable);
     check(firstGrants.items == secondGrants.items);
     check(firstGrants.ruleFragment == secondGrants.ruleFragment);
     check(!firstGrants.items.empty());
     check(firstGrants.items.size() <= 9);
+    check(world.content.lootables.at(soma::gameplay::LootableId{"lootable.barrel"}).loot.entries.empty());
+    check(!cupLoot.entries.empty());
 
     soma::content::EconomyContent rarityEconomy;
     const auto rarityTemplate = economy.content.items.at(soma::gameplay::ItemId{"item.bang.beer"});
@@ -177,20 +179,32 @@ int main(int argc, char** argv)
         definition.campaigns = {"rarity-test"};
         rarityEconomy.items.emplace(definition.id, std::move(definition));
     }
-    soma::content::WorldContent rarityWorld;
-    const auto rarityTableId = soma::gameplay::LootTableId{"loot.test.rarity"};
-    rarityWorld.lootTables.emplace(
-        rarityTableId,
-        soma::content::LootTableDefinition{rarityTableId, {{soma::gameplay::ItemId{"item.test.rarity.1"}, 1}}, 1, 1, 0.0});
+    const soma::content::LootTableDefinition rarityLootDefinition{{}, 1, 1, 0.0};
     soma::content::RuleContent noRules;
+
+    soma::content::EconomyContent campaignEconomy;
+    const auto addCampaignItem = [&](const char* id) {
+        auto item = economy.content.items.at(soma::gameplay::ItemId{id});
+        campaignEconomy.items.emplace(item.id, std::move(item));
+    };
+    addCampaignItem("item.bang.beer");
+    addCampaignItem("item.kutschfahrt.absinth");
+    soma::gameplay::SeededRandom campaignLootRandom{100};
+    const soma::simulation::LootGenerator campaignLoot{campaignEconomy, noRules, campaignLootRandom};
+    const soma::content::LootTableDefinition defaultLoot{{}, 20, 20, 0.0};
+    const auto bangOnly = campaignLoot.generate(defaultLoot, "bang", 1, bangLootable);
+    check(std::ranges::all_of(bangOnly.items, [](const auto& grant) {
+        return grant.item.definition == soma::gameplay::ItemId{"item.bang.beer"};
+    }));
+
     soma::gameplay::SeededRandom rarityLootRandom{4242};
-    const soma::simulation::LootGenerator rarityLoot{rarityWorld, rarityEconomy, noRules, rarityLootRandom};
+    const soma::simulation::LootGenerator rarityLoot{rarityEconomy, noRules, rarityLootRandom};
     const soma::simulation::RuleLootContext rarityContext{
         soma::simulation::RuleRewardSource::lootable, "rarity-test", soma::gameplay::LevelId{"level.test"}, {}};
     std::array<int, 4> lootRarityCounts{};
     for (auto iteration = 0; iteration < 5'000; ++iteration)
     {
-        const auto bundle = rarityLoot.generate(rarityTableId, "rarity-test", 1, rarityContext);
+        const auto bundle = rarityLoot.generate(rarityLootDefinition, "rarity-test", 1, rarityContext);
         for (const auto& grant : bundle.items)
         {
             const auto& item = rarityEconomy.items.at(grant.item.definition);
@@ -209,18 +223,18 @@ int main(int argc, char** argv)
     check(lootRarityCounts.at(3) > 0);
 
     soma::gameplay::SeededRandom rewardRandom{11};
-    const soma::simulation::LootGenerator rewardGenerator{world.content, economy.content, rules.content, rewardRandom};
+    const soma::simulation::LootGenerator rewardGenerator{economy.content, rules.content, rewardRandom};
     const soma::simulation::RuleLootContext firstBattle{
         soma::simulation::RuleRewardSource::battle, first.campaign, first.id, firstEncounter.combatants};
-    const auto battleRewards = rewardGenerator.generate(firstEncounter.rewardTable, first.campaign, first.difficulty, firstBattle);
+    const auto battleRewards = rewardGenerator.generate(firstEncounter.loot, first.campaign, first.difficulty, firstBattle);
     check(!battleRewards.items.empty());
     check(battleRewards.items.size() <= 9);
 
     auto guaranteedRules = rules.content;
     guaranteedRules.lootChance = 1.0;
     soma::gameplay::SeededRandom guaranteedRuleRandom{22};
-    const soma::simulation::LootGenerator guaranteedRuleLoot{world.content, economy.content, guaranteedRules, guaranteedRuleRandom};
-    check(guaranteedRuleLoot.generate(firstEncounter.rewardTable, first.campaign, first.difficulty, firstBattle).ruleFragment.has_value());
+    const soma::simulation::LootGenerator guaranteedRuleLoot{economy.content, guaranteedRules, guaranteedRuleRandom};
+    check(guaranteedRuleLoot.generate(firstEncounter.loot, first.campaign, first.difficulty, firstBattle).ruleFragment.has_value());
 
     auto bountyOnly = guaranteedRules;
     const auto bountyId = soma::gameplay::RuleFragmentId{"rule.effect.bounty_three"};
@@ -229,7 +243,7 @@ int main(int argc, char** argv)
     bountyOnly.fragments.emplace(bountyId, bounty);
     const auto rollBounty = [&](const soma::simulation::RuleLootContext& context, std::uint64_t seed) {
         soma::gameplay::SeededRandom random{seed};
-        return soma::simulation::LootGenerator{world.content, economy.content, bountyOnly, random}.rollRuleFragment(context);
+        return soma::simulation::LootGenerator{economy.content, bountyOnly, random}.rollRuleFragment(context);
     };
     check(rollBounty(bangLootable, 30) == bountyId);
     const soma::simulation::RuleLootContext kutschfahrtLootable{

@@ -1,9 +1,8 @@
 #pragma once
 
-#include "content/EconomyContent.hpp"
+#include "content/economy/EconomyContent.hpp"
 #include "game/CampaignState.hpp"
 
-#include <span>
 #include <vector>
 
 namespace soma::game
@@ -38,16 +37,6 @@ namespace soma::game
         int salePrice{};
     };
 
-    struct ShopOffer
-    {
-        gameplay::ItemInstance item;
-        std::string name;
-        gameplay::AssetId icon;
-        int price{};
-        bool available{};
-        bool affordable{};
-    };
-
     struct SkillEntry
     {
         gameplay::SkillId skill;
@@ -67,7 +56,6 @@ namespace soma::game
 
         [[nodiscard]] std::vector<InventoryEntry> inventory(ItemSort order) const;
         [[nodiscard]] std::vector<ConsumableEntry> consumables(ItemSort order) const;
-        [[nodiscard]] std::vector<ShopOffer> shopOffers(std::span<const gameplay::ItemInstance> stock) const;
         [[nodiscard]] const content::AbilitySetDefinition* abilitySet(const gameplay::ContentDefinitionId& player,
                                                                       std::size_t abilitySlot) const;
         [[nodiscard]] std::vector<SkillEntry> skills(const gameplay::ContentDefinitionId& player,

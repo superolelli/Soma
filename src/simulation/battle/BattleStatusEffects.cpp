@@ -1,4 +1,5 @@
 #include "simulation/battle/BattleSimulation.hpp"
+#include "simulation/battle/StatusResistance.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -13,22 +14,6 @@ namespace soma::simulation
             return gameplay::StatusId{"status." + std::move(value)};
         }
 
-        int resistance(const CombatantState& target, const std::string& kind)
-        {
-            if (kind == "sleep")
-            {
-                return target.secondaryAttributes.sleepResistance;
-            }
-            if (kind == "confusion")
-            {
-                return target.secondaryAttributes.confusionResistance;
-            }
-            if (kind == "decay")
-            {
-                return target.secondaryAttributes.decayResistance;
-            }
-            return target.secondaryAttributes.debuffResistance;
-        }
     } // namespace
 
     void BattleSimulation::applyUtilityEffects(CombatantState& actor,
@@ -81,7 +66,7 @@ namespace soma::simulation
             }
             const auto duration = buff.duration + durationBonus;
             auto& buffTarget = targetsActor && !actor.confusedThisTurn ? actor : target;
-            if (!buff.positive && random_.between(1, 100) <= resistance(buffTarget, "debuff"))
+            if (!buff.positive && random_.between(1, 100) <= resistance(buffTarget, StatusResistance::debuff))
             {
                 events.emplace_back(gameplay::EffectResisted{buffTarget.id, statusId("debuffed")});
             }
@@ -108,26 +93,6 @@ namespace soma::simulation
             return;
         }
         auto& collection = buff.positive ? target.buffs : target.debuffs;
-        const auto sameAttributes = [&buff](const ActiveBuff& active) {
-            const auto& left = active.attributes;
-            const auto& right = buff.attributes;
-            return left.armour == right.armour && left.damageMinimum == right.damageMinimum && left.damageMaximum == right.damageMaximum &&
-                   left.initiative == right.initiative && left.maximumHealth == right.maximumHealth &&
-                   left.criticalHitChance == right.criticalHitChance && left.precision == right.precision && left.dodge == right.dodge &&
-                   left.healing == right.healing && left.sleepResistance == right.sleepResistance &&
-                   left.confusionResistance == right.confusionResistance && left.debuffResistance == right.debuffResistance &&
-                   left.decayResistance == right.decayResistance && active.healingReceived == buff.healingReceived &&
-                   active.damageAgainstMarked == buff.damageAgainstMarked && active.damagePerNegativeStatus == buff.damagePerNegativeStatus &&
-                   active.damageFromFatigue == buff.damageFromFatigue && active.blocksFatigueStageOne == buff.blocksFatigueStageOne &&
-                   active.blocksFatigueStageTwo == buff.blocksFatigueStageTwo;
-        };
-        const auto existing = std::ranges::find_if(collection, sameAttributes);
-        if (existing != collection.end())
-        {
-            existing->remainingTurns += duration;
-            recordStatusGained(target, statusId(buff.positive ? "buffed" : "debuffed"), events);
-            return;
-        }
         const auto negativeStatusCount = negativeStatusCategoryCount(target);
         addAttributes(target, buff.attributes, 1);
         collection.push_back({buff.attributes,

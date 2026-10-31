@@ -16,34 +16,11 @@ namespace soma::simulation
             return static_cast<int>(std::round(static_cast<double>(value) * multiplier));
         }
 
-        gameplay::CombatantAttributes scaled(gameplay::CombatantAttributes value, double multiplier)
+        gameplay::CombatantAttributes scaleHealthAndDamage(gameplay::CombatantAttributes value, double multiplier)
         {
             value.maximumHealth = scaled(value.maximumHealth, multiplier);
             value.damageMinimum = scaled(value.damageMinimum, multiplier);
             value.damageMaximum = scaled(value.damageMaximum, multiplier);
-            value.armour = scaled(value.armour, multiplier);
-            value.criticalHitChance = scaled(value.criticalHitChance, multiplier);
-            value.dodge = scaled(value.dodge, multiplier);
-            value.initiative = scaled(value.initiative, multiplier);
-            value.precision = scaled(value.precision, multiplier);
-            return value;
-        }
-
-        content::AttributeDelta scaled(content::AttributeDelta value, double multiplier)
-        {
-            value.armour = scaled(value.armour, multiplier);
-            value.damageMinimum = scaled(value.damageMinimum, multiplier);
-            value.damageMaximum = scaled(value.damageMaximum, multiplier);
-            value.initiative = scaled(value.initiative, multiplier);
-            value.maximumHealth = scaled(value.maximumHealth, multiplier);
-            value.criticalHitChance = scaled(value.criticalHitChance, multiplier);
-            value.precision = scaled(value.precision, multiplier);
-            value.dodge = scaled(value.dodge, multiplier);
-            value.healing = scaled(value.healing, multiplier);
-            value.sleepResistance = scaled(value.sleepResistance, multiplier);
-            value.confusionResistance = scaled(value.confusionResistance, multiplier);
-            value.debuffResistance = scaled(value.debuffResistance, multiplier);
-            value.decayResistance = scaled(value.decayResistance, multiplier);
             return value;
         }
     } // namespace
@@ -72,14 +49,14 @@ namespace soma::simulation
             }
             const auto& definition = found->second;
             auto id = definition.id.value() + ".slot" + std::to_string(spawn.slot);
-            const auto attributes = scaled(definition.attributes, spawn.attributeMultiplier);
+            const auto attributes = scaleHealthAndDamage(definition.attributes, spawn.healthAndDamageMultiplier);
             combatants_.push_back({gameplay::EntityId{std::move(id)},
                                    definition.id,
                                    definition.name,
                                    definition.team,
                                    spawn.slot,
                                    attributes,
-                                   scaled(definition.resistances, spawn.attributeMultiplier),
+                                   definition.resistances,
                                    0});
             combatants_.back().baseAttributes = attributes;
             for (const auto& buff : spawn.initialBuffs)
@@ -134,6 +111,7 @@ namespace soma::simulation
             return gameplay::Result<std::vector<gameplay::GameplayEvent>>::failure("The selected target is not valid");
         }
 
+        const auto actorId = actor->id;
         std::vector<gameplay::GameplayEvent> events;
         if (actor->confusedThisTurn)
         {
@@ -150,7 +128,7 @@ namespace soma::simulation
             }
             if (redirectedTargets.empty())
             {
-                advanceTurn(events);
+                advanceToPlayableTurn(events);
                 return gameplay::Result<std::vector<gameplay::GameplayEvent>>::success(std::move(events));
             }
             const auto originalTarget = primaryTarget->id;
@@ -179,10 +157,10 @@ namespace soma::simulation
             summonCombatants(*ability.summon, events);
         }
 
-        resolveTriggeredRules(events, actor->id, 0);
+        resolveTriggeredRules(events, actorId, 0);
         const auto firstEquipmentEvent = events.size();
         resolveEquipmentEffects(events);
-        resolveTriggeredRules(events, actor->id, firstEquipmentEvent);
+        resolveTriggeredRules(events, actorId, firstEquipmentEvent);
         updateFinished(events);
         if (!finished_)
         {

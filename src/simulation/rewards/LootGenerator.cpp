@@ -9,23 +9,38 @@
 
 namespace soma::simulation
 {
-    LootGenerator::LootGenerator(const content::WorldContent& world,
-                                 const content::EconomyContent& economy,
+    LootGenerator::LootGenerator(const content::EconomyContent& economy,
                                  const content::RuleContent& rules,
                                  gameplay::IRandom& random)
-        : world_(world), economy_(economy), rules_(rules), random_(random)
+        : economy_(economy), rules_(rules), random_(random)
     {
     }
 
-    LootBundle LootGenerator::generate(const gameplay::LootTableId& tableId,
+    LootBundle LootGenerator::generate(const content::LootTableDefinition& loot,
                                        std::string_view campaign,
                                        int difficulty,
                                        const RuleLootContext& ruleContext) const
     {
-        const auto& table = world_.lootTables.at(tableId);
+        std::vector<content::LootEntryDefinition> defaultEntries;
+        if (loot.entries.empty())
+        {
+            defaultEntries.reserve(economy_.items.size());
+            for (const auto& [id, item] : economy_.items)
+            {
+                if (std::ranges::find(item.campaigns, campaign) != item.campaigns.end())
+                {
+                    defaultEntries.push_back({id, 1});
+                }
+            }
+            std::ranges::sort(defaultEntries, {}, [](const auto& entry) { return entry.item.value(); });
+        }
+        const auto& configuredEntries = loot.entries.empty() ? defaultEntries : loot.entries;
+
         std::vector<const content::LootEntryDefinition*> eligible;
+        std::vector<const content::LootEntryDefinition*> eligibleItems;
         int totalWeight{};
-        for (const auto& entry : table.entries)
+        int itemWeight{};
+        for (const auto& entry : configuredEntries)
         {
             const auto& item = economy_.items.at(entry.item);
             if (std::ranges::find(item.campaigns, campaign) == item.campaigns.end())
@@ -34,14 +49,19 @@ namespace soma::simulation
             }
             eligible.push_back(&entry);
             totalWeight += entry.weight;
+            if (item.category != gameplay::ItemCategory::currency)
+            {
+                eligibleItems.push_back(&entry);
+                itemWeight += entry.weight;
+            }
         }
         if (eligible.empty())
         {
             throw std::runtime_error("Loot table has no entries eligible for this campaign");
         }
 
-        auto rolls = table.minimumRolls;
-        while (rolls < table.maximumRolls && random_.chance(table.additionalRollChance))
+        auto rolls = loot.minimumRolls;
+        while (rolls < loot.maximumRolls && random_.chance(loot.additionalRollChance))
         {
             ++rolls;
         }
@@ -50,18 +70,34 @@ namespace soma::simulation
         for (auto roll = 0; roll < rolls; ++roll)
         {
             auto selectedWeight = random_.between(1, totalWeight);
-            const content::LootEntryDefinition* selected{};
-            for (const auto* entry : eligible)
+            const gameplay::ItemDefinition* selected{};
+            if (selectedWeight <= itemWeight)
             {
-                selectedWeight -= entry->weight;
-                if (selectedWeight <= 0)
+                selected = &rollCampaignItem(eligibleItems);
+            }
+            else
+            {
+                selectedWeight -= itemWeight;
+                for (const auto* entry : eligible)
                 {
-                    selected = entry;
-                    break;
+                    const auto& item = economy_.items.at(entry->item);
+                    if (item.category != gameplay::ItemCategory::currency)
+                    {
+                        continue;
+                    }
+                    selectedWeight -= entry->weight;
+                    if (selectedWeight <= 0)
+                    {
+                        selected = &item;
+                        break;
+                    }
                 }
             }
-            const auto& selectedItem = economy_.items.at(selected->item);
-            const auto& item = selectedItem.category == gameplay::ItemCategory::currency ? selectedItem : rollCampaignItem(campaign);
+            if (selected == nullptr)
+            {
+                throw std::runtime_error("Could not select a loot entry");
+            }
+            const auto& item = *selected;
             result.items.push_back({{item.id, item.category == gameplay::ItemCategory::equipment ? rollColor() : gameplay::ItemColor{}},
                                     rollQuantity(item, difficulty)});
         }
@@ -69,22 +105,18 @@ namespace soma::simulation
         return result;
     }
 
-    const gameplay::ItemDefinition& LootGenerator::rollCampaignItem(std::string_view campaign) const
+    const gameplay::ItemDefinition& LootGenerator::rollCampaignItem(
+        const std::vector<const content::LootEntryDefinition*>& entries) const
     {
-        std::array<std::vector<const gameplay::ItemDefinition*>, gameplay::maximumItemRarityLevel> candidatesByLevel;
-        for (const auto& [id, item] : economy_.items)
+        std::array<std::vector<const content::LootEntryDefinition*>, gameplay::maximumItemRarityLevel> candidatesByLevel;
+        for (const auto* entry : entries)
         {
-            static_cast<void>(id);
-            const auto supportsCampaign = std::ranges::find(item.campaigns, campaign) != item.campaigns.end();
-            if (item.category == gameplay::ItemCategory::currency || !supportsCampaign)
-            {
-                continue;
-            }
-            candidatesByLevel.at(static_cast<std::size_t>(item.level - gameplay::minimumItemRarityLevel)).push_back(&item);
+            const auto& item = economy_.items.at(entry->item);
+            candidatesByLevel.at(static_cast<std::size_t>(item.level - gameplay::minimumItemRarityLevel)).push_back(entry);
         }
         for (auto& candidates : candidatesByLevel)
         {
-            std::ranges::sort(candidates, {}, [](const auto* item) { return item->id.value(); });
+            std::ranges::sort(candidates, {}, [](const auto* entry) { return entry->item.value(); });
         }
 
         auto totalWeight = 0;
@@ -111,8 +143,20 @@ namespace soma::simulation
             selectedWeight -= gameplay::itemRarityWeight(level);
             if (selectedWeight <= 0)
             {
-                const auto index = random_.between(0, static_cast<int>(candidates.size()) - 1);
-                return *candidates.at(static_cast<std::size_t>(index));
+                auto entryWeight = 0;
+                for (const auto* entry : candidates)
+                {
+                    entryWeight += entry->weight;
+                }
+                auto selectedEntryWeight = random_.between(1, entryWeight);
+                for (const auto* entry : candidates)
+                {
+                    selectedEntryWeight -= entry->weight;
+                    if (selectedEntryWeight <= 0)
+                    {
+                        return economy_.items.at(entry->item);
+                    }
+                }
             }
         }
         throw std::runtime_error("Could not select an item rarity");

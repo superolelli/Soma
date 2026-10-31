@@ -50,11 +50,15 @@ namespace soma::simulation
             auto* target = targets.at(index);
             const auto friendly = (actor.team == target->team) != actor.confusedThisTurn;
             const auto& effect = friendly ? ability.friendlyEffect : ability.hostileEffect;
-            if (!friendly && target != &actor && attackIsDodged(actor, *target, ability, events))
+            if (!friendly && target != &actor && resolveAttackDodge(actor, *target, ability, events))
             {
                 if (effect.damageFactor != 0.0)
                 {
                     resolveRiposte(*target, actor, events);
+                }
+                if (!actor.alive())
+                {
+                    break;
                 }
                 continue;
             }
@@ -210,7 +214,7 @@ namespace soma::simulation
         target.health -= appliedDamage;
         updateNofaceBuff(target);
         recordDamageApplied(source.id, target, appliedDamage, gameplay::DamageKind::direct, events);
-        emitDefeatIfNeeded(target, events);
+        emitDefeatIfNeeded(target, source.id, events);
     }
 
     void BattleSimulation::recordDamageApplied(
@@ -223,10 +227,10 @@ namespace soma::simulation
         }
     }
 
-    bool BattleSimulation::attackIsDodged(CombatantState& actor,
-                                          CombatantState& target,
-                                          const content::AbilityDefinition& ability,
-                                          std::vector<gameplay::GameplayEvent>& events)
+    bool BattleSimulation::resolveAttackDodge(CombatantState& actor,
+                                              CombatantState& target,
+                                              const content::AbilityDefinition& ability,
+                                              std::vector<gameplay::GameplayEvent>& events)
     {
         if (definition(target).marksAttackersForRevenge)
         {

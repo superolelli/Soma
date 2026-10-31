@@ -1,6 +1,6 @@
 #pragma once
 
-#include "content/WorldContent.hpp"
+#include "content/world/WorldContent.hpp"
 
 #include <optional>
 #include <set>

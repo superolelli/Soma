@@ -1,7 +1,6 @@
 #include "game/ExplorationConsumableUseService.hpp"
 
 #include <algorithm>
-#include <ranges>
 
 namespace soma::game
 {
@@ -49,16 +48,7 @@ namespace soma::game
         if (consumable->duration > 0)
         {
             const auto bonus = attributes(consumable->temporaryBonuses);
-            const auto same = [&bonus](const simulation::ActiveBuff& buff) { return buff.attributes == bonus; };
-            const auto existing = std::ranges::find_if(buffs, same);
-            if (existing == buffs.end())
-            {
-                buffs.push_back({bonus, consumable->duration, true});
-            }
-            else
-            {
-                existing->remainingTurns += consumable->duration;
-            }
+            buffs.push_back({bonus, consumable->duration, true});
         }
         return consumed;
     }

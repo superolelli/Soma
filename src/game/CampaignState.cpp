@@ -70,7 +70,7 @@ namespace soma::game
         return found == ruleFragments_.end() ? 0 : found->second;
     }
 
-    const ComposedRules& CampaignState::rules() const noexcept
+    const gameplay::ComposedRules& CampaignState::rules() const noexcept
     {
         return rules_;
     }

@@ -1,5 +1,7 @@
 #include "simulation/exploration/LevelGenerator.hpp"
 
+#include "content/world/EncounterBudget.hpp"
+
 #include <algorithm>
 #include <numeric>
 #include <stdexcept>
@@ -67,24 +69,15 @@ namespace soma::simulation
 
     std::vector<gameplay::EncounterId> LevelGenerator::generateEncounters(const content::LevelDefinition& level) const
     {
-        const auto budget = random_.between(level.minimumEncounterBudget, level.maximumEncounterBudget);
-        const auto roomLimit = level.roomCount - 1;
-        std::vector<std::vector<bool>> reachable(static_cast<std::size_t>(roomLimit + 1),
-                                                 std::vector<bool>(static_cast<std::size_t>(budget + 1), false));
-        reachable.at(0).at(0) = true;
-        for (int rooms = 1; rooms <= roomLimit; ++rooms)
+        const auto validBudgets = content::reachableEncounterBudgets(level, content_);
+        if (validBudgets.empty())
         {
-            reachable.at(static_cast<std::size_t>(rooms)).at(0) = true;
-            for (int total = 1; total <= budget; ++total)
-            {
-                reachable.at(static_cast<std::size_t>(rooms)).at(static_cast<std::size_t>(total)) =
-                    std::ranges::any_of(level.encounters, [this, &reachable, rooms, total](const auto& encounterId) {
-                        const auto cost = content_.encounters.at(encounterId).budgetCost;
-                        return cost <= total &&
-                               reachable.at(static_cast<std::size_t>(rooms - 1)).at(static_cast<std::size_t>(total - cost));
-                    });
-            }
+            throw std::runtime_error("No encounter budget in the configured range can be filled");
         }
+        const auto budget = choose(validBudgets, random_);
+        const auto roomLimit = level.roomCount - 1;
+        const content::EncounterBudgetReachability reachability{level, content_};
+        const auto& reachable = reachability.byRoomCount();
 
         std::vector<gameplay::EncounterId> result;
         auto remainingBudget = budget;

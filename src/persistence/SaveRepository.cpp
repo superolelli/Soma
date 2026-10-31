@@ -1,11 +1,16 @@
 #include "persistence/SaveRepository.hpp"
 
 #include "gameplay/combat/Fatigue.hpp"
+#include "gameplay/rules/ComposedRule.hpp"
 
 #include <algorithm>
 #include <fstream>
 #include <json.hpp>
 #include <system_error>
+
+#define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
+#include <Windows.h>
 
 namespace soma::persistence
 {
@@ -52,13 +57,13 @@ namespace soma::persistence
             return gameplay::RuleFragmentId{value.at(key).get<std::string>()};
         }
 
-        game::ComposedRule readRule(const json& value)
+        gameplay::ComposedRule readRule(const json& value)
         {
             return {readRulePart(value, "trigger"), readRulePart(value, "subject"), readRulePart(value, "effect"),
                     readRulePart(value, "modifier")};
         }
 
-        json writeRule(const game::ComposedRule& rule)
+        json writeRule(const gameplay::ComposedRule& rule)
         {
             json result = json::object();
             const auto write = [&result](std::string_view name, const std::optional<gameplay::RuleFragmentId>& part) {
@@ -192,6 +197,68 @@ namespace soma::persistence
             return result;
         }
 
+        content::AttributeDelta readAttributeDelta(const json& value)
+        {
+            return {.armour = value.at("armour").get<int>(),
+                    .damageMinimum = value.at("damage_minimum").get<int>(),
+                    .damageMaximum = value.at("damage_maximum").get<int>(),
+                    .initiative = value.at("initiative").get<int>(),
+                    .maximumHealth = value.at("maximum_health").get<int>(),
+                    .criticalHitChance = value.at("critical_hit_chance").get<int>(),
+                    .precision = value.at("precision").get<int>(),
+                    .dodge = value.at("dodge").get<int>(),
+                    .healing = value.at("healing").get<int>(),
+                    .sleepResistance = value.at("sleep_resistance").get<int>(),
+                    .confusionResistance = value.at("confusion_resistance").get<int>(),
+                    .debuffResistance = value.at("debuff_resistance").get<int>(),
+                    .decayResistance = value.at("decay_resistance").get<int>()};
+        }
+
+        json writeAttributeDelta(const content::AttributeDelta& value)
+        {
+            return {{"armour", value.armour},
+                    {"damage_minimum", value.damageMinimum},
+                    {"damage_maximum", value.damageMaximum},
+                    {"initiative", value.initiative},
+                    {"maximum_health", value.maximumHealth},
+                    {"critical_hit_chance", value.criticalHitChance},
+                    {"precision", value.precision},
+                    {"dodge", value.dodge},
+                    {"healing", value.healing},
+                    {"sleep_resistance", value.sleepResistance},
+                    {"confusion_resistance", value.confusionResistance},
+                    {"debuff_resistance", value.debuffResistance},
+                    {"decay_resistance", value.decayResistance}};
+        }
+
+        simulation::ActiveBuff readActiveBuff(const json& value)
+        {
+            return {.attributes = readAttributeDelta(value.at("attributes")),
+                    .remainingTurns = value.at("remaining_turns").get<int>(),
+                    .positive = value.at("positive").get<bool>(),
+                    .healingReceived = value.at("healing_received").get<double>(),
+                    .damageAgainstMarked = value.at("damage_against_marked").get<double>(),
+                    .damagePerNegativeStatus = value.at("damage_per_negative_status").get<double>(),
+                    .negativeStatusCountAtApplication = value.at("negative_status_count_at_application").get<int>(),
+                    .damageFromFatigue = value.at("damage_from_fatigue").get<bool>(),
+                    .blocksFatigueStageOne = value.at("blocks_fatigue_stage_one").get<bool>(),
+                    .blocksFatigueStageTwo = value.at("blocks_fatigue_stage_two").get<bool>()};
+        }
+
+        json writeActiveBuff(const simulation::ActiveBuff& value)
+        {
+            return {{"attributes", writeAttributeDelta(value.attributes)},
+                    {"remaining_turns", value.remainingTurns},
+                    {"positive", value.positive},
+                    {"healing_received", value.healingReceived},
+                    {"damage_against_marked", value.damageAgainstMarked},
+                    {"damage_per_negative_status", value.damagePerNegativeStatus},
+                    {"negative_status_count_at_application", value.negativeStatusCountAtApplication},
+                    {"damage_from_fatigue", value.damageFromFatigue},
+                    {"blocks_fatigue_stage_one", value.blocksFatigueStageOne},
+                    {"blocks_fatigue_stage_two", value.blocksFatigueStageTwo}};
+        }
+
         game::ActiveLevelState readActiveLevel(const json& value)
         {
             std::vector<simulation::GeneratedRoom> rooms;
@@ -212,9 +279,23 @@ namespace soma::persistence
             game::ActiveLevelState result{std::move(run)};
             result.viewLeft = value.at("view_left").get<float>();
             for (const auto& [id, health] : value.at("player_health").items())
-                result.playerHealth.emplace(gameplay::ContentDefinitionId{id}, health.get<int>());
+                result.progress.playerHealth.emplace(gameplay::ContentDefinitionId{id}, health.get<int>());
             for (const auto& [id, fatigue] : value.at("player_fatigue").items())
-                result.playerFatigue.emplace(gameplay::ContentDefinitionId{id}, fatigue.get<int>());
+                result.progress.playerFatigue.emplace(gameplay::ContentDefinitionId{id}, fatigue.get<int>());
+            for (const auto& [id, buffs] : value.at("player_buffs").items())
+            {
+                auto& destination = result.progress.playerBuffs[gameplay::ContentDefinitionId{id}];
+                for (const auto& buff : buffs)
+                {
+                    destination.push_back(readActiveBuff(buff));
+                }
+            }
+            for (const auto& ability : value.at("used_player_abilities"))
+            {
+                result.progress.usedPlayerAbilities.emplace(ability.get<std::string>());
+            }
+            result.progress.enemiesDefeated = value.at("enemies_defeated").get<int>();
+            result.progress.defeated = value.at("defeated").get<bool>();
             result.baseline = readCampaignData(value.at("baseline"));
             return result;
         }
@@ -228,15 +309,33 @@ namespace soma::persistence
             json third = json::array();
             for (const auto& tile : active.run.parallax().thirdLayerTiles) third.push_back(tile.value());
             json health = json::object();
-            for (const auto& [id, value] : active.playerHealth) health[id.value()] = value;
+            for (const auto& [id, value] : active.progress.playerHealth) health[id.value()] = value;
             json fatigue = json::object();
-            for (const auto& [id, value] : active.playerFatigue) fatigue[id.value()] = value;
+            for (const auto& [id, value] : active.progress.playerFatigue) fatigue[id.value()] = value;
+            json buffs = json::object();
+            for (const auto& [id, activeBuffs] : active.progress.playerBuffs)
+            {
+                auto& destination = buffs[id.value()] = json::array();
+                for (const auto& buff : activeBuffs)
+                {
+                    destination.push_back(writeActiveBuff(buff));
+                }
+            }
+            json usedAbilities = json::array();
+            for (const auto& ability : active.progress.usedPlayerAbilities)
+            {
+                usedAbilities.push_back(ability.value());
+            }
             return {{"level", active.run.level().value()},
                     {"rooms", std::move(rooms)},
                     {"current_room", active.run.currentRoom()},
                     {"view_left", active.viewLeft},
                     {"player_health", std::move(health)},
                     {"player_fatigue", std::move(fatigue)},
+                    {"player_buffs", std::move(buffs)},
+                    {"used_player_abilities", std::move(usedAbilities)},
+                    {"enemies_defeated", active.progress.enemiesDefeated},
+                    {"defeated", active.progress.defeated},
                     {"baseline", writeCampaignData(active.baseline)},
                     {"parallax",
                      {{"second_layer_tiles", std::move(second)},
@@ -284,6 +383,41 @@ namespace soma::persistence
                 "equipment.north", "equipment.east", "equipment.south", "equipment.west"};
             return std::ranges::find(slots, slot.value()) != slots.end();
         }
+
+        std::optional<std::string> commitSaveFile(const std::filesystem::path& temporary,
+                                                  const std::filesystem::path& destination)
+        {
+            std::error_code filesystemError;
+            const auto destinationExists = std::filesystem::exists(destination, filesystemError);
+            if (filesystemError)
+            {
+                return "Save destination could not be inspected: " + filesystemError.message();
+            }
+
+            if (!destinationExists)
+            {
+                if (MoveFileExW(temporary.c_str(), destination.c_str(), MOVEFILE_WRITE_THROUGH) != 0)
+                {
+                    return std::nullopt;
+                }
+                return "Save file could not be committed: " + std::system_category().message(static_cast<int>(GetLastError()));
+            }
+
+            const auto backup = std::filesystem::path{destination.string() + ".bak"};
+            std::filesystem::remove(backup, filesystemError);
+            if (filesystemError)
+            {
+                return "Previous save backup could not be removed: " + filesystemError.message();
+            }
+            if (ReplaceFileW(destination.c_str(), temporary.c_str(), backup.c_str(), REPLACEFILE_WRITE_THROUGH, nullptr, nullptr) == 0)
+            {
+                return "Save file could not be atomically replaced: " +
+                       std::system_category().message(static_cast<int>(GetLastError()));
+            }
+
+            std::filesystem::remove(backup, filesystemError);
+            return std::nullopt;
+        }
     } // namespace
 
     SaveRepository::SaveRepository(const content::EconomyContent& economy,
@@ -315,13 +449,13 @@ namespace soma::persistence
     gameplay::Result<std::filesystem::path> SaveRepository::save(const std::filesystem::path& path,
                                                                   const SaveGame& saveGame) const
     {
-        const auto validated = validate(saveGame);
-        if (!validated.hasValue())
-        {
-            return gameplay::Result<std::filesystem::path>::failure(validated.error());
-        }
         try
         {
+            const auto validated = validate(saveGame);
+            if (!validated.hasValue())
+            {
+                return gameplay::Result<std::filesystem::path>::failure(validated.error());
+            }
             std::filesystem::create_directories(path.parent_path());
             const auto temporary = std::filesystem::path{path.string() + ".tmp"};
             {
@@ -335,31 +469,16 @@ namespace soma::persistence
                 {
                     return gameplay::Result<std::filesystem::path>::failure("Save file could not be written");
                 }
-            }
-            std::error_code error;
-            const auto backup = std::filesystem::path{path.string() + ".bak"};
-            std::filesystem::remove(backup, error);
-            error.clear();
-            const auto replacingExistingSave = std::filesystem::exists(path);
-            if (replacingExistingSave)
-            {
-                std::filesystem::rename(path, backup, error);
-                if (error)
+                stream.close();
+                if (!stream)
                 {
-                    return gameplay::Result<std::filesystem::path>::failure("Existing save could not be backed up: " + error.message());
+                    return gameplay::Result<std::filesystem::path>::failure("Save file could not be finalized");
                 }
             }
-            std::filesystem::rename(temporary, path, error);
-            if (error)
+            if (const auto error = commitSaveFile(temporary, path))
             {
-                if (replacingExistingSave)
-                {
-                    std::error_code restoreError;
-                    std::filesystem::rename(backup, path, restoreError);
-                }
-                return gameplay::Result<std::filesystem::path>::failure("Save file could not be committed: " + error.message());
+                return gameplay::Result<std::filesystem::path>::failure(*error);
             }
-            std::filesystem::remove(backup, error);
             return gameplay::Result<std::filesystem::path>::success(path);
         }
         catch (const std::exception& error)
@@ -379,6 +498,10 @@ namespace soma::persistence
             return gameplay::Result<SaveGame>::failure("Player name must contain between 1 and 64 UTF-8 bytes");
         }
         const auto state = saveGame.campaign.data();
+        if (!state.currencies.contains(gameplay::Currency::cards) || !state.currencies.contains(gameplay::Currency::dice))
+        {
+            return gameplay::Result<SaveGame>::failure("Save is missing a required currency value");
+        }
         if (state.currencies.at(gameplay::Currency::cards) < 0 || state.currencies.at(gameplay::Currency::dice) < 0)
         {
             return gameplay::Result<SaveGame>::failure("Currency cannot be negative");
@@ -427,7 +550,7 @@ namespace soma::persistence
         {
             return gameplay::Result<SaveGame>::failure("Save references an invalid ability version");
         }
-        if (state.ruleSlotsUnlocked < 1 || state.ruleSlotsUnlocked > static_cast<int>(game::maximumRuleSlots) ||
+        if (state.ruleSlotsUnlocked < 1 || state.ruleSlotsUnlocked > static_cast<int>(gameplay::maximumRuleSlots) ||
             std::ranges::any_of(state.ruleFragments, [this](const auto& entry) {
                 return !rules_.fragments.contains(entry.first) || entry.second <= 0;
             }))
@@ -454,8 +577,8 @@ namespace soma::persistence
                 if (found == rules_.fragments.end() || found->second.type != expectedType)
                     return gameplay::Result<SaveGame>::failure("A rule references an invalid fragment");
                 ++usedFragments[**part];
-                triggered = triggered && found->second.allowedModes.at(0);
-                standing = standing && found->second.allowedModes.at(1);
+                triggered = triggered && found->second.allowedModes.supports(content::RuleMode::triggered);
+                standing = standing && found->second.allowedModes.supports(content::RuleMode::standing);
             }
             if (!triggered && !standing) return gameplay::Result<SaveGame>::failure("A saved rule contains incompatible fragments");
         }
@@ -472,10 +595,15 @@ namespace soma::persistence
         if (saveGame.activeLevel)
         {
             const auto& active = *saveGame.activeLevel;
-            if (!world_.levels.contains(active.run.level()) || active.viewLeft < 0.0F || active.playerHealth.empty() ||
-                active.playerFatigue.size() != active.playerHealth.size() ||
-                std::ranges::any_of(active.playerFatigue, [&active](const auto& entry) {
-                    return !active.playerHealth.contains(entry.first) || entry.second < 0 || entry.second > gameplay::maximumFatigue;
+            const auto& progress = active.progress;
+            if (!world_.levels.contains(active.run.level()) || active.viewLeft < 0.0F || progress.defeated || progress.enemiesDefeated < 0 ||
+                progress.playerHealth.empty() || progress.playerFatigue.size() != progress.playerHealth.size() ||
+                std::ranges::any_of(progress.playerFatigue, [&active](const auto& entry) {
+                    return !active.progress.playerHealth.contains(entry.first) || entry.second < 0 || entry.second > gameplay::maximumFatigue;
+                }) ||
+                std::ranges::any_of(progress.playerBuffs, [&progress](const auto& entry) {
+                    return !progress.playerHealth.contains(entry.first) ||
+                           std::ranges::any_of(entry.second, [](const simulation::ActiveBuff& buff) { return buff.remainingTurns <= 0; });
                 }) ||
                 std::ranges::any_of(active.run.rooms(), [this](const auto& room) {
                     return !world_.assets.contains(room.background) ||

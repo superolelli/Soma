@@ -1,7 +1,7 @@
 #pragma once
 
-#include "content/BattleContent.hpp"
-#include "content/RuleContent.hpp"
+#include "content/battle/BattleContent.hpp"
+#include "content/rules/RuleContent.hpp"
 #include "gameplay/combat/Fatigue.hpp"
 #include "gameplay/common/Result.hpp"
 #include "gameplay/events/GameplayEvent.hpp"
@@ -37,6 +37,9 @@ namespace soma::simulation
         [[nodiscard]] const std::vector<CombatantState>& combatants() const noexcept;
         [[nodiscard]] std::vector<gameplay::EntityId> initiativeOrder() const;
         [[nodiscard]] std::vector<gameplay::EntityId> remainingInitiativeOrder() const;
+        /// Returns the combatant whose command may be executed next.
+        /// @pre The battle is not finished.
+        /// @throws std::logic_error if the battle is already finished.
         [[nodiscard]] const gameplay::EntityId& currentActor() const;
         [[nodiscard]] gameplay::CombatantAttributes effectiveAttributes(const CombatantState& combatant) const;
         [[nodiscard]] int modifiedDamage(const CombatantState& source, const CombatantState& target, int baseDamage) const;
@@ -66,10 +69,10 @@ namespace soma::simulation
                                  int damage,
                                  gameplay::DamageKind kind,
                                  std::vector<gameplay::GameplayEvent>& events);
-        [[nodiscard]] bool attackIsDodged(CombatantState& actor,
-                                          CombatantState& target,
-                                          const content::AbilityDefinition& ability,
-                                          std::vector<gameplay::GameplayEvent>& events);
+        [[nodiscard]] bool resolveAttackDodge(CombatantState& actor,
+                                              CombatantState& target,
+                                              const content::AbilityDefinition& ability,
+                                              std::vector<gameplay::GameplayEvent>& events);
         void summonCombatants(const content::SummonDefinition& summon, std::vector<gameplay::GameplayEvent>& events);
         void applyEffect(CombatantState& actor,
                          CombatantState& target,
@@ -125,12 +128,15 @@ namespace soma::simulation
         void addAttributes(CombatantState& target, const content::AttributeDelta& attributes, int sign);
         void removeAllBuffs(CombatantState& target, std::vector<gameplay::GameplayEvent>& events);
         void removeAllDebuffs(CombatantState& target, std::vector<gameplay::GameplayEvent>& events);
+        [[nodiscard]] CombatantState* nextLivingCombatantBySlot(const CombatantState& current);
         void updateStatuses(CombatantState& combatant, std::vector<gameplay::GameplayEvent>& events);
         void rebuildTurnOrder();
         void advanceTurn(std::vector<gameplay::GameplayEvent>& events);
         void advanceToPlayableTurn(std::vector<gameplay::GameplayEvent>& events);
         void updateFinished(std::vector<gameplay::GameplayEvent>& events);
-        void emitDefeatIfNeeded(CombatantState& target, std::vector<gameplay::GameplayEvent>& events);
+        void emitDefeatIfNeeded(CombatantState& target,
+                                const gameplay::EntityId& source,
+                                std::vector<gameplay::GameplayEvent>& events);
         void updateNofaceBuff(CombatantState& target);
         void changeFatigue(CombatantState& target, int amount, std::vector<gameplay::GameplayEvent>& events);
         void updateFatiguePenalties(CombatantState& target);
