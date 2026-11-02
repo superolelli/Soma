@@ -129,6 +129,7 @@ namespace soma::presentation
             , fatigueStupid(content.assets.at("status_fatigue_stupid"))
             , riposte(content.assets.at("status_riposte"))
             , rage(content.assets.at("status_rage"))
+            , guard(content.assets.at("status_guard"))
             , hacked(content.assets.at("status_hacked"))
             , transfusion(content.assets.at("status_transfusion"))
             , panic(content.assets.at("status_panic"))
@@ -166,6 +167,7 @@ namespace soma::presentation
         sf::Texture fatigueStupid;
         sf::Texture riposte;
         sf::Texture rage;
+        sf::Texture guard;
         sf::Texture hacked;
         sf::Texture transfusion;
         sf::Texture panic;

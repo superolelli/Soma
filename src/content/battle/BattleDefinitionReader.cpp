@@ -65,6 +65,7 @@ namespace soma::content
             effect.riposteRounds = integer(value, "riposte");
             effect.riposteSelfRounds = integer(value, "riposteSelf");
             effect.rageRounds = integer(value, "rage");
+            effect.guardRounds = integer(value, "guard");
             effect.hackedRounds = integer(value, "hacked");
             effect.transfusionHealing = integer(value, "transfusion");
             effect.panicStacks = integer(value, "panic");

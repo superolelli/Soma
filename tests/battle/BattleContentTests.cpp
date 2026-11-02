@@ -48,7 +48,10 @@ int main(int argc, char** argv)
 
     const auto& bigSpencer = result.content.combatants.at(soma::gameplay::ContentDefinitionId{"enemy.big_spencer"});
     check(!bigSpencer.abilities.empty());
-    check(bigSpencer.attributes.maximumHealth == 100);
+    check(bigSpencer.attributes.maximumHealth == 60);
+    const auto& guard = result.content.abilities.at(soma::gameplay::AbilityId{"ability.enemy.guard"});
+    check(guard.friendlyEffect.guardRounds == 3);
+    check(result.content.assets.contains("status_guard"));
 
     const auto& markus = result.content.combatants.at(soma::gameplay::ContentDefinitionId{"player.markus"});
     check(markus.marksAttackersForRevenge);

@@ -247,6 +247,13 @@ namespace soma::presentation
                              "Raserei (" + std::to_string(state.rageTurns) + " Runden)\nVerursachter und erlittener Schaden: +50%",
                              gameplay::StatusId{"status.rage"}});
         }
+        if (state.guardTurns > 0)
+        {
+            icons.push_back({&textures.guard,
+                             "Schutz (" + std::to_string(state.guardTurns) +
+                                 " Runden)\nLeitet direkten Schaden an Verbündeten auf diesen Kämpfer um",
+                             gameplay::StatusId{"status.guard"}});
+        }
         const auto fatigueStage = gameplay::fatigueStage(state.fatigue);
         if (fatigueStage > 0)
         {

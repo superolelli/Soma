@@ -77,6 +77,7 @@ namespace soma::content
         int riposteRounds{};
         int riposteSelfRounds{};
         int rageRounds{};
+        int guardRounds{};
         int hackedRounds{};
         int transfusionHealing{};
         int panicStacks{};

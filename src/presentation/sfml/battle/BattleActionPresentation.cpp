@@ -27,6 +27,7 @@ namespace
                                             Entry{"status.dynamite", "Dynamit!"},
                                             Entry{"status.riposte", "Gegenschlag!"},
                                             Entry{"status.rage", "Raserei!"},
+                                            Entry{"status.guard", "Beschützt!"},
                                             Entry{"status.hacked", "Gehackt!"},
                                             Entry{"status.transfusion", "Transfusion!"},
                                             Entry{"status.panic", "Panik!"},
@@ -421,6 +422,11 @@ namespace soma::presentation
                      triggered != nullptr && triggered->status == gameplay::StatusId{"status.hacked"})
             {
                 floating.push_back({triggered->combatant, "Stärkung blockiert!", sf::Color::White});
+            }
+            else if (const auto* guardTriggered = std::get_if<gameplay::StatusTriggered>(&event);
+                     guardTriggered != nullptr && guardTriggered->status == gameplay::StatusId{"status.guard"})
+            {
+                addInterfaceNotification(floating, guardTriggered->combatant, "Schaden abgefangen!");
             }
             else if (const auto* activated = std::get_if<gameplay::RuleActivated>(&event))
             {

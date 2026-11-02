@@ -282,21 +282,22 @@
                            "id":  "enemy.big_spencer",
                            "ai_policy":  "big_spencer",
                            "team":  "enemies",
-                           "encounter_cost":  10,
+                           "encounter_cost":  4,
                            "name":  "Big Spencer",
                            "abilities":  [
                                              "ability.enemy.punch",
                                              "ability.enemy.brawl",
-                                             "ability.enemy.dynamite"
+                                             "ability.enemy.dynamite",
+                                             "ability.enemy.guard"
                                          ],
                            "attributes":  {
-                                              "maximum_health":  100,
-                                              "damage_minimum":  9,
-                                              "damage_maximum":  12,
+                                              "maximum_health":  60,
+                                              "damage_minimum":  7,
+                                              "damage_maximum":  10,
                                               "armour":  10,
                                               "critical_hit_chance":  5,
                                               "dodge":  0,
-                                              "initiative":  3,
+                                              "initiative":  1,
                                               "precision":  5
                                           },
                            "resistances":  {
@@ -1395,7 +1396,12 @@
                                        "animation":  "punch",
                                        "effectAnimation":  "punch",
                                        "effect":  {
-                                                      "damageFactor":  1
+                                                      "damageFactor":  1,
+                                                      "buff" : {
+                                                            "isPositive":false,
+                                                            "duration": 3,
+                                                            "armour": -15
+                                                      }
                                                   },
                                        "targeting":  {
                                                          "relation":  "opposing_team",
@@ -1906,6 +1912,24 @@
                                                   },
                                        "targeting":  {
                                                          "relation":  "opposing_team",
+                                                         "scope":  "single",
+                                                         "count":  1
+                                                     }
+                                   }
+                      },
+                                            {
+                          "id":  "ability.enemy.guard",
+                          "data":  {
+                                       "id":  36,
+                                       "name":  "Schützen",
+                                       "animation":  "guard",
+                                       "effectAnimation":  "empty",
+                                       "effect":  {
+                                                      "guard": 3,
+                                                      "mark": 3
+                                                  },
+                                       "targeting":  {
+                                                         "relation":  "self",
                                                          "scope":  "single",
                                                          "count":  1
                                                      }

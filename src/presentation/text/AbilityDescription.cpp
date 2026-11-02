@@ -206,6 +206,7 @@ namespace soma::presentation
             if (effect.riposteSelfRounds != 0)
                 addItem(statuses, "e0c050", "Eigener Gegenschlag: " + std::to_string(effect.riposteSelfRounds) + " Runden");
             if (effect.rageRounds != 0) addItem(statuses, "cc5533", "Raserei: " + std::to_string(effect.rageRounds) + " Runden");
+            if (effect.guardRounds != 0) addItem(statuses, "66aadd", "Schutz: " + std::to_string(effect.guardRounds) + " Runden");
             if (effect.hackedRounds != 0)
                 addItem(statuses, "cc8888", "Gehackt: " + std::to_string(effect.hackedRounds) + " Runden");
             if (effect.transfusionHealing != 0)
@@ -397,6 +398,12 @@ namespace soma::presentation
                                  "cc5533",
                                  "Raserei",
                                  "Erhöhter verursachter und erlittener Schaden: +50%."});
+            if (effect.guardRounds != 0)
+                addStatusDetail(details,
+                                {gameplay::StatusId{"status.guard"},
+                                 "66aadd",
+                                 "Schutz",
+                                 "Leitet direkten Schaden an Verbündeten auf den geschützten Kämpfer um. Verfall wird nicht umgeleitet."});
             if (effect.hackedRounds != 0)
                 addStatusDetail(details,
                                 {gameplay::StatusId{"status.hacked"}, "cc8888", "Gehackt", "Blockiert positive Stärkungen."});

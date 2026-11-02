@@ -149,12 +149,20 @@ namespace soma::simulation
         }
         if (id == "big_spencer")
         {
+            const auto hasLivingAlly = std::ranges::any_of(battle.combatants(), [&actor](const auto& target) {
+                return target.team == actor.team && target.alive() && target.id != actor.id;
+            });
+            if (actor.guardTurns <= 0 && hasLivingAlly)
+            {
+                return enemyAbility("guard");
+            }
             const auto playerBuffed = std::ranges::any_of(battle.combatants(), [](const auto& target) {
                 return target.team == gameplay::Team::players && target.alive() && !target.buffs.empty();
             });
             const auto dynamitePossible = std::ranges::none_of(battle.combatants(), [](const auto& target) {
                 return target.dynamite;
             });
+
             if (playerBuffed)
             {
                 return dynamitePossible && coin() ? enemyAbility("dynamite") : enemyAbility("brawl");

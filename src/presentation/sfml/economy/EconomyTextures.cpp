@@ -28,6 +28,7 @@ namespace soma::presentation
             std::pair{"status.bounty", "status_bounty"},
             std::pair{"status.riposte", "status_riposte"},
             std::pair{"status.rage", "status_rage"},
+            std::pair{"status.guard", "status_guard"},
             std::pair{"status.hacked", "status_hacked"},
             std::pair{"status.transfusion", "status_transfusion"},
             std::pair{"status.panic", "status_panic"}};

@@ -148,7 +148,7 @@ namespace soma::simulation
         const auto& value = status.value();
         const auto negative = value == "status.debuffed" || value == "status.sleeping" || value == "status.confused" || value == "status.decay" ||
                               value == "status.bounty" || value == "status.marked" || value == "status.hacked" || value == "status.transfusion";
-        const auto positive = value == "status.buffed" || value == "status.riposte" || value == "status.miss";
+        const auto positive = value == "status.buffed" || value == "status.riposte" || value == "status.guard" || value == "status.miss";
         if (negative)
         {
             changePanic(target, 1, events);
@@ -215,6 +215,7 @@ namespace soma::simulation
     {
         const auto removedOrdinaryBuff = !target.buffs.empty();
         const auto removedRiposte = target.riposteTurns > 0;
+        const auto removedGuard = target.guardTurns > 0;
         for (const auto& buff : target.buffs)
         {
             addAttributes(target, buff.attributes, -1);
@@ -225,8 +226,13 @@ namespace soma::simulation
             target.riposteTurns = 0;
             events.emplace_back(gameplay::StatusExpired{target.id, statusId("riposte")});
         }
+        if (target.guardTurns > 0)
+        {
+            target.guardTurns = 0;
+            events.emplace_back(gameplay::StatusExpired{target.id, statusId("guard")});
+        }
         target.health = std::min(target.health, target.attributes.maximumHealth);
-        if (removedOrdinaryBuff || removedRiposte)
+        if (removedOrdinaryBuff || removedRiposte || removedGuard)
         {
             events.emplace_back(gameplay::BuffsRemoved{target.id});
         }

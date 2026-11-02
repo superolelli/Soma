@@ -97,6 +97,7 @@ namespace soma::game
             destination.riposteRounds += source.riposteRounds;
             destination.riposteSelfRounds += source.riposteSelfRounds;
             destination.rageRounds += source.rageRounds;
+            destination.guardRounds += source.guardRounds;
             destination.hackedRounds += source.hackedRounds;
             destination.transfusionHealing += source.transfusionHealing;
             destination.panicStacks += source.panicStacks;

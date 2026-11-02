@@ -66,6 +66,10 @@ namespace
         {
             return &textures.rage;
         }
+        if (id == "status.guard")
+        {
+            return &textures.guard;
+        }
         if (id == "status.hacked")
         {
             return &textures.hacked;

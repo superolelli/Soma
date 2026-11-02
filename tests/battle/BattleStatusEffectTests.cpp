@@ -40,6 +40,85 @@ namespace soma::tests
             const auto* damage = std::get_if<soma::gameplay::DamageApplied>(&event);
             return damage != nullptr && damage->source == entity("player.simon", 0) && damage->target == entity("enemy.gesetzloser", 4);
         }));
+
+        auto guardContent = loaded.content;
+        auto& guardingSpencer = guardContent.combatants.at(soma::gameplay::ContentDefinitionId{"enemy.big_spencer"});
+        guardingSpencer.attributes.initiative = 100;
+        guardingSpencer.attributes.maximumHealth = 100;
+        guardingSpencer.attributes.armour = 0;
+        guardingSpencer.attributes.criticalHitChance = 0;
+        auto& guardedAlly = guardContent.combatants.at(soma::gameplay::ContentDefinitionId{"enemy.gesetzloser"});
+        guardedAlly.attributes.initiative = 0;
+        guardedAlly.attributes.maximumHealth = 100;
+        guardedAlly.attributes.armour = 0;
+        guardedAlly.attributes.dodge = 0;
+        guardedAlly.resistances.decayResistance = 0;
+        auto& guardAttacker = guardContent.combatants.at(soma::gameplay::ContentDefinitionId{"player.simon"});
+        guardAttacker.attributes.initiative = 50;
+        guardAttacker.attributes.damageMinimum = 10;
+        guardAttacker.attributes.damageMaximum = 10;
+        guardAttacker.attributes.precision = 100;
+        guardAttacker.attributes.criticalHitChance = 0;
+        auto& guardedAttack = guardContent.abilities.at(soma::gameplay::AbilityId{"ability.simon.0"});
+        guardedAttack.targeting = {soma::content::TargetRelation::opposingTeam, soma::content::TargetScope::single, 1, false};
+        guardedAttack.hostileEffect = {};
+        guardedAttack.hostileEffect.damageFactor = 1.0;
+        guardedAttack.fatigue = 0;
+        MinimumRandom guardRandom;
+        soma::simulation::BattleSimulation guardBattle{
+            guardContent,
+            {{soma::gameplay::ContentDefinitionId{"enemy.big_spencer"}, 4},
+             {soma::gameplay::ContentDefinitionId{"player.simon"}, 0},
+             {soma::gameplay::ContentDefinitionId{"enemy.gesetzloser"}, 5}},
+            guardRandom};
+        const auto spencerId = entity("enemy.big_spencer", 4);
+        const auto guardedAllyId = entity("enemy.gesetzloser", 5);
+        const auto guardAttackerId = entity("player.simon", 0);
+        check(guardBattle.execute({spencerId, soma::gameplay::AbilityId{"ability.enemy.guard"}, spencerId}).hasValue());
+        check(guardBattle.find(spencerId)->guardTurns == 3);
+        const auto spencerHealthBeforeAttack = guardBattle.find(spencerId)->health;
+        const auto allyHealthBeforeAttack = guardBattle.find(guardedAllyId)->health;
+        const auto guardedAttackResult = guardBattle.execute(
+            {guardAttackerId, soma::gameplay::AbilityId{"ability.simon.0"}, guardedAllyId});
+        check(guardedAttackResult.hasValue());
+        check(guardBattle.find(spencerId)->health == spencerHealthBeforeAttack - 10);
+        check(guardBattle.find(guardedAllyId)->health == allyHealthBeforeAttack);
+        check(std::ranges::any_of(guardedAttackResult.value(), [&guardedAllyId, &spencerId](const auto& event) {
+            const auto* redirected = std::get_if<soma::gameplay::TargetRedirected>(&event);
+            return redirected != nullptr && redirected->originalTarget == guardedAllyId && redirected->resolvedTarget == spencerId;
+        }));
+        check(std::ranges::any_of(guardedAttackResult.value(), [&spencerId](const auto& event) {
+            const auto* damage = std::get_if<soma::gameplay::DamageApplied>(&event);
+            return damage != nullptr && damage->target == spencerId && damage->kind == soma::gameplay::DamageKind::direct;
+        }));
+
+        auto decayAgainstGuardContent = guardContent;
+        auto& decayAttack = decayAgainstGuardContent.abilities.at(soma::gameplay::AbilityId{"ability.simon.0"});
+        decayAttack.hostileEffect = {};
+        decayAttack.hostileEffect.decayDamage = 2;
+        decayAttack.hostileEffect.decayRounds = 2;
+        MinimumRandom decayAgainstGuardRandom;
+        soma::simulation::BattleSimulation decayAgainstGuardBattle{
+            decayAgainstGuardContent,
+            {{soma::gameplay::ContentDefinitionId{"enemy.big_spencer"}, 4},
+             {soma::gameplay::ContentDefinitionId{"player.simon"}, 0},
+             {soma::gameplay::ContentDefinitionId{"enemy.gesetzloser"}, 5}},
+            decayAgainstGuardRandom};
+        check(decayAgainstGuardBattle.execute({spencerId, soma::gameplay::AbilityId{"ability.enemy.guard"}, spencerId}).hasValue());
+        const auto spencerHealthBeforeDecay = decayAgainstGuardBattle.find(spencerId)->health;
+        const auto allyHealthBeforeDecay = decayAgainstGuardBattle.find(guardedAllyId)->health;
+        const auto decayResult = decayAgainstGuardBattle.execute(
+            {guardAttackerId, soma::gameplay::AbilityId{"ability.simon.0"}, guardedAllyId});
+        check(decayResult.hasValue());
+        check(decayAgainstGuardBattle.find(spencerId)->health == spencerHealthBeforeDecay);
+        check(decayAgainstGuardBattle.find(guardedAllyId)->health == allyHealthBeforeDecay - 2);
+        check(std::ranges::none_of(decayResult.value(), [](const auto& event) {
+            return std::holds_alternative<soma::gameplay::TargetRedirected>(event);
+        }));
+        check(std::ranges::any_of(decayResult.value(), [&guardedAllyId](const auto& event) {
+            const auto* damage = std::get_if<soma::gameplay::DamageApplied>(&event);
+            return damage != nullptr && damage->target == guardedAllyId && damage->kind == soma::gameplay::DamageKind::decay;
+        }));
     
         auto neutralRageContent = loaded.content;
         auto& neutralRageAbility = neutralRageContent.abilities.at(soma::gameplay::AbilityId{"ability.simon.0"});

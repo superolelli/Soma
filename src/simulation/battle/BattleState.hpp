@@ -73,6 +73,7 @@ namespace soma::simulation
         int fatigue{};
         int riposteTurns{};
         int rageTurns{};
+        int guardTurns{};
         int hackedTurns{};
         int panicStacks{};
         int appliedFatiguePenaltyStages{};

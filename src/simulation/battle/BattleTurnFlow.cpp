@@ -87,6 +87,10 @@ namespace soma::simulation
         {
             events.emplace_back(gameplay::StatusExpired{combatant.id, statusId("rage")});
         }
+        if (combatant.guardTurns > 0 && --combatant.guardTurns == 0)
+        {
+            events.emplace_back(gameplay::StatusExpired{combatant.id, statusId("guard")});
+        }
         if (combatant.hackedTurns > 0 && --combatant.hackedTurns == 0)
         {
             events.emplace_back(gameplay::StatusExpired{combatant.id, statusId("hacked")});
@@ -120,15 +124,16 @@ namespace soma::simulation
             if (random_.between(0, 4) == 0)
             {
                 events.emplace_back(gameplay::StatusTriggered{combatant.id, statusId("dynamite")});
-                const auto rawDamage = standingModifiedValue(content::ModifierKind::damageReceived, combatant, 15);
-                const auto rageDamage = combatant.rageTurns > 0 ? static_cast<int>(std::round(rawDamage * 1.5)) : rawDamage;
-                const auto effectiveArmour = effectiveAttributes(combatant).armour;
+                auto& damageTarget = redirectDirectDamage(combatant.id, combatant, events);
+                const auto rawDamage = standingModifiedValue(content::ModifierKind::damageReceived, damageTarget, 15);
+                const auto rageDamage = damageTarget.rageTurns > 0 ? static_cast<int>(std::round(rawDamage * 1.5)) : rawDamage;
+                const auto effectiveArmour = effectiveAttributes(damageTarget).armour;
                 const auto armour = static_cast<int>(std::round(effectiveArmour / 100.0 * rageDamage));
                 const auto damage = std::max(0, rageDamage - armour);
-                combatant.health = std::max(0, combatant.health - damage);
-                updateNofaceBuff(combatant);
-                recordDamageApplied(combatant.id, combatant, damage, gameplay::DamageKind::direct, events);
-                emitDefeatIfNeeded(combatant, combatant.id, events);
+                damageTarget.health = std::max(0, damageTarget.health - damage);
+                updateNofaceBuff(damageTarget);
+                recordDamageApplied(combatant.id, damageTarget, damage, gameplay::DamageKind::direct, events);
+                emitDefeatIfNeeded(damageTarget, combatant.id, events);
             }
             else
             {

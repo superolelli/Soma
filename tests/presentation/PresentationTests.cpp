@@ -181,10 +181,12 @@ int main()
     statusAbility.hostileEffect.confusionRounds = 2;
     statusAbility.hostileEffect.hackedRounds = 2;
     statusAbility.hostileEffect.transfusionHealing = 3;
+    statusAbility.hostileEffect.guardRounds = 2;
     const auto statusDescription = soma::presentation::abilityDescription(statusAbility);
     check(statusDescription.find("Auf Freunde") == std::string::npos);
     check(statusDescription.find("0 Runden") == std::string::npos);
     check(statusDescription.find("Transfusion: 3") != std::string::npos);
+    check(statusDescription.find("Schutz: 2 Runden") != std::string::npos);
     check(statusDescription.find("Heilt bei Verfallsschaden") == std::string::npos);
     check(statusDescription.find("keine Stärkungen") == std::string::npos);
 
@@ -195,6 +197,7 @@ int main()
     check(containsStatus("Verwirrung"));
     check(containsStatus("Gehackt"));
     check(containsStatus("Transfusion"));
+    check(containsStatus("Schutz"));
     check(std::ranges::any_of(statusDetails, [](const auto& detail) {
         return detail.explanation.find("Blockiert positive Stärkungen") != std::string::npos;
     }));

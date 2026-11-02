@@ -114,7 +114,7 @@ Abilities live in `battle/content.json`. Their tooltip is generated from mechani
 
 Target relations are `self`, `own_team`, `opposing_team`, `either_team`, and `everyone_else`. Scopes are `single`, `count`, and `team`. Formation positions never restrict an ability. Multi-target selection wraps around the four logical slots and counts empty slots.
 
-Effects can combine direct damage/healing, fatigue, buffs/debuffs, mark, confusion, sleep, decay, dynamite, hacked, bounty, rage, riposte, panic, transfusion, cleansing, status extension, summoning, and the specialized mechanics already represented in existing definitions. Reuse the exact property spelling from a working neighboring ability; the loader rejects unsupported combinations and invalid references.
+Effects can combine direct damage/healing, fatigue, buffs/debuffs, mark, confusion, sleep, decay, dynamite, hacked, bounty, rage, riposte, guard, panic, transfusion, cleansing, status extension, summoning, and the specialized mechanics already represented in existing definitions. Reuse the exact property spelling from a working neighboring ability; the loader rejects unsupported combinations and invalid references.
 
 ## Player ability versions and skills
 

@@ -32,6 +32,7 @@
                    "status_fatigue_stupid":  "Data/Sprites/Battle/fatigue_debuff2.png",
                    "status_riposte":  "Data/Sprites/Battle/riposte.png",
                    "status_rage":  "Data/Sprites/Battle/rage.png",
+                   "status_guard":  "Data/Sprites/Battle/guard.png",
                    "status_hacked":  "Data/Sprites/Battle/hacked.png",
                    "status_transfusion":  "Data/Sprites/Battle/transfusion.png",
                    "status_panic":  "Data/Sprites/Battle/panic.png",

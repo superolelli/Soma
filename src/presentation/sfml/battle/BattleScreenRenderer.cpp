@@ -60,6 +60,10 @@ namespace
         {
             displayed.rageTurns = previous.rageTurns;
         }
+        else if (id == "status.guard")
+        {
+            displayed.guardTurns = previous.guardTurns;
+        }
         else if (id == "status.hacked")
         {
             displayed.hackedTurns = previous.hackedTurns;

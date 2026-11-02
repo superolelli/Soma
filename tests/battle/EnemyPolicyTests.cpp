@@ -265,6 +265,35 @@ namespace
             content.abilities.at(command.value().ability).targeting, actor, primary, battle.combatants());
         check(targets == std::vector{soma::gameplay::EntityId{actingPlayer}, soma::gameplay::EntityId{secondPlayer}});
     }
+
+    void bigSpencerGuardsLivingAllies()
+    {
+        const soma::gameplay::AbilityId preparation{"ability.player.wait"};
+        const soma::gameplay::ContentDefinitionId bigSpencer{"enemy.big_spencer"};
+        auto content = baseContent(preparation,
+                                   {},
+                                   bigSpencer,
+                                   "big_spencer",
+                                   {enemyAbility("guard"), enemyAbility("punch"), enemyAbility("brawl"), enemyAbility("dynamite")},
+                                   true);
+        addAbility(content, enemyAbility("guard"), soma::content::TargetRelation::self);
+        addAbility(content, enemyAbility("punch"), soma::content::TargetRelation::opposingTeam);
+        addAbility(content, enemyAbility("brawl"), soma::content::TargetRelation::opposingTeam);
+        addAbility(content, enemyAbility("dynamite"), soma::content::TargetRelation::opposingTeam);
+        FixedRandom random{false};
+
+        const auto command = chooseAfterPreparation(std::move(content),
+                                                    random,
+                                                    preparation,
+                                                    actingPlayer,
+                                                    {{actingPlayerDefinition, 0},
+                                                     {secondPlayerDefinition, 1},
+                                                     {bigSpencer, 4},
+                                                     {soma::gameplay::ContentDefinitionId{"enemy.ally"}, 5}});
+
+        check(command.ability == enemyAbility("guard"));
+        check(command.primaryTarget == soma::gameplay::EntityId{"enemy.big_spencer.slot4"});
+    }
 } // namespace
 
 int main()
@@ -275,4 +304,5 @@ int main()
     bountySkipsAPlayerWhoAlreadyHasOne();
     crystalBallSelectsTheBuffedPlayer();
     fanningSelectsACompleteTwoTargetArc();
+    bigSpencerGuardsLivingAllies();
 }

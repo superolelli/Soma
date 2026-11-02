@@ -37,6 +37,7 @@ namespace soma::simulation
         const auto critical = random_.chance(std::clamp(criticalChance, 0, 100) / 100.0);
         const auto effectFactor = critical ? 2 : 1;
         const auto durationBonus = critical ? 2 : 0;
+        const auto criticalEventIndex = events.size();
         if (critical)
         {
             events.emplace_back(gameplay::CriticalHit{target.id});
@@ -46,6 +47,22 @@ namespace soma::simulation
         applyHealingEffects(actor, target, effect, effectFactor, events);
         applyStatusEffects(actor, target, effect, durationBonus, events);
         applyUtilityEffects(actor, target, effect, durationBonus, events);
+        if (critical)
+        {
+            const auto result = std::ranges::find_if(events.begin() + static_cast<std::ptrdiff_t>(criticalEventIndex + 1),
+                                                     events.end(),
+                                                     [](const auto& event) {
+                                                         return std::holds_alternative<gameplay::DamageApplied>(event) ||
+                                                                std::holds_alternative<gameplay::HealingApplied>(event);
+                                                     });
+            if (result != events.end())
+            {
+                auto& criticalEvent = std::get<gameplay::CriticalHit>(events.at(criticalEventIndex));
+                criticalEvent.combatant = std::holds_alternative<gameplay::DamageApplied>(*result)
+                                              ? std::get<gameplay::DamageApplied>(*result).target
+                                              : std::get<gameplay::HealingApplied>(*result).target;
+            }
+        }
     }
 
     void BattleSimulation::applyDamageEffect(CombatantState& actor,
@@ -58,6 +75,7 @@ namespace soma::simulation
     {
         if (effect.damageFactor != 0.0)
         {
+            auto& damageTarget = redirectDirectDamage(actor.id, target, events);
             const auto baseDamage = random_.between(actor.attributes.damageMinimum, actor.attributes.damageMaximum);
             const auto markedBonus = target.markedTurns > 0 ? effect.damageAgainstMarked + damageAgainstMarkedBonus(actor) : 0.0;
             const auto revengeBonus = target.fistOfRevengeTarget ? effect.damageAgainstRevengeMarked : 0.0;
@@ -72,19 +90,19 @@ namespace soma::simulation
             const auto abilityDamage =
                 static_cast<int>(baseDamage * (effect.damageFactor + additionalDamage + markedBonus + revengeBonus + fatigueBonus) *
                                  damageFactorMultiplier * effectFactor);
-            const auto rawDamage = modifiedDamage(actor, target, abilityDamage);
-            const auto armour = effect.ignoreArmour ? 0 : effectiveAttributes(target).armour;
+            const auto rawDamage = modifiedDamage(actor, damageTarget, abilityDamage);
+            const auto armour = effect.ignoreArmour ? 0 : effectiveAttributes(damageTarget).armour;
             const auto armourReduction = static_cast<int>(std::round(armour / 100.0 * rawDamage));
             const auto damage = std::max(0, rawDamage - armourReduction);
-            target.health = std::max(0, target.health - damage);
-            if (damage >= 10 && definition(target).addsMissOnHighDamage)
+            damageTarget.health = std::max(0, damageTarget.health - damage);
+            if (damage >= 10 && definition(damageTarget).addsMissOnHighDamage)
             {
-                ++target.misses;
-                recordStatusGained(target, statusId("miss"), events);
+                ++damageTarget.misses;
+                recordStatusGained(damageTarget, statusId("miss"), events);
             }
-            updateNofaceBuff(target);
-            recordDamageApplied(actor.id, target, damage, gameplay::DamageKind::direct, events);
-            if (target.bountyTurns > 0)
+            updateNofaceBuff(damageTarget);
+            recordDamageApplied(actor.id, damageTarget, damage, gameplay::DamageKind::direct, events);
+            if (damageTarget.bountyTurns > 0)
             {
                 content::BuffDefinition bounty;
                 bounty.duration = 3;
@@ -93,11 +111,11 @@ namespace soma::simulation
                 bounty.attributes.damageMaximum = 2;
                 applyBuff(actor, bounty, bounty.duration, events);
             }
-            const auto defeatedByAttack = !target.alive();
-            emitDefeatIfNeeded(target, actor.id, events);
+            const auto defeatedByAttack = !damageTarget.alive();
+            emitDefeatIfNeeded(damageTarget, actor.id, events);
             if (defeatedByAttack && effect.transferDecayOnKill)
             {
-                transferDecayAfterDefeat(actor, target, events);
+                transferDecayAfterDefeat(actor, damageTarget, events);
             }
         }
         if (effect.transferredMissingHealthDamageFactor != 0.0 || effect.transferredMissingHealthHealingFactor != 0.0)
@@ -230,6 +248,11 @@ namespace soma::simulation
         {
             target.rageTurns += std::max(0, effect.rageRounds + durationBonus);
             recordStatusGained(target, statusId("rage"), events);
+        }
+        if (effect.guardRounds > 0)
+        {
+            target.guardTurns += std::max(0, effect.guardRounds + durationBonus);
+            recordStatusGained(target, statusId("guard"), events);
         }
         if (effect.hackedRounds > 0)
         {

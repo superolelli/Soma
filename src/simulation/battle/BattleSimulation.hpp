@@ -63,6 +63,9 @@ namespace soma::simulation
         [[nodiscard]] CombatantState* nextLivingTeamMember(const CombatantState& combatant);
         void resolveRiposte(CombatantState& counteringCombatant, CombatantState& attacker, std::vector<gameplay::GameplayEvent>& events);
         void resolveEquipmentEffects(std::vector<gameplay::GameplayEvent>& events);
+        [[nodiscard]] CombatantState& redirectDirectDamage(const gameplay::EntityId& source,
+                                                            CombatantState& intendedTarget,
+                                                            std::vector<gameplay::GameplayEvent>& events);
         void applyUnavoidableDamage(CombatantState& source, CombatantState& target, int damage, std::vector<gameplay::GameplayEvent>& events);
         void recordDamageApplied(const gameplay::EntityId& source,
                                  CombatantState& target,

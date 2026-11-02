@@ -195,18 +195,19 @@ namespace soma::simulation
     {
         if (effect.kind == content::EffectKind::damage)
         {
+            auto& damageTarget = redirectDirectDamage(source, target, events);
             const auto* actor = find(source);
-            auto damage = actor == nullptr ? standingModifiedValue(content::ModifierKind::damageReceived, target, effect.amount)
-                                           : modifiedDamage(*actor, target, effect.amount);
-            if (actor == nullptr && target.rageTurns > 0)
+            auto damage = actor == nullptr ? standingModifiedValue(content::ModifierKind::damageReceived, damageTarget, effect.amount)
+                                           : modifiedDamage(*actor, damageTarget, effect.amount);
+            if (actor == nullptr && damageTarget.rageTurns > 0)
             {
                 damage = static_cast<int>(std::round(damage * 1.5));
             }
             damage = std::max(0, damage);
-            target.health = std::max(0, target.health - damage);
-            updateNofaceBuff(target);
-            recordDamageApplied(source, target, damage, gameplay::DamageKind::direct, events);
-            emitDefeatIfNeeded(target, source, events);
+            damageTarget.health = std::max(0, damageTarget.health - damage);
+            updateNofaceBuff(damageTarget);
+            recordDamageApplied(source, damageTarget, damage, gameplay::DamageKind::direct, events);
+            emitDefeatIfNeeded(damageTarget, source, events);
             return;
         }
         if (effect.kind == content::EffectKind::healing)

@@ -210,11 +210,43 @@ namespace soma::simulation
                                                   int damage,
                                                   std::vector<gameplay::GameplayEvent>& events)
     {
-        const auto appliedDamage = std::min(target.health, std::max(0, damage));
-        target.health -= appliedDamage;
-        updateNofaceBuff(target);
-        recordDamageApplied(source.id, target, appliedDamage, gameplay::DamageKind::direct, events);
-        emitDefeatIfNeeded(target, source.id, events);
+        auto& resolvedTarget = redirectDirectDamage(source.id, target, events);
+        const auto appliedDamage = std::min(resolvedTarget.health, std::max(0, damage));
+        resolvedTarget.health -= appliedDamage;
+        updateNofaceBuff(resolvedTarget);
+        recordDamageApplied(source.id, resolvedTarget, appliedDamage, gameplay::DamageKind::direct, events);
+        emitDefeatIfNeeded(resolvedTarget, source.id, events);
+    }
+
+    CombatantState& BattleSimulation::redirectDirectDamage(const gameplay::EntityId& source,
+                                                            CombatantState& intendedTarget,
+                                                            std::vector<gameplay::GameplayEvent>& events)
+    {
+        if (intendedTarget.guardTurns > 0)
+        {
+            return intendedTarget;
+        }
+
+        CombatantState* guard = nullptr;
+        for (auto& candidate : combatants_)
+        {
+            if (!candidate.alive() || candidate.team != intendedTarget.team || candidate.guardTurns <= 0)
+            {
+                continue;
+            }
+            if (guard == nullptr || candidate.slot < guard->slot)
+            {
+                guard = &candidate;
+            }
+        }
+        if (guard == nullptr)
+        {
+            return intendedTarget;
+        }
+
+        events.emplace_back(gameplay::StatusTriggered{guard->id, statusId("guard")});
+        events.emplace_back(gameplay::TargetRedirected{source, intendedTarget.id, guard->id});
+        return *guard;
     }
 
     void BattleSimulation::recordDamageApplied(
