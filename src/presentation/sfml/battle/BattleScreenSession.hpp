@@ -60,6 +60,7 @@ namespace soma::presentation
         std::optional<std::filesystem::path> introVideo;
         std::function<void()> onBattleTransition;
         std::function<void()> onBattleReady;
+        std::function<bool(const std::function<void()>&)> beforeFirstTurn;
         const content::GameFlowContent* flow{};
         std::optional<BattleLaunchOptions> developmentLaunchOptions;
         bool returnWhenResolved{};

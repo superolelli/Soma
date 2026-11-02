@@ -114,6 +114,11 @@ namespace soma::presentation::detail
             if (lootDialog_->closed())
             {
                 lootDialog_.reset();
+                if (tutorial_.show && initialConsumableCount_ == 0U && campaignState_.distinctConsumables() > 0U)
+                {
+                    tutorial_.show("first_consumable", [this]() { drawExplorationFrame(); });
+                    initialConsumableCount_ = campaignState_.distinctConsumables();
+                }
                 if (completeLevelAfterLoot_)
                 {
                     completeLevelAfterLoot_ = false;

@@ -139,7 +139,7 @@ namespace soma::content::detail
             }
             for (const auto& campaign : definition.campaigns)
             {
-                if (campaign != "bang" && campaign != "kutschfahrt")
+                if (campaign != "bang" && campaign != "kutschfahrt" && campaign != "tutorial")
                 {
                     throw std::runtime_error("Unknown campaign '" + campaign + "' on item " + id.value());
                 }

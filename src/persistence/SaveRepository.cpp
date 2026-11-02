@@ -358,6 +358,23 @@ namespace soma::persistence
             }
             if (document.contains("active_level") && !document.at("active_level").is_null())
                 result.activeLevel = readActiveLevel(document.at("active_level"));
+            if (document.contains("tutorial"))
+            {
+                const auto& tutorial = document.at("tutorial");
+                result.tutorial.initialSequenceCompleted = tutorial.value("initial_sequence_completed", true);
+                if (tutorial.contains("main_room_step") && !tutorial.at("main_room_step").is_null())
+                {
+                    result.tutorial.mainRoomStep = tutorial.at("main_room_step").get<std::size_t>();
+                }
+                result.tutorial.rulesUnlocked = tutorial.value("rules_unlocked", false);
+                if (tutorial.contains("shown_messages"))
+                {
+                    for (const auto& message : tutorial.at("shown_messages"))
+                    {
+                        result.tutorial.shownMessages.emplace(message.get<std::string>());
+                    }
+                }
+            }
             return result;
         }
 
@@ -369,10 +386,15 @@ namespace soma::persistence
             {
                 completedLevels.push_back(level.value());
             }
+            json tutorial{{"initial_sequence_completed", saveGame.tutorial.initialSequenceCompleted},
+                          {"rules_unlocked", saveGame.tutorial.rulesUnlocked},
+                          {"shown_messages", saveGame.tutorial.shownMessages}};
+            tutorial["main_room_step"] = saveGame.tutorial.mainRoomStep ? json(*saveGame.tutorial.mainRoomStep) : json{};
             json result{{"schema_version", currentSaveVersion},
                     {"player_name", saveGame.playerName},
                     {"campaign", writeCampaignData(state)},
-                    {"completed_levels", std::move(completedLevels)}};
+                    {"completed_levels", std::move(completedLevels)},
+                    {"tutorial", std::move(tutorial)}};
             if (saveGame.activeLevel) result["active_level"] = writeActiveLevel(*saveGame.activeLevel);
             return result;
         }

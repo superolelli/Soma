@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <limits>
 
 namespace soma::presentation
 {
@@ -131,6 +132,46 @@ namespace soma::presentation
         music_->stop();
     }
 
+    void MainRoomScreen::focusCampaignDoors()
+    {
+        auto left = std::numeric_limits<float>::max();
+        auto right = std::numeric_limits<float>::lowest();
+        for (std::size_t index = 0; index < flow_.mainRoom.doors.size(); ++index)
+        {
+            sf::Sprite door{doorTextures_.at(index)};
+            door.setPosition(vector(flow_.mainRoom.doors.at(index).position));
+            const auto bounds = door.getGlobalBounds();
+            left = std::min(left, bounds.position.x);
+            right = std::max(right, bounds.position.x + bounds.size.x);
+        }
+
+        const auto roomWidth = static_cast<float>(backgroundTextures_.front().getSize().x * backgroundTextures_.size());
+        const auto viewWidth = worldView_.getSize().x;
+        const auto desiredLeft = (left + right - viewWidth) / 2.0F;
+        const auto viewLeft = std::clamp(desiredLeft, 0.0F, roomWidth - viewWidth);
+        worldView_.setCenter({viewLeft + viewWidth / 2.0F, worldView_.getCenter().y});
+        sf::Listener::setPosition({worldView_.getCenter().x, worldView_.getCenter().y, -5.0F});
+    }
+
+    std::vector<content::Rectangle> MainRoomScreen::campaignSignHighlights() const
+    {
+        constexpr float padding = 12.0F;
+        const auto viewOrigin = worldView_.getCenter() - worldView_.getSize() / 2.0F;
+        std::vector<content::Rectangle> result;
+        result.reserve(flow_.mainRoom.signs.size());
+        for (std::size_t index = 0; index < flow_.mainRoom.signs.size(); ++index)
+        {
+            sf::Sprite sign{signTextures_.at(index)};
+            sign.setPosition(vector(flow_.mainRoom.signs.at(index).position));
+            const auto bounds = sign.getGlobalBounds();
+            result.push_back({static_cast<int>(bounds.position.x - viewOrigin.x - padding),
+                              static_cast<int>(bounds.position.y - viewOrigin.y - padding),
+                              static_cast<int>(bounds.size.x + padding * 2.0F),
+                              static_cast<int>(bounds.size.y + padding * 2.0F)});
+        }
+        return result;
+    }
+
     void MainRoomScreen::processEvents()
     {
         while (const auto event = window_.pollEvent())
@@ -206,6 +247,10 @@ namespace soma::presentation
                                             MainRoomAction::rules};
         for (std::size_t index = 0; index < toolbarTextures_.size(); ++index)
         {
+            if (index == 3U && !rulesAvailable())
+            {
+                continue;
+            }
             const auto buttonPosition = vector(flow_.mainRoom.toolbarPositions.at(index));
             const sf::FloatRect bounds{buttonPosition,
                                        {static_cast<float>(toolbarTextures_.at(index).getSize().x / 2U),
@@ -300,6 +345,15 @@ namespace soma::presentation
     bool MainRoomScreen::campaignAvailable(std::string_view campaign) const
     {
         return game::CampaignProgression{world_, saveGame_.completedLevels}.nextLevel(campaign).has_value();
+    }
+
+    bool MainRoomScreen::rulesAvailable() const
+    {
+        if (saveGame_.tutorial.rulesUnlocked)
+        {
+            return true;
+        }
+        return saveGame_.campaign.hasDiscoveredRuleFragments();
     }
 
     bool MainRoomScreen::interactiveAt(sf::Vector2f position) const
@@ -422,6 +476,10 @@ namespace soma::presentation
         window_.draw(positioned(statusBarBackgroundTexture_, flow_.mainRoom.statusBarBackgroundPosition));
         for (std::size_t index = 0; index < toolbarTextures_.size(); ++index)
         {
+            if (index == 3U && !rulesAvailable())
+            {
+                continue;
+            }
             sf::Sprite button{toolbarTextures_.at(index)};
             button.setPosition(vector(flow_.mainRoom.toolbarPositions.at(index)));
             const auto frameWidth = static_cast<int>(toolbarTextures_.at(index).getSize().x / 2U);

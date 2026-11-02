@@ -295,7 +295,7 @@ namespace soma::presentation
         BattleInteractionController interaction{
             battleContent, battle, enemyPolicy, actionStarter, launchOptions, views, action, skipTurnBounds};
         ResourceCounter resources{economyContent, campaignState};
-        ActiveRulesPanel activeRules{ruleContent, campaignState.rules(), interfaceFont};
+        ActiveRulesPanel activeRules{ruleContent, campaignState.rules(), interfaceFont, campaignState.hasDiscoveredRuleFragments()};
         BattleScreenRenderer renderer{window,
                                       battleContent,
                                       battle,
@@ -339,6 +339,13 @@ namespace soma::presentation
         if (music)
         {
             music->play();
+        }
+
+        if (request.beforeFirstTurn && !request.beforeFirstTurn([&]() {
+                renderer.draw(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+            }))
+        {
+            return outcome(BattleScreenResult::windowClosed, battle);
         }
 
         // Transition and intro playback are synchronous. Do not feed their

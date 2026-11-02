@@ -22,6 +22,11 @@ namespace sf
 
 namespace soma::presentation
 {
+    struct ExplorationTutorialCallbacks
+    {
+        std::function<void(std::string_view, const std::function<void()>&)> show;
+    };
+
     [[nodiscard]] game::LevelSessionOutcome runCampaignExplorationSession(sf::RenderWindow& window,
                                                                           const content::BattleContent& battle,
                                                                           const content::EconomyContent& economy,
@@ -33,7 +38,8 @@ namespace soma::presentation
                                                                           game::EconomyService& economyService,
                                                                           std::uint64_t randomSeed,
                                                                           std::optional<game::ActiveLevelState> savedLevel = std::nullopt,
-                                                                          std::function<void()> loadingFrame = {});
+                                                                          std::function<void()> loadingFrame = {},
+                                                                          ExplorationTutorialCallbacks tutorial = {});
 
     int runExplorationSession(const content::BattleContent& battle,
                               const content::EconomyContent& economy,

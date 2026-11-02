@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "content_kind": "tutorial",
+  "font": "Data/Fonts/trajan.ttf",
+  "intro_video": "Data/Videos/BasiliusKartov.mp4",
+  "initial_level": {
+    "first_background": "Data/Sprites/Backgrounds/Tutorial/tutorial_gang_1.png",
+    "battle_background": "Data/Sprites/Backgrounds/Tutorial/tutorial_gang_2.png",
+    "end_background": "Data/Sprites/Backgrounds/Tutorial/tutorial_gang_ende.png",
+    "door": "Data/Sprites/Backgrounds/Tutorial/tutorial_door.png",
+    "lootable": "lootable.chest",
+    "loot_item": "item.tutorial.red_meeple",
+    "door_position": [1474, 196],
+    "movement_speed": 380,
+    "battle_reward": {"cards": 5, "dice": 1}
+  },
+  "initial_messages": {
+    "navigation": "initial.navigation",
+    "lootable": "initial.lootable",
+    "battle_loot": "initial.battle_loot",
+    "retry_battle": "battle.retry"
+  },
+  "battle_messages": [
+    "battle.initiative",
+    "battle.abilities",
+    "battle.accuracy",
+    "battle.armour",
+    "battle.statuses",
+    "battle.death"
+  ],
+  "ending_dialogue": [
+    {"speaker": "Simon", "text": "Eine Tür. Mit einem Namensschild."},
+    {"speaker": "Markus", "text": "Da stehen unsere Namen drauf!"},
+    {"speaker": "Anna", "text": "Dann mach auf!"},
+    {"speaker": "Markus", "text": "Ein Sofa!"},
+    {"speaker": "Anna", "text": "Ein Hase!"},
+    {"speaker": "Ole", "text": "Ein Computer!"},
+    {"speaker": "Simon", "text": "Eine Werkbank!"}
+  ],
+  "main_room_onboarding": [
+    {"message": "main.inventory", "action": "inventory"},
+    {"message": "main.skills", "action": "skills", "requirement": "skill_acquired"},
+    {"message": "main.shop", "action": "shop"},
+    {"message": "main.worlds", "action": "worlds"}
+  ],
+  "on_demand_messages": {
+    "first_consumable": "ondemand.consumable",
+    "level_rewards": "ondemand.level_rewards",
+    "boss_battle": "ondemand.boss",
+    "rules_unlocked": "ondemand.rules"
+  },
+  "messages": [
+    {
+      "id": "initial.navigation",
+      "title": "Wo sind wir?",
+      "text": "Ihr seid durch ein Loch in Simons Häuschen gefallen. Bewege die Gruppe mit A oder D um dich umzusehen."
+    },
+    {
+      "id": "initial.lootable",
+      "title": "Fundstücke",
+      "text": "Dort steht eine Truhe. Klicke darauf um ihren Inhalt einsammeln."
+    },
+    {
+      "id": "battle.initiative",
+      "title": "Zugreihenfolge",
+      "text": "Die kleinen Zahlen an den Kämpfern zeigen ihre aktuelle Position in der Zugreihenfolge. Diese hängt von der jeweiligen Initiative ab.",
+      "highlights": [[70, 670, 700, 150], [940, 670, 900, 150]]
+    },
+    {
+      "id": "battle.abilities",
+      "title": "Fähigkeiten und Ziele",
+      "text": "Wähle eine Fähigkeit und danach ein hervorgehobenes Ziel. Der Infobereich zeigt dir den erwarteten Schaden und die Trefferchance.",
+      "highlight": [90, 850, 720, 220]
+    },
+    {
+      "id": "battle.accuracy",
+      "title": "Präzision und Ausweichen",
+      "text": "Ob ein Angriff trifft hängt von dem Präzisionswert des Angreifers und dem Ausweichenwert des Angegriffenen ab.",
+      "highlight": [810, 840, 1100, 230]
+    },
+    {
+      "id": "battle.armour",
+      "title": "Schaden und Rüstung",
+      "text": "Rüstung verringert direkten Schaden um einen gewissen Prozentsatz. Einige besondere Schadensarten umgehen Rüstung allerdings.",
+      "highlight": [810, 840, 1100, 230]
+    },
+    {
+      "id": "battle.statuses",
+      "title": "Status- und Verfallseffekte",
+      "text": "Symbole unter den Lebensbalken zeigen Statuseffekte. Verfall verursacht Schaden über mehrere Runden. Bewege die Maus über ein Symbol, um Einzelheiten zu sehen.",
+      "highlight": [60, 590, 1800, 235]
+    },
+    {
+      "id": "battle.death",
+      "title": "Besiegen und Überleben",
+      "text": "Fällt die Gesundheit auf null, scheidet der Kämpfer aus. Besiege beide Gegner."
+    },
+    {
+      "id": "battle.retry",
+      "title": "Noch einmal",
+      "text": "Die Gruppe wurde besiegt. Im Tutorial beginnt der Kampf noch einmal, damit du Fähigkeiten und Zielwahl weiter ausprobieren kannst."
+    },
+    {
+      "id": "initial.battle_loot",
+      "title": "Kampfbeute",
+      "text": "Gewonnene Kämpfe bringen Beute. Karten sind die allgemeine Währung; Mit Würfeln kannst du deine Fähigkeiten verbessern."
+    },
+    {
+      "id": "main.inventory",
+      "title": "Inventar und Werte",
+      "text": "Im Inventar siehst du die Statuswerte der Heldengruppe. Ausgerüstete Gegenstände können diese Werte verändern. Rüste das rote Männchen bei einem der Helden aus.",
+      "highlight": [0, 0, 53, 53]
+    },
+    {
+      "id": "main.skills",
+      "title": "Fähigkeiten verbessern",
+      "text": "Im Fähigkeitenfenster hat jede Fähigkeit zwei Varianten mit eigenen Fertigkeitsbäumen. Du kannst frei entscheiden, welche Variante aktiv sein soll. Gib den erhaltenen Würfel für eine erste Verbesserung aus.",
+      "highlight": [53, 0, 53, 53]
+    },
+    {
+      "id": "main.shop",
+      "title": "Verkaufsautomat",
+      "text": "Am Verkaufsautomaten kannst du Gegenstände kaufen und verkaufen. Ein Schloss zeigt an, dass du hier weitere Dinge freischalten kannst.",
+      "highlight": [106, 0, 53, 53]
+    },
+    {
+      "id": "main.worlds",
+      "title": "Welten und Schwierigkeit",
+      "text": "Die Türen führen in unterschiedliche Welten. Die Zahl über einer Tür zeigt das nächste Level und damit die steigende Schwierigkeit. Tichu ist noch in Arbeit..."
+    },
+    {
+      "id": "ondemand.consumable",
+      "title": "Verbrauchsgegenstand gefunden",
+      "text": "Verbrauchsgegenstände kannst du nur außerhalb von Kämpfen benutzen. Ziehe einen Gegenstand auf einen Kämpfer, um ihn zu benutzen."
+    },
+    {
+      "id": "ondemand.level_rewards",
+      "title": "Levelbelohnungen",
+      "text": "Nach einem Level werden zusätzliche Karten und Würfel für deine Leistung vergeben. Neu entdeckte Gegenstandskarten die dadurch im Shop verfügbar werden, werden ebenfalls angezeigt."
+    },
+    {
+      "id": "ondemand.boss",
+      "title": "Bosskampf",
+      "text": "Bossgegner besitzen mehr Gesundheit und verursachen mehr Schaden. Nachdem du sie besiegt hast, können sie auch regulär in Leveln auftauchen, dann allerdings in schwächerer Form."
+    },
+    {
+      "id": "ondemand.rules",
+      "title": "Spielregeln freigeschaltet",
+      "text": "Du hast dein erstes Regelfragment gefunden. Im neuen Regelpanel kannst du Fragmente zu Regeln verbinden, die während eines Levels für alle Kämpfer gelten.",
+      "highlight": [159, 0, 53, 53]
+    }
+  ]
+}

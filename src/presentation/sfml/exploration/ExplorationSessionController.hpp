@@ -55,7 +55,8 @@ namespace soma::presentation::detail
                            sf::RenderWindow* sharedWindow = nullptr,
                            const content::GameFlowContent* flow = nullptr,
                            std::function<void()> loadingFrame = {},
-                           std::optional<game::ActiveLevelState> savedLevel = std::nullopt);
+                           std::optional<game::ActiveLevelState> savedLevel = std::nullopt,
+                           ExplorationTutorialCallbacks tutorial = {});
 
         game::LevelSessionResult run();
         [[nodiscard]] game::ActiveLevelState activeLevelState() const;
@@ -134,6 +135,8 @@ namespace soma::presentation::detail
         sf::RenderWindow& window_;
         bool embedded_{};
         std::function<void()> loadingFrame_;
+        ExplorationTutorialCallbacks tutorial_;
+        std::size_t initialConsumableCount_{};
         const content::GameFlowContent* flow_{};
         bool returnRequested_{};
         std::unique_ptr<PauseMenu> pauseMenu_;

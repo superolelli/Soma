@@ -13,6 +13,11 @@ namespace soma::presentation::detail
         const auto campaignBeforeBattle = campaignState_;
         const auto& worldEncounter = world_.encounters.at(encounterId);
         const auto& level = world_.levels.at(levelId_);
+        if (worldEncounter.boss && tutorial_.show)
+        {
+            tutorial_.show("boss_battle", [this]() { drawExplorationFrame(); });
+            if (!window_.isOpen()) return false;
+        }
         const auto& battleEncounter = campaignBattle_.encounters.at(battleEncounterFor(level));
         BattleScreenRequest request;
         request.encounter = battleEncounter;
@@ -206,6 +211,11 @@ namespace soma::presentation::detail
 
     void ExplorationSession::openLevelResult(const content::LevelDefinition& level, bool completed)
     {
+        if (tutorial_.show)
+        {
+            tutorial_.show("level_rewards", [this]() { drawExplorationFrame(); });
+            if (!window_.isOpen()) return;
+        }
         result_ = completed ? game::LevelSessionResult::completed : game::LevelSessionResult::defeated;
         auto result = game::ExplorationOutcomeService::completeLevel(level,
                                                                       completed,

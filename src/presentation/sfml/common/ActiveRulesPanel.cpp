@@ -9,37 +9,40 @@ namespace soma::presentation
 {
     ActiveRulesPanel::ActiveRulesPanel(const content::RuleContent& content,
                                        const gameplay::ComposedRules& rules,
-                                       const sf::Font& font)
+                                       const sf::Font& font,
+                                       bool enabled)
         : layout_(content.activeRulesPresentation)
         , font_(font)
         , toggleTexture_(content.activeRulesToggle)
         , rowTexture_(content.fragmentBackground)
         , descriptions_(buildGermanActiveRuleDescriptions(rules, content))
+        , enabled_(enabled)
     {
     }
 
     bool ActiveRulesPanel::handleClick(sf::Vector2f position)
     {
-        if (toggleBounds().contains(position))
+        if (enabled_ && toggleBounds().contains(position))
         {
             expanded_ = !expanded_;
             return true;
         }
-        return expanded_ && listBounds().contains(position);
+        return enabled_ && expanded_ && listBounds().contains(position);
     }
 
     bool ActiveRulesPanel::clickableAt(sf::Vector2f position) const
     {
-        return toggleBounds().contains(position);
+        return enabled_ && toggleBounds().contains(position);
     }
 
     bool ActiveRulesPanel::contains(sf::Vector2f position) const
     {
-        return toggleBounds().contains(position) || (expanded_ && listBounds().contains(position));
+        return enabled_ && (toggleBounds().contains(position) || (expanded_ && listBounds().contains(position)));
     }
 
     void ActiveRulesPanel::render(sf::RenderWindow& window, sf::Vector2f mousePosition) const
     {
+        if (!enabled_) return;
         if (expanded_)
         {
             const auto rows = std::max<std::size_t>(descriptions_.size(), 1U);

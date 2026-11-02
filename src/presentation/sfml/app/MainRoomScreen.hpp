@@ -12,6 +12,7 @@
 #include <memory>
 #include <optional>
 #include <random>
+#include <vector>
 
 namespace soma::presentation
 {
@@ -47,6 +48,8 @@ namespace soma::presentation
         void resume();
         void renderBackdrop();
         void stopMusic();
+        void focusCampaignDoors();
+        [[nodiscard]] std::vector<content::Rectangle> campaignSignHighlights() const;
         [[nodiscard]] std::optional<MainRoomAction> toolbarActionAt(sf::Vector2f position) const;
 
       private:
@@ -64,6 +67,7 @@ namespace soma::presentation
         [[nodiscard]] bool interactiveAt(sf::Vector2f position) const;
         [[nodiscard]] std::string levelSignLabel(std::string_view campaign) const;
         [[nodiscard]] bool campaignAvailable(std::string_view campaign) const;
+        [[nodiscard]] bool rulesAvailable() const;
 
         sf::RenderWindow& window_;
         const content::GameFlowContent& flow_;

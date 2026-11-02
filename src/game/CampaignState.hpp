@@ -76,6 +76,7 @@ namespace soma::game
         [[nodiscard]] std::size_t activeAbilityVersion(const gameplay::ContentDefinitionId& player,
                                                        std::size_t abilitySlot) const noexcept;
         [[nodiscard]] int ruleFragmentCount(const gameplay::RuleFragmentId& fragment) const noexcept;
+        [[nodiscard]] bool hasDiscoveredRuleFragments() const noexcept;
         [[nodiscard]] const gameplay::ComposedRules& rules() const noexcept;
         [[nodiscard]] const std::vector<ShopStockEntry>& shopStock() const noexcept;
         [[nodiscard]] int ruleSlotsUnlocked() const noexcept;

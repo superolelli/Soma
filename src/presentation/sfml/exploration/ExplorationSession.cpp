@@ -44,7 +44,8 @@ namespace soma::presentation::detail
                                            sf::RenderWindow* sharedWindow,
                                            const content::GameFlowContent* flow,
                                            std::function<void()> loadingFrame,
-                                           std::optional<game::ActiveLevelState> savedLevel)
+                                           std::optional<game::ActiveLevelState> savedLevel,
+                                           ExplorationTutorialCallbacks tutorial)
         : battle_(battle)
         , economy_(economy)
         , world_(world)
@@ -76,6 +77,8 @@ namespace soma::presentation::detail
         , window_(sharedWindow != nullptr ? *sharedWindow : *ownedWindow_)
         , embedded_(sharedWindow != nullptr)
         , loadingFrame_(loadingFrame)
+        , tutorial_(std::move(tutorial))
+        , initialConsumableCount_(campaignState.distinctConsumables())
         , flow_(flow)
         , view_(sf::FloatRect{{0.0F, 0.0F}, {static_cast<float>(layout_.referenceSize.x), static_cast<float>(layout_.referenceSize.y)}})
         , hudView_(sf::FloatRect{{0.0F, 0.0F}, {static_cast<float>(layout_.referenceSize.x), static_cast<float>(layout_.referenceSize.y)}})
@@ -103,7 +106,7 @@ namespace soma::presentation::detail
         partyStatus_ = std::make_unique<ExplorationPartyStatus>(world_, font_);
         explorationHud_ = std::make_unique<ExplorationHud>(economy_, campaignState_);
         explorationConsumables_ = std::make_unique<ExplorationConsumablePanel>(economy_, campaignState_, economyTextures_, font_);
-        activeRules_ = std::make_unique<ActiveRulesPanel>(rules_, campaignState_.rules(), font_);
+        activeRules_ = std::make_unique<ActiveRulesPanel>(rules_, campaignState_.rules(), font_, campaignState_.hasDiscoveredRuleFragments());
         loadCursors();
         lootableOutlineAvailable_ =
             lootableOutlineShader_.loadFromFile(world_.assets.at(gameplay::AssetId{"lootable.outline_shader"}), sf::Shader::Type::Fragment);
@@ -272,7 +275,8 @@ namespace soma::presentation
                                                             game::EconomyService& economyService,
                                                             std::uint64_t randomSeed,
                                                             std::optional<game::ActiveLevelState> savedLevel,
-                                                            std::function<void()> loadingFrame)
+                                                            std::function<void()> loadingFrame,
+                                                            ExplorationTutorialCallbacks tutorial)
     {
         detail::ExplorationSession session{battle,
                                            economy,
@@ -286,7 +290,8 @@ namespace soma::presentation
                                            &window,
                                            &flow,
                                            std::move(loadingFrame),
-                                           std::move(savedLevel)};
+                                           std::move(savedLevel),
+                                           std::move(tutorial)};
         const auto result = session.run();
         return {result,
                 result == game::LevelSessionResult::saveAndMainMenu ? std::optional<game::ActiveLevelState>{session.activeLevelState()}

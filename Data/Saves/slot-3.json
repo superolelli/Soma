@@ -1,0 +1,118 @@
+{
+  "campaign": {
+    "acquired_skills": [
+      "skill.simon.1.1"
+    ],
+    "active_ability_versions": [
+      {
+        "player": "player.simon",
+        "slot": 0,
+        "version": 0
+      },
+      {
+        "player": "player.simon",
+        "slot": 2,
+        "version": 0
+      }
+    ],
+    "consumables": [],
+    "currencies": {
+      "cards": 5,
+      "dice": 0
+    },
+    "equipment": [
+      {
+        "item": {
+          "color": [
+            128,
+            0,
+            0
+          ],
+          "id": "item.tutorial.red_meeple"
+        },
+        "player": "player.simon",
+        "slot": "equipment.east"
+      }
+    ],
+    "inventory": [],
+    "rule_fragments": [],
+    "rule_slots_unlocked": 1,
+    "rules": [
+      {},
+      {},
+      {},
+      {}
+    ],
+    "shop_dice_price": 100,
+    "shop_slots_unlocked": 1,
+    "shop_stock": [
+      {
+        "item": {
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "id": "item.bang.lasso"
+        }
+      },
+      {
+        "item": {
+          "color": [
+            0,
+            128,
+            0
+          ],
+          "id": "item.bang.ammo"
+        }
+      },
+      {
+        "item": {
+          "color": [
+            0,
+            0,
+            128
+          ],
+          "id": "item.bang.cowboyhat"
+        }
+      },
+      {
+        "item": {
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "id": "item.bang.binocular"
+        }
+      },
+      {
+        "item": {
+          "color": [
+            128,
+            128,
+            0
+          ],
+          "id": "item.bang.pepperbox"
+        }
+      }
+    ],
+    "unlocked_items": [
+      "item.tutorial.red_meeple"
+    ]
+  },
+  "completed_levels": [],
+  "player_name": "Test",
+  "schema_version": 5,
+  "tutorial": {
+    "initial_sequence_completed": true,
+    "main_room_step": null,
+    "rules_unlocked": false,
+    "shown_messages": [
+      "main.inventory",
+      "main.shop",
+      "main.skills",
+      "main.worlds"
+    ]
+  }
+}

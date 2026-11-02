@@ -72,6 +72,12 @@ namespace soma::persistence
         }
         SaveGame saveGame;
         saveGame.playerName = std::move(playerName);
+        saveGame.tutorial.initialSequenceCompleted = false;
+        saveGame.tutorial.mainRoomStep = 0;
+        auto campaign = saveGame.campaign.data();
+        campaign.currencies[gameplay::Currency::cards] = 0;
+        campaign.currencies[gameplay::Currency::dice] = 0;
+        saveGame.campaign = game::CampaignState::fromData(std::move(campaign));
         const auto saved = repository_.save(path, saveGame);
         if (!saved.hasValue())
         {

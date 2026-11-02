@@ -1,5 +1,7 @@
 #include "game/CampaignState.hpp"
 
+#include <algorithm>
+
 namespace soma::game
 {
     std::size_t EquipmentLocationHash::operator()(const EquipmentLocation& location) const noexcept
@@ -68,6 +70,17 @@ namespace soma::game
     {
         const auto found = ruleFragments_.find(fragment);
         return found == ruleFragments_.end() ? 0 : found->second;
+    }
+
+    bool CampaignState::hasDiscoveredRuleFragments() const noexcept
+    {
+        if (std::ranges::any_of(ruleFragments_, [](const auto& entry) { return entry.second > 0; }))
+        {
+            return true;
+        }
+        return std::ranges::any_of(rules_, [](const auto& rule) {
+            return rule.trigger || rule.subject || rule.effect || rule.modifier;
+        });
     }
 
     const gameplay::ComposedRules& CampaignState::rules() const noexcept

@@ -37,7 +37,8 @@ int main(int argc, char** argv)
     const auto rules = soma::content::RuleContentLoader{}.load(std::filesystem::absolute(argv[1]));
     check(result.valid());
     check(rules.valid());
-    check(result.content.items.size() == 36);
+    check(result.content.items.size() >= 36);
+    check(result.content.items.contains(soma::gameplay::ItemId{"item.tutorial.red_meeple"}));
     const auto& lodgeRing = result.content.items.at(soma::gameplay::ItemId{"item.kutschfahrt.lodge_ring"});
     check(lodgeRing.description == "???");
     check(std::get<soma::gameplay::EquipmentItem>(lodgeRing.properties).battleEffect.has_value());

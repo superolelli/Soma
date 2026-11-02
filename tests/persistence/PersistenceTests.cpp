@@ -164,7 +164,11 @@ int main(int argc, char** argv)
     check(!slots.create(-1, "Invalid").hasValue());
     check(!slots.create(3, "Invalid").hasValue());
     check(!slots.create(0, "").hasValue());
-    check(slots.create(0, "Erster Spielstand").hasValue());
+    const auto newSave = slots.create(0, "Erster Spielstand");
+    check(newSave.hasValue());
+    check(!newSave.value().tutorial.initialSequenceCompleted);
+    check(newSave.value().tutorial.mainRoomStep == std::optional<std::size_t>{0U});
+    check(newSave.value().campaign.currency(soma::gameplay::Currency::cards) == 0);
     check(!slots.create(0, "Nicht überschreiben").hasValue());
     check(slots.create(0, "Überschrieben", true).hasValue());
     check(slots.load(0).hasValue());

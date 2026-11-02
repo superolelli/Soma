@@ -2,6 +2,7 @@
 #include "content/economy/EconomyContentLoader.hpp"
 #include "content/flow/GameFlowContentLoader.hpp"
 #include "content/rules/RuleContentLoader.hpp"
+#include "content/tutorial/TutorialContentLoader.hpp"
 #include "content/world/WorldContentLoader.hpp"
 
 #include <filesystem>
@@ -20,6 +21,7 @@ int main(int argc, char** argv)
     const auto economyResult = soma::content::EconomyContentLoader{}.load(contentRoot);
     const auto ruleResult = soma::content::RuleContentLoader{}.load(contentRoot);
     const auto flowResult = soma::content::GameFlowContentLoader{}.load(contentRoot);
+    const auto tutorialResult = soma::content::TutorialContentLoader{}.load(contentRoot);
     const auto worldResult = soma::content::WorldContentLoader{}.load(contentRoot, battleResult.content, economyResult.content);
     auto printDiagnostic = [](const auto& diagnostic) {
         std::cerr << (diagnostic.severity == soma::gameplay::DiagnosticSeverity::error ? "error" : "warning") << " [" << diagnostic.code << "] "
@@ -47,6 +49,10 @@ int main(int argc, char** argv)
         printDiagnostic(diagnostic);
     }
     for (const auto& diagnostic : worldResult.diagnostics)
+    {
+        printDiagnostic(diagnostic);
+    }
+    for (const auto& diagnostic : tutorialResult.diagnostics)
     {
         printDiagnostic(diagnostic);
     }
@@ -105,6 +111,12 @@ int main(int argc, char** argv)
             }
         }
     }
+    if (tutorialResult.valid() && economyResult.valid() &&
+        !economyResult.content.items.contains(soma::gameplay::ItemId{tutorialResult.content.rewardItem}))
+    {
+        std::cerr << "error [tutorial.loot_item]: Tutorial references an unknown reward item\n";
+        crossContentValid = false;
+    }
     const auto battleDefinitions =
         battleResult.content.combatants.size() + battleResult.content.abilities.size() + battleResult.content.encounters.size();
     const auto economyDefinitions =
@@ -113,6 +125,8 @@ int main(int argc, char** argv)
         worldResult.content.levels.size() + worldResult.content.encounters.size() + worldResult.content.lootables.size();
     const auto definitionCount = battleDefinitions + economyDefinitions + worldDefinitions + ruleResult.content.fragments.size();
     std::cout << "Validated " << definitionCount << " definitions from " << contentRoot.generic_string() << '\n';
-    return battleResult.valid() && economyResult.valid() && ruleResult.valid() && flowResult.valid() && worldResult.valid() && crossContentValid ? 0
-                                                                                                                                              : 1;
+    return battleResult.valid() && economyResult.valid() && ruleResult.valid() && flowResult.valid() && worldResult.valid() &&
+                   tutorialResult.valid() && crossContentValid
+               ? 0
+               : 1;
 }

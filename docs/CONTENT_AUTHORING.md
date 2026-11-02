@@ -14,6 +14,7 @@ Soma loads all game definitions from `Data/content/v1`. JSON is the canonical so
 | `world/content.json` | Campaign assets, generated levels, world encounters with inline rewards, lootables, and exploration layout |
 | `rules/content.json` | Rule fragments, acquisition constraints, rule economy, sprites, and rule-panel layout |
 | `flow/presentation.json` | Startup, main menu, main room, pause menu, toolbar, doors, music, and cursors |
+| `tutorial/content.json` | Intro video, scripted tutorial sequence, dialogue, modal highlights, and one-time hints |
 
 All IDs are stable strings. Prefer the existing namespaces: `player.*`, `enemy.*`, `ability.*`, `skill.*`, `item.*`, `encounter.*`, `level.*`, `lootable.*`, and `rule.*`. Changing an ID is a breaking content change because saves and other definitions reference it.
 
@@ -304,3 +305,16 @@ The `stat_tooltips` object in `battle/presentation.json` owns the German explana
 panel. Keep an entry for every displayed attribute and resistance when changing those panels.
 
 Keep source and JSON files UTF-8. German text can contain `ä`, `ö`, `ü`, and `ß` directly.
+## Tutorial
+
+`Data/content/v1/tutorial/content.json` is the single authoring file for onboarding:
+
+- `intro_video` selects the blocking video played for a new save. Replace the current placeholder path when the final intro is available.
+- `initial_level` selects the three corridor backgrounds, door, chest, red-meeple item, interaction positions, movement speed, and fixed battle rewards.
+- `initial_messages` maps the navigation, loot, battle-reward, and retry stages to message IDs; `battle_messages` orders the modal battle explanations.
+- `ending_dialogue` contains the speaker/text pairs shown at the door.
+- `main_room_onboarding` orders guided hub actions. Supported actions are `inventory`, `skills`, `shop`, `rules`, and `none`; `skill_acquired` can be used as a requirement.
+- `on_demand_messages` maps runtime triggers (`first_consumable`, `level_rewards`, `boss_battle`, and `rules_unlocked`) to message IDs.
+- `messages` contains all titles, German copy, button labels, and optional `[x, y, width, height]` highlight rectangles in the 1920x1080 reference view.
+
+Old saves skip the initial sequence. New save slots persist the completed sequence, guided main-room step, rule-panel unlock, and already-shown one-time messages.

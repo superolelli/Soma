@@ -4,6 +4,7 @@
 #include "content/economy/EconomyContentLoader.hpp"
 #include "content/flow/GameFlowContentLoader.hpp"
 #include "content/rules/RuleContentLoader.hpp"
+#include "content/tutorial/TutorialContentLoader.hpp"
 #include "content/world/WorldContentLoader.hpp"
 #include "game/CampaignLifecycleService.hpp"
 #include "game/CampaignProgression.hpp"
@@ -22,8 +23,12 @@
 #include "presentation/sfml/economy/SkillPanel.hpp"
 #include "presentation/sfml/economy/RuleBuilderPanel.hpp"
 #include "presentation/sfml/app/StartupScreen.hpp"
+#include "presentation/sfml/common/SfeMovieVideoPlayer.hpp"
+#include "presentation/sfml/common/TutorialOverlay.hpp"
+#include "presentation/sfml/tutorial/InitialTutorialSession.hpp"
 
 #include <SFML/Graphics.hpp>
+#include <algorithm>
 #include <filesystem>
 #include <functional>
 #include <future>
@@ -42,6 +47,7 @@ namespace soma::presentation
             content::WorldContent world;
             content::GameFlowContent flow;
             content::RuleContent rules;
+            content::TutorialContent tutorial;
         };
 
         struct GameContentLoadResult
@@ -58,6 +64,7 @@ namespace soma::presentation
             auto battle = content::BattleContentLoader{}.load(contentRoot);
             auto economy = content::EconomyContentLoader{}.load(contentRoot);
             auto rules = content::RuleContentLoader{}.load(contentRoot);
+            auto tutorial = content::TutorialContentLoader{}.load(contentRoot);
             if (!battle.valid())
             {
                 return {{}, formatContentDiagnostics("Battle content could not be loaded.", battle.diagnostics)};
@@ -70,13 +77,22 @@ namespace soma::presentation
             {
                 return {{}, formatContentDiagnostics("Rule content could not be loaded.", rules.diagnostics)};
             }
+            if (!tutorial.valid())
+            {
+                return {{}, formatContentDiagnostics("Tutorial content could not be loaded.", tutorial.diagnostics)};
+            }
             auto world = content::WorldContentLoader{}.load(contentRoot, battle.content, economy.content);
             if (!world.valid())
             {
                 return {{}, formatContentDiagnostics("World content could not be loaded.", world.diagnostics)};
             }
-            return {LoadedGameContent{std::move(battle.content), std::move(economy.content), std::move(world.content), std::move(flow),
-                                      std::move(rules.content)}, {}};
+            return {LoadedGameContent{std::move(battle.content),
+                                      std::move(economy.content),
+                                      std::move(world.content),
+                                      std::move(flow),
+                                      std::move(rules.content),
+                                      std::move(tutorial.content)},
+                    {}};
         }
 
         sf::RenderWindow makeWindow(const content::GameFlowContent& flow)
@@ -113,6 +129,31 @@ namespace soma::presentation
 
             [[nodiscard]] bool run()
             {
+                if (!save_.tutorial.initialSequenceCompleted)
+                {
+                    const auto campaignBeforeTutorial = save_.campaign;
+                    SfeMovieVideoPlayer video;
+                    if (!video.play(window_, content_.tutorial.introVideo))
+                    {
+                        save_.campaign = campaignBeforeTutorial;
+                        return false;
+                    }
+                    InitialTutorialSession tutorial{window_,
+                                                    content_.battle,
+                                                    content_.economy,
+                                                    content_.world,
+                                                    content_.flow,
+                                                    content_.rules,
+                                                    content_.tutorial,
+                                                    save_.campaign};
+                    if (tutorial.run() != InitialTutorialResult::completed)
+                    {
+                        save_.campaign = campaignBeforeTutorial;
+                        return false;
+                    }
+                    save_.tutorial.initialSequenceCompleted = true;
+                    saveAtBoundary();
+                }
                 if (save_.activeLevel)
                 {
                     statusScreen_.renderLoading();
@@ -120,8 +161,10 @@ namespace soma::presentation
                     if (playNextLevel(campaign)) return true;
                 }
                 MainRoomScreen room{window_, content_.flow, content_.world, save_};
+                runMainRoomOnboarding(room);
                 while (window_.isOpen())
                 {
+                    showRulesTutorialIfNeeded(room);
                     const auto result = room.run();
                     if (result.action == MainRoomAction::windowClosed)
                     {
@@ -158,6 +201,110 @@ namespace soma::presentation
             }
 
           private:
+            void runMainRoomOnboarding(MainRoomScreen& room)
+            {
+                while (window_.isOpen() && save_.tutorial.mainRoomStep &&
+                       *save_.tutorial.mainRoomStep < content_.tutorial.mainRoomOnboarding.size())
+                {
+                    const auto& step = content_.tutorial.mainRoomOnboarding.at(*save_.tutorial.mainRoomStep);
+                    if (step.action == "inventory")
+                    {
+                        equipTutorialItem();
+                    }
+                    std::vector<content::Rectangle> highlights;
+                    if (step.action == "worlds")
+                    {
+                        room.focusCampaignDoors();
+                        highlights = room.campaignSignHighlights();
+                    }
+                    if (!showTutorialMessage(step.message, [&room]() { room.renderBackdrop(); }, std::move(highlights)))
+                    {
+                        return;
+                    }
+                    const auto action = actionForTutorialStep(step.action);
+                    if (action != MainRoomAction::none)
+                    {
+                        openPanel(MainRoomResult{action}, room);
+                    }
+                    if (!tutorialRequirementSatisfied(step.requirement))
+                    {
+                        room.resume();
+                        continue;
+                    }
+                    ++*save_.tutorial.mainRoomStep;
+                    if (*save_.tutorial.mainRoomStep >= content_.tutorial.mainRoomOnboarding.size())
+                    {
+                        save_.tutorial.mainRoomStep.reset();
+                    }
+                    saveAtBoundary();
+                    room.resume();
+                }
+            }
+
+            void equipTutorialItem()
+            {
+                const gameplay::ItemId id{content_.tutorial.rewardItem};
+                const game::EquipmentLocation location{gameplay::ContentDefinitionId{"player.simon"},
+                                                       gameplay::EquipmentSlotId{"equipment.north"}};
+                const auto equipped = save_.campaign.equipped(location);
+                if (equipped && equipped->definition == id)
+                {
+                    return;
+                }
+                const auto& inventory = save_.campaign.inventory();
+                const auto found = std::ranges::find(inventory, id, &gameplay::ItemInstance::definition);
+                if (found != inventory.end())
+                {
+                    static_cast<void>(economy_.equip(location, *found));
+                }
+            }
+
+            [[nodiscard]] static MainRoomAction actionForTutorialStep(std::string_view action)
+            {
+                if (action == "inventory") return MainRoomAction::inventory;
+                if (action == "skills") return MainRoomAction::skills;
+                if (action == "shop") return MainRoomAction::shop;
+                if (action == "rules") return MainRoomAction::rules;
+                return MainRoomAction::none;
+            }
+
+            [[nodiscard]] bool tutorialRequirementSatisfied(std::string_view requirement) const
+            {
+                if (requirement.empty()) return true;
+                if (requirement == "skill_acquired") return !save_.campaign.data().acquiredSkills.empty();
+                return false;
+            }
+
+            bool showTutorialMessage(std::string_view id,
+                                     const std::function<void()>& drawBackground,
+                                     std::vector<content::Rectangle> highlights = {})
+            {
+                const auto found = content_.tutorial.messages.find(std::string{id});
+                if (found == content_.tutorial.messages.end()) return true;
+                auto message = found->second;
+                if (!highlights.empty()) message.highlights = std::move(highlights);
+                const auto shown = TutorialOverlay{window_, interfaceFont_}.show(message, drawBackground);
+                if (shown) save_.tutorial.shownMessages.emplace(found->first);
+                return shown;
+            }
+
+            void showRulesTutorialIfNeeded(MainRoomScreen& room)
+            {
+                const auto hasFragments = save_.campaign.hasDiscoveredRuleFragments();
+                const auto trigger = content_.tutorial.onDemandMessages.find("rules_unlocked");
+                if (hasFragments)
+                {
+                    save_.tutorial.rulesUnlocked = true;
+                }
+                if (!hasFragments || trigger == content_.tutorial.onDemandMessages.end() ||
+                    save_.tutorial.shownMessages.contains(trigger->second))
+                {
+                    return;
+                }
+                static_cast<void>(showTutorialMessage(trigger->second, [&room]() { room.renderBackdrop(); }));
+                saveAtBoundary();
+            }
+
             bool playNextLevel(std::string_view campaign)
             {
                 const auto level = save_.activeLevel ? std::optional{save_.activeLevel->run.level()}
@@ -180,7 +327,17 @@ namespace soma::presentation
                                                              std::move(save_.activeLevel),
                                                              [this]() {
                                                                  if (statusScreen_.processEvents()) statusScreen_.renderLoading();
-                                                             });
+                                                             },
+                                                             ExplorationTutorialCallbacks{[this](std::string_view trigger,
+                                                                                                 const std::function<void()>& drawBackground) {
+                                                                 const auto message = content_.tutorial.onDemandMessages.find(std::string{trigger});
+                                                                 if (message == content_.tutorial.onDemandMessages.end() ||
+                                                                     save_.tutorial.shownMessages.contains(message->second))
+                                                                 {
+                                                                     return;
+                                                                 }
+                                                                 static_cast<void>(showTutorialMessage(message->second, drawBackground));
+                                                             }});
                 if (outcome.result == game::LevelSessionResult::completed || outcome.result == game::LevelSessionResult::defeated)
                 {
                     sounds_.click();

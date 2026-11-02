@@ -597,6 +597,19 @@
                                   }
                   },
                   {
+                      "id": "item.tutorial.red_meeple",
+                      "name": "Rotes Männchen",
+                      "description": "Ein kleines rotes Männchen. Es scheint euch Glück zu bringen.",
+                      "category": "equipment",
+                      "level": 1,
+                      "price": 0,
+                      "icon": "Data/Sprites/Backgrounds/Tutorial/red_meeple.png",
+                      "campaigns": ["tutorial"],
+                      "bonuses": {"maxHealth": 1},
+                      "miss_on_high_damage": false,
+                      "heal_on_pass": false
+                  },
+                  {
                       "id":  "item.kutschfahrt.flash_powder",
                       "name":  "Blitzpulver",
                       "category":  "consumable",

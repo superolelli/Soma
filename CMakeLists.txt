@@ -77,6 +77,7 @@ add_library(soma_content STATIC
     src/content/flow/GameFlowContentLoader.cpp
     src/content/JsonFileReader.cpp
     src/content/rules/RuleContentLoader.cpp
+    src/content/tutorial/TutorialContentLoader.cpp
     src/content/world/WorldContentLoader.cpp
     src/content/world/WorldContentValidation.cpp
 )
@@ -165,6 +166,7 @@ add_library(soma_presentation_sfml STATIC
     src/presentation/sfml/common/SpriterAnimationPlayer.cpp
     src/presentation/sfml/app/StartupScreen.cpp
     src/presentation/sfml/common/StatusGlossary.cpp
+    src/presentation/sfml/common/TutorialOverlay.cpp
 )
 add_library(Soma::PresentationSfml ALIAS soma_presentation_sfml)
 target_include_directories(soma_presentation_sfml PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -193,6 +195,7 @@ add_executable(Soma
       src/presentation/sfml/exploration/ExplorationSpeechBubbles.cpp
       src/presentation/sfml/exploration/LootDialog.cpp
       src/presentation/sfml/exploration/LevelResultDialog.cpp
+      src/presentation/sfml/tutorial/InitialTutorialSession.cpp
   )
 target_include_directories(Soma PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_link_libraries(Soma PRIVATE sfeMovie

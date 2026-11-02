@@ -13,7 +13,7 @@ namespace soma::presentation
     class ActiveRulesPanel
     {
       public:
-        ActiveRulesPanel(const content::RuleContent& content, const gameplay::ComposedRules& rules, const sf::Font& font);
+        ActiveRulesPanel(const content::RuleContent& content, const gameplay::ComposedRules& rules, const sf::Font& font, bool enabled = true);
 
         [[nodiscard]] bool handleClick(sf::Vector2f position);
         [[nodiscard]] bool clickableAt(sf::Vector2f position) const;
@@ -31,5 +31,6 @@ namespace soma::presentation
         sf::Texture rowTexture_;
         std::vector<std::string> descriptions_;
         bool expanded_{};
+        bool enabled_{true};
     };
 } // namespace soma::presentation

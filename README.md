@@ -51,6 +51,8 @@ Common examples:
 
 Runtime content lives in `Data/content/v1`. See [Content authoring](docs/CONTENT_AUTHORING.md) for the file map and workflows for adding or changing items, enemies, abilities, skills, encounters, levels, lootables, rule fragments, assets, and presentation layout.
 
+The complete introductory sequence and all tutorial copy live in `Data/content/v1/tutorial/content.json`. This includes the placeholder intro video, fixed corridor assets, loot and battle rewards, modal highlights, ending dialogue, guided main-room steps, and one-time message triggers. It can therefore be edited without recompiling C++.
+
 After every content change, run:
 
 ```powershell
